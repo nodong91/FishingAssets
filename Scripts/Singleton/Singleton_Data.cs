@@ -7,11 +7,11 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     public Dictionary<string, Data_Manager.TranslateString> Dict_DialogString = new Dictionary<string, Data_Manager.TranslateString>();
     public Dictionary<string, Data_Manager.TranslateString> Dict_TranslateString = new Dictionary<string, Data_Manager.TranslateString>();
     public Dictionary<string, Data_Manager.SkillStruct> Dict_Skill = new Dictionary<string, Data_Manager.SkillStruct>();
-    public Dictionary<string, Data_Manager.UnitStruct> Dict_Unit = new Dictionary<string, Data_Manager.UnitStruct>();
     public Dictionary<string, Data_Manager.ItemStruct> Dict_Item = new Dictionary<string, Data_Manager.ItemStruct>();
     public Dictionary<string, AudioClip> Dict_Audio = new Dictionary<string, AudioClip>();
     //public Dictionary<string, Skill_Set> Dict_SkillSet = new Dictionary<string, Skill_Set>();
     public Translation translation;
+    public Dictionary<string, Data_Manager.FishStruct> Dict_Fish = new Dictionary<string, Data_Manager.FishStruct>();
 
     public void SetDictionary_Dialog(List<Data_Manager.DialogStruct> _data)
     {
@@ -29,21 +29,6 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
             }
         }
     }
-
-    //public void SetDictionary_SkillTranslation(List<Data_Manager.TranslateString> _data)
-    //{
-    //    Dict_SkillString = SetTranslation(_data);
-    //}
-
-    //public void SetDictionary_UnitTranslation(List<Data_Manager.TranslateString> _data)
-    //{
-    //    Dict_UnitString = SetTranslation(_data);
-    //}
-
-    //public void SetDictionary_ItemTranslation(List<Data_Manager.TranslateString> _data)
-    //{
-    //    Dict_ItemString = SetTranslation(_data);
-    //}
 
     public void SetDictionary_DialogString(List<Data_Manager.TranslateString> _data)
     {
@@ -121,19 +106,19 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         }
     }
 
-    public void SetDictionary_Unit(List<Data_Manager.UnitStruct> _data)
+    public void SetDictionary_Fish(List<Data_Manager.FishStruct> _data)
     {
-        Dict_Unit = new Dictionary<string, Data_Manager.UnitStruct>();
+        Dict_Fish = new Dictionary<string, Data_Manager.FishStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
-            string id = _data[i].ID;
-            if (Dict_Unit.ContainsKey(id) == true)
+            string id = _data[i].itemStruct.ID;
+            if (Dict_Fish.ContainsKey(id) == true)
             {
                 Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
             }
             else
             {
-                Dict_Unit[id] = _data[i];
+                Dict_Fish[id] = _data[i];
             }
         }
     }
@@ -163,31 +148,6 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         Chinese
     }
 
-    //public string TryDialogTranslation(string _ID)
-    //{
-    //    Data_Manager.DialogInfoamtion dialogTranslation = Dict_Dialog[_ID];
-    //    string temp = "";
-    //    switch (translation)
-    //    {
-    //        case Translation.Korean:
-    //            temp = dialogTranslation.KR;
-    //            break;
-
-    //        case Translation.English:
-    //            temp = dialogTranslation.EN;
-    //            break;
-
-    //        case Translation.Japanese:
-    //            temp = dialogTranslation.JP;
-    //            break;
-
-    //        case Translation.Chinese:
-    //            temp = dialogTranslation.CN;
-    //            break;
-    //    }
-    //    return temp;
-    //}
-
     public void SetDictionary_Audio(List<AudioClip> _data)
     {
         Dict_Audio = new Dictionary<string, AudioClip>();
@@ -204,21 +164,4 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
             }
         }
     }
-
-    //public void SetSkillSet(List<Skill_Set> _data)
-    //{
-    //    Dict_SkillSet = new Dictionary<string, Skill_Set>();
-    //    for (int i = 0; i < _data.Count; i++)
-    //    {
-    //        string id = _data[i].name;
-    //        if (Dict_SkillSet.ContainsKey(id) == true)
-    //        {
-    //            Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
-    //        }
-    //        else
-    //        {
-    //            Dict_SkillSet[id] = _data[i];
-    //        }
-    //    }
-    //}
 }

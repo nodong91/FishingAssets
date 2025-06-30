@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Data_Manager;
 
 public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -9,6 +10,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public TMPro.TMP_Text m_Text;
     public int x, y;
     public Image iconImage, checkImage;
+    public Sprite checkOn, checkOff;
     public UI_Inventory_Slot baseSlot;// 링크 베이스 - 다 묶이게
 
     public delegate void Dele_HelperSlot(UI_Inventory_Slot _slot);
@@ -20,7 +22,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public Dele_Helper dele_Drag;
     public Dele_Helper dele_End;
     public Dele_Helper dele_Exit;
-    public UI_Inventory.ItemStruct item;
+    public ItemStruct item;
 
     public void SetStart(int _x, int _y)
     {
@@ -28,18 +30,19 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
         y = _y;
         m_Text.text = _x + "/" + _y;
         gameObject.name = m_Text.text;
+        CheckOff();
     }
 
-    void SetSlot(UI_Inventory.ItemStruct _item)
+    void SetSlot(ItemStruct _item)
     {
         item = _item;
-        empty = item.id == null;
+        empty = item.ID == null;
         if (!empty)
-            iconImage.sprite = item.icon;
+            iconImage.sprite = item.Icon;
         iconImage.gameObject.SetActive(!empty);
     }
 
-    public void SetBase(UI_Inventory.ItemStruct _item)
+    public void SetBase(ItemStruct _item)
     {
         baseSlot = this;
         SetSlot(_item);
@@ -60,19 +63,18 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public bool CheckSlot()
     {
-        if (empty == true)
+        Sprite temp = (empty == true) ? checkOn : checkOff;
         {
-
+            checkImage.sprite = temp;
         }
-        else
-        {
-
-        }
-        checkImage.gameObject.SetActive(empty == false);
+        checkImage.gameObject.SetActive(true);
         return (empty == true);
     }
 
-
+    public void CheckOff()
+    {
+        checkImage.gameObject.SetActive(false);
+    }
 
 
 

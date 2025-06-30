@@ -145,7 +145,7 @@ public class Data_Parse : MonoBehaviour
         return 0;
     }
 
-    public float FloatTryParse(string _str)
+    public float Parse_Float(string _str)
     {
         if (float.TryParse(_str, out float value))
             return value;
