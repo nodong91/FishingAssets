@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -72,25 +71,30 @@ public class Data_Manager : Data_Parse
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
             string[] elements = data[i].Split(new char[] { ',' });
-
-            ItemStruct tempItem = new ItemStruct
-            {
-                ID = elements[0].Trim(),
-                Name = elements[1].Trim(),
-                Explanation = elements[2].Trim(),
-                Icon = FindSprite(elements[3].Trim()),
-                Size = Parse_Vector2Int(elements[4].Trim()),
-                Weight = Parse_Float(elements[5].Trim()),
-                Price = Parse_Float(elements[6].Trim()),
-            };
-
+            ItemStruct tempItem = GetItemStruct(elements);
             FishStruct tempData = new FishStruct
             {
                 itemStruct = tempItem,
-                fishType = (FishStruct.FishType)Enum.Parse(typeof(FishStruct.FishType), elements[7]),
+                fishType = (FishStruct.FishType)System.Enum.Parse(typeof(FishStruct.FishType), elements[7]),
+                size = Parse_Vector2(elements[8])
             };
             fishStruct.Add(tempData);
         }
+    }
+
+    ItemStruct GetItemStruct(string[] _elements)
+    {
+        ItemStruct tempItem = new ItemStruct
+        {
+            ID = _elements[0].Trim(),
+            Name = _elements[1],
+            Explanation = _elements[2],
+            Icon = FindSprite(_elements[3]),
+            Shape = Parse_Vector2Int(_elements[4].Trim()),
+            Weight = Parse_Float(_elements[5]),
+            Price = Parse_Float(_elements[6]),
+        };
+        return tempItem;
     }
 
     void SetItem(TextAsset _textAsset)
@@ -101,13 +105,7 @@ public class Data_Manager : Data_Parse
         {
             string[] elements = data[i].Split(new char[] { ',' });
 
-            ItemStruct tempData = new ItemStruct
-            {
-                ID = elements[0].Trim(),
-                Name = elements[1].Trim(),
-                Explanation = elements[2].Trim(),
-                Icon = FindSprite(elements[3].Trim()),
-            };
+            ItemStruct tempData = GetItemStruct(elements);
             itemStruct.Add(tempData);
         }
     }
@@ -219,7 +217,7 @@ public class Data_Manager : Data_Parse
         public string Explanation;// 설명
         public Sprite Icon;
 
-        public Vector2Int[] Size;
+        public Vector2Int[] Shape;
         public float Weight;
         public float Price;
     }
@@ -229,10 +227,6 @@ public class Data_Manager : Data_Parse
     public struct FishStruct
     {
         public ItemStruct itemStruct;
-        //public string ID;
-        //public string Name;
-        //public string Explanation;// 설명
-        //public Sprite Icon;
         public enum FishType
         {
             Strength,
@@ -240,6 +234,35 @@ public class Data_Manager : Data_Parse
             Health,
         }
         public FishType fishType;
+        public Vector2 size;
+        [System.Serializable]
+        public struct RandomSize
+        {
+            public string id;
+            public float size;
+            public float weight;
+            public float price;
+        }
+
+        public RandomSize GetRandom()
+        {
+            float randomSize = Random.Range(size.x, size.y);
+            float percent = GetFloat(size.y / randomSize);
+            RandomSize randomFish = new RandomSize
+            {
+                id = itemStruct.ID,
+                size = GetFloat(size.y / percent),
+                weight = GetFloat(itemStruct.Weight / percent),
+                price = GetFloat(itemStruct.Price / percent),
+            };
+            return randomFish;
+        }
+
+        float GetFloat(float _origin)
+        {
+            float temp = Mathf.Round(_origin * 10f) * 0.1f;
+            return temp;
+        }
     }
     public List<FishStruct> fishStruct = new List<FishStruct>();
 

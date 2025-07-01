@@ -214,13 +214,13 @@ public class Data_Parse : MonoBehaviour
     public Vector2 Parse_Vector2(string _str)
     {
         string[] subStrings = _str.Split(';');
-        float[] subInt = new float[subStrings.Length];
+        float[] subFloat = new float[subStrings.Length];
         for (int i = 0; i < subStrings.Length; i++)
         {
             float index = float.Parse(subStrings[i]);
-            subInt[i] = index;
+            subFloat[i] = index;
         }
-        return new Vector2(subInt[0], subInt[1]);
+        return new Vector2(subFloat[0], subFloat[1]);
     }
 
     public Vector3 Parse_Vector3(string _str)

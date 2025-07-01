@@ -21,7 +21,7 @@ public class UI_Inventory_Infomation : MonoBehaviour
         string explanation = "";
         explanation += "Explanation : " + _itemStruct.Explanation + "\n";
         explanation += "Icon : " + _itemStruct.Icon.name + "\n";
-        explanation += "Size : " + _itemStruct.Size.Length + "\n";
+        explanation += "Size : " + _itemStruct.Shape.Length + "\n";
         explanation += "Weight : " + _itemStruct.Weight + "\n";
         explanation += "Price : " + _itemStruct.Price;
         m_Explanation.text = explanation;

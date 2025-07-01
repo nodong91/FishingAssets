@@ -14,7 +14,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public UI_Inventory_Slot baseSlot;// 링크 베이스 - 다 묶이게
 
     public delegate void Dele_HelperSlot(UI_Inventory_Slot _slot);
-    public Dele_HelperSlot dele_Click;
+    public Dele_HelperSlot dele_LeftClick, dele_RightClick;
     public Dele_HelperSlot dele_Enter;
     public Dele_HelperSlot dele_Begin;
 
@@ -110,11 +110,12 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             // 액션
-            dele_Click?.Invoke(this);
+            dele_LeftClick?.Invoke(this);
         }
         else if (eventData.button == PointerEventData.InputButton.Right)
         {
             // 확인
+            dele_RightClick?.Invoke(this);
         }
     }
 

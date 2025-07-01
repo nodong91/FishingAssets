@@ -8850,7 +8850,7 @@ MonoBehaviour:
     Name: 
     Explanation: 
     Icon: {fileID: 0}
-    Size: []
+    Shape: []
     Weight: 0
     Price: 0
 --- !u!1 &865894708
@@ -9289,21 +9289,7 @@ MonoBehaviour:
   weightSlider: {fileID: 1183499899}
   currentWeight: 0
   maxWeight: 10
-  checkList: []
-  dragItem:
-    ID: 
-    Name: 
-    Explanation: 
-    Icon: {fileID: 0}
-    Size: []
-    Weight: 0
-    Price: 0
-  dragSlot: {fileID: 0}
-  enterSlot: {fileID: 0}
   iconImage: {fileID: 884202892}
-  onDrag: 0
-  onCheck: 0
-  walletMoney: 0
   walletText: {fileID: 513700094}
   inventoryInfomation: {fileID: 660396877}
 --- !u!4 &884023917
@@ -22896,25 +22882,27 @@ MonoBehaviour:
       Name: Pale Chub
       Explanation: 
       Icon: {fileID: 21300000, guid: 91cdc7bd53b3507418bcb8b86946d7bb, type: 3}
-      Size:
+      Shape:
       - {x: 1, y: 0}
       - {x: 0, y: -1}
-      Weight: 1
+      Weight: 0.1
       Price: 15
     fishType: 1
+    size: {x: 10, y: 20}
   - itemStruct:
       ID: F_0002
       Name: Bass
       Explanation: 
       Icon: {fileID: 21300000, guid: ed70b980cd4019348946dbf763e38637, type: 3}
-      Size:
+      Shape:
       - {x: -1, y: 0}
       - {x: 1, y: 0}
       - {x: 0, y: -1}
       - {x: 1, y: -1}
-      Weight: 2.5
+      Weight: 2
       Price: 130
     fishType: 0
+    size: {x: 40, y: 60}
 --- !u!4 &1981730717
 Transform:
   m_ObjectHideFlags: 0

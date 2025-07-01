@@ -1,9 +1,7 @@
-using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Drawing;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Data_Manager;
 
@@ -14,19 +12,16 @@ public class UI_Inventory : MonoBehaviour
     public Vector2Int inventorySize;
     public Image weightSlider;
     public float currentWeight, maxWeight;
-    ItemStruct a, b;
     UI_Inventory_Slot[,] allSlots;
     List<UI_Inventory_Slot> checkList = new List<UI_Inventory_Slot>();
 
     ItemStruct dragItem;
-    UI_Inventory_Slot dragSlot, enterSlot;
+    UI_Inventory_Slot dragSlot, enterSlot, selectedSlot;
     public Image iconImage;
     bool onDrag, onCheck;
 
     void Start()
     {
-        a = Singleton_Data.INSTANCE.Dict_Fish["F_0001"].itemStruct;
-        b = Singleton_Data.INSTANCE.Dict_Fish["F_0002"].itemStruct;
         weightSlider.material = Instantiate(weightSlider.material);
         SetInventory();
         SetInfomation();
@@ -49,28 +44,41 @@ public class UI_Inventory : MonoBehaviour
                 inst.dele_Begin = OnBeginDrag;
                 inst.dele_Drag = OnDrag;
                 inst.dele_End = OnEndDrag;
-                inst.dele_Click = OnPointerClick;
+                inst.dele_LeftClick = OnPointerLeftClick;
+                inst.dele_RightClick = OnPointerRightClick;
                 inst.dele_Enter = OnPointerEnter;
                 inst.dele_Exit = OnPointerExit;
                 allSlots[x, y] = inst;
             }
         }
         // 테스트 세팅
-        SetSlot(allSlots[1, 1], a);
-        SetSlot(allSlots[3, 3], b);
+        ItemStruct a = Singleton_Data.INSTANCE.Dict_Fish["F_0001"].itemStruct;
+        ItemStruct b = Singleton_Data.INSTANCE.Dict_Fish["F_0002"].itemStruct;
+        SetSlot(GetEmptySlot(a), a);
+        SetSlot(GetEmptySlot(b), b);
+        SetSlot(GetEmptySlot(a), a);
+
+        RandomFish();
+    }
+    public FishStruct.RandomSize randomSize;
+    void RandomFish()
+    {
+        FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish["F_0001"];
+        randomSize = fishStruct.GetRandom();
+        Debug.LogWarning($"  {randomSize.size},  {randomSize.weight},  {randomSize.price}");
     }
 
     void SetSlot(UI_Inventory_Slot _slot, ItemStruct _item)
     {
         _slot.SetBase(_item);// 메인
-        if (_item.Size == null)
+        if (_item.Shape == null)
             return;
 
         // 사이즈
-        for (int i = 0; i < _item.Size.Length; i++)
+        for (int i = 0; i < _item.Shape.Length; i++)
         {
-            int slotX = _slot.x + _item.Size[i].x;
-            int slotY = _slot.y + _item.Size[i].y;
+            int slotX = _slot.x + _item.Shape[i].x;
+            int slotY = _slot.y + _item.Shape[i].y;
             allSlots[slotX, slotY].SetLink(_slot);
         }
         SetWeight(_item.Weight);
@@ -87,48 +95,52 @@ public class UI_Inventory : MonoBehaviour
     {
         ItemStruct item = _slot.item;
         _slot.SetEmpty();// 메인
-        if (item.Size == null)
+        if (item.Shape == null)
             return;
         // 사이즈
-        for (int i = 0; i < item.Size.Length; i++)
+        for (int i = 0; i < item.Shape.Length; i++)
         {
-            int slotX = _slot.x + item.Size[i].x;
-            int slotY = _slot.y + item.Size[i].y;
+            int slotX = _slot.x + item.Shape[i].x;
+            int slotY = _slot.y + item.Shape[i].y;
             allSlots[slotX, slotY].SetEmpty();
         }
     }
 
     UI_Inventory_Slot GetEmptySlot(ItemStruct _item)
     {
-        foreach (var child in allSlots)
+        for (int y = 0; y < inventorySize.y; y++)
         {
-            bool empty = true;
-            if (child.empty == false)
+            for (int x = 0; x < inventorySize.x; x++)
             {
-                continue;
-            }
-
-            for (int i = 0; i < _item.Size.Length; i++)
-            {
-                int slotX = child.x + _item.Size[i].x;
-                int slotY = child.y + _item.Size[i].y;
-                if (slotX < 0 || slotX >= inventorySize.x || slotY < 0 || slotY >= inventorySize.y)
+                bool empty = true;
+                UI_Inventory_Slot slot = allSlots[x, y];
+                if (slot.empty == false)
                 {
-                    empty = false;
-                    break;
+                    continue;
                 }
-                else
+
+                for (int i = 0; i < _item.Shape.Length; i++)
                 {
-                    bool temp = allSlots[slotX, slotY].empty;
-                    if (temp == false)
+                    int slotX = slot.x + _item.Shape[i].x;
+                    int slotY = slot.y + _item.Shape[i].y;
+                    if (slotX < 0 || slotX >= inventorySize.x || slotY < 0 || slotY >= inventorySize.y)
                     {
                         empty = false;
                         break;
                     }
+                    else
+                    {
+                        bool temp = allSlots[slotX, slotY].empty;
+                        if (temp == false)
+                        {
+                            empty = false;
+                            break;
+                        }
+                    }
                 }
+                if (empty == true)
+                    return slot;
             }
-            if (empty == true)
-                return child;
         }
         return null;
     }
@@ -167,12 +179,12 @@ public class UI_Inventory : MonoBehaviour
         onCheck = _slot.CheckSlot();
         checkList.Add(_slot);
 
-        if (item.Size == null)
+        if (item.Shape == null)
             return;
-        for (int i = 0; i < item.Size.Length; i++)
+        for (int i = 0; i < item.Shape.Length; i++)
         {
-            int slotX = _slot.x + item.Size[i].x;
-            int slotY = _slot.y + item.Size[i].y;
+            int slotX = _slot.x + item.Shape[i].x;
+            int slotY = _slot.y + item.Shape[i].y;
             if (slotX < 0 || slotX >= inventorySize.x || slotY < 0 || slotY >= inventorySize.y)
             {
                 onCheck = false;
@@ -206,8 +218,8 @@ public class UI_Inventory : MonoBehaviour
     // 아이템 확인
     //===========================================================================================================================
 
-    float walletMoney;
     Coroutine moneyCoroutine;
+    float walletMoney;
     public TMPro.TMP_Text walletText;
     public UI_Inventory_Infomation inventoryInfomation;
 
@@ -223,7 +235,7 @@ public class UI_Inventory : MonoBehaviour
         inventoryInfomation.SetDisplay(_item);
     }
 
-    void BuyItem()
+    void BuyItem()// 구매
     {
         if (selectedSlot == null || selectedSlot.empty == true)
         {
@@ -244,10 +256,10 @@ public class UI_Inventory : MonoBehaviour
 
         if (moneyCoroutine != null)
             StopCoroutine(moneyCoroutine);
-        moneyCoroutine = StartCoroutine(RemoveWalletMoney(walletMoney - item.Price));
+        moneyCoroutine = StartCoroutine(WalletMoney(-item.Price));
     }
 
-    void SellItem()
+    void SellItem()// 판매
     {
         if (selectedSlot == null)
             return;
@@ -258,25 +270,31 @@ public class UI_Inventory : MonoBehaviour
 
         if (moneyCoroutine != null)
             StopCoroutine(moneyCoroutine);
-        moneyCoroutine = StartCoroutine(AddWalletMoney(walletMoney + item.Price));
+        moneyCoroutine = StartCoroutine(WalletMoney(item.Price));
     }
 
-    IEnumerator AddWalletMoney(float _money)
+    IEnumerator WalletMoney(float _money)
     {
-        while (walletMoney < _money)
+        float prevMoney = walletMoney;
+        walletMoney += _money;
+        bool addMoney = (prevMoney < walletMoney);
+        bool moveMoney = true;
+        while (moveMoney == true)
         {
-            walletMoney = Mathf.Lerp(walletMoney, _money, 0.1f);
-            walletText.text = Mathf.Round(walletMoney).ToString();
-            yield return null;
-        }
-    }
+            prevMoney = Mathf.Lerp(prevMoney, walletMoney, 0.1f);
+            walletText.text = Mathf.Round(prevMoney).ToString();
 
-    IEnumerator RemoveWalletMoney(float _money)
-    {
-        while (walletMoney > _money)
-        {
-            walletMoney = Mathf.Lerp(walletMoney, _money, 0.1f);
-            walletText.text = Mathf.Round(walletMoney).ToString();
+            if (addMoney == true)// 판매인 경우
+            {
+                if (prevMoney > walletMoney)
+                {
+                    moveMoney = false;
+                }
+            }
+            else if (prevMoney < walletMoney)// 구매인 경우
+            {
+                moveMoney = false;
+            }
             yield return null;
         }
     }
@@ -326,13 +344,21 @@ public class UI_Inventory : MonoBehaviour
         onCheck = false;
         iconImage.gameObject.SetActive(false);
     }
-    UI_Inventory_Slot selectedSlot;
-    void OnPointerClick(UI_Inventory_Slot _slot)
+
+    void OnPointerLeftClick(UI_Inventory_Slot _slot)
     {
         // 클릭
         selectedSlot = _slot.baseSlot;
         if (selectedSlot != null)
             SetInfomationDisplay(selectedSlot.item);
+    }
+
+    void OnPointerRightClick(UI_Inventory_Slot _slot)
+    {
+        // 클릭
+        selectedSlot = _slot.baseSlot;
+        if (selectedSlot != null)
+            SellItem();
     }
 
     void OnPointerEnter(UI_Inventory_Slot _slot)
