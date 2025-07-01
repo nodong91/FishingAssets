@@ -8845,14 +8845,17 @@ MonoBehaviour:
   checkOn: {fileID: 21300000, guid: cbbc3eb210af81b488e88aee86644b23, type: 3}
   checkOff: {fileID: 21300000, guid: 71ee75f6d67bc0f4fbe65a19732da49f, type: 3}
   baseSlot: {fileID: 0}
-  item:
-    ID: 
-    Name: 
-    Explanation: 
-    Icon: {fileID: 0}
-    Shape: []
-    Weight: 0
-    Price: 0
+  itemClass:
+    item:
+      ID: 
+      Name: 
+      Explanation: 
+      Icon: {fileID: 0}
+      Shape: []
+      Weight: 0
+      Price: 0
+    angle: 0
+    shape: []
 --- !u!1 &865894708
 GameObject:
   m_ObjectHideFlags: 0
@@ -9289,6 +9292,9 @@ MonoBehaviour:
   weightSlider: {fileID: 1183499899}
   currentWeight: 0
   maxWeight: 10
+  dragSlot: {fileID: 0}
+  enterSlot: {fileID: 0}
+  selectedSlot: {fileID: 0}
   iconImage: {fileID: 884202892}
   randomSize:
     id: 
@@ -22904,6 +22910,7 @@ MonoBehaviour:
       - {x: 1, y: 0}
       - {x: 0, y: -1}
       - {x: 1, y: -1}
+      - {x: 2, y: -1}
       Weight: 2
       Price: 130
     fishType: 0

@@ -16,7 +16,7 @@ public class UI_Inventory : MonoBehaviour
     UI_Inventory_Slot[,] allSlots;
     List<UI_Inventory_Slot> checkList = new List<UI_Inventory_Slot>();
 
-    UI_Inventory_Slot.ItemClass dragItem;
+    ItemClass dragItem;
     public UI_Inventory_Slot dragSlot, enterSlot, selectedSlot;
     public Image iconImage;
     bool onDrag, onCheck;
@@ -71,13 +71,13 @@ public class UI_Inventory : MonoBehaviour
         Debug.LogWarning($"  {randomSize.size},  {randomSize.weight},  {randomSize.price}");
     }
 
-    void SetSlot(UI_Inventory_Slot _slot, UI_Inventory_Slot.ItemClass _itemClass)
+    void SetSlot(UI_Inventory_Slot _slot, ItemClass _itemClass)
     {
-        _slot.SetBase(_itemClass.item);// 메인 슬롯
-        Vector2Int[] shape = _slot.itemClass.shape;
-        if (shape == null)
+        _slot.SetBase(_itemClass);// 메인 슬롯
+        if (_itemClass == null)
             return;
 
+        Vector2Int[] shape = _itemClass.shape;
         // 사이즈
         for (int i = 0; i < shape.Length; i++)
         {
@@ -110,7 +110,7 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    UI_Inventory_Slot GetEmptySlot(UI_Inventory_Slot.ItemClass _itemClass)
+    UI_Inventory_Slot GetEmptySlot(ItemClass _itemClass)
     {
         for (int y = 0; y < inventorySize.y; y++)
         {
@@ -228,7 +228,7 @@ public class UI_Inventory : MonoBehaviour
             return;
         }
 
-        UI_Inventory_Slot.ItemClass itemClass = selectedSlot.itemClass;
+        ItemClass itemClass = selectedSlot.itemClass;
         UI_Inventory_Slot slot = GetEmptySlot(itemClass);
         if (slot == null)
         {
@@ -289,12 +289,9 @@ public class UI_Inventory : MonoBehaviour
 
     void DragRotate()
     {
-        //if (dragSlot == null)
-        //    return;
-
-        //selectedSlot.
-        selectedSlot.itemClass.SetRotate(90f);
-
+        if (dragItem == null)
+            return;
+        dragItem.SetRotate(90f);
     }
 
     //===========================================================================================================================
@@ -306,10 +303,9 @@ public class UI_Inventory : MonoBehaviour
         if (_slot.empty == true)
             return;
 
-        UI_Inventory_Slot slot = _slot.baseSlot;
         ItemStruct item = _slot.itemClass.item;
         SetWeight(-item.Weight);
-        SetEmpty(slot);
+        SetEmpty(_slot);
     }
 
     void SetDragMove(UI_Inventory_Slot _slot)
@@ -371,7 +367,7 @@ public class UI_Inventory : MonoBehaviour
         //if (selectedSlot != null)
         //    SetInfomationDisplay(selectedSlot.itemClass.item);
 
-        ClickMoveTest();
+        ClickMoveTest(_slot);
     }
 
     void OnPointerRightClick(UI_Inventory_Slot _slot)
@@ -380,7 +376,7 @@ public class UI_Inventory : MonoBehaviour
         //selectedSlot = _slot.baseSlot;
         //if (selectedSlot != null)
         //    SellItem();
-        selectedSlot = _slot.baseSlot;
+
         DragRotate();
     }
 
@@ -403,28 +399,50 @@ public class UI_Inventory : MonoBehaviour
     // Input
     //===========================================================================================================================
     Coroutine testCoroutine;
-    bool testMove;
-    void ClickMoveTest()
+
+    void ClickMoveTest(UI_Inventory_Slot _slot)
     {
         if (testCoroutine != null)
             StopCoroutine(testCoroutine);
 
-        if (testMove == false)
+        if (onDrag == false)
         {
-            testMove = true;
-            testCoroutine = StartCoroutine(MoveTest());
+            if (_slot?.baseSlot == null)
+                return;
+
+            onDrag = true;
+            dragSlot = _slot.baseSlot;
+            dragItem = dragSlot.itemClass;
+            iconImage.sprite = dragItem.item.Icon;
+            iconImage.gameObject.SetActive(dragSlot.empty == false);
+
+            SetDragStart(dragSlot);
+            testCoroutine = StartCoroutine(MoveTest(_slot));
         }
         else
         {
-            testMove = false;
+            onDrag = false;
+            ClearCheckList();
+            if (dragSlot != null && enterSlot != null && onCheck == true)
+            {
+                // 교체
+                SetSlot(dragSlot, enterSlot.itemClass);
+                SetSlot(enterSlot, dragItem);
+            }
+            else
+            {
+                // 기존 위치로
+                SetSlot(dragSlot, dragItem);
+            }
+            iconImage.gameObject.SetActive(false);
         }
     }
 
-    IEnumerator MoveTest()
+    IEnumerator MoveTest(UI_Inventory_Slot _slot)
     {
-        while (testMove == true)
+        while (onDrag == true)
         {
-
+            iconImage.transform.position = Input.mousePosition;
             yield return null;
         }
     }

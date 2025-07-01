@@ -64,27 +64,26 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
         CheckOff();
     }
 
-    void SetSlot(ItemStruct _item)
+    void SetSlot(ItemClass _itemClass)
     {
-        //item = _item;
-        empty = _item.ID == null;
+        empty = _itemClass == null;
         if (!empty)
-            iconImage.sprite = _item.Icon;
+            iconImage.sprite = _itemClass.item.Icon;
         iconImage.gameObject.SetActive(!empty);
 
-        itemClass = new ItemClass(_item);
+        itemClass = _itemClass;
     }
 
-    public void SetBase(ItemStruct _item)
+    public void SetBase(ItemClass _itemClass)
     {
         baseSlot = this;
-        SetSlot(_item);
+        SetSlot(_itemClass);
     }
 
     public void SetLink(UI_Inventory_Slot _slot)
     {
         baseSlot = _slot;
-        SetSlot(_slot.itemClass.item);
+        SetSlot(_slot.itemClass);
     }
 
     public void SetEmpty()
