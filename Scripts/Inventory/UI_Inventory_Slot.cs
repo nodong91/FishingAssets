@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Data_Manager;
+using static UnityEngine.Rendering.ProbeAdjustmentVolume;
 
 public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -22,7 +23,37 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public Dele_Helper dele_Drag;
     public Dele_Helper dele_End;
     public Dele_Helper dele_Exit;
-    public ItemStruct item;
+
+    [System.Serializable]
+    public class ItemClass
+    {
+        public ItemStruct item;
+        public float angle;
+        public Vector2Int[] shape;
+
+        public ItemClass(ItemStruct _item)
+        {
+            item = _item;
+            angle = 0;
+            shape = _item.Shape;
+        }
+
+        public void SetRotate(float _angle)
+        {
+            shape = new Vector2Int[item.Shape.Length];
+            angle += _angle;
+            if (angle >= 360f)
+                angle = 0f;
+            for (int i = 0; i < item.Shape.Length; i++)
+            {
+                int x = item.Shape[i].x;
+                int y = item.Shape[i].y;
+                Vector2Int newVector = new Vector2Int(y, x);
+                shape[i] = newVector;
+            }
+        }
+    }
+    public ItemClass itemClass;
 
     public void SetStart(int _x, int _y)
     {
@@ -35,11 +66,13 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     void SetSlot(ItemStruct _item)
     {
-        item = _item;
-        empty = item.ID == null;
+        //item = _item;
+        empty = _item.ID == null;
         if (!empty)
-            iconImage.sprite = item.Icon;
+            iconImage.sprite = _item.Icon;
         iconImage.gameObject.SetActive(!empty);
+
+        itemClass = new ItemClass(_item);
     }
 
     public void SetBase(ItemStruct _item)
@@ -51,7 +84,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public void SetLink(UI_Inventory_Slot _slot)
     {
         baseSlot = _slot;
-        SetSlot(_slot.item);
+        SetSlot(_slot.itemClass.item);
     }
 
     public void SetEmpty()
