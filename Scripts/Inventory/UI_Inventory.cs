@@ -20,6 +20,8 @@ public class UI_Inventory : MonoBehaviour
     public Image iconImage;
     bool onDrag, onCheck;
 
+    public FishStruct.RandomSize randomSize;
+
     void Start()
     {
         weightSlider.material = Instantiate(weightSlider.material);
@@ -60,7 +62,7 @@ public class UI_Inventory : MonoBehaviour
 
         RandomFish();
     }
-    public FishStruct.RandomSize randomSize;
+    
     void RandomFish()
     {
         FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish["F_0001"];
