@@ -37,7 +37,7 @@ public class FishingSet : MonoBehaviour
         hitPoint.text = fishingLodStruct.hitPoint.ToString();
         hitBobberSpeed.text = fishingLodStruct.hitBobberSpeed.ToString();
 
-        FishingGame.FishStruct fishStruct = fishingGame.fishStruct;
+        Data_Manager.FishStruct fishStruct = fishingGame.fishStruct;
         fishPower.text = fishStruct.fishPower.ToString();
         fishAddAngle.text=fishStruct.fishAddAngle.ToString();
         fishSpeed.text = fishStruct.fishSpeed.ToString();
@@ -58,7 +58,7 @@ public class FishingSet : MonoBehaviour
             hitBobberSpeed = FloatParse(hitBobberSpeed.text),
         };
 
-        FishingGame.FishStruct fishStruct = new FishingGame.FishStruct
+        Data_Manager.FishStruct fishStruct = new Data_Manager.FishStruct
         {
             fishPower = FloatParse(fishPower.text),
             fishAddAngle = FloatParse(fishAddAngle.text),

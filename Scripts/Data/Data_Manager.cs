@@ -60,7 +60,6 @@ public class Data_Manager : Data_Parse
             {
                 SetItem(GetCSV_Data[i]);
             }
-
         }
     }
 
@@ -235,6 +234,13 @@ public class Data_Manager : Data_Parse
         }
         public FishType fishType;
         public Vector2 size;
+
+        public float fishPower;// 초당 끌려가는 힘 - 높을 수록 쉽게 끌려감
+        public float fishAddAngle;// 물고기 다음 이동 각도
+        public float fishSpeed;
+        public Vector2 fishDelay;// 방향 바뀌는 딜레이 시간
+        public float fishBobberLength;// 히트 최소 0~1까지
+
         [System.Serializable]
         public struct RandomSize
         {

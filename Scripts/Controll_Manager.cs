@@ -9,12 +9,6 @@ public class Controll_Manager : MonoBehaviour
     public Coroutine clickLefting;
 
     public LayerMask layerMask;
-    public enum RotateType
-    {
-        Normal,
-        Focus
-    }
-    [SerializeField] private RotateType rotateType;
 
     void Start()
     {
@@ -66,7 +60,6 @@ public class Controll_Manager : MonoBehaviour
 
     IEnumerator MouseLeftDrag(bool _input)
     {
-        rotateType = RotateType.Normal;
         Camera_Manager.current?.InputRotate(_input);
         if (_input == true)
         {
@@ -87,10 +80,6 @@ public class Controll_Manager : MonoBehaviour
     void InputMouseRight(bool _input)
     {
         inputMouseRight = _input;
-        if (_input == true)
-        {
-            rotateType = RotateType.Focus;
-        }
         //else if (inputDir != 0)
         //{
         //    rotateType = RotateType.Normal;

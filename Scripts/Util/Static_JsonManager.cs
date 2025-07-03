@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using System.Text;
-using System.Security.Cryptography;
 
 public class Static_JsonManager
 {
@@ -186,6 +184,34 @@ public class Static_JsonManager
     //======================================================================================
     // 인벤토리 저장
     //======================================================================================
+
+    public static void SaveInventoryData(string fileName, List<UI_Inventory.SaveItemClass> _data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        // 폴더 없으면 생성
+        FindFolder(filePath);
+
+        string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
+        File.WriteAllText(filePath + fileName + ".json", toJson);
+    }
+    // 불러오기
+    public static bool TryLoadInventoryData(string fileName, out List<UI_Inventory.SaveItemClass> _data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        string path = filePath + fileName + ".json";
+        FileInfo fileInfo = new FileInfo(path);
+
+        if (fileInfo.Exists == true)
+        {
+            string fromJson = File.ReadAllText(path);
+            _data = JsonHelper.FromJson<UI_Inventory.SaveItemClass>(fromJson);
+            return true;
+        }
+        _data = default;
+        return false;
+    }
+   
+
     //public static void SaveInventoryData(string fileName, Singleton_SaveData.SaveData _data)
     //{
     //    string filePath = Application.dataPath + "/Save/";

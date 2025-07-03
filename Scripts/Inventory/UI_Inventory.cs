@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -13,11 +12,11 @@ public class UI_Inventory : MonoBehaviour
     public Vector2Int inventorySize;
     public Image weightSlider;
     public float currentWeight, maxWeight;
-    UI_Inventory_Slot[,] allSlots;
-    List<UI_Inventory_Slot> checkList = new List<UI_Inventory_Slot>();
+    private UI_Inventory_Slot[,] allSlots;
+    private List<UI_Inventory_Slot> checkList = new List<UI_Inventory_Slot>();
 
-    ItemClass dragItem;
-    public UI_Inventory_Slot dragSlot, enterSlot, selectedSlot;
+    private ItemClass dragItemClass;
+    private UI_Inventory_Slot dragSlot, enterSlot, selectedSlot;
     public Image iconImage;
     bool onDrag, onCheck;
 
@@ -42,9 +41,6 @@ public class UI_Inventory : MonoBehaviour
                 UI_Inventory_Slot inst = Instantiate(inventorySlot, gridLayoutGroup.transform);
                 inst.SetStart(x, y);
                 inst.SetEmpty();
-                inst.dele_Begin = OnBeginDrag;
-                inst.dele_Drag = OnDrag;
-                inst.dele_End = OnEndDrag;
                 inst.dele_LeftClick = OnPointerLeftClick;
                 inst.dele_RightClick = OnPointerRightClick;
                 inst.dele_Enter = OnPointerEnter;
@@ -52,23 +48,65 @@ public class UI_Inventory : MonoBehaviour
                 allSlots[x, y] = inst;
             }
         }
-        // 테스트 세팅
-        ItemStruct a = Singleton_Data.INSTANCE.Dict_Fish["F_0001"].itemStruct;
-        ItemStruct b = Singleton_Data.INSTANCE.Dict_Fish["F_0002"].itemStruct;
-        UI_Inventory_Slot.ItemClass itemClassA = new ItemClass(a);
-        UI_Inventory_Slot.ItemClass itemClassB = new ItemClass(b);
-        SetSlot(GetEmptySlot(itemClassA), itemClassA);
-        SetSlot(GetEmptySlot(itemClassB), itemClassB);
-        SetSlot(GetEmptySlot(itemClassA), itemClassA);
-
-        RandomFish();
+        LoadInventory();
     }
-    public FishStruct.RandomSize randomSize;
-    void RandomFish()
+
+    private void Update()
     {
-        FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish["F_0001"];
-        randomSize = fishStruct.GetRandom();
-        Debug.LogWarning($"  {randomSize.size},  {randomSize.weight},  {randomSize.price}");
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ItemStruct a = Singleton_Data.INSTANCE.Dict_Fish["F_0001"].itemStruct;
+            AddItem(a);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ItemStruct b = Singleton_Data.INSTANCE.Dict_Fish["F_0002"].itemStruct;
+            AddItem(b);
+        }
+    }
+
+    void AddItem(ItemStruct _item)
+    {
+        UI_Inventory_Slot slot = GetEmptySlot(_item);
+        if (slot != null)
+        {
+            ItemClass itemClass = new ItemClass
+            {
+                item = _item,
+                angle = 0,
+                shape = _item.Shape,
+            };
+            SetSlot(GetEmptySlot(_item), itemClass);
+        }
+    }
+
+    [System.Serializable]
+    public class SaveItemClass
+    {
+        public string id;
+        public float angle;
+        public Vector2Int slotNum;
+        public Vector2Int[] shape;
+    }
+    public List<SaveItemClass> saveItems;
+    Dictionary<Vector2Int, ItemClass> dictItemClass = new Dictionary<Vector2Int, ItemClass>();
+
+    void DictCheck()
+    {
+        saveItems = new List<SaveItemClass>();
+        foreach (var child in dictItemClass)
+        {
+            SaveItemClass dictCheck = new SaveItemClass
+            {
+                slotNum = child.Key,
+                id = child.Value.item.ID,
+                angle = child.Value.angle,
+                shape = child.Value.shape,
+            };
+            saveItems.Add(dictCheck);
+        }
+        SaveInventory();// 내려놓으면 저장
     }
 
     void SetSlot(UI_Inventory_Slot _slot, ItemClass _itemClass)
@@ -81,11 +119,14 @@ public class UI_Inventory : MonoBehaviour
         // 사이즈
         for (int i = 0; i < shape.Length; i++)
         {
-            int slotX = _slot.x + shape[i].x;
-            int slotY = _slot.y + shape[i].y;
+            int slotX = _slot.slotNum.x + shape[i].x;
+            int slotY = _slot.slotNum.y + shape[i].y;
             allSlots[slotX, slotY].SetLink(_slot);
         }
         SetWeight(_itemClass.item.Weight);
+
+        dictItemClass[_slot.slotNum] = _itemClass;
+        DictCheck();
     }
 
     void SetWeight(float _weight)
@@ -97,6 +138,9 @@ public class UI_Inventory : MonoBehaviour
 
     void SetEmpty(UI_Inventory_Slot _slot)// 비우기
     {
+        dictItemClass.Remove(_slot.slotNum);
+        DictCheck();
+
         Vector2Int[] shape = _slot.itemClass.shape;
         _slot.SetEmpty();// 메인 슬롯 비우기
         if (shape == null)
@@ -104,13 +148,13 @@ public class UI_Inventory : MonoBehaviour
         // 사이즈
         for (int i = 0; i < shape.Length; i++)
         {
-            int slotX = _slot.x + shape[i].x;
-            int slotY = _slot.y + shape[i].y;
+            int slotX = _slot.slotNum.x + shape[i].x;
+            int slotY = _slot.slotNum.y + shape[i].y;
             allSlots[slotX, slotY].SetEmpty();
         }
     }
 
-    UI_Inventory_Slot GetEmptySlot(ItemClass _itemClass)
+    UI_Inventory_Slot GetEmptySlot(ItemStruct _item)
     {
         for (int y = 0; y < inventorySize.y; y++)
         {
@@ -123,10 +167,10 @@ public class UI_Inventory : MonoBehaviour
                     continue;
                 }
 
-                for (int i = 0; i < _itemClass.shape.Length; i++)
+                for (int i = 0; i < _item.Shape.Length; i++)
                 {
-                    int slotX = slot.x + _itemClass.shape[i].x;
-                    int slotY = slot.y + _itemClass.shape[i].y;
+                    int slotX = slot.slotNum.x + _item.Shape[i].x;
+                    int slotY = slot.slotNum.y + _item.Shape[i].y;
                     if (slotX < 0 || slotX >= inventorySize.x || slotY < 0 || slotY >= inventorySize.y)
                     {
                         empty = false;
@@ -157,19 +201,17 @@ public class UI_Inventory : MonoBehaviour
     {
         ClearCheckList();
 
-        //Vector2Int[] shape = _slot.itemClass.shape;
-        Vector2Int[] shape = dragItem.shape;
+        Vector2Int[] shape = dragItemClass.shape;
         onCheck = _slot.CheckSlot();// 메인
         checkList.Add(_slot);
 
-        Debug.LogWarning(shape.Length);
         if (shape == null)
             return;
 
         for (int i = 0; i < shape.Length; i++)
         {
-            int slotX = _slot.x + shape[i].x;
-            int slotY = _slot.y + shape[i].y;
+            int slotX = _slot.slotNum.x + shape[i].x;
+            int slotY = _slot.slotNum.y + shape[i].y;
             if (slotX < 0 || slotX >= inventorySize.x || slotY < 0 || slotY >= inventorySize.y)
             {
                 onCheck = false;
@@ -229,7 +271,7 @@ public class UI_Inventory : MonoBehaviour
         }
 
         ItemClass itemClass = selectedSlot.itemClass;
-        UI_Inventory_Slot slot = GetEmptySlot(itemClass);
+        UI_Inventory_Slot slot = GetEmptySlot(selectedSlot.itemClass.item);
         if (slot == null)
         {
             // 넣을만한 빈 슬롯 없음
@@ -283,82 +325,10 @@ public class UI_Inventory : MonoBehaviour
             yield return null;
         }
     }
-    //===========================================================================================================================
-    // Rotate
-    //===========================================================================================================================
-
-    void DragRotate()
-    {
-        if (dragItem == null)
-            return;
-        dragItem.SetRotate(90f);
-    }
-
-    //===========================================================================================================================
-    // 드래그
-    //===========================================================================================================================
-
-    void SetDragStart(UI_Inventory_Slot _slot)
-    {
-        if (_slot.empty == true)
-            return;
-
-        ItemStruct item = _slot.itemClass.item;
-        SetWeight(-item.Weight);
-        SetEmpty(_slot);
-    }
-
-    void SetDragMove(UI_Inventory_Slot _slot)
-    {
-        // 이동 중 놓을 수 잇는 곳인지 체크
-        SetCheck(_slot);
-    }
 
     //===========================================================================================================================
     // Input
     //===========================================================================================================================
-
-    void OnBeginDrag(UI_Inventory_Slot _slot)
-    {
-        if (_slot.empty == true)
-            return;
-
-        onDrag = true;
-        dragSlot = _slot.baseSlot;
-        dragItem = dragSlot.itemClass;
-        iconImage.sprite = dragSlot.iconImage.sprite;
-        iconImage.gameObject.SetActive(dragSlot.empty == false);
-
-        SetDragStart(_slot);
-    }
-
-    void OnDrag()
-    {
-        if (onDrag == true)
-            iconImage.transform.position = Input.mousePosition;
-    }
-
-    void OnEndDrag()
-    {
-        if (onDrag == false)
-            return;
-
-        ClearCheckList();
-        onDrag = false;
-        if (dragSlot != null && enterSlot != null && onCheck == true)
-        {
-            // 교체
-            SetSlot(dragSlot, enterSlot.itemClass);
-            SetSlot(enterSlot, dragItem);
-        }
-        else
-        {
-            // 기존 위치로
-            SetSlot(dragSlot, dragItem);
-        }
-        onCheck = false;
-        iconImage.gameObject.SetActive(false);
-    }
 
     void OnPointerLeftClick(UI_Inventory_Slot _slot)
     {
@@ -377,14 +347,14 @@ public class UI_Inventory : MonoBehaviour
         //if (selectedSlot != null)
         //    SellItem();
 
-        DragRotate();
+        SetDragRotate();
     }
 
     void OnPointerEnter(UI_Inventory_Slot _slot)
     {
         enterSlot = _slot;
         if (onDrag == true)
-            SetDragMove(enterSlot);
+            SetDragMove();
     }
 
     void OnPointerExit()
@@ -392,50 +362,69 @@ public class UI_Inventory : MonoBehaviour
         enterSlot = null;
     }
 
-
-
-
     //===========================================================================================================================
-    // Input
+    // 드래그
     //===========================================================================================================================
-    Coroutine testCoroutine;
-
+    Coroutine dragCoroutine;
+    ItemClass originItemClass;
     void ClickMoveTest(UI_Inventory_Slot _slot)
     {
-        if (testCoroutine != null)
-            StopCoroutine(testCoroutine);
+        if (dragCoroutine != null)
+            StopCoroutine(dragCoroutine);
 
         if (onDrag == false)
         {
-            if (_slot?.baseSlot == null)
-                return;
-
-            onDrag = true;
-            dragSlot = _slot.baseSlot;
-            dragItem = dragSlot.itemClass;
-            iconImage.sprite = dragItem.item.Icon;
-            iconImage.gameObject.SetActive(dragSlot.empty == false);
-
-            SetDragStart(dragSlot);
-            testCoroutine = StartCoroutine(MoveTest(_slot));
+            OnDragStart(_slot);
         }
         else
         {
-            onDrag = false;
-            ClearCheckList();
-            if (dragSlot != null && enterSlot != null && onCheck == true)
-            {
-                // 교체
-                SetSlot(dragSlot, enterSlot.itemClass);
-                SetSlot(enterSlot, dragItem);
-            }
-            else
-            {
-                // 기존 위치로
-                SetSlot(dragSlot, dragItem);
-            }
-            iconImage.gameObject.SetActive(false);
+            OnDragEnd();
         }
+    }
+
+    void OnDragStart(UI_Inventory_Slot _slot)
+    {
+        if (_slot == null || _slot.baseSlot == null)
+            return;
+
+        onDrag = true;
+        dragSlot = _slot.baseSlot;
+        dragItemClass = dragSlot.itemClass;
+
+        if (dragItemClass == null)
+            return;
+
+        if (originItemClass == null)// 기존 위치 저장
+            originItemClass = new ItemClass();
+        originItemClass.SetItemClass(dragItemClass);
+
+        iconImage.sprite = dragItemClass.item.Icon;
+        iconImage.gameObject.SetActive(dragSlot.empty == false);
+
+        SetDragStart(dragSlot);
+        dragCoroutine = StartCoroutine(MoveTest(_slot));
+    }
+
+    void OnDragEnd()
+    {
+        onDrag = false;
+        if (dragSlot != null && enterSlot != null && onCheck == true)
+        {
+            // 교체
+            SetSlot(dragSlot, enterSlot.itemClass);
+            SetSlot(enterSlot, dragItemClass);
+        }
+        else
+        {
+            // 기존 위치로
+            dragItemClass.SetItemClass(originItemClass);// 기존 클라스로 돌림
+            SetSlot(dragSlot, dragItemClass);
+        }
+        iconImage.gameObject.SetActive(false);
+
+        ClearCheckList();
+        dragSlot = null;
+        dragItemClass = null;
     }
 
     IEnumerator MoveTest(UI_Inventory_Slot _slot)
@@ -444,6 +433,67 @@ public class UI_Inventory : MonoBehaviour
         {
             iconImage.transform.position = Input.mousePosition;
             yield return null;
+        }
+    }
+    //===========================================================================================================================
+    // 드래그
+    //===========================================================================================================================
+
+    void SetDragStart(UI_Inventory_Slot _slot)
+    {
+        if (_slot.empty == true)
+            return;
+
+        ItemStruct item = _slot.itemClass.item;
+        SetWeight(-item.Weight);
+        SetEmpty(_slot);
+        SetCheck(_slot);
+    }
+
+    void SetDragMove()
+    {
+        // 이동 중 놓을 수 잇는 곳인지 체크
+        SetCheck(enterSlot);
+    }
+
+    void SetDragRotate()
+    {
+        if (dragItemClass == null)
+            return;
+        dragItemClass.SetRotate(90f);
+        SetCheck(enterSlot);
+    }
+
+    //===========================================================================================================================
+    // 저장 및 불러오기
+    //===========================================================================================================================
+
+    void SaveInventory()
+    {
+        Static_JsonManager.SaveInventoryData("InventoryData", saveItems);
+    }
+
+    void LoadInventory()
+    {
+        if (Static_JsonManager.TryLoadInventoryData("InventoryData", out List<SaveItemClass> _data))
+        {
+            LoadItem(_data);
+        }
+    }
+
+    void LoadItem(List<SaveItemClass> _items)
+    {
+        for (int i = 0; i < _items.Count; i++)
+        {
+            ItemStruct setItem = Singleton_Data.INSTANCE.Dict_Fish[_items[i].id].itemStruct;
+            ItemClass itemClass = new ItemClass
+            {
+                item = setItem,
+                angle = _items[i].angle,
+                shape = _items[i].shape,
+            };// 새로운 클라스 캡슐화
+            UI_Inventory_Slot slot = allSlots[_items[i].slotNum.x, _items[i].slotNum.y];
+            SetSlot(slot, itemClass);
         }
     }
 }

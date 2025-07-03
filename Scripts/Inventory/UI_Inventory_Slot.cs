@@ -5,11 +5,11 @@ using UnityEngine.UI;
 using static Data_Manager;
 using static UnityEngine.Rendering.ProbeAdjustmentVolume;
 
-public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public bool empty;
     public TMPro.TMP_Text m_Text;
-    public int x, y;
+    public Vector2Int slotNum;
     public Image iconImage, checkImage;
     public Sprite checkOn, checkOff;
     public UI_Inventory_Slot baseSlot;// 링크 베이스 - 다 묶이게
@@ -17,11 +17,8 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
     public delegate void Dele_HelperSlot(UI_Inventory_Slot _slot);
     public Dele_HelperSlot dele_LeftClick, dele_RightClick;
     public Dele_HelperSlot dele_Enter;
-    public Dele_HelperSlot dele_Begin;
 
     public delegate void Dele_Helper();
-    public Dele_Helper dele_Drag;
-    public Dele_Helper dele_End;
     public Dele_Helper dele_Exit;
 
     [System.Serializable]
@@ -31,11 +28,11 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
         public float angle;
         public Vector2Int[] shape;
 
-        public ItemClass(ItemStruct _item)
+        public void SetItemClass(ItemClass _item)
         {
-            item = _item;
-            angle = 0;
-            shape = _item.Shape;
+            item = _item.item;
+            angle = _item.angle;
+            shape = _item.shape;
         }
 
         public void SetRotate(float _angle)
@@ -48,7 +45,27 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
             {
                 int x = item.Shape[i].x;
                 int y = item.Shape[i].y;
-                Vector2Int newVector = new Vector2Int(y, x);
+                switch (angle)
+                {
+                    case 0:
+
+                        break;
+
+                    case 90:
+                        x = item.Shape[i].y * -1;
+                        y = item.Shape[i].x;
+                        break;
+
+                    case 180:
+                        x = item.Shape[i].x * -1;
+                        y = item.Shape[i].y * -1;
+                        break;
+                    case 270:
+                        x = item.Shape[i].y;
+                        y = item.Shape[i].x * -1;
+                        break;
+                }
+                Vector2Int newVector = new Vector2Int(x, y);
                 shape[i] = newVector;
             }
         }
@@ -57,8 +74,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
     public void SetStart(int _x, int _y)
     {
-        x = _x;
-        y = _y;
+        slotNum = new Vector2Int(_x, _y);
         m_Text.text = _x + "/" + _y;
         gameObject.name = m_Text.text;
         CheckOff();
@@ -120,22 +136,6 @@ public class UI_Inventory_Slot : MonoBehaviour, IBeginDragHandler, IDragHandler,
 
 
 
-
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        dele_Begin?.Invoke(this);
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        dele_Drag?.Invoke();
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        dele_End?.Invoke();
-    }
 
     public void OnPointerClick(PointerEventData eventData)
     {

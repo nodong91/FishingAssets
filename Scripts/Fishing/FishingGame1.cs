@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static FishingGame;
 
 public class FishingGame1 : MonoBehaviour
 {
@@ -504,7 +503,7 @@ public class FishingGame1 : MonoBehaviour
     }
 
     //==================================================================================================================================
-    // 4
+    // 5
     //==================================================================================================================================
     public float runningSpeed = 1f;
     public RectTransform type5Base;

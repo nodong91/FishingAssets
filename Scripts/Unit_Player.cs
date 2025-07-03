@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class Unit_Player : MonoBehaviour
@@ -246,28 +247,6 @@ public class Unit_Player : MonoBehaviour
             CheckClosestUnit();
         }
     }
-    //================================================================================================================================================
-    // 충돌
-    //================================================================================================================================================
-    public List<GameObject> triggerGameObject = new List<GameObject>();
-    public GameObject closestTarget;
-    public float closestDistance;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        triggerGameObject.Add(other.gameObject);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        triggerGameObject.Remove(other.gameObject);
-
-        if (triggerGameObject.Count == 0)
-        {
-            closestTarget = null;
-            UI_Manager.current.followManager.AddClosestTarget(null);
-        }
-    }
 
     void CheckClosestUnit()// 아이템이나 채집 같은거 하기 위한 테스트
     {
@@ -286,22 +265,11 @@ public class Unit_Player : MonoBehaviour
             }
         }
 
-        //for (int i = 0; i < monsterList().Count; i++)
-        //{
-        //    float offsetDist = (monsterList()[i].transform.position - transform.position).sqrMagnitude;
-        //    if (closestDistance > offsetDist)
-        //    {
-        //        closestDistance = offsetDist;
-        //        tempTarget = monsterList()[i].gameObject;
-        //    }
-        //}
-
         if (closestTarget != tempTarget)
         {
             closestTarget = tempTarget;
         }
         UI_Manager.current.followManager.AddClosestTarget(closestTarget);
-        //Debug.LogWarning("이동중~" + monsterList().Count);
     }
 
     void SetMoving()
@@ -331,6 +299,34 @@ public class Unit_Player : MonoBehaviour
         Vector3 target = transform.position + Camera_Manager.current.transform.TransformDirection(dir).normalized;
         Vector3 offset = (target - transform.position).normalized;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed * 5f);
+    }
+    //================================================================================================================================================
+    // 충돌
+    //================================================================================================================================================
+    public List<Fishing_Setting> triggerGameObject = new List<Fishing_Setting>();
+    public GameObject closestTarget;
+    public float closestDistance;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Fishing_Setting fishing = other.GetComponent<Fishing_Setting>();
+        if (fishing == null)
+            return;
+        triggerGameObject.Add(fishing);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Fishing_Setting fishing = other.GetComponent<Fishing_Setting>();
+        if (fishing == null)
+            return;
+
+        triggerGameObject.Remove(fishing);
+        if (triggerGameObject.Count == 0)
+        {
+            closestTarget = null;
+            UI_Manager.current.followManager.AddClosestTarget(null);
+        }
     }
 
     //================================================================================================================================================
@@ -397,6 +393,7 @@ public class Unit_Player : MonoBehaviour
         {
             if (closestTarget != null)
             {
+                // 낚시 시작
                 fishingGame.StartFishing();
             }
             stateAction = StartCoroutine(State_StopActing());

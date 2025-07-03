@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FishingGame : MonoBehaviour
+public class Fishing_Main : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
     public enum FishingState
@@ -47,6 +47,25 @@ public class FishingGame : MonoBehaviour
 
     public Data_Manager.FishStruct fishStruct;
 
+    public delegate void DeleEndGame();
+    public DeleEndGame deleEndGame;
+
+    public void StartGame()
+    {
+        canvasGroup.gameObject.SetActive(true);
+    }
+
+    void EndGame()
+    {
+        deleEndGame?.Invoke();
+        canvasGroup.gameObject.SetActive(false);
+    }
+
+    public void Action()
+    {
+        EndGame();
+    }
+
     void Start()
     {
         fishingRod.material = Instantiate(fishingRod.material);
@@ -76,7 +95,7 @@ public class FishingGame : MonoBehaviour
         switch (state)
         {
             case FishingState.None:
-                
+
                 break;
 
             case FishingState.Hit:
