@@ -47,7 +47,7 @@ public class Fishing_Main : MonoBehaviour
 
     public Data_Manager.FishStruct fishStruct;
 
-    public delegate void DeleEndGame();
+    public delegate void DeleEndGame(Fishing_Manager.FishingState _state);
     public DeleEndGame deleEndGame;
 
     public void SetStart()
@@ -62,7 +62,7 @@ public class Fishing_Main : MonoBehaviour
 
     void EndGame()
     {
-        deleEndGame?.Invoke();
+        deleEndGame?.Invoke(Fishing_Manager.FishingState.Sub);// 끝나면 서브로 이동
         canvasGroup.gameObject.SetActive(false);
     }
 

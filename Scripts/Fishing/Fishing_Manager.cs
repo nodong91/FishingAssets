@@ -31,18 +31,6 @@ public class Fishing_Manager : MonoBehaviour
         fishingSubHealth.SetStart();
     }
 
-    void SetMouse()
-    {
-        Singleton_Controller.INSTANCE.key_MouseLeft += InputMouseLeft;
-        Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
-    }
-
-    void RemoveMouse()
-    {
-        Singleton_Controller.INSTANCE.key_MouseLeft -= InputMouseLeft;
-        Singleton_Controller.INSTANCE.key_MouseRight -= InputMouseRight;
-    }
-
     public void StartGame(Fishing_Setting _fishSetting)
     {
         fishSetting = _fishSetting;
@@ -54,16 +42,21 @@ public class Fishing_Manager : MonoBehaviour
         }
     }
 
-    void EndGame()
+    void EndGame(FishingState _fishState)
     {
-        if (state < FishingState.Complate)
-        {
-            StateMachine(state + 1);
-        }
-        else
-        {
-            StateMachine(FishingState.Ready);
-        }
+        StateMachine(_fishState);
+    }
+
+    void SetMouse()
+    {
+        Singleton_Controller.INSTANCE.key_MouseLeft += InputMouseLeft;
+        Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
+    }
+
+    void RemoveMouse()
+    {
+        Singleton_Controller.INSTANCE.key_MouseLeft -= InputMouseLeft;
+        Singleton_Controller.INSTANCE.key_MouseRight -= InputMouseRight;
     }
 
     void StateMachine(FishingState _state)
@@ -97,7 +90,7 @@ public class Fishing_Manager : MonoBehaviour
     void StateReady()
     {
         fishSetting = null;
-        Game_Manager.current.player.ResetMouse();
+        Game_Manager.current.player.SetControll();
         RemoveMouse();
     }
 

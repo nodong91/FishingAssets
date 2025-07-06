@@ -8,7 +8,7 @@ public class Fishing_Sub : MonoBehaviour
     public float fillAmount;
     public int keyCode;
 
-    public delegate void DeleEndGame();
+    public delegate void DeleEndGame(Fishing_Manager.FishingState _state);
     public DeleEndGame deleEndGame;
 
     public virtual void SetStart()
@@ -24,7 +24,7 @@ public class Fishing_Sub : MonoBehaviour
 
     public void EndGame()
     {
-        deleEndGame?.Invoke();
+        deleEndGame?.Invoke(Fishing_Manager.FishingState.Complate);// 끝 (보스라면 다시 메인으로)
         canvasGroup.gameObject.SetActive(false);
     }
 

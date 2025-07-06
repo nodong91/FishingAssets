@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Unit_Player : MonoBehaviour
@@ -27,20 +28,16 @@ public class Unit_Player : MonoBehaviour
     public State state = State.None;
 
     public Vector2Int dirction;
-
     public float moveSpeed = 0.01f;
 
     private void Start()
     {
-        SetPlayer();
+        SetControll();
     }
 
-    public void SetPlayer()
-    {
-        state = State.Idle;
-        SetMouse();
-        SetKeyCode();
-    }
+    //================================================================================================================================================
+    // 컨트롤 세팅
+    //================================================================================================================================================
 
     void SetMouse()
     {
@@ -54,11 +51,6 @@ public class Unit_Player : MonoBehaviour
         Singleton_Controller.INSTANCE.key_MouseLeft -= InputMousetLeft;
         //Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
         //Singleton_Controller.INSTANCE.key_MouseWheel += InputMouseWheel;
-    }
-
-    void InputMousetLeft(bool _input)
-    {
-        State_Action(_input);
     }
 
     void SetKeyCode()
@@ -85,17 +77,26 @@ public class Unit_Player : MonoBehaviour
         Singleton_Controller.INSTANCE.key_2 -= Key_2;
     }
 
+    //================================================================================================================================================
+    // 컨트롤
+    //================================================================================================================================================
+
+    void InputMousetLeft(bool _input)
+    {
+        State_Action(_input);
+    }
+
     void Direction_UP(bool _input)
     {
         if (_input == true)
         {
-            controllDirection |= ControllDirection.W;
-            dirction.y += 1;
+            controllDirection |= ControllDirection.W;// 넣기
+            //dirction.y += 1;
         }
         else
         {
-            controllDirection &= ~ControllDirection.W;
-            dirction.y -= 1;
+            controllDirection &= ~ControllDirection.W;// 제외
+            //dirction.y -= 1;
         }
         StateMove();
     }
@@ -105,12 +106,12 @@ public class Unit_Player : MonoBehaviour
         if (_input == true)
         {
             controllDirection |= ControllDirection.A;
-            dirction.x -= 1;
+            //dirction.x -= 1;
         }
         else
         {
             controllDirection &= ~ControllDirection.A;
-            dirction.x += 1;
+            //dirction.x += 1;
         }
         StateMove();
     }
@@ -120,12 +121,12 @@ public class Unit_Player : MonoBehaviour
         if (_input == true)
         {
             controllDirection |= ControllDirection.S;
-            dirction.y -= 1;
+            //dirction.y -= 1;
         }
         else
         {
             controllDirection &= ~ControllDirection.S;
-            dirction.y += 1;
+            //dirction.y += 1;
         }
         StateMove();
     }
@@ -135,12 +136,12 @@ public class Unit_Player : MonoBehaviour
         if (_input == true)
         {
             controllDirection |= ControllDirection.D;
-            dirction.x += 1;
+            //dirction.x += 1;
         }
         else
         {
             controllDirection &= ~ControllDirection.D;
-            dirction.x -= 1;
+            //dirction.x -= 1;
         }
         StateMove();
     }
@@ -212,8 +213,38 @@ public class Unit_Player : MonoBehaviour
     // 이동
     //================================================================================================================================================
 
+    void SetDirection()
+    {
+        if (controllDirection.HasFlag(ControllDirection.W) == false && controllDirection.HasFlag(ControllDirection.S) == false)
+        {
+            dirction.y = 0;
+        }
+        else if (controllDirection.HasFlag(ControllDirection.W))
+        {
+            dirction.y = 1;
+        }
+        else if (controllDirection.HasFlag(ControllDirection.S))
+        {
+            dirction.y = -1;
+        }
+        if (controllDirection.HasFlag(ControllDirection.A) == false && controllDirection.HasFlag(ControllDirection.D) == false)
+        {
+            dirction.x = 0;
+        }
+        else if (controllDirection.HasFlag(ControllDirection.A))
+        {
+            dirction.x = -1;
+        }
+        else if (controllDirection.HasFlag(ControllDirection.D))
+        {
+            dirction.x = 1;
+        }
+    }
+
     void StateMove()
     {
+        SetDirection();
+
         if (outOfControll == true)
             return;
 
@@ -386,7 +417,7 @@ public class Unit_Player : MonoBehaviour
                 triggerGameObject.Remove(closestTarget);
                 closestTarget = null;
 
-                RemoveMouse();
+                RemoveControll();
             }
             stateAction = StartCoroutine(State_StopActing());
         }
@@ -460,8 +491,21 @@ public class Unit_Player : MonoBehaviour
     // 낚시
     //================================================================================================================================================
 
-    public void ResetMouse()
+    public void SetControll()
     {
+        state = State.Idle;
+        dirction = Vector2Int.zero;
+
         SetMouse();
+        SetKeyCode();
+    }
+
+    public void RemoveControll()
+    {
+        state = State.Idle;
+        dirction = Vector2Int.zero;
+
+        RemoveMouse();
+        RemoveKeyCode();
     }
 }
