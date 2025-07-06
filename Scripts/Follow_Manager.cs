@@ -1,34 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Follow_Manager : MonoBehaviour
 {
     Camera UICamera;
     public Camera SetCamera { set { UICamera = value; } }
     public RectTransform cameraParent;
-    Dictionary<GameObject, GameObject> follow_Camera = new Dictionary<GameObject, GameObject>();
+    Dictionary<GameObject, Image> follow_Camera = new Dictionary<GameObject, Image>();
     Dictionary<GameObject, GameObject> follow_Overlay = new Dictionary<GameObject, GameObject>();
 
-    public GameObject ttttttt;
-    public GameObject xxxxxxx;
-
-    void Start()
-    {
-
-    }
+    private GameObject target;
+    public Image followUI;
+    Coroutine following;
 
     public void StartTest()
     {
-        //AddFollowUI(ttttttt);
-        //StartFollowing();
-        xxxxxxx.gameObject.SetActive(false);
+        followUI.gameObject.SetActive(false);
     }
 
-    public void AddClosestTarget(GameObject _target)
+    public void AddClosestTarget(Fishing_Setting _target)
     {
-        ttttttt = _target;
-        xxxxxxx.gameObject.SetActive(_target != null);
+        followUI.gameObject.SetActive(_target != null);
+        if (_target == null)
+            return;
+
+        target = _target.gameObject;
+        followUI.sprite = _target.GetIconSprite;
+
         if (followClosestTarget == null)
             followClosestTarget = StartCoroutine(FollowClosestTarget());
     }
@@ -36,9 +36,9 @@ public class Follow_Manager : MonoBehaviour
 
     IEnumerator FollowClosestTarget()
     {
-        while (ttttttt != null)
+        while (target != null)
         {
-            FollowTarget_Camera(ttttttt.transform, xxxxxxx);
+            FollowTarget_Camera(target.transform, followUI);
             yield return null;
         }
         followClosestTarget = null;
@@ -46,7 +46,7 @@ public class Follow_Manager : MonoBehaviour
 
     public void AddFollowUI(GameObject _target)
     {
-        follow_Camera[_target] = xxxxxxx;
+        follow_Camera[_target] = followUI;
     }
 
     public void RemoveFollowUI(GameObject _target)
@@ -54,12 +54,11 @@ public class Follow_Manager : MonoBehaviour
         follow_Camera.Remove(_target);
     }
 
-    Coroutine followUI;
     void StartFollowing()
     {
-        if (followUI != null)
-            StopCoroutine(followUI);
-        followUI = StartCoroutine(StartFollowing_Camera());
+        if (following != null)
+            StopCoroutine(following);
+        following = StartCoroutine(StartFollowing_Camera());
     }
 
     IEnumerator StartFollowing_Camera()
@@ -69,7 +68,7 @@ public class Follow_Manager : MonoBehaviour
             foreach (var child in follow_Camera)
             {
                 Transform target = child.Key.transform;
-                GameObject followUI = child.Value;
+                Image followUI = child.Value;
                 //    followUI.transform.localScale = Vector3.one;
 
                 //    Vector3 screenPosition = Camera.main.WorldToScreenPoint(target.position);
@@ -92,7 +91,7 @@ public class Follow_Manager : MonoBehaviour
         }
     }
 
-    void FollowTarget_Camera(Transform _target, GameObject _followUI)
+    void FollowTarget_Camera(Transform _target, Image _followUI)
     {
         _followUI.transform.localScale = Vector3.one;
 

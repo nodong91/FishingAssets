@@ -1,10 +1,12 @@
 using UnityEngine;
 using Unity.Cinemachine;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public class Camera_Manager : MonoBehaviour
 {
     public CinemachineCamera cinemachineCamera;
+    public Camera UICamera;
     public Vector3 offset;
     CinemachineRotationComposer rotationComposer;
     CinemachineOrbitalFollow orbitalFollow;
@@ -31,16 +33,10 @@ public class Camera_Manager : MonoBehaviour
 
     CinemachineBrain brain;
 
-    public static Camera_Manager current;
-
-    private void Awake()
-    {
-        current = this;
-    }
-
     private void Start()
     {
         SetCameraManager();
+        SetUICamera();
     }
 
     public void SetCameraManager()
@@ -54,6 +50,18 @@ public class Camera_Manager : MonoBehaviour
         cinemachineBasicMultiChannelPerlin = cinemachineCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
         rotationComposer = cinemachineCamera.GetComponent<CinemachineRotationComposer>();
         SetDefault();
+    }
+
+    void SetUICamera()
+    {
+        Camera mainCamera = Camera.main;
+        var cameraData = mainCamera.GetUniversalAdditionalCameraData();
+        if (cameraData.cameraStack.Contains(UICamera) == false)
+        {
+            UICamera.fieldOfView = mainCamera.fieldOfView;
+            cameraData.cameraStack.Add(UICamera);
+            Debug.LogWarning(UICamera.fieldOfView + "       " + mainCamera.fieldOfView);
+        }
     }
 
     void SetDefault()

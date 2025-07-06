@@ -1,83 +1,76 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Fishing_Sub_Strength : MonoBehaviour
+public class Fishing_Sub_Strength : Fishing_Sub
 {
-    public CanvasGroup canvasGroup;
-    public Image test3Image;
-    public float type3FillAmount;
     public TMPro.TMP_Text type3Text;
     Coroutine playing;
     public float testSpeed = 1f;
     //==================================================================================================================================
     // 3
     //==================================================================================================================================
-    int keyCode;
 
-    public delegate void DeleEndGame();
-    public DeleEndGame deleEndGame;
-
-    public void StartGame()
+    public override void SetStart()
     {
-        canvasGroup.gameObject.SetActive(true);
+        base.SetStart();
+    }
+
+    public override void StartGame()
+    {
+        base.StartGame();
         SetKeyCode();
         if (playing != null)
             StopCoroutine(playing);
         playing = StartCoroutine(Playing());
     }
 
-    void EndGame()
+    public override void Action_Left()
     {
-        deleEndGame?.Invoke();
-        canvasGroup.gameObject.SetActive(false);
+        float addValue = keyCode == 0 ? 1f : -1f;
+        FillAmount(addValue);
     }
 
-    public void Action_Left()
+    public override void Action_Right()
     {
-        if (keyCode == 0)
-        {
-            if (type3FillAmount < 1f)
-                type3FillAmount += 0.05f;
-        }
+        float addValue = keyCode == 1 ? 1f : -1f;
+        FillAmount(addValue);
     }
 
-    public void Action_Right()
+    void FillAmount(float _value)
     {
-        if (keyCode == 1)
+        if (fillAmount > 0f || fillAmount < 1f)
         {
-            if (type3FillAmount > 0f)
-                type3FillAmount -= 0.05f;
+            fillAmount += 0.05f * _value;
         }
     }
 
     void SetKeyCode()
     {
         keyCode = Random.Range(0, 2);
-        type3Text.text = (keyCode > 0) ? "Left" : "Right";
+        type3Text.text = (keyCode == 0) ? "Left" : "Right";
     }
 
     IEnumerator Playing()
     {
-        type3FillAmount = 0f;
+        fillAmount = 0f;
         float runningTime = 0f;
         float randomTime = 0f;
         bool setStart = true;
         while (setStart == true)
         {
             runningTime += testSpeed * Time.deltaTime;
-            if (type3FillAmount > 1f)
+            if (fillAmount > 1f)
             {
                 setStart = false;
             }
-            else if (type3FillAmount > 0f)
+            else if (fillAmount > 0f)
             {
-                type3FillAmount -= Time.deltaTime * 0.1f;
+                fillAmount -= Time.deltaTime * 0.1f;
             }
-            test3Image.material.SetFloat("_FillAmount", type3FillAmount);
+            gageImage.material.SetFloat("_FillAmount", fillAmount);
             if (runningTime > randomTime)
             {
-                randomTime += Random.Range(1f, 3f);
+                randomTime += Random.Range(0.5f, 2f);
                 SetKeyCode();
             }
             yield return null;

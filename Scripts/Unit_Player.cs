@@ -1,8 +1,6 @@
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 public class Unit_Player : MonoBehaviour
@@ -36,14 +34,6 @@ public class Unit_Player : MonoBehaviour
     {
         SetPlayer();
     }
-
-    //void Update()
-    //{
-    //    if (outOfControll == false)
-    //    {
-    //        RotateMousePosition();
-    //    }
-    //}
 
     public void SetPlayer()
     {
@@ -254,14 +244,14 @@ public class Unit_Player : MonoBehaviour
             return;
 
         closestDistance = float.MaxValue;
-        GameObject tempTarget = null;
+        Fishing_Setting tempTarget = null;
         for (int i = 0; i < triggerGameObject.Count; i++)
         {
             float offsetDist = (triggerGameObject[i].transform.position - transform.position).sqrMagnitude;
             if (closestDistance > offsetDist)
             {
                 closestDistance = offsetDist;
-                tempTarget = triggerGameObject[i].gameObject;
+                tempTarget = triggerGameObject[i];
             }
         }
 
@@ -269,7 +259,7 @@ public class Unit_Player : MonoBehaviour
         {
             closestTarget = tempTarget;
         }
-        UI_Manager.current.followManager.AddClosestTarget(closestTarget);
+        Game_Manager.current.uiManager.followManager.AddClosestTarget(closestTarget);
     }
 
     void SetMoving()
@@ -278,9 +268,9 @@ public class Unit_Player : MonoBehaviour
             return;
 
         float speed = moveSpeed * Time.deltaTime;
-        Camera_Manager.current.transform.position = transform.position;
+        Game_Manager.current.cameraManager.transform.position = transform.position;
         Vector3 dir = new Vector3(dirction.x, 0f, dirction.y);
-        Vector3 target = transform.position + Camera_Manager.current.transform.TransformDirection(dir).normalized;
+        Vector3 target = transform.position + Game_Manager.current.cameraManager.transform.TransformDirection(dir).normalized;
         transform.position = Vector3.Lerp(transform.position, target, speed);
 
         Vector3 offset = (target - transform.position).normalized;
@@ -296,7 +286,7 @@ public class Unit_Player : MonoBehaviour
         Vector3 uiOffset = (mousePosition - playerPosition).normalized;
         Vector3 dir = new Vector3(uiOffset.x, 0f, uiOffset.y);
 
-        Vector3 target = transform.position + Camera_Manager.current.transform.TransformDirection(dir).normalized;
+        Vector3 target = transform.position + Game_Manager.current.cameraManager.transform.TransformDirection(dir).normalized;
         Vector3 offset = (target - transform.position).normalized;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed * 5f);
     }
@@ -304,7 +294,7 @@ public class Unit_Player : MonoBehaviour
     // √Êµπ
     //================================================================================================================================================
     public List<Fishing_Setting> triggerGameObject = new List<Fishing_Setting>();
-    public GameObject closestTarget;
+    public Fishing_Setting closestTarget;
     public float closestDistance;
 
     private void OnTriggerEnter(Collider other)
@@ -325,7 +315,7 @@ public class Unit_Player : MonoBehaviour
         if (triggerGameObject.Count == 0)
         {
             closestTarget = null;
-            UI_Manager.current.followManager.AddClosestTarget(null);
+            Game_Manager.current.uiManager.followManager.AddClosestTarget(null);
         }
     }
 
@@ -356,8 +346,8 @@ public class Unit_Player : MonoBehaviour
 
     void SetMoveEscape(Vector3 _dir, float _escapeSpeed)
     {
-        Camera_Manager.current.transform.position = transform.position;
-        Vector3 target = transform.position + Camera_Manager.current.transform.TransformDirection(_dir).normalized;
+        Game_Manager.current.cameraManager.transform.position = transform.position;
+        Vector3 target = transform.position + Game_Manager.current.cameraManager.transform.TransformDirection(_dir).normalized;
         transform.position = Vector3.Lerp(transform.position, target, _escapeSpeed);
 
         Vector3 offset = (target - transform.position).normalized;
@@ -373,7 +363,7 @@ public class Unit_Player : MonoBehaviour
 
     public void EventAction()// æÓ≈√ ¿Ã∫•∆Æ
     {
-        //InstancingAction();
+
     }
 
     void State_Action(bool _input)
@@ -383,9 +373,6 @@ public class Unit_Player : MonoBehaviour
             if (outOfControll == true)
                 return;
 
-            //currentSkill = readySkills[0];
-            //if (Time.time < currentSkill.startTime)
-            //    return;
             StateMachine(State.Action);
             stateAction = StartCoroutine(State_Acting());
         }
@@ -394,7 +381,12 @@ public class Unit_Player : MonoBehaviour
             if (closestTarget != null)
             {
                 // ≥¨Ω√ Ω√¿€
-                fishingGame.StartFishing();
+                Game_Manager.current.uiManager.followManager.AddClosestTarget(null);
+                Game_Manager.current.fishingManager.StartGame(closestTarget);
+                triggerGameObject.Remove(closestTarget);
+                closestTarget = null;
+
+                RemoveMouse();
             }
             stateAction = StartCoroutine(State_StopActing());
         }
@@ -432,25 +424,6 @@ public class Unit_Player : MonoBehaviour
             yield return null;
         }
     }
-
-    //IEnumerator SkillCasting(float _castingTime)
-    //{
-    //    float casting = 0f;
-    //    skillCasting = true;
-    //    while (skillCasting == true)
-    //    {
-    //        casting += Time.deltaTime;
-
-    //        deleUpdateAction(casting / _castingTime);
-    //        if (casting > _castingTime)
-    //        {
-    //            skillCasting = false;
-    //        }
-    //        yield return null;
-    //    }
-    //    deleUpdateAction(0f);
-    //}
-
     //================================================================================================================================================
     // »¶µÂ
     //================================================================================================================================================
@@ -471,5 +444,24 @@ public class Unit_Player : MonoBehaviour
 
 
 
-    public FishingGame fishingGame;
+
+
+
+
+
+
+
+
+
+
+
+
+    //================================================================================================================================================
+    // ≥¨Ω√
+    //================================================================================================================================================
+
+    public void ResetMouse()
+    {
+        SetMouse();
+    }
 }

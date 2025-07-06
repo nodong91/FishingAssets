@@ -18,6 +18,11 @@ public class Fishing_Hit : MonoBehaviour
     public delegate void DeleEndGame();
     public DeleEndGame deleEndGame;
 
+    public void SetStart()
+    {
+        canvasGroup.gameObject.SetActive(false);
+    }
+
     public void StartGame()
     {
         canvasGroup.gameObject.SetActive(true);
@@ -65,11 +70,11 @@ public class Fishing_Hit : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < 3; i++)
-        {
-            // 성공 실패 연출
-            yield return new WaitForSeconds(1f);//3초 뒤에
-        }
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    // 성공 실패 연출
+        //    yield return new WaitForSeconds(1f);//3초 뒤에
+        //}
         EndGame();
     }
 }

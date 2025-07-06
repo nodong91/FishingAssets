@@ -50,6 +50,11 @@ public class Fishing_Main : MonoBehaviour
     public delegate void DeleEndGame();
     public DeleEndGame deleEndGame;
 
+    public void SetStart()
+    {
+        canvasGroup.gameObject.SetActive(false);
+    }
+
     public void StartGame()
     {
         canvasGroup.gameObject.SetActive(true);

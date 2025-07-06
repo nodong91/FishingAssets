@@ -19,7 +19,7 @@ public class Controll_Manager : MonoBehaviour
 
     void Key_Esc(bool _input)
     {
-        if(_input == true)
+        if (_input == true)
             Application.Quit();
     }
 
@@ -60,7 +60,7 @@ public class Controll_Manager : MonoBehaviour
 
     IEnumerator MouseLeftDrag(bool _input)
     {
-        Camera_Manager.current?.InputRotate(_input);
+        Game_Manager.current.cameraManager?.InputRotate(_input);
         if (_input == true)
         {
             isLeftDrag = false;
@@ -84,12 +84,12 @@ public class Controll_Manager : MonoBehaviour
         //{
         //    rotateType = RotateType.Normal;
         //}
-        Camera_Manager.current?.InputRotate(_input);
+        Game_Manager.current.cameraManager?.InputRotate(_input);
     }
 
     void InputMouseWheel(bool _input)
     {
         float input = _input ? -0.1f : 0.1f;
-        Camera_Manager.current?.delegateInputScroll(input);
+        Game_Manager.current.cameraManager?.delegateInputScroll(input);
     }
 }

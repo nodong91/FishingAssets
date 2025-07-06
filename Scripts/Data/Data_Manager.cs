@@ -73,6 +73,7 @@ public class Data_Manager : Data_Parse
             ItemStruct tempItem = GetItemStruct(elements);
             FishStruct tempData = new FishStruct
             {
+                id = tempItem.ID,
                 itemStruct = tempItem,
                 fishType = (FishStruct.FishType)System.Enum.Parse(typeof(FishStruct.FishType), elements[7]),
                 size = Parse_Vector2(elements[8])
@@ -225,6 +226,8 @@ public class Data_Manager : Data_Parse
     [System.Serializable]
     public struct FishStruct
     {
+        [HideInInspector]
+        public string id;
         public ItemStruct itemStruct;
         public enum FishType
         {

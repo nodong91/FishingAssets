@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Fishing_Manager : MonoBehaviour
@@ -11,21 +12,46 @@ public class Fishing_Manager : MonoBehaviour
         Complate
     }
     public FishingState state;
-    public Data_Manager.FishStruct.FishType catchFishType;
+    Fishing_Setting fishSetting;
+    public Data_Manager.FishStruct.FishType fishType;
+
     public Fishing_Hit fishingHit;
     public Fishing_Main fishingMain;
     public Fishing_Sub_Strength fishingSubStrength;
+    public Fishing_Sub_Agility fishingSubAgility;
+    public Fishing_Sub_Health fishingSubHealth;
+    public Fishing_Complate fishingComplate;
 
     void Start()
     {
-        SetMouse();
-        StateMachine(FishingState.Hit);
+        fishingHit.SetStart();
+        fishingMain.SetStart();
+        fishingSubStrength.SetStart();
+        fishingSubAgility.SetStart();
+        fishingSubHealth.SetStart();
     }
 
     void SetMouse()
     {
         Singleton_Controller.INSTANCE.key_MouseLeft += InputMouseLeft;
         Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
+    }
+
+    void RemoveMouse()
+    {
+        Singleton_Controller.INSTANCE.key_MouseLeft -= InputMouseLeft;
+        Singleton_Controller.INSTANCE.key_MouseRight -= InputMouseRight;
+    }
+
+    public void StartGame(Fishing_Setting _fishSetting)
+    {
+        fishSetting = _fishSetting;
+        if (fishSetting != null)
+        {
+            fishType = fishSetting.fishType;
+            SetMouse();
+            StateMachine(FishingState.Hit);
+        }
     }
 
     void EndGame()
@@ -46,7 +72,7 @@ public class Fishing_Manager : MonoBehaviour
         switch (state)
         {
             case FishingState.Ready:
-
+                StateReady();
                 break;
 
             case FishingState.Hit:
@@ -64,34 +90,64 @@ public class Fishing_Manager : MonoBehaviour
                 break;
 
             case FishingState.Complate:
-
+                StateComplate();
                 break;
         }
+    }
+    void StateReady()
+    {
+        fishSetting = null;
+        Game_Manager.current.player.ResetMouse();
+        RemoveMouse();
     }
 
     void StateSub()
     {
-        switch (catchFishType)
+        switch (fishSetting.fishType)
         {
             case Data_Manager.FishStruct.FishType.Strength:
                 fishingSubStrength.deleEndGame = EndGame;
                 fishingSubStrength.StartGame();
                 break;
+
             case Data_Manager.FishStruct.FishType.Agility:
+                fishingSubAgility.deleEndGame = EndGame;
+                fishingSubAgility.StartGame();
                 break;
+
             case Data_Manager.FishStruct.FishType.Health:
+                fishingSubHealth.deleEndGame = EndGame;
+                fishingSubHealth.StartGame();
                 break;
         }
     }
 
+    void StateComplate()
+    {
+        fishingComplate.SetFish(fishSetting);// 물고기 스탯 출력
+        StateMachine(FishingState.Ready);
+    }
+
     //==================================================================================================================================
-    // 왼쪽 액션
+    // 액션
     //==================================================================================================================================
     void InputMouseLeft(bool _input)
     {
         if (_input)
         {
             StateAction(true);
+        }
+        else
+        {
+
+        }
+    }
+
+    void InputMouseRight(bool _input)
+    {
+        if (_input)
+        {
+            StateAction(false);
         }
         else
         {
@@ -120,13 +176,14 @@ public class Fishing_Manager : MonoBehaviour
                 break;
 
             case FishingState.Complate:
-
+                StateComplateAction();
                 break;
         }
     }
+
     void StateSubAction(bool _left)
     {
-        switch (catchFishType)
+        switch (fishSetting.fishType)
         {
             case Data_Manager.FishStruct.FishType.Strength:
                 if (_left == true)
@@ -138,25 +195,33 @@ public class Fishing_Manager : MonoBehaviour
                     fishingSubStrength.Action_Right();
                 }
                 break;
+
             case Data_Manager.FishStruct.FishType.Agility:
+                if (_left == true)
+                {
+                    fishingSubAgility.Action_Left();
+                }
+                else
+                {
+                    fishingSubAgility.Action_Right();
+                }
                 break;
+
             case Data_Manager.FishStruct.FishType.Health:
+                if (_left == true)
+                {
+                    fishingSubHealth.Action_Left();
+                }
+                else
+                {
+                    fishingSubHealth.Action_Right();
+                }
                 break;
         }
     }
 
-    //==================================================================================================================================
-    // 오른쪽 액션
-    //==================================================================================================================================
-    void InputMouseRight(bool _input)
+    void StateComplateAction()
     {
-        if (_input)
-        {
-            StateAction(false);
-        }
-        else
-        {
-
-        }
+        //StateMachine(FishingState.Ready);
     }
 }
