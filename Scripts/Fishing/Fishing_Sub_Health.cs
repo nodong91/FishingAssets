@@ -1,11 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Fishing_Sub_Health : Fishing_Sub
 {
     public TMPro.TMP_Text type4Text;
-    float runningTime;
     Coroutine playing;
     public string originString;
 
@@ -50,15 +48,16 @@ public class Fishing_Sub_Health : Fishing_Sub
                 type4Text.text = originString;
                 //keyCode = KeyCodeToIndex(newString[0].ToString());
 
-                if (runningTime < 1f)
-                    runningTime += 0.2f;
+                if (AddAmount(0.2f) == true)
+                {
+                    EndGame();
+                }
             }
         }
-        else
+        else if (fillAmount > 0f)
         {
-            runningTime -= 0.2f;
+            AddAmount(-0.2f);
         }
-        EndGame();
     }
 
     void SetKeyCode()
@@ -80,15 +79,15 @@ public class Fishing_Sub_Health : Fishing_Sub
 
     IEnumerator Playing()
     {
-        runningTime = 0f;
+        fillAmount = 0f;
         bool setStart = true;
         while (setStart == true)
         {
-            if (runningTime > 0f)
+            if (fillAmount > 0f)
             {
-                runningTime -= Time.deltaTime * 0.1f;
+                fillAmount -= Time.deltaTime * 0.1f;
             }
-            gageImage.material.SetFloat("_FillAmount", runningTime);
+            gageImage.material.SetFloat("_FillAmount", fillAmount);
             yield return null;
         }
     }

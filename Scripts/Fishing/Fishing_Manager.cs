@@ -75,7 +75,7 @@ public class Fishing_Manager : MonoBehaviour
 
             case FishingState.Main:
                 fishingMain.deleEndGame = EndGame;
-                fishingMain.StartGame();
+                fishingMain.StartGame(fishSetting);
                 break;
 
             case FishingState.Sub:

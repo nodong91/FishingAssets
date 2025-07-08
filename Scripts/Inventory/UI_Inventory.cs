@@ -18,7 +18,7 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
     private List<UI_Inventory_Slot> checkList = new List<UI_Inventory_Slot>();
 
     private ItemClass dragItemClass;
-    public UI_Inventory_Slot dragSlot, enterSlot, selectedSlot;
+    private UI_Inventory_Slot dragSlot, enterSlot, selectedSlot;
     public Image iconImage;
     public bool onDrag, onCheck;
     public Button closeButton;
@@ -265,6 +265,25 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
         inventoryInfomation.SetDisplay(_item);
     }
 
+    public void AddItem(ItemStruct _item)
+    {
+        onDrag = true;
+        ItemClass itemClass = new ItemClass
+        {
+            item = _item,
+            angle = 0,
+            shape = _item.Shape,
+        };
+        dragItemClass = itemClass;
+
+        iconImage.sprite = _item.Icon;
+        iconImage.gameObject.SetActive(true);
+
+        if (dragCoroutine != null)
+            StopCoroutine(dragCoroutine);
+        dragCoroutine = StartCoroutine(MoveTest());
+    }
+
     void BuyItem()// ±¸¸Å
     {
         if (selectedSlot == null || selectedSlot.empty == true)
@@ -408,26 +427,6 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
         iconImage.gameObject.SetActive(dragSlot.empty == false);
 
         SetDragStart(dragSlot);
-        dragCoroutine = StartCoroutine(MoveTest());
-    }
-
-
-    public void AddItem(ItemStruct _item)
-    {
-        onDrag = true;
-        ItemClass itemClass = new ItemClass
-        {
-            item = _item,
-            angle = 0,
-            shape = _item.Shape,
-        };
-        dragItemClass = itemClass;
-
-        iconImage.sprite = _item.Icon;
-        iconImage.gameObject.SetActive(true);
-
-        if (dragCoroutine != null)
-            StopCoroutine(dragCoroutine);
         dragCoroutine = StartCoroutine(MoveTest());
     }
 

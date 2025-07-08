@@ -52,13 +52,16 @@ public class Fishing_Sub_Agility : Fishing_Sub
         {
             // 성공
             SetKeyCode();
+            if (AddAmount(0.1f) == true)
+            {
+                EndGame();
+            }
         }
         else
         {
             // 실패
             //return;
         }
-        EndGame();
     }
 
     void SetKeyCode()

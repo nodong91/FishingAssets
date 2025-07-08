@@ -38,10 +38,11 @@ public class Fishing_Sub_Strength : Fishing_Sub
 
     void FillAmount(float _value)
     {
-        if (fillAmount > 0f || fillAmount < 1f)
-        {
-            fillAmount += 0.05f * _value;
-        }
+        //if (fillAmount > 0f || fillAmount < 1f)
+        //{
+        //    fillAmount += 0.05f * _value;
+        //}
+        AddAmount(0.05f * _value);
     }
 
     void SetKeyCode()
@@ -59,13 +60,17 @@ public class Fishing_Sub_Strength : Fishing_Sub
         while (setStart == true)
         {
             runningTime += testSpeed * Time.deltaTime;
-            if (fillAmount > 1f)
+            //if (fillAmount > 1f)
+            //{
+            //    setStart = false;
+            //}
+            //else if (fillAmount > 0f)
+            //{
+            //    fillAmount -= Time.deltaTime * 0.1f;
+            //}
+            if (AddAmount(-Time.deltaTime * 0.1f) == true)
             {
                 setStart = false;
-            }
-            else if (fillAmount > 0f)
-            {
-                fillAmount -= Time.deltaTime * 0.1f;
             }
             gageImage.material.SetFloat("_FillAmount", fillAmount);
             if (runningTime > randomTime)

@@ -28,13 +28,14 @@ public class Fishing_Sub : MonoBehaviour
         canvasGroup.gameObject.SetActive(false);
     }
 
-    public virtual void Action_Left()
+    public bool AddAmount(float _addAmount)
     {
-      
+        if (fillAmount > 0f || fillAmount < 1f)
+            fillAmount += _addAmount;
+        return (fillAmount >= 1f);
     }
 
-    public virtual void Action_Right()
-    {
-       
-    }
+    public virtual void Action_Left() { }
+
+    public virtual void Action_Right() { }
 }

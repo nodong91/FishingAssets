@@ -76,7 +76,13 @@ public class Data_Manager : Data_Parse
                 id = tempItem.ID,
                 itemStruct = tempItem,
                 fishType = (FishStruct.FishType)System.Enum.Parse(typeof(FishStruct.FishType), elements[7]),
-                size = Parse_Vector2(elements[8])
+                size = Parse_Vector2(elements[8]),
+                fishStamina = Parse_Float(elements[9]),
+                fishPower = Parse_Float(elements[10]),
+                fishROA = Parse_Float(elements[11]),
+                fishSpeed = Parse_Float(elements[12]),
+                fishTurnDelay = Parse_Vector2(elements[13]),
+                hitValue = Parse_Vector2(elements[14]),
             };
             fishStruct.Add(tempData);
         }
@@ -238,11 +244,12 @@ public class Data_Manager : Data_Parse
         public FishType fishType;
         public Vector2 size;
 
-        public float fishPower;// 초당 끌려가는 힘 - 높을 수록 쉽게 끌려감
-        public float fishAddAngle;// 물고기 다음 이동 각도
+        public float fishStamina;
+        public float fishPower;// 물고기 방어력
+        public float fishROA;// 물고기 활동 범위 (다음 이동 각도) range of activity 
         public float fishSpeed;
-        public Vector2 fishDelay;// 방향 바뀌는 딜레이 시간
-        public float fishBobberLength;// 히트 최소 0~1까지
+        public Vector2 fishTurnDelay;// 방향 바뀌는 딜레이 시간
+        public Vector2 hitValue; // 크리티컬 ; 히트 0~1
 
         [System.Serializable]
         public struct RandomSize

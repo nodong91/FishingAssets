@@ -6,20 +6,20 @@ using UnityEngine.UI;
 public class Fishing_Main : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
-    public enum FishingState
-    {
-        None,
-        Hit,
-        MainGame,
-        SubGame,
-        Complate
-    }
-    public FishingState state;
+    //public enum FishingState
+    //{
+    //    None,
+    //    Hit,
+    //    MainGame,
+    //    SubGame,
+    //    Complate
+    //}
+    //public FishingState state;
     public TMPro.TMP_Text stateText;
     public Image fishingRod, fishObject, health;
     public Transform fish;
     public ParticleSystem targetParticles;
-    public GameObject hitImage;
+    //public GameObject hitImage;
 
     public bool hitBool = false;
     float fillAmount;
@@ -29,7 +29,6 @@ public class Fishing_Main : MonoBehaviour
 
     bool fishingAction;
     float currentSpeed = 0f;
-    float fishPower;
     float complatePoint;// 완료 퍼센트
 
     [Header("[ 변경 가능한 수치 ]")]
@@ -53,11 +52,28 @@ public class Fishing_Main : MonoBehaviour
     public void SetStart()
     {
         canvasGroup.gameObject.SetActive(false);
+
+        fishingRod.material = Instantiate(fishingRod.material);
+        health.material = Instantiate(health.material);
+        //StateMachine(FishingState.None);
+    }
+
+    public void StartGame(Fishing_Setting _fishSetting)
+    {
+        fishStruct = _fishSetting.fishStruct;
+        StartGame();
     }
 
     public void StartGame()
     {
+        //if (state != FishingState.None)
+        //    return;
+
         canvasGroup.gameObject.SetActive(true);
+        SetMouse();
+        //// 낚시 가능한 위치
+        //StateMachine(FishingState.MainGame);
+        StateMachine();
     }
 
     void EndGame()
@@ -68,15 +84,7 @@ public class Fishing_Main : MonoBehaviour
 
     public void Action()
     {
-        EndGame();
-    }
 
-    void Start()
-    {
-        fishingRod.material = Instantiate(fishingRod.material);
-        health.material = Instantiate(health.material);
-        StateMachine(FishingState.None);
-        SetMouse();
     }
 
     void SetMouse()
@@ -85,60 +93,33 @@ public class Fishing_Main : MonoBehaviour
         Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
     }
 
-    public void StartFishing()
+    void RemoveMouse()
     {
-        if (state != FishingState.None)
-            return;
-
-        // 낚시 가능한 위치
-        StateMachine(FishingState.MainGame);
-        Debug.LogWarning("poujpok");
+        Singleton_Controller.INSTANCE.key_MouseLeft += InputMouseLeft;
+        Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
     }
 
     void InputMouseLeft(bool _input)
     {
-        switch (state)
+        if (_input == true)
         {
-            case FishingState.None:
-
-                break;
-
-            case FishingState.Hit:
-
-                break;
-
-            case FishingState.MainGame:
-                if (_input == true)
-                {
-                    RotateTarget(fishingLodStruct.reelingSpeed);
-                }
-                else
-                {
-                    RotateTarget(0);
-                }
-                break;
-
-            case FishingState.SubGame:
-
-                break;
+            RotateTarget(fishingLodStruct.reelingSpeed);
+        }
+        else
+        {
+            RotateTarget(0);
         }
     }
 
     void InputMouseRight(bool _input)
     {
-        switch (state)
+        if (_input == true)
         {
-            case FishingState.MainGame:
-
-                if (_input == true)
-                {
-                    RotateTarget(-fishingLodStruct.reelingSpeed);
-                }
-                else
-                {
-                    RotateTarget(0);
-                }
-                break;
+            RotateTarget(-fishingLodStruct.reelingSpeed);
+        }
+        else
+        {
+            RotateTarget(0);
         }
     }
 
@@ -146,54 +127,33 @@ public class Fishing_Main : MonoBehaviour
     {
         fishingLodStruct = _fishingLodStruct;
         fishStruct = _fishStruct;
-        StateMachine(FishingState.None);
+        //StateMachine(FishingState.None);
     }
 
-    void StateMachine(FishingState _state)
+    void StateMachine()
     {
-        state = _state;
-        stateText.text = _state.ToString();
+        //state = _state;
+        //stateText.text = _state.ToString();
         if (actionCoroutine != null)
             StopCoroutine(actionCoroutine);
 
-        switch (state)
-        {
-            case FishingState.None:
-                StateNone();
-                break;
-
-            case FishingState.Hit:
-
-                break;
-
-            case FishingState.MainGame:
-                canvasGroup.gameObject.SetActive(true);
-                StateFishing();
-                break;
-
-            case FishingState.SubGame:
-
-                break;
-
-            case FishingState.Complate:
-                StateComplate();
-                break;
-        }
-    }
-
-    void StateNone()
-    {
+        canvasGroup.gameObject.SetActive(true);
         SetFishing();
-        canvasGroup.gameObject.SetActive(false);
+        StateFishing();
     }
 
+    //void StateNone()
+    //{
+    //    //SetFishing();
+    //    canvasGroup.gameObject.SetActive(false);
+    //}
+    public float lodPower, fishPower;
     void SetFishing()
     {
         fillAmount = fishingLodStruct.fishingAmount;
-        fishPower = fishingLodStruct.lodPower + fishStruct.fishPower;
+        lodPower = (1f + (fishingLodStruct.lodPower / fishStruct.fishPower)) / fishStruct.fishStamina;
+        fishPower = (1f + (fishStruct.fishPower / fishingLodStruct.lodPower)) / fishStruct.fishStamina;
     }
-
-
 
     //==================================================================================================================================
     // 릴링
@@ -219,10 +179,10 @@ public class Fishing_Main : MonoBehaviour
     {
         while (fishingAction == true)
         {
-            fish.rotation = Quaternion.Slerp(fish.rotation, Quaternion.Euler(0, 0, targetAngle), fishStruct.fishSpeed * Time.deltaTime);// 물고기 움직임 추적
+            fish.localRotation = Quaternion.Slerp(fish.localRotation, Quaternion.Euler(0, 0, targetAngle), fishStruct.fishSpeed * Time.deltaTime);// 물고기 움직임 추적
 
             currentSpeed = Mathf.Lerp(currentSpeed, _targetSpeed, fishingLodStruct.reelingSlip * Time.deltaTime);// 가속도
-            fishingRod.transform.rotation = Quaternion.Euler(0, 0, fishingRod.transform.rotation.eulerAngles.z + currentSpeed * Time.deltaTime);
+            fishingRod.transform.localRotation = Quaternion.Euler(0, 0, fishingRod.transform.localRotation.eulerAngles.z + currentSpeed * Time.deltaTime);
 
             health.material.SetFloat("_FillAmount", complatePoint);
 
@@ -236,11 +196,12 @@ public class Fishing_Main : MonoBehaviour
                 main.startColor = Color.green;
                 if (complatePoint < 1f)
                 {
-                    complatePoint += fishPower * Time.deltaTime;
+                    complatePoint += lodPower * Time.deltaTime;
                 }
                 else
                 {
-                    StateMachine(FishingState.Complate);
+                    fishingAction = false;
+                    EndGame();
                 }
             }
             else
@@ -261,9 +222,9 @@ public class Fishing_Main : MonoBehaviour
         fishingAction = true;
         while (fishingAction == true)
         {
-            float addAngle = Random.Range(-fishStruct.fishAddAngle, fishStruct.fishAddAngle);
+            float addAngle = Random.Range(-fishStruct.fishROA, fishStruct.fishROA);
             targetAngle += addAngle;
-            float random = Random.Range(fishStruct.fishDelay.x, fishStruct.fishDelay.y);
+            float random = Random.Range(fishStruct.fishTurnDelay.x, fishStruct.fishTurnDelay.y);
             yield return new WaitForSeconds(random);
         }
     }
@@ -271,7 +232,6 @@ public class Fishing_Main : MonoBehaviour
     bool VisibleTarget()// 보이는지 확인
     {
         Vector3 offset = (fishObject.transform.position - fishingRod.transform.position);
-        //Debug.LogWarning(Vector3.Angle(test.transform.up, offset.normalized));
         if (Vector3.Angle(fishingRod.transform.up, offset.normalized) < fillAngle)// 앵글 안에 포함 되는지
         {
             return true;
@@ -279,22 +239,25 @@ public class Fishing_Main : MonoBehaviour
         return false;
     }
 
-    void StateComplate()
-    {
-        actionCoroutine = StartCoroutine(FishingComplate());
-    }
+    //void StateComplate()
+    //{
+    //    //StateMachine(FishingState.None);
+    //    EndGame();
+    //    //actionCoroutine = StartCoroutine(FishingComplate());
+    //}
 
-    IEnumerator FishingComplate()
-    {
-        int index = 0;
-        while (index < 3)
-        {
-            index++;
-            stateText.text = index.ToString();
-            yield return new WaitForSeconds(1f);
-        }
-        StateMachine(FishingState.None);
-    }
+    //IEnumerator FishingComplate()
+    //{
+    //    int index = 0;
+    //    while (index < 3)
+    //    {
+    //        index++;
+    //        stateText.text = index.ToString();
+    //        yield return new WaitForSeconds(1f);
+    //    }
+    //    //StateMachine(FishingState.None);
+    //    EndGame();
+    //}
     //==================================================================================================================================
     // 기즈모
     //==================================================================================================================================
