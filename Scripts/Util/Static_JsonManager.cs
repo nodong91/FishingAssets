@@ -210,63 +210,37 @@ public class Static_JsonManager
         _data = default;
         return false;
     }
-   
 
-    //public static void SaveInventoryData(string fileName, Singleton_SaveData.SaveData _data)
-    //{
-    //    string filePath = Application.dataPath + "/Save/";
-    //    // 폴더 생성
-    //    FindFolder(filePath);
+    //======================================================================================
+    // 도감 저장
+    //======================================================================================
 
-    //    string toJson = JsonUtility.ToJson(_data, prettyPrint: true);
-    //    //toJson = Static_AES.Program.Encrypt(toJson, "SaveInventoryData");          // 암호화 저장
-    //    File.WriteAllText(filePath + fileName + ".json", toJson);
-    //}
+    public static void SaveFishGuideData(string fileName, List<FishGuide.SaveFishClass> _data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        // 폴더 없으면 생성
+        FindFolder(filePath);
 
-    //public static bool TryLoadInventoryData(string fileName, out Singleton_SaveData.SaveData _data)
-    //{
-    //    string filePath = Application.dataPath + "/Save/";
-    //    string path = filePath + fileName + ".json";
-    //    FileInfo fileInfo = new FileInfo(path);
+        string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
+        File.WriteAllText(filePath + fileName + ".json", toJson);
+    }
 
-    //    if (fileInfo.Exists == true)
-    //    {
-    //        string fromJson = File.ReadAllText(path);
-    //        //fromJson = Static_AES.Program.Decrypt(fromJson, "SaveOptionData");      // 복화
-    //        _data = JsonUtility.FromJson<Singleton_SaveData.SaveData>(fromJson);
-    //        return true;
-    //    }
-    //    _data = default;
-    //    return false;
-    //}
-    //public static void SaveInventoryData(string fileName, List<Data_Inventory> inventory)
-    //{
-    //    string filePath = Application.dataPath + "/Save/";
-    //    // 폴더 생성
-    //    FindFolder(filePath);
+    public static bool TryLoadFishGuideData(string fileName, out List<FishGuide.SaveFishClass> _data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        string path = filePath + fileName + ".json";
+        FileInfo fileInfo = new FileInfo(path);
 
-    //    string toJson = JsonHelper.ToJson(inventory, prettyPrint: true);
-    //    //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
-    //    File.WriteAllText(filePath + fileName + ".json", toJson);
-    //}
+        if (fileInfo.Exists == true)
+        {
+            string fromJson = File.ReadAllText(path);
+            _data = JsonHelper.FromJson<FishGuide.SaveFishClass>(fromJson);
+            return true;
+        }
+        _data = default;
+        return false;
+    }
 
-    //public static bool TryLoadInventoryData(string fileName, out List<Data_Inventory> inventory)
-    //{
-    //    string filePath = Application.dataPath + "/Save/";
-    //    string path = filePath + fileName + ".json";
-    //    FileInfo fileInfo = new FileInfo(path);
-
-    //    if (fileInfo.Exists == true)
-    //    {
-    //        string fromJson = File.ReadAllText(path);
-    //        //fromJson = Static_AES.Program.Decrypt(fromJson, "SaveOptionData");      // 복화
-    //        inventory = JsonHelper.FromJson<Data_Inventory>(fromJson);
-    //        return true;
-    //    }
-
-    //    inventory = default;
-    //    return false;
-    //}
     //======================================================================================
     // Json 리스트 저장용 헬퍼
     //======================================================================================

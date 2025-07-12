@@ -292,6 +292,19 @@ public class Unit_Player : MonoBehaviour
         }
         Game_Manager.current.uiManager.followManager.AddClosestTarget(closestTarget);
     }
+    public Reflection_Manager reflection_Manager;
+    public float shipHight, hightSpeed;
+    float runningTime;
+    public float hight;
+    private void Update()
+    {
+        runningTime += Time.deltaTime * hightSpeed;
+        //float hight = Mathf.PingPong(runningTime, shipHight);
+         hight = (Mathf.Sin(runningTime) + 1f) * shipHight * 0.5f;
+
+        transform.position = new Vector3(transform.position.x, hight, transform.position.z);
+        SetOceanRenderer();
+    }
 
     void SetMoving()
     {
@@ -306,6 +319,12 @@ public class Unit_Player : MonoBehaviour
 
         Vector3 offset = (target - transform.position).normalized;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed * 5f);
+    }
+
+    void SetOceanRenderer()
+    {
+        string shipPosition = "_ShipPosition";
+        reflection_Manager.GetMaterial.SetVector(shipPosition, transform.position);
     }
 
     void RotateMousePosition()

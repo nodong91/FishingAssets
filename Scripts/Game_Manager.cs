@@ -7,6 +7,7 @@ public class Game_Manager : MonoBehaviour
     public Fishing_Manager fishingManager;
     public Camera_Manager cameraManager;
     public UI_Manager uiManager;
+    public UI_Equip equip;
 
     public static Game_Manager current;
 

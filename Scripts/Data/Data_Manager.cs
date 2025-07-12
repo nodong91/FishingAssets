@@ -165,55 +165,14 @@ public class Data_Manager : Data_Parse
     public List<TranslateString> translateString = new List<TranslateString>();
 
     [System.Serializable]
-    public struct SkillStruct
+    public struct LodStruct
     {
-        public string ID;
-        public string skillName;
-        [TextArea]
-        public string skillDescription;
-        //public Unit_Animation.AnimationType animationType;
-        public Sprite icon;
-        public int level;
-
-        public enum SkillType
-        {
-            Attack,
-            Defense,
-            Heal,
-        }
-        public SkillType skillType;
-        public enum CCType
-        {
-            Normal,
-            KnockBack,
-        }
-        public CCType ccType;
-        public enum EnergyType
-        {
-            Mana,
-            Rage,
-            Stamina
-        }
-        public EnergyType energyType;// 기본 에너지의 몇%
-        public float energyAmount;
-        public float castingTime;// 0일 경우 즉시시전
-        public float coolingTime;
-        public Vector2 range;
-        public Vector3 influence;// 힘,민,지 영향
-        public float aggro;
-        public string skillSet;
-        public float splashRange;
-        public float splashAngle;// 타격 했을 때 각도
-        public float projectileSpeed;// 탄이 있을 때 탄 속도
-
-        public float GetDamage(float _ap, float _sp, float _rp)
-        {
-            float damage = _ap * influence.x + _sp * influence.y + _rp * influence.z;
-            return damage;
-        }
+        [HideInInspector]
+        public string id;
+        public ItemStruct itemStruct;
     }
     [Header(" [ Data ]")]
-    public List<SkillStruct> skillStruct = new List<SkillStruct>();
+    public List<LodStruct> lodStruct = new List<LodStruct>();
     [System.Serializable]
     public struct ItemStruct
     {

@@ -6,7 +6,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     public Dictionary<string, Data_Manager.DialogStruct> Dict_Dialog = new Dictionary<string, Data_Manager.DialogStruct>();
     public Dictionary<string, Data_Manager.TranslateString> Dict_DialogString = new Dictionary<string, Data_Manager.TranslateString>();
     public Dictionary<string, Data_Manager.TranslateString> Dict_TranslateString = new Dictionary<string, Data_Manager.TranslateString>();
-    public Dictionary<string, Data_Manager.SkillStruct> Dict_Skill = new Dictionary<string, Data_Manager.SkillStruct>();
+    public Dictionary<string, Data_Manager.LodStruct> Dict_Lod = new Dictionary<string, Data_Manager.LodStruct>();
     public Dictionary<string, Data_Manager.ItemStruct> Dict_Item = new Dictionary<string, Data_Manager.ItemStruct>();
     public Dictionary<string, AudioClip> Dict_Audio = new Dictionary<string, AudioClip>();
     //public Dictionary<string, Skill_Set> Dict_SkillSet = new Dictionary<string, Skill_Set>();
@@ -89,19 +89,19 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         return Dict_Temp;
     }
 
-    public void SetDictionary_Skill(List<Data_Manager.SkillStruct> _data)
+    public void SetDictionary_Lod(List<Data_Manager.LodStruct> _data)
     {
-        Dict_Skill = new Dictionary<string, Data_Manager.SkillStruct>();
+        Dict_Lod = new Dictionary<string, Data_Manager.LodStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
-            string id = _data[i].ID;
-            if (Dict_Skill.ContainsKey(id) == true)
+            string id = _data[i].itemStruct.ID;
+            if (Dict_Lod.ContainsKey(id) == true)
             {
                 Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
             }
             else
             {
-                Dict_Skill[id] = _data[i];
+                Dict_Lod[id] = _data[i];
             }
         }
     }
