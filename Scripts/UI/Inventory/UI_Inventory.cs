@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using static Data_Manager;
 using static UI_Inventory_Slot;
 
-public class UI_Inventory : MonoBehaviour, IPointerClickHandler
+public class UI_Inventory : MonoBehaviour
 {
     public GridLayoutGroup gridLayoutGroup;
     public UI_Inventory_Slot inventorySlot;
@@ -39,7 +39,7 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
         weightSlider.material = Instantiate(weightSlider.material);
         SetInventory();
         SetInfomation();
-        SetRemovePopup();
+        SetRemoveBox();
 
         closeButton.onClick.AddListener(CloseButton);
         CloseButton();
@@ -103,7 +103,7 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
             SaveItemClass dictCheck = new SaveItemClass
             {
                 slotNum = child.Key,
-                id = child.Value.item.ID,
+                id = child.Value.item.id,
                 angle = child.Value.angle,
                 shape = child.Value.shape,
             };
@@ -126,7 +126,7 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
             int slotY = _slot.slotNum.y + shape[i].y;
             allSlots[slotX, slotY].SetLink(_slot);
         }
-        SetWeight(_itemClass.item.Weight);
+        SetWeight(_itemClass.item.weight);
 
         dictItemClass[_slot.slotNum] = _itemClass;
         DictCheck();
@@ -170,10 +170,10 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
                     continue;
                 }
 
-                for (int i = 0; i < _item.Shape.Length; i++)
+                for (int i = 0; i < _item.shape.Length; i++)
                 {
-                    int slotX = slot.slotNum.x + _item.Shape[i].x;
-                    int slotY = slot.slotNum.y + _item.Shape[i].y;
+                    int slotX = slot.slotNum.x + _item.shape[i].x;
+                    int slotY = slot.slotNum.y + _item.shape[i].y;
                     if (slotX < 0 || slotX >= inventorySize.x || slotY < 0 || slotY >= inventorySize.y)
                     {
                         empty = false;
@@ -272,11 +272,11 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
         {
             item = _item,
             angle = 0,
-            shape = _item.Shape,
+            shape = _item.shape,
         };
         dragItemClass = itemClass;
 
-        iconImage.sprite = _item.Icon;
+        iconImage.sprite = _item.icon;
         iconImage.gameObject.SetActive(true);
 
         if (dragCoroutine != null)
@@ -305,7 +305,7 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
 
         if (moneyCoroutine != null)
             StopCoroutine(moneyCoroutine);
-        moneyCoroutine = StartCoroutine(WalletMoney(-itemClass.item.Price));
+        moneyCoroutine = StartCoroutine(WalletMoney(-itemClass.item.price));
     }
 
     void SellItem()// 판매
@@ -314,12 +314,12 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
             return;
 
         ItemStruct item = selectedSlot.itemClass.item;
-        SetWeight(-item.Weight);
+        SetWeight(-item.weight);
         SetEmpty(selectedSlot);
 
         if (moneyCoroutine != null)
             StopCoroutine(moneyCoroutine);
-        moneyCoroutine = StartCoroutine(WalletMoney(item.Price));
+        moneyCoroutine = StartCoroutine(WalletMoney(item.price));
     }
 
     IEnumerator WalletMoney(float _money)
@@ -364,10 +364,14 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
 
     void OnPointerRightClick(UI_Inventory_Slot _slot)
     {
-        if (onDrag == true)
+        if (onDrag == true)// 드래그 중일 때
             SetDragRotate();
         else
         {
+            if (_slot.itemClass.item.id.Contains(""))
+            {
+
+            }
             // 삭제
             selectedSlot = _slot.baseSlot;
             if (selectedSlot != null)
@@ -423,7 +427,7 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
             originItemClass = new ItemClass();
         originItemClass.SetItemClass(dragItemClass);
 
-        iconImage.sprite = dragItemClass.item.Icon;
+        iconImage.sprite = dragItemClass.item.icon;
         iconImage.gameObject.SetActive(dragSlot.empty == false);
 
         SetDragStart(dragSlot);
@@ -487,7 +491,7 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
             return;
 
         ItemStruct item = _slot.itemClass.item;
-        SetWeight(-item.Weight);
+        SetWeight(-item.weight);
         SetEmpty(_slot);
         SetCheck(_slot);
     }
@@ -507,24 +511,17 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
         SetCheck(enterSlot);
     }
 
-    void OpenRemovePopup()
-    {
-        Debug.LogWarning("삭제");
-        uiInventoryRemove.OpenRemovePopup();
-    }
-
     //===========================================================================================================================
     // 삭제 확인 팝업
     //===========================================================================================================================
 
-    public UI_Inventory_Remove uiInventoryRemove;
-    void SetRemovePopup()
+    public UI_Inventory_Remove_Box removeBox;
+    void SetRemoveBox()
     {
-        uiInventoryRemove.deleRemove = RemoveDragItem;
-        uiInventoryRemove.CancelButton();
+        removeBox.deleRemove = RemoveDragItem;
     }
 
-    void RemoveDragItem()
+    void RemoveDragItem()// 아이템 제거
     {
         onDrag = false;
         iconImage.gameObject.SetActive(false);
@@ -565,30 +562,5 @@ public class UI_Inventory : MonoBehaviour, IPointerClickHandler
             UI_Inventory_Slot slot = allSlots[_items[i].slotNum.x, _items[i].slotNum.y];
             SetSlot(slot, itemClass);
         }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (onDrag == true)
-            OpenRemovePopup();
     }
 }

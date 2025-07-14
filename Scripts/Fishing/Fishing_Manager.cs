@@ -22,6 +22,12 @@ public class Fishing_Manager : MonoBehaviour
     public Fishing_Sub_Health fishingSubHealth;
     public Fishing_Complate fishingComplate;
 
+    // 순서
+    // 히트 - 파이트 - 릴링 - 파이트 - 릴링 - 물고기 체력방전 시 캐치, 줄이 못버티면 놓침
+    // 파이트 - 성공 (물고기 체력), 실패 (줄 타격)
+    // 릴링 - 지속적으로 물고기 체력 타격
+    // 릴링 시 물고기가 공격할 때(색이 변하던가 해서 알려줘야) 영역안에 들어가 있으면 줄 타격 (너무 영역이 크면 빠져나가기 힘들게)
+
     void Start()
     {
         fishingHit.SetStart();

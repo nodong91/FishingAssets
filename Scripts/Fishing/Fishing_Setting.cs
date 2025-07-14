@@ -27,6 +27,6 @@ public class Fishing_Setting : MonoBehaviour
 
     public Sprite GetIconSprite
     {
-        get { return fishStruct.itemStruct.Icon; }
+        get { return fishStruct.itemStruct.icon; }
     }
 }

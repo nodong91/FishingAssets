@@ -17,13 +17,13 @@ public class UI_Inventory_Infomation : MonoBehaviour
 
     public void SetDisplay(Data_Manager.ItemStruct _itemStruct)
     {
-        m_itemName.text = _itemStruct.Name;
+        m_itemName.text = _itemStruct.name;
         string explanation = "";
-        explanation += "Explanation : " + _itemStruct.Explanation + "\n";
-        explanation += "Icon : " + _itemStruct.Icon.name + "\n";
-        explanation += "Size : " + _itemStruct.Shape.Length + "\n";
-        explanation += "Weight : " + _itemStruct.Weight + "\n";
-        explanation += "Price : " + _itemStruct.Price;
+        explanation += "Explanation : " + _itemStruct.explanation + "\n";
+        explanation += "Icon : " + _itemStruct.icon.name + "\n";
+        explanation += "Size : " + _itemStruct.shape.Length + "\n";
+        explanation += "Weight : " + _itemStruct.weight + "\n";
+        explanation += "Price : " + _itemStruct.price;
         m_Explanation.text = explanation;
     }
 

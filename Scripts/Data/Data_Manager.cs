@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using static Data_Manager.PartsStruct;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -56,6 +58,10 @@ public class Data_Manager : Data_Parse
             {
                 SetFish(GetCSV_Data[i]);
             }
+            else if (csv_Type.Contains("Parts"))
+            {
+                SetParts(GetCSV_Data[i]);
+            }
             else if (csv_Type.Contains("Item"))
             {
                 SetItem(GetCSV_Data[i]);
@@ -71,9 +77,36 @@ public class Data_Manager : Data_Parse
         {
             string[] elements = data[i].Split(new char[] { ',' });
             ItemStruct tempItem = GetItemStruct(elements);
+            tempItem.itemType = ItemStruct.ItemType.Fish;// 타입 세팅
             FishStruct tempData = new FishStruct
             {
-                id = tempItem.ID,
+                id = tempItem.id,
+                itemStruct = tempItem,
+                fishType = (FishStruct.FishType)System.Enum.Parse(typeof(FishStruct.FishType), elements[7]),
+                size = Parse_Vector2(elements[8]),
+                fishStamina = Parse_Float(elements[9]),
+                fishPower = Parse_Float(elements[10]),
+                fishROA = Parse_Float(elements[11]),
+                fishSpeed = Parse_Float(elements[12]),
+                fishTurnDelay = Parse_Vector2(elements[13]),
+                hitValue = Parse_Vector2(elements[14]),
+            };
+            fishStruct.Add(tempData);
+        }
+    }
+
+    void SetEquip(TextAsset _textAsset)
+    {
+        fishStruct.Clear();
+        string[] data = _textAsset.text.Split(new char[] { '\n' });
+        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
+        {
+            string[] elements = data[i].Split(new char[] { ',' });
+            ItemStruct tempItem = GetItemStruct(elements);
+            tempItem.itemType = ItemStruct.ItemType.Fish;// 타입 세팅
+            FishStruct tempData = new FishStruct
+            {
+                id = tempItem.id,
                 itemStruct = tempItem,
                 fishType = (FishStruct.FishType)System.Enum.Parse(typeof(FishStruct.FishType), elements[7]),
                 size = Parse_Vector2(elements[8]),
@@ -92,17 +125,63 @@ public class Data_Manager : Data_Parse
     {
         ItemStruct tempItem = new ItemStruct
         {
-            ID = _elements[0].Trim(),
-            Name = _elements[1],
-            Explanation = _elements[2],
-            Icon = FindSprite(_elements[3]),
-            Shape = Parse_Vector2Int(_elements[4].Trim()),
-            Weight = Parse_Float(_elements[5]),
-            Price = Parse_Float(_elements[6]),
+            id = _elements[0].Trim(),
+            name = _elements[1],
+            explanation = _elements[2],
+            icon = FindSprite(_elements[3]),
+            shape = Parse_Vector2IntArray(_elements[4].Trim()),
+            weight = Parse_Float(_elements[5]),
+            price = Parse_Float(_elements[6]),
         };
         return tempItem;
     }
 
+    void SetParts(TextAsset _textAsset)
+    {
+        partsStruct.Clear();
+        string[] data = _textAsset.text.Split(new char[] { '\n' });
+        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
+        {
+            string[] elements = data[i].Split(new char[] { ',' });
+            PartsStruct tempData = new PartsStruct
+            {
+                id = elements[0].Trim(),
+                name = elements[1],
+                partsType = GetPartsType(elements[0].Trim()),
+                explanation = elements[2],
+                icon = FindSprite(elements[3]),
+                price = Parse_Float(elements[4]),
+                addStatus = new SetStatus
+                {
+                    maxSpeed = Parse_Float(elements[5]),
+                    maxWeight = Parse_Float(elements[6]),
+                    maxEnergy = Parse_Float(elements[7]),
+                    maxBoxSize = Parse_Vector2Int(elements[8]),
+                    freshness = Parse_Float(elements[9]),
+                },
+            };
+            partsStruct.Add(tempData);
+        }
+    }
+    PartsType GetPartsType(string _id)
+    {
+        if (_id.Contains("Pb"))
+        {
+            return PartsType.Body;
+        }
+        else if (_id.Contains("Pe"))
+        {
+            return PartsType.Engine;
+        }
+        return PartsType.Box;
+    }
+
+    public PartsType partsType;
+    [TextArea]
+    public string explanation;// 설명
+    public Sprite icon;
+    public float price;
+    public SetStatus addStatus;
     void SetItem(TextAsset _textAsset)
     {
         itemStruct.Clear();
@@ -164,29 +243,107 @@ public class Data_Manager : Data_Parse
     public List<TranslateString> dialogString = new List<TranslateString>();
     public List<TranslateString> translateString = new List<TranslateString>();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    [Header(" [ Data ]")]
+    public List<EquipStruct> equipStruct = new List<EquipStruct>();
+    public List<ItemStruct> itemStruct = new List<ItemStruct>();
+    public List<FishStruct> fishStruct = new List<FishStruct>();
+    public List<PartsStruct> partsStruct = new List<PartsStruct>();
+
     [System.Serializable]
-    public struct LodStruct
+    public class SetStatus
+    {
+        public float maxSpeed;// 속도
+        public float maxWeight;// 인벤토리 중량
+        public float maxEnergy;// 연료통 크기
+        public Vector2Int maxBoxSize;// 인벤토리 크기
+        public float freshness;// 신선도 유지
+    }
+
+    [System.Serializable]
+    public struct PartsStruct
+    {
+        public string id;
+        public string name;
+        public enum PartsType
+        {
+            Body,
+            Engine,
+            Box
+        }
+        public PartsType partsType;
+        [TextArea]
+        public string explanation;// 설명
+        public Sprite icon;
+        public float price;
+        public SetStatus addStatus;
+    }
+
+    [System.Serializable]
+    public struct EquipStruct
     {
         [HideInInspector]
         public string id;
         public ItemStruct itemStruct;
+
+        public float fishingAmount;// 공격력
+        public float lodPower;// 초당 끌려가는 힘 - 높을 수록 쉽게 끌려감
+        public float reelingSpeed;// 낚시 회전 속도
+        public float reelingSlip;// 릴링 정지 시 밀림
+        public float hitPoint;// 물고기 잡을 위치
+        public float hitBobberSpeed;// 물고기 찌 움직임
     }
-    [Header(" [ Data ]")]
-    public List<LodStruct> lodStruct = new List<LodStruct>();
+
+    public struct BaitStruct
+    {
+        [HideInInspector]
+        public string id;
+        public ItemStruct itemStruct;
+        public enum CatchType// 잡을 수 있는 어종
+        {
+            Coast,// 연안
+            Shallow,// 얕은
+            Ocean,// 대양
+        }
+        public CatchType catchType;
+    }
+
     [System.Serializable]
     public struct ItemStruct
     {
-        public string ID;
-        public string Name;
+        public string id;
+        public string name;
+        public enum ItemType
+        {
+            Equip,
+            Fish,
+        }
+        public ItemType itemType;
         [TextArea]
-        public string Explanation;// 설명
-        public Sprite Icon;
+        public string explanation;// 설명
+        public Sprite icon;
 
-        public Vector2Int[] Shape;
-        public float Weight;
-        public float Price;
+        public Vector2Int[] shape;
+        public float weight;
+        public float price;
     }
-    public List<ItemStruct> itemStruct = new List<ItemStruct>();
 
     [System.Serializable]
     public struct FishStruct
@@ -202,7 +359,9 @@ public class Data_Manager : Data_Parse
         }
         public FishType fishType;
         public Vector2 size;
+        public float freshness;// 신선도
 
+        // 낚시 관련
         public float fishStamina;
         public float fishPower;// 물고기 방어력
         public float fishROA;// 물고기 활동 범위 (다음 이동 각도) range of activity 
@@ -219,30 +378,32 @@ public class Data_Manager : Data_Parse
             public float price;
         }
 
+        // 랜덤 사이즈
         public RandomSize GetRandom()
         {
             float randomSize = Random.Range(size.x, size.y);
-            float percent = GetFloat(size.y / randomSize);
+            float percent = GetPercent(size.y / randomSize);
             RandomSize randomFish = new RandomSize
             {
-                id = itemStruct.ID,
-                size = GetFloat(size.y / percent),
-                weight = GetFloat(itemStruct.Weight / percent),
-                price = GetFloat(itemStruct.Price / percent),
+                id = itemStruct.id,
+                size = GetPercent(size.y / percent),
+                weight = GetPercent(itemStruct.weight / percent),
+                price = GetPercent(itemStruct.price / percent),
             };
             return randomFish;
         }
 
-        float GetFloat(float _origin)
+        float GetPercent(float _origin)
         {
             float temp = Mathf.Round(_origin * 10f) * 0.1f;
             return temp;
         }
     }
-    public List<FishStruct> fishStruct = new List<FishStruct>();
 
     private void Awake()
     {
         Singleton_Data.INSTANCE.SetDictionary_Fish(fishStruct);
+        Singleton_Data.INSTANCE.SetDictionary_Parts(partsStruct);
+        Singleton_Data.INSTANCE.SetDictionary_Equip(equipStruct);
     }
 }

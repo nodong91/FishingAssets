@@ -85,7 +85,7 @@ public class FishGuide : MonoBehaviour
 
     void SetCard(UI_FishCard _card, Data_Manager.FishStruct _fish)
     {
-        string id = _fish.itemStruct.ID;
+        string id = _fish.itemStruct.id;
         bool onDict = dictFishClass.ContainsKey(id);// 도감을 못 만들었으면 까맣게
         SaveFishClass tempFish = onDict == true ? dictFishClass[id] : null;
         _card.SetCard(_fish, tempFish);
@@ -101,7 +101,7 @@ public class FishGuide : MonoBehaviour
         };
         SetCurrentFishStruct();
 
-        Vector3 outPos = _out == true ? Vector3.left : Vector3.right;
+        Vector3 outPos = _out == false ? Vector3.left : Vector3.right;
         float outLength = 300f;
         float normalize = 0f;
         while (normalize < 1f)

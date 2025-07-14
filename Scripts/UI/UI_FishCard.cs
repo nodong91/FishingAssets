@@ -23,12 +23,12 @@ public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
         if (_fishClass != null)
         {
-            text_Name.text = _fishStruct.itemStruct.Name;
+            text_Name.text = _fishStruct.itemStruct.name;
             amount.text = _fishClass.amount.ToString();
             minSize.text = _fishClass.minSize.ToString();
             maxSize.text = _fishClass.maxSize.ToString();
         }
-        iconImage.sprite = _fishStruct.itemStruct.Icon;
+        iconImage.sprite = _fishStruct.itemStruct.icon;
         iconImage.color = _fishClass != null ? Color.white : Color.black;
     }
 

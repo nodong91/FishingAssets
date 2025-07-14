@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Data_Manager;
-using static UnityEngine.Rendering.ProbeAdjustmentVolume;
 
 public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -37,14 +36,14 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
 
         public void SetRotate(float _angle)
         {
-            shape = new Vector2Int[item.Shape.Length];
+            shape = new Vector2Int[item.shape.Length];
             angle += _angle;
             if (angle >= 360f)
                 angle = 0f;
-            for (int i = 0; i < item.Shape.Length; i++)
+            for (int i = 0; i < item.shape.Length; i++)
             {
-                int x = item.Shape[i].x;
-                int y = item.Shape[i].y;
+                int x = item.shape[i].x;
+                int y = item.shape[i].y;
                 switch (angle)
                 {
                     case 0:
@@ -52,17 +51,17 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
                         break;
 
                     case 90:
-                        x = item.Shape[i].y * -1;
-                        y = item.Shape[i].x;
+                        x = item.shape[i].y * -1;
+                        y = item.shape[i].x;
                         break;
 
                     case 180:
-                        x = item.Shape[i].x * -1;
-                        y = item.Shape[i].y * -1;
+                        x = item.shape[i].x * -1;
+                        y = item.shape[i].y * -1;
                         break;
                     case 270:
-                        x = item.Shape[i].y;
-                        y = item.Shape[i].x * -1;
+                        x = item.shape[i].y;
+                        y = item.shape[i].x * -1;
                         break;
                 }
                 Vector2Int newVector = new Vector2Int(x, y);
@@ -84,7 +83,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     {
         empty = _itemClass == null;
         if (!empty)
-            iconImage.sprite = _itemClass.item.Icon;
+            iconImage.sprite = _itemClass.item.icon;
         iconImage.gameObject.SetActive(!empty);
 
         itemClass = _itemClass;

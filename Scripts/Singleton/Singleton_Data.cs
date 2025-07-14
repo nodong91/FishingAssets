@@ -6,12 +6,13 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     public Dictionary<string, Data_Manager.DialogStruct> Dict_Dialog = new Dictionary<string, Data_Manager.DialogStruct>();
     public Dictionary<string, Data_Manager.TranslateString> Dict_DialogString = new Dictionary<string, Data_Manager.TranslateString>();
     public Dictionary<string, Data_Manager.TranslateString> Dict_TranslateString = new Dictionary<string, Data_Manager.TranslateString>();
-    public Dictionary<string, Data_Manager.LodStruct> Dict_Lod = new Dictionary<string, Data_Manager.LodStruct>();
-    public Dictionary<string, Data_Manager.ItemStruct> Dict_Item = new Dictionary<string, Data_Manager.ItemStruct>();
     public Dictionary<string, AudioClip> Dict_Audio = new Dictionary<string, AudioClip>();
     //public Dictionary<string, Skill_Set> Dict_SkillSet = new Dictionary<string, Skill_Set>();
     public Translation translation;
     public Dictionary<string, Data_Manager.FishStruct> Dict_Fish = new Dictionary<string, Data_Manager.FishStruct>();
+    public Dictionary<string, Data_Manager.PartsStruct> Dict_Parts = new Dictionary<string, Data_Manager.PartsStruct>();
+    public Dictionary<string, Data_Manager.EquipStruct> Dict_Equip = new Dictionary<string, Data_Manager.EquipStruct>();
+    public Dictionary<string, Data_Manager.ItemStruct> Dict_Item = new Dictionary<string, Data_Manager.ItemStruct>();
 
     public void SetDictionary_Dialog(List<Data_Manager.DialogStruct> _data)
     {
@@ -89,19 +90,19 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         return Dict_Temp;
     }
 
-    public void SetDictionary_Lod(List<Data_Manager.LodStruct> _data)
+    public void SetDictionary_Equip(List<Data_Manager.EquipStruct> _data)
     {
-        Dict_Lod = new Dictionary<string, Data_Manager.LodStruct>();
+        Dict_Equip = new Dictionary<string, Data_Manager.EquipStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
-            string id = _data[i].itemStruct.ID;
-            if (Dict_Lod.ContainsKey(id) == true)
+            string id = _data[i].itemStruct.id;
+            if (Dict_Equip.ContainsKey(id) == true)
             {
                 Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
             }
             else
             {
-                Dict_Lod[id] = _data[i];
+                Dict_Equip[id] = _data[i];
             }
         }
     }
@@ -111,7 +112,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         Dict_Fish = new Dictionary<string, Data_Manager.FishStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
-            string id = _data[i].itemStruct.ID;
+            string id = _data[i].itemStruct.id;
             if (Dict_Fish.ContainsKey(id) == true)
             {
                 Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
@@ -123,12 +124,29 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         }
     }
 
+    public void SetDictionary_Parts(List<Data_Manager.PartsStruct> _data)
+    {
+        Dict_Parts = new Dictionary<string, Data_Manager.PartsStruct>();
+        for (int i = 0; i < _data.Count; i++)
+        {
+            string id = _data[i].id;
+            if (Dict_Parts.ContainsKey(id) == true)
+            {
+                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
+            }
+            else
+            {
+                Dict_Parts[id] = _data[i];
+            }
+        }
+    }
+
     public void SetDictionary_Item(List<Data_Manager.ItemStruct> _data)
     {
         Dict_Item = new Dictionary<string, Data_Manager.ItemStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
-            string id = _data[i].ID;
+            string id = _data[i].id;
             if (Dict_Item.ContainsKey(id) == true)
             {
                 Debug.LogError($"{id}와 같은 이름이 존재 합니다.");

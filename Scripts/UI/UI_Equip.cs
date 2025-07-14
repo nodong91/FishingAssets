@@ -1,16 +1,59 @@
 using UnityEngine;
+using static Data_Manager;
 
 public class UI_Equip : MonoBehaviour
 {
-    public GameObject boat;// 배 기본 스탯 (속도, 방어도, 인벤토리 중량)
-    public GameObject engine;// 이동 관련 스탯 (속도, 연료통 크기)
-    public GameObject inventoryBox;// 운송 관련 스탯 (인벤토리 크기, 신선도 유지)
+    public PartsStruct boatStruct;
+    public PartsStruct engineStruct;
+    public PartsStruct boxStruct;
 
-    public Data_Manager.LodStruct fishingLod;// 낚시 관련 스탯
-    public GameObject bait;// 미끼 (해당 물고기 )
+    [Header("[ 스테이터스 ]")]
+    public SetStatus totalStatus;
+    public EquipStruct fishingStatus;// 낚시 관련 스탯
+    public BaitStruct bait;// 미끼 (해당 물고기 )
 
     public void OpenCanvas()
     {
 
+    }
+
+    private void Start()
+    {
+        PartsStruct test = Singleton_Data.INSTANCE.Dict_Parts["Pb_0001"];
+        AddEquip(test);
+        test = Singleton_Data.INSTANCE.Dict_Parts["Pe_0001"];
+        AddEquip(test);
+        test = Singleton_Data.INSTANCE.Dict_Parts["Px_0001"];
+        AddEquip(test);
+    }
+
+    void AddEquip(PartsStruct _struct)
+    {
+        switch (_struct.partsType)
+        {
+            case PartsStruct.PartsType.Body:
+                boatStruct = _struct;
+                break;
+
+            case PartsStruct.PartsType.Engine:
+                engineStruct = _struct;
+                break;
+
+            case PartsStruct.PartsType.Box:
+                boxStruct = _struct;
+                break;
+        }
+        AddStatus(boatStruct);
+        AddStatus(engineStruct);
+        AddStatus(boxStruct);
+    }
+
+    void AddStatus(PartsStruct _struct)
+    {
+        totalStatus.maxSpeed += _struct.addStatus.maxSpeed;
+        totalStatus.maxWeight += _struct.addStatus.maxWeight;
+        totalStatus.maxEnergy += _struct.addStatus.maxEnergy;
+        totalStatus.maxBoxSize += _struct.addStatus.maxBoxSize;
+        totalStatus.freshness += _struct.addStatus.freshness;
     }
 }
