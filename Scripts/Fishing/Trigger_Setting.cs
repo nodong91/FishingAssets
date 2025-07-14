@@ -1,8 +1,15 @@
 using UnityEngine;
 using static Data_Manager;
 
-public class Fishing_Setting : MonoBehaviour
+public class Trigger_Setting : MonoBehaviour
 {
+    public enum TriggerType
+    {
+        Fishing,// ³¬½Ã
+        Landing,// ºÎµÎ
+    }
+    public TriggerType triggerType;
+
     public string id;
     public FishStruct fishStruct;
     public FishStruct.FishType fishType;
@@ -16,6 +23,7 @@ public class Fishing_Setting : MonoBehaviour
     public void SetFish(string _id)
     {
         id = _id;
+        RandomFish();
     }
 
     void RandomFish()

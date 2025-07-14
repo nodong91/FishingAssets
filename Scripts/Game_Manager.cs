@@ -6,8 +6,10 @@ public class Game_Manager : MonoBehaviour
     public UI_Inventory inventory;
     public Fishing_Manager fishingManager;
     public Camera_Manager cameraManager;
-    public UI_Manager uiManager;
+    public FishGuide fishGuide;
     public UI_Equip equip;
+    public Follow_Manager followManager;
+    public UI_Main uiMain;
 
     public static Game_Manager current;
 
@@ -18,7 +20,12 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
+        followManager.SetCamera = cameraManager.UICamera;
+        followManager.StartTest();
+        uiMain.SetStart();
+
         inventory.SetStart();
+        fishGuide.SetStart();
     }
 
     void Update()

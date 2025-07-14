@@ -62,6 +62,10 @@ public class Data_Manager : Data_Parse
             {
                 SetParts(GetCSV_Data[i]);
             }
+            else if (csv_Type.Contains("Equip"))
+            {
+                SetEquip(GetCSV_Data[i]);
+            }
             else if (csv_Type.Contains("Item"))
             {
                 SetItem(GetCSV_Data[i]);
@@ -97,30 +101,27 @@ public class Data_Manager : Data_Parse
 
     void SetEquip(TextAsset _textAsset)
     {
-        fishStruct.Clear();
+        equipStruct.Clear();
         string[] data = _textAsset.text.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
             string[] elements = data[i].Split(new char[] { ',' });
             ItemStruct tempItem = GetItemStruct(elements);
-            tempItem.itemType = ItemStruct.ItemType.Fish;// 타입 세팅
-            FishStruct tempData = new FishStruct
+            tempItem.itemType = ItemStruct.ItemType.Equip;// 타입 세팅
+            EquipStruct tempData = new EquipStruct
             {
                 id = tempItem.id,
                 itemStruct = tempItem,
-                fishType = (FishStruct.FishType)System.Enum.Parse(typeof(FishStruct.FishType), elements[7]),
-                size = Parse_Vector2(elements[8]),
-                fishStamina = Parse_Float(elements[9]),
-                fishPower = Parse_Float(elements[10]),
-                fishROA = Parse_Float(elements[11]),
-                fishSpeed = Parse_Float(elements[12]),
-                fishTurnDelay = Parse_Vector2(elements[13]),
-                hitValue = Parse_Vector2(elements[14]),
+                fishingArea = Parse_Float(elements[7]),
+                lodPower = Parse_Float(elements[8]),
+                reelingSpeed = Parse_Float(elements[9]),
+                reelingAcceleration = Parse_Float(elements[10]),
+                hitPoint = Parse_Float(elements[11]),
+                hitSpeed = Parse_Float(elements[12]),
             };
-            fishStruct.Add(tempData);
+            equipStruct.Add(tempData);
         }
     }
-
     ItemStruct GetItemStruct(string[] _elements)
     {
         ItemStruct tempItem = new ItemStruct
@@ -163,6 +164,7 @@ public class Data_Manager : Data_Parse
             partsStruct.Add(tempData);
         }
     }
+
     PartsType GetPartsType(string _id)
     {
         if (_id.Contains("Pb"))
@@ -303,12 +305,12 @@ public class Data_Manager : Data_Parse
         public string id;
         public ItemStruct itemStruct;
 
-        public float fishingAmount;// 공격력
+        public float fishingArea;// 공격 영역
         public float lodPower;// 초당 끌려가는 힘 - 높을 수록 쉽게 끌려감
         public float reelingSpeed;// 낚시 회전 속도
-        public float reelingSlip;// 릴링 정지 시 밀림
+        public float reelingAcceleration;// 릴링 가속도
         public float hitPoint;// 물고기 잡을 위치
-        public float hitBobberSpeed;// 물고기 찌 움직임
+        public float hitSpeed;// 물고기 찌 움직임
     }
 
     public struct BaitStruct

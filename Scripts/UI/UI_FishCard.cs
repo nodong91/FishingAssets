@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public GameObject card;
     public Data_Manager.FishStruct fishStruct;
     public TMPro.TMP_Text text_Name, amount, minSize, maxSize;
     public Image iconImage;
@@ -30,6 +31,11 @@ public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         }
         iconImage.sprite = _fishStruct.itemStruct.icon;
         iconImage.color = _fishClass != null ? Color.white : Color.black;
+    }
+
+    public void CardDisplay(bool _onDisplay)
+    {
+        card.SetActive(_onDisplay);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

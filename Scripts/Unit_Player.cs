@@ -1,8 +1,10 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Data_Manager.FishStruct;
 
 public class Unit_Player : MonoBehaviour
 {
@@ -269,13 +271,13 @@ public class Unit_Player : MonoBehaviour
         }
     }
 
-    void CheckClosestUnit()// 아이템이나 채집 같은거 하기 위한 테스트
+    void CheckClosestUnit()// 아이템이나 채집 같은거 하기 위한 체크
     {
         if (triggerGameObject.Count == 0)
             return;
 
         closestDistance = float.MaxValue;
-        Fishing_Setting tempTarget = null;
+        Trigger_Setting tempTarget = null;
         for (int i = 0; i < triggerGameObject.Count; i++)
         {
             float offsetDist = (triggerGameObject[i].transform.position - transform.position).sqrMagnitude;
@@ -290,20 +292,52 @@ public class Unit_Player : MonoBehaviour
         {
             closestTarget = tempTarget;
         }
-        Game_Manager.current.uiManager.followManager.AddClosestTarget(closestTarget);
+        Game_Manager.current.followManager.AddClosestTarget(closestTarget);
     }
     public Reflection_Manager reflection_Manager;
-    public float shipHight, hightSpeed;
+    public float shipHight, waveSpeed = 2f;
     float runningTime;
-    public float hight;
+    public GameObject playerObject;
+
     private void Update()
     {
-        runningTime += Time.deltaTime * hightSpeed;
-        //float hight = Mathf.PingPong(runningTime, shipHight);
-         hight = (Mathf.Sin(runningTime) + 1f) * shipHight * 0.5f;
-
-        transform.position = new Vector3(transform.position.x, hight, transform.position.z);
         SetOceanRenderer();
+    }
+
+    Quaternion prevAngle, setAngle;
+    public float targetAngle = 10f;
+    float randomTime, runningRandomTime;
+
+    public AnimationCurve rotateCurve;
+    void SetOceanRenderer()
+    {
+        runningTime += Time.deltaTime * waveSpeed;
+        float moveHight = (Mathf.Sin(runningTime) + 1f) * 0.5f;
+        Vector3 localPosition = Vector3.up * moveHight * shipHight;
+        playerObject.transform.localPosition = localPosition;
+
+        if (runningTime > runningRandomTime)
+        {
+            randomTime = UnityEngine.Random.Range(5f, 3f);
+            runningRandomTime = runningTime + randomTime;
+            prevAngle = playerObject.transform.localRotation;
+            setAngle = Quaternion.Euler(RandomAngle(targetAngle));
+        }
+
+        float curve = rotateCurve.Evaluate(1f - (runningRandomTime - runningTime) / randomTime);
+        playerObject.transform.localRotation = Quaternion.Slerp(prevAngle, setAngle, curve / randomTime);
+
+        string shipPosition = "_ShipPosition";
+        reflection_Manager.GetMaterial.SetVector(shipPosition, playerObject.transform.position);
+        reflection_Manager.GetMaterial.SetFloat("_WaveSpeed", waveSpeed);
+    }
+
+    Vector3 RandomAngle(float _maxAngle)
+    {
+        float x = UnityEngine.Random.Range(-_maxAngle, _maxAngle);
+        float y = UnityEngine.Random.Range(-_maxAngle, _maxAngle);
+        float z = UnityEngine.Random.Range(-_maxAngle, _maxAngle);
+        return new Vector3(x, y, z);
     }
 
     void SetMoving()
@@ -321,12 +355,6 @@ public class Unit_Player : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed * 5f);
     }
 
-    void SetOceanRenderer()
-    {
-        string shipPosition = "_ShipPosition";
-        reflection_Manager.GetMaterial.SetVector(shipPosition, transform.position);
-    }
-
     void RotateMousePosition()
     {
         float speed = moveSpeed * Time.deltaTime;
@@ -340,16 +368,18 @@ public class Unit_Player : MonoBehaviour
         Vector3 offset = (target - transform.position).normalized;
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed * 5f);
     }
+
     //================================================================================================================================================
     // 충돌
     //================================================================================================================================================
-    public List<Fishing_Setting> triggerGameObject = new List<Fishing_Setting>();
-    public Fishing_Setting closestTarget;
+
+    public List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
+    public Trigger_Setting closestTarget;
     public float closestDistance;
 
     private void OnTriggerEnter(Collider other)
     {
-        Fishing_Setting fishing = other.GetComponent<Fishing_Setting>();
+        Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
         if (fishing == null)
             return;
         triggerGameObject.Add(fishing);
@@ -357,7 +387,7 @@ public class Unit_Player : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Fishing_Setting fishing = other.GetComponent<Fishing_Setting>();
+        Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
         if (fishing == null)
             return;
 
@@ -365,7 +395,7 @@ public class Unit_Player : MonoBehaviour
         if (triggerGameObject.Count == 0)
         {
             closestTarget = null;
-            Game_Manager.current.uiManager.followManager.AddClosestTarget(null);
+            Game_Manager.current.followManager.AddClosestTarget(null);
         }
     }
 
@@ -416,7 +446,7 @@ public class Unit_Player : MonoBehaviour
 
     }
 
-    void State_Action(bool _input)
+    void State_Action(bool _input)// 클릭 이벤트
     {
         if (_input == true)
         {
@@ -429,15 +459,22 @@ public class Unit_Player : MonoBehaviour
         else
         {
             if (closestTarget != null)
-            {
-                // 낚시 시작
-                Game_Manager.current.uiManager.followManager.AddClosestTarget(null);
-                Game_Manager.current.fishingManager.StartGame(closestTarget);
-                triggerGameObject.Remove(closestTarget);
-                closestTarget = null;
+                switch (closestTarget.triggerType)
+                {
+                    case Trigger_Setting.TriggerType.Fishing:
+                        // 낚시 시작
+                        Game_Manager.current.followManager.AddClosestTarget(null);
+                        Game_Manager.current.fishingManager.StartGame(closestTarget);
+                        triggerGameObject.Remove(closestTarget);
+                        closestTarget = null;
 
-                RemoveControll();
-            }
+                        RemoveControll();
+                        break;
+
+                    case Trigger_Setting.TriggerType.Landing:
+
+                        break;
+                }
             stateAction = StartCoroutine(State_StopActing());
         }
     }

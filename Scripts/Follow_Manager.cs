@@ -20,7 +20,7 @@ public class Follow_Manager : MonoBehaviour
         followUI.gameObject.SetActive(false);
     }
 
-    public void AddClosestTarget(Fishing_Setting _target)
+    public void AddClosestTarget(Trigger_Setting _target)
     {
         followUI.gameObject.SetActive(_target != null);
         if (_target == null)

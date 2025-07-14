@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using static Data_Manager;
 
 public class Fishing_Main : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class Fishing_Main : MonoBehaviour
     //public GameObject hitImage;
 
     public bool hitBool = false;
-    float fillAmount;
+    float fillArea;
     float fillAngle;
     float targetAngle;
     Coroutine actionCoroutine;
@@ -32,20 +33,8 @@ public class Fishing_Main : MonoBehaviour
     float complatePoint;// 완료 퍼센트
 
     [Header("[ 변경 가능한 수치 ]")]
-    public Data_Manager.EquipStruct equipStruct;
-    //public FishingLodStruct fishingLodStruct;
-    //[System.Serializable]
-    //public struct FishingLodStruct
-    //{
-    //    public float fishingAmount;// 공격력
-    //    public float lodPower;// 초당 끌려가는 힘 - 높을 수록 쉽게 끌려감
-    //    public float reelingSpeed;// 낚시 회전 속도
-    //    public float reelingSlip;// 릴링 정지 시 밀림
-    //    public float hitPoint;// 물고기 잡을 위치
-    //    public float hitBobberSpeed;// 물고기 찌 움직임
-    //}
-
-    public Data_Manager.FishStruct fishStruct;
+    public EquipStruct equipStruct;
+    public FishStruct fishStruct;
 
     public delegate void DeleEndGame(Fishing_Manager.FishingState _state);
     public DeleEndGame deleEndGame;
@@ -59,8 +48,9 @@ public class Fishing_Main : MonoBehaviour
         //StateMachine(FishingState.None);
     }
 
-    public void StartGame(Fishing_Setting _fishSetting)
+    public void StartGame(Trigger_Setting _fishSetting)
     {
+        equipStruct = Singleton_Data.INSTANCE.Dict_Equip["El_0001"];// 낚시대 테스트
         fishStruct = _fishSetting.fishStruct;
         StartGame();
     }
@@ -151,7 +141,7 @@ public class Fishing_Main : MonoBehaviour
     public float lodPower, fishPower;
     void SetFishing()
     {
-        fillAmount = equipStruct.fishingAmount;
+        fillArea = equipStruct.fishingArea;
         lodPower = (1f + (equipStruct.lodPower / fishStruct.fishPower)) / fishStruct.fishStamina;
         fishPower = (1f + (fishStruct.fishPower / equipStruct.lodPower)) / fishStruct.fishStamina;
     }
@@ -182,13 +172,13 @@ public class Fishing_Main : MonoBehaviour
         {
             fish.localRotation = Quaternion.Slerp(fish.localRotation, Quaternion.Euler(0, 0, targetAngle), fishStruct.fishSpeed * Time.deltaTime);// 물고기 움직임 추적
 
-            currentSpeed = Mathf.Lerp(currentSpeed, _targetSpeed, equipStruct.reelingSlip * Time.deltaTime);// 가속도
+            currentSpeed = Mathf.Lerp(currentSpeed, _targetSpeed, equipStruct.reelingAcceleration * Time.deltaTime);// 가속도
             fishingRod.transform.localRotation = Quaternion.Euler(0, 0, fishingRod.transform.localRotation.eulerAngles.z + currentSpeed * Time.deltaTime);
 
             health.material.SetFloat("_FillAmount", complatePoint);
 
-            fillAngle = 180f * fillAmount;
-            fishingRod.material.SetFloat("_FillAmount", fillAmount);
+            fillAngle = 180f * fillArea;
+            fishingRod.material.SetFloat("_FillAmount", fillArea);
             fishingRod.material.SetFloat("_RotateAngle", fillAngle + 180f);
 
             var main = targetParticles.main;

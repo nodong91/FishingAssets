@@ -12,7 +12,7 @@ public class Fishing_Manager : MonoBehaviour
         Complate
     }
     public FishingState state;
-    Fishing_Setting fishSetting;
+    Trigger_Setting fishSetting;
     public Data_Manager.FishStruct.FishType fishType;
 
     public Fishing_Hit fishingHit;
@@ -37,7 +37,7 @@ public class Fishing_Manager : MonoBehaviour
         fishingSubHealth.SetStart();
     }
 
-    public void StartGame(Fishing_Setting _fishSetting)
+    public void StartGame(Trigger_Setting _fishSetting)
     {
         fishSetting = _fishSetting;
         if (fishSetting != null)

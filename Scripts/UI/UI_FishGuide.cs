@@ -29,7 +29,7 @@ public class FishGuide : MonoBehaviour
     public int currentIndex;
     Queue<FishStruct> instQueue = new Queue<FishStruct>();
 
-    void Start()
+    public void SetStart()
     {
         LoadFishGuide();
 
@@ -39,7 +39,8 @@ public class FishGuide : MonoBehaviour
             allFishStruct.Add(temp);
             //AddFishClass(temp.id, 3.5f);
         }
-        closeButton.onClick.AddListener(CloseCanvas);
+        closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
+        OpenCanvas(false);
         for (int i = 0; i < toggles.Length; i++)
         {
             int index = i;
@@ -49,9 +50,9 @@ public class FishGuide : MonoBehaviour
         SetCurrentFishStruct();
     }
 
-    void CloseCanvas()
+    public void OpenCanvas(bool _open)
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(_open);
     }
 
     void SetToggle(int _index)
@@ -74,10 +75,10 @@ public class FishGuide : MonoBehaviour
             int index = i + startIndex;
             if (index >= allFishStruct.Count)
             {
-                tempCard.gameObject.SetActive(false);
+                tempCard.CardDisplay(false);
                 continue;
             }
-            tempCard.gameObject.SetActive(true);
+            tempCard.CardDisplay(true);
             // 도감에 있는지 확인
             SetCard(tempCard, allFishStruct[index]);
         }

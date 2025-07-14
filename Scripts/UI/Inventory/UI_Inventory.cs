@@ -41,18 +41,13 @@ public class UI_Inventory : MonoBehaviour
         SetInfomation();
         SetRemoveBox();
 
-        closeButton.onClick.AddListener(CloseButton);
-        CloseButton();
+        closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
+        OpenCanvas(false);
     }
 
-    public void OpenCanvas()
+    public void OpenCanvas(bool _open)
     {
-        gameObject.SetActive(true);
-    }
-
-    void CloseButton()
-    {
-        gameObject.SetActive(false);
+        gameObject.SetActive(_open);
     }
 
     void SetInventory()

@@ -17,12 +17,12 @@ public class Fishing_Complate : MonoBehaviour
     {
         fishInfomation.gameObject.SetActive(false);
 
-        Game_Manager.current.inventory.OpenCanvas();
+        Game_Manager.current.inventory.OpenCanvas(true);
         Data_Manager.ItemStruct fishStruct = Game_Manager.current.inventory.GetTempItem();
         Game_Manager.current.inventory.AddItem(fishStruct);
     }
 
-    public void SetFish(Fishing_Setting _fish)
+    public void SetFish(Trigger_Setting _fish)
     {
         StartCoroutine(SetDisplaying());
     }

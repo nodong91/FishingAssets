@@ -4,22 +4,22 @@ using UnityEngine.UI;
 public class UI_Main : MonoBehaviour
 {
     public Button inventoryButton;
-    public Button equipButton;
+    public Button fishGuideButton;
 
     public void SetStart()
     {
         inventoryButton.onClick.AddListener(InventoryButton);
-        equipButton.onClick.AddListener(EquipButton);
+        fishGuideButton.onClick.AddListener(FishGuideButton);
     }
 
     // Update is called once per frame
     void InventoryButton()
     {
-        Game_Manager.current.inventory.OpenCanvas();
+        Game_Manager.current.inventory.OpenCanvas(true);
     }
 
-    void EquipButton()
+    void FishGuideButton()
     {
-        Game_Manager.current.equip.OpenCanvas();
+        Game_Manager.current.fishGuide.OpenCanvas(true);
     }
 }
