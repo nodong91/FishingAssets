@@ -38,6 +38,7 @@ public class Fishing_Sub_Strength : Fishing_Sub
 
     void FillAmount(float _value)
     {
+        EndGame();
         //if (fillAmount > 0f || fillAmount < 1f)
         //{
         //    fillAmount += 0.05f * _value;

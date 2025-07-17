@@ -1,39 +1,28 @@
+using System.IO;
 using UnityEngine;
-using UnityEngine.UI;
+using static Data_Manager;
 
 public class UI_Inventory_Infomation : MonoBehaviour
 {
-    public TMPro.TMP_Text m_itemName, m_Explanation;
-    public Button buyButton, sellButton;
+    public CanvasGroup canvasGroup;
+    public TMPro.TMP_Text nameText;
+    public TMPro.TMP_Text priceText, typeText;
 
-    public delegate void Dele_Button();
-    public Dele_Button deleBuyButton, deleSellButton;
-
-    public void SetInfomation()
+    public void SetStart(UI_Inventory_Slot _slot)
     {
-        buyButton.onClick.AddListener(BuyButton);
-        sellButton.onClick.AddListener(SellButton);
-    }
+        bool HideInfo = _slot == null || _slot.empty == true;
+        if (HideInfo == true)
+        {
+            canvasGroup.alpha = 0f;
+            return;
+        }
 
-    public void SetDisplay(Data_Manager.ItemStruct _itemStruct)
-    {
-        m_itemName.text = _itemStruct.name;
-        string explanation = "";
-        explanation += "Explanation : " + _itemStruct.explanation + "\n";
-        explanation += "Icon : " + _itemStruct.icon.name + "\n";
-        explanation += "Size : " + _itemStruct.shape.Length + "\n";
-        explanation += "Weight : " + _itemStruct.weight + "\n";
-        explanation += "Price : " + _itemStruct.price;
-        m_Explanation.text = explanation;
-    }
+        ItemStruct item = _slot.itemClass.item;
+        nameText.text = item.id;
+        priceText.text = item.price.ToString();
+        typeText.text = item.itemType.ToString();
 
-    void BuyButton()
-    {
-        deleBuyButton?.Invoke();
-    }
-
-    void SellButton()
-    {
-        deleSellButton?.Invoke();
+        canvasGroup.alpha = 1f;
+        canvasGroup.transform.position = Input.mousePosition;
     }
 }

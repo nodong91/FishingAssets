@@ -59,6 +59,15 @@
         },
         {
             "m_Id": "10266c97bed74e26901ebb3e01112da8"
+        },
+        {
+            "m_Id": "55cb37c59653443589261a8291d5996b"
+        },
+        {
+            "m_Id": "db863c38fcc94e2ea2894f4d01f3438f"
+        },
+        {
+            "m_Id": "a18746c8ffc3474e90c38ed9aac933ee"
         }
     ],
     "m_Keywords": [],
@@ -2219,8 +2228,8 @@
     "m_ObjectId": "064a086e78504a7bb5f9a4f0759d6ee2",
     "m_Title": "Ship",
     "m_Position": {
-        "x": -2331.0,
-        "y": -1703.000244140625
+        "x": -2330.999755859375,
+        "y": -1702.999755859375
     }
 }
 
@@ -4305,7 +4314,7 @@
     "m_ObjectId": "30d538e0f6e6427b8686b481a31bf288",
     "m_Title": "Foam",
     "m_Position": {
-        "x": -1141.0,
+        "x": -1140.9998779296875,
         "y": -310.0000305175781
     }
 }
@@ -5410,8 +5419,8 @@
     "m_ObjectId": "4e5c93593e3744c287b8d63fe2b16cda",
     "m_Title": "Foam",
     "m_Position": {
-        "x": -1772.0,
-        "y": 440.0000915527344
+        "x": -1771.999755859375,
+        "y": 439.9999694824219
     }
 }
 
@@ -5636,6 +5645,36 @@
         "z": 0.0,
         "w": 0.0
     }
+}
+
+{
+    "m_SGVersion": 3,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
+    "m_ObjectId": "55cb37c59653443589261a8291d5996b",
+    "m_Guid": {
+        "m_GuidSerialized": "6a652e67-a56f-47e7-9493-95e64878ec20"
+    },
+    "m_Name": "Color",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Color",
+    "m_DefaultReferenceName": "_Color",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "r": 0.8396226167678833,
+        "g": 0.8396226167678833,
+        "b": 0.8396226167678833,
+        "a": 0.0
+    },
+    "isMainColor": false,
+    "m_ColorMode": 0
 }
 
 {
@@ -6784,7 +6823,7 @@
     "m_ObjectId": "73350b35d0d347eabe030b5938d0aaa3",
     "m_Title": "Wave",
     "m_Position": {
-        "x": -1682.0,
+        "x": -1681.999755859375,
         "y": -1252.9998779296875
     }
 }
@@ -6881,7 +6920,7 @@
     "m_ObjectId": "751031e741eb4d499a06b4ff930cc5f0",
     "m_Title": "Water Texture",
     "m_Position": {
-        "x": -1969.0,
+        "x": -1968.999755859375,
         "y": -475.0000305175781
     }
 }
@@ -8684,6 +8723,29 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty",
+    "m_ObjectId": "a18746c8ffc3474e90c38ed9aac933ee",
+    "m_Guid": {
+        "m_GuidSerialized": "a305464f-ecef-4d25-8243-03e762451a49"
+    },
+    "m_Name": "Boolean",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Boolean",
+    "m_DefaultReferenceName": "_Boolean",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": false
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "a1fce1f03eef4a52bae8215f1dee9e0b",
     "m_Id": 2,
@@ -10135,6 +10197,15 @@
     "m_ChildObjectList": [
         {
             "m_Id": "0e3aac0a03aa44e8b6f051d7fbfcf616"
+        },
+        {
+            "m_Id": "55cb37c59653443589261a8291d5996b"
+        },
+        {
+            "m_Id": "db863c38fcc94e2ea2894f4d01f3438f"
+        },
+        {
+            "m_Id": "a18746c8ffc3474e90c38ed9aac933ee"
         }
     ]
 }
@@ -11737,7 +11808,7 @@
     "m_Title": "Wave",
     "m_Position": {
         "x": 375.0,
-        "y": 201.99998474121095
+        "y": 202.00003051757813
     }
 }
 
@@ -11863,6 +11934,36 @@
     "m_Value": 50.0,
     "m_DefaultValue": 500.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
+    "m_ObjectId": "db863c38fcc94e2ea2894f4d01f3438f",
+    "m_Guid": {
+        "m_GuidSerialized": "94219106-09ff-4e14-894f-6ca5573a865c"
+    },
+    "m_Name": "Texture2D",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "Texture2D",
+    "m_DefaultReferenceName": "_Texture2D",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "m_SerializedTexture": "",
+        "m_Guid": ""
+    },
+    "isMainTexture": false,
+    "useTilingAndOffset": false,
+    "m_Modifiable": true,
+    "m_DefaultType": 3
 }
 
 {
@@ -12579,7 +12680,7 @@
     "m_ObjectId": "ef75538d348f4d5da745b9cbdfe5604a",
     "m_Title": "Under Water",
     "m_Position": {
-        "x": -3106.00048828125,
+        "x": -3105.999755859375,
         "y": -734.0
     }
 }

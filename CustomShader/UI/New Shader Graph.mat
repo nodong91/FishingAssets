@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Shader Graph
-  m_Shader: {fileID: -6465566751694194690, guid: 98d19f3a5b6459b4e8da8a261f0086a3, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: e1393133e90942d42898850073271a44, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Texture2D:
         m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 2, y: 10}
@@ -42,10 +46,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Amount: 0.85
+    - _ColorMask: 15
     - _Float: -1.17
+    - _Float_1: 0.688
+    - _Float_2: 1.01
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _Thickness: 0.543
+    - _UIMaskSoftnessX: 1
+    - _UIMaskSoftnessY: 1
+    - _thickness: 0.12
     m_Colors:
+    - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Vector2: {r: 0, g: 0, b: 0, a: 0}
     - _Vector2_1: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

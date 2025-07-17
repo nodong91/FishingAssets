@@ -2,18 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static Data_Manager.FishStruct;
 
 public class Unit_Player : MonoBehaviour
 {
-    [Flags]
-    public enum ControllDirection
-    {
-        None = 0, W = 1 << 0, A = 1 << 1, S = 1 << 2, D = 1 << 3
-    }
-    public ControllDirection controllDirection = ControllDirection.None;
 
     public enum State
     {
@@ -29,7 +21,6 @@ public class Unit_Player : MonoBehaviour
     }
     public State state = State.None;
 
-    public Vector2Int dirction;
     public float moveSpeed = 0.01f;
 
     private void Start()
@@ -43,140 +34,22 @@ public class Unit_Player : MonoBehaviour
 
     void SetMouse()
     {
-        Singleton_Controller.INSTANCE.key_MouseLeft += InputMousetLeft;
+        //Singleton_Controller.INSTANCE.key_MouseLeft += InputMousetLeft;
         //Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
         //Singleton_Controller.INSTANCE.key_MouseWheel += InputMouseWheel;
     }
 
     void RemoveMouse()
     {
-        Singleton_Controller.INSTANCE.key_MouseLeft -= InputMousetLeft;
+        //Singleton_Controller.INSTANCE.key_MouseLeft -= InputMousetLeft;
         //Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
         //Singleton_Controller.INSTANCE.key_MouseWheel += InputMouseWheel;
-    }
-
-    void SetKeyCode()
-    {
-        Singleton_Controller.INSTANCE.key_W += Direction_UP;
-        Singleton_Controller.INSTANCE.key_A += Direction_Left;
-        Singleton_Controller.INSTANCE.key_S += Direction_Down;
-        Singleton_Controller.INSTANCE.key_D += Direction_Right;
-
-        Singleton_Controller.INSTANCE.key_SpaceBar += Key_SpaceBar;
-        Singleton_Controller.INSTANCE.key_1 += Key_1;
-        Singleton_Controller.INSTANCE.key_2 += Key_2;
-    }
-
-    void RemoveKeyCode()
-    {
-        Singleton_Controller.INSTANCE.key_W -= Direction_UP;
-        Singleton_Controller.INSTANCE.key_A -= Direction_Left;
-        Singleton_Controller.INSTANCE.key_S -= Direction_Down;
-        Singleton_Controller.INSTANCE.key_D -= Direction_Right;
-
-        Singleton_Controller.INSTANCE.key_SpaceBar -= Key_SpaceBar;
-        Singleton_Controller.INSTANCE.key_1 -= Key_1;
-        Singleton_Controller.INSTANCE.key_2 -= Key_2;
     }
 
     //================================================================================================================================================
     // 컨트롤
     //================================================================================================================================================
 
-    void InputMousetLeft(bool _input)
-    {
-        State_Action(_input);
-    }
-
-    void Direction_UP(bool _input)
-    {
-        if (_input == true)
-        {
-            controllDirection |= ControllDirection.W;// 넣기
-            //dirction.y += 1;
-        }
-        else
-        {
-            controllDirection &= ~ControllDirection.W;// 제외
-            //dirction.y -= 1;
-        }
-        StateMove();
-    }
-
-    void Direction_Left(bool _input)
-    {
-        if (_input == true)
-        {
-            controllDirection |= ControllDirection.A;
-            //dirction.x -= 1;
-        }
-        else
-        {
-            controllDirection &= ~ControllDirection.A;
-            //dirction.x += 1;
-        }
-        StateMove();
-    }
-
-    void Direction_Down(bool _input)
-    {
-        if (_input == true)
-        {
-            controllDirection |= ControllDirection.S;
-            //dirction.y -= 1;
-        }
-        else
-        {
-            controllDirection &= ~ControllDirection.S;
-            //dirction.y += 1;
-        }
-        StateMove();
-    }
-
-    void Direction_Right(bool _input)
-    {
-        if (_input == true)
-        {
-            controllDirection |= ControllDirection.D;
-            //dirction.x += 1;
-        }
-        else
-        {
-            controllDirection &= ~ControllDirection.D;
-            //dirction.x -= 1;
-        }
-        StateMove();
-    }
-
-    void Key_1(bool _input)
-    {
-        if (_input == true)
-            QuickSlot(0);
-    }
-
-    void Key_2(bool _input)
-    {
-        if (_input == true)
-            QuickSlot(1);
-    }
-
-    public void QuickSlot(int _index)
-    {
-        //Game_Manager.current.QuickSlotAction(_index);
-    }
-
-    void Key_SpaceBar(bool _input)
-    {
-        // 방어 스킬
-        // 방패를 가진 무기는 방패막기
-        // 양손검은 패링
-        // 한손검은 구르기
-        // 무기 특징
-        if (_input == true)
-        {
-            StateEscape();
-        }
-    }
 
     public void StateMachine(State _state)
     {
@@ -190,14 +63,14 @@ public class Unit_Player : MonoBehaviour
             case State.None:
                 break;
             case State.Dead:
-                RemoveKeyCode();
+                //RemoveKeyCode();
                 //DeadState();
-                outOfControll = true;
+                //OutOfControll(true);
                 break;
             case State.Action:
                 break;
             case State.Idle:
-                if (controllDirection != ControllDirection.None)
+                if (dirction.x != 0f || dirction.y != 0f)
                     StateMachine(State.Move);
                 break;
             case State.Move:
@@ -215,40 +88,14 @@ public class Unit_Player : MonoBehaviour
     // 이동
     //================================================================================================================================================
 
-    void SetDirection()
+    public Vector2 dirction;
+    public void StateMove(Vector2 _dirction)
     {
-        if (controllDirection.HasFlag(ControllDirection.W) == false && controllDirection.HasFlag(ControllDirection.S) == false)
-        {
-            dirction.y = 0;
-        }
-        else if (controllDirection.HasFlag(ControllDirection.W))
-        {
-            dirction.y = 1;
-        }
-        else if (controllDirection.HasFlag(ControllDirection.S))
-        {
-            dirction.y = -1;
-        }
-        if (controllDirection.HasFlag(ControllDirection.A) == false && controllDirection.HasFlag(ControllDirection.D) == false)
-        {
-            dirction.x = 0;
-        }
-        else if (controllDirection.HasFlag(ControllDirection.A))
-        {
-            dirction.x = -1;
-        }
-        else if (controllDirection.HasFlag(ControllDirection.D))
-        {
-            dirction.x = 1;
-        }
-    }
+        dirction = _dirction;
+        //SetDirection();
 
-    void StateMove()
-    {
-        SetDirection();
-
-        if (outOfControll == true)
-            return;
+        //if (outOfControll == true)
+        //    return;
 
         if (state == State.Idle)
         {
@@ -256,7 +103,7 @@ public class Unit_Player : MonoBehaviour
         }
         if (state == State.Move)// 공격이나 회피가 있을 수 있으니
         {
-            if (controllDirection == ControllDirection.None)
+            if (dirction.x == 0f && dirction.y == 0f)
                 StateMachine(State.Idle);
         }
     }
@@ -299,20 +146,22 @@ public class Unit_Player : MonoBehaviour
     float runningTime;
     public GameObject playerObject;
 
-    private void Update()
-    {
-        SetOceanRenderer();
-    }
-
     Quaternion prevAngle, setAngle;
     public float targetAngle = 10f;
     float randomTime, runningRandomTime;
 
     public AnimationCurve rotateCurve;
+
+    private void Update()
+    {
+        SetOceanRenderer();
+    }
+
     void SetOceanRenderer()
     {
         runningTime += Time.deltaTime * waveSpeed;
-        float moveHight = (Mathf.Sin(runningTime) + 1f) * 0.5f;
+
+        float moveHight = (Mathf.Sin(runningTime) + 1f) * 0.5f;// 위아래 움직임
         Vector3 localPosition = Vector3.up * moveHight * shipHight;
         playerObject.transform.localPosition = localPosition;
 
@@ -325,7 +174,7 @@ public class Unit_Player : MonoBehaviour
         }
 
         float curve = rotateCurve.Evaluate(1f - (runningRandomTime - runningTime) / randomTime);
-        playerObject.transform.localRotation = Quaternion.Slerp(prevAngle, setAngle, curve / randomTime);
+        playerObject.transform.localRotation = Quaternion.Slerp(prevAngle, setAngle, curve / randomTime);// 랜덤 회전
 
         string shipPosition = "_ShipPosition";
         reflection_Manager.GetMaterial.SetVector(shipPosition, playerObject.transform.position);
@@ -342,9 +191,6 @@ public class Unit_Player : MonoBehaviour
 
     void SetMoving()
     {
-        if (outOfControll == true)
-            return;
-
         float speed = moveSpeed * Time.deltaTime;
         Game_Manager.current.cameraManager.transform.position = transform.position;
         Vector3 dir = new Vector3(dirction.x, 0f, dirction.y);
@@ -403,7 +249,7 @@ public class Unit_Player : MonoBehaviour
     // 회피
     //================================================================================================================================================
 
-    void StateEscape()
+    public void StateEscape()
     {
         StateMachine(State.Escape);
     }
@@ -446,12 +292,12 @@ public class Unit_Player : MonoBehaviour
 
     }
 
-    void State_Action(bool _input)// 클릭 이벤트
+    public void State_Action(bool _input)// 클릭 이벤트
     {
         if (_input == true)
         {
-            if (outOfControll == true)
-                return;
+            //if (outOfControll == true)
+            //    return;
 
             StateMachine(State.Action);
             stateAction = StartCoroutine(State_Acting());
@@ -459,22 +305,25 @@ public class Unit_Player : MonoBehaviour
         else
         {
             if (closestTarget != null)
+            {
+                triggerGameObject.Remove(closestTarget);
                 switch (closestTarget.triggerType)
                 {
                     case Trigger_Setting.TriggerType.Fishing:
                         // 낚시 시작
-                        Game_Manager.current.followManager.AddClosestTarget(null);
                         Game_Manager.current.fishingManager.StartGame(closestTarget);
-                        triggerGameObject.Remove(closestTarget);
-                        closestTarget = null;
-
-                        RemoveControll();
+                        Destroy(closestTarget.gameObject);
+                        OutOfControll(true);
                         break;
 
                     case Trigger_Setting.TriggerType.Landing:
-
+                        Game_Manager.current.OutOfControll(true);
+                        closestTarget.GetTriggerLanding.SetLanding(this);
                         break;
                 }
+                closestTarget = null;
+                Game_Manager.current.followManager.AddClosestTarget(null);// 팔로우 유아이 제거
+            }
             stateAction = StartCoroutine(State_StopActing());
         }
     }
@@ -506,7 +355,7 @@ public class Unit_Player : MonoBehaviour
         action = false;
         while (state == State.Action)
         {
-            if (outOfControll == false)
+            //if (outOfControll == false)
                 StateMachine(State.Idle);
             yield return null;
         }
@@ -515,18 +364,24 @@ public class Unit_Player : MonoBehaviour
     // 홀드
     //================================================================================================================================================
 
-    public bool outOfControll = false;
-    void OutOfControll(float _time)
+    //bool outOfControll = false;
+
+    public void OutOfControll(bool _isOn)
     {
-        StartCoroutine(HoldControll(_time));
+        //outOfControll = _isOn;
     }
 
-    IEnumerator HoldControll(float _time)
-    {
-        outOfControll = true;
-        yield return new WaitForSeconds(_time);
-        outOfControll = false;
-    }
+    //void OutOfControllTimer(float _time)
+    //{
+    //    StartCoroutine(HoldControllTimer(_time));
+    //}
+
+    //IEnumerator HoldControllTimer(float _time)
+    //{
+    //    outOfControll = true;
+    //    yield return new WaitForSeconds(_time);
+    //    outOfControll = false;
+    //}
 
 
 
@@ -550,18 +405,16 @@ public class Unit_Player : MonoBehaviour
     public void SetControll()
     {
         state = State.Idle;
-        dirction = Vector2Int.zero;
+        //dirction = Vector2Int.zero;
 
-        SetMouse();
-        SetKeyCode();
+        //SetKeyCode();
     }
 
     public void RemoveControll()
     {
         state = State.Idle;
-        dirction = Vector2Int.zero;
+        //dirction = Vector2Int.zero;
 
-        RemoveMouse();
-        RemoveKeyCode();
+        //RemoveKeyCode();
     }
 }

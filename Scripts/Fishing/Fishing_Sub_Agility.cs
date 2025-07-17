@@ -42,6 +42,7 @@ public class Fishing_Sub_Agility : Fishing_Sub
 
     void FillAmount(bool _active)
     {
+        EndGame();
         if (_active == false)
             return;
 

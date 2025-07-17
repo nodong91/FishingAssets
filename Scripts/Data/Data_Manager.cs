@@ -262,6 +262,16 @@ public class Data_Manager : Data_Parse
 
 
 
+    [System.Serializable]
+    public struct Data_Option
+    {
+        // 사운드 관련
+        public bool BGMMute;
+        public float BGMVolume;
+        public bool EffectMute;
+        public float EffectVolume;
+    }
+
 
     [Header(" [ Data ]")]
     public List<EquipStruct> equipStruct = new List<EquipStruct>();
@@ -313,6 +323,7 @@ public class Data_Manager : Data_Parse
         public float hitSpeed;// 물고기 찌 움직임
     }
 
+    [System.Serializable]
     public struct BaitStruct
     {
         [HideInInspector]

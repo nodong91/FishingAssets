@@ -11,7 +11,8 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     public Vector2Int slotNum;
     public Image iconImage, checkImage;
     public Sprite checkOn, checkOff;
-    public UI_Inventory_Slot baseSlot;// 링크 베이스 - 다 묶이게
+    UI_Inventory_Slot linkSlot;// 링크 베이스 - 다 묶이게
+    public UI_Inventory_Slot GetLinkSlot { get { return linkSlot; } }
 
     public delegate void Dele_HelperSlot(UI_Inventory_Slot _slot);
     public Dele_HelperSlot dele_LeftClick, dele_RightClick;
@@ -20,6 +21,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     public delegate void Dele_Helper();
     public Dele_Helper dele_Exit;
 
+    public ItemClass itemClass;
     [System.Serializable]
     public class ItemClass
     {
@@ -69,7 +71,6 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
             }
         }
     }
-    public ItemClass itemClass;
 
     public void SetStart(int _x, int _y)
     {
@@ -91,19 +92,19 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     public void SetBase(ItemClass _itemClass)
     {
-        baseSlot = this;
+        linkSlot = this;
         SetSlot(_itemClass);
     }
 
     public void SetLink(UI_Inventory_Slot _slot)
     {
-        baseSlot = _slot;
+        linkSlot = _slot;
         SetSlot(_slot.itemClass);
     }
 
     public void SetEmpty()
     {
-        baseSlot = null;
+        linkSlot = null;
         SetSlot(default);
         iconImage.gameObject.SetActive(false);
     }

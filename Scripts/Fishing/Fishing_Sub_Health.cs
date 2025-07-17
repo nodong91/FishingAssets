@@ -39,6 +39,7 @@ public class Fishing_Sub_Health : Fishing_Sub
 
     void FillAmount(bool _active)
     {
+        EndGame();
         if (_active)
         {
             if (originString.Length > 0)

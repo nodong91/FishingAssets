@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Reflection_Manager : MonoBehaviour
 {
@@ -28,17 +27,6 @@ public class Reflection_Manager : MonoBehaviour
         reflectionMaterial = reflectionPlane.GetComponent<Renderer>().material;
         reflectionTexture = new RenderTexture(Screen.width, Screen.height, 24);
         reflectionTexture.useMipMap = true;
-
-        //RenderPipelineManager.endCameraRendering += (context, camera) =>
-        //{
-        //    OnPostRender();
-        //    print("Working");
-        //};
-        //RenderPipelineManager.endFrameRendering += (context, camera) =>
-        //{
-        //    print("Working");
-        //};
-        //Camera.onPostRender += OnPostRenderCallback;
     }
 
     void Update()
@@ -56,7 +44,7 @@ public class Reflection_Manager : MonoBehaviour
     void RenderReflection()
     {
         reflectionCamera.CopyFrom(mainCamera);
-        reflectionCamera.cullingMask = reflectionCamera.cullingMask & ~(1 << LayerMask.NameToLayer("Water"));
+        reflectionCamera.cullingMask = reflectionCamera.cullingMask & ~(1 << LayerMask.NameToLayer("Water"));// Water »©±â
 
         Vector3 cameraDirectionWorldSpace = mainCamera.transform.forward;
         Vector3 cameraUpWorldSpace = mainCamera.transform.up;

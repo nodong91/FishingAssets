@@ -42,7 +42,7 @@ public class Fishing_Manager : MonoBehaviour
         fishSetting = _fishSetting;
         if (fishSetting != null)
         {
-            fishType = fishSetting.fishType;
+            fishType = fishSetting.GetTriggerFish.GetFishType;
             SetMouse();
             StateMachine(FishingState.Hit);
         }
@@ -102,7 +102,7 @@ public class Fishing_Manager : MonoBehaviour
 
     void StateSub()
     {
-        switch (fishSetting.fishType)
+        switch (fishSetting.GetTriggerFish.GetFishType)
         {
             case Data_Manager.FishStruct.FishType.Strength:
                 fishingSubStrength.deleEndGame = EndGame;
@@ -182,7 +182,7 @@ public class Fishing_Manager : MonoBehaviour
 
     void StateSubAction(bool _left)
     {
-        switch (fishSetting.fishType)
+        switch (fishSetting.GetTriggerFish.GetFishType)
         {
             case Data_Manager.FishStruct.FishType.Strength:
                 if (_left == true)

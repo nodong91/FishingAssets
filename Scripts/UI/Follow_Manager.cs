@@ -5,22 +5,23 @@ using UnityEngine.UI;
 
 public class Follow_Manager : MonoBehaviour
 {
+    public Canvas canvas;
     Camera UICamera;
-    public Camera SetCamera { set { UICamera = value; } }
-    public RectTransform cameraParent;
-    Dictionary<GameObject, Image> follow_Camera = new Dictionary<GameObject, Image>();
+    Dictionary<GameObject, GameObject> follow_Camera = new Dictionary<GameObject, GameObject>();
     Dictionary<GameObject, GameObject> follow_Overlay = new Dictionary<GameObject, GameObject>();
 
     private GameObject target;
     public Image followUI;
     Coroutine following;
 
-    public void StartTest()
+    public void SetStart()
     {
         followUI.gameObject.SetActive(false);
+        UICamera = Game_Manager.current.cameraManager.UICamera;
+        canvas.worldCamera = UICamera;
     }
 
-    public void AddClosestTarget(Trigger_Setting _target)
+    public void AddClosestTarget(Trigger_Setting _target)// 가까운 닿은 오브젝트
     {
         followUI.gameObject.SetActive(_target != null);
         if (_target == null)
@@ -38,20 +39,22 @@ public class Follow_Manager : MonoBehaviour
     {
         while (target != null)
         {
-            FollowTarget_Camera(target.transform, followUI);
+            FollowTarget_Camera(target.transform, followUI.transform);
             yield return null;
         }
         followClosestTarget = null;
     }
 
-    public void AddFollowUI(GameObject _target)
+    public void AddFollowUI(GameObject _target, GameObject _followUI)
     {
-        follow_Camera[_target] = followUI;
+        follow_Camera[_target] = _followUI;
+        StartFollowing();
     }
 
     public void RemoveFollowUI(GameObject _target)
     {
         follow_Camera.Remove(_target);
+        StartFollowing();
     }
 
     void StartFollowing()
@@ -68,7 +71,7 @@ public class Follow_Manager : MonoBehaviour
             foreach (var child in follow_Camera)
             {
                 Transform target = child.Key.transform;
-                Image followUI = child.Value;
+                Transform followUI = child.Value.transform;
                 //    followUI.transform.localScale = Vector3.one;
 
                 //    Vector3 screenPosition = Camera.main.WorldToScreenPoint(target.position);
@@ -91,7 +94,7 @@ public class Follow_Manager : MonoBehaviour
         }
     }
 
-    void FollowTarget_Camera(Transform _target, Image _followUI)
+    void FollowTarget_Camera(Transform _target, Transform _followUI)
     {
         _followUI.transform.localScale = Vector3.one;
 

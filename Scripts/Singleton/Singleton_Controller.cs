@@ -5,11 +5,15 @@ using UnityEngine.EventSystems;
 
 public class Singleton_Controller : MonoSingleton<Singleton_Controller>
 {
+    public bool outOfControll;
     public delegate void Holder(bool _input);
     Dictionary<KeyCode, Holder> keyCodeSets;
 
     private void Update()
     {
+        if (outOfControll == true)
+            return;
+
         foreach (var dic in keyCodeSets)
         {
             if (Input.GetKeyUp(dic.Key))

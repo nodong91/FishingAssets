@@ -1,23 +1,21 @@
 using UnityEngine;
 using static Data_Manager;
 
-public class Trigger_Setting : MonoBehaviour
+public class Trigger_Fish : Trigger_Setting
 {
-    public enum TriggerType
-    {
-        Fishing,// ³¬½Ã
-        Landing,// ºÎµÎ
-    }
-    public TriggerType triggerType;
-
     public string id;
     public FishStruct fishStruct;
-    public FishStruct.FishType fishType;
+    public FishStruct.FishType GetFishType { get { return fishStruct.fishType; } }
     public FishStruct.RandomSize randomSize;
+
+    public override Sprite GetIconSprite
+    {
+        get { return fishStruct.itemStruct.icon; }
+    }
 
     void Start()
     {
-        RandomFish();
+        SetFish(id);
     }
 
     public void SetFish(string _id)
@@ -29,12 +27,6 @@ public class Trigger_Setting : MonoBehaviour
     void RandomFish()
     {
         fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];
-        fishType = fishStruct.fishType;
         randomSize = fishStruct.GetRandom();
-    }
-
-    public Sprite GetIconSprite
-    {
-        get { return fishStruct.itemStruct.icon; }
     }
 }

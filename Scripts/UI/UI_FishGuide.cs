@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class FishGuide : MonoBehaviour
 {
+    public Canvas canvas;
     [System.Serializable]
     public struct FishStruct
     {
@@ -47,12 +48,12 @@ public class FishGuide : MonoBehaviour
             toggles[index].onValueChanged.AddListener(delegate { SetToggle(index); });
         }
         toggles[0].isOn = true;
-        SetCurrentFishStruct();
+        SetInstanceStruct();
     }
 
     public void OpenCanvas(bool _open)
     {
-        gameObject.SetActive(_open);
+        canvas.gameObject.SetActive(_open);
     }
 
     void SetToggle(int _index)
@@ -65,9 +66,14 @@ public class FishGuide : MonoBehaviour
         }
     }
 
-    void SetCurrentFishStruct()
+    void SetInstanceStruct()
     {
         currentFishStruct = GetFishStruct();
+        SetcurrentStructCheck();
+    }
+
+    void SetcurrentStructCheck()
+    {
         int startIndex = currentIndex * 21;
         for (int i = 0; i < currentFishStruct.cards.Count; i++)
         {
@@ -92,6 +98,36 @@ public class FishGuide : MonoBehaviour
         _card.SetCard(_fish, tempFish);
     }
 
+    public void AddFishClass(string _id, float _size)
+    {
+        if (dictFishClass.ContainsKey(_id) == true)
+        {
+            SaveFishClass fish = dictFishClass[_id];
+            fish.amount++;
+            if (_size < fish.minSize)
+            {
+                fish.minSize = _size;
+            }
+            if (_size > fish.maxSize)
+            {
+                fish.maxSize = _size;
+            }
+        }
+        else
+        {
+            SaveFishClass newClass = new SaveFishClass
+            {
+                id = _id,
+                amount = 1,
+                minSize = _size,
+                maxSize = _size,
+            };
+            dictFishClass[_id] = newClass;
+        }
+        SetcurrentStructCheck();// 도감 다시 체크
+        SaveFishGuide();
+    }
+
     IEnumerator MoveChange(bool _out)
     {
         FishStruct tempStruct = new FishStruct
@@ -100,7 +136,7 @@ public class FishGuide : MonoBehaviour
             canvasGroup = currentFishStruct.canvasGroup,
             cards = currentFishStruct.cards,
         };
-        SetCurrentFishStruct();
+        SetInstanceStruct();
 
         Vector3 outPos = _out == false ? Vector3.left : Vector3.right;
         float outLength = 300f;
@@ -139,6 +175,7 @@ public class FishGuide : MonoBehaviour
         {
             return instQueue.Dequeue();
         }
+
         CanvasGroup instCanvas = Instantiate(parentBase, parent);
         List<UI_FishCard> temp = new List<UI_FishCard>();
         for (int i = 0; i < 21; i++)// 카드 생성
@@ -181,34 +218,6 @@ public class FishGuide : MonoBehaviour
     //===========================================================================================================================
 
     public Dictionary<string, SaveFishClass> dictFishClass = new Dictionary<string, SaveFishClass>();
-    public void AddFishClass(string _id, float _size)
-    {
-        if (dictFishClass.ContainsKey(_id) == true)
-        {
-            SaveFishClass fish = dictFishClass[_id];
-            fish.amount++;
-            if (_size < fish.minSize)
-            {
-                fish.minSize = _size;
-            }
-            if (_size > fish.maxSize)
-            {
-                fish.maxSize = _size;
-            }
-        }
-        else
-        {
-            SaveFishClass newClass = new SaveFishClass
-            {
-                id = _id,
-                amount = 1,
-                minSize = _size,
-                maxSize = _size,
-            };
-            dictFishClass[_id] = newClass;
-        }
-        SaveFishGuide();
-    }
 
     [System.Serializable]
     public class SaveFishClass

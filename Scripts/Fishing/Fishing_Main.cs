@@ -51,7 +51,7 @@ public class Fishing_Main : MonoBehaviour
     public void StartGame(Trigger_Setting _fishSetting)
     {
         equipStruct = Singleton_Data.INSTANCE.Dict_Equip["El_0001"];// 낚시대 테스트
-        fishStruct = _fishSetting.fishStruct;
+        fishStruct = _fishSetting.GetTriggerFish.fishStruct;
         StartGame();
     }
 
