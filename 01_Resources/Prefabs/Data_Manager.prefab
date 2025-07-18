@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099045693682048369}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 400.5, y: 320.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 63df2980f32e92241bcd7f734b5f4cd9, type: 3}
   - {fileID: 4900000, guid: 2c1cae21fb9892444a35c728a959fcc5, type: 3}
   - {fileID: 4900000, guid: f4fae08d822bb9a409ea2f80630e22a2, type: 3}
+  - {fileID: 4900000, guid: 05eb149bca1b9bb4bab49f9e7841d79e, type: 3}
   audioClip: []
   sprites:
   - {fileID: 21300000, guid: 328cb977f05a0ba4b8e06989fab520cc, type: 3}
@@ -165,27 +166,15 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 03c171d36dbadf94b81b55a054fc6590, type: 3}
   - {fileID: 21300000, guid: 80c5ae9cbeee81a468b6ceada7f3cd8f, type: 3}
   - {fileID: 21300000, guid: 198f80daf8b8ac544beb49cc01b16f2c, type: 3}
-  partsType: 0
-  explanation: 
-  icon: {fileID: 0}
-  price: 0
-  addStatus:
-    maxSpeed: 0
-    maxWeight: 0
-    maxEnergy: 0
-    maxBoxSize: {x: 0, y: 0}
-    freshness: 0
-  dialogStruct: []
-  dialogString: []
-  translateString: []
   equipStruct:
-  - id: El_0001
+  - id: Eq_0001
     itemStruct:
-      id: El_0001
+      id: Eq_0001
       name: fishing rod for practice
       itemType: 0
       explanation: 
       icon: {fileID: 21300000, guid: 91cdc7bd53b3507418bcb8b86946d7bb, type: 3}
+      maxAmount: 1
       shape:
       - {x: 1, y: 0}
       - {x: 0, y: -1}
@@ -197,13 +186,14 @@ MonoBehaviour:
     reelingAcceleration: 1
     hitPoint: 1
     hitSpeed: 1
-  - id: El_0002
+  - id: Eq_0002
     itemStruct:
-      id: El_0002
+      id: Eq_0002
       name: bamboo fishing rod
       itemType: 0
       explanation: 
       icon: {fileID: 21300000, guid: 95af63e89959298479df131007c8bc47, type: 3}
+      maxAmount: 1
       shape:
       - {x: -1, y: 0}
       - {x: 1, y: 0}
@@ -217,13 +207,14 @@ MonoBehaviour:
     reelingAcceleration: 2
     hitPoint: 2
     hitSpeed: 2
-  - id: El_0003
+  - id: Eq_0003
     itemStruct:
-      id: El_0003
+      id: Eq_0003
       name: carbon fishing rod
       itemType: 0
       explanation: 
       icon: {fileID: 21300000, guid: b8dc588068be4db419bb46792dc7db96, type: 3}
+      maxAmount: 1
       shape:
       - {x: -1, y: 0}
       - {x: 1, y: 0}
@@ -236,15 +227,42 @@ MonoBehaviour:
     reelingAcceleration: 3
     hitPoint: 3
     hitSpeed: 3
-  itemStruct: []
-  fishStruct:
-  - id: Fs_0001
+  usedStruct:
+  - id: Us_1001
     itemStruct:
-      id: Fs_0001
+      id: Us_1001
+      name: Small Oil Tank
+      itemType: 2
+      explanation: 
+      icon: {fileID: 21300000, guid: bce3f09e06ae50e4488f0a9d2a393918, type: 3}
+      maxAmount: 5
+      shape:
+      - {x: 0, y: 0}
+      weight: 3
+      price: 10
+    usedType: 0
+  - id: Us_2001
+    itemStruct:
+      id: Us_2001
+      name: Lobworm
+      itemType: 2
+      explanation: Bait Coast
+      icon: {fileID: 21300000, guid: 328cb977f05a0ba4b8e06989fab520cc, type: 3}
+      maxAmount: 10
+      shape:
+      - {x: 0, y: 0}
+      weight: 0.1
+      price: 5
+    usedType: 1
+  fishStruct:
+  - id: Fs_1001
+    itemStruct:
+      id: Fs_1001
       name: Pale Chub
       itemType: 1
       explanation: 
       icon: {fileID: 21300000, guid: 91cdc7bd53b3507418bcb8b86946d7bb, type: 3}
+      maxAmount: 1
       shape:
       - {x: 1, y: 0}
       - {x: 0, y: -1}
@@ -259,13 +277,14 @@ MonoBehaviour:
     fishSpeed: 1
     fishTurnDelay: {x: 1, y: 3}
     hitValue: {x: 0.1, y: 0.5}
-  - id: Fs_0002
+  - id: Fs_2001
     itemStruct:
-      id: Fs_0002
+      id: Fs_2001
       name: Bass
       itemType: 1
       explanation: 
       icon: {fileID: 21300000, guid: 95af63e89959298479df131007c8bc47, type: 3}
+      maxAmount: 1
       shape:
       - {x: -1, y: 0}
       - {x: 1, y: 0}
@@ -282,13 +301,14 @@ MonoBehaviour:
     fishSpeed: 0.5
     fishTurnDelay: {x: 1, y: 4}
     hitValue: {x: 0.03, y: 0.6}
-  - id: Fs_0003
+  - id: Fs_3001
     itemStruct:
-      id: Fs_0003
+      id: Fs_3001
       name: Gobiidae
       itemType: 1
       explanation: 
       icon: {fileID: 21300000, guid: b8dc588068be4db419bb46792dc7db96, type: 3}
+      maxAmount: 1
       shape:
       - {x: -1, y: 0}
       - {x: 1, y: 0}
@@ -305,9 +325,9 @@ MonoBehaviour:
     fishTurnDelay: {x: 0.3, y: 1.5}
     hitValue: {x: 0.05, y: 0.7}
   partsStruct:
-  - id: Pb_0001
+  - id: Pt_1001
     name: Boat
-    partsType: 0
+    partsType: 1
     explanation: 
     icon: {fileID: 21300000, guid: 288d52472b19c4b4c8e7ecb64780f7ec, type: 3}
     price: 1000
@@ -317,9 +337,9 @@ MonoBehaviour:
       maxEnergy: 0
       maxBoxSize: {x: 0, y: 0}
       freshness: 0
-  - id: Pe_0001
+  - id: Pt_2001
     name: Engine
-    partsType: 1
+    partsType: 2
     explanation: 
     icon: {fileID: 21300000, guid: 539550bde256a934680a39d08a303202, type: 3}
     price: 675
@@ -329,9 +349,9 @@ MonoBehaviour:
       maxEnergy: 30
       maxBoxSize: {x: 0, y: 0}
       freshness: 0
-  - id: Px_0001
+  - id: Pt_3001
     name: Box
-    partsType: 2
+    partsType: 3
     explanation: 
     icon: {fileID: 21300000, guid: 87cc3497b12867545a25c42509505e38, type: 3}
     price: 345
@@ -341,3 +361,4 @@ MonoBehaviour:
       maxEnergy: 0
       maxBoxSize: {x: 5, y: 6}
       freshness: 10
+  itemStruct: []

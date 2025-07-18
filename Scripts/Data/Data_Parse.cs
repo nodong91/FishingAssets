@@ -12,8 +12,6 @@ public class Data_Parse : MonoBehaviour
 
     public virtual void DataSetting()
     {
-        //units = new List<Unit_Animation>();
-        //skillSet = new List<Skill_Set>();
         sprites = new List<Sprite>();
         audioClip.Clear();
         CSV_Data.Clear();
@@ -138,7 +136,7 @@ public class Data_Parse : MonoBehaviour
     // Parse
     //==================================================================================
 
-    public int IntTryParse(string _str)
+    public int Parse_Int(string _str)
     {
         if (int.TryParse(_str, out int value))
             return value;
@@ -200,6 +198,10 @@ public class Data_Parse : MonoBehaviour
         {
             string[] sub2strings = sub1strings[i].Split(';');
             int[] subInt = new int[sub2strings.Length];
+            if (subInt.Length < 2)
+            {
+                continue;
+            }
             for (int j = 0; j < sub2strings.Length; j++)
             {
                 int index = int.Parse(sub2strings[j]);

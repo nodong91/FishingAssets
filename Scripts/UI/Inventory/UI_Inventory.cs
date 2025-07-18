@@ -39,8 +39,7 @@ public class UI_Inventory : MonoBehaviour
     public enum BargainType
     {
         None,
-        Buy,
-        Sell
+        Shop
     }
     public BargainType bargainType = BargainType.None;
     public BargainType SetBargainType { set { bargainType = value; } }
@@ -57,7 +56,7 @@ public class UI_Inventory : MonoBehaviour
 
     public void OpenCanvas(bool _open)
     {
-        StartCoroutine(OpenCanvasMoving(canvasStructs, _open, 10f));
+        StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
     }
 
     void SetInventory()
@@ -190,7 +189,7 @@ public class UI_Inventory : MonoBehaviour
     //===========================================================================================================================
 
     Coroutine moneyCoroutine;
-    float walletMoney;
+    float moneyValue;
     public TMPro.TMP_Text walletText;
 
     public void AddItem(ItemStruct _item)
@@ -212,63 +211,82 @@ public class UI_Inventory : MonoBehaviour
         dragCoroutine = StartCoroutine(MoveTest());
     }
 
-    void BuyItem()// 구매
+    public bool BuyItem(ItemStruct _item)// 구매
     {
-        if (selectedSlot == null || selectedSlot.empty == true)
-        {
-            Debug.LogWarning("선택된 아이템 없음");
-            return;
-        }
-
-        ItemClass itemClass = selectedSlot.itemClass;
-        UI_Inventory_Slot slot = GetEmptySlot(selectedSlot.itemClass.item);
+        UI_Inventory_Slot slot = GetEmptySlot(_item);
         if (slot == null)
         {
             // 넣을만한 빈 슬롯 없음
             Debug.LogWarning("넣을만한 빈 슬롯 없음");
-            return;
+            return false;
         }
+
+        if (moneyValue < _item.price)// 돈이 있는지 확인
+            return false;
+
         Debug.LogWarning("슬롯 이름 : " + slot.name);
+        ItemClass itemClass = new ItemClass
+        {
+            item = _item,
+            angle = 0,
+            shape = _item.shape,
+        };
         SetSlot(slot, itemClass);
 
         if (moneyCoroutine != null)
             StopCoroutine(moneyCoroutine);
-        moneyCoroutine = StartCoroutine(WalletMoney(-itemClass.item.price));
+        moneyCoroutine = StartCoroutine(WalletMoney(-_item.price));
+        return true;
     }
 
-    void SellItem()// 판매
+    public void ShopDragBuyItem(ItemStruct _item)// 샵에 드래그로 구매
     {
-        if (selectedSlot == null)
+        if (moneyCoroutine != null)
+            StopCoroutine(moneyCoroutine);
+        moneyCoroutine = StartCoroutine(WalletMoney(-_item.price));
+    }
+
+    void SellItem(UI_Inventory_Slot _slot)// 판매
+    {
+        if (_slot == null)
             return;
 
-        ItemStruct item = selectedSlot.itemClass.item;
+        ItemStruct item = _slot.itemClass.item;
         SetWeight(-item.weight);
-        SetEmpty(selectedSlot);
+        SetEmpty(_slot);
 
         if (moneyCoroutine != null)
             StopCoroutine(moneyCoroutine);
         moneyCoroutine = StartCoroutine(WalletMoney(item.price));
     }
 
+    public void ShopDragSellItem()// 샵에 드래그로 팔기
+    {
+        if (moneyCoroutine != null)
+            StopCoroutine(moneyCoroutine);
+        moneyCoroutine = StartCoroutine(WalletMoney(dragItemClass.item.price));
+        RemoveDragItem();
+    }
+
     IEnumerator WalletMoney(float _money)
     {
-        float prevMoney = walletMoney;
-        walletMoney += _money;
-        bool addMoney = (prevMoney < walletMoney);
+        float prevMoney = moneyValue;
+        moneyValue += _money;
+        bool addMoney = (prevMoney < moneyValue);
         bool moveMoney = true;
         while (moveMoney == true)
         {
-            prevMoney = Mathf.Lerp(prevMoney, walletMoney, 0.1f);
+            prevMoney = Mathf.Lerp(prevMoney, moneyValue, 0.1f);
             walletText.text = Mathf.Round(prevMoney).ToString();
 
             if (addMoney == true)// 판매인 경우
             {
-                if (prevMoney > walletMoney)
+                if (prevMoney > moneyValue)
                 {
                     moveMoney = false;
                 }
             }
-            else if (prevMoney < walletMoney)// 구매인 경우
+            else if (prevMoney < moneyValue)// 구매인 경우
             {
                 moveMoney = false;
             }
@@ -297,14 +315,11 @@ public class UI_Inventory : MonoBehaviour
                 case BargainType.None:
                     ActionSlot(_slot);
                     break;
-                case BargainType.Buy:
-
-                    break;
-                case BargainType.Sell:
+                case BargainType.Shop:
                     // 아이템 판매
                     selectedSlot = _slot.GetLinkSlot;
                     if (selectedSlot != null)
-                        SellItem();
+                        SellItem(selectedSlot);
                     break;
                 default:
 
@@ -362,18 +377,21 @@ public class UI_Inventory : MonoBehaviour
 
         if (onDrag == false)
         {
+            if (_slot == null || _slot.GetLinkSlot == null)
+                return;
+
             OnDragStart(_slot);
+            dragSlotType = DragSlotType.Inventory;
         }
         else
         {
             OnDragEnd();
+            dragSlotType = DragSlotType.None;
         }
     }
 
     void OnDragStart(UI_Inventory_Slot _slot)
     {
-        if (_slot == null || _slot.GetLinkSlot == null)
-            return;
         SetInfomation(null);// 인포메이션 제거
 
         onDrag = true;
@@ -404,34 +422,40 @@ public class UI_Inventory : MonoBehaviour
         }
         else if (onCheck == true)
         {
-            SetSlot(enterSlot, dragItemClass);
+            if (bargainType == BargainType.Shop)// 샵의 슬롯을 들었을 경우 구매
+            {
+                if (moneyValue < dragItemClass.item.price)// 돈이 있는지 확인
+                {
+                    Game_Manager.current.shopUI.ReturnPrevPosition(true);// 상점 물건 원래 위치로
+                }
+                else
+                {
+                    Game_Manager.current.shopUI.ReturnPrevPosition(false);// 상점 물건 제거
+                    SetSlot(enterSlot, dragItemClass);
+                    ShopDragBuyItem(dragItemClass.item);// 구매 성공
+                }
+                Debug.LogWarning("구매 "+ (moneyValue < dragItemClass.item.price));
+            }
         }
         else
         {
             if (dragSlot == null)
             {
-                // 이동이 아니라 얻은 아이템인 경우
+                // 획득 아이템일 때 싶패한 경우
+                if (bargainType == BargainType.Shop)
+                {
+                    Game_Manager.current.shopUI.ReturnPrevPosition(true);// 원래 위치로
+                }
             }
             else
             {
                 // 기존 위치로
                 dragItemClass.SetItemClass(originItemClass);// 기존 클라스로 돌림
                 SetSlot(dragSlot, dragItemClass);
+                Debug.LogWarning("hjofaisjdofjajd");
             }
         }
         RemoveDragItem();
-        //if (dragSlot != null && enterSlot != null && onCheck == true)
-        //{
-        //    // 교체
-        //    SetSlot(dragSlot, enterSlot.itemClass);
-        //    SetSlot(enterSlot, dragItemClass);
-        //}
-        //else
-        //{
-        //    // 기존 위치로
-        //    dragItemClass.SetItemClass(originItemClass);// 기존 클라스로 돌림
-        //    SetSlot(dragSlot, dragItemClass);
-        //}
     }
 
     IEnumerator MoveTest()
@@ -442,9 +466,6 @@ public class UI_Inventory : MonoBehaviour
             yield return null;
         }
     }
-    //===========================================================================================================================
-    // 드래그
-    //===========================================================================================================================
 
     void SetDragStart(UI_Inventory_Slot _slot)
     {
@@ -530,7 +551,7 @@ public class UI_Inventory : MonoBehaviour
         removeBox.deleRemove = RemoveDragItem;
     }
 
-    void RemoveDragItem()// 아이템 제거
+    public void RemoveDragItem()// 아이템 제거
     {
         onDrag = false;
         iconImage.gameObject.SetActive(false);
@@ -563,7 +584,7 @@ public class UI_Inventory : MonoBehaviour
         {
             ItemClass itemClass = new ItemClass
             {
-                item = GetItemStruct(_items[i].id),
+                item = Singleton_Data.INSTANCE.GetItemStruct(_items[i].id),
                 angle = _items[i].angle,
                 shape = _items[i].shape,
             };// 새로운 클라스 캡슐화
@@ -572,32 +593,9 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    ItemStruct GetItemStruct(string _id)
-    {
-        if (_id.Contains("Fs"))
-        {
-            return Singleton_Data.INSTANCE.Dict_Fish[_id].itemStruct;
-        }
-        else if (_id.Contains("El"))
-        {
-            return Singleton_Data.INSTANCE.Dict_Equip[_id].itemStruct;
-        }
-        return default;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //===========================================================================================================================
+    // 정보 출력
+    //===========================================================================================================================
 
     public UI_Inventory_Infomation infomation;
     void SetInfomation(UI_Inventory_Slot _slot)
@@ -608,27 +606,60 @@ public class UI_Inventory : MonoBehaviour
 
 
 
+
+
+
+
+
+
+
+
+
+
     private void Update()// 아이템 추가 테스트
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             int randomIndex = Random.Range(1, 4);
             Trigger_Fish fish = new Trigger_Fish();
-            fish.SetFish("Fs_000" + randomIndex);
+            fish.SetFish("Fs_" + randomIndex + "001");
             ItemStruct fishItem = fish.fishStruct.itemStruct;
             float size = fish.randomSize.size;
 
             Game_Manager.current.inventory.AddItem(fishItem);// 인벤토리에 생선 추가
             Game_Manager.current.fishGuide.AddFishClass(fishItem.id, size);// 도감 추가
-            Debug.LogWarning("iuhiufheiojfojeofd");
+            Debug.LogWarning("TestTest");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            string randomID = "El_000" + Random.Range(1, 4);
+            string randomID = "Eq_000" + Random.Range(1, 4);
             EquipStruct equip = Singleton_Data.INSTANCE.Dict_Equip[randomID];
             Game_Manager.current.inventory.AddItem(equip.itemStruct);// 인벤토리에 아이템 추가
-            Debug.LogWarning("iuhiufheiojfojeofd");
+            Debug.LogWarning("TestTest");
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public enum DragSlotType
+    {
+        None,
+        Shop,
+        Inventory
+    }
+    public DragSlotType dragSlotType = DragSlotType.None;
+    public DragSlotType TryDragSlotType { get { return dragSlotType; } set { dragSlotType = value; } }
 }

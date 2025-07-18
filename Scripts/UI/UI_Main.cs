@@ -47,8 +47,9 @@ public class UI_Main : MonoBehaviour
         }
     }
 
-    public static IEnumerator OpenCanvasMoving(CanvasStruct[] _canvasStructs, bool _open, float _speed = 10f)
+    public static IEnumerator OpenCanvasMoving(CanvasStruct[] _canvasStructs, bool _open)
     {
+        float _speed = 10f;
         for (int i = 0; i < _canvasStructs.Length; i++)
         {
             CanvasStruct canvas = _canvasStructs[i];
@@ -120,6 +121,6 @@ public class UI_Main : MonoBehaviour
 
     public void OpenCanvas(bool _open)
     {
-        StartCoroutine(OpenCanvasMoving(canvasStructs, _open, 10f));
+        StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
     }
 }

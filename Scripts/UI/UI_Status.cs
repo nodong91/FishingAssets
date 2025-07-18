@@ -11,7 +11,6 @@ public class UI_Status : MonoBehaviour, IPointerClickHandler
     public PartsStruct engineStruct;
     public PartsStruct boxStruct;
     public EquipStruct equipStruct;// 낚시 관련 스탯
-    public BaitStruct bait;// 미끼 (해당 물고기 )
 
     [Header("[ 스테이터스 ]")]
     public SetStatus totalStatus;
@@ -20,11 +19,11 @@ public class UI_Status : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        PartsStruct test = Singleton_Data.INSTANCE.Dict_Parts["Pb_0001"];
+        PartsStruct test = Singleton_Data.INSTANCE.Dict_Parts["Pt_1001"];
         AddParts(test);
-        test = Singleton_Data.INSTANCE.Dict_Parts["Pe_0001"];
+        test = Singleton_Data.INSTANCE.Dict_Parts["Pt_2001"];
         AddParts(test);
-        test = Singleton_Data.INSTANCE.Dict_Parts["Px_0001"];
+        test = Singleton_Data.INSTANCE.Dict_Parts["Pt_3001"];
         AddParts(test);
 
         OpenCanvas(false);
@@ -32,7 +31,7 @@ public class UI_Status : MonoBehaviour, IPointerClickHandler
 
     public void OpenCanvas(bool _open)
     {
-        StartCoroutine(OpenCanvasMoving(canvasStructs, _open, 10f));
+        StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
     }
 
     public void AddParts(PartsStruct _struct)

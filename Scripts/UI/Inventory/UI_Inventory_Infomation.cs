@@ -18,7 +18,7 @@ public class UI_Inventory_Infomation : MonoBehaviour
         }
 
         ItemStruct item = _slot.itemClass.item;
-        nameText.text = item.id;
+        nameText.text = item.name;
         priceText.text = item.price.ToString();
         typeText.text = item.itemType.ToString();
 

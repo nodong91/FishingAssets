@@ -1,94 +1,96 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static Data_Manager;
 
 public class Singleton_Data : MonoSingleton<Singleton_Data>
 {
-    public Dictionary<string, Data_Manager.DialogStruct> Dict_Dialog = new Dictionary<string, Data_Manager.DialogStruct>();
-    public Dictionary<string, Data_Manager.TranslateString> Dict_DialogString = new Dictionary<string, Data_Manager.TranslateString>();
-    public Dictionary<string, Data_Manager.TranslateString> Dict_TranslateString = new Dictionary<string, Data_Manager.TranslateString>();
+    //public Dictionary<string, Data_Manager.DialogStruct> Dict_Dialog = new Dictionary<string, Data_Manager.DialogStruct>();
+    //public Dictionary<string, Data_Manager.TranslateString> Dict_DialogString = new Dictionary<string, Data_Manager.TranslateString>();
+    //public Dictionary<string, Data_Manager.TranslateString> Dict_TranslateString = new Dictionary<string, Data_Manager.TranslateString>();
     public Dictionary<string, AudioClip> Dict_Audio = new Dictionary<string, AudioClip>();
     //public Dictionary<string, Skill_Set> Dict_SkillSet = new Dictionary<string, Skill_Set>();
-    public Translation translation;
+    //public Translation translation;
     public Dictionary<string, Data_Manager.FishStruct> Dict_Fish = new Dictionary<string, Data_Manager.FishStruct>();
     public Dictionary<string, Data_Manager.PartsStruct> Dict_Parts = new Dictionary<string, Data_Manager.PartsStruct>();
     public Dictionary<string, Data_Manager.EquipStruct> Dict_Equip = new Dictionary<string, Data_Manager.EquipStruct>();
+    public Dictionary<string, Data_Manager.UsedStruct> Dict_Used = new Dictionary<string, Data_Manager.UsedStruct>();
     public Dictionary<string, Data_Manager.ItemStruct> Dict_Item = new Dictionary<string, Data_Manager.ItemStruct>();
 
-    public void SetDictionary_Dialog(List<Data_Manager.DialogStruct> _data)
-    {
-        Dict_Dialog = new Dictionary<string, Data_Manager.DialogStruct>();
-        for (int i = 0; i < _data.Count; i++)
-        {
-            string id = _data[i].ID;
-            if (Dict_Dialog.ContainsKey(id) == true)
-            {
-                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
-            }
-            else
-            {
-                Dict_Dialog[id] = _data[i];
-            }
-        }
-    }
+    //public void SetDictionary_Dialog(List<Data_Manager.DialogStruct> _data)
+    //{
+    //    Dict_Dialog = new Dictionary<string, Data_Manager.DialogStruct>();
+    //    for (int i = 0; i < _data.Count; i++)
+    //    {
+    //        string id = _data[i].ID;
+    //        if (Dict_Dialog.ContainsKey(id) == true)
+    //        {
+    //            Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
+    //        }
+    //        else
+    //        {
+    //            Dict_Dialog[id] = _data[i];
+    //        }
+    //    }
+    //}
 
-    public void SetDictionary_DialogString(List<Data_Manager.TranslateString> _data)
-    {
-        Dict_DialogString = SetTranslation(_data);
-    }
+    //public void SetDictionary_DialogString(List<Data_Manager.TranslateString> _data)
+    //{
+    //    Dict_DialogString = SetTranslation(_data);
+    //}
 
-    public void SetDictionary_TranslationString(List<Data_Manager.TranslateString> _data)
-    {
-        Dict_TranslateString = SetTranslation(_data);
-    }
+    //public void SetDictionary_TranslationString(List<Data_Manager.TranslateString> _data)
+    //{
+    //    Dict_TranslateString = SetTranslation(_data);
+    //}
 
-    public string TryTranslation(int _type, string _id)
-    {
-        Dictionary<string, Data_Manager.TranslateString> temp = default;
-        switch (_type)
-        {
-            case 0:
-                temp = Dict_DialogString;
-                break;
+    //public string TryTranslation(int _type, string _id)
+    //{
+    //    Dictionary<string, Data_Manager.TranslateString> temp = default;
+    //    switch (_type)
+    //    {
+    //        case 0:
+    //            temp = Dict_DialogString;
+    //            break;
 
-            case 1:
-                temp = Dict_TranslateString;
-                break;
-        }
+    //        case 1:
+    //            temp = Dict_TranslateString;
+    //            break;
+    //    }
 
-        switch (translation)
-        {
-            case Translation.Korean:
-                return temp[_id].KR;
+    //    switch (translation)
+    //    {
+    //        case Translation.Korean:
+    //            return temp[_id].KR;
 
-            case Translation.English:
-                return temp[_id].EN;
+    //        case Translation.English:
+    //            return temp[_id].EN;
 
-            case Translation.Japanese:
-                return temp[_id].JP;
+    //        case Translation.Japanese:
+    //            return temp[_id].JP;
 
-            case Translation.Chinese:
-                return temp[_id].CN;
-        }
-        return null;
-    }
+    //        case Translation.Chinese:
+    //            return temp[_id].CN;
+    //    }
+    //    return null;
+    //}
 
-    Dictionary<string, Data_Manager.TranslateString> SetTranslation(List<Data_Manager.TranslateString> _data)
-    {
-        Dictionary<string, Data_Manager.TranslateString> Dict_Temp = new Dictionary<string, Data_Manager.TranslateString>();
-        for (int i = 0; i < _data.Count; i++)
-        {
-            string id = _data[i].ID;
-            if (Dict_Temp.ContainsKey(id) == true)
-            {
-                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
-            }
-            else
-            {
-                Dict_Temp[id] = _data[i];
-            }
-        }
-        return Dict_Temp;
-    }
+    //Dictionary<string, Data_Manager.TranslateString> SetTranslation(List<Data_Manager.TranslateString> _data)
+    //{
+    //    Dictionary<string, Data_Manager.TranslateString> Dict_Temp = new Dictionary<string, Data_Manager.TranslateString>();
+    //    for (int i = 0; i < _data.Count; i++)
+    //    {
+    //        string id = _data[i].ID;
+    //        if (Dict_Temp.ContainsKey(id) == true)
+    //        {
+    //            Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
+    //        }
+    //        else
+    //        {
+    //            Dict_Temp[id] = _data[i];
+    //        }
+    //    }
+    //    return Dict_Temp;
+    //}
 
     public void SetDictionary_Equip(List<Data_Manager.EquipStruct> _data)
     {
@@ -103,6 +105,23 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
             else
             {
                 Dict_Equip[id] = _data[i];
+            }
+        }
+    }
+
+    public void SetDictionary_Used(List<Data_Manager.UsedStruct> _data)
+    {
+        Dict_Used = new Dictionary<string, Data_Manager.UsedStruct>();
+        for (int i = 0; i < _data.Count; i++)
+        {
+            string id = _data[i].itemStruct.id;
+            if (Dict_Used.ContainsKey(id) == true)
+            {
+                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
+            }
+            else
+            {
+                Dict_Used[id] = _data[i];
             }
         }
     }
@@ -158,13 +177,30 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         }
     }
 
-    public enum Translation
+    public ItemStruct GetItemStruct(string _id)
     {
-        Korean,
-        English,
-        Japanese,
-        Chinese
+        if (_id.Contains("Fs"))
+        {
+            return Dict_Fish[_id].itemStruct;
+        }
+        else if (_id.Contains("Eq"))
+        {
+            return Dict_Equip[_id].itemStruct;
+        }
+        else if (_id.Contains("Us"))
+        {
+            return Dict_Used[_id].itemStruct;
+        }
+        return default;
     }
+
+    //public enum Translation
+    //{
+    //    Korean,
+    //    English,
+    //    Japanese,
+    //    Chinese
+    //}
 
     public void SetDictionary_Audio(List<AudioClip> _data)
     {

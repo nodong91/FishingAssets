@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using static Data_Manager.PartsStruct;
-
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -38,23 +36,10 @@ public class Data_Manager : Data_Parse
     public override void DataSetting()
     {
         base.DataSetting();
-        translateString = new List<TranslateString>();
-        dialogString = new List<TranslateString>();
         for (int i = 0; i < GetCSV_Data.Count; i++)
         {
             string csv_Type = GetCSV_Data[i].name;
-            if (csv_Type.Contains("Translate"))
-            {
-                if (csv_Type.Contains("Dialog"))
-                {
-                    dialogString = SetTranslateString(dialogString, GetCSV_Data[i]);
-                }
-                else
-                {
-                    translateString = SetTranslateString(translateString, GetCSV_Data[i]);
-                }
-            }
-            else if (csv_Type.Contains("Fish"))
+            if (csv_Type.Contains("Fish"))
             {
                 SetFish(GetCSV_Data[i]);
             }
@@ -65,6 +50,10 @@ public class Data_Manager : Data_Parse
             else if (csv_Type.Contains("Equip"))
             {
                 SetEquip(GetCSV_Data[i]);
+            }
+            else if (csv_Type.Contains("Used"))
+            {
+                SetUsed(GetCSV_Data[i]);
             }
             else if (csv_Type.Contains("Item"))
             {
@@ -86,14 +75,14 @@ public class Data_Manager : Data_Parse
             {
                 id = tempItem.id,
                 itemStruct = tempItem,
-                fishType = (FishStruct.FishType)System.Enum.Parse(typeof(FishStruct.FishType), elements[7]),
-                size = Parse_Vector2(elements[8]),
-                fishStamina = Parse_Float(elements[9]),
-                fishPower = Parse_Float(elements[10]),
-                fishROA = Parse_Float(elements[11]),
-                fishSpeed = Parse_Float(elements[12]),
-                fishTurnDelay = Parse_Vector2(elements[13]),
-                hitValue = Parse_Vector2(elements[14]),
+                fishType = (FishStruct.FishType)System.Enum.Parse(typeof(FishStruct.FishType), elements[8]),
+                size = Parse_Vector2(elements[9]),
+                fishStamina = Parse_Float(elements[10]),
+                fishPower = Parse_Float(elements[11]),
+                fishROA = Parse_Float(elements[12]),
+                fishSpeed = Parse_Float(elements[13]),
+                fishTurnDelay = Parse_Vector2(elements[14]),
+                hitValue = Parse_Vector2(elements[15]),
             };
             fishStruct.Add(tempData);
         }
@@ -112,16 +101,36 @@ public class Data_Manager : Data_Parse
             {
                 id = tempItem.id,
                 itemStruct = tempItem,
-                fishingArea = Parse_Float(elements[7]),
-                lodPower = Parse_Float(elements[8]),
-                reelingSpeed = Parse_Float(elements[9]),
-                reelingAcceleration = Parse_Float(elements[10]),
-                hitPoint = Parse_Float(elements[11]),
-                hitSpeed = Parse_Float(elements[12]),
+                fishingArea = Parse_Float(elements[8]),
+                lodPower = Parse_Float(elements[9]),
+                reelingSpeed = Parse_Float(elements[10]),
+                reelingAcceleration = Parse_Float(elements[11]),
+                hitPoint = Parse_Float(elements[12]),
+                hitSpeed = Parse_Float(elements[13]),
             };
             equipStruct.Add(tempData);
         }
     }
+
+    void SetUsed(TextAsset _textAsset)
+    {
+        usedStruct.Clear();
+        string[] data = _textAsset.text.Split(new char[] { '\n' });
+        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
+        {
+            string[] elements = data[i].Split(new char[] { ',' });
+            ItemStruct tempItem = GetItemStruct(elements);
+            tempItem.itemType = ItemStruct.ItemType.Used;// 타입 세팅
+            UsedStruct tempData = new UsedStruct
+            {
+                id = tempItem.id,
+                itemStruct = tempItem,
+                usedType = (UsedStruct.UsedType)System.Enum.Parse(typeof(UsedStruct.UsedType), elements[8]),
+            };
+            usedStruct.Add(tempData);
+        }
+    }
+
     ItemStruct GetItemStruct(string[] _elements)
     {
         ItemStruct tempItem = new ItemStruct
@@ -130,9 +139,10 @@ public class Data_Manager : Data_Parse
             name = _elements[1],
             explanation = _elements[2],
             icon = FindSprite(_elements[3]),
-            shape = Parse_Vector2IntArray(_elements[4].Trim()),
-            weight = Parse_Float(_elements[5]),
-            price = Parse_Float(_elements[6]),
+            maxAmount = Parse_Int(_elements[4]),
+            shape = Parse_Vector2IntArray(_elements[5].Trim()),
+            weight = Parse_Float(_elements[6]),
+            price = Parse_Float(_elements[7]),
         };
         return tempItem;
     }
@@ -148,42 +158,23 @@ public class Data_Manager : Data_Parse
             {
                 id = elements[0].Trim(),
                 name = elements[1],
-                partsType = GetPartsType(elements[0].Trim()),
-                explanation = elements[2],
-                icon = FindSprite(elements[3]),
-                price = Parse_Float(elements[4]),
+                partsType = (PartsStruct.PartsType)System.Enum.Parse(typeof(PartsStruct.PartsType), elements[2]),
+                explanation = elements[3],
+                icon = FindSprite(elements[4]),
+                price = Parse_Float(elements[5]),
                 addStatus = new SetStatus
                 {
-                    maxSpeed = Parse_Float(elements[5]),
-                    maxWeight = Parse_Float(elements[6]),
-                    maxEnergy = Parse_Float(elements[7]),
-                    maxBoxSize = Parse_Vector2Int(elements[8]),
-                    freshness = Parse_Float(elements[9]),
+                    maxSpeed = Parse_Float(elements[6]),
+                    maxWeight = Parse_Float(elements[7]),
+                    maxEnergy = Parse_Float(elements[8]),
+                    maxBoxSize = Parse_Vector2Int(elements[9]),
+                    freshness = Parse_Float(elements[10]),
                 },
             };
             partsStruct.Add(tempData);
         }
     }
 
-    PartsType GetPartsType(string _id)
-    {
-        if (_id.Contains("Pb"))
-        {
-            return PartsType.Body;
-        }
-        else if (_id.Contains("Pe"))
-        {
-            return PartsType.Engine;
-        }
-        return PartsType.Box;
-    }
-
-    public PartsType partsType;
-    [TextArea]
-    public string explanation;// 설명
-    public Sprite icon;
-    public float price;
-    public SetStatus addStatus;
     void SetItem(TextAsset _textAsset)
     {
         itemStruct.Clear();
@@ -196,71 +187,11 @@ public class Data_Manager : Data_Parse
             itemStruct.Add(tempData);
         }
     }
-
-    List<TranslateString> SetTranslateString(List<TranslateString> _tempString, TextAsset _textAsset)
-    {
-        string[] data = _textAsset.text.Split(new char[] { '\n' });
-        for (int i = 1; i < data.Length; i++)// 첫째 라인(목록) 빼고 리스팅
-        {
-            string[] elements = data[i].Split(new char[] { ',' });
-            if (elements[0].Trim().Length == 0)// 아이디 표기가 없으면 제외
-                continue;
-
-            TranslateString tempData = new TranslateString
-            {
-                ID = elements[0].Trim(),
-                KR = elements[1],
-                EN = elements[2],
-                JP = elements[3],
-                CN = elements[4],
-            };
-            _tempString.Add(tempData);
-        }
-        return _tempString;
-    }
 #endif
 
-    [System.Serializable]
-    public class DialogStruct
-    {
-        public string ID;
-        public string color;
-        public int size;
-        public bool bold;
-        public Data_DialogType.TextStyle textStyle;
-        public float speed;
-    }
-    [Header(" [ String ]")]
-    public List<DialogStruct> dialogStruct = new List<DialogStruct>();
-
-    [System.Serializable]
-    public class TranslateString
-    {
-        public string ID;
-        public string KR;
-        public string EN;
-        public string JP;
-        public string CN;
-    }
-    public List<TranslateString> dialogString = new List<TranslateString>();
-    public List<TranslateString> translateString = new List<TranslateString>();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //==================================================================================
+    // Data
+    //==================================================================================
 
     [System.Serializable]
     public struct Data_Option
@@ -271,13 +202,6 @@ public class Data_Manager : Data_Parse
         public bool EffectMute;
         public float EffectVolume;
     }
-
-
-    [Header(" [ Data ]")]
-    public List<EquipStruct> equipStruct = new List<EquipStruct>();
-    public List<ItemStruct> itemStruct = new List<ItemStruct>();
-    public List<FishStruct> fishStruct = new List<FishStruct>();
-    public List<PartsStruct> partsStruct = new List<PartsStruct>();
 
     [System.Serializable]
     public class SetStatus
@@ -296,6 +220,7 @@ public class Data_Manager : Data_Parse
         public string name;
         public enum PartsType
         {
+            None,
             Body,
             Engine,
             Box
@@ -324,18 +249,19 @@ public class Data_Manager : Data_Parse
     }
 
     [System.Serializable]
-    public struct BaitStruct
+    public struct UsedStruct
     {
         [HideInInspector]
         public string id;
         public ItemStruct itemStruct;
-        public enum CatchType// 잡을 수 있는 어종
+        public enum UsedType// 사용 효과
         {
-            Coast,// 연안
-            Shallow,// 얕은
-            Ocean,// 대양
+            Energe, // 연료
+            Bait_Coast, // 연안 미끼
+            Bait_Shallow,// 얕은
+            Bait_Ocean,// 대양
         }
-        public CatchType catchType;
+        public UsedType usedType;
     }
 
     [System.Serializable]
@@ -347,12 +273,13 @@ public class Data_Manager : Data_Parse
         {
             Equip,
             Fish,
+            Used,
         }
         public ItemType itemType;
         [TextArea]
         public string explanation;// 설명
         public Sprite icon;
-
+        public int maxAmount;
         public Vector2Int[] shape;
         public float weight;
         public float price;
@@ -413,10 +340,22 @@ public class Data_Manager : Data_Parse
         }
     }
 
+    //==================================================================================
+    // Data
+    //==================================================================================
+
+    [Header(" [ Data ]")]
+    public List<EquipStruct> equipStruct = new List<EquipStruct>();
+    public List<UsedStruct> usedStruct = new List<UsedStruct>();
+    public List<FishStruct> fishStruct = new List<FishStruct>();
+    public List<PartsStruct> partsStruct = new List<PartsStruct>();
+    public List<ItemStruct> itemStruct = new List<ItemStruct>();
+
     private void Awake()
     {
         Singleton_Data.INSTANCE.SetDictionary_Fish(fishStruct);
         Singleton_Data.INSTANCE.SetDictionary_Parts(partsStruct);
         Singleton_Data.INSTANCE.SetDictionary_Equip(equipStruct);
+        Singleton_Data.INSTANCE.SetDictionary_Used(usedStruct);
     }
 }

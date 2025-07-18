@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
-public class Pone_Utility
+public class P01_Utility
 {
     // 랜덤 배열 구하기
     public static T[] ShuffleArray<T>(T[] array, int seed)
