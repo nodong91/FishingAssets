@@ -108,10 +108,11 @@ public class UI_Landing : MonoBehaviour
 
     void ShopButton()
     {
-        Game_Manager.current.shopUI.OpenCanvas(true);
+        // 샵 버튼 누르면
+        Game_Manager.current.inventory.OpenShop(true);
     }
 
-    void ShipyardButton()
+    void ShipyardButton()// 조선소
     {
 
     }

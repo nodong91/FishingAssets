@@ -11,8 +11,7 @@ public class Game_Manager : MonoBehaviour
     public Controll_Manager controllManager;
     [Header("[ UI ]")]
     public UI_Main mainUI;
-    public UI_Inventory inventory;
-    public UI_Shop shopUI;
+    public UI_Inventory_Manager inventory;
     public UI_Landing landingUI;
     public UI_Status statusUI;
 
@@ -31,7 +30,6 @@ public class Game_Manager : MonoBehaviour
         inventory.SetStart();
         fishGuide.SetStart();
         landingUI.SetStart();
-        shopUI.SetStart();
 
         //player.deleControll = controllManager.controllDirection;
     }
