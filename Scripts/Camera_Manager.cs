@@ -7,6 +7,7 @@ public class Camera_Manager : MonoBehaviour
 {
     public CinemachineCamera cinemachineCamera;
     public Camera UICamera;
+    public GameObject focusTarget;
     public Vector3 offset;
     CinemachineRotationComposer rotationComposer;
     CinemachineOrbitalFollow orbitalFollow;
@@ -16,11 +17,12 @@ public class Camera_Manager : MonoBehaviour
     Vector2 currentInput;
     float currentX, currentY;
     const float rotateSpeed = 0.1f;
-    public Vector2 zoomLimit = new Vector2(2.0f, 5.0f);
+    public Vector2 zoomLimit = new Vector2(0.5f, 3.0f);
 
     Coroutine stoping, zooming, shaking;
     Coroutine onRotate;
-    [SerializeField] float x, y;
+    //[SerializeField] 
+    float x, y;
     public float smoothSpeed = 10f;
     public float shakeValue = 5f;
     public float shakeTime = 1f;
@@ -37,6 +39,7 @@ public class Camera_Manager : MonoBehaviour
     {
         SetCameraManager();
         SetUICamera();
+        SetDefault();
     }
 
     public void SetCameraManager()
@@ -49,7 +52,6 @@ public class Camera_Manager : MonoBehaviour
         orbitalFollow = cinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
         cinemachineBasicMultiChannelPerlin = cinemachineCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
         rotationComposer = cinemachineCamera.GetComponent<CinemachineRotationComposer>();
-        SetDefault();
     }
 
     void SetUICamera()
@@ -66,18 +68,17 @@ public class Camera_Manager : MonoBehaviour
 
     void SetDefault()
     {
-        //zoomLimit = new Vector2(2.0f, 5.0f);
         orbitalFollow.RadialAxis.Range = zoomLimit;
-        orbitalFollow.RadialAxis.Value = (zoomLimit.x + zoomLimit.y) * 0.5f;
-        orbitalFollow.OrbitStyle = CinemachineOrbitalFollow.OrbitStyles.ThreeRing;
-        Cinemachine3OrbitRig.Settings newSetting = new Cinemachine3OrbitRig.Settings
-        {
-            SplineCurvature = 0.5f,
-            Top = new Cinemachine3OrbitRig.Orbit { Height = 7, Radius = 2 },
-            Center = new Cinemachine3OrbitRig.Orbit { Height = 4f, Radius = 3 },
-            Bottom = new Cinemachine3OrbitRig.Orbit { Height = 1f, Radius = 2.5f }
-        };
-        orbitalFollow.Orbits = newSetting;
+        orbitalFollow.RadialAxis.Value = (int)((zoomLimit.x + zoomLimit.y) * 0.5f);
+        //orbitalFollow.OrbitStyle = CinemachineOrbitalFollow.OrbitStyles.ThreeRing;
+        //Cinemachine3OrbitRig.Settings newSetting = new Cinemachine3OrbitRig.Settings
+        //{
+        //    SplineCurvature = 0.5f,
+        //    Top = new Cinemachine3OrbitRig.Orbit { Height = 7, Radius = 2 },
+        //    Center = new Cinemachine3OrbitRig.Orbit { Height = 4f, Radius = 3 },
+        //    Bottom = new Cinemachine3OrbitRig.Orbit { Height = 1f, Radius = 2.5f }
+        //};
+        //orbitalFollow.Orbits = newSetting;
     }
 
     void AddOverlayCamera(Camera _overlay)
@@ -87,6 +88,7 @@ public class Camera_Manager : MonoBehaviour
 
     public void SetTarget(Transform _target)
     {
+        focusTarget = _target.gameObject;
         cinemachineCamera.Target.TrackingTarget = _target;
         rotationComposer.TargetOffset = offset;
     }
@@ -130,12 +132,12 @@ public class Camera_Manager : MonoBehaviour
         Rotate();
     }
 
-    void StopRotate()
-    {
-        if (onRotate != null)
-            StopCoroutine(onRotate);
-        onRotate = StartCoroutine(StopRotating());
-    }
+    //void StopRotate()
+    //{
+    //    if (onRotate != null)
+    //        StopCoroutine(onRotate);
+    //    onRotate = StartCoroutine(StopRotating());
+    //}
 
     IEnumerator StopRotating()
     {
@@ -158,15 +160,15 @@ public class Camera_Manager : MonoBehaviour
 
     private void Rotate()
     {
+        float speed = Time.deltaTime * smoothSpeed;
         Vector2 verticalLimit = orbitalFollow.VerticalAxis.Range;
         y = Mathf.Clamp(y, verticalLimit.x, verticalLimit.y);
-        float speed = Time.deltaTime * smoothSpeed;
         orbitalFollow.HorizontalAxis.Value = Mathf.Lerp(orbitalFollow.HorizontalAxis.Value, x, speed);
         orbitalFollow.VerticalAxis.Value = Mathf.Lerp(orbitalFollow.VerticalAxis.Value, y, speed);
 
         Vector3 camPos = cinemachineCamera.transform.position;
-        Vector3 offset = (transform.position - new Vector3(camPos.x, transform.position.y, camPos.z));
-        transform.rotation = Quaternion.LookRotation(offset, Vector3.up);
+        Vector3 offset = (focusTarget.transform.position - new Vector3(camPos.x, focusTarget.transform.position.y, camPos.z));
+        focusTarget.transform.rotation = Quaternion.LookRotation(offset, Vector3.up);
     }
 
     void InputScroll(float _input)
@@ -180,7 +182,7 @@ public class Camera_Manager : MonoBehaviour
     IEnumerator ScrollWheeling(float _input)
     {
         Vector2 limit = orbitalFollow.RadialAxis.Range;
-        float zoom = (limit.y - limit.x) * _input;
+        float zoom = (limit.y - limit.x) * _input / 5f;
         float originValue = orbitalFollow.RadialAxis.Value;
         float targetValue = originValue + zoom;
 

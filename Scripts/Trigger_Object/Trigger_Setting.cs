@@ -2,25 +2,18 @@ using UnityEngine;
 
 public class Trigger_Setting : MonoBehaviour
 {
-    public enum TriggerType
-    {
-        Fishing,// ³¬½Ã
-        Landing,// ºÎµÎ
-    }
-    public TriggerType triggerType;
+    public delegate void DeleTriggerAction();
+    public DeleTriggerAction deleTriggerAction;
 
-    public virtual Sprite GetIconSprite
+    Sprite icon;
+    public Sprite GetIconSprite
     {
-        get { return null; }
+        get { return icon; }
+        set { icon = value; }
     }
 
-    public Trigger_Fish GetTriggerFish
+    public void TriggerAction()
     {
-        get { return this as Trigger_Fish; }
-    }
-
-    public Trigger_Landing GetTriggerLanding
-    {
-        get { return this as Trigger_Landing; }
+        deleTriggerAction?.Invoke();
     }
 }

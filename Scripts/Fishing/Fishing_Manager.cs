@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Fishing_Manager : MonoBehaviour
 {
+
+    public GameObject fishingCamera;
     public enum FishingState
     {
         Ready,
@@ -12,8 +14,8 @@ public class Fishing_Manager : MonoBehaviour
         Complate
     }
     public FishingState state;
-    Trigger_Setting fishSetting;
-    public Data_Manager.FishStruct.FishType fishType;
+    public Data_Manager.FishStruct fishStruct;
+    public Data_Manager.FishStruct.RandomSize randomSize;
 
     public Fishing_Hit fishingHit;
     public Fishing_Main fishingMain;
@@ -21,7 +23,6 @@ public class Fishing_Manager : MonoBehaviour
     public Fishing_Sub_Agility fishingSubAgility;
     public Fishing_Sub_Health fishingSubHealth;
     public Fishing_Complate fishingComplate;
-
     // 순서
     // 히트 - 파이트 - 릴링 - 파이트 - 릴링 - 물고기 체력방전 시 캐치, 줄이 못버티면 놓침
     // 파이트 - 성공 (물고기 체력), 실패 (줄 타격)
@@ -30,6 +31,8 @@ public class Fishing_Manager : MonoBehaviour
 
     void Start()
     {
+        fishingCamera.SetActive(false);
+
         fishingHit.SetStart();
         fishingMain.SetStart();
         fishingSubStrength.SetStart();
@@ -37,32 +40,42 @@ public class Fishing_Manager : MonoBehaviour
         fishingSubHealth.SetStart();
     }
 
-    public void StartGame(Trigger_Setting _fishSetting)
+    public void StartGame(Data_Manager.FishStruct _fishStruct)
     {
-        fishSetting = _fishSetting;
-        if (fishSetting != null)
-        {
-            fishType = fishSetting.GetTriggerFish.GetFishType;
-            SetMouse();
-            StateMachine(FishingState.Hit);
-        }
+        Game_Manager.current.OutOfControll(true);
+
+        Transform player = Game_Manager.current.player.transform;
+        fishingCamera.transform.position = player.position;
+        fishingCamera.transform.rotation = player.rotation;
+
+        fishingCamera.SetActive(true);
+
+        fishStruct = _fishStruct;
+        randomSize = fishStruct.GetRandom();
+
+        StateMachine(FishingState.Hit);
     }
 
     void EndGame(FishingState _fishState)
     {
+        Game_Manager.current.OutOfControll(false);
+
+        fishingCamera.SetActive(false);
         StateMachine(_fishState);
+        Debug.LogWarning(_fishState);
     }
 
-    void SetMouse()
+    private void Update()
     {
-        Singleton_Controller.INSTANCE.key_MouseLeft += InputMouseLeft;
-        Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
-    }
+        if (Input.GetMouseButtonDown(0))
+        {
+            InputMouseLeft(true);
+        }
 
-    void RemoveMouse()
-    {
-        Singleton_Controller.INSTANCE.key_MouseLeft -= InputMouseLeft;
-        Singleton_Controller.INSTANCE.key_MouseRight -= InputMouseRight;
+        if (Input.GetMouseButtonDown(1))
+        {
+            InputMouseRight(true);
+        }
     }
 
     void StateMachine(FishingState _state)
@@ -81,7 +94,7 @@ public class Fishing_Manager : MonoBehaviour
 
             case FishingState.Main:
                 fishingMain.deleEndGame = EndGame;
-                fishingMain.StartGame(fishSetting);
+                fishingMain.StartGame(fishStruct);
                 break;
 
             case FishingState.Sub:
@@ -95,14 +108,12 @@ public class Fishing_Manager : MonoBehaviour
     }
     void StateReady()
     {
-        fishSetting = null;
-        Game_Manager.current.player.SetControll();
-        RemoveMouse();
+        //fishSetting = null;
     }
 
     void StateSub()
     {
-        switch (fishSetting.GetTriggerFish.GetFishType)
+        switch (fishStruct.fishType)
         {
             case Data_Manager.FishStruct.FishType.Strength:
                 fishingSubStrength.deleEndGame = EndGame;
@@ -123,7 +134,7 @@ public class Fishing_Manager : MonoBehaviour
 
     void StateComplate()
     {
-        fishingComplate.SetFish(fishSetting);// 물고기 스탯 출력
+        fishingComplate.SetFish(fishStruct, randomSize);// 물고기 스탯 출력
         StateMachine(FishingState.Ready);
     }
 
@@ -182,7 +193,7 @@ public class Fishing_Manager : MonoBehaviour
 
     void StateSubAction(bool _left)
     {
-        switch (fishSetting.GetTriggerFish.GetFishType)
+        switch (fishStruct.fishType)
         {
             case Data_Manager.FishStruct.FishType.Strength:
                 if (_left == true)

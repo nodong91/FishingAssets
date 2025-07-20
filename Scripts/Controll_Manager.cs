@@ -251,7 +251,7 @@ public class Controll_Manager : MonoBehaviour
 
     void InputMouseWheel(bool _input)
     {
-        float input = _input ? -0.1f : 0.1f;
+        float input = _input ? -1f : 1f;
         Game_Manager.current.cameraManager?.delegateInputScroll(input);
     }
 }

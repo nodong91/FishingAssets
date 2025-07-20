@@ -10,40 +10,18 @@ public class Unit_Player : MonoBehaviour
     public enum State
     {
         None,
-        Dead,
-        Action,
         Idle,
-        Escape,
         Move,
-        Patrol,
         Damage,
-        End,
     }
     public State state = State.None;
 
     public float moveSpeed = 0.01f;
+    public Vector2 dirction;
 
     private void Start()
     {
-        SetControll();
-    }
-
-    //================================================================================================================================================
-    // 컨트롤 세팅
-    //================================================================================================================================================
-
-    void SetMouse()
-    {
-        //Singleton_Controller.INSTANCE.key_MouseLeft += InputMousetLeft;
-        //Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
-        //Singleton_Controller.INSTANCE.key_MouseWheel += InputMouseWheel;
-    }
-
-    void RemoveMouse()
-    {
-        //Singleton_Controller.INSTANCE.key_MouseLeft -= InputMousetLeft;
-        //Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
-        //Singleton_Controller.INSTANCE.key_MouseWheel += InputMouseWheel;
+        StateMachine(State.Idle);
     }
 
     //================================================================================================================================================
@@ -61,13 +39,7 @@ public class Unit_Player : MonoBehaviour
         switch (state)
         {
             case State.None:
-                break;
-            case State.Dead:
-                //RemoveKeyCode();
-                //DeadState();
-                //OutOfControll(true);
-                break;
-            case State.Action:
+
                 break;
             case State.Idle:
                 if (dirction.x != 0f || dirction.y != 0f)
@@ -76,10 +48,8 @@ public class Unit_Player : MonoBehaviour
             case State.Move:
                 stateAction = StartCoroutine(Moving());
                 break;
-            case State.Escape:
-                //stateAction = StartCoroutine(MoveEscape());
-                break;
             case State.Damage:
+
                 break;
         }
     }
@@ -88,15 +58,9 @@ public class Unit_Player : MonoBehaviour
     // 이동
     //================================================================================================================================================
 
-    public Vector2 dirction;
     public void StateMove(Vector2 _dirction)
     {
         dirction = _dirction;
-        //SetDirection();
-
-        //if (outOfControll == true)
-        //    return;
-
         if (state == State.Idle)
         {
             StateMachine(State.Move);
@@ -150,7 +114,7 @@ public class Unit_Player : MonoBehaviour
     public float targetAngle = 10f;
     float randomTime, runningRandomTime;
 
-    public AnimationCurve rotateCurve;
+    public AnimationCurve rotateCurve;// 위아래 흔들릴 때 로테이션
 
     private void Update()
     {
@@ -191,30 +155,17 @@ public class Unit_Player : MonoBehaviour
 
     void SetMoving()
     {
-        float speed = moveSpeed * Time.deltaTime;
-        Game_Manager.current.cameraManager.transform.position = transform.position;
+        GameObject focusTarget = Game_Manager.current.cameraManager.focusTarget;
+
+        focusTarget.transform.position = transform.position;
         Vector3 dir = new Vector3(dirction.x, 0f, dirction.y);
-        Vector3 target = transform.position + Game_Manager.current.cameraManager.transform.TransformDirection(dir).normalized;
-        transform.position = Vector3.Lerp(transform.position, target, speed);
+        Vector3 target = transform.position + focusTarget.transform.TransformDirection(dir).normalized;
 
-        Vector3 offset = (target - transform.position).normalized;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed * 5f);
-    }
-
-    void RotateMousePosition()
-    {
         float speed = moveSpeed * Time.deltaTime;
-        Vector3 playerPosition = Camera.main.WorldToScreenPoint(transform.position);
-        Vector3 mousePosition = Input.mousePosition;
-
-        Vector3 uiOffset = (mousePosition - playerPosition).normalized;
-        Vector3 dir = new Vector3(uiOffset.x, 0f, uiOffset.y);
-
-        Vector3 target = transform.position + Game_Manager.current.cameraManager.transform.TransformDirection(dir).normalized;
         Vector3 offset = (target - transform.position).normalized;
+        transform.position = Vector3.Lerp(transform.position, target, speed);
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed * 5f);
     }
-
     //================================================================================================================================================
     // 충돌
     //================================================================================================================================================
@@ -251,35 +202,8 @@ public class Unit_Player : MonoBehaviour
 
     public void StateEscape()
     {
-        StateMachine(State.Escape);
+
     }
-
-    //IEnumerator MoveEscape()// 탈출 (회피)
-    //{
-    //    float normalize = 0f;
-    //    float actionTime = unitAnimation.PlayAnimation(4);// 애니메이션 길이만큼 대기
-    //    OutOfControll(actionTime + 0.5f);// 대기 시간 0.5f
-    //    Vector3 dir = new Vector3(dirction.x, 0f, dirction.y);
-    //    while (normalize < actionTime)
-    //    {
-    //        normalize += Time.deltaTime;
-    //        float escapeSpeed = Mathf.Lerp(0.3f, 0f, normalize * 5f);
-    //        SetMoveEscape(dir, escapeSpeed);
-    //        yield return null;
-    //    }
-    //    StateMachine(State.Idle);
-    //}
-
-    void SetMoveEscape(Vector3 _dir, float _escapeSpeed)
-    {
-        Game_Manager.current.cameraManager.transform.position = transform.position;
-        Vector3 target = transform.position + Game_Manager.current.cameraManager.transform.TransformDirection(_dir).normalized;
-        transform.position = Vector3.Lerp(transform.position, target, _escapeSpeed);
-
-        Vector3 offset = (target - transform.position).normalized;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), _escapeSpeed * 5f);
-    }
-
     //================================================================================================================================================
     // 공격
     //================================================================================================================================================
@@ -296,125 +220,18 @@ public class Unit_Player : MonoBehaviour
     {
         if (_input == true)
         {
-            //if (outOfControll == true)
-            //    return;
-
-            StateMachine(State.Action);
-            stateAction = StartCoroutine(State_Acting());
-        }
-        else
-        {
             if (closestTarget != null)
             {
+                closestTarget.TriggerAction();
                 triggerGameObject.Remove(closestTarget);
-                switch (closestTarget.triggerType)
-                {
-                    case Trigger_Setting.TriggerType.Fishing:
-                        // 낚시 시작
-                        Game_Manager.current.fishingManager.StartGame(closestTarget);
-                        Destroy(closestTarget.gameObject);
-                        OutOfControll(true);
-                        break;
-
-                    case Trigger_Setting.TriggerType.Landing:
-                        Game_Manager.current.OutOfControll(true);
-                        closestTarget.GetTriggerLanding.SetLanding(this);
-                        break;
-                }
                 closestTarget = null;
                 Game_Manager.current.followManager.AddClosestTarget(null);// 팔로우 유아이 제거
             }
-            stateAction = StartCoroutine(State_StopActing());
         }
     }
-
-    IEnumerator State_Acting()
-    {
-        action = true;
-        while (action == true)
-        {
-            float coolingTime = 1f;
-            //float castingTime = currentSkill.skillStruct.castingTime;
-            //if (castingTime > 0f)
-            //    yield return StartCoroutine(SkillCasting(castingTime));// 캐스팅
-
-            //float coolingTime = currentSkill.skillStruct.coolingTime;
-            //currentSkill.startTime = Time.time + coolingTime;
-            //Debug.LogWarning("State_Attacking!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            //float actionTime = unitAnimation.PlayAnimation(3);// 애니메이션
-            //OutOfControll(actionTime);// 공격하는 동안 대기
-            yield return new WaitForSeconds(coolingTime);
-
-            //float coolingTime = currentSkill.skillStruct.coolingTime;
-            //yield return new WaitForSeconds(coolingTime);
-        }
-    }
-
-    IEnumerator State_StopActing()
-    {
-        action = false;
-        while (state == State.Action)
-        {
-            //if (outOfControll == false)
-                StateMachine(State.Idle);
-            yield return null;
-        }
-    }
-    //================================================================================================================================================
-    // 홀드
-    //================================================================================================================================================
-
-    //bool outOfControll = false;
-
-    public void OutOfControll(bool _isOn)
-    {
-        //outOfControll = _isOn;
-    }
-
-    //void OutOfControllTimer(float _time)
-    //{
-    //    StartCoroutine(HoldControllTimer(_time));
-    //}
-
-    //IEnumerator HoldControllTimer(float _time)
-    //{
-    //    outOfControll = true;
-    //    yield return new WaitForSeconds(_time);
-    //    outOfControll = false;
-    //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     //================================================================================================================================================
     // 낚시
     //================================================================================================================================================
 
-    public void SetControll()
-    {
-        state = State.Idle;
-        //dirction = Vector2Int.zero;
-
-        //SetKeyCode();
-    }
-
-    public void RemoveControll()
-    {
-        state = State.Idle;
-        //dirction = Vector2Int.zero;
-
-        //RemoveKeyCode();
-    }
 }

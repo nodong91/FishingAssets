@@ -1,5 +1,4 @@
 using UnityEngine;
-using static Unit_Player;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -11,9 +10,10 @@ public class Game_Manager : MonoBehaviour
     public Controll_Manager controllManager;
     [Header("[ UI ]")]
     public UI_Main mainUI;
-    public UI_Inventory_Manager inventory;
+    public UI_Inventory inventory;
     public UI_Landing landingUI;
     public UI_Status statusUI;
+    public UI_Time timeUI;
 
     public static Game_Manager current;
 
@@ -31,6 +31,8 @@ public class Game_Manager : MonoBehaviour
         fishGuide.SetStart();
         landingUI.SetStart();
 
+        SaveData_Continue.current.GetContinue();
+        PlayerMove();
         //player.deleControll = controllManager.controllDirection;
     }
 

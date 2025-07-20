@@ -149,43 +149,43 @@ public class Static_JsonManager
     //    option = default;
     //    return false;
     //}
-    ////======================================================================================
-    //// 중간 세이브 데이터 관련
-    ////======================================================================================
+    //======================================================================================
+    // 중간 세이브 데이터 관련
+    //======================================================================================
 
-    //public static void SaveCountinueData(string fileName, Data_Countinue countinue)
-    //{
-    //    string filePath = Application.dataPath + "/Save/";
-    //    // 폴더 생성
-    //    FindFolder(filePath);
+    public static void SaveCountinueData(string fileName, SaveData_Continue.SetSaveContinue _data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        // 폴더 생성
+        FindFolder(filePath);
 
-    //    string toJson = JsonUtility.ToJson(countinue, prettyPrint: true);
-    //    //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
-    //    File.WriteAllText(filePath + fileName + ".json", toJson);
-    //}
+        string toJson = JsonUtility.ToJson(_data, prettyPrint: true);
+        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        File.WriteAllText(filePath + fileName + ".json", toJson);
+    }
 
-    //public static bool TryLoadCountinueData(string fileName, out Data_Countinue countinue)
-    //{
-    //    string filePath = Application.dataPath + "/Save/";
-    //    string path = filePath + fileName + ".json";
-    //    FileInfo fileInfo = new FileInfo(path);
+    public static bool TryLoadCountinueData(string fileName, out SaveData_Continue.SetSaveContinue _data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        string path = filePath + fileName + ".json";
+        FileInfo fileInfo = new FileInfo(path);
 
-    //    if (fileInfo.Exists == true)
-    //    {
-    //        string fromJson = File.ReadAllText(path);
-    //        //fromJson = Static_AES.Program.Decrypt(fromJson, "SaveOptionData");      // 복화
-    //        countinue = JsonUtility.FromJson<Data_Countinue>(fromJson);
-    //        return true;
-    //    }
+        if (fileInfo.Exists == true)
+        {
+            string fromJson = File.ReadAllText(path);
+            //fromJson = Static_AES.Program.Decrypt(fromJson, "SaveOptionData");      // 복화
+            _data = JsonUtility.FromJson<SaveData_Continue.SetSaveContinue>(fromJson);
+            return true;
+        }
 
-    //    countinue = default;
-    //    return false;
-    //}
+        _data = default;
+        return false;
+    }
     //======================================================================================
     // 인벤토리 저장
     //======================================================================================
 
-    public static void SaveInventoryData(string fileName, List<UI_Inventory.SaveItemClass> _data)
+    public static void SaveInventoryData(string fileName, List<UI_Inventory_Base.SaveItemClass> _data)
     {
         string filePath = Application.dataPath + "/Save/";
         // 폴더 없으면 생성
@@ -195,7 +195,7 @@ public class Static_JsonManager
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
     // 불러오기
-    public static bool TryLoadInventoryData(string fileName, out List<UI_Inventory.SaveItemClass> _data)
+    public static bool TryLoadInventoryData(string fileName, out List<UI_Inventory_Base.SaveItemClass> _data)
     {
         string filePath = Application.dataPath + "/Save/";
         string path = filePath + fileName + ".json";
@@ -204,7 +204,7 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            _data = JsonHelper.FromJson<UI_Inventory.SaveItemClass>(fromJson);
+            _data = JsonHelper.FromJson<UI_Inventory_Base.SaveItemClass>(fromJson);
             return true;
         }
         _data = default;

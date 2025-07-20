@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Data_Manager;
 
-public class UI_Shop : UI_Inventory
+public class UI_Shop : UI_Inventory_Base
 {
 
     //===========================================================================================================================
@@ -14,10 +14,12 @@ public class UI_Shop : UI_Inventory
 
     public override void SetStart()
     {
+        slotType = SlotType.Shop;
         base.SetStart();
         //SetFixedItem();
         //SetRandomItem();
     }
+
     public override void OpenCanvas(bool _open)
     {
         base.OpenCanvas(_open);

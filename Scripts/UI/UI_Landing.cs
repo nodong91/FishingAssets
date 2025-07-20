@@ -45,6 +45,7 @@ public class UI_Landing : MonoBehaviour
             Game_Manager.current.followManager.AddFollowUI(targetPoint, followUI);
         }
         SetOpenCanvas(true);
+        Game_Manager.current.OutOfControll(true);
     }
 
     GameObject GetFollowUI(LandingSetting.LandingType _type)

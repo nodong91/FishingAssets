@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class UI_Time : MonoBehaviour
 {
-
-
     public TMPro.TMP_Text hourText, minuteText, weekText;
 
     public float timeSpeed = 10f;
@@ -21,6 +19,14 @@ public class UI_Time : MonoBehaviour
         Friday = 4,
         Saturday = 5,
         Sunday = 6
+    }
+
+    public void SetStart(float _timeSpeed, float _minute, int _hour, int _day)
+    {
+        timeSpeed = _timeSpeed;
+        minute = _minute;
+        hour = _hour;
+        day = _day;
     }
 
     private void Update()
@@ -45,36 +51,4 @@ public class UI_Time : MonoBehaviour
         minuteText.text = minuteStr;
         weekText.text = ((WEEK)day).ToString();
     }
-
-    //private void Start()
-    //{
-    //    StartCoroutine(TimeUpdate());
-    //}
-
-    //IEnumerator TimeUpdate()
-    //{
-    //    while (true)
-    //    {
-    //        minute++;
-    //        if (minute >= 60f)
-    //        {
-    //            minute = 0f;
-    //            hour++;
-    //            if (hour >= 24)
-    //            {
-    //                hour = 0;
-    //                day++;
-    //                if (day >= 7)
-    //                    day = 0;
-    //            }
-    //        }
-
-    //        string minuteStr = ((int)minute).ToString("D2");
-    //        string hourStr = hour.ToString("D2");
-    //        hourText.text = hourStr;
-    //        minuteText.text = minuteStr;
-    //        weekText.text = ((WEEK)day).ToString();
-    //        yield return new WaitForSeconds(timeSpeed);
-    //    }
-    //}
 }

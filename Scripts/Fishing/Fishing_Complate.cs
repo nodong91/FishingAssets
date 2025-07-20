@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
+using static Data_Manager.FishStruct;
 
 public class Fishing_Complate : MonoBehaviour
 {
@@ -19,18 +20,18 @@ public class Fishing_Complate : MonoBehaviour
         fishInfomation.gameObject.SetActive(false);
         Game_Manager.current.inventory.OpenCanvas(true);
 
-        Trigger_Fish fish = catchFish.GetTriggerFish;
-        ItemStruct fishItem = fish.fishStruct.itemStruct;
-        float size = fish.randomSize.size;
+        ItemStruct fishItem = fishStruct.itemStruct;
+        float size = randomSize.size;
 
         Game_Manager.current.inventory.AddItem(fishItem);// 인벤토리에 생선 추가
         Game_Manager.current.fishGuide.AddFishClass(fishItem.id, size);
     }
-    Trigger_Setting catchFish;
-
-    public void SetFish(Trigger_Setting _fish)
+    FishStruct fishStruct;
+    FishStruct.RandomSize randomSize;
+    public void SetFish(FishStruct _fishStruct, FishStruct.RandomSize _randomSize)
     {
-        catchFish = _fish;
+        fishStruct = _fishStruct;
+        randomSize = _randomSize;
         StartCoroutine(SetDisplaying());
     }
 

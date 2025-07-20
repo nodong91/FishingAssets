@@ -48,10 +48,11 @@ public class Fishing_Main : MonoBehaviour
         //StateMachine(FishingState.None);
     }
 
-    public void StartGame(Trigger_Setting _fishSetting)
+    public void StartGame(Data_Manager.FishStruct _fishStruct)
     {
-        equipStruct = Singleton_Data.INSTANCE.Dict_Equip["El_0001"];// 낚시대 테스트
-        fishStruct = _fishSetting.GetTriggerFish.fishStruct;
+        Debug.LogWarning("낚시대 테스트");
+        equipStruct = Singleton_Data.INSTANCE.Dict_Equip["Eq_0001"];// 낚시대 테스트
+        fishStruct = _fishStruct;
         StartGame();
     }
 
