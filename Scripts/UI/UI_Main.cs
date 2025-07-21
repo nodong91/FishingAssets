@@ -105,7 +105,7 @@ public class UI_Main : MonoBehaviour
 
     void FishGuideButton()
     {
-        Game_Manager.current.fishGuide.OpenCanvas(true);
+        Game_Manager.current.instFishGuide.OpenCanvas(true);
     }
 
     void StatusButton()

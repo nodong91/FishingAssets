@@ -6,6 +6,7 @@ public class Game_Manager : MonoBehaviour
     public Fishing_Manager fishingManager;
     public Camera_Manager cameraManager;
     public FishGuide fishGuide;
+    public FishGuide instFishGuide;
     public Follow_Manager followManager;
     public Controll_Manager controllManager;
     [Header("[ UI ]")]
@@ -28,7 +29,9 @@ public class Game_Manager : MonoBehaviour
         mainUI.SetStart();
 
         inventory.SetStart();
-        fishGuide.SetStart();
+        if(instFishGuide == null)
+            instFishGuide = Instantiate(fishGuide);
+        instFishGuide.SetStart();
         landingUI.SetStart();
 
         SaveData_Continue.current.GetContinue();

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -18,17 +19,19 @@ public class UI_Inventory : MonoBehaviour
     public TMPro.TMP_Text moneyText;
     public UI_Inventory_Infomation infomation;
 
-    public SlotType enterSlotType;
-    UI_Inventory_Slot enterSlot;
-
-    public SlotType selectSlotType;
-    UI_Inventory_Slot selectSlot;
+    public SlotType enterSlotType, selectSlotType;
+    public UI_Inventory_Slot enterSlot, selectSlot;
 
     ItemClass selectItemClass;
     ItemClass originItemClass;
 
+    int slotSize = 40;
+
     public void SetStart()
     {
+        myBox.SetSlotSize = slotSize;
+        shop.SetSlotSize = slotSize;
+
         myBox.SetStart();
         shop.SetStart();
     }
@@ -51,6 +54,8 @@ public class UI_Inventory : MonoBehaviour
             string randomID = "Fs_" + Random.Range(1, 4) + "001";
             FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[randomID];
             FishStruct.RandomSize randomSize = fishStruct.GetRandom();
+
+            SetIconImage(fishStruct.itemStruct);
             AddItem(fishStruct.itemStruct);
         }
 
@@ -70,8 +75,6 @@ public class UI_Inventory : MonoBehaviour
             angle = 0,
             shape = _itemStruct.shape,
         };
-
-        onDrag = true;
         selectItemClass = itemClass;
         DragSlot();
     }
@@ -90,7 +93,7 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    void RemoveItem(UI_Inventory_Slot _slot)
+    void EmptySlot(UI_Inventory_Slot _slot)
     {
         UI_Inventory_Base getInventory = GetInventory(enterSlotType);
         getInventory.SetEmpty(_slot);
@@ -98,7 +101,7 @@ public class UI_Inventory : MonoBehaviour
 
     void TradeItem()
     {
-        if (selectSlotType == SlotType.None)
+        if (selectSlotType == SlotType.None || selectSlotType == SlotType.Storage || enterSlotType == SlotType.Storage)
             return;
 
         if (enterSlotType != selectSlotType)
@@ -148,13 +151,12 @@ public class UI_Inventory : MonoBehaviour
             if (_slot.empty == true)
                 return;
 
-            onDrag = true;
             selectSlot = _slot.GetLinkSlot;
             selectItemClass = selectSlot.itemClass;
             selectSlotType = enterSlotType;
 
             SetOriginItemClass();
-            EmptySlot(selectSlotType);
+            EmptySlot(selectSlot);
             DragSlot();
         }
     }
@@ -165,9 +167,9 @@ public class UI_Inventory : MonoBehaviour
         {
             SetDragRotate();
         }
-        else
+        else if (_slot.empty == false)
         {
-            RemoveItem(_slot.GetLinkSlot);
+            EmptySlot(_slot.GetLinkSlot);
         }
     }
 
@@ -175,7 +177,7 @@ public class UI_Inventory : MonoBehaviour
     {
         enterSlotType = _dragSlotType;
         enterSlot = _slot;
-        CheckSlot(enterSlotType);
+        CheckSlot(_dragSlotType);
 
         SetInfomation(_slot);
     }
@@ -205,6 +207,9 @@ public class UI_Inventory : MonoBehaviour
 
     void DragSlot()
     {
+        SetInfomation(null);// 켜져 있던 정보 끄기
+        onDrag = true;
+
         CheckSlot(enterSlotType);
 
         if (slotMoving != null)
@@ -214,14 +219,31 @@ public class UI_Inventory : MonoBehaviour
 
     IEnumerator DragingSlot()
     {
+        Image inst = iconImage;
         iconImage.gameObject.SetActive(true);
-        iconImage.sprite = selectItemClass.item.icon;
+        if (selectSlot != null)
+        {
+            Debug.LogWarning(selectItemClass);
+            Debug.LogWarning(selectItemClass.item);
+            ItemStruct itemStruct = selectItemClass.item;
+
+            SetIconImage(itemStruct);
+        }
+
         while (onDrag == true)
         {
-            iconImage.transform.position = Input.mousePosition;
+            inst.transform.position = Input.mousePosition;
+            inst.transform.rotation = Quaternion.Euler(0f, 0f, selectItemClass.angle);
             yield return null;
         }
         iconImage.gameObject.SetActive(false);
+    }
+
+    void SetIconImage(ItemStruct _itemStruct)
+    {
+        iconImage.sprite = _itemStruct.icon;
+        iconImage.rectTransform.sizeDelta = new Vector2(_itemStruct.iconSize.x, _itemStruct.iconSize.y) * slotSize;
+        iconImage.rectTransform.pivot = new Vector2(_itemStruct.iconSize.w, _itemStruct.iconSize.z);
     }
 
     void SetDragRotate()
@@ -231,12 +253,6 @@ public class UI_Inventory : MonoBehaviour
 
         selectItemClass.SetRotate(90f);
         CheckSlot(enterSlotType);
-    }
-
-    void EmptySlot(SlotType _dragSlotType)
-    {
-        UI_Inventory_Base getInventory = GetInventory(_dragSlotType);
-        getInventory.SetEmpty(selectSlot);
     }
 
     void SetOriginItemClass()
@@ -257,6 +273,9 @@ public class UI_Inventory : MonoBehaviour
                 return myBox;
 
             case SlotType.Shop:
+                return shop;
+
+            case SlotType.Storage:
                 return shop;
         }
         return null;
@@ -290,6 +309,9 @@ public class UI_Inventory : MonoBehaviour
 
     public void SetInfomation(UI_Inventory_Slot _slot)
     {
+        if (onDrag == true)
+            return;
+
         infomation.SetStart(_slot);
     }
 

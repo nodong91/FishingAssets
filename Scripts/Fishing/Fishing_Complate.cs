@@ -24,7 +24,7 @@ public class Fishing_Complate : MonoBehaviour
         float size = randomSize.size;
 
         Game_Manager.current.inventory.AddItem(fishItem);// 인벤토리에 생선 추가
-        Game_Manager.current.fishGuide.AddFishClass(fishItem.id, size);
+        Game_Manager.current.instFishGuide.AddFishClass(fishItem.id, size);
     }
     FishStruct fishStruct;
     FishStruct.RandomSize randomSize;

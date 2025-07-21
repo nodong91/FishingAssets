@@ -35,7 +35,7 @@ public class Fishing_Sub : MonoBehaviour
         return (fillAmount >= 1f);
     }
 
-    public virtual void Action_Left() { }
+    public virtual void InputMouseLeft(bool _input) { }
 
-    public virtual void Action_Right() { }
+    public virtual void InputMouseRight(bool _input) { }
 }

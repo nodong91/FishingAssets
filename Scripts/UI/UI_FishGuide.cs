@@ -9,39 +9,44 @@ public class FishGuide : MonoBehaviour
 {
     public Canvas canvas;
     [System.Serializable]
-    public struct FishStruct
+    public struct FishStructGuide
     {
         public string name;
         public CanvasGroup canvasGroup;
         public List<UI_FishCard> cards;
     }
-    public List<FishStruct> fishStructList;
-    private FishStruct currentFishStruct;
+    public List<FishStructGuide> fishStructList;
+    private FishStructGuide currentFishStruct;
 
     public List<Data_Manager.FishStruct> allFishStruct;// 일단 물고기 정보 대신
 
     public Transform parent;
     public CanvasGroup parentBase;
+    public Vector2Int guideSize;
+    int cardAmount;
+    GridLayoutGroup gridLayoutGroup;
     public UI_FishCard cardBase;
     UI_FishCard selectCard;
     public Button closeButton;
 
     public Toggle[] toggles;
     public int currentIndex;
-    Queue<FishStruct> instQueue = new Queue<FishStruct>();
+    Queue<FishStructGuide> instQueue = new Queue<FishStructGuide>();
 
     public void SetStart()
     {
+        gridLayoutGroup = parentBase.GetComponent<GridLayoutGroup>();
+        gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        gridLayoutGroup.constraintCount = guideSize.x;
+        cardAmount = guideSize.x * guideSize.y;
+
         LoadFishGuide();
 
         foreach (var fish in Singleton_Data.INSTANCE.Dict_Fish)
         {
             Data_Manager.FishStruct temp = fish.Value;
             allFishStruct.Add(temp);
-            //AddFishClass(temp.id, 3.5f);
         }
-        closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
-        OpenCanvas(false);
         for (int i = 0; i < toggles.Length; i++)
         {
             int index = i;
@@ -49,6 +54,9 @@ public class FishGuide : MonoBehaviour
         }
         toggles[0].isOn = true;
         SetInstanceStruct();
+
+        closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
+        OpenCanvas(false);
     }
 
     public void OpenCanvas(bool _open)
@@ -74,7 +82,7 @@ public class FishGuide : MonoBehaviour
 
     void SetcurrentStructCheck()
     {
-        int startIndex = currentIndex * 21;
+        int startIndex = currentIndex * cardAmount;
         for (int i = 0; i < currentFishStruct.cards.Count; i++)
         {
             UI_FishCard tempCard = currentFishStruct.cards[i];
@@ -130,7 +138,7 @@ public class FishGuide : MonoBehaviour
 
     IEnumerator MoveChange(bool _out)
     {
-        FishStruct tempStruct = new FishStruct
+        FishStructGuide tempStruct = new FishStructGuide
         {
             name = currentFishStruct.name,
             canvasGroup = currentFishStruct.canvasGroup,
@@ -169,7 +177,7 @@ public class FishGuide : MonoBehaviour
         _canvasGroup.blocksRaycasts = alpha;
     }
 
-    FishStruct GetFishStruct()
+    FishStructGuide GetFishStruct()
     {
         if (instQueue.Count > 0)
         {
@@ -178,14 +186,14 @@ public class FishGuide : MonoBehaviour
 
         CanvasGroup instCanvas = Instantiate(parentBase, parent);
         List<UI_FishCard> temp = new List<UI_FishCard>();
-        for (int i = 0; i < 21; i++)// 카드 생성
+        for (int i = 0; i < cardAmount; i++)// 카드 생성
         {
             UI_FishCard inst = Instantiate(cardBase, instCanvas.transform);
             inst.deleSelectCard = SelectCard;
             temp.Add(inst);
         }
 
-        FishStruct fishStruct = new FishStruct
+        FishStructGuide fishStruct = new FishStructGuide
         {
             name = "",
             canvasGroup = instCanvas,

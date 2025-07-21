@@ -129,7 +129,7 @@ public class Unit_Player : MonoBehaviour
         Vector3 localPosition = Vector3.up * moveHight * shipHight;
         playerObject.transform.localPosition = localPosition;
 
-        if (runningTime > runningRandomTime)
+        if (runningTime >= runningRandomTime)
         {
             randomTime = UnityEngine.Random.Range(5f, 3f);
             runningRandomTime = runningTime + randomTime;
@@ -209,7 +209,7 @@ public class Unit_Player : MonoBehaviour
     //================================================================================================================================================
 
     Coroutine stateAction;
-    bool action = false;
+    //bool action = false;
 
     public void EventAction()// 어택 이벤트
     {

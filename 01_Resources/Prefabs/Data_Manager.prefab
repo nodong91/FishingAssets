@@ -28,7 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 400.5, y: 320.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -102,6 +102,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 65e7478a3eb184b4c9d4988ad2645ebe, type: 3}
   - {fileID: 21300000, guid: 83e32dc3219d2cd4e8c4b370bafe731e, type: 3}
   - {fileID: 21300000, guid: 27e0ed1d2bdd51d4493c00e84e5a4ae6, type: 3}
+  - {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+  - {fileID: 21300000, guid: 7bf99e228d7913249bf876e02713a33d, type: 3}
   - {fileID: 21300000, guid: 6647a9bc09c39e641a578ef2ce3b67ac, type: 3}
   - {fileID: 21300000, guid: b5a101e9756f1fa45a65e59ff8589347, type: 3}
   - {fileID: 21300000, guid: 140981467a2732948bf1de73f738ebbe, type: 3}
@@ -178,6 +180,7 @@ MonoBehaviour:
       shape:
       - {x: 1, y: 0}
       - {x: 0, y: -1}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
       weight: 0.2
       price: 15
     fishingArea: 0.1
@@ -199,6 +202,7 @@ MonoBehaviour:
       - {x: 1, y: 0}
       - {x: 0, y: -1}
       - {x: 1, y: -1}
+      iconSize: {x: 3, y: 2, z: 0.25, w: 0.5}
       weight: 2
       price: 130
     fishingArea: 0.1
@@ -219,6 +223,7 @@ MonoBehaviour:
       - {x: -1, y: 0}
       - {x: 1, y: 0}
       - {x: 0, y: -1}
+      iconSize: {x: 3, y: 2, z: 0.25, w: 0.5}
       weight: 1
       price: 70
     fishingArea: 0.1
@@ -238,6 +243,7 @@ MonoBehaviour:
       maxAmount: 5
       shape:
       - {x: 0, y: 0}
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 3
       price: 10
     usedType: 0
@@ -251,6 +257,7 @@ MonoBehaviour:
       maxAmount: 10
       shape:
       - {x: 0, y: 0}
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 0.1
       price: 5
     usedType: 1
@@ -261,11 +268,12 @@ MonoBehaviour:
       name: Pale Chub
       itemType: 1
       explanation: 
-      icon: {fileID: 21300000, guid: 91cdc7bd53b3507418bcb8b86946d7bb, type: 3}
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
       maxAmount: 1
       shape:
-      - {x: 1, y: 0}
-      - {x: 0, y: -1}
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
       weight: 0.2
       price: 15
     fishType: 0
@@ -283,13 +291,12 @@ MonoBehaviour:
       name: Bass
       itemType: 1
       explanation: 
-      icon: {fileID: 21300000, guid: 95af63e89959298479df131007c8bc47, type: 3}
+      icon: {fileID: 21300000, guid: 7bf99e228d7913249bf876e02713a33d, type: 3}
       maxAmount: 1
       shape:
       - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
       weight: 2
       price: 130
     fishType: 1
@@ -313,6 +320,7 @@ MonoBehaviour:
       - {x: -1, y: 0}
       - {x: 1, y: 0}
       - {x: 0, y: -1}
+      iconSize: {x: 3, y: 2, z: 0.25, w: 0.5}
       weight: 1
       price: 70
     fishType: 2

@@ -25,13 +25,13 @@ public class Fishing_Sub_Health : Fishing_Sub
         playing = StartCoroutine(Playing());
     }
 
-    public override void Action_Left()
+    public override void InputMouseLeft(bool _input)
     {
         bool active = originString[0].ToString() == "L";
         FillAmount(active);
     }
 
-    public override void Action_Right()
+    public override void InputMouseRight(bool _input)
     {
         bool active = originString[0].ToString() == "R";
         FillAmount(active);

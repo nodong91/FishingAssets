@@ -28,13 +28,13 @@ public class Fishing_Sub_Agility : Fishing_Sub
         playing = StartCoroutine(Playing());
     }
 
-    public override void Action_Left()
+    public override void InputMouseLeft(bool _input)
     {
         bool active = (keyCode == 0);
         FillAmount(active);
     }
 
-    public override void Action_Right()
+    public override void InputMouseRight(bool _input)
     {
         bool active = (keyCode == 1);
         FillAmount(active);

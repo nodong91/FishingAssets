@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using static UnityEngine.Rendering.ProbeAdjustmentVolume;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -133,6 +135,7 @@ public class Data_Manager : Data_Parse
 
     ItemStruct GetItemStruct(string[] _elements)
     {
+        Vector2Int[] tempShape = Parse_Vector2IntArray(_elements[5].Trim());
         ItemStruct tempItem = new ItemStruct
         {
             id = _elements[0].Trim(),
@@ -140,11 +143,35 @@ public class Data_Manager : Data_Parse
             explanation = _elements[2],
             icon = FindSprite(_elements[3]),
             maxAmount = Parse_Int(_elements[4]),
-            shape = Parse_Vector2IntArray(_elements[5].Trim()),
+            shape = tempShape,
+            iconSize = TryIconSize(tempShape),
             weight = Parse_Float(_elements[6]),
             price = Parse_Float(_elements[7]),
         };
         return tempItem;
+    }
+
+    Vector4 TryIconSize(Vector2Int[] _shape)
+    {
+        int minX = 0, minY = 0, maxX = 0, maxY = 0;
+        for (int i = 0; i < _shape.Length; i++)
+        {
+            if (_shape[i].x < minX)
+                minX = _shape[i].x;
+            if (_shape[i].y < minY)
+                minY = _shape[i].y;
+            if (_shape[i].x > maxX)
+                maxX = _shape[i].x;
+            if (_shape[i].y > maxY)
+                maxY = _shape[i].y;
+        }
+        int x = maxX - minX + 1;
+        int y = maxY - minY + 1;
+        float centerX = 0.5f - (minX + maxX) * 0.25f;
+        float centerY = 0.5f + (minY + maxY) * 0.25f;
+
+        Vector4 temp = new Vector4(x, y, centerY, centerX);
+        return temp;
     }
 
     void SetParts(TextAsset _textAsset)
@@ -281,6 +308,7 @@ public class Data_Manager : Data_Parse
         public Sprite icon;
         public int maxAmount;
         public Vector2Int[] shape;
+        public Vector4 iconSize;
         public float weight;
         public float price;
     }

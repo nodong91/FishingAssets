@@ -62,7 +62,6 @@ public class Fishing_Main : MonoBehaviour
         //    return;
 
         canvasGroup.gameObject.SetActive(true);
-        SetMouse();
         //// 낚시 가능한 위치
         //StateMachine(FishingState.MainGame);
         StateMachine();
@@ -79,19 +78,7 @@ public class Fishing_Main : MonoBehaviour
 
     }
 
-    void SetMouse()
-    {
-        Singleton_Controller.INSTANCE.key_MouseLeft += InputMouseLeft;
-        Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
-    }
-
-    void RemoveMouse()
-    {
-        Singleton_Controller.INSTANCE.key_MouseLeft += InputMouseLeft;
-        Singleton_Controller.INSTANCE.key_MouseRight += InputMouseRight;
-    }
-
-    void InputMouseLeft(bool _input)
+    public void InputMouseLeft(bool _input)
     {
         if (_input == true)
         {
@@ -103,7 +90,7 @@ public class Fishing_Main : MonoBehaviour
         }
     }
 
-    void InputMouseRight(bool _input)
+    public void InputMouseRight(bool _input)
     {
         if (_input == true)
         {
@@ -112,6 +99,7 @@ public class Fishing_Main : MonoBehaviour
         else
         {
             RotateTarget(0);
+            Debug.LogWarning("ijoijik;k;k");
         }
     }
 

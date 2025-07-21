@@ -12,6 +12,7 @@ public class UI_Inventory_Base : MonoBehaviour
     {
         None,
         Shop,
+        Storage,
         MyBox
     }
     public SlotType slotType = SlotType.None;
@@ -22,7 +23,8 @@ public class UI_Inventory_Base : MonoBehaviour
     public CanvasStruct[] canvasStructs;
     public GridLayoutGroup gridLayoutGroup;
     public UI_Inventory_Slot inventorySlot;
-    public float slotSize;
+    float slotSize;
+    public float SetSlotSize { set { slotSize = value; } }
     public Vector2Int inventorySize;
 
     private UI_Inventory_Slot[,] allSlots;
@@ -43,9 +45,15 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public virtual void SetStart()
     {
-        SetInventory();
-
         closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
+        StartCoroutine(SetLoadingItem());
+    }
+
+    IEnumerator SetLoadingItem()
+    {
+        SetInventory();
+        yield return null;
+        LoadInventory();
         OpenCanvas(false);
     }
 
@@ -53,6 +61,8 @@ public class UI_Inventory_Base : MonoBehaviour
     {
         StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
     }
+
+    protected virtual void SetWeight(float _weight) { }
 
     void SetInventory()
     {
@@ -75,7 +85,6 @@ public class UI_Inventory_Base : MonoBehaviour
                 allSlots[x, y] = inst;
             }
         }
-        LoadInventory();
     }
 
     void DictCheck()
@@ -98,34 +107,61 @@ public class UI_Inventory_Base : MonoBehaviour
     public void SetSlot(UI_Inventory_Slot _slot, ItemClass _itemClass)
     {
         _slot.SetBase(_itemClass);// 메인 슬롯
-        if (_itemClass == null)
+        if (_itemClass == null)// 비워져 있는지
             return;
 
+        _slot.SetSlotImage = TryIcon(_itemClass.item);// 이미지 세팅
+        _slot.GetSlotImage.transform.position = _slot.transform.position;
+        _slot.GetSlotImage.transform.rotation = Quaternion.Euler(0f, 0f, _itemClass.angle);
+
+        // 슬롯 세팅
         Vector2Int[] shape = _itemClass.shape;
-        // 사이즈
         for (int i = 0; i < shape.Length; i++)
         {
             int slotX = _slot.slotNum.x + shape[i].x;
             int slotY = _slot.slotNum.y + shape[i].y;
             allSlots[slotX, slotY].SetLink(_slot);
         }
+
         SetWeight(_itemClass.item.weight);
 
         dictItemClass[_slot.slotNum] = _itemClass;
         DictCheck();
     }
 
-    protected virtual void SetWeight(float _weight)
+    Queue<Image> iconQueue = new Queue<Image>();
+    public RectTransform iconParent;
+    Image TryIcon(ItemStruct _itemStruct)
     {
-        //currentWeight += _weight;
-        //float sliderValue = currentWeight / maxWeight;
-        //weightSlider.material.SetFloat("_FillAmount", sliderValue);
+        if (iconQueue.Count > 0)
+        {
+            Image queueIcon = iconQueue.Dequeue();
+            queueIcon.gameObject.SetActive(true);
+            SetImage(queueIcon, _itemStruct);
+            return queueIcon;
+        }
+        Image baseImage = Game_Manager.current.inventory.iconImage;
+        Image instIcon = Instantiate(baseImage, iconParent);
+        SetImage(instIcon, _itemStruct);
+        return instIcon;
+    }
+
+    void SetImage(Image _image, ItemStruct _itemStruct)
+    {
+        Vector2 size = new Vector2(_itemStruct.iconSize.x, _itemStruct.iconSize.y);
+        Vector2 pivot = new Vector2(_itemStruct.iconSize.w, _itemStruct.iconSize.z);
+        _image.sprite = _itemStruct.icon;
+        _image.rectTransform.sizeDelta = size * slotSize;
+        _image.rectTransform.pivot = pivot;
     }
 
     public void SetEmpty(UI_Inventory_Slot _slot)// 비우기
     {
         dictItemClass.Remove(_slot.slotNum);
         DictCheck();
+
+        iconQueue.Enqueue(_slot.GetSlotImage);
+        _slot.GetSlotImage.gameObject.SetActive(false);
 
         Vector2Int[] shape = _slot.itemClass.shape;
         _slot.SetEmpty();// 메인 슬롯 비우기

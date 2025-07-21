@@ -24,13 +24,13 @@ public class Fishing_Sub_Strength : Fishing_Sub
         playing = StartCoroutine(Playing());
     }
 
-    public override void Action_Left()
+    public override void InputMouseLeft(bool _input)
     {
         float addValue = keyCode == 0 ? 1f : -1f;
         FillAmount(addValue);
     }
 
-    public override void Action_Right()
+    public override void InputMouseRight(bool _input)
     {
         float addValue = keyCode == 1 ? 1f : -1f;
         FillAmount(addValue);

@@ -9,9 +9,13 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     public bool empty;
     public TMPro.TMP_Text m_Text;
     public Vector2Int slotNum;
-    public Image iconImage, checkImage;
-    public Sprite checkOn, checkOff;
+    public Image checkImage;
+    private Image slotImage;
+    public Image SetSlotImage { set { slotImage = value; } }
+    public Image GetSlotImage { get { return slotImage; } }
+
     UI_Inventory_Slot linkSlot;// 링크 베이스 - 다 묶이게
+
     public UI_Inventory_Slot GetLinkSlot { get { return linkSlot; } }
 
     public delegate void Dele_HelperSlot(UI_Inventory_Slot _slot);
@@ -53,8 +57,8 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
                         break;
 
                     case 90:
-                        x = item.shape[i].y * -1;
-                        y = item.shape[i].x;
+                        x = item.shape[i].y;
+                        y = item.shape[i].x * -1;
                         break;
 
                     case 180:
@@ -62,8 +66,8 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
                         y = item.shape[i].y * -1;
                         break;
                     case 270:
-                        x = item.shape[i].y;
-                        y = item.shape[i].x * -1;
+                        x = item.shape[i].y * -1;
+                        y = item.shape[i].x;
                         break;
                 }
                 Vector2Int newVector = new Vector2Int(x, y);
@@ -82,12 +86,9 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     void SetSlot(ItemClass _itemClass)
     {
-        empty = _itemClass == null;
-        if (!empty)
-            iconImage.sprite = _itemClass.item.icon;
-        iconImage.gameObject.SetActive(!empty);
-
+        empty = _itemClass == null; 
         itemClass = _itemClass;
+        CheckOff();
     }
 
     public void SetBase(ItemClass _itemClass)
@@ -106,22 +107,22 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     {
         linkSlot = null;
         SetSlot(default);
-        iconImage.gameObject.SetActive(false);
     }
 
     public bool CheckSlot()
     {
-        Sprite temp = (empty == true) ? checkOn : checkOff;
+        Color checkColor = (empty == true) ? Color.white : Color.red;
         {
-            checkImage.sprite = temp;
+            checkImage.color = checkColor;
         }
         checkImage.gameObject.SetActive(true);
-        return (empty == true);
+        return empty;
     }
 
     public void CheckOff()
     {
-        checkImage.gameObject.SetActive(false);
+        checkImage.color = Color.white;
+        checkImage.gameObject.SetActive(empty == false);
     }
 
 

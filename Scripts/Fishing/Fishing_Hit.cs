@@ -75,10 +75,28 @@ public class Fishing_Hit : MonoBehaviour
     public float getAngle;
     public float criticalAngle, catchAngle;
 
+
+    public void InputMouseLeft(bool _input)
+    {
+        if (_input == true)
+        {
+            spinStop = true;
+        }
+    }
+
+    public void InputMouseRight(bool _input)
+    {
+        if (_input == true)
+        {
+            spinStop = true;
+        }
+    }
+
     public void Action()
     {
         spinStop = true;
     }
+
     public enum HitResult
     {
         Critical,
