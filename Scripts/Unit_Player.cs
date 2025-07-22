@@ -205,7 +205,7 @@ public class Unit_Player : MonoBehaviour
 
     }
     //================================================================================================================================================
-    // 공격
+    // 액션
     //================================================================================================================================================
 
     Coroutine stateAction;
@@ -220,7 +220,7 @@ public class Unit_Player : MonoBehaviour
     {
         if (_input == true)
         {
-            if (closestTarget == null)
+            if (closestTarget == null)// 낚시
             {
                 string id = "Fs_1001";
                 FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];

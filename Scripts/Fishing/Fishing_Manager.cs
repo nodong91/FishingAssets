@@ -61,7 +61,6 @@ public class Fishing_Manager : MonoBehaviour
 
     void EndGame(FishingState _fishState)
     {
-        fishingCamera.OffCamera();
         StateMachine(_fishState);
         Debug.LogWarning(_fishState);
     }
@@ -141,6 +140,7 @@ public class Fishing_Manager : MonoBehaviour
     void StateReady()
     {
         Game_Manager.current.OutOfControll(false);
+        fishingCamera.OffCamera();
         fishStruct = default;
     }
 
