@@ -406,13 +406,13 @@
             "m_Id": "026e74aad538419f99aaa64b82d846b8"
         },
         {
-            "m_Id": "3b9aa4ec285d4ee2a01126743b1c38fb"
+            "m_Id": "6bc89867f6bc4dcf90f5f994be448171"
         },
         {
-            "m_Id": "df7d19b08974409ab677768ed8af57bf"
+            "m_Id": "fa8607781d454146a9166e96aeb50d30"
         },
         {
-            "m_Id": "ee40115732f1407f850fff4fcdcbb44a"
+            "m_Id": "681b4e59c9bb4c2ba00227214cdf158e"
         }
     ],
     "m_GroupDatas": [
@@ -1893,13 +1893,13 @@
         },
         "m_Blocks": [
             {
-                "m_Id": "3b9aa4ec285d4ee2a01126743b1c38fb"
+                "m_Id": "6bc89867f6bc4dcf90f5f994be448171"
             },
             {
-                "m_Id": "df7d19b08974409ab677768ed8af57bf"
+                "m_Id": "fa8607781d454146a9166e96aeb50d30"
             },
             {
-                "m_Id": "ee40115732f1407f850fff4fcdcbb44a"
+                "m_Id": "681b4e59c9bb4c2ba00227214cdf158e"
             }
         ]
     },
@@ -2007,7 +2007,7 @@
     "m_Title": "Face Texture",
     "m_Position": {
         "x": -4779.0,
-        "y": -2949.00048828125
+        "y": -2949.0
     }
 }
 
@@ -3729,6 +3729,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "Composite",
     "m_FunctionSource": "96de908384869cd409c75efa351d5edf",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -4359,40 +4360,6 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "3b9aa4ec285d4ee2a01126743b1c38fb",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "VertexDescription.Position",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "aee9b1b4fcbe4ce8b657740916e7a372"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "VertexDescription.Position"
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
     "m_ObjectId": "3c50439118b2496f9e390021b0964606",
     "m_Group": {
         "m_Id": ""
@@ -4854,7 +4821,7 @@
     "m_Title": "Face + 3 Outlines + Underlay",
     "m_Position": {
         "x": -5437.0,
-        "y": -3558.000244140625
+        "y": -3558.0
     }
 }
 
@@ -4923,6 +4890,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "Layer1",
     "m_FunctionSource": "96de908384869cd409c75efa351d5edf",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -5089,7 +5057,7 @@
     "m_Title": "Underlay",
     "m_Position": {
         "x": -4959.0,
-        "y": -4542.00048828125
+        "y": -4542.0
     }
 }
 
@@ -5552,6 +5520,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "GetSurfaceNormal",
     "m_FunctionSource": "96de908384869cd409c75efa351d5edf",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -5632,6 +5601,30 @@
     },
     "isMainColor": false,
     "m_ColorMode": 1
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PositionMaterialSlot",
+    "m_ObjectId": "536ea5c72cd040ddb04fe8461ae7a666",
+    "m_Id": 0,
+    "m_DisplayName": "Position",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Position",
+    "m_StageCapability": 1,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": [],
+    "m_Space": 0
 }
 
 {
@@ -6042,30 +6035,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.NormalMaterialSlot",
-    "m_ObjectId": "622c31c25dbc46f3934a7626f75394ff",
-    "m_Id": 0,
-    "m_DisplayName": "Normal",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Normal",
-    "m_StageCapability": 1,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_Labels": [],
-    "m_Space": 0
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.Rendering.HighDefinition.ShaderGraph.HDLitData",
     "m_ObjectId": "6238ae56182d404f8563cb88cb801549",
     "m_RayTracing": false,
@@ -6349,6 +6318,40 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "681b4e59c9bb4c2ba00227214cdf158e",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "VertexDescription.Tangent",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "96cda80a4d234a9d9963ebf0b43b8258"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "VertexDescription.Tangent"
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "68ec7c31365549d6a8ce883edfc02de2",
     "m_Id": 4,
@@ -6460,6 +6463,40 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "6bc89867f6bc4dcf90f5f994be448171",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "VertexDescription.Position",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "536ea5c72cd040ddb04fe8461ae7a666"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "VertexDescription.Position"
 }
 
 {
@@ -6966,6 +7003,30 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.NormalMaterialSlot",
+    "m_ObjectId": "7768cf9f8d3544baaaf88ff69e54976e",
+    "m_Id": 0,
+    "m_DisplayName": "Normal",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Normal",
+    "m_StageCapability": 1,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": [],
+    "m_Space": 0
 }
 
 {
@@ -7687,6 +7748,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "ScreenSpaceRatio",
     "m_FunctionSource": "96de908384869cd409c75efa351d5edf",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -7972,6 +8034,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "ComputeSDF",
     "m_FunctionSource": "96de908384869cd409c75efa351d5edf",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -8612,6 +8675,30 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.TangentMaterialSlot",
+    "m_ObjectId": "96cda80a4d234a9d9963ebf0b43b8258",
+    "m_Id": 0,
+    "m_DisplayName": "Tangent",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Tangent",
+    "m_StageCapability": 1,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "m_Labels": [],
+    "m_Space": 0
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "96ee2c88953543d89b5d5ea56afb78e8",
     "m_Id": 0,
@@ -8685,7 +8772,7 @@
     "m_Title": "Outline1 Texture",
     "m_Position": {
         "x": -4633.0,
-        "y": -2496.00048828125
+        "y": -2496.0
     }
 }
 
@@ -9076,30 +9163,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.TangentMaterialSlot",
-    "m_ObjectId": "9f0f424c6f224a1598177c8b4cdc74ca",
-    "m_Id": 0,
-    "m_DisplayName": "Tangent",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Tangent",
-    "m_StageCapability": 1,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_Labels": [],
-    "m_Space": 0
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "a0285c9c381a49cba194709efa0a7c85",
     "m_Id": 7,
@@ -9284,6 +9347,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "GenerateUV",
     "m_FunctionSource": "96de908384869cd409c75efa351d5edf",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -9606,6 +9670,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "EvaluateLight",
     "m_FunctionSource": "96de908384869cd409c75efa351d5edf",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -9772,30 +9837,6 @@
         "w": 0.0
     },
     "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.PositionMaterialSlot",
-    "m_ObjectId": "aee9b1b4fcbe4ce8b657740916e7a372",
-    "m_Id": 0,
-    "m_DisplayName": "Position",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Position",
-    "m_StageCapability": 1,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_Labels": [],
-    "m_Space": 0
 }
 
 {
@@ -10582,6 +10623,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "GenerateUV",
     "m_FunctionSource": "96de908384869cd409c75efa351d5edf",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -11233,7 +11275,7 @@
     "m_Title": "Generate Normal",
     "m_Position": {
         "x": -4511.0,
-        "y": -3999.000244140625
+        "y": -3999.0
     }
 }
 
@@ -11512,7 +11554,7 @@
     "m_Title": "Offset Scale",
     "m_Position": {
         "x": -5893.0,
-        "y": -3921.000244140625
+        "y": -3921.0
     }
 }
 
@@ -11629,40 +11671,6 @@
     "m_ShaderOutputName": "Out",
     "m_StageCapability": 3,
     "m_BareResource": false
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "df7d19b08974409ab677768ed8af57bf",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "VertexDescription.Normal",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "622c31c25dbc46f3934a7626f75394ff"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "VertexDescription.Normal"
 }
 
 {
@@ -11912,6 +11920,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "ComputeSDF44",
     "m_FunctionSource": "96de908384869cd409c75efa351d5edf",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -12123,8 +12132,8 @@
     "m_ObjectId": "ecf16c34d46f4502ac601f0c38c7576b",
     "m_Title": "Vertex Color",
     "m_Position": {
-        "x": -3556.999755859375,
-        "y": -3525.000244140625
+        "x": -3557.0,
+        "y": -3525.0
     }
 }
 
@@ -12191,40 +12200,6 @@
         "z": 0.0
     },
     "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "ee40115732f1407f850fff4fcdcbb44a",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "VertexDescription.Tangent",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "9f0f424c6f224a1598177c8b4cdc74ca"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "VertexDescription.Tangent"
 }
 
 {
@@ -12371,6 +12346,7 @@
     "m_SourceType": 0,
     "m_FunctionName": "Layer4",
     "m_FunctionSource": "96de908384869cd409c75efa351d5edf",
+    "m_FunctionSourceUsePragmas": true,
     "m_FunctionBody": "Enter function body here..."
 }
 
@@ -12784,6 +12760,40 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "fa8607781d454146a9166e96aeb50d30",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "VertexDescription.Normal",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "7768cf9f8d3544baaaf88ff69e54976e"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "VertexDescription.Normal"
 }
 
 {

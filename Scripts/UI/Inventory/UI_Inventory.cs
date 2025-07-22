@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -20,7 +19,7 @@ public class UI_Inventory : MonoBehaviour
     public UI_Inventory_Infomation infomation;
 
     public SlotType enterSlotType, selectSlotType;
-    public UI_Inventory_Slot enterSlot, selectSlot;
+    private UI_Inventory_Slot enterSlot, selectSlot;
 
     ItemClass selectItemClass;
     ItemClass originItemClass;
@@ -79,7 +78,7 @@ public class UI_Inventory : MonoBehaviour
         DragSlot();
     }
 
-    void BuyItem(string _id)
+    void BuyItem(string _id)// 구매
     {
         ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_id);
         if (moneyValue < item.price)
@@ -87,22 +86,22 @@ public class UI_Inventory : MonoBehaviour
 
         if (myBox.BuyItem(item) == true)// 살 공간이 있으면 슬롯세팅
         {
-            if (movingMoney != null)
-                StopCoroutine(movingMoney);
-            movingMoney = StartCoroutine(MoneyWallet(-item.price));
+            float price = -item.price;
+            if (CheckMoney(price) == true)
+                MoveMoney(price);
         }
     }
 
-    void EmptySlot(UI_Inventory_Slot _slot)
+    void SetEmptySlot(UI_Inventory_Slot _slot)// 슬롯 비우기
     {
         UI_Inventory_Base getInventory = GetInventory(enterSlotType);
         getInventory.SetEmpty(_slot);
     }
 
-    void TradeItem()
+    bool TryTradeItem()// 상점
     {
         if (selectSlotType == SlotType.None || selectSlotType == SlotType.Storage || enterSlotType == SlotType.Storage)
-            return;
+            return true;
 
         if (enterSlotType != selectSlotType)
         {
@@ -110,10 +109,17 @@ public class UI_Inventory : MonoBehaviour
             if (selectSlotType == SlotType.Shop)
                 price *= -1f;
 
-            if (movingMoney != null)
-                StopCoroutine(movingMoney);
-            movingMoney = StartCoroutine(MoneyWallet(price));
+            if (CheckMoney(price) == true)
+                MoveMoney(price);
+            else
+                return false;
         }
+        return true;
+    }
+
+    bool CheckMoney(float _price)
+    {
+        return (moneyValue + _price >= 0f);
     }
 
     //===========================================================================================================================
@@ -124,11 +130,20 @@ public class UI_Inventory : MonoBehaviour
         // 아이템 체크
         if (onDrag == true)// 드래그 중일 때 드랍
         {
-            if (onCheck == true)
+            if (onCheck == true)// 놓을 수 있다.
             {
-                UI_Inventory_Base getInventory = GetInventory(enterSlotType);
-                getInventory.SetSlot(enterSlot, selectItemClass);
-                TradeItem();
+                if (TryTradeItem() == true)// 트레이드가 가능한지
+                {
+                    UI_Inventory_Base getInventory = GetInventory(enterSlotType);
+                    getInventory.SetSlot(enterSlot, selectItemClass);
+                }
+                else
+                {
+                    // 돈없음
+                    UI_Inventory_Base getInventory = GetInventory(selectSlotType);
+                    getInventory.SetSlot(selectSlot, originItemClass);
+                    Game_Manager.current.mainUI.SetWarnningText("돈 없음");
+                }
             }
             else
             {
@@ -141,10 +156,11 @@ public class UI_Inventory : MonoBehaviour
                     // 놓을 수 없다면 원래 위치로 돌리기
                     UI_Inventory_Base getInventory = GetInventory(selectSlotType);
                     getInventory.SetSlot(selectSlot, originItemClass);
+                    Game_Manager.current.mainUI.SetWarnningText("놓을 수 없음");
                 }
             }
             originItemClass = null;
-            OnTreshBox();
+            OffDragReset();
         }
         else// 드래그 중이 아닐 때 픽업
         {
@@ -156,7 +172,7 @@ public class UI_Inventory : MonoBehaviour
             selectSlotType = enterSlotType;
 
             SetOriginItemClass();
-            EmptySlot(selectSlot);
+            SetEmptySlot(selectSlot);
             DragSlot();
         }
     }
@@ -169,7 +185,7 @@ public class UI_Inventory : MonoBehaviour
         }
         else if (_slot.empty == false)
         {
-            EmptySlot(_slot.GetLinkSlot);
+            SetEmptySlot(_slot.GetLinkSlot);
         }
     }
 
@@ -191,7 +207,7 @@ public class UI_Inventory : MonoBehaviour
         CheckSlot(SlotType.None);
     }
 
-    public void OnTreshBox()
+    public void OffDragReset()
     {
         selectSlot = null;
         selectItemClass = null;
@@ -281,27 +297,36 @@ public class UI_Inventory : MonoBehaviour
         return null;
     }
 
-    IEnumerator MoneyWallet(float _money)
+    void MoveMoney(float _price)
+    {
+        if (moneyValue + _price < 0f)
+            return;
+
+        if (movingMoney != null)
+            StopCoroutine(movingMoney);
+        movingMoney = StartCoroutine(MoneyMoving(_price));
+    }
+
+    IEnumerator MoneyMoving(float _price)
     {
         float prevMoney = moneyValue;
-        moneyValue += _money;
-        bool addMoney = (prevMoney < moneyValue);
+        moneyValue += _price;
         bool moveMoney = true;
+        Debug.LogWarning(_price + "          " + moneyValue);
         while (moveMoney == true)
         {
             prevMoney = Mathf.Lerp(prevMoney, moneyValue, 0.1f);
             moneyText.text = Mathf.Round(prevMoney).ToString();
 
-            if (addMoney == true)// 판매인 경우
+            if (_price < 0f)// 판매인 경우
             {
-                if (prevMoney > moneyValue)
-                {
+                if (prevMoney <= moneyValue)
                     moveMoney = false;
-                }
             }
-            else if (prevMoney < moneyValue)// 구매인 경우
+            else if (_price > 0f)// 구매인 경우
             {
-                moveMoney = false;
+                if (prevMoney >= moneyValue)
+                    moveMoney = false;
             }
             yield return null;
         }

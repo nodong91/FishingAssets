@@ -28,6 +28,7 @@ public class UI_Inventory_Base : MonoBehaviour
     public Vector2Int inventorySize;
 
     private UI_Inventory_Slot[,] allSlots;
+    Queue<UI_Inventory_Slot> slotPool = new Queue<UI_Inventory_Slot>();
     private List<UI_Inventory_Slot> checkList = new List<UI_Inventory_Slot>();
 
     private ItemClass dragItemClass;
@@ -75,7 +76,7 @@ public class UI_Inventory_Base : MonoBehaviour
         {
             for (int x = 0; x < inventorySize.x; x++)
             {
-                UI_Inventory_Slot inst = Instantiate(inventorySlot, gridLayoutGroup.transform);
+                UI_Inventory_Slot inst = TrySlotPool();
                 inst.SetStart(x, y);
                 inst.SetEmpty();
                 inst.dele_LeftClick = OnPointerLeftClick;
@@ -85,6 +86,15 @@ public class UI_Inventory_Base : MonoBehaviour
                 allSlots[x, y] = inst;
             }
         }
+    }
+
+    UI_Inventory_Slot TrySlotPool()
+    {
+        if (slotPool.Count > 0)
+            return slotPool.Dequeue();
+
+        UI_Inventory_Slot inst = Instantiate(inventorySlot, gridLayoutGroup.transform);
+        return inst;
     }
 
     void DictCheck()
@@ -261,7 +271,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public void RemoveDragItem()
     {
-        Game_Manager.current.inventory.OnTreshBox();
+        Game_Manager.current.inventory.OffDragReset();
     }
 
     //===========================================================================================================================

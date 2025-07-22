@@ -6,14 +6,7 @@ public class Trigger_Fish : MonoBehaviour
     public Trigger_Setting triggerSetting;
     public string id;
     public FishStruct fishStruct;
-    //public FishStruct.FishType GetFishType { get { return fishStruct.fishType; } }
-    //public FishStruct.RandomSize randomSize;
-
-    //public override Sprite GetIconSprite
-    //{
-    //    get { return fishStruct.itemStruct.icon; }
-    //}
-
+    
     void Start()
     {
         SetFish(id);
@@ -30,6 +23,6 @@ public class Trigger_Fish : MonoBehaviour
 
     void FishingStart()
     {
-        Game_Manager.current.fishingManager.StartGame(fishStruct);
+        //Game_Manager.current.fishingManager.StartGame(fishStruct);
     }
 }

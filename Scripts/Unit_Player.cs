@@ -3,10 +3,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Data_Manager;
 
 public class Unit_Player : MonoBehaviour
 {
-
     public enum State
     {
         None,
@@ -220,7 +220,13 @@ public class Unit_Player : MonoBehaviour
     {
         if (_input == true)
         {
-            if (closestTarget != null)
+            if (closestTarget == null)
+            {
+                string id = "Fs_1001";
+                FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];
+                Game_Manager.current.fishingManager.StartGame(fishStruct);
+            }
+            else
             {
                 closestTarget.TriggerAction();
                 triggerGameObject.Remove(closestTarget);
