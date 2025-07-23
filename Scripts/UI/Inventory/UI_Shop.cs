@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static Data_Manager;
 
 public class UI_Shop : UI_Inventory_Base
@@ -11,6 +12,7 @@ public class UI_Shop : UI_Inventory_Base
 
     [Header("- Shop")]
     public Data_Shop shopItem;
+    public Toggle[] groupToggles;
 
     public override void SetStart()
     {
@@ -18,6 +20,28 @@ public class UI_Shop : UI_Inventory_Base
         base.SetStart();
         //SetFixedItem();
         //SetRandomItem();
+        for (int i = 0; i < groupToggles.Length; i++)
+        {
+            int index = i;
+            groupToggles[i].onValueChanged.AddListener(delegate { SetToggle(index); });
+        }
+        groupToggles[0].isOn = true;
+    }
+
+    void SetToggle(int _index)
+    {
+        switch (_index)
+        {
+            case 0:
+                SetInventoryItem("Temp1");
+                break;
+            case 1:
+                SetInventoryItem("Temp2");
+                break;
+            case 2:
+                SetInventoryItem("Temp3");
+                break;
+        }
     }
 
     public override void OpenCanvas(bool _open)

@@ -52,10 +52,44 @@ public class UI_Inventory_Base : MonoBehaviour
 
     IEnumerator SetLoadingItem()
     {
-        SetInventory();
-        yield return null;
+        SetInventorySlot();
+        yield return new WaitForEndOfFrame();
         LoadInventory();
         OpenCanvas(false);
+    }
+
+    public void SetInventoryItem(string _saveData)
+    {
+        EmptyInventory();
+
+        saveData = _saveData;
+        LoadInventory();
+    }
+
+    void EmptyInventory()
+    {
+        dictItemClass.Clear();
+        foreach (var item in allSlots)
+        {
+            if (item.empty == true)
+                continue;
+
+            UI_Inventory_Slot slot = item.GetLinkSlot;
+            iconQueue.Enqueue(slot.GetSlotImage);
+            slot.GetSlotImage.gameObject.SetActive(false);
+
+            Vector2Int[] shape = slot.itemClass.shape;
+            slot.SetEmpty();// 메인 슬롯 비우기
+            if (shape == null)
+                return;
+            // 사이즈
+            for (int i = 0; i < shape.Length; i++)
+            {
+                int slotX = slot.slotNum.x + shape[i].x;
+                int slotY = slot.slotNum.y + shape[i].y;
+                allSlots[slotX, slotY].SetEmpty();
+            }
+        }
     }
 
     public virtual void OpenCanvas(bool _open)
@@ -65,7 +99,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
     protected virtual void SetWeight(float _weight) { }
 
-    void SetInventory()
+    void SetInventorySlot()
     {
         gridLayoutGroup.cellSize = new Vector2(1f, 1f) * slotSize;
         gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
@@ -97,7 +131,7 @@ public class UI_Inventory_Base : MonoBehaviour
         return inst;
     }
 
-    void DictCheck()
+    void SaveDictCheck()
     {
         saveItems = new List<SaveItemClass>();
         foreach (var child in dictItemClass)
@@ -136,7 +170,7 @@ public class UI_Inventory_Base : MonoBehaviour
         SetWeight(_itemClass.item.weight);
 
         dictItemClass[_slot.slotNum] = _itemClass;
-        DictCheck();
+        SaveDictCheck();
     }
 
     Queue<Image> iconQueue = new Queue<Image>();
@@ -165,10 +199,10 @@ public class UI_Inventory_Base : MonoBehaviour
         _image.rectTransform.pivot = pivot;
     }
 
-    public void SetEmpty(UI_Inventory_Slot _slot)// 비우기
+    public void SlotEmpty(UI_Inventory_Slot _slot)// 비우기
     {
         dictItemClass.Remove(_slot.slotNum);
-        DictCheck();
+        SaveDictCheck();
 
         iconQueue.Enqueue(_slot.GetSlotImage);
         _slot.GetSlotImage.gameObject.SetActive(false);

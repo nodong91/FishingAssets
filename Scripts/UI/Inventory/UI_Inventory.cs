@@ -95,7 +95,7 @@ public class UI_Inventory : MonoBehaviour
     void SetEmptySlot(UI_Inventory_Slot _slot)// 슬롯 비우기
     {
         UI_Inventory_Base getInventory = GetInventory(enterSlotType);
-        getInventory.SetEmpty(_slot);
+        getInventory.SlotEmpty(_slot);
     }
 
     bool TryTradeItem()// 상점
