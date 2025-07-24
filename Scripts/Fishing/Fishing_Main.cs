@@ -99,7 +99,6 @@ public class Fishing_Main : MonoBehaviour
         else
         {
             RotateTarget(0);
-            Debug.LogWarning("ijoijik;k;k");
         }
     }
 

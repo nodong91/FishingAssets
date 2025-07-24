@@ -113,7 +113,7 @@ public class UI_Main : MonoBehaviour
 
     void InventoryButton()
     {
-        Game_Manager.current.inventory.OpenCanvas(true);
+        Game_Manager.current.inventory.OpenInventory(true);
     }
 
     void FishGuideButton()

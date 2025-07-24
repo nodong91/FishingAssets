@@ -14,7 +14,16 @@ public class UI_Inventory : MonoBehaviour
     bool onDrag, onCheck;
     Coroutine slotMoving, movingMoney;
     float moneyValue;
-    public float TryMoney { get { return moneyValue; } set { moneyValue = value; } }
+    public float TryMoney
+    {
+        get { return moneyValue; }
+        set
+        {
+            float money = value;
+            moneyText.text = money.ToString();
+            moneyValue = money;
+        }
+    }
     public TMPro.TMP_Text moneyText;
     public UI_Inventory_Infomation infomation;
 
@@ -35,7 +44,7 @@ public class UI_Inventory : MonoBehaviour
         shop.SetStart();
     }
 
-    public void OpenCanvas(bool _open)
+    public void OpenInventory(bool _open)
     {
         myBox.OpenCanvas(_open);
     }
@@ -43,7 +52,13 @@ public class UI_Inventory : MonoBehaviour
     public void OpenShop(bool _open)
     {
         myBox.OpenCanvas(_open);
-        shop.OpenCanvas(_open);
+        shop.SetShop(_open);
+    }
+
+    public void OpenStorage(bool _open)
+    {
+        myBox.OpenCanvas(_open);
+        shop.SetStorage(_open);
     }
 
     void Update()// 아이템 추가 테스트
@@ -78,18 +93,25 @@ public class UI_Inventory : MonoBehaviour
         DragSlot();
     }
 
-    void BuyItem(string _id)// 구매
+    void SellItem(string _id)
+    {
+        ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_id);
+        float price = item.price;
+        MoveMoney(price);
+    }
+
+    bool BuyItem(string _id)// 구매
     {
         ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_id);
         if (moneyValue < item.price)
-            return;
+            return false;
 
-        if (myBox.BuyItem(item) == true)// 살 공간이 있으면 슬롯세팅
+        if (myBox.AddItem(item) == true)// 살 공간이 있으면 슬롯세팅
         {
             float price = -item.price;
-            if (CheckMoney(price) == true)
-                MoveMoney(price);
+            MoveMoney(price);
         }
+        return true;
     }
 
     void SetEmptySlot(UI_Inventory_Slot _slot)// 슬롯 비우기
@@ -100,26 +122,28 @@ public class UI_Inventory : MonoBehaviour
 
     bool TryTradeItem()// 상점
     {
-        if (selectSlotType == SlotType.None || selectSlotType == SlotType.Storage || enterSlotType == SlotType.Storage)
-            return true;
-
-        if (enterSlotType != selectSlotType)
+        if (selectSlotType == SlotType.Shop && enterSlotType == SlotType.MyBox)// 구매
         {
             float price = selectItemClass.item.price;
-            if (selectSlotType == SlotType.Shop)
-                price *= -1f;
-
-            if (CheckMoney(price) == true)
-                MoveMoney(price);
+            Debug.LogWarning(moneyValue + ">>>>" + price);
+            if (moneyValue < price)
+            {
+                Debug.LogWarning("돈없음");
+                return false;// 돈없음
+            }
             else
-                return false;
+            {
+                MoveMoney(-price);
+                Debug.LogWarning("구매");
+            }
+        }
+        else if (selectSlotType == SlotType.MyBox && enterSlotType == SlotType.Shop)// 판매
+        {
+            float price = selectItemClass.item.price;
+            MoveMoney(price);
+            Debug.LogWarning("판매");
         }
         return true;
-    }
-
-    bool CheckMoney(float _price)
-    {
-        return (moneyValue + _price >= 0f);
     }
 
     //===========================================================================================================================
@@ -134,6 +158,10 @@ public class UI_Inventory : MonoBehaviour
             {
                 if (TryTradeItem() == true)// 트레이드가 가능한지
                 {
+                    if (enterSlotType == SlotType.Shop)// 판매
+                    {
+                        Debug.LogWarning("판매");
+                    }
                     UI_Inventory_Base getInventory = GetInventory(enterSlotType);
                     getInventory.SetSlot(enterSlot, selectItemClass);
                 }
@@ -143,13 +171,16 @@ public class UI_Inventory : MonoBehaviour
                     UI_Inventory_Base getInventory = GetInventory(selectSlotType);
                     getInventory.SetSlot(selectSlot, originItemClass);
                     Game_Manager.current.mainUI.SetWarnningText("돈 없음");
+                    Debug.LogWarning("돈 없음");
                 }
+                Debug.LogWarning("???");
             }
             else
             {
                 if (selectSlot == null)
                 {
                     // 낚시 성공등 트레이드가 아닌 경우?
+                    Debug.LogWarning("낚시 성공등 트레이드가 아닌 경우?");
                 }
                 else
                 {
@@ -157,6 +188,7 @@ public class UI_Inventory : MonoBehaviour
                     UI_Inventory_Base getInventory = GetInventory(selectSlotType);
                     getInventory.SetSlot(selectSlot, originItemClass);
                     Game_Manager.current.mainUI.SetWarnningText("놓을 수 없음");
+                    Debug.LogWarning("놓을 수 없음");
                 }
             }
             originItemClass = null;
@@ -171,8 +203,8 @@ public class UI_Inventory : MonoBehaviour
             selectItemClass = selectSlot.itemClass;
             selectSlotType = enterSlotType;
 
-            SetOriginItemClass();
-            SetEmptySlot(selectSlot);
+            SetOriginItemClass();// 기존 위치 저장
+            SetEmptySlot(selectSlot);// 위치 비우기
             DragSlot();
         }
     }
@@ -185,6 +217,18 @@ public class UI_Inventory : MonoBehaviour
         }
         else if (_slot.empty == false)
         {
+            if (enterSlotType == SlotType.MyBox)// 판매
+            {
+                SellItem(_slot.itemClass.item.id);
+            }
+            else if (enterSlotType == SlotType.Shop)
+            {
+                if (BuyItem(_slot.itemClass.item.id) == false)
+                {
+                    Game_Manager.current.mainUI.SetWarnningText("돈이 없음");
+                    return;
+                }
+            }
             SetEmptySlot(_slot.GetLinkSlot);
         }
     }
@@ -239,10 +283,7 @@ public class UI_Inventory : MonoBehaviour
         iconImage.gameObject.SetActive(true);
         if (selectSlot != null)
         {
-            Debug.LogWarning(selectItemClass);
-            Debug.LogWarning(selectItemClass.item);
             ItemStruct itemStruct = selectItemClass.item;
-
             SetIconImage(itemStruct);
         }
 
@@ -312,7 +353,6 @@ public class UI_Inventory : MonoBehaviour
         float prevMoney = moneyValue;
         moneyValue += _price;
         bool moveMoney = true;
-        Debug.LogWarning(_price + "          " + moneyValue);
         while (moveMoney == true)
         {
             prevMoney = Mathf.Lerp(prevMoney, moneyValue, 0.1f);

@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
-using static Data_Manager.FishStruct;
 
 public class Fishing_Complate : MonoBehaviour
 {
@@ -18,7 +17,7 @@ public class Fishing_Complate : MonoBehaviour
     void CloseButton()
     {
         fishInfomation.gameObject.SetActive(false);
-        Game_Manager.current.inventory.OpenCanvas(true);
+        Game_Manager.current.inventory.OpenInventory(true);
 
         ItemStruct fishItem = fishStruct.itemStruct;
         float size = randomSize.size;

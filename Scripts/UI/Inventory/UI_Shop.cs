@@ -16,10 +16,7 @@ public class UI_Shop : UI_Inventory_Base
 
     public override void SetStart()
     {
-        slotType = SlotType.Shop;
         base.SetStart();
-        //SetFixedItem();
-        //SetRandomItem();
         for (int i = 0; i < groupToggles.Length; i++)
         {
             int index = i;
@@ -47,21 +44,53 @@ public class UI_Shop : UI_Inventory_Base
     public override void OpenCanvas(bool _open)
     {
         base.OpenCanvas(_open);
+        if (_open == false)
+        {
+            // »óÁ¡ ´ÝÀ» ¶§ ÀúÀå
+            SaveData_Continue.current.SetContinue();
+        }
+    }
+
+    public void SetShop(bool _open)
+    {
+        slotType = SlotType.Shop;
+        SetShopItem();
+        OpenCanvas(_open);
+    }
+
+    public void SetStorage(bool _open)
+    {
+        slotType = SlotType.Storage;
+        OpenCanvas(_open);
     }
 
     //===========================================================================================================================
     // »óÁ¡ ¹°°Ç ¹èÄ¡
     //===========================================================================================================================
+    int resetDay = 0;
+    void SetShopItem()
+    {
+        int checkDay = Game_Manager.current.timeUI.day;
+        if (resetDay != checkDay)
+        {
+            resetDay = checkDay;
+
+            SetFixedItem();
+            SetRandomItem();
+        }
+    }
+
     void SetFixedItem()
     {
+        EmptyInventory();
         string[] setID = shopItem.fixedID;
         for (int i = 0; i < setID.Length; i++)
         {
             ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(setID[i]);
-            //if (AddItem(item) == false)
-            //{
-            //    break;// ºóÄ­ÀÌ ¾øÀ¸¸é ±×¸¸
-            //}
+            if (AddItem(item) == false)
+            {
+                break;// ºóÄ­ÀÌ ¾øÀ¸¸é ±×¸¸
+            }
         }
     }
 
@@ -75,10 +104,10 @@ public class UI_Shop : UI_Inventory_Base
         for (int i = 0; i < amount; i++)
         {
             ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(setID[i]);
-            //if (AddItem(item) == false)
-            //{
-            //    break;// ºóÄ­ÀÌ ¾øÀ¸¸é ±×¸¸
-            //}
+            if (AddItem(item) == false)
+            {
+                break;// ºóÄ­ÀÌ ¾øÀ¸¸é ±×¸¸
+            }
         }
     }
 }

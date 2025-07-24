@@ -30,6 +30,8 @@ public class UI_Inventory_Base : MonoBehaviour
     private UI_Inventory_Slot[,] allSlots;
     Queue<UI_Inventory_Slot> slotPool = new Queue<UI_Inventory_Slot>();
     private List<UI_Inventory_Slot> checkList = new List<UI_Inventory_Slot>();
+    Queue<Image> iconQueue = new Queue<Image>();
+    public RectTransform iconParent;
 
     private ItemClass dragItemClass;
 
@@ -43,6 +45,8 @@ public class UI_Inventory_Base : MonoBehaviour
     }
     private List<SaveItemClass> saveItems;
     Dictionary<Vector2Int, ItemClass> dictItemClass = new Dictionary<Vector2Int, ItemClass>();
+
+    protected virtual void SetWeight(float _weight) { }
 
     public virtual void SetStart()
     {
@@ -58,6 +62,11 @@ public class UI_Inventory_Base : MonoBehaviour
         OpenCanvas(false);
     }
 
+    public virtual void OpenCanvas(bool _open)
+    {
+        StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
+    }
+
     public void SetInventoryItem(string _saveData)
     {
         EmptyInventory();
@@ -66,7 +75,7 @@ public class UI_Inventory_Base : MonoBehaviour
         LoadInventory();
     }
 
-    void EmptyInventory()
+    public void EmptyInventory()
     {
         dictItemClass.Clear();
         foreach (var item in allSlots)
@@ -91,13 +100,6 @@ public class UI_Inventory_Base : MonoBehaviour
             }
         }
     }
-
-    public virtual void OpenCanvas(bool _open)
-    {
-        StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
-    }
-
-    protected virtual void SetWeight(float _weight) { }
 
     void SetInventorySlot()
     {
@@ -157,6 +159,7 @@ public class UI_Inventory_Base : MonoBehaviour
         _slot.SetSlotImage = TryIcon(_itemClass.item);// ÀÌ¹ÌÁö ¼¼ÆÃ
         _slot.GetSlotImage.transform.position = _slot.transform.position;
         _slot.GetSlotImage.transform.rotation = Quaternion.Euler(0f, 0f, _itemClass.angle);
+        SetWeight(_itemClass.item.weight);// ¹«°Ô ¼¼ÆÃ
 
         // ½½·Ô ¼¼ÆÃ
         Vector2Int[] shape = _itemClass.shape;
@@ -167,14 +170,10 @@ public class UI_Inventory_Base : MonoBehaviour
             allSlots[slotX, slotY].SetLink(_slot);
         }
 
-        SetWeight(_itemClass.item.weight);
-
         dictItemClass[_slot.slotNum] = _itemClass;
         SaveDictCheck();
     }
 
-    Queue<Image> iconQueue = new Queue<Image>();
-    public RectTransform iconParent;
     Image TryIcon(ItemStruct _itemStruct)
     {
         if (iconQueue.Count > 0)
@@ -204,6 +203,7 @@ public class UI_Inventory_Base : MonoBehaviour
         dictItemClass.Remove(_slot.slotNum);
         SaveDictCheck();
 
+        SetWeight(-_slot.itemClass.item.weight);// ¹«°Ô »©±â
         iconQueue.Enqueue(_slot.GetSlotImage);
         _slot.GetSlotImage.gameObject.SetActive(false);
 
@@ -220,7 +220,7 @@ public class UI_Inventory_Base : MonoBehaviour
         }
     }
 
-    UI_Inventory_Slot GetEmptySlot(ItemStruct _item)// ºó½½·Ô Ã£±â
+    public UI_Inventory_Slot GetEmptySlot(ItemStruct _item)// ºó½½·Ô Ã£±â
     {
         for (int y = 0; y < inventorySize.y; y++)
         {
@@ -259,7 +259,7 @@ public class UI_Inventory_Base : MonoBehaviour
         return null;
     }
 
-    public bool BuyItem(ItemStruct _item)// ±¸¸Å
+    public bool AddItem(ItemStruct _item)// ±¸¸Å
     {
         UI_Inventory_Slot slot = GetEmptySlot(_item);
         if (slot == null)

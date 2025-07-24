@@ -33,6 +33,7 @@ public class UI_Landing : MonoBehaviour
         outButton.onClick.AddListener(OutButton);
         shopButton.onClick.AddListener(ShopButton);
         shipyardButton.onClick.AddListener(ShipyardButton);
+        storageButton.onClick.AddListener(StorageButton);
     }
 
     public void SetStart(LandingSetting[] _landings)
@@ -105,6 +106,16 @@ public class UI_Landing : MonoBehaviour
 
         Game_Manager.current.OutOfControll(false);
         outLanding?.Invoke();
+    }
+    void RestButton()// ÈÞ½Ä
+    {
+
+    }
+
+    void StorageButton()// Ã¢°í
+    {
+        Game_Manager.current.inventory.OpenStorage(true);
+        
     }
 
     void ShopButton()

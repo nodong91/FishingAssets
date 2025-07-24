@@ -30,14 +30,14 @@ public class SaveData_Continue : MonoBehaviour
     //===========================================================================================================================
     // 저장 및 불러오기
     //===========================================================================================================================
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            SetContinue();
-            Game_Manager.current.cameraManager.InputShake();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Z))
+    //    {
+    //        SetContinue();
+    //        Game_Manager.current.cameraManager.InputShake();
+    //    }
+    //}
 
     public void SetContinue()
     {
@@ -62,7 +62,7 @@ public class SaveData_Continue : MonoBehaviour
         LoadContinue();
         if (setSaveContinue == null)
             return;
-
+        // 위치
         Game_Manager.current.player.transform.position = setSaveContinue.playerPosition;
         Game_Manager.current.player.transform.rotation = setSaveContinue.playerRotation;
         Game_Manager.current.player.transform.localScale = setSaveContinue.playerScale;
@@ -71,9 +71,9 @@ public class SaveData_Continue : MonoBehaviour
         float minute = setSaveContinue.minute;
         int hour = setSaveContinue.hour;
         int day = setSaveContinue.day;
-        Game_Manager.current.timeUI.SetStart(timeSpeed, minute, hour, day);
+        Game_Manager.current.timeUI.SetStart(timeSpeed, minute, hour, day);// 시간
 
-        Game_Manager.current.inventory.TryMoney = setSaveContinue.money;
+        Game_Manager.current.inventory.TryMoney = setSaveContinue.money;// 돈
     }
 
     void SaveContinue()

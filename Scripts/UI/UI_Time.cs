@@ -40,8 +40,6 @@ public class UI_Time : MonoBehaviour
             {
                 hour = 0;
                 day++;
-                if (day >= 7)
-                    day = 0;
             }
         }
 
@@ -49,6 +47,6 @@ public class UI_Time : MonoBehaviour
         string hourStr = hour.ToString("D2");
         hourText.text = hourStr;
         minuteText.text = minuteStr;
-        weekText.text = ((WEEK)day).ToString();
+        weekText.text = ((WEEK)(day % 7)).ToString();
     }
 }
