@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SplatMap:
-        m_Texture: {fileID: 2800000, guid: 4bb039aeac147ab42be27183ca76ba7a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 54c1edf517a3b97419072132f2a06e3a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -66,9 +66,17 @@ Material:
     - _QueueOffset: 0
     - _R_Index: 0
     m_Colors:
-    - _B_Color: {r: 0, g: 0, b: 1, a: 0}
-    - _Base_Color: {r: 1, g: 1, b: 1, a: 0}
-    - _G_Color: {r: 0, g: 1, b: 0, a: 0}
-    - _R_Color: {r: 1, g: 0, b: 0, a: 0}
+    - _B_Color: {r: 0, g: 0, b: 1, a: 1}
+    - _B_TilingNOffset: {r: 1, g: 1, b: 0, a: 0}
+    - _B_Vector4: {r: 0, g: 0, b: 0, a: 0}
+    - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_TilingNOffset: {r: 1, g: 1, b: 0, a: 0}
+    - _Base_Vector4: {r: 0, g: 0, b: 0, a: 0}
+    - _G_Color: {r: 0, g: 1, b: 0, a: 1}
+    - _G_TilingNOffset: {r: 1, g: 1, b: 0, a: 0}
+    - _G_Vector4: {r: 0, g: 0, b: 0, a: 0}
+    - _R_Color: {r: 1, g: 0, b: 0, a: 1}
+    - _R_TilingNOffset: {r: 1, g: 1, b: 0, a: 0}
+    - _R_Vector4: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
