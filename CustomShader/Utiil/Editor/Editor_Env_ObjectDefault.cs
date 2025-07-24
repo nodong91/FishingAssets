@@ -13,7 +13,7 @@ namespace P01.Editor
         bool baseStruct, normalStruct, metallicStruct, aoStruct, emissionStruct, fogStruct;
         MaterialProperty _Alpha_Clipping, _Color, _BaseMap, _Base_Color_Base_Opacity, _isNormal;
         MaterialProperty _Normal_Strength, _NormalMap, _Metallic, _Roughness, _Roughness_In_Lightmap, _MRHMap;
-        MaterialProperty _isNormal_1, _UV_CHANNEL_AO, _AO_Strength, _NormalMap_1;
+        MaterialProperty _isAO, _UV_CHANNEL_AO, _AO_Strength, _AOMap;
         MaterialProperty _Emission_Map, _EmissionColor, _Fog_On, _Fog_Smooth, _Fog_Hight, _Fog_Color;
 
         public override void OnGUI(MaterialEditor _materialEditor, MaterialProperty[] _properties)
@@ -101,14 +101,14 @@ namespace P01.Editor
             if (aoStruct == true)
             {
                 EditorGUILayout.BeginVertical("box");
-                _isNormal_1 = FindProperty("_isNormal_1", properties);
-                materialEditor.ShaderProperty(_isNormal_1, new GUIContent("_isNormal_1"));
+                _isAO = FindProperty("_isAO", properties);
+                materialEditor.ShaderProperty(_isAO, new GUIContent("_isAO"));
                 _UV_CHANNEL_AO = FindProperty("_UV_CHANNEL_AO", properties);
                 materialEditor.ShaderProperty(_UV_CHANNEL_AO, new GUIContent("_UV_CHANNEL_AO"));
                 _AO_Strength = FindProperty("_AO_Strength", properties);
                 materialEditor.ShaderProperty(_AO_Strength, new GUIContent("_AO_Strength"));
-                _NormalMap_1 = FindProperty("_NormalMap_1", properties);
-                materialEditor.ShaderProperty(_NormalMap_1, new GUIContent("_NormalMap_1"));
+                _AOMap = FindProperty("_AOMap", properties);
+                materialEditor.ShaderProperty(_AOMap, new GUIContent("_AOMap"));
                 EditorGUILayout.EndVertical();
             }
         }
@@ -165,9 +165,11 @@ namespace P01.Editor
 
         void GUIColor(bool _struct, Action _action)
         {
-            GUI.color = (_struct == true) ? Color.cyan : Color.white;
+            //Color OnColor = Color.white;
+            //Color OffColor = Color.white;
+            //GUI.color = (_struct == true) ? OnColor : OffColor;
             _action();
-            GUI.color = Color.white;
+            //GUI.color = OffColor;
         }
 
         void OptionStruct()
