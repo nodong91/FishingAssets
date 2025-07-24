@@ -11,7 +11,7 @@ namespace P01.Editor
         MaterialProperty[] properties;
         //GUIStyle fontStyle;
         bool baseStruct, normalStruct, metallicStruct, aoStruct, emissionStruct, fogStruct;
-        MaterialProperty _Alpha_Clipping, _Color, _BaseMap, _Base_Color_Base_Opacity, _isNormal;
+        MaterialProperty _Color, _BaseMap, _isNormal;
         MaterialProperty _Normal_Strength, _NormalMap, _Metallic, _Roughness, _Roughness_In_Lightmap, _MRHMap;
         MaterialProperty _isAO, _UV_CHANNEL_AO, _AO_Strength, _AOMap;
         MaterialProperty _Emission_Map, _EmissionColor, _Fog_On, _Fog_Smooth, _Fog_Hight, _Fog_Color;
@@ -40,14 +40,10 @@ namespace P01.Editor
             if (baseStruct == true)
             {
                 EditorGUILayout.BeginVertical("box");
-                _Alpha_Clipping = FindProperty("_Alpha_Clipping", properties);
-                materialEditor.ShaderProperty(_Alpha_Clipping, new GUIContent("_Alpha_Clipping"));
                 _Color = FindProperty("_Color", properties);
                 materialEditor.ShaderProperty(_Color, new GUIContent("_Color"));
                 _BaseMap = FindProperty("_BaseMap", properties);
                 materialEditor.ShaderProperty(_BaseMap, new GUIContent("_BaseMap"));
-                _Base_Color_Base_Opacity = FindProperty("_Base_Color_Base_Opacity", properties);
-                materialEditor.ShaderProperty(_Base_Color_Base_Opacity, new GUIContent("_Base_Color_Base_Opacity"));
                 EditorGUILayout.EndVertical();
             }
         }
