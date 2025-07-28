@@ -21,12 +21,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rocks_A
-  m_Shader: {fileID: -6465566751694194690, guid: 5b12b4a898f6f274b967474aab775b68, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: a3091975a1bc04545bc26ebdff8b45e6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _UV_CHANNEL_AO_UV0
+  m_InvalidKeywords:
   - _POTALTYPE_FRESNEL_NORMAL
-  m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -38,6 +39,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AOMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ArrayTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -50,6 +55,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 18260b5f661d18140ad4743bb6ab3142, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EMISSION_COLOR_MAP:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -58,8 +67,16 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Emission_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _METALNESS_MAP:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MRHMap:
+        m_Texture: {fileID: 2800000, guid: 04b2a048eb712644aa55ad6d56bd47c8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
@@ -120,6 +137,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AO_Strength: 1
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
@@ -142,6 +160,9 @@ Material:
     - _EnvironmentReflections: 1
     - _Float: 0
     - _Float_1: 0
+    - _Fog_Hight: 0.1
+    - _Fog_On: 1
+    - _Fog_Smooth: 0.497
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -153,11 +174,12 @@ Material:
     - _MatCapBlend_MSO: 0
     - _MatCap_Channel: 0
     - _MatCap_Value: 0
-    - _Metallic: 0
+    - _Metallic: 0.401
     - _Mode: 0
     - _NoiseAmount: 1
     - _NoiseDistortion: 10
     - _NoiseSpeed: 0
+    - _Normal_Strength: 1
     - _OcclusionChannel: 0
     - _OcclusionStrength: 1
     - _Outline_Mask_Channel: 0
@@ -172,6 +194,8 @@ Material:
     - _ReceiveShadows: 1
     - _Rimlight_Smooth: 0.805
     - _Rimlight_Strangth: 0.34
+    - _Roughness: 0.651
+    - _Roughness_In_Lightmap: 0
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularChannel: 0
@@ -184,8 +208,11 @@ Material:
     - _Surface: 0
     - _TRANSPARENCY: 0
     - _UVSec: 0
+    - _UV_CHANNEL_AO: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
+    - _isAO: 0
+    - _isNormal: 1
     m_Colors:
     - _BASE_COLOR: {r: 0.36842108, g: 0.36842108, b: 0.36842108, a: 1}
     - _BaseColor: {r: 0.6409253, g: 0.6409253, b: 0.6409253, a: 1}
@@ -193,6 +220,7 @@ Material:
     - _DamageColor: {r: 9.560206, g: 2.215383, b: 0.3156674, a: 1}
     - _EMISSION_COLOR: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Fog_Color: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _MatCap2_Color: {r: 0, g: 0, b: 0, a: 0}
     - _MatCap_Color: {r: 0, g: 0, b: 0, a: 0}

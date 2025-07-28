@@ -8,12 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Bush_A
-  m_Shader: {fileID: -6465566751694194690, guid: 5b12b4a898f6f274b967474aab775b68, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: a3091975a1bc04545bc26ebdff8b45e6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _UV_CHANNEL_AO_UV0
+  m_InvalidKeywords:
   - _POTALTYPE_FRESNEL_NORMAL
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -21,16 +22,20 @@ Material:
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
-  m_LockedProperties: _BaseColor _BaseMap
+  m_LockedProperties: _BaseColor
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AOMap:
+        m_Texture: {fileID: 2800000, guid: 501f781dadbf58c4689536232accabb8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _ArrayTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 0b1159a5852b1c54fb8222d548046cdf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0333de0b4c83abf498d116295d533b05, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -57,6 +62,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Emission_Map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MRHMap:
+        m_Texture: {fileID: 2800000, guid: 8a7566d960cafd94c81a94c81e4c65d3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 0b1159a5852b1c54fb8222d548046cdf, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -78,7 +91,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 5d62da0b0b0748444968ed35879b5bcf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 438c657ff4d97804fb13802d4b3c3efd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -119,13 +132,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AO_Strength: 1
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 1
     - _AlphaToMask: 1
+    - _Alpha_Clipping: 1
     - _ArrayIndex: 0
+    - _Base_Color_Base_Opacity: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 0
     - _BumpScale: 1
+    - _CastShadows: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -136,6 +153,9 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _Fog_Hight: 1
+    - _Fog_On: 0
+    - _Fog_Smooth: 0.506
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -150,6 +170,7 @@ Material:
     - _NoiseAmount: 1
     - _NoiseDistortion: 10
     - _NoiseSpeed: 0
+    - _Normal_Strength: 1
     - _OcclusionChannel: 0
     - _OcclusionStrength: 1
     - _Outline_Mask_Channel: 0
@@ -161,6 +182,8 @@ Material:
     - _ReceiveShadows: 1
     - _Rimlight_Smooth: 0.352
     - _Rimlight_Strangth: 0.27
+    - _Roughness: 0.656
+    - _Roughness_In_Lightmap: 1
     - _Smoothness: 0.484
     - _SmoothnessTextureChannel: 0
     - _SpecularChannel: 0
@@ -171,13 +194,19 @@ Material:
     - _SrcBlendAlpha: 1
     - _SubShadowChannel: 0
     - _Surface: 0
+    - _UV_CHANNEL_AO: 0
     - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
+    - _isAO: 1
+    - _isNormal: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.8584906, g: 0.8584906, b: 0.8584906, a: 1}
     - _DamageColor: {r: 9.560206, g: 2.215383, b: 0.3156674, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Fog_Color: {r: 0, g: 0, b: 0, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _MatCap2_Color: {r: 0, g: 0, b: 0, a: 0}
     - _MatCap_Color: {r: 0, g: 0, b: 0, a: 0}
