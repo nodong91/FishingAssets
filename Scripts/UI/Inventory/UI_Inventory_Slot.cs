@@ -86,7 +86,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     void SetSlot(ItemClass _itemClass)
     {
-        empty = _itemClass == null; 
+        empty = _itemClass == null;
         itemClass = _itemClass;
         CheckOff();
     }

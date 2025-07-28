@@ -4,7 +4,13 @@ using UnityEngine;
 public class UI_Time : MonoBehaviour
 {
     public TMPro.TMP_Text hourText, minuteText, weekText;
-
+    public enum WeatherType
+    {
+        Sun,
+        Rain,
+        Cloud
+    }
+    public WeatherType weatherType;
     public float timeSpeed = 10f;
     public float minute = 0;
     public int hour = 0;

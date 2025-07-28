@@ -11,8 +11,12 @@ public class UI_MyBox : UI_Inventory_Base
     public override void SetStart()
     {
         slotType = SlotType.MyBox;
-        weightSlider.material = Instantiate(weightSlider.material); removeBox.deleRemove = RemoveDragItem;
-        base.SetStart();
+        saveData = "MyBag";
+        weightSlider.material = Instantiate(weightSlider.material);
+        removeBox.deleRemove = RemoveDragItem;
+        base.SetStart();    
+        // 저장된 내용 불러오기
+        SetInventoryItem(saveData);
     }
 
     public override void OpenCanvas(bool _open)

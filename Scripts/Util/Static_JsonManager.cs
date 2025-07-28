@@ -185,17 +185,26 @@ public class Static_JsonManager
     // 인벤토리 저장
     //======================================================================================
 
-    public static void SaveInventoryData(string fileName, List<UI_Inventory_Base.SaveItemClass> _data)
+    [System.Serializable]
+    public class InventoryData
+    {
+        public string name;
+        public Vector2Int invenSize;
+        public List<UI_Inventory_Base.SaveItemClass> invenClass;
+    }
+
+    public static void SaveInventory(string fileName, InventoryData _data)
     {
         string filePath = Application.dataPath + "/Save/";
-        // 폴더 없으면 생성
+        // 폴더 생성
         FindFolder(filePath);
 
-        string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
+        string toJson = JsonUtility.ToJson(_data, prettyPrint: true);
+        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
-    // 불러오기
-    public static bool TryLoadInventoryData(string fileName, out List<UI_Inventory_Base.SaveItemClass> _data)
+
+    public static bool TryLoadInventory(string fileName, out InventoryData _data)
     {
         string filePath = Application.dataPath + "/Save/";
         string path = filePath + fileName + ".json";
@@ -204,13 +213,14 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            _data = JsonHelper.FromJson<UI_Inventory_Base.SaveItemClass>(fromJson);
+            //fromJson = Static_AES.Program.Decrypt(fromJson, "SaveOptionData");      // 복화
+            _data = JsonUtility.FromJson<InventoryData>(fromJson);
             return true;
         }
+
         _data = default;
         return false;
     }
-
     //======================================================================================
     // 도감 저장
     //======================================================================================

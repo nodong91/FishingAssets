@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static SaveData_Continue;
+using static UI_Time;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class SaveData_Continue : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class SaveData_Continue : MonoBehaviour
         public float minute;
         public int hour;
         public int day;
-
+        public UI_Time.WeatherType weatherType;
+        public float energy;
         public float money;
     }
     public SetSaveContinue setSaveContinue;
@@ -30,12 +32,30 @@ public class SaveData_Continue : MonoBehaviour
     //===========================================================================================================================
     // 저장 및 불러오기
     //===========================================================================================================================
+    //public Static_JsonManager.InventoryData loadingTestData;
     //private void Update()
     //{
     //    if (Input.GetKeyDown(KeyCode.Z))
     //    {
-    //        SetContinue();
-    //        Game_Manager.current.cameraManager.InputShake();
+    //        Static_JsonManager.InventoryData testData = new Static_JsonManager.InventoryData();
+    //        testData.name = "jijoiajoisdjfoahsdk";
+    //        List<UI_Inventory_Base.SaveItemClass> testClass1111 = new List<UI_Inventory_Base.SaveItemClass>();
+    //        for (int i = 0; i < 3; i++)
+    //        {
+    //            UI_Inventory_Base.SaveItemClass itemClass = new UI_Inventory_Base.SaveItemClass();
+    //            itemClass.id = "ejijfijosajd " + i;
+    //            testClass1111.Add(itemClass);
+    //        }
+    //        testData.inventoryClass = testClass1111;
+    //        Static_JsonManager.SaveTest("jijoiajoisdjfoahsdk", testData);
+    //    }
+
+    //    if (Input.GetKeyDown(KeyCode.X))
+    //    {
+    //        if (Static_JsonManager.TryLoadTest("jijoiajoisdjfoahsdk", out Static_JsonManager.InventoryData testData))
+    //        {
+    //            loadingTestData = testData;
+    //        }
     //    }
     //}
 
@@ -51,7 +71,9 @@ public class SaveData_Continue : MonoBehaviour
             minute = Game_Manager.current.timeUI.minute,
             hour = Game_Manager.current.timeUI.hour,
             day = Game_Manager.current.timeUI.day,
+            weatherType = Game_Manager.current.timeUI.weatherType,
 
+            energy = Game_Manager.current.inventory.TryEnergy,
             money = Game_Manager.current.inventory.TryMoney,
         };
         SaveContinue();

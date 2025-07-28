@@ -32,18 +32,7 @@ public class UI_Inventory_Base : MonoBehaviour
     private List<UI_Inventory_Slot> checkList = new List<UI_Inventory_Slot>();
     Queue<Image> iconQueue = new Queue<Image>();
     public RectTransform iconParent;
-
-    private ItemClass dragItemClass;
-
-    [System.Serializable]
-    public class SaveItemClass
-    {
-        public string id;
-        public float angle;
-        public Vector2Int slotNum;
-        public Vector2Int[] shape;
-    }
-    private List<SaveItemClass> saveItems;
+    Coroutine loadingItem;
     Dictionary<Vector2Int, ItemClass> dictItemClass = new Dictionary<Vector2Int, ItemClass>();
 
     protected virtual void SetWeight(float _weight) { }
@@ -51,15 +40,31 @@ public class UI_Inventory_Base : MonoBehaviour
     public virtual void SetStart()
     {
         closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
-        StartCoroutine(SetLoadingItem());
+        //if (loadingItem != null)
+        //    StopCoroutine(loadingItem);
+        //loadingItem = StartCoroutine(SetLoadingItem(false));
+        OpenCanvas(false);
+    }
+
+    public void SetInventoryItem(string _saveData)// 기존 비우고 다시 세팅
+    {
+        saveData = _saveData;
+        if (loadingItem != null)
+            StopCoroutine(loadingItem);
+        loadingItem = StartCoroutine(SetLoadingItem());
     }
 
     IEnumerator SetLoadingItem()
     {
+        EmptyInventory();
+        LoadInventory();
+        while (saveInventoryData == null)
+            yield return null;
+
         SetInventorySlot();
         yield return new WaitForEndOfFrame();
-        LoadInventory();
-        OpenCanvas(false);
+
+        LoadItem(saveInventoryData);
     }
 
     public virtual void OpenCanvas(bool _open)
@@ -67,42 +72,33 @@ public class UI_Inventory_Base : MonoBehaviour
         StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
     }
 
-    public void SetInventoryItem(string _saveData)
-    {
-        EmptyInventory();
-
-        saveData = _saveData;
-        LoadInventory();
-    }
-
     public void EmptyInventory()
     {
-        dictItemClass.Clear();
+        if (allSlots == null)
+            return;
+
         foreach (var item in allSlots)
         {
             if (item.empty == true)
                 continue;
 
             UI_Inventory_Slot slot = item.GetLinkSlot;
-            iconQueue.Enqueue(slot.GetSlotImage);
-            slot.GetSlotImage.gameObject.SetActive(false);
-
-            Vector2Int[] shape = slot.itemClass.shape;
-            slot.SetEmpty();// 메인 슬롯 비우기
-            if (shape == null)
-                return;
-            // 사이즈
-            for (int i = 0; i < shape.Length; i++)
-            {
-                int slotX = slot.slotNum.x + shape[i].x;
-                int slotY = slot.slotNum.y + shape[i].y;
-                allSlots[slotX, slotY].SetEmpty();
-            }
+            SlotEmpty(slot);
         }
     }
 
     void SetInventorySlot()
     {
+        if (allSlots != null)
+        {
+            foreach (var slot in allSlots)
+            {
+                slot.gameObject.SetActive(false);
+                slotPool.Enqueue(slot);
+            }
+        }
+
+        inventorySize = saveInventoryData.invenSize;
         gridLayoutGroup.cellSize = new Vector2(1f, 1f) * slotSize;
         gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         gridLayoutGroup.constraintCount = inventorySize.x;
@@ -120,6 +116,7 @@ public class UI_Inventory_Base : MonoBehaviour
                 inst.dele_Enter = OnPointerEnter;
                 inst.dele_Exit = OnPointerExit;
                 allSlots[x, y] = inst;
+                inst.transform.SetAsLastSibling();
             }
         }
     }
@@ -127,81 +124,19 @@ public class UI_Inventory_Base : MonoBehaviour
     UI_Inventory_Slot TrySlotPool()
     {
         if (slotPool.Count > 0)
-            return slotPool.Dequeue();
-
+        {
+            UI_Inventory_Slot slot = slotPool.Dequeue();
+            slot.gameObject.SetActive(true);
+            return slot;
+        }
         UI_Inventory_Slot inst = Instantiate(inventorySlot, gridLayoutGroup.transform);
         return inst;
-    }
-
-    void SaveDictCheck()
-    {
-        saveItems = new List<SaveItemClass>();
-        foreach (var child in dictItemClass)
-        {
-            SaveItemClass dictCheck = new SaveItemClass
-            {
-                slotNum = child.Key,
-                id = child.Value.item.id,
-                angle = child.Value.angle,
-                shape = child.Value.shape,
-            };
-            saveItems.Add(dictCheck);
-        }
-        SaveInventory();// 내려놓으면 저장
-    }
-
-    public void SetSlot(UI_Inventory_Slot _slot, ItemClass _itemClass)
-    {
-        _slot.SetBase(_itemClass);// 메인 슬롯
-        if (_itemClass == null)// 비워져 있는지
-            return;
-
-        _slot.SetSlotImage = TryIcon(_itemClass.item);// 이미지 세팅
-        _slot.GetSlotImage.transform.position = _slot.transform.position;
-        _slot.GetSlotImage.transform.rotation = Quaternion.Euler(0f, 0f, _itemClass.angle);
-        SetWeight(_itemClass.item.weight);// 무게 세팅
-
-        // 슬롯 세팅
-        Vector2Int[] shape = _itemClass.shape;
-        for (int i = 0; i < shape.Length; i++)
-        {
-            int slotX = _slot.slotNum.x + shape[i].x;
-            int slotY = _slot.slotNum.y + shape[i].y;
-            allSlots[slotX, slotY].SetLink(_slot);
-        }
-
-        dictItemClass[_slot.slotNum] = _itemClass;
-        SaveDictCheck();
-    }
-
-    Image TryIcon(ItemStruct _itemStruct)
-    {
-        if (iconQueue.Count > 0)
-        {
-            Image queueIcon = iconQueue.Dequeue();
-            queueIcon.gameObject.SetActive(true);
-            SetImage(queueIcon, _itemStruct);
-            return queueIcon;
-        }
-        Image baseImage = Game_Manager.current.inventory.iconImage;
-        Image instIcon = Instantiate(baseImage, iconParent);
-        SetImage(instIcon, _itemStruct);
-        return instIcon;
-    }
-
-    void SetImage(Image _image, ItemStruct _itemStruct)
-    {
-        Vector2 size = new Vector2(_itemStruct.iconSize.x, _itemStruct.iconSize.y);
-        Vector2 pivot = new Vector2(_itemStruct.iconSize.w, _itemStruct.iconSize.z);
-        _image.sprite = _itemStruct.icon;
-        _image.rectTransform.sizeDelta = size * slotSize;
-        _image.rectTransform.pivot = pivot;
     }
 
     public void SlotEmpty(UI_Inventory_Slot _slot)// 비우기
     {
         dictItemClass.Remove(_slot.slotNum);
-        SaveDictCheck();
+        SaveDictionary();
 
         SetWeight(-_slot.itemClass.item.weight);// 무게 빼기
         iconQueue.Enqueue(_slot.GetSlotImage);
@@ -218,6 +153,54 @@ public class UI_Inventory_Base : MonoBehaviour
             int slotY = _slot.slotNum.y + shape[i].y;
             allSlots[slotX, slotY].SetEmpty();
         }
+    }
+
+    public void SetSlot(UI_Inventory_Slot _slot, ItemClass _itemClass)
+    {
+        dictItemClass[_slot.slotNum] = _itemClass;
+        SaveDictionary();
+
+        _slot.SetBase(_itemClass);// 메인 슬롯
+        if (_itemClass != null)// 비워져 있는지
+        {
+            SetWeight(_itemClass.item.weight);// 무게 세팅
+            Image iconImage = IconPool();
+            iconImage.transform.SetPositionAndRotation(_slot.transform.position, Quaternion.Euler(0f, 0f, _itemClass.angle));
+            SetImage(iconImage, _itemClass.item);
+            _slot.SetSlotImage = iconImage;// 이미지 세팅
+
+            // 슬롯 세팅
+            Vector2Int[] shape = _itemClass.shape;
+            if (shape != null)
+            {
+                for (int i = 0; i < shape.Length; i++)
+                {
+                    int slotX = _slot.slotNum.x + shape[i].x;
+                    int slotY = _slot.slotNum.y + shape[i].y;
+                    allSlots[slotX, slotY].SetLink(_slot);
+                }
+            }
+        }
+    }
+
+    Image IconPool()
+    {
+        if (iconQueue.Count > 0)
+        {
+            return iconQueue.Dequeue();
+        }
+        Image baseImage = Game_Manager.current.inventory.iconImage;
+        return Instantiate(baseImage, iconParent);
+    }
+
+    void SetImage(Image _image, ItemStruct _itemStruct)
+    {
+        Vector2 size = new Vector2(_itemStruct.iconSize.x, _itemStruct.iconSize.y);
+        Vector2 pivot = new Vector2(_itemStruct.iconSize.w, _itemStruct.iconSize.z);
+        _image.sprite = _itemStruct.icon;
+        _image.rectTransform.sizeDelta = size * slotSize;
+        _image.rectTransform.pivot = pivot;
+        _image.gameObject.SetActive(true);
     }
 
     public UI_Inventory_Slot GetEmptySlot(ItemStruct _item)// 빈슬롯 찾기
@@ -354,30 +337,69 @@ public class UI_Inventory_Base : MonoBehaviour
     //===========================================================================================================================
     // 저장 및 불러오기
     //===========================================================================================================================
-    void SaveInventory()
+
+    [System.Serializable]
+    public class SaveItemClass
     {
-        Static_JsonManager.SaveInventoryData(saveData, saveItems);
+        public string id;
+        public float angle;
+        public Vector2Int slotNum;
+        public Vector2Int[] shape;
+    }
+    Static_JsonManager.InventoryData saveInventoryData;
+    Vector2Int defaultInvenSize = new Vector2Int(4, 4);
+
+    void SaveDictionary()
+    {
+        List<SaveItemClass> saveItems = new List<SaveItemClass>();
+        foreach (var child in dictItemClass)
+        {
+            SaveItemClass dictCheck = new SaveItemClass
+            {
+                slotNum = child.Key,
+                id = child.Value.item.id,
+                angle = child.Value.angle,
+                shape = child.Value.shape,
+            };
+            saveItems.Add(dictCheck);
+        }
+
+        saveInventoryData = new Static_JsonManager.InventoryData
+        {
+            invenSize = inventorySize,
+            invenClass = saveItems,
+        };
+        //Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 내려놓으면 저장
     }
 
     void LoadInventory()
     {
-        if (Static_JsonManager.TryLoadInventoryData(saveData, out List<SaveItemClass> _data))
+        if (Static_JsonManager.TryLoadInventory(saveData, out Static_JsonManager.InventoryData _data))
         {
-            LoadItem(_data);
+            saveInventoryData = _data;
+        }
+        else
+        {
+            saveInventoryData = new Static_JsonManager.InventoryData
+            {
+                invenSize = defaultInvenSize,
+                invenClass = new List<SaveItemClass>(),
+            };
         }
     }
 
-    void LoadItem(List<SaveItemClass> _items)
+    void LoadItem(Static_JsonManager.InventoryData _data)
     {
-        for (int i = 0; i < _items.Count; i++)
+        inventorySize = _data.invenSize;
+        for (int i = 0; i < _data.invenClass.Count; i++)
         {
             ItemClass itemClass = new ItemClass
             {
-                item = Singleton_Data.INSTANCE.GetItemStruct(_items[i].id),
-                angle = _items[i].angle,
-                shape = _items[i].shape,
+                item = Singleton_Data.INSTANCE.GetItemStruct(_data.invenClass[i].id),
+                angle = _data.invenClass[i].angle,
+                shape = _data.invenClass[i].shape,
             };// 새로운 클라스 캡슐화
-            UI_Inventory_Slot slot = allSlots[_items[i].slotNum.x, _items[i].slotNum.y];
+            UI_Inventory_Slot slot = allSlots[_data.invenClass[i].slotNum.x, _data.invenClass[i].slotNum.y];
             SetSlot(slot, itemClass);
         }
     }

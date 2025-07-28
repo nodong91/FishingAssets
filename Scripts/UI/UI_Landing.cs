@@ -13,6 +13,7 @@ public class UI_Landing : MonoBehaviour
     public GameObject eventUI;
     public GameObject shipyardUI;
 
+    LandingStruct landingData;
 
     public delegate void DeleOutLanding();
     public DeleOutLanding outLanding;
@@ -35,13 +36,14 @@ public class UI_Landing : MonoBehaviour
         shipyardButton.onClick.AddListener(ShipyardButton);
         storageButton.onClick.AddListener(StorageButton);
     }
-
-    public void SetStart(LandingSetting[] _landings)
+  
+    public void SetLanding(LandingStruct _landingData)
     {
-        for (int i = 0; i < _landings.Length; i++)
+        landingData = _landingData;
+        for (int i = 0; i < _landingData.landingSetting.Length; i++)
         {
-            GameObject targetPoint = _landings[i].landingPoint;
-            GameObject followUI = GetFollowUI(_landings[i].landingType);
+            GameObject targetPoint = _landingData.landingSetting[i].landingPoint;
+            GameObject followUI = GetFollowUI(_landingData.landingSetting[i].landingType);
             followUI.SetActive(true);
             Game_Manager.current.followManager.AddFollowUI(targetPoint, followUI);
         }
@@ -107,25 +109,26 @@ public class UI_Landing : MonoBehaviour
         Game_Manager.current.OutOfControll(false);
         outLanding?.Invoke();
     }
+
     void RestButton()// 휴식
     {
 
     }
 
-    void StorageButton()// 창고
-    {
-        Game_Manager.current.inventory.OpenStorage(true);
-        
-    }
-
     void ShopButton()
     {
         // 샵 버튼 누르면
-        Game_Manager.current.inventory.OpenShop(true);
+        Game_Manager.current.inventory.OpenShop(true, landingData);
     }
 
     void ShipyardButton()// 조선소
     {
+        Game_Manager.current.inventory.OpenShipyard(true, landingData);
+    }
+
+    void StorageButton()// 창고
+    {
+        Game_Manager.current.inventory.OpenStorage(true);
 
     }
 }

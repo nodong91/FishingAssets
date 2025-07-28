@@ -85,10 +85,9 @@ public class UI_Main : MonoBehaviour
     public Button inventoryButton;
     public Button fishGuideButton;
     public Button statusButton;
-    public Button outButton;
+    public Button fishingButton;
 
     public CanvasStruct[] canvasStructs;
-    bool _open = false;
 
     public Canvas cameraCanvas;
     public TMPro.TMP_Text warnningText;
@@ -99,7 +98,7 @@ public class UI_Main : MonoBehaviour
         inventoryButton.onClick.AddListener(InventoryButton);
         fishGuideButton.onClick.AddListener(FishGuideButton);
         statusButton.onClick.AddListener(StatusButton);
-        outButton.onClick.AddListener(OutButton);
+        fishingButton.onClick.AddListener(FishingButton);
 
         SetCameraCanvas();
     }
@@ -118,7 +117,7 @@ public class UI_Main : MonoBehaviour
 
     void FishGuideButton()
     {
-        Game_Manager.current.instFishGuide.OpenCanvas(true);
+        Game_Manager.current.GetFishGuide.OpenCanvas(true);
     }
 
     void StatusButton()
@@ -126,17 +125,17 @@ public class UI_Main : MonoBehaviour
         Game_Manager.current.statusUI.OpenCanvas(true);
     }
 
-    void OutButton()
-    {
-        _open = !_open;
-        OpenCanvas(_open);
-    }
-
     public void OpenCanvas(bool _open)
     {
         StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
     }
 
+    public void FishingButton()
+    {
+        string id = "Fs_1001";
+        Data_Manager.FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];
+        Game_Manager.current.fishingManager.StartGame(fishStruct);
+    }
     //===========================================================================================================================
     // 경고 문구
     //===========================================================================================================================

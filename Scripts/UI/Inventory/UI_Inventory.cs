@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
+using static Trigger_Landing;
 using static UI_Inventory_Base;
 using static UI_Inventory_Slot;
 
@@ -13,6 +14,11 @@ public class UI_Inventory : MonoBehaviour
 
     bool onDrag, onCheck;
     Coroutine slotMoving, movingMoney;
+    float energyValue;
+    public float TryEnergy
+    {
+        get { return energyValue; }
+    }
     float moneyValue;
     public float TryMoney
     {
@@ -49,10 +55,16 @@ public class UI_Inventory : MonoBehaviour
         myBox.OpenCanvas(_open);
     }
 
-    public void OpenShop(bool _open)
+    public void OpenShop(bool _open, LandingStruct _shopData)
     {
         myBox.OpenCanvas(_open);
-        shop.SetShop(_open);
+        shop.SetShop(_open, _shopData);
+    }
+
+    public void OpenShipyard(bool _open, LandingStruct _shopData)
+    {
+        myBox.OpenCanvas(_open);
+        shop.SetShipyard(_open, _shopData);
     }
 
     public void OpenStorage(bool _open)
@@ -346,12 +358,15 @@ public class UI_Inventory : MonoBehaviour
         if (movingMoney != null)
             StopCoroutine(movingMoney);
         movingMoney = StartCoroutine(MoneyMoving(_price));
+
     }
 
     IEnumerator MoneyMoving(float _price)
     {
         float prevMoney = moneyValue;
         moneyValue += _price;
+
+        SaveData_Continue.current.SetContinue(); // ¿˙¿Â
         bool moveMoney = true;
         while (moveMoney == true)
         {

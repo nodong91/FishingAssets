@@ -6,14 +6,6 @@ public class Trigger_Landing : Trigger_Setting
     public Sprite iconImage;
     Unit_Player player;
     Coroutine setLanding;
-    public Trigger_Setting triggerSetting;
-    public GameObject cameraPosition;
-
-    private void Start()
-    {
-        triggerSetting.deleTriggerAction = SetLandingAction;
-        triggerSetting.GetIconSprite = iconImage;
-    }
 
     [System.Serializable]
     public struct LandingSetting
@@ -29,7 +21,25 @@ public class Trigger_Landing : Trigger_Setting
         public LandingType landingType;
         public GameObject landingPoint;
     }
-    public LandingSetting[] landingSetting;
+
+    [System.Serializable]
+    public struct LandingStruct
+    {
+        public string landingID;
+        public Data_Shop shopData;
+        public Data_Shop[] shipyardData;
+        public LandingSetting[] landingSetting;
+    }
+    public LandingStruct landingStruct;
+
+    public Trigger_Setting triggerSetting;
+    public GameObject cameraPosition;
+
+    private void Start()
+    {
+        triggerSetting.deleTriggerAction = SetLandingAction;
+        triggerSetting.GetIconSprite = iconImage;
+    }
 
     void SetLandingAction()
     {
@@ -59,7 +69,7 @@ public class Trigger_Landing : Trigger_Setting
 
     private void SetLandingUI()
     {
-        Game_Manager.current.landingUI.SetStart(landingSetting);
+        Game_Manager.current.landingUI.SetLanding(landingStruct);
         Game_Manager.current.landingUI.outLanding = OutLanding;
         Game_Manager.current.mainUI.OpenCanvas(false);
     }

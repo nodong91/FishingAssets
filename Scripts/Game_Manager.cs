@@ -6,7 +6,8 @@ public class Game_Manager : MonoBehaviour
     public Fishing_Manager fishingManager;
     public Camera_Manager cameraManager;
     public FishGuide fishGuide;
-    public FishGuide instFishGuide;
+    private FishGuide instFishGuide;
+    public FishGuide GetFishGuide { get { return instFishGuide; } }
     public Follow_Manager followManager;
     public Controll_Manager controllManager;
     [Header("[ UI ]")]
@@ -25,6 +26,8 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
+        SaveData_Continue.current.GetContinue();
+
         followManager.SetStart();
         mainUI.SetStart();
 
@@ -34,15 +37,12 @@ public class Game_Manager : MonoBehaviour
         instFishGuide.SetStart();
         landingUI.SetStart();
 
-        SaveData_Continue.current.GetContinue();
         PlayerMove();
-        //player.deleControll = controllManager.controllDirection;
     }
 
     public void InputLeftMouse(bool _input)
     {
         player.State_Action(_input);
-        //player.InputMousetLeft(_input);
     }
 
     public void InputRightMouse(bool _input)
