@@ -125,18 +125,9 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
         checkImage.gameObject.SetActive(empty == false);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    //===========================================================================================================================
+    // ÀÎÇ² ÄÁÆ®·Ñ
+    //===========================================================================================================================
 
     public void OnPointerClick(PointerEventData eventData)
     {

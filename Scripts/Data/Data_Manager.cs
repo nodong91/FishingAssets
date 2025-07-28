@@ -368,6 +368,25 @@ public class Data_Manager : Data_Parse
         }
     }
 
+    [System.Serializable]
+    public struct DialogStruct
+    {
+        public string ID;
+        public string dialogString;
+        [System.Serializable]
+        public struct DialogType
+        {
+            public Vector2Int dialogIndex;// 움직일 문장 시작과 끝 인덱스
+            public Data_DialogType.DialogAnimation dialogAnimation;// 애니메이션 타입
+            public float size;
+            public float Speed;
+            public string color;
+        }
+        public DialogType[] dialogTypes;
+    }
+    [Header(" [ String ]")]
+    public List<DialogStruct> dialogStruct = new List<DialogStruct>();
+
     //==================================================================================
     // Data
     //==================================================================================
@@ -385,5 +404,6 @@ public class Data_Manager : Data_Parse
         Singleton_Data.INSTANCE.SetDictionary_Parts(partsStruct);
         Singleton_Data.INSTANCE.SetDictionary_Equip(equipStruct);
         Singleton_Data.INSTANCE.SetDictionary_Used(usedStruct);
+        Singleton_Data.INSTANCE.SetDictionary_Dialog(dialogStruct);
     }
 }
