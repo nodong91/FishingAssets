@@ -25,7 +25,7 @@ public class UI_Shop : UI_Inventory_Base
             int index = i;
             groupToggles[i].onValueChanged.AddListener(delegate { SetToggle(index); });
         }
-        groupToggles[0].isOn = true;
+        //groupToggles[0].isOn = true;
     }
 
     void SetToggle(int _index)
@@ -50,20 +50,22 @@ public class UI_Shop : UI_Inventory_Base
 
         slotType = SlotType.Shop;
         toggleGroup.gameObject.SetActive(false);
-        SetShopItem();
+        if (_open)
+            SetShopItem();// 열릴때 세팅
         OpenCanvas(_open);
     }
 
     public void SetShipyard(bool _open, LandingStruct _landingStruct)
     {
-        groupToggles[0].isOn = true;
+        groupToggles[0].isOn = true;// 첫번째 탭 열기
         landingID = _landingStruct.landingID + "_Shipyard";
         currentIndex = 0;
         shopItem = _landingStruct.shipyardData;
 
         slotType = SlotType.Shop;
         toggleGroup.gameObject.SetActive(true);
-        SetShopItem();
+        if (_open)
+            SetShopItem();
         OpenCanvas(_open);
     }
 
@@ -83,27 +85,28 @@ public class UI_Shop : UI_Inventory_Base
     public string landingID;
     void SetShopItem()
     {
+        string saveData = landingID + currentIndex;
         if (CheckResetDay() == true)
         {
             EmptyInventory();
             SetFixedItem();
             SetRandomItem();
+            //Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 디폴트로 저장
         }
         else
         {
             // 저장된 내용 불러오기
-            string saveData = landingID + currentIndex;
             SetInventoryItem(saveData);
         }
     }
 
     bool CheckResetDay()
     {
-        if (SaveData_Continue.current.setSaveContinue == null)
+        if (SaveData_Continue.current.setSaveContinue == null )
             return false;
 
         int checkDay = Game_Manager.current.timeUI.day;
-        resetDay = SaveData_Continue.current.setSaveContinue.day;
+        resetDay = GetSaveInventoryData.lastSetDay;
         Debug.LogWarning(SaveData_Continue.current.setSaveContinue + " " + checkDay + " " + resetDay);
         if (resetDay != checkDay)
         {

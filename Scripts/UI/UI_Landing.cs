@@ -84,7 +84,7 @@ public class UI_Landing : MonoBehaviour
         // 열 때 출력
         if (_open == true)
         {
-            OpenPointUI(_open);
+            OpenPointUI(true);
         }
 
         float normalize = 0f;
@@ -98,7 +98,7 @@ public class UI_Landing : MonoBehaviour
         // 닫을 때 제거
         if (_open == false)
         {
-            OpenPointUI(_open);
+            OpenPointUI(false);
         }
     }
 
@@ -117,6 +117,7 @@ public class UI_Landing : MonoBehaviour
 
         Game_Manager.current.OutOfControll(false);
         outLanding?.Invoke();
+        SaveData_Continue.current.SetContinue();// 섬에서 나갈 때 저장
     }
 
     void RestButton()// 휴식
@@ -135,7 +136,7 @@ public class UI_Landing : MonoBehaviour
     void OutInventory()
     {
         SetOpenCanvas(true);
-        Debug.LogWarning("ijoijijijijij");
+        Debug.LogWarning("OutInventory");
     }
 
     void ShipyardButton()// 조선소

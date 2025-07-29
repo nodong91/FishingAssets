@@ -70,9 +70,10 @@ public class UI_Inventory_Base : MonoBehaviour
     public virtual void OpenCanvas(bool _open)
     {
         StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
-        if(_open == false)
+        if (_open == false)
         {
             deleOutInventory?.Invoke();
+            //Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 닫을 시 저장
         }
     }
 
@@ -351,6 +352,7 @@ public class UI_Inventory_Base : MonoBehaviour
         public Vector2Int[] shape;
     }
     Static_JsonManager.InventoryData saveInventoryData;
+    public Static_JsonManager.InventoryData GetSaveInventoryData { get { return saveInventoryData; } }
     Vector2Int defaultInvenSize = new Vector2Int(4, 4);
 
     void SaveDictionary()
@@ -370,13 +372,14 @@ public class UI_Inventory_Base : MonoBehaviour
 
         saveInventoryData = new Static_JsonManager.InventoryData
         {
+            lastSetDay = Game_Manager.current.timeUI.day,
             invenSize = inventorySize,
             invenClass = saveItems,
         };
         //Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 내려놓으면 저장
     }
 
-    void LoadInventory()
+    public void LoadInventory()
     {
         if (Static_JsonManager.TryLoadInventory(saveData, out Static_JsonManager.InventoryData _data))
         {
@@ -386,9 +389,11 @@ public class UI_Inventory_Base : MonoBehaviour
         {
             saveInventoryData = new Static_JsonManager.InventoryData
             {
+                lastSetDay = -1,
                 invenSize = defaultInvenSize,
                 invenClass = new List<SaveItemClass>(),
             };
+            Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 디폴트로 저장
         }
     }
 

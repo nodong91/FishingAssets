@@ -372,7 +372,7 @@ public class UI_Inventory : MonoBehaviour
         float prevMoney = moneyValue;
         moneyValue += _price;
 
-        SaveData_Continue.current.SetContinue(); // 저장
+        SaveData_Continue.current.SetContinue(); // 팔거나 사면 저장
         bool moveMoney = true;
         while (moveMoney == true)
         {

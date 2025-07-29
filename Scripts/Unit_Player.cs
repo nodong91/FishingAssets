@@ -75,10 +75,18 @@ public class Unit_Player : MonoBehaviour
     {
         while (state == State.Move)
         {
-            SetMoving();
-            yield return null;
+            if (clash == false)
+                SetMoving();
             CheckClosestUnit();
+            yield return null;
         }
+    }
+
+    IEnumerator StateClash()
+    {
+        clash = true;
+        yield return new WaitForSeconds(3f);
+        clash = false;
     }
 
     void CheckClosestUnit()// 아이템이나 채집 같은거 하기 위한 체크
@@ -104,7 +112,7 @@ public class Unit_Player : MonoBehaviour
         }
         Game_Manager.current.followManager.AddClosestTarget(closestTarget);
     }
-    public Reflection_Manager reflection_Manager;
+    //public Reflection_Manager reflection_Manager;
     public float shipHight, waveSpeed = 2f;
     float runningTime;
     public GameObject playerObject;
@@ -139,9 +147,10 @@ public class Unit_Player : MonoBehaviour
         float curve = rotateCurve.Evaluate(1f - (runningRandomTime - runningTime) / randomTime);
         playerObject.transform.localRotation = Quaternion.Slerp(prevAngle, setAngle, curve / randomTime);// 랜덤 회전
 
-        string shipPosition = "_ShipPosition";
-        reflection_Manager.GetMaterial.SetVector(shipPosition, playerObject.transform.position);
-        reflection_Manager.GetMaterial.SetFloat("_WaveSpeed", waveSpeed);
+        //// 배 부분 물결 안생기게
+        //string shipPosition = "_ShipPosition";
+        //reflection_Manager.GetMaterial.SetVector(shipPosition, playerObject.transform.position);
+        //reflection_Manager.GetMaterial.SetFloat("_WaveSpeed", waveSpeed);
     }
 
     Vector3 RandomAngle(float _maxAngle)
@@ -163,7 +172,8 @@ public class Unit_Player : MonoBehaviour
         float speed = moveSpeed * Time.deltaTime;
         Vector3 offset = (target - transform.position).normalized;
         transform.position = Vector3.Lerp(transform.position, target, speed);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed * 5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed );
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(focusTarget.transform.forward), speed * 5f);
     }
 
     //================================================================================================================================================
@@ -212,13 +222,18 @@ public class Unit_Player : MonoBehaviour
     public Trigger_Setting closestTarget;
     public float closestDistance;
 
+
+    public bool clash;// 이동 못함
+    public GameObject clashObstacle;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Finish")
+        if (other.tag == "Finish" && other.gameObject != clashObstacle)
         {
             Debug.LogWarning("충돌");
+            clashObstacle = other.gameObject;
             Game_Manager.current.cameraManager.InputShake();
-            Game_Manager.current.Clash();
+            StartCoroutine(StateClash());
         }
         else
         {
@@ -231,6 +246,7 @@ public class Unit_Player : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        clashObstacle = null;
         Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
         if (fishing == null)
             return;

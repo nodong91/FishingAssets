@@ -69,17 +69,4 @@ public class Game_Manager : MonoBehaviour
         Singleton_Controller.INSTANCE.outOfControll = _isOn;
         controllManager.ResetControll();
     }
-
-    public void Clash()
-    {
-        controllManager.ResetControll();
-        StartCoroutine(HoldControll());
-    }
-
-    IEnumerator HoldControll()
-    {
-        Singleton_Controller.INSTANCE.outOfControll = true;
-        yield return new WaitForSeconds(3f);
-        Singleton_Controller.INSTANCE.outOfControll = false;
-    }
 }
