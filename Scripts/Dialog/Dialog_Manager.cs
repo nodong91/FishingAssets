@@ -1,71 +1,87 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
+using static UI_Main;
+using UnityEngine.UI;
+using static Trigger_Landing;
 
-public class Dialog_Manager : MonoBehaviour
+public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 {
+    public CanvasStruct[] canvasStructs;
     public string FXSound;
     const float defaultTypingSpeed = 0.1f;
     const int defaultSize = 15;
-    const string defaultColor = "000000";
-    const string lineEnd = "/n";
 
-    public bool typing;
+    bool typing;
+    public RawImage NPC_Image;
     public TMP_Text dialogText;
-    public Data_DialogType dialogType;
+    public Data_DialogType actionType;
 
     private float typingSpeed;
     Coroutine typingCoroutine, actionCoroutine;
 
-    public int dialogIndex;
-    public float interval;
+    int dialogIndex;
+    float interval;
+    bool actionBool = false;
+
+    int currentDialog;
+    public Data_Manager.DialogStruct[] dialogStructs;
+    [System.Serializable]
+    public struct SelectButton
+    {
+        public TMP_Text text;
+        public Button button;
+    }
+    public SelectButton[] selectButton;
+    Data_Manager.DialogStruct dialog;
 
     private void Start()
     {
         SetDialogManager();
     }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonUp(0))
-        {
-            SetTest();
-        }
-    }
-
     public void SetDialogManager()
     {
         typingSpeed = defaultTypingSpeed;
-        //button.onClick.AddListener(SetTest);
+        dialogText.fontSize = defaultSize;
+        dialogText.color = Color.white;
+
+        OpenCanvas(false);
     }
 
-    void SetTest()
+    public void DialogStart()
+    {
+        currentDialog = 0;
+        endDialog = false;
+        for (int i = 0; i < selectButton.Length; i++)
+        {
+            int index = i;
+            selectButton[i].button.onClick.AddListener(delegate { InputButton(index); });
+            selectButton[i].button.gameObject.SetActive(false);
+        }
+        DialogAction();
+        OpenCanvas(true);
+    }
+
+    public void OpenCanvas(bool _open)
+    {
+        StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
+    }
+
+    void DialogAction()
     {
         if (typing == true)
         {
-            StartTyping(false);
+            StartTyping(false);// 스킵
         }
-        else
+        else if(endDialog == false)
         {
             StopAllCoroutines();
             typingCoroutine = StartCoroutine(StartDialog());
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    bool actionBool = false;
+    bool endDialog;
     //const string inID = "{";
     //const string outID = "}";
     //public string setID;
@@ -74,33 +90,80 @@ public class Dialog_Manager : MonoBehaviour
 
     IEnumerator StartDialog()
     {
+        if (currentDialog >= dialogStructs.Length)
+        {
+            // 대화 끝
+            endDialog = true;
+            EndDialog();
+            yield break;
+        }
         //bool id = Singleton_Data.INSTANCE.Dict_Dialog.ContainsKey(setID);
         //dialogText.text = id ? TryDialog(setID) : $"<size=25>{setID}</size> : 아이디가 없습니다!!";
-        dialogText.text = SetDialog();
+        dialog = dialogStructs[currentDialog];
+        dialogText.text = TryDialogString();
         dialogText.ForceMeshUpdate(true);// 메쉬 재 생성 (리셋)
+        dialogText.alpha = 0f;
         yield return null;
-        PreSetHide();// 글자 숨김
-        yield return new WaitForSeconds(defaultTypingSpeed);
-        //yield return new WaitForFixedUpdate();
 
+        //PreSetHide();// 글자 숨김
+        //yield return new WaitForSeconds(defaultTypingSpeed);
+        //yield return new WaitForFixedUpdate();
+        //dialogText.alpha = 1f;
         StartTyping(true);
         StartActing();
+
+        currentDialog++;
     }
-    public Data_Manager.DialogStruct dialogStruct;
-    string SetDialog()
+
+    string TryDialogString()
     {
-        string temp = dialogStruct.dialogString;
-        int length = dialogStruct.dialogTypes.Length - 1;
+        string temp = dialog.dialogString;
+        int length = dialog.dialogTypes.Length - 1;
         for (int i = length; i >= 0; i--)
         {
-            float size = dialogStruct.dialogTypes[i].size;
-            string textColor = dialogStruct.dialogTypes[i].color;
-            int x = dialogStruct.dialogTypes[i].dialogIndex.x;
-            int y = dialogStruct.dialogTypes[i].dialogIndex.y;
+            float size = dialog.dialogTypes[i].size;
+            string textColor = dialog.dialogTypes[i].color;
+            int x = dialog.dialogTypes[i].dialogIndex.x;
+            int y = dialog.dialogTypes[i].dialogIndex.y;
             temp = temp.Insert(y, "</size></color>");
             temp = temp.Insert(x, $"<color=#{textColor}><size={size}>");
         }
         return temp;
+    }
+
+    void EndDialog()
+    {
+        // 메뉴 출력
+        for (int i = 0; i < selectButton.Length; i++)
+        {
+            selectButton[i].text.text = i.ToString();
+            selectButton[i].button.gameObject.SetActive(true);
+        }
+    }
+
+    void InputButton(int _index)
+    {
+        switch (_index)
+        {
+            case 0:
+                OpenShop();
+                break;
+            case 1:
+                OutDialog();
+                break;
+        }
+    }
+
+    void OpenShop()
+    {
+        LandingStruct getLandingData = Game_Manager.current.landingUI.GetLandingData;
+        Game_Manager.current.inventory.OpenShop(getLandingData);
+    }
+
+    void OutDialog()
+    {
+        Game_Manager.current.inventory.CloseShop();
+        OpenCanvas(false);
     }
 
     //string TryDialog(string _string)
@@ -164,40 +227,40 @@ public class Dialog_Manager : MonoBehaviour
     //}
 
     // 미리 세팅해놓고 숨기기
-    void PreSetHide()
-    {
-        TMP_TextInfo textInfo = dialogText.textInfo;
-        for (int c = 0; c < textInfo.characterCount; c++)
-        {
-            var charInfo = textInfo.characterInfo[c];
-            if (!charInfo.isVisible)
-                continue;
+    //void PreSetHide()
+    //{
+    //    TMP_TextInfo textInfo = dialogText.textInfo;
+    //    for (int c = 0; c < textInfo.characterCount; c++)
+    //    {
+    //        var charInfo = textInfo.characterInfo[c];
+    //        if (!charInfo.isVisible)
+    //            continue;
 
-            int materialIndex = charInfo.materialReferenceIndex;
-            Color32[] vertexColors = textInfo.meshInfo[materialIndex].colors32;
-            int vertexIndex = charInfo.vertexIndex;
-            for (int i = 0; i < 4; i++)
-            {
-                int index = vertexIndex + i;
-                vertexColors[index].a = 0;// 투명화
-            }
-        }
+    //        int materialIndex = charInfo.materialReferenceIndex;
+    //        Color32[] vertexColors = textInfo.meshInfo[materialIndex].colors32;
+    //        int vertexIndex = charInfo.vertexIndex;
+    //        for (int i = 0; i < 4; i++)
+    //        {
+    //            int index = vertexIndex + i;
+    //            vertexColors[index].a = 0;// 투명화
+    //        }
+    //    }
 
-        // 메쉬 업데이트
-        for (int i = 0; i < textInfo.materialCount; i++)
-        {
-            if (textInfo.meshInfo[i].mesh == null) { continue; }
-            textInfo.meshInfo[i].mesh.colors32 = textInfo.meshInfo[i].colors32;
-            textInfo.meshInfo[i].mesh.vertices = textInfo.meshInfo[i].vertices;   // 변경
-            dialogText.UpdateGeometry(textInfo.meshInfo[i].mesh, i);
-        }
-    }
+    //    // 메쉬 업데이트
+    //    for (int i = 0; i < textInfo.materialCount; i++)
+    //    {
+    //        if (textInfo.meshInfo[i].mesh == null) { continue; }
+    //        textInfo.meshInfo[i].mesh.colors32 = textInfo.meshInfo[i].colors32;
+    //        textInfo.meshInfo[i].mesh.vertices = textInfo.meshInfo[i].vertices;   // 변경
+    //        dialogText.UpdateGeometry(textInfo.meshInfo[i].mesh, i);
+    //    }
+    //}
 
     void StartActing()
     {
         if (actionCoroutine != null)
             StopCoroutine(actionCoroutine);
-        actionCoroutine = StartCoroutine(TextAction(dialogStruct));
+        actionCoroutine = StartCoroutine(TextAction(dialog));
     }
 
     IEnumerator TextAction(Data_Manager.DialogStruct _dialogStruct)
@@ -213,35 +276,34 @@ public class Dialog_Manager : MonoBehaviour
                 // x - 시작 포지션
                 // y - 끝 포지션
                 // z - 액션 타입
-                //if (_actionText[i].z > -1)// 액션 타입이 None(-1)이 아니면
-                //{
-                int x = _dialogStruct.dialogTypes[i].dialogIndex.x;
-                int y = _dialogStruct.dialogTypes[i].dialogIndex.y;
-                for (int c = x; c < y; c++)
+                if (_dialogStruct.dialogTypes[i].dialogAnimation != Data_DialogType.DialogAnimation.None)// 액션 타입이 None이 아니면
                 {
-                    var charInfo = component.textInfo.characterInfo[c];
-                    if (charInfo.isVisible == false)
-                        continue;
+                    int x = _dialogStruct.dialogTypes[i].dialogIndex.x;
+                    int y = _dialogStruct.dialogTypes[i].dialogIndex.y;
+                    for (int c = x; c < y; c++)
+                    {
+                        var charInfo = component.textInfo.characterInfo[c];
+                        if (charInfo.isVisible == false)
+                            continue;
 
-                    int materialIndex = charInfo.materialReferenceIndex;
-                    int vertexIndex = charInfo.vertexIndex;
+                        int materialIndex = charInfo.materialReferenceIndex;
+                        int vertexIndex = charInfo.vertexIndex;
 
-                    // 원래 정점정보
-                    Vector3[] sourceVertices = cachedMeshInfo[materialIndex].vertices;
-                    // 현재 정점 정보를 얻고 덮어쓰기
-                    Vector3[] destinationVertices = component.textInfo.meshInfo[materialIndex].vertices;
-                    //Color32[] vertexColors = component.textInfo.meshInfo[materialIndex].colors32;
-                    //Data_DialogType.ActionType type = dialogType.actionType[_actionText[i].z];
-                    //SetActionType(type, vertexIndex, sourceVertices, destinationVertices, c);
-                    TryAimationWave(actionType, vertexIndex, sourceVertices, destinationVertices, c);
+                        // 원래 정점정보
+                        Vector3[] sourceVertices = cachedMeshInfo[materialIndex].vertices;
+                        // 현재 정점 정보를 얻고 덮어쓰기
+                        Vector3[] destinationVertices = component.textInfo.meshInfo[materialIndex].vertices;
+                        //Color32[] vertexColors = component.textInfo.meshInfo[materialIndex].colors32;
+                        //Data_DialogType.ActionType type = dialogType.actionType[_actionText[i].z];
+                        //SetActionType(type, vertexIndex, sourceVertices, destinationVertices, c);
+                        TryAimationWave(actionType, vertexIndex, sourceVertices, destinationVertices, c);
+                    }
                 }
-                //}
             }
             component.UpdateVertexData();
             Debug.LogWarning("TextAction");
         }
     }
-    public Data_DialogType actionType;
 
     void TryAnimationCurve(Data_DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
@@ -273,7 +335,6 @@ public class Dialog_Manager : MonoBehaviour
             //float x = Mathf.Sin(curveTime + sourceVertices[index].x * actionRange) * type.angle.x;
             //float y = Mathf.Cos(curveTime + sourceVertices[index].y * actionRange) * type.angle.y;
             destinationVertices[index] = sourceVertices[index] + new Vector3(y, x, 0f);
-            Debug.LogWarning("ijeijfieji");
         }
     }
 
@@ -355,7 +416,7 @@ public class Dialog_Manager : MonoBehaviour
         typing = _typing;
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
-        typingCoroutine = StartCoroutine(Typing(dialogStruct));
+        typingCoroutine = StartCoroutine(Typing(dialog));
     }
 
     IEnumerator Typing(Data_Manager.DialogStruct _dialogStruct)
@@ -417,5 +478,19 @@ public class Dialog_Manager : MonoBehaviour
             normalize += Time.deltaTime / 3f;
             yield return null;
         }
+    }
+
+
+
+
+
+
+
+
+
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        DialogAction();
     }
 }

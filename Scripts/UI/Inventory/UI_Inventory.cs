@@ -55,10 +55,16 @@ public class UI_Inventory : MonoBehaviour
         myBox.OpenCanvas(_open);
     }
 
-    public void OpenShop(bool _open, LandingStruct _shopData)
+    public void OpenShop(LandingStruct _shopData)
     {
-        myBox.OpenCanvas(_open);
-        shop.SetShop(_open, _shopData);
+        myBox.OpenCanvas(true);
+        shop.SetShop(true, _shopData);
+    }
+
+    public void CloseShop()
+    {
+        myBox.OpenCanvas(false);
+        shop.OpenCanvas(false);
     }
 
     public void OpenShipyard(bool _open, LandingStruct _shopData)

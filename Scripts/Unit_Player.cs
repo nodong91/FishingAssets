@@ -165,35 +165,6 @@ public class Unit_Player : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, target, speed);
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed * 5f);
     }
-    //================================================================================================================================================
-    // 충돌
-    //================================================================================================================================================
-
-    public List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
-    public Trigger_Setting closestTarget;
-    public float closestDistance;
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
-        if (fishing == null)
-            return;
-        triggerGameObject.Add(fishing);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
-        if (fishing == null)
-            return;
-
-        triggerGameObject.Remove(fishing);
-        if (triggerGameObject.Count == 0)
-        {
-            closestTarget = null;
-            Game_Manager.current.followManager.AddClosestTarget(null);
-        }
-    }
 
     //================================================================================================================================================
     // 회피
@@ -233,4 +204,42 @@ public class Unit_Player : MonoBehaviour
     // 낚시
     //================================================================================================================================================
 
+    //================================================================================================================================================
+    // 충돌
+    //================================================================================================================================================
+
+    public List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
+    public Trigger_Setting closestTarget;
+    public float closestDistance;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Finish")
+        {
+            Debug.LogWarning("충돌");
+            Game_Manager.current.cameraManager.InputShake();
+            Game_Manager.current.Clash();
+        }
+        else
+        {
+            Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
+            if (fishing == null)
+                return;
+            triggerGameObject.Add(fishing);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
+        if (fishing == null)
+            return;
+
+        triggerGameObject.Remove(fishing);
+        if (triggerGameObject.Count == 0)
+        {
+            closestTarget = null;
+            Game_Manager.current.followManager.AddClosestTarget(null);
+        }
+    }
 }

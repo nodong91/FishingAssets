@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static Data_Manager;
 using static UI_Inventory_Slot;
@@ -40,9 +42,6 @@ public class UI_Inventory_Base : MonoBehaviour
     public virtual void SetStart()
     {
         closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
-        //if (loadingItem != null)
-        //    StopCoroutine(loadingItem);
-        //loadingItem = StartCoroutine(SetLoadingItem(false));
         OpenCanvas(false);
     }
 
@@ -66,10 +65,15 @@ public class UI_Inventory_Base : MonoBehaviour
 
         LoadItem(saveInventoryData);
     }
-
+    public delegate void DeleOutInventory();
+    public DeleOutInventory deleOutInventory;
     public virtual void OpenCanvas(bool _open)
     {
         StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
+        if(_open == false)
+        {
+            deleOutInventory?.Invoke();
+        }
     }
 
     public void EmptyInventory()
