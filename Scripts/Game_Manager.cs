@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Game_Manager : MonoBehaviour
@@ -16,6 +17,7 @@ public class Game_Manager : MonoBehaviour
     public UI_Landing landingUI;
     public UI_Status statusUI;
     public UI_Time timeUI;
+    public Dialog_Manager dialogManager;
 
     public static Game_Manager current;
 
@@ -26,13 +28,14 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
+        SceneLoader.OnSceneLoaded("Fishing", UnityEngine.SceneManagement.LoadSceneMode.Additive);
         SaveData_Continue.current.GetContinue();
 
         followManager.SetStart();
         mainUI.SetStart();
 
         inventory.SetStart();
-        if(instFishGuide == null)
+        if (instFishGuide == null)
             instFishGuide = Instantiate(fishGuide);
         instFishGuide.SetStart();
         landingUI.SetStart();

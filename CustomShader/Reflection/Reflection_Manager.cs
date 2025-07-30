@@ -9,10 +9,10 @@ public class Reflection_Manager : MonoBehaviour
     Camera reflectionCamera;
     Camera mainCamera;
 
-    public GameObject reflectionPlane;
+    public Renderer reflectionPlane;
 
     const string TextureName = "_RenderTexture";
-    Material reflectionMaterial;
+    private Material reflectionMaterial;
     public Material GetMaterial { get { return reflectionMaterial; } }
     RenderTexture reflectionTexture;
 
@@ -27,11 +27,33 @@ public class Reflection_Manager : MonoBehaviour
         reflectionMaterial = reflectionPlane.GetComponent<Renderer>().material;
         reflectionTexture = new RenderTexture(Screen.width, Screen.height, 24);
         reflectionTexture.useMipMap = true;
-    }
 
+        InstanceWater();
+    }
+    public Vector2Int waterSize;
+    void InstanceWater()
+    {
+        Vector3 halfSize = new Vector3(waterSize.x, 0f, waterSize.y);
+        for (int x = 0; x < waterSize.x; x++)
+        {
+            for (int y = 0; y < waterSize.y; y++)
+            {
+                Renderer inst = Instantiate(reflectionPlane, transform);
+                inst.material = reflectionMaterial;
+                inst.transform.position = (new Vector3(x, 0f, y) * 10f) - (halfSize * 5f);
+            }
+        }
+    }
+    public float waveSpeed = 2f;
     void Update()
     {
         OnPostRender();
+
+        // 배 부분 물결 안생기게
+        string shipPosition = "_ShipPosition";
+        Transform player = Game_Manager.current.player.transform;
+        reflectionMaterial.SetVector(shipPosition, player.position);
+        reflectionMaterial.SetFloat("_WaveSpeed", waveSpeed);
     }
 
     private void OnPostRender()

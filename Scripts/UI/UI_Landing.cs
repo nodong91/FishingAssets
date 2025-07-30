@@ -14,6 +14,7 @@ public class UI_Landing : MonoBehaviour
     public GameObject shipyardUI;
 
     LandingStruct landingData;
+    public LandingStruct GetLandingData { get { return landingData; } }
 
     public delegate void DeleOutLanding();
     public DeleOutLanding outLanding;
@@ -36,10 +37,11 @@ public class UI_Landing : MonoBehaviour
         shipyardButton.onClick.AddListener(ShipyardButton);
         storageButton.onClick.AddListener(StorageButton);
     }
-  
+
     public void SetLanding(LandingStruct _landingData)
     {
-        landingData = _landingData;
+        // 어떤 섬인지 확인
+        landingData = _landingData;// 개별 섬의 정보
         for (int i = 0; i < _landingData.landingSetting.Length; i++)
         {
             GameObject targetPoint = _landingData.landingSetting[i].landingPoint;
@@ -79,8 +81,11 @@ public class UI_Landing : MonoBehaviour
 
     IEnumerator SetCanvasAlpha(bool _open)
     {
+        // 열 때 출력
         if (_open == true)
-            canvasGroup.gameObject.SetActive(true);
+        {
+            OpenPointUI(true);
+        }
 
         float normalize = 0f;
         while (normalize < 1f)
@@ -90,16 +95,20 @@ public class UI_Landing : MonoBehaviour
             canvasGroup.alpha = alpha;
             yield return null;
         }
-
+        // 닫을 때 제거
         if (_open == false)
         {
-            canvasGroup.gameObject.SetActive(false);
-            // 모든 UI 제거
-            landingPointUI.SetActive(false);
-            fishShopUI.SetActive(false);
-            eventUI.SetActive(false);
-            shipyardUI.SetActive(false);
+            OpenPointUI(false);
         }
+    }
+
+    void OpenPointUI(bool _open)
+    {
+        canvasGroup.gameObject.SetActive(_open);
+        landingPointUI.SetActive(_open);
+        fishShopUI.SetActive(_open);
+        eventUI.SetActive(_open);
+        shipyardUI.SetActive(_open);
     }
 
     void OutButton()
@@ -108,6 +117,7 @@ public class UI_Landing : MonoBehaviour
 
         Game_Manager.current.OutOfControll(false);
         outLanding?.Invoke();
+        SaveData_Continue.current.SetContinue();// 섬에서 나갈 때 저장
     }
 
     void RestButton()// 휴식
@@ -117,8 +127,16 @@ public class UI_Landing : MonoBehaviour
 
     void ShopButton()
     {
+        SetOpenCanvas(false);
+        Game_Manager.current.inventory.shop.deleOutInventory = OutInventory;
         // 샵 버튼 누르면
-        Game_Manager.current.inventory.OpenShop(true, landingData);
+        Game_Manager.current.dialogManager.DialogStart();
+    }
+
+    void OutInventory()
+    {
+        SetOpenCanvas(true);
+        Debug.LogWarning("OutInventory");
     }
 
     void ShipyardButton()// 조선소

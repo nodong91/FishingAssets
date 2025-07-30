@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UI_Time;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class SaveData_Continue : MonoBehaviour
 {
@@ -108,6 +106,25 @@ public class SaveData_Continue : MonoBehaviour
         if (Static_JsonManager.TryLoadCountinueData(saveData, out SetSaveContinue _data))
         {
             setSaveContinue = _data;
+        }
+        else
+        {
+            setSaveContinue = new SetSaveContinue
+            {
+                playerPosition = Vector3.zero,
+                playerRotation = Quaternion.identity,
+                playerScale = Vector3.one,
+
+                timeSpeed = 10f,
+                minute = 30f,
+                hour = 7,
+                day = 0,
+                weatherType = UI_Time.WeatherType.Sun,
+
+                energy = 0f,
+                money = 0f,
+            };
+            SetContinue();// 섬에서 나갈 때 저장
         }
     }
 

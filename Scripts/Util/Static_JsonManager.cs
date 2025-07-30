@@ -189,12 +189,14 @@ public class Static_JsonManager
     public class InventoryData
     {
         public string name;
+        public int lastSetDay;
         public Vector2Int invenSize;
         public List<UI_Inventory_Base.SaveItemClass> invenClass;
     }
 
     public static void SaveInventory(string fileName, InventoryData _data)
     {
+        Debug.LogWarning(fileName);
         string filePath = Application.dataPath + "/Save/";
         // 폴더 생성
         FindFolder(filePath);

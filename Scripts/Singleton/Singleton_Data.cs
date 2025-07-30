@@ -4,21 +4,21 @@ using static Data_Manager;
 
 public class Singleton_Data : MonoSingleton<Singleton_Data>
 {
-    public Dictionary<string, Data_Manager.DialogStruct> Dict_Dialog = new Dictionary<string, Data_Manager.DialogStruct>();
+    public Dictionary<string, DialogStruct> Dict_Dialog = new Dictionary<string, DialogStruct>();
     //public Dictionary<string, Data_Manager.TranslateString> Dict_DialogString = new Dictionary<string, Data_Manager.TranslateString>();
     //public Dictionary<string, Data_Manager.TranslateString> Dict_TranslateString = new Dictionary<string, Data_Manager.TranslateString>();
     public Dictionary<string, AudioClip> Dict_Audio = new Dictionary<string, AudioClip>();
     //public Dictionary<string, Skill_Set> Dict_SkillSet = new Dictionary<string, Skill_Set>();
     //public Translation translation;
-    public Dictionary<string, Data_Manager.FishStruct> Dict_Fish = new Dictionary<string, Data_Manager.FishStruct>();
-    public Dictionary<string, Data_Manager.PartsStruct> Dict_Parts = new Dictionary<string, Data_Manager.PartsStruct>();
-    public Dictionary<string, Data_Manager.EquipStruct> Dict_Equip = new Dictionary<string, Data_Manager.EquipStruct>();
-    public Dictionary<string, Data_Manager.UsedStruct> Dict_Used = new Dictionary<string, Data_Manager.UsedStruct>();
-    public Dictionary<string, Data_Manager.ItemStruct> Dict_Item = new Dictionary<string, Data_Manager.ItemStruct>();
+    public Dictionary<string, FishStruct> Dict_Fish = new Dictionary<string, FishStruct>();
+    public Dictionary<string, PartsStruct> Dict_Parts = new Dictionary<string, PartsStruct>();
+    public Dictionary<string, EquipStruct> Dict_Equip = new Dictionary<string, EquipStruct>();
+    public Dictionary<string, UsedStruct> Dict_Used = new Dictionary<string, UsedStruct>();
+    public Dictionary<string, ItemStruct> Dict_Item = new Dictionary<string, ItemStruct>();
 
-    public void SetDictionary_Dialog(List<Data_Manager.DialogStruct> _data)
+    public void SetDictionary_Dialog(List<DialogStruct> _data)
     {
-        Dict_Dialog = new Dictionary<string, Data_Manager.DialogStruct>();
+        Dict_Dialog = new Dictionary<string, DialogStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
             string id = _data[i].ID;
@@ -92,9 +92,9 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     //    return Dict_Temp;
     //}
 
-    public void SetDictionary_Equip(List<Data_Manager.EquipStruct> _data)
+    public void SetDictionary_Equip(List<EquipStruct> _data)
     {
-        Dict_Equip = new Dictionary<string, Data_Manager.EquipStruct>();
+        Dict_Equip = new Dictionary<string, EquipStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
             string id = _data[i].itemStruct.id;
@@ -109,9 +109,9 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         }
     }
 
-    public void SetDictionary_Used(List<Data_Manager.UsedStruct> _data)
+    public void SetDictionary_Used(List<UsedStruct> _data)
     {
-        Dict_Used = new Dictionary<string, Data_Manager.UsedStruct>();
+        Dict_Used = new Dictionary<string, UsedStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
             string id = _data[i].itemStruct.id;
@@ -126,9 +126,9 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         }
     }
 
-    public void SetDictionary_Fish(List<Data_Manager.FishStruct> _data)
+    public void SetDictionary_Fish(List<FishStruct> _data)
     {
-        Dict_Fish = new Dictionary<string, Data_Manager.FishStruct>();
+        Dict_Fish = new Dictionary<string, FishStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
             string id = _data[i].itemStruct.id;
@@ -143,9 +143,9 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         }
     }
 
-    public void SetDictionary_Parts(List<Data_Manager.PartsStruct> _data)
+    public void SetDictionary_Parts(List<PartsStruct> _data)
     {
-        Dict_Parts = new Dictionary<string, Data_Manager.PartsStruct>();
+        Dict_Parts = new Dictionary<string, PartsStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
             string id = _data[i].id;
@@ -160,9 +160,9 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         }
     }
 
-    public void SetDictionary_Item(List<Data_Manager.ItemStruct> _data)
+    public void SetDictionary_Item(List<ItemStruct> _data)
     {
-        Dict_Item = new Dictionary<string, Data_Manager.ItemStruct>();
+        Dict_Item = new Dictionary<string, ItemStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
             string id = _data[i].id;

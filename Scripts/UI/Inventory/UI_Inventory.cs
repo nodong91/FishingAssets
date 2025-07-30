@@ -55,10 +55,16 @@ public class UI_Inventory : MonoBehaviour
         myBox.OpenCanvas(_open);
     }
 
-    public void OpenShop(bool _open, LandingStruct _shopData)
+    public void OpenShop(LandingStruct _shopData)
     {
-        myBox.OpenCanvas(_open);
-        shop.SetShop(_open, _shopData);
+        myBox.OpenCanvas(true);
+        shop.SetShop(true, _shopData);
+    }
+
+    public void CloseShop()
+    {
+        myBox.OpenCanvas(false);
+        shop.OpenCanvas(false);
     }
 
     public void OpenShipyard(bool _open, LandingStruct _shopData)
@@ -366,7 +372,7 @@ public class UI_Inventory : MonoBehaviour
         float prevMoney = moneyValue;
         moneyValue += _price;
 
-        SaveData_Continue.current.SetContinue(); // 저장
+        SaveData_Continue.current.SetContinue(); // 팔거나 사면 저장
         bool moveMoney = true;
         while (moveMoney == true)
         {

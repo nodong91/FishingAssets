@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static Data_Manager;
 using static UI_Inventory_Slot;
@@ -40,9 +42,6 @@ public class UI_Inventory_Base : MonoBehaviour
     public virtual void SetStart()
     {
         closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
-        //if (loadingItem != null)
-        //    StopCoroutine(loadingItem);
-        //loadingItem = StartCoroutine(SetLoadingItem(false));
         OpenCanvas(false);
     }
 
@@ -66,10 +65,16 @@ public class UI_Inventory_Base : MonoBehaviour
 
         LoadItem(saveInventoryData);
     }
-
+    public delegate void DeleOutInventory();
+    public DeleOutInventory deleOutInventory;
     public virtual void OpenCanvas(bool _open)
     {
         StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
+        if (_open == false)
+        {
+            deleOutInventory?.Invoke();
+            //Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 닫을 시 저장
+        }
     }
 
     public void EmptyInventory()
@@ -347,6 +352,7 @@ public class UI_Inventory_Base : MonoBehaviour
         public Vector2Int[] shape;
     }
     Static_JsonManager.InventoryData saveInventoryData;
+    public Static_JsonManager.InventoryData GetSaveInventoryData { get { return saveInventoryData; } }
     Vector2Int defaultInvenSize = new Vector2Int(4, 4);
 
     void SaveDictionary()
@@ -366,13 +372,14 @@ public class UI_Inventory_Base : MonoBehaviour
 
         saveInventoryData = new Static_JsonManager.InventoryData
         {
+            lastSetDay = Game_Manager.current.timeUI.day,
             invenSize = inventorySize,
             invenClass = saveItems,
         };
         //Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 내려놓으면 저장
     }
 
-    void LoadInventory()
+    public void LoadInventory()
     {
         if (Static_JsonManager.TryLoadInventory(saveData, out Static_JsonManager.InventoryData _data))
         {
@@ -382,9 +389,11 @@ public class UI_Inventory_Base : MonoBehaviour
         {
             saveInventoryData = new Static_JsonManager.InventoryData
             {
+                lastSetDay = -1,
                 invenSize = defaultInvenSize,
                 invenClass = new List<SaveItemClass>(),
             };
+            Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 디폴트로 저장
         }
     }
 
