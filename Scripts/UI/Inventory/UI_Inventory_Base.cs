@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using static Data_Manager;
 using static UI_Inventory_Slot;
@@ -21,7 +19,6 @@ public class UI_Inventory_Base : MonoBehaviour
     public string saveData = "Temp";
 
     public Canvas canvas;
-    public Button closeButton;
     public CanvasStruct[] canvasStructs;
     public GridLayoutGroup gridLayoutGroup;
     public UI_Inventory_Slot inventorySlot;
@@ -30,6 +27,7 @@ public class UI_Inventory_Base : MonoBehaviour
     public Vector2Int inventorySize;
 
     private UI_Inventory_Slot[,] allSlots;
+    //public UI_Inventory_Slot[,] GetAllSlots { get { return allSlots; } }
     Queue<UI_Inventory_Slot> slotPool = new Queue<UI_Inventory_Slot>();
     private List<UI_Inventory_Slot> checkList = new List<UI_Inventory_Slot>();
     Queue<Image> iconQueue = new Queue<Image>();
@@ -37,11 +35,13 @@ public class UI_Inventory_Base : MonoBehaviour
     Coroutine loadingItem;
     Dictionary<Vector2Int, ItemClass> dictItemClass = new Dictionary<Vector2Int, ItemClass>();
 
+    public delegate void DeleOutInventory();
+    public DeleOutInventory deleOutInventory;
+
     protected virtual void SetWeight(float _weight) { }
 
     public virtual void SetStart()
     {
-        closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
         OpenCanvas(false);
     }
 
@@ -60,20 +60,23 @@ public class UI_Inventory_Base : MonoBehaviour
         while (saveInventoryData == null)
             yield return null;
 
-        SetInventorySlot();
+        SetInventorySlot();// 데이터 불러온 이후
         yield return new WaitForEndOfFrame();
 
         LoadItem(saveInventoryData);
+        SetLoadDestroy();
     }
-    public delegate void DeleOutInventory();
-    public DeleOutInventory deleOutInventory;
+
     public virtual void OpenCanvas(bool _open)
     {
         StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
-        if (_open == false)
+        if (_open == true)
         {
-            deleOutInventory?.Invoke();
-            //Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 닫을 시 저장
+
+        }
+        else
+        {
+            deleOutInventory?.Invoke();// 닫았을 때
         }
     }
 
@@ -90,6 +93,12 @@ public class UI_Inventory_Base : MonoBehaviour
             UI_Inventory_Slot slot = item.GetLinkSlot;
             SlotEmpty(slot);
         }
+    }
+
+    public void SetDefault()
+    {
+        EmptyInventory();
+        SetInventorySlot();// 디폴트 세팅
     }
 
     void SetInventorySlot()
@@ -169,11 +178,11 @@ public class UI_Inventory_Base : MonoBehaviour
         if (_itemClass != null)// 비워져 있는지
         {
             SetWeight(_itemClass.item.weight);// 무게 세팅
+
             Image iconImage = IconPool();
             iconImage.transform.SetPositionAndRotation(_slot.transform.position, Quaternion.Euler(0f, 0f, _itemClass.angle));
             SetImage(iconImage, _itemClass.item);
             _slot.SetSlotImage = iconImage;// 이미지 세팅
-
             // 슬롯 세팅
             Vector2Int[] shape = _itemClass.shape;
             if (shape != null)
@@ -249,7 +258,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public bool AddItem(ItemStruct _item)// 구매
     {
-        UI_Inventory_Slot slot = GetEmptySlot(_item);
+        UI_Inventory_Slot slot = GetEmptySlot(_item);// 아이템 넣을 수 있는 칸 찾기
         if (slot == null)
         {
             // 넣을만한 빈 슬롯 없음
@@ -321,9 +330,9 @@ public class UI_Inventory_Base : MonoBehaviour
             }
             else
             {
-                bool temp = allSlots[slotX, slotY].CheckSlot();
+                bool linkCheck = allSlots[slotX, slotY].CheckSlot();
                 if (onCheck == true)
-                    onCheck = temp;
+                    onCheck = linkCheck;
                 checkList.Add(allSlots[slotX, slotY]);
             }
         }
@@ -338,6 +347,16 @@ public class UI_Inventory_Base : MonoBehaviour
         }
         checkList.Clear();
     }
+
+
+
+
+
+
+
+
+
+
 
     //===========================================================================================================================
     // 저장 및 불러오기
@@ -376,7 +395,6 @@ public class UI_Inventory_Base : MonoBehaviour
             invenSize = inventorySize,
             invenClass = saveItems,
         };
-        //Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 내려놓으면 저장
     }
 
     public void LoadInventory()
@@ -393,7 +411,7 @@ public class UI_Inventory_Base : MonoBehaviour
                 invenSize = defaultInvenSize,
                 invenClass = new List<SaveItemClass>(),
             };
-            Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 디폴트로 저장
+            //Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 디폴트로 저장
         }
     }
 
@@ -411,5 +429,67 @@ public class UI_Inventory_Base : MonoBehaviour
             UI_Inventory_Slot slot = allSlots[_data.invenClass[i].slotNum.x, _data.invenClass[i].slotNum.y];
             SetSlot(slot, itemClass);
         }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    void SetLoadDestroy()
+    {
+        for (int i = 0; i < destroySlot.Count; i++)
+        {
+            int x = destroySlot[i].x;
+            int y = destroySlot[i].y;
+            allSlots[x, y].DestroySlot();
+        }
+    }
+
+    public List<Vector2Int> destroySlot = new List<Vector2Int>();
+    public List<Vector2Int> GetDestroySlot { get { return destroySlot; } }
+    public void DistroySlot()
+    {
+        bool find = false;
+        while (find == false)
+        {
+            int x = Random.Range(0, inventorySize.x);
+            int y = Random.Range(0, inventorySize.y);
+
+            if (allSlots[x, y].destroy == false)
+            {
+                find = true;
+                UI_Inventory_Slot linkSlot = allSlots[x, y].GetLinkSlot;
+                if (linkSlot?.empty == false)
+                {
+                    SlotEmpty(linkSlot);
+                }
+                allSlots[x, y].DestroySlot();// 슬롯 부수기
+                destroySlot.Add(new Vector2Int(x, y));
+            }
+        }
+    }
+
+    public void FixSlot(UI_Inventory_Slot _slot)
+    {
+        _slot.FixSlot();
+        destroySlot.Remove(_slot.slotNum);
+    }
+
+    public void FixAll()
+    {
+        for (int i = 0; i < destroySlot.Count; i++)
+        {
+            int x = destroySlot[i].x;
+            int y = destroySlot[i].y;
+            allSlots[x, y].FixSlot();
+        }
+        destroySlot.Clear();
     }
 }

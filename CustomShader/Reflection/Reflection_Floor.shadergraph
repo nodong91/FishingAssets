@@ -392,6 +392,9 @@
         },
         {
             "m_Id": "d485b0f5e76b45738135e5f5a56898ad"
+        },
+        {
+            "m_Id": "5ccb70fae99a429297e0d08564a029e2"
         }
     ],
     "m_GroupDatas": [
@@ -1117,6 +1120,20 @@
                     "m_Id": "bcc20bae1afa457198c9656d249c8203"
                 },
                 "m_SlotId": 48712792
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "92459e9351764d1091c69637c177c8c5"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "5ccb70fae99a429297e0d08564a029e2"
+                },
+                "m_SlotId": 0
             }
         },
         {
@@ -4444,8 +4461,8 @@
     "m_ObjectId": "30d538e0f6e6427b8686b481a31bf288",
     "m_Title": "Foam",
     "m_Position": {
-        "x": -1195.0,
-        "y": -310.0
+        "x": -1195.000244140625,
+        "y": -309.9999084472656
     }
 }
 
@@ -5577,7 +5594,7 @@
     "m_ObjectId": "4e5c93593e3744c287b8d63fe2b16cda",
     "m_Title": "Foam",
     "m_Position": {
-        "x": -1772.0,
+        "x": -1772.0001220703125,
         "y": 440.0
     }
 }
@@ -6271,6 +6288,44 @@
         "x": 0.0,
         "y": 1.0
     }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PreviewNode",
+    "m_ObjectId": "5ccb70fae99a429297e0d08564a029e2",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Preview",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -379.99981689453127,
+            "y": 553.0,
+            "width": 207.9998016357422,
+            "height": 277.99993896484377
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "e511b72091404ec288c227f95a86dab0"
+        },
+        {
+            "m_Id": "ca0611ffc6f1412691ce6bd2a1c2a35a"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Width": 208.0,
+    "m_Height": 208.0
 }
 
 {
@@ -7079,7 +7134,7 @@
     "m_Title": "Water Texture",
     "m_Position": {
         "x": -2134.0,
-        "y": -475.0
+        "y": -474.9999084472656
     }
 }
 
@@ -11410,6 +11465,30 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "ca0611ffc6f1412691ce6bd2a1c2a35a",
+    "m_Id": 1,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "cabd9c5a60ff45bfbbe2becbc2c3026a",
     "m_Id": 1,
     "m_DisplayName": "B",
@@ -12233,8 +12312,8 @@
     "m_ObjectId": "d5a2eadf50214948bfbf9155b8ca5932",
     "m_Title": "Wave",
     "m_Position": {
-        "x": 375.0,
-        "y": 202.0
+        "x": 374.999755859375,
+        "y": 201.99978637695313
     }
 }
 
@@ -12837,6 +12916,30 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "e511b72091404ec288c227f95a86dab0",
+    "m_Id": 0,
+    "m_DisplayName": "In",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "In",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "e5220392f2334021b46594ace2069a97",
     "m_Id": 0,
@@ -13167,7 +13270,7 @@
     "m_Title": "Under Water",
     "m_Position": {
         "x": -3106.0,
-        "y": -734.0
+        "y": -733.9998779296875
     }
 }
 

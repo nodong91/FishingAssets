@@ -1,8 +1,5 @@
 using UnityEngine;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
-using System;
-using UnityEditor.SearchService;
 
 public class SceneLoader : MonoBehaviour
 {

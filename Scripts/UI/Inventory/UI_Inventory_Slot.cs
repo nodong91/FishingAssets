@@ -1,18 +1,21 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Data_Manager;
+using static UI_Inventory_Slot;
 
 public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public bool empty;
-    public TMPro.TMP_Text m_Text;
+    public bool empty, destroy;
     public Vector2Int slotNum;
+    public TMPro.TMP_Text m_Text;
     public Image checkImage;
-    private Image slotImage;
-    public Image SetSlotImage { set { slotImage = value; } }
-    public Image GetSlotImage { get { return slotImage; } }
+    public Image destroyImage;
+    private Image itemImage;
+    public Image SetSlotImage { set { itemImage = value; } }
+    public Image GetSlotImage { get { return itemImage; } }
 
     UI_Inventory_Slot linkSlot;// 링크 베이스 - 다 묶이게
 
@@ -82,11 +85,14 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
         m_Text.text = _x + "/" + _y;
         gameObject.name = m_Text.text;
         CheckOff();
+
+        destroy = false;
+        destroyImage.gameObject.SetActive(false);
     }
 
     void SetSlot(ItemClass _itemClass)
     {
-        empty = _itemClass == null;
+        empty = (_itemClass == null);
         itemClass = _itemClass;
         CheckOff();
     }
@@ -111,18 +117,32 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
 
     public bool CheckSlot()
     {
-        Color checkColor = (empty == true) ? Color.white : Color.red;
+        bool check = empty == true && destroy == false;
+        Color checkColor = (check) ? Color.white : Color.red;
         {
             checkImage.color = checkColor;
         }
         checkImage.gameObject.SetActive(true);
-        return empty;
+        return check;
     }
 
     public void CheckOff()
     {
         checkImage.color = Color.white;
         checkImage.gameObject.SetActive(empty == false);
+    }
+
+    public void DestroySlot()
+    {
+        destroy = true;
+        CheckOff();
+        destroyImage.gameObject.SetActive(true);
+    }
+
+    public void FixSlot()
+    {
+        destroy = false;
+        destroyImage.gameObject.SetActive(false);
     }
 
     //===========================================================================================================================

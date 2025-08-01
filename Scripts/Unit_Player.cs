@@ -1,5 +1,5 @@
 
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -75,18 +75,18 @@ public class Unit_Player : MonoBehaviour
     {
         while (state == State.Move)
         {
-            if (clash == false)
+            if (hold == false)
                 SetMoving();
             CheckClosestUnit();
             yield return null;
         }
     }
 
-    IEnumerator StateClash()
+    IEnumerator StateHold()
     {
-        clash = true;
-        yield return new WaitForSeconds(3f);
-        clash = false;
+        hold = true;
+        yield return new WaitForSeconds(1f);
+        hold = false;
     }
 
     void CheckClosestUnit()// 아이템이나 채집 같은거 하기 위한 체크
@@ -168,11 +168,12 @@ public class Unit_Player : MonoBehaviour
         focusTarget.transform.position = transform.position;
         Vector3 dir = new Vector3(dirction.x, 0f, dirction.y);
         Vector3 target = transform.position + focusTarget.transform.TransformDirection(dir).normalized;
+        //Vector3 target = transform.position + focusTarget.transform.forward;
 
         float speed = moveSpeed * Time.deltaTime;
         Vector3 offset = (target - transform.position).normalized;
         transform.position = Vector3.Lerp(transform.position, target, speed);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed );
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed);
         //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(focusTarget.transform.forward), speed * 5f);
     }
 
@@ -184,6 +185,16 @@ public class Unit_Player : MonoBehaviour
     {
 
     }
+
+    public void StateClash()
+    {
+        Game_Manager.current.inventory.DistroySlot();// 랜덤 슬롯 부수기
+
+        Debug.LogWarning("충돌!!!!!!!!!!!!!!!!!!!!");
+        Game_Manager.current.cameraManager.InputShake();
+        StartCoroutine(StateHold());
+    }
+
     //================================================================================================================================================
     // 액션
     //================================================================================================================================================
@@ -213,7 +224,7 @@ public class Unit_Player : MonoBehaviour
     //================================================================================================================================================
     // 낚시
     //================================================================================================================================================
-
+    public int HealthPoint;
     //================================================================================================================================================
     // 충돌
     //================================================================================================================================================
@@ -223,17 +234,21 @@ public class Unit_Player : MonoBehaviour
     public float closestDistance;
 
 
-    public bool clash;// 이동 못함
-    public GameObject clashObstacle;
+    public bool hold;// 이동 못함
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Finish" && other.gameObject != clashObstacle)
+        if (other.tag == "Finish")
         {
-            Debug.LogWarning("충돌");
-            clashObstacle = other.gameObject;
-            Game_Manager.current.cameraManager.InputShake();
-            StartCoroutine(StateClash());
+            HealthPoint--;
+            if (HealthPoint > 0)
+            {
+                StateClash();
+            }
+            else
+            {
+                Debug.LogWarning("배 파괴!!!!!!!!!!!!!!!!!!!!");
+            }
         }
         else
         {
@@ -246,7 +261,6 @@ public class Unit_Player : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        clashObstacle = null;
         Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
         if (fishing == null)
             return;

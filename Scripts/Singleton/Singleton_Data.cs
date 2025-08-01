@@ -21,7 +21,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         Dict_Dialog = new Dictionary<string, DialogStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
-            string id = _data[i].ID;
+            string id = _data[i].id;
             if (Dict_Dialog.ContainsKey(id) == true)
             {
                 Debug.LogError($"{id}와 같은 이름이 존재 합니다.");

@@ -13,7 +13,6 @@ public class Reflection_Manager : MonoBehaviour
 
     const string TextureName = "_RenderTexture";
     private Material reflectionMaterial;
-    public Material GetMaterial { get { return reflectionMaterial; } }
     RenderTexture reflectionTexture;
 
     void Start()
@@ -58,7 +57,7 @@ public class Reflection_Manager : MonoBehaviour
 
     private void OnPostRender()
     {
-        bool fog = RenderSettings.fog;
+        //bool fog = RenderSettings.fog;
         RenderReflection();
     }
 

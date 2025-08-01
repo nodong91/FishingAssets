@@ -14,8 +14,10 @@ public class SaveData_Continue : MonoBehaviour
         public int hour;
         public int day;
         public UI_Time.WeatherType weatherType;
+
         public float energy;
         public float money;
+        public List<Vector2Int> destroySlot;
     }
     public SetSaveContinue setSaveContinue;
     public string saveData = "SaveContinue";
@@ -73,6 +75,8 @@ public class SaveData_Continue : MonoBehaviour
 
             energy = Game_Manager.current.inventory.TryEnergy,
             money = Game_Manager.current.inventory.TryMoney,
+
+            destroySlot = Game_Manager.current.inventory.TryDestroySlot,
         };
         SaveContinue();
     }
@@ -94,6 +98,7 @@ public class SaveData_Continue : MonoBehaviour
         Game_Manager.current.timeUI.SetStart(timeSpeed, minute, hour, day);// 시간
 
         Game_Manager.current.inventory.TryMoney = setSaveContinue.money;// 돈
+        Game_Manager.current.inventory.TryDestroySlot = setSaveContinue.destroySlot;// 부서진 슬롯
     }
 
     void SaveContinue()
@@ -124,7 +129,6 @@ public class SaveData_Continue : MonoBehaviour
                 energy = 0f,
                 money = 0f,
             };
-            SetContinue();// 섬에서 나갈 때 저장
         }
     }
 
