@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -12,12 +13,13 @@ public class UI_Inventory : MonoBehaviour
     public UI_Shop shop;
     public Image iconImage;
 
-    bool onDrag, onCheck;
+    public bool onDrag, onCheck;
     Coroutine slotMoving, movingMoney;
     float energyValue;
     public float TryEnergy
     {
         get { return energyValue; }
+        set { energyValue = value; }
     }
     float moneyValue;
     public float TryMoney
@@ -32,6 +34,11 @@ public class UI_Inventory : MonoBehaviour
     }
     public TMPro.TMP_Text moneyText;
     public UI_Inventory_Infomation infomation;
+    public List<Vector2Int> TryDestroySlot
+    {
+        get { return myBox.destroySlot; }
+        set { myBox.destroySlot = value; }
+    }
 
     public SlotType enterSlotType, selectSlotType;
     private UI_Inventory_Slot enterSlot, selectSlot;
@@ -65,12 +72,13 @@ public class UI_Inventory : MonoBehaviour
     {
         myBox.OpenCanvas(false);
         shop.OpenCanvas(false);
+        shop.CloseButton();
     }
 
-    public void OpenShipyard(bool _open, LandingStruct _shopData)
+    public void OpenShipyard(LandingStruct _shopData)
     {
-        myBox.OpenCanvas(_open);
-        shop.SetShipyard(_open, _shopData);
+        myBox.OpenCanvas(true);
+        shop.SetShipyard(true, _shopData);
     }
 
     public void OpenStorage(bool _open)
@@ -191,7 +199,6 @@ public class UI_Inventory : MonoBehaviour
                     Game_Manager.current.mainUI.SetWarnningText("돈 없음");
                     Debug.LogWarning("돈 없음");
                 }
-                Debug.LogWarning("???");
             }
             else
             {
@@ -212,11 +219,17 @@ public class UI_Inventory : MonoBehaviour
             originItemClass = null;
             OffDragReset();
         }
-        else// 드래그 중이 아닐 때 픽업
+        else// 드래그 중이 아닐 때 클릭
         {
+            if (_slot.destroy == true && OnFix == true)
+            {
+                OnFix = false;
+                myBox.FixSlot(_slot);    // 하나씩 수리
+            }
+
             if (_slot.empty == true)
                 return;
-
+            // 픽업
             selectSlot = _slot.GetLinkSlot;
             selectItemClass = selectSlot.itemClass;
             selectSlotType = enterSlotType;
@@ -373,6 +386,7 @@ public class UI_Inventory : MonoBehaviour
         moneyValue += _price;
 
         SaveData_Continue.current.SetContinue(); // 팔거나 사면 저장
+
         bool moveMoney = true;
         while (moveMoney == true)
         {
@@ -399,6 +413,17 @@ public class UI_Inventory : MonoBehaviour
             return;
 
         infomation.SetStart(_slot);
+    }
+
+    public void DistroySlot()
+    {
+        myBox.DistroySlot();
+    }
+
+    public bool OnFix { get; set; }
+    public void FixAll()
+    {
+        myBox.FixAll();
     }
 
     //===========================================================================================================================

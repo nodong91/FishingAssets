@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using static UnityEngine.Rendering.ProbeAdjustmentVolume;
 
 
 #if UNITY_EDITOR
@@ -56,6 +55,10 @@ public class Data_Manager : Data_Parse
             else if (csv_Type.Contains("Used"))
             {
                 SetUsed(GetCSV_Data[i]);
+            }
+            else if (csv_Type.Contains("Dialog"))
+            {
+                SetDialog(GetCSV_Data[i]);
             }
             else if (csv_Type.Contains("Item"))
             {
@@ -199,6 +202,21 @@ public class Data_Manager : Data_Parse
                 },
             };
             partsStruct.Add(tempData);
+        }
+    }
+    void SetDialog(TextAsset _textAsset)
+    {
+        dialogStruct.Clear();
+        string[] data = _textAsset.text.Split(new char[] { '\n' });
+        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
+        {
+            string[] elements = data[i].Split(new char[] { ',' });
+            DialogStruct tempData = new DialogStruct
+            {
+                id = elements[0].Trim(),
+                contents = elements[1],
+            };
+            dialogStruct.Add(tempData);
         }
     }
 
@@ -371,21 +389,32 @@ public class Data_Manager : Data_Parse
     [System.Serializable]
     public struct DialogStruct
     {
-        public string ID;
-        public string dialogString;
+        public string id;
+        public string contents;
+
+        public enum ActionType
+        {
+            None,
+            Move,
+            Wave,
+            Jitter
+        }
+
         [System.Serializable]
         public struct DialogType
         {
             public Vector2Int dialogIndex;// 움직일 문장 시작과 끝 인덱스
-            public Data_DialogType.DialogAnimation dialogAnimation;// 애니메이션 타입
-            public float size;
-            public float Speed;
-            public string color;
+            public float textSize;
+            public float typingSpeed;
+            public string textColor;
+            [Header("Action")]
+            public ActionType actionType;
+            public float actionSpeed;
+            public float actionInterval;
+            public Vector2 actionAngle;
         }
         public DialogType[] dialogTypes;
     }
-    [Header(" [ String ]")]
-    public List<DialogStruct> dialogStruct = new List<DialogStruct>();
 
     //==================================================================================
     // Data
@@ -396,6 +425,7 @@ public class Data_Manager : Data_Parse
     public List<UsedStruct> usedStruct = new List<UsedStruct>();
     public List<FishStruct> fishStruct = new List<FishStruct>();
     public List<PartsStruct> partsStruct = new List<PartsStruct>();
+    public List<DialogStruct> dialogStruct = new List<DialogStruct>();
     public List<ItemStruct> itemStruct = new List<ItemStruct>();
 
     private void Awake()

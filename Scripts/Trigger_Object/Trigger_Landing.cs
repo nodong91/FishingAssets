@@ -7,6 +7,9 @@ public class Trigger_Landing : Trigger_Setting
     Unit_Player player;
     Coroutine setLanding;
 
+    public Trigger_Setting triggerSetting;
+    public GameObject cameraPosition;
+
     [System.Serializable]
     public struct LandingSetting
     {
@@ -26,14 +29,15 @@ public class Trigger_Landing : Trigger_Setting
     public struct LandingStruct
     {
         public string landingID;
+        public LandingSetting[] landingSetting;
+
         public Data_Shop shopData;
         public Data_Shop[] shipyardData;
-        public LandingSetting[] landingSetting;
+
+        public Data_NPC shopNPC;
+        public Data_NPC shipyardNPC;
     }
     public LandingStruct landingStruct;
-
-    public Trigger_Setting triggerSetting;
-    public GameObject cameraPosition;
 
     private void Start()
     {
@@ -69,8 +73,8 @@ public class Trigger_Landing : Trigger_Setting
 
     private void SetLandingUI()
     {
-        Game_Manager.current.landingUI.SetLanding(landingStruct);
-        Game_Manager.current.landingUI.outLanding = OutLanding;
+        Game_Manager.current.GetLanding.SetLanding(landingStruct);
+        Game_Manager.current.GetLanding.outLanding = OutLanding;
         Game_Manager.current.mainUI.OpenCanvas(false);
     }
 
@@ -80,4 +84,6 @@ public class Trigger_Landing : Trigger_Setting
         cameraPosition.SetActive(false);
         Game_Manager.current.mainUI.OpenCanvas(true);
     }
+
+
 }

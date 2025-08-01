@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UI_Main;
 
 public class Controll_Manager : MonoBehaviour
 {
@@ -70,30 +71,55 @@ public class Controll_Manager : MonoBehaviour
 
     public void SetDirection()
     {
-        if (controllDirection.HasFlag(ControllDirection.W) == false && controllDirection.HasFlag(ControllDirection.S) == false)
+        if ((controllDirection & ControllDirection.W) == 0 & (controllDirection & ControllDirection.S) == 0)
         {
             dirction.y = 0;
         }
-        else if (controllDirection.HasFlag(ControllDirection.W))
+        else if ((controllDirection & ControllDirection.W) != 0)
         {
             dirction.y = 1;
         }
-        else if (controllDirection.HasFlag(ControllDirection.S))
+        else if ((controllDirection & ControllDirection.S) != 0)
         {
             dirction.y = -1;
         }
-        if (controllDirection.HasFlag(ControllDirection.A) == false && controllDirection.HasFlag(ControllDirection.D) == false)
+        if ((controllDirection & ControllDirection.A) == 0 & (controllDirection & ControllDirection.D) == 0)
         {
             dirction.x = 0;
         }
-        else if (controllDirection.HasFlag(ControllDirection.A))
+        else if ((controllDirection & ControllDirection.A) != 0)
         {
             dirction.x = -1;
         }
-        else if (controllDirection.HasFlag(ControllDirection.D))
+        else if ((controllDirection & ControllDirection.D) != 0)
         {
             dirction.x = 1;
         }
+
+        //if (controllDirection.HasFlag(ControllDirection.W) == false && controllDirection.HasFlag(ControllDirection.S) == false)
+        //{
+        //    dirction.y = 0;
+        //}
+        //else if (controllDirection.HasFlag(ControllDirection.W))
+        //{
+        //    dirction.y = 1;
+        //}
+        //else if (controllDirection.HasFlag(ControllDirection.S))
+        //{
+        //    dirction.y = -1;
+        //}
+        //if (controllDirection.HasFlag(ControllDirection.A) == false && controllDirection.HasFlag(ControllDirection.D) == false)
+        //{
+        //    dirction.x = 0;
+        //}
+        //else if (controllDirection.HasFlag(ControllDirection.A))
+        //{
+        //    dirction.x = -1;
+        //}
+        //else if (controllDirection.HasFlag(ControllDirection.D))
+        //{
+        //    dirction.x = 1;
+        //}
     }
 
     public void ResetControll()

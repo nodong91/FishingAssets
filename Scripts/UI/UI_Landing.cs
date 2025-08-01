@@ -117,6 +117,8 @@ public class UI_Landing : MonoBehaviour
 
         Game_Manager.current.OutOfControll(false);
         outLanding?.Invoke();
+        Game_Manager.current.inventory.shop.deleOutInventory = null;
+        Game_Manager.current.inventory.CloseShop();
         SaveData_Continue.current.SetContinue();// 섬에서 나갈 때 저장
     }
 
@@ -130,18 +132,23 @@ public class UI_Landing : MonoBehaviour
         SetOpenCanvas(false);
         Game_Manager.current.inventory.shop.deleOutInventory = OutInventory;
         // 샵 버튼 누르면
-        Game_Manager.current.dialogManager.DialogStart();
+        Game_Manager.current.dialogManager.DialogStart(landingData.shopNPC);
     }
 
     void OutInventory()
     {
+        // 닫히면 다시 랜드 유아이 뜨게
         SetOpenCanvas(true);
         Debug.LogWarning("OutInventory");
     }
 
     void ShipyardButton()// 조선소
     {
-        Game_Manager.current.inventory.OpenShipyard(true, landingData);
+        SetOpenCanvas(false);
+        //Game_Manager.current.inventory.OpenShipyard(true, landingData);
+        Game_Manager.current.inventory.shop.deleOutInventory = OutInventory;
+        // 샵 버튼 누르면
+        Game_Manager.current.dialogManager.DialogStart(landingData.shipyardNPC);
     }
 
     void StorageButton()// 창고

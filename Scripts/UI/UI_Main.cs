@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static Controll_Manager;
 
 public class UI_Main : MonoBehaviour
 {
@@ -81,7 +82,15 @@ public class UI_Main : MonoBehaviour
                 _canvasStructs[i].rect.gameObject.SetActive(false);
         }
     }
+    [Flags]
+    public enum MenuState
+    {
+        Inventory = 1 << 0,
+        Fishing = 1 << 1,
+        Status = 1 << 2,
 
+    }
+    public MenuState menuState;
     public Button inventoryButton;
     public Button fishGuideButton;
     public Button statusButton;
@@ -112,7 +121,15 @@ public class UI_Main : MonoBehaviour
 
     void InventoryButton()
     {
-        Game_Manager.current.inventory.OpenInventory(true);
+        if ((menuState & MenuState.Inventory) == 0)
+        {
+            menuState |= MenuState.Inventory;// 넣기
+        }
+        else
+        {
+            menuState &= ~MenuState.Inventory;
+        }
+        Game_Manager.current.inventory.OpenInventory((menuState & MenuState.Inventory) != 0);
     }
 
     void FishGuideButton()
@@ -122,7 +139,15 @@ public class UI_Main : MonoBehaviour
 
     void StatusButton()
     {
-        Game_Manager.current.statusUI.OpenCanvas(true);
+        if ((menuState & MenuState.Status) == 0)
+        {
+            menuState |= MenuState.Status;// 넣기
+        }
+        else
+        {
+            menuState &= ~MenuState.Status;
+        }
+        Game_Manager.current.statusUI.OpenCanvas((menuState & MenuState.Status) != 0);
     }
 
     public void OpenCanvas(bool _open)

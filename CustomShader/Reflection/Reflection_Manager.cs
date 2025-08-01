@@ -58,7 +58,7 @@ public class Reflection_Manager : MonoBehaviour
 
     private void OnPostRender()
     {
-        bool fog = RenderSettings.fog;
+        //bool fog = RenderSettings.fog;
         RenderReflection();
     }
 

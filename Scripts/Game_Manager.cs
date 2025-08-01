@@ -7,8 +7,6 @@ public class Game_Manager : MonoBehaviour
     public Fishing_Manager fishingManager;
     public Camera_Manager cameraManager;
     public FishGuide fishGuide;
-    private FishGuide instFishGuide;
-    public FishGuide GetFishGuide { get { return instFishGuide; } }
     public Follow_Manager followManager;
     public Controll_Manager controllManager;
     [Header("[ UI ]")]
@@ -18,6 +16,7 @@ public class Game_Manager : MonoBehaviour
     public UI_Status statusUI;
     public UI_Time timeUI;
     public Dialog_Manager dialogManager;
+    public UI_Quest questUI;
 
     public static Game_Manager current;
 
@@ -35,10 +34,7 @@ public class Game_Manager : MonoBehaviour
         mainUI.SetStart();
 
         inventory.SetStart();
-        if (instFishGuide == null)
-            instFishGuide = Instantiate(fishGuide);
-        instFishGuide.SetStart();
-        landingUI.SetStart();
+        questUI.SetStart();
 
         PlayerMove();
     }
@@ -68,5 +64,38 @@ public class Game_Manager : MonoBehaviour
     {
         Singleton_Controller.INSTANCE.outOfControll = _isOn;
         controllManager.ResetControll();
+    }
+
+
+    //====================================================================================================================
+    // 매니저 가져오기
+    //====================================================================================================================
+
+    private FishGuide instFishGuide;
+    public FishGuide GetFishGuide
+    {
+        get
+        {
+            if (instFishGuide == null)
+            {
+                instFishGuide = Instantiate(fishGuide);
+                instFishGuide.SetStart();
+            }
+            return instFishGuide;
+        }
+    }
+
+    private UI_Landing instLanding;
+    public UI_Landing GetLanding
+    {
+        get
+        {
+            if (instLanding == null)
+            {
+                instLanding = Instantiate(landingUI);
+                instLanding.SetStart();
+            }
+            return instLanding;
+        }
     }
 }
