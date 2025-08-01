@@ -1,5 +1,5 @@
 
-using System;
+//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -185,6 +185,16 @@ public class Unit_Player : MonoBehaviour
     {
 
     }
+
+    public void StateClash()
+    {
+        Game_Manager.current.inventory.DistroySlot();// ·£´ý ½½·Ô ºÎ¼ö±â
+
+        Debug.LogWarning("Ãæµ¹!!!!!!!!!!!!!!!!!!!!");
+        Game_Manager.current.cameraManager.InputShake();
+        StartCoroutine(StateHold());
+    }
+
     //================================================================================================================================================
     // ¾×¼Ç
     //================================================================================================================================================
@@ -233,11 +243,7 @@ public class Unit_Player : MonoBehaviour
             HealthPoint--;
             if (HealthPoint > 0)
             {
-                Game_Manager.current.inventory.DistroySlot();// ·£´ý ½½·Ô ºÎ¼ö±â
-
-                Debug.LogWarning("Ãæµ¹!!!!!!!!!!!!!!!!!!!!");
-                Game_Manager.current.cameraManager.InputShake();
-                StartCoroutine(StateHold());
+                StateClash();
             }
             else
             {
