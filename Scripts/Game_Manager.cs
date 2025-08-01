@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Game_Manager : MonoBehaviour
 {
+    public int frameRate = 60;
+
     public Unit_Player player;
     public Fishing_Manager fishingManager;
     public Camera_Manager cameraManager;
@@ -27,6 +29,8 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = frameRate;
+
         SceneLoader.OnSceneLoaded("Fishing", UnityEngine.SceneManagement.LoadSceneMode.Additive);
         SaveData_Continue.current.GetContinue();
 

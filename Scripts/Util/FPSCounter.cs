@@ -5,12 +5,6 @@ public class FPSCounter : MonoBehaviour
     public TMPro.TMP_Text fpsText; // Assign this in the Inspector
     private float deltaTime;
     private float fps;
-    public int targetFrameRate = 60;
-
-    void Start()
-    {
-        Application.targetFrameRate = targetFrameRate;
-    }
 
     void Update()
     {
