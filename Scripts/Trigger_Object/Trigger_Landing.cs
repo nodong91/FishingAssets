@@ -56,6 +56,7 @@ public class Trigger_Landing : Trigger_Setting
     IEnumerator SetLanding()
     {
         cameraPosition.SetActive(true);
+        SetLandingUI();
 
         Vector3 prevPosition = player.transform.position;
         Quaternion prevRotation = player.transform.rotation;
@@ -68,7 +69,6 @@ public class Trigger_Landing : Trigger_Setting
             player.transform.rotation = Quaternion.Lerp(prevRotation, triggerSetting.transform.rotation, normalize);
             yield return null;
         }
-        SetLandingUI();
     }
 
     private void SetLandingUI()
