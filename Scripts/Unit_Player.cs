@@ -238,25 +238,10 @@ public class Unit_Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Finish")
-        {
-            HealthPoint--;
-            if (HealthPoint > 0)
-            {
-                StateClash();
-            }
-            else
-            {
-                Debug.LogWarning("¹è ÆÄ±«!!!!!!!!!!!!!!!!!!!!");
-            }
-        }
-        else
-        {
-            Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
-            if (fishing == null)
-                return;
-            triggerGameObject.Add(fishing);
-        }
+        Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
+        if (fishing == null)
+            return;
+        triggerGameObject.Add(fishing);
     }
 
     private void OnTriggerExit(Collider other)
@@ -270,6 +255,22 @@ public class Unit_Player : MonoBehaviour
         {
             closestTarget = null;
             Game_Manager.current.followManager.AddClosestTarget(null);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Finish")
+        {
+            HealthPoint--;
+            if (HealthPoint > 0)
+            {
+                StateClash();
+            }
+            else
+            {
+                Debug.LogWarning("¹è ÆÄ±«!!!!!!!!!!!!!!!!!!!!");
+            }
         }
     }
 }
