@@ -47,9 +47,9 @@ public class UI_Landing : MonoBehaviour
             GameObject targetPoint = _landingData.landingSetting[i].landingPoint;
             GameObject followUI = GetFollowUI(_landingData.landingSetting[i].landingType);
             followUI.SetActive(true);
-            Game_Manager.current.followManager.AddFollowUI(targetPoint, followUI);
+            Game_Manager.current.GetFollow.AddFollowUI(targetPoint, followUI);
         }
-        SetOpenCanvas(true);
+        SetLandingCanvas(true);
         Game_Manager.current.OutOfControll(true);
     }
 
@@ -72,7 +72,7 @@ public class UI_Landing : MonoBehaviour
         return null;
     }
 
-    void SetOpenCanvas(bool _open)
+    void SetLandingCanvas(bool _open)
     {
         if (opening != null)
             StopCoroutine(opening);
@@ -113,12 +113,12 @@ public class UI_Landing : MonoBehaviour
 
     void OutButton()
     {
-        SetOpenCanvas(false);
+        SetLandingCanvas(false);
 
         Game_Manager.current.OutOfControll(false);
         outLanding?.Invoke();
-        Game_Manager.current.inventory.shop.deleOutInventory = null;
-        Game_Manager.current.inventory.CloseShop();
+        Game_Manager.current.GetInventory.shop.deleOutInventory = null;
+        Game_Manager.current.GetInventory.CloseShop();
         SaveData_Continue.current.SetContinue();// 섬에서 나갈 때 저장
     }
 
@@ -127,33 +127,34 @@ public class UI_Landing : MonoBehaviour
 
     }
 
-    void ShopButton()
-    {
-        SetOpenCanvas(false);
-        Game_Manager.current.inventory.shop.deleOutInventory = OutInventory;
-        // 샵 버튼 누르면
-        Game_Manager.current.dialogManager.DialogStart(landingData.shopNPC);
-    }
-
     void OutInventory()
     {
         // 닫히면 다시 랜드 유아이 뜨게
-        SetOpenCanvas(true);
+        SetLandingCanvas(true);
         Debug.LogWarning("OutInventory");
+    }
+
+    void ShopButton()
+    {
+        SetLandingCanvas(false);
+        Game_Manager.current.GetInventory.shop.deleOutInventory = OutInventory;
+        // 샵 버튼 누르면
+        Game_Manager.current.GetDialog.DialogStart(landingData.shopNPC);
     }
 
     void ShipyardButton()// 조선소
     {
-        SetOpenCanvas(false);
+        SetLandingCanvas(false);
         //Game_Manager.current.inventory.OpenShipyard(true, landingData);
-        Game_Manager.current.inventory.shop.deleOutInventory = OutInventory;
+        Game_Manager.current.GetInventory.shop.deleOutInventory = OutInventory;
         // 샵 버튼 누르면
-        Game_Manager.current.dialogManager.DialogStart(landingData.shipyardNPC);
+        Game_Manager.current.GetDialog.DialogStart(landingData.shipyardNPC);
     }
 
     void StorageButton()// 창고
     {
-        Game_Manager.current.inventory.OpenStorage(true);
-
+        SetLandingCanvas(false);
+        Game_Manager.current.GetInventory.OpenStorage(true);
+        Game_Manager.current.GetInventory.shop.deleOutInventory = OutInventory;
     }
 }

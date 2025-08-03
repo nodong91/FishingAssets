@@ -93,13 +93,13 @@ public class Follow_Manager : MonoBehaviour
             yield return null;
         }
     }
-
+    public Vector3 offset;
     void FollowTarget_Camera(Transform _target, Transform _followUI)
     {
         _followUI.transform.localScale = Vector3.one;
 
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(_target.position);
         Vector3 followPosition = UICamera.ScreenToWorldPoint(screenPosition);
-        _followUI.transform.position = followPosition;
+        _followUI.transform.position = followPosition + offset;
     }
 }

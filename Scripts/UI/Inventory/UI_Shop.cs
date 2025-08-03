@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
 using static Trigger_Landing;
+using static UI_Inventory_Base;
 
 public class UI_Shop : UI_Inventory_Base
 {
@@ -14,7 +14,7 @@ public class UI_Shop : UI_Inventory_Base
     //===========================================================================================================================
 
     [Header("- Shop")]
-    public Data_Shop[] shopItem;
+    private Data_Shop[] shopItem;
     public VerticalLayoutGroup layoutGroup;
     public ToggleGroup toggleGroup;
     public Toggle[] groupToggles;
@@ -36,7 +36,7 @@ public class UI_Shop : UI_Inventory_Base
 
     public void CloseButton()
     {
-        //Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 창닫힐 때 저장
+        Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 창닫힐 때 저장
     }
 
     void SetToggle(int _index)
@@ -46,7 +46,7 @@ public class UI_Shop : UI_Inventory_Base
             currentIndex = _index;
             SetShopItem();
         }
-        else
+        else if (saveData != null)
         {
             // 탭 닫힐때 저장
             Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 디폴트로 저장
@@ -55,12 +55,12 @@ public class UI_Shop : UI_Inventory_Base
 
     void FixButton()
     {
-        Game_Manager.current.inventory.OnFix = true;
+        Game_Manager.current.GetInventory.OnFix = true;
     }
 
     void FixAllButton()
     {
-        Game_Manager.current.inventory.FixAll();
+        Game_Manager.current.GetInventory.FixAll();
     }
 
     public override void OpenCanvas(bool _open)
@@ -73,6 +73,7 @@ public class UI_Shop : UI_Inventory_Base
         landingID = _landingStruct.landingID + "_Shop";
         currentIndex = 0;
         shopItem[currentIndex] = _landingStruct.shopData;
+        OpenCanvas(_open);
 
         layoutGroup.padding.top = 15;
         layoutGroup.padding.bottom = 15;
@@ -82,7 +83,6 @@ public class UI_Shop : UI_Inventory_Base
         fixGroup.gameObject.SetActive(false);
         if (_open)
             SetShopItem();// 열릴때 세팅
-        OpenCanvas(_open);
     }
 
     public void SetShipyard(bool _open, LandingStruct _landingStruct)
@@ -90,6 +90,7 @@ public class UI_Shop : UI_Inventory_Base
         landingID = _landingStruct.landingID + "_Shipyard";
         currentIndex = 0;
         shopItem = _landingStruct.shipyardData;
+        OpenCanvas(_open);
 
         layoutGroup.padding.top = 40;
         layoutGroup.padding.bottom = 40;
@@ -97,25 +98,23 @@ public class UI_Shop : UI_Inventory_Base
         slotType = SlotType.Shop;
         toggleGroup.gameObject.SetActive(true);
         fixGroup.gameObject.SetActive(true);
-        groupToggles[0].isOn = true;// 첫번째 탭 열기
-
-        OpenCanvas(_open);
+        groupToggles[currentIndex].isOn = true;// 첫번째 탭 열기
     }
 
     public void SetStorage(bool _open)
     {
         landingID = "MyStorage";
         currentIndex = 0;
-        //shopItem = _landingStruct.shipyardData;
+        OpenCanvas(_open);
 
-        layoutGroup.padding.top = 15;
+        layoutGroup.padding.top = 40;
         layoutGroup.padding.bottom = 15;
 
         slotType = SlotType.Storage;
-        toggleGroup.gameObject.SetActive(false);
+        toggleGroup.gameObject.SetActive(true);
         fixGroup.gameObject.SetActive(false);
 
-        OpenCanvas(_open);
+        groupToggles[currentIndex].isOn = true;// 첫번째 탭 열기
     }
 
     //===========================================================================================================================
@@ -129,20 +128,33 @@ public class UI_Shop : UI_Inventory_Base
         Debug.LogWarning("상점 세팅");
         saveData = landingID + currentIndex;
         LoadInventory();
-        if (CheckResetDay() == true)
+        switch (slotType)
         {
-            SetItemDisplay();
-        }
-        else
-        {
-            // 저장된 내용 불러오기
-            SetInventoryItem(saveData);
+            case SlotType.None:
+
+                break;
+
+            case SlotType.Shop:
+                if (CheckResetDay() == true)
+                {
+                    SetItemDisplay();
+                }
+                else
+                {
+                    // 저장된 내용 불러오기
+                    SetInventoryItem(saveData);
+                }
+                break;
+
+            case SlotType.Storage:
+                SetInventoryItem(saveData);
+                break;
         }
     }
 
     bool CheckResetDay()// 상점 물건 리셋
     {
-        int checkDay = Game_Manager.current.timeUI.day;
+        int checkDay = Game_Manager.current.GetTimeUI.day;
         resetDay = GetSaveInventoryData.lastSetDay;
         Debug.LogWarning("날짜 체크!!! " + checkDay + " " + resetDay);
         if (resetDay != checkDay)

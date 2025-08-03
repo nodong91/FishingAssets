@@ -16,7 +16,7 @@ public class UI_Inventory_Base : MonoBehaviour
         MyBox
     }
     public SlotType slotType = SlotType.None;
-    public string saveData = "Temp";
+    public string saveData { get; set; }
 
     public Canvas canvas;
     public CanvasStruct[] canvasStructs;
@@ -27,11 +27,11 @@ public class UI_Inventory_Base : MonoBehaviour
     public Vector2Int inventorySize;
 
     private UI_Inventory_Slot[,] allSlots;
-    //public UI_Inventory_Slot[,] GetAllSlots { get { return allSlots; } }
     Queue<UI_Inventory_Slot> slotPool = new Queue<UI_Inventory_Slot>();
     private List<UI_Inventory_Slot> checkList = new List<UI_Inventory_Slot>();
     Queue<Image> iconQueue = new Queue<Image>();
     public RectTransform iconParent;
+    public RectTransform infomationRect;
     Coroutine loadingItem;
     Dictionary<Vector2Int, ItemClass> dictItemClass = new Dictionary<Vector2Int, ItemClass>();
 
@@ -203,7 +203,7 @@ public class UI_Inventory_Base : MonoBehaviour
         {
             return iconQueue.Dequeue();
         }
-        Image baseImage = Game_Manager.current.inventory.iconImage;
+        Image baseImage = Game_Manager.current.GetInventory.iconImage;
         return Instantiate(baseImage, iconParent);
     }
 
@@ -271,6 +271,7 @@ public class UI_Inventory_Base : MonoBehaviour
             item = _item,
             angle = 0,
             shape = _item.shape,
+            acquisition = Game_Manager.current.GetTimeUI.day,
         };
         SetSlot(slot, itemClass);
         return true;
@@ -282,27 +283,27 @@ public class UI_Inventory_Base : MonoBehaviour
 
     void OnPointerLeftClick(UI_Inventory_Slot _slot)
     {
-        Game_Manager.current.inventory.OnPointerLeftClick(_slot);
+        Game_Manager.current.GetInventory.OnPointerLeftClick(_slot);
     }
 
     void OnPointerRightClick(UI_Inventory_Slot _slot)
     {
-        Game_Manager.current.inventory.OnPointerRightClick(_slot);
+        Game_Manager.current.GetInventory.OnPointerRightClick(_slot);
     }
 
     void OnPointerEnter(UI_Inventory_Slot _slot)
     {
-        Game_Manager.current.inventory.OnPointerEnter(_slot, slotType);
+        Game_Manager.current.GetInventory.OnPointerEnter(_slot, slotType);
     }
 
     void OnPointerExit()
     {
-        Game_Manager.current.inventory.OnPointerExit();
+        Game_Manager.current.GetInventory.OnPointerExit();
     }
 
     public void RemoveDragItem()
     {
-        Game_Manager.current.inventory.OffDragReset();
+        Game_Manager.current.GetInventory.OffDragReset();
     }
 
     //===========================================================================================================================
@@ -369,6 +370,7 @@ public class UI_Inventory_Base : MonoBehaviour
         public float angle;
         public Vector2Int slotNum;
         public Vector2Int[] shape;
+        public int acquisition;
     }
     Static_JsonManager.InventoryData saveInventoryData;
     public Static_JsonManager.InventoryData GetSaveInventoryData { get { return saveInventoryData; } }
@@ -391,7 +393,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
         saveInventoryData = new Static_JsonManager.InventoryData
         {
-            lastSetDay = Game_Manager.current.timeUI.day,
+            lastSetDay = Game_Manager.current.GetTimeUI.day,
             invenSize = inventorySize,
             invenClass = saveItems,
         };
@@ -425,6 +427,7 @@ public class UI_Inventory_Base : MonoBehaviour
                 item = Singleton_Data.INSTANCE.GetItemStruct(_data.invenClass[i].id),
                 angle = _data.invenClass[i].angle,
                 shape = _data.invenClass[i].shape,
+                acquisition = _data.invenClass[i].acquisition,
             };// »õ·Î¿î Å¬¶ó½º Ä¸½¶È­
             UI_Inventory_Slot slot = allSlots[_data.invenClass[i].slotNum.x, _data.invenClass[i].slotNum.y];
             SetSlot(slot, itemClass);
@@ -444,6 +447,9 @@ public class UI_Inventory_Base : MonoBehaviour
 
     void SetLoadDestroy()
     {
+        if (destroySlot == null)
+            return;
+
         for (int i = 0; i < destroySlot.Count; i++)
         {
             int x = destroySlot[i].x;

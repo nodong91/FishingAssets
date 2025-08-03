@@ -1,10 +1,7 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Data_Manager;
-using static UI_Inventory_Slot;
 
 public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -35,12 +32,14 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
         public ItemStruct item;
         public float angle;
         public Vector2Int[] shape;
+        public int acquisition;// 입수 날짜
 
         public void SetItemClass(ItemClass _item)
         {
             item = _item.item;
             angle = _item.angle;
             shape = _item.shape;
+            acquisition = _item.acquisition;
         }
 
         public void SetRotate(float _angle)

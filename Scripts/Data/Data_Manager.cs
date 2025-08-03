@@ -319,6 +319,7 @@ public class Data_Manager : Data_Parse
             Equip,
             Fish,
             Used,
+            Quest,
         }
         public ItemType itemType;
         [TextArea]

@@ -17,12 +17,12 @@ public class Fishing_Complate : MonoBehaviour
     void CloseButton()
     {
         fishInfomation.gameObject.SetActive(false);
-        Game_Manager.current.inventory.OpenInventory(true);
+        Game_Manager.current.GetInventory.OpenInventory(true);
 
         ItemStruct fishItem = fishStruct.itemStruct;
         float size = randomSize.size;
 
-        Game_Manager.current.inventory.AddItem(fishItem);// 인벤토리에 생선 추가
+        Game_Manager.current.GetInventory.AddItem(fishItem);// 인벤토리에 생선 추가
         Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);
     }
     FishStruct fishStruct;

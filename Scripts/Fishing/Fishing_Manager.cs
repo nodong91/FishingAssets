@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class Fishing_Manager : MonoBehaviour
@@ -32,7 +31,7 @@ public class Fishing_Manager : MonoBehaviour
     // 릴링 - 지속적으로 물고기 체력 타격
     // 릴링 시 물고기가 공격할 때(색이 변하던가 해서 알려줘야) 영역안에 들어가 있으면 줄 타격 (너무 영역이 크면 빠져나가기 힘들게)
 
-    void Start()
+    public void SetStart()
     {
         fishingCamera.OffCamera();
 

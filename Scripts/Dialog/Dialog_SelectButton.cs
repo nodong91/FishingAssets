@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using static Data_Dialog;
 
 public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public TMPro.TMP_Text buttonText;
-    public Image boxImage;
+    public GameObject boxImage;
 
     SelectStruct selectStruct;
 
@@ -17,7 +16,7 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
     {
         selectStruct = _selectStruct;
         buttonText.text = _selectStruct.selectDialog;
-        boxImage.color = Color.gray;
+        boxImage.gameObject.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -27,11 +26,11 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        boxImage.color = Color.white;
+        boxImage.gameObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        boxImage.color = Color.gray;
+        boxImage.gameObject.SetActive(false);
     }
 }

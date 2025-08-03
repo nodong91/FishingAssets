@@ -10,7 +10,7 @@ public class Trigger_Fish : MonoBehaviour
     void Start()
     {
         SetFish(id);
-        triggerSetting.deleTriggerAction = FishingStart;
+        triggerSetting.deleTriggerAction = FishingStart;// 낚시 게임 스타트
         triggerSetting.GetIconSprite = fishStruct.itemStruct.icon;
     }
 

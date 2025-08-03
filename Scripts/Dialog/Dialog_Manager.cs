@@ -38,12 +38,17 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     RectTransform rectParent;
 
-    private void Start()
-    {
-        SetDialogManager();
-    }
+    //void SetDialogManager()
+    //{
+    //    rectParent = selectCanvas.GetComponent<RectTransform>();
+    //    typingSpeed = defaultTypingSpeed;
+    //    dialogText.fontSize = defaultSize;
+    //    dialogText.color = Color.white;
 
-    void SetDialogManager()
+    //    OpenCanvas(false);
+    //}
+
+    public void SetStart()
     {
         rectParent = selectCanvas.GetComponent<RectTransform>();
         typingSpeed = defaultTypingSpeed;
@@ -174,10 +179,11 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     void InputButton(SelectStruct.SelectType _selectType)
     {
+        Debug.LogWarning($"선택지 버튼 : {_selectType}");
         switch (_selectType)
         {
             case SelectStruct.SelectType.Out:
-                OutDialog();
+                //OutDialog();
                 break;
             case SelectStruct.SelectType.None:
 
@@ -199,13 +205,13 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     void OpenShop()
     {
         LandingStruct getLandingData = Game_Manager.current.GetLanding.GetLandingData;
-        Game_Manager.current.inventory.OpenShop(getLandingData);
+        Game_Manager.current.GetInventory.OpenShop(getLandingData);
     }
 
     void OpenShipyard()
     {
         LandingStruct getLandingData = Game_Manager.current.GetLanding.GetLandingData;
-        Game_Manager.current.inventory.OpenShipyard(getLandingData);
+        Game_Manager.current.GetInventory.OpenShipyard(getLandingData);
     }
 
     void OpenQuest()
@@ -213,10 +219,10 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     }
 
-    void OutDialog()
+    public void OutDialog()
     {
         StopAllCoroutines();
-        Game_Manager.current.inventory.CloseShop();
+        //Game_Manager.current.GetInventory.CloseShop();
         OpenCanvas(false);
     }
 
@@ -227,7 +233,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         actionCoroutine = StartCoroutine(TextAction(dialog));
     }
 
-    IEnumerator TextAction(Data_Dialog.DialogStruct _dialogStruct)
+    IEnumerator TextAction(DialogStruct _dialogStruct)
     {
         actionBool = true;
         TMP_Text component = dialogText;
@@ -239,7 +245,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 // x - 시작 포지션
                 // y - 끝 포지션
                 // z - 액션 타입
-                if (_dialogStruct.dialogTypes[i].actionType == Data_Dialog.ActionType.None)// 액션 타입이 None이 아니면
+                if (_dialogStruct.dialogTypes[i].actionType == ActionType.None)// 액션 타입이 None이 아니면
                     continue;
 
                 int x = _dialogStruct.dialogTypes[i].dialogIndex.x;
@@ -267,29 +273,29 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void SetActingText(Data_Dialog.DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void SetActingText(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         switch (type.actionType)
         {
-            case Data_Dialog.ActionType.None:
+            case ActionType.None:
 
                 break;
 
-            case Data_Dialog.ActionType.Move:
+            case ActionType.Move:
                 TryAimationMove(type, vertexIndex, sourceVertices, destinationVertices, _index);
                 break;
 
-            case Data_Dialog.ActionType.Wave:
+            case ActionType.Wave:
                 TryAimationWave(type, vertexIndex, sourceVertices, destinationVertices, _index);
                 break;
 
-            case Data_Dialog.ActionType.Jitter:
+            case ActionType.Jitter:
                 TryAimationJitter(type, vertexIndex, sourceVertices, destinationVertices, _index);
                 break;
         }
     }
 
-    void TryAimationWave(Data_Dialog.DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void TryAimationWave(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         for (int v = 0; v < 4; v++)
         {
@@ -302,7 +308,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void TryAimationMove(Data_Dialog.DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void TryAimationMove(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         for (int v = 0; v < 4; v++)
         {
@@ -314,7 +320,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void TryAimationJitter(Data_Dialog.DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void TryAimationJitter(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         for (int v = 0; v < 4; v++)
         {
@@ -333,7 +339,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         typingCoroutine = StartCoroutine(Typing(dialog));
     }
 
-    IEnumerator Typing(Data_Dialog.DialogStruct _dialogStruct)
+    IEnumerator Typing(DialogStruct _dialogStruct)
     {
         int subIndex = 0;
         TMP_TextInfo textInfo = dialogText.textInfo;
