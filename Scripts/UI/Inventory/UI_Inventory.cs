@@ -9,6 +9,8 @@ using static UI_Inventory_Slot;
 
 public class UI_Inventory : MonoBehaviour
 {
+    public SlotType currentType;
+
     public UI_MyBox myBox;
     public UI_Shop shop;
     public Image iconImage;
@@ -48,6 +50,13 @@ public class UI_Inventory : MonoBehaviour
 
     int slotSize = 40;
 
+    public Button outButton;
+
+    private void Start()
+    {
+        outButton.onClick.AddListener(OutButton);
+    }
+
     public void SetStart()
     {
         myBox.SetSlotSize = slotSize;
@@ -55,34 +64,54 @@ public class UI_Inventory : MonoBehaviour
 
         myBox.SetStart();
         shop.SetStart();
+
+        SetInfomation(null);// 인포메이션 제거
     }
 
     public void OpenInventory(bool _open)
     {
+        if (_open == true)
+        {
+            currentType = SlotType.MyBox;
+        }
+        else
+        {
+            currentType = SlotType.None;
+        }
         myBox.OpenCanvas(_open);
     }
 
-    public void OpenShop(LandingStruct _shopData)
+    void OutButton()
     {
-        myBox.OpenCanvas(true);
-        shop.SetShop(true, _shopData);
+        CloseShop();
+        Game_Manager.current.GetDialog.OutDialog();
     }
 
     public void CloseShop()
     {
+        currentType = SlotType.None;
         myBox.OpenCanvas(false);
         shop.OpenCanvas(false);
         shop.CloseButton();
     }
 
+    public void OpenShop(LandingStruct _shopData)
+    {
+        currentType = SlotType.Shop;
+        myBox.OpenCanvas(true);
+        shop.SetShop(true, _shopData);
+    }
+
     public void OpenShipyard(LandingStruct _shopData)
     {
+        currentType = SlotType.Shop;
         myBox.OpenCanvas(true);
         shop.SetShipyard(true, _shopData);
     }
 
     public void OpenStorage(bool _open)
     {
+        currentType = SlotType.Storage;
         myBox.OpenCanvas(_open);
         shop.SetStorage(_open);
     }
@@ -114,6 +143,7 @@ public class UI_Inventory : MonoBehaviour
             item = _itemStruct,
             angle = 0,
             shape = _itemStruct.shape,
+            acquisition = Game_Manager.current.GetTimeUI.day,
         };
         selectItemClass = itemClass;
         DragSlot();
@@ -196,7 +226,7 @@ public class UI_Inventory : MonoBehaviour
                     // 돈없음
                     UI_Inventory_Base getInventory = GetInventory(selectSlotType);
                     getInventory.SetSlot(selectSlot, originItemClass);
-                    Game_Manager.current.mainUI.SetWarnningText("돈 없음");
+                    Game_Manager.current.GetMainUI.SetWarnningText("돈 없음");
                     Debug.LogWarning("돈 없음");
                 }
             }
@@ -212,7 +242,7 @@ public class UI_Inventory : MonoBehaviour
                     // 놓을 수 없다면 원래 위치로 돌리기
                     UI_Inventory_Base getInventory = GetInventory(selectSlotType);
                     getInventory.SetSlot(selectSlot, originItemClass);
-                    Game_Manager.current.mainUI.SetWarnningText("놓을 수 없음");
+                    Game_Manager.current.GetMainUI.SetWarnningText("놓을 수 없음");
                     Debug.LogWarning("놓을 수 없음");
                 }
             }
@@ -248,19 +278,53 @@ public class UI_Inventory : MonoBehaviour
         }
         else if (_slot.empty == false)
         {
-            if (enterSlotType == SlotType.MyBox)// 판매
+            if (currentType == SlotType.Shop)// 샵이 열려있을 때 우클릭
             {
-                SellItem(_slot.itemClass.item.id);
-            }
-            else if (enterSlotType == SlotType.Shop)
-            {
-                if (BuyItem(_slot.itemClass.item.id) == false)
+                Debug.LogWarning("Shopping");
+                if (enterSlotType == SlotType.MyBox)// 판매
                 {
-                    Game_Manager.current.mainUI.SetWarnningText("돈이 없음");
-                    return;
+                    SellItem(_slot.itemClass.item.id);
                 }
+                else if (enterSlotType == SlotType.Shop)// 구매
+                {
+                    if (BuyItem(_slot.itemClass.item.id) == false)
+                    {
+                        Game_Manager.current.GetMainUI.SetWarnningText("돈이 없음");
+                        return;
+                    }
+                }
+                SetEmptySlot(_slot.GetLinkSlot);
             }
-            SetEmptySlot(_slot.GetLinkSlot);
+            else if (currentType == SlotType.Storage)// 창고가 열려있을 때 우클릭
+            {
+                Debug.LogWarning("창고 클릭!!!!!!!!!!!!!!!!!!!!");
+            }
+            else// 사용하기
+            {
+                UseItem(_slot.itemClass.item);
+            }
+        }
+    }
+
+
+    public Data_Quest[] questData;
+    void UseItem(ItemStruct _item)
+    {
+        switch (_item.itemType)
+        {
+            case ItemStruct.ItemType.Equip:
+
+                break;
+            case ItemStruct.ItemType.Fish:
+                Debug.LogWarning("UseItem");
+                Game_Manager.current.GetQuest.SetQuest(questData);
+                break;
+            case ItemStruct.ItemType.Used:
+
+                break;
+            case ItemStruct.ItemType.Quest:
+
+                break;
         }
     }
 

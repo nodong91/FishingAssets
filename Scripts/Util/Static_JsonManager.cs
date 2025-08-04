@@ -196,7 +196,10 @@ public class Static_JsonManager
 
     public static void SaveInventory(string fileName, InventoryData _data)
     {
-        Debug.LogWarning(fileName);
+        Debug.LogWarning($"저장 : {fileName} {(fileName == null || fileName.Length == 0)}");
+        if (fileName == null || fileName.Length == 0)
+            return;
+
         string filePath = Application.dataPath + "/Save/";
         // 폴더 생성
         FindFolder(filePath);

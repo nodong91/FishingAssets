@@ -67,16 +67,16 @@ public class SaveData_Continue : MonoBehaviour
             playerRotation = Game_Manager.current.player.transform.rotation,
             playerScale = Game_Manager.current.player.transform.localScale,
 
-            timeSpeed = Game_Manager.current.timeUI.timeSpeed,
-            minute = Game_Manager.current.timeUI.minute,
-            hour = Game_Manager.current.timeUI.hour,
-            day = Game_Manager.current.timeUI.day,
-            weatherType = Game_Manager.current.timeUI.weatherType,
+            timeSpeed = Game_Manager.current.GetTimeUI.timeSpeed,
+            minute = Game_Manager.current.GetTimeUI.minute,
+            hour = Game_Manager.current.GetTimeUI.hour,
+            day = Game_Manager.current.GetTimeUI.day,
+            weatherType = Game_Manager.current.GetTimeUI.weatherType,
 
-            energy = Game_Manager.current.inventory.TryEnergy,
-            money = Game_Manager.current.inventory.TryMoney,
+            energy = Game_Manager.current.GetInventory.TryEnergy,
+            money = Game_Manager.current.GetInventory.TryMoney,
 
-            destroySlot = Game_Manager.current.inventory.TryDestroySlot,
+            destroySlot = Game_Manager.current.GetInventory.TryDestroySlot,
         };
         SaveContinue();
     }
@@ -95,10 +95,10 @@ public class SaveData_Continue : MonoBehaviour
         float minute = setSaveContinue.minute;
         int hour = setSaveContinue.hour;
         int day = setSaveContinue.day;
-        Game_Manager.current.timeUI.SetStart(timeSpeed, minute, hour, day);// ½Ã°£
+        Game_Manager.current.GetTimeUI.SetStart(timeSpeed, minute, hour, day);// ½Ã°£
 
-        Game_Manager.current.inventory.TryMoney = setSaveContinue.money;// µ·
-        Game_Manager.current.inventory.TryDestroySlot = setSaveContinue.destroySlot;// ºÎ¼­Áø ½½·Ô
+        Game_Manager.current.GetInventory.TryMoney = setSaveContinue.money;// µ·
+        Game_Manager.current.GetInventory.TryDestroySlot = setSaveContinue.destroySlot;// ºÎ¼­Áø ½½·Ô
     }
 
     void SaveContinue()

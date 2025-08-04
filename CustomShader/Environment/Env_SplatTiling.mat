@@ -21,10 +21,11 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Env_SplatTiling
-  m_Shader: {fileID: -6465566751694194690, guid: abc4f6fd32f68264bbbe6eb52a3cfb65, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: d79624c437ffbfa449a93ad329872ebf, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _UV_CHANNEL_AO_UV0
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
@@ -37,7 +38,15 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AOMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Emission_Map:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -80,15 +89,26 @@ Material:
     m_Ints: []
     m_Floats:
     - _AOValue: 1
+    - _AO_Strength: 1
     - _B_Index: 0
     - _Base_Index: 0
     - _EmissionValue: 0
+    - _Fog_Hight: 1
+    - _Fog_On: 0
+    - _Fog_Smooth: 0.1
     - _G_Index: 0
     - _MatallickValue: 0
+    - _Metallic: 0
+    - _Normal_Strength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _R_Index: 0
+    - _Roughness: 0.5
+    - _Roughness_In_Lightmap: 1
     - _Smoothness: 0.5
+    - _UV_CHANNEL_AO: 0
+    - _isAO: 0
+    - _isNormal: 0
     m_Colors:
     - _B_Color: {r: 0, g: 0, b: 1, a: 1}
     - _B_TilingNOffset: {r: 1, g: 1, b: 0, a: 0}
@@ -96,6 +116,8 @@ Material:
     - _Base_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Base_TilingNOffset: {r: 1, g: 1, b: 0, a: 0}
     - _Base_Vector4: {r: 0, g: 0, b: 0, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Fog_Color: {r: 0, g: 0, b: 0, a: 0}
     - _G_Color: {r: 0, g: 1, b: 0, a: 1}
     - _G_TilingNOffset: {r: 1, g: 1, b: 0, a: 0}
     - _G_Vector4: {r: 0, g: 0, b: 0, a: 0}

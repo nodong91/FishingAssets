@@ -1,7 +1,6 @@
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public static class SceneLoader 
 {
     internal static void OnSceneLoaded(string scene, LoadSceneMode mode)
     {

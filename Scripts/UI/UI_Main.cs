@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static Controll_Manager;
 
 public class UI_Main : MonoBehaviour
 {
@@ -91,6 +90,8 @@ public class UI_Main : MonoBehaviour
 
     }
     public MenuState menuState;
+    public UI_Time timeUI;
+    public UI_Status statusUI;
     public Button inventoryButton;
     public Button fishGuideButton;
     public Button statusButton;
@@ -110,6 +111,7 @@ public class UI_Main : MonoBehaviour
         fishingButton.onClick.AddListener(FishingButton);
 
         SetCameraCanvas();
+        Debug.LogWarning("menuState");
     }
 
     void SetCameraCanvas()
@@ -129,7 +131,8 @@ public class UI_Main : MonoBehaviour
         {
             menuState &= ~MenuState.Inventory;
         }
-        Game_Manager.current.inventory.OpenInventory((menuState & MenuState.Inventory) != 0);
+        Game_Manager.current.GetInventory.OpenInventory((menuState & MenuState.Inventory) != 0);
+        Debug.LogWarning(menuState);
     }
 
     void FishGuideButton()
@@ -147,7 +150,7 @@ public class UI_Main : MonoBehaviour
         {
             menuState &= ~MenuState.Status;
         }
-        Game_Manager.current.statusUI.OpenCanvas((menuState & MenuState.Status) != 0);
+        statusUI.OpenCanvas((menuState & MenuState.Status) != 0);
     }
 
     public void OpenCanvas(bool _open)
@@ -159,7 +162,7 @@ public class UI_Main : MonoBehaviour
     {
         string id = "Fs_1001";
         Data_Manager.FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];
-        Game_Manager.current.fishingManager.StartGame(fishStruct);
+        Game_Manager.current.GetFishing.StartGame(fishStruct);
     }
     //===========================================================================================================================
     // 경고 문구

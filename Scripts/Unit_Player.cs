@@ -75,18 +75,10 @@ public class Unit_Player : MonoBehaviour
     {
         while (state == State.Move)
         {
-            if (hold == false)
-                SetMoving();
+            SetMoving();
             CheckClosestUnit();
             yield return null;
         }
-    }
-
-    IEnumerator StateHold()
-    {
-        hold = true;
-        yield return new WaitForSeconds(1f);
-        hold = false;
     }
 
     void CheckClosestUnit()// 아이템이나 채집 같은거 하기 위한 체크
@@ -110,7 +102,7 @@ public class Unit_Player : MonoBehaviour
         {
             closestTarget = tempTarget;
         }
-        Game_Manager.current.followManager.AddClosestTarget(closestTarget);
+        Game_Manager.current.GetFollow.AddClosestTarget(closestTarget);
     }
     //public Reflection_Manager reflection_Manager;
     public float shipHight, waveSpeed = 2f;
@@ -186,13 +178,31 @@ public class Unit_Player : MonoBehaviour
 
     }
 
-    public void StateClash()
+    public void StateClash(Vector3 _offset)
     {
-        Game_Manager.current.inventory.DistroySlot();// 랜덤 슬롯 부수기
+        Vector3 target = transform.position + _offset;
+        if (state != State.Damage)
+            StartCoroutine(MovingClash(target));
 
         Debug.LogWarning("충돌!!!!!!!!!!!!!!!!!!!!");
+    }
+
+    IEnumerator MovingClash(Vector3 _target)
+    {
+        StateMachine(State.Damage);
+
+        Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
         Game_Manager.current.cameraManager.InputShake();
-        StartCoroutine(StateHold());
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime;
+            float speed = (1f - normalize) * 0.1f;
+            transform.position = Vector3.Lerp(transform.position, _target, speed);
+            CheckClosestUnit();
+            yield return null;
+        }
+        StateMachine(State.Idle);
     }
 
     //================================================================================================================================================
@@ -216,7 +226,7 @@ public class Unit_Player : MonoBehaviour
                 closestTarget.TriggerAction();
                 triggerGameObject.Remove(closestTarget);
                 closestTarget = null;
-                Game_Manager.current.followManager.AddClosestTarget(null);// 팔로우 유아이 제거
+                Game_Manager.current.GetFollow.AddClosestTarget(null);// 팔로우 유아이 제거
             }
         }
     }
@@ -233,30 +243,12 @@ public class Unit_Player : MonoBehaviour
     public Trigger_Setting closestTarget;
     public float closestDistance;
 
-
-    public bool hold;// 이동 못함
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Finish")
-        {
-            HealthPoint--;
-            if (HealthPoint > 0)
-            {
-                StateClash();
-            }
-            else
-            {
-                Debug.LogWarning("배 파괴!!!!!!!!!!!!!!!!!!!!");
-            }
-        }
-        else
-        {
-            Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
-            if (fishing == null)
-                return;
-            triggerGameObject.Add(fishing);
-        }
+        Trigger_Setting fishing = other.GetComponent<Trigger_Setting>();
+        if (fishing == null)
+            return;
+        triggerGameObject.Add(fishing);
     }
 
     private void OnTriggerExit(Collider other)
@@ -269,7 +261,24 @@ public class Unit_Player : MonoBehaviour
         if (triggerGameObject.Count == 0)
         {
             closestTarget = null;
-            Game_Manager.current.followManager.AddClosestTarget(null);
+            Game_Manager.current.GetFollow.AddClosestTarget(null);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Finish")
+        {
+            if (HealthPoint > 0)
+            {
+                HealthPoint--;
+                Vector3 offset = (transform.position - collision.transform.position).normalized;
+                StateClash(offset);
+            }
+            else
+            {
+                Debug.LogWarning("배 파괴!!!!!!!!!!!!!!!!!!!!");
+            }
         }
     }
 }
