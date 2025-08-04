@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Reflection_Manager : MonoBehaviour
 {
-
     Camera reflectionCamera;
     Camera mainCamera;
 
@@ -14,6 +10,8 @@ public class Reflection_Manager : MonoBehaviour
     const string TextureName = "_RenderTexture";
     private Material reflectionMaterial;
     RenderTexture reflectionTexture;
+    public Vector2Int waterSize;
+    public float waveSpeed = 2f;
 
     void Start()
     {
@@ -29,7 +27,7 @@ public class Reflection_Manager : MonoBehaviour
 
         InstanceWater();
     }
-    public Vector2Int waterSize;
+
     void InstanceWater()
     {
         Vector3 halfSize = new Vector3(waterSize.x, 0f, waterSize.y);
@@ -43,12 +41,14 @@ public class Reflection_Manager : MonoBehaviour
             }
         }
     }
-    public float waveSpeed = 2f;
+
     void Update()
     {
         OnPostRender();
 
         // 배 부분 물결 안생기게
+        if (Game_Manager.current == null)
+            return;
         string shipPosition = "_ShipPosition";
         Transform player = Game_Manager.current.player.transform;
         reflectionMaterial.SetVector(shipPosition, player.position);
