@@ -14,7 +14,7 @@ public class Game_Manager : MonoBehaviour
     public UI_Inventory inventory;
     public UI_Landing landingUI;
     public Dialog_Manager dialogManager;
-    public UI_QuestManager questUI;
+    public UI_NewsManager newsUI;
     public Fishing_Manager fishingManager;
     public FishGuide fishGuide;
 
@@ -146,17 +146,17 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-    private UI_QuestManager instQuest;
-    public UI_QuestManager GetQuest
+    private UI_NewsManager instNews;
+    public UI_NewsManager GetNews
     {
         get
         {
-            if (instQuest == null)
+            if (instNews == null)
             {
-                instQuest = Instantiate(questUI);
-                instQuest.SetStart();
+                instNews = Instantiate(newsUI);
+                instNews.SetStart();
             }
-            return instQuest;
+            return instNews;
         }
     }
 

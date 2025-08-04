@@ -38,16 +38,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     RectTransform rectParent;
 
-    //void SetDialogManager()
-    //{
-    //    rectParent = selectCanvas.GetComponent<RectTransform>();
-    //    typingSpeed = defaultTypingSpeed;
-    //    dialogText.fontSize = defaultSize;
-    //    dialogText.color = Color.white;
-
-    //    OpenCanvas(false);
-    //}
-
     public void SetStart()
     {
         rectParent = selectCanvas.GetComponent<RectTransform>();
@@ -222,7 +212,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     public void OutDialog()
     {
         StopAllCoroutines();
-        //Game_Manager.current.GetInventory.CloseShop();
         OpenCanvas(false);
     }
 

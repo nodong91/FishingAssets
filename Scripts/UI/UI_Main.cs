@@ -86,7 +86,7 @@ public class UI_Main : MonoBehaviour
     {
         Inventory = 1 << 0,
         Fishing = 1 << 1,
-        Status = 1 << 2,
+        //Status = 1 << 2,
 
     }
     public MenuState menuState;
@@ -94,7 +94,6 @@ public class UI_Main : MonoBehaviour
     public UI_Status statusUI;
     public Button inventoryButton;
     public Button fishGuideButton;
-    public Button statusButton;
     public Button fishingButton;
 
     public CanvasStruct[] canvasStructs;
@@ -107,7 +106,6 @@ public class UI_Main : MonoBehaviour
     {
         inventoryButton.onClick.AddListener(InventoryButton);
         fishGuideButton.onClick.AddListener(FishGuideButton);
-        statusButton.onClick.AddListener(StatusButton);
         fishingButton.onClick.AddListener(FishingButton);
 
         SetCameraCanvas();
@@ -131,26 +129,15 @@ public class UI_Main : MonoBehaviour
         {
             menuState &= ~MenuState.Inventory;
         }
-        Game_Manager.current.GetInventory.OpenInventory((menuState & MenuState.Inventory) != 0);
+        bool onInventory= (menuState & MenuState.Inventory) != 0;
+        Game_Manager.current.GetInventory.OpenInventory(onInventory);
+        statusUI.OpenCanvas(onInventory);
         Debug.LogWarning(menuState);
     }
 
     void FishGuideButton()
     {
         Game_Manager.current.GetFishGuide.OpenCanvas(true);
-    }
-
-    void StatusButton()
-    {
-        if ((menuState & MenuState.Status) == 0)
-        {
-            menuState |= MenuState.Status;// ³Ö±â
-        }
-        else
-        {
-            menuState &= ~MenuState.Status;
-        }
-        statusUI.OpenCanvas((menuState & MenuState.Status) != 0);
     }
 
     public void OpenCanvas(bool _open)

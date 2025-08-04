@@ -26334,7 +26334,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1164543584}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ee12bca8419c9874ca4cb7c0f099bc20, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26389,6 +26389,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee12bca8419c9874ca4cb7c0f099bc20, type: 3}
+--- !u!4 &498382173 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ee12bca8419c9874ca4cb7c0f099bc20, type: 3}
+  m_PrefabInstance: {fileID: 498382172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &504549247
 GameObject:
   m_ObjectHideFlags: 0
@@ -62628,6 +62633,7 @@ Transform:
   m_Children:
   - {fileID: 1126506389}
   - {fileID: 369818763}
+  - {fileID: 498382173}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1167232670
@@ -71023,6 +71029,10 @@ PrefabInstance:
     - target: {fileID: 3797233889539951741, guid: bf13c18789631de439b5a3a463f90589, type: 3}
       propertyPath: m_Name
       value: ReflectionManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 3797233889539951741, guid: bf13c18789631de439b5a3a463f90589, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3827802920888772380, guid: bf13c18789631de439b5a3a463f90589, type: 3}
       propertyPath: m_LocalPosition.x
@@ -117939,7 +117949,6 @@ SceneRoots:
   - {fileID: 1405525427}
   - {fileID: 480537044}
   - {fileID: 154472955}
-  - {fileID: 498382172}
   - {fileID: 1099546957}
   - {fileID: 4632791453041015791}
   - {fileID: 5169373279970934384}

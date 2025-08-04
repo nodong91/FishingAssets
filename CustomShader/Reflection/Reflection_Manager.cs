@@ -1,5 +1,29 @@
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+[CustomEditor(typeof(Reflection_Manager))]
+public class Editor_Reflection_Manager : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        GUILayout.Space(10f);
+
+        GUIStyle fontStyle = new GUIStyle(GUI.skin.button);
+        fontStyle.fontSize = 15;
+        fontStyle.normal.textColor = Color.yellow;
+
+        Reflection_Manager Inspector = target as Reflection_Manager;
+        if (GUILayout.Button("UpdateData", fontStyle, GUILayout.Height(30f)))
+        {
+            Inspector.UpdateData();
+            EditorUtility.SetDirty(Inspector);
+        }
+    }
+}
+#endif
+
 public class Reflection_Manager : MonoBehaviour
 {
     Camera reflectionCamera;
@@ -8,10 +32,21 @@ public class Reflection_Manager : MonoBehaviour
     public Renderer reflectionPlane;
 
     const string TextureName = "_RenderTexture";
-    private Material reflectionMaterial;
+    public Material reflectionMaterial;
     RenderTexture reflectionTexture;
     public Vector2Int waterSize;
     public float waveSpeed = 2f;
+    public Instancer instancer;
+    public Transform instParent;
+
+    public void UpdateData()
+    {
+        if (instParent != null)
+            DestroyImmediate(instParent.gameObject);
+        instParent = new GameObject($"[{TextureName}]").transform;
+        instParent.SetParent(instancer.transform);
+        InstanceWater(instParent);
+    }
 
     void Start()
     {
@@ -21,30 +56,31 @@ public class Reflection_Manager : MonoBehaviour
 
         mainCamera = Camera.main;
 
-        reflectionMaterial = reflectionPlane.GetComponent<Renderer>().material;
+        //reflectionMaterial = reflectionPlane.GetComponent<Renderer>().material;
         reflectionTexture = new RenderTexture(Screen.width, Screen.height, 24);
         reflectionTexture.useMipMap = true;
 
-        InstanceWater();
+        //InstanceWater();
     }
 
-    void InstanceWater()
+    void InstanceWater(Transform _parent)
     {
         Vector3 halfSize = new Vector3(waterSize.x, 0f, waterSize.y);
         for (int x = 0; x < waterSize.x; x++)
         {
             for (int y = 0; y < waterSize.y; y++)
             {
-                Renderer inst = Instantiate(reflectionPlane, transform);
-                inst.material = reflectionMaterial;
+                Renderer inst = Instantiate(reflectionPlane, _parent);
+                //inst.material = reflectionMaterial;
                 inst.transform.position = (new Vector3(x, 0f, y) * 10f) - (halfSize * 5f);
             }
         }
     }
-
+    
     void Update()
     {
         OnPostRender();
+        instancer.UpdateBatch();
 
         // 배 부분 물결 안생기게
         if (Game_Manager.current == null)
