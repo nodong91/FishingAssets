@@ -27,7 +27,7 @@ Material:
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -91,10 +91,10 @@ Material:
     - _ColorDepth: 0
     - _ColorLength: 1
     - _Depth: 2
-    - _Float: 2.36
-    - _Float_1: 0.3
-    - _Float_2: 0
-    - _Float_3: 5
+    - _Float: 20
+    - _Float_1: 35
+    - _Float_2: 1.5
+    - _Float_3: 0.5
     - _Float_4: 0.3
     - _Float_5: 0
     - _FoamCellDensity: 40
@@ -105,6 +105,8 @@ Material:
     - _HightFoam: 0.3
     - _HorizonDistance: 3
     - _HorizonLength: 0.5
+    - _HorizonRange: 500
+    - _HorizonSmooth: 20
     - _Lod: 0
     - _NoiseDistort: 2
     - _NoiseHight: 0.5
@@ -136,9 +138,10 @@ Material:
     - _NoiseSpeed: {r: 1, g: 1, b: 0, a: 0}
     - _ReflectionColor: {r: 0.3436276, g: 0.56085783, b: 0.735849, a: 0}
     - _ShallowColor: {r: 0.6933962, g: 0.86918235, b: 1, a: 1}
-    - _ShipPosition: {r: -1.98794, g: -0.10000044, b: 21.863146, a: 0}
+    - _ShipPosition: {r: 7.6413336, g: -0.10000056, b: 12.310459, a: 0}
     - _Speed: {r: 0.21, g: 0.43, b: 0, a: 0}
     - _Vector2_1: {r: 1, g: 1, b: 0, a: 0}
+    - _Vector4: {r: 1, g: 1, b: 0, a: 0}
     - _WavePosition: {r: 0, g: 1, b: 0, a: 0}
     - _tile: {r: 10, g: 10, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -50,13 +50,6 @@ public class UI_Inventory : MonoBehaviour
 
     int slotSize = 40;
 
-    public Button outButton;
-
-    private void Start()
-    {
-        outButton.onClick.AddListener(OutButton);
-    }
-
     public void SetStart()
     {
         myBox.SetSlotSize = slotSize;
@@ -81,39 +74,45 @@ public class UI_Inventory : MonoBehaviour
         myBox.OpenCanvas(_open);
     }
 
-    void OutButton()
-    {
-        CloseShop();
-        Game_Manager.current.GetDialog.OutDialog();
-    }
-
     public void CloseShop()
     {
-        currentType = SlotType.None;
-        myBox.OpenCanvas(false);
-        shop.OpenCanvas(false);
-        shop.CloseButton();
+        if (currentType != SlotType.None)
+        {
+            currentType = SlotType.None;
+            myBox.OpenCanvas(false);
+            shop.OpenCanvas(false);
+            shop.CloseButton();
+        }
     }
 
     public void OpenShop(LandingStruct _shopData)
     {
-        currentType = SlotType.Shop;
-        myBox.OpenCanvas(true);
-        shop.SetShop(true, _shopData);
+        if (currentType != SlotType.Shop)
+        {
+            currentType = SlotType.Shop;
+            myBox.OpenCanvas(true);
+            shop.SetShop(true, _shopData);
+        }
     }
 
     public void OpenShipyard(LandingStruct _shopData)
     {
-        currentType = SlotType.Shop;
-        myBox.OpenCanvas(true);
-        shop.SetShipyard(true, _shopData);
+        if (currentType != SlotType.Shipyard)
+        {
+            currentType = SlotType.Shipyard;
+            myBox.OpenCanvas(true);
+            shop.SetShipyard(true, _shopData);
+        }
     }
 
     public void OpenStorage(bool _open)
     {
-        currentType = SlotType.Storage;
-        myBox.OpenCanvas(_open);
-        shop.SetStorage(_open);
+        if (currentType != SlotType.Storage)
+        {
+            currentType = SlotType.Storage;
+            myBox.OpenCanvas(_open);
+            shop.SetStorage(_open);
+        }
     }
 
     void Update()// 아이템 추가 테스트
@@ -278,30 +277,31 @@ public class UI_Inventory : MonoBehaviour
         }
         else if (_slot.empty == false)
         {
-            if (currentType == SlotType.Shop)// 샵이 열려있을 때 우클릭
+            switch (currentType)
             {
-                Debug.LogWarning("Shopping");
-                if (enterSlotType == SlotType.MyBox)// 판매
-                {
-                    SellItem(_slot.itemClass.item.id);
-                }
-                else if (enterSlotType == SlotType.Shop)// 구매
-                {
-                    if (BuyItem(_slot.itemClass.item.id) == false)
+                case SlotType.Shop:// 샵이 열려있을 때 우클릭
+                case SlotType.Shipyard:
+                    Debug.LogWarning("Shopping");
+                    if (enterSlotType == SlotType.MyBox)// 판매
                     {
-                        Game_Manager.current.GetMainUI.SetWarnningText("돈이 없음");
-                        return;
+                        SellItem(_slot.itemClass.item.id);
                     }
-                }
-                SetEmptySlot(_slot.GetLinkSlot);
-            }
-            else if (currentType == SlotType.Storage)// 창고가 열려있을 때 우클릭
-            {
-                Debug.LogWarning("창고 클릭!!!!!!!!!!!!!!!!!!!!");
-            }
-            else// 사용하기
-            {
-                UseItem(_slot.itemClass.item);
+                    else if (enterSlotType == SlotType.Shop)// 구매
+                    {
+                        if (BuyItem(_slot.itemClass.item.id) == false)
+                        {
+                            Game_Manager.current.GetMainUI.SetWarnningText("돈이 없음");
+                            return;
+                        }
+                    }
+                    SetEmptySlot(_slot.GetLinkSlot);
+                    break;
+                case SlotType.Storage:// 창고가 열려있을 때 우클릭
+                    Debug.LogWarning("창고 클릭!!!!!!!!!!!!!!!!!!!!");
+                    break;
+                default:
+                    UseItem(_slot.itemClass.item);// 사용하기
+                    break;
             }
         }
     }
@@ -317,7 +317,7 @@ public class UI_Inventory : MonoBehaviour
                 break;
             case ItemStruct.ItemType.Fish:
                 Debug.LogWarning("UseItem");
-                Game_Manager.current.GetQuest.SetQuest(questData);
+                Game_Manager.current.GetNews.SetQuest(questData);
                 break;
             case ItemStruct.ItemType.Used:
 

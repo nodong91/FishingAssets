@@ -12,6 +12,7 @@ public class UI_Inventory_Base : MonoBehaviour
     {
         None,
         Shop,
+        Shipyard,
         Storage,
         MyBox
     }
@@ -34,9 +35,6 @@ public class UI_Inventory_Base : MonoBehaviour
     public RectTransform infomationRect;
     Coroutine loadingItem;
     Dictionary<Vector2Int, ItemClass> dictItemClass = new Dictionary<Vector2Int, ItemClass>();
-
-    public delegate void DeleOutInventory();
-    public DeleOutInventory deleOutInventory;
 
     protected virtual void SetWeight(float _weight) { }
 
@@ -70,14 +68,6 @@ public class UI_Inventory_Base : MonoBehaviour
     public virtual void OpenCanvas(bool _open)
     {
         StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
-        if (_open == true)
-        {
-
-        }
-        else
-        {
-            deleOutInventory?.Invoke();// ¥›æ“¿ª ∂ß
-        }
     }
 
     public void EmptyInventory()
