@@ -28,11 +28,7 @@ public class Game_Manager : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = frameRate;
-
-        SceneLoader.OnSceneLoaded("Fishing", UnityEngine.SceneManagement.LoadSceneMode.Additive);
         SaveData_Continue.current.GetContinue();
-
-        //followManager.SetStart();
 
         PlayerMove();
     }
