@@ -90,8 +90,10 @@ Material:
     - _Boolean: 0
     - _ColorDepth: 0
     - _ColorLength: 1
-    - _Depth: 2
-    - _Float: 20
+    - _DeepDepth: 3
+    - _DeepSmooth: 3
+    - _Depth: 0.5
+    - _Float: 2.57
     - _Float_1: 35
     - _Float_2: 1.5
     - _Float_3: 0.5
@@ -113,12 +115,15 @@ Material:
     - _NoiseSize: 10
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Reflection: 1
+    - _Reflection: 2.5
     - _ReflectionDepth: 0.1
     - _ReflectionSmooth: 0.5
     - _ReflectionValue: 0.1
     - _RingSize: 10
+    - _ShallowDepth: 0.5
+    - _ShallowSmooth: 1
     - _Size: 1.72
+    - _Smooth: 0
     - _VoronoiCell: 5
     - _VoronoiSpeed: 5
     - _VoronoiStep: 1
@@ -129,16 +134,17 @@ Material:
     - _WaveTiling: 2
     m_Colors:
     - _Color: {r: 0, g: 0.42352942, b: 0.47058824, a: 1}
-    - _DeepColor: {r: 0.21568625, g: 0.51043093, b: 0.54901963, a: 1}
+    - _DeepColor: {r: 0.04116232, g: 0.20710528, b: 0.34905657, a: 1}
     - _FarColor: {r: 0, g: 0.29019606, b: 0.5607843, a: 1}
     - _FoamColor: {r: 8, g: 8, b: 8, a: 1}
     - _LightColor: {r: 2.362898, g: 6.012622, b: 12.84447, a: 0}
     - _MainTiling: {r: 1, g: 1, b: 0, a: 0}
+    - _MiddleColor: {r: 0.11863641, g: 0.5975451, b: 0.8113207, a: 0.9019608}
     - _NearColor: {r: 0.22745097, g: 0.5019608, b: 0.7803922, a: 1}
     - _NoiseSpeed: {r: 1, g: 1, b: 0, a: 0}
-    - _ReflectionColor: {r: 0.3436276, g: 0.56085783, b: 0.735849, a: 0}
-    - _ShallowColor: {r: 0.6933962, g: 0.86918235, b: 1, a: 1}
-    - _ShipPosition: {r: 7.6413336, g: -0.10000056, b: 12.310459, a: 0}
+    - _ReflectionColor: {r: 0.5613208, g: 0.8025944, b: 1, a: 0}
+    - _ShallowColor: {r: 0.6933962, g: 0.86918235, b: 1, a: 0.2784314}
+    - _ShipPosition: {r: 6.487852, g: -0.100001216, b: 20.973454, a: 0}
     - _Speed: {r: 0.21, g: 0.43, b: 0, a: 0}
     - _Vector2_1: {r: 1, g: 1, b: 0, a: 0}
     - _Vector4: {r: 1, g: 1, b: 0, a: 0}
