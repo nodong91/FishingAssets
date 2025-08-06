@@ -80,7 +80,7 @@ public class Reflection_Manager : MonoBehaviour
     void Update()
     {
         OnPostRender();
-        instancer.UpdateBatch();
+        //instancer.UpdateBatch();
 
         // 배 부분 물결 안생기게
         if (Game_Manager.current == null)

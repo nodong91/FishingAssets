@@ -117,10 +117,10 @@ public class Instancer : MonoBehaviour
     //    //}
     //}
 
-    //private void Update()
-    //{
-    //    UpdateBatch();
-    //}
+    private void Update()
+    {
+        UpdateBatch();
+    }
 
     public void UpdateBatch()
     {
