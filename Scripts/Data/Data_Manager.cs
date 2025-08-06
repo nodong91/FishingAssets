@@ -237,15 +237,37 @@ public class Data_Manager : Data_Parse
     //==================================================================================
     // Data
     //==================================================================================
+    [System.Serializable]
+    public class Data_Continue
+    {
+        public Vector3 playerPosition;
+        public Quaternion playerRotation;
+        public Vector3 playerScale;
+
+        public float timeSpeed;
+        public float minute;
+        public int hour;
+        public int day;
+        public UI_Time.WeatherType weatherType;
+
+        public float energy;
+        public float money;
+        public List<Vector2Int> destroySlot;
+    }
 
     [System.Serializable]
     public struct Data_Option
     {
-        // 사운드 관련
-        public bool BGMMute;
-        public float BGMVolume;
-        public bool EffectMute;
-        public float EffectVolume;
+        [System.Serializable]
+        public struct AudioStruct
+        {
+            // 사운드 관련
+            public bool bgmMute;
+            public float bgmVolume;
+            public bool fxMute;
+            public float fxVolume;
+        }
+        public AudioStruct audioStruct;
     }
 
     [System.Serializable]
@@ -436,5 +458,6 @@ public class Data_Manager : Data_Parse
         Singleton_Data.INSTANCE.SetDictionary_Equip(equipStruct);
         Singleton_Data.INSTANCE.SetDictionary_Used(usedStruct);
         Singleton_Data.INSTANCE.SetDictionary_Dialog(dialogStruct);
+        Singleton_Data.INSTANCE.SetDictionary_Audio(audioClip);
     }
 }

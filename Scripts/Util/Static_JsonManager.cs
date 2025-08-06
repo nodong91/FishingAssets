@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using static Data_Manager;
 
 public class Static_JsonManager
 {
@@ -117,43 +118,43 @@ public class Static_JsonManager
     //    return false;
     //}
 
-    ////======================================================================================
-    //// 옵션 데이터 관련
-    ////======================================================================================
+    //======================================================================================
+    // 옵션 데이터 관련
+    //======================================================================================
 
-    //public static void SaveOptionData(string fileName, Data_Option option)
-    //{
-    //    string filePath = Application.dataPath + "/Save/";
-    //    // 폴더 생성
-    //    FindFolder(filePath);
+    public static void SaveOptionData(string fileName, Data_Option option)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        // 폴더 생성
+        FindFolder(filePath);
 
-    //    string toJson = JsonUtility.ToJson(option, prettyPrint: true);
-    //    //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
-    //    File.WriteAllText(filePath + fileName + ".json", toJson);
-    //}
+        string toJson = JsonUtility.ToJson(option, prettyPrint: true);
+        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        File.WriteAllText(filePath + fileName + ".json", toJson);
+    }
 
-    //public static bool TryLoadOptionData(string fileName, out Data_Option option)
-    //{
-    //    string filePath = Application.dataPath + "/Save/";
-    //    string path = filePath + fileName + ".json";
-    //    FileInfo fileInfo = new FileInfo(path);
+    public static bool TryLoadOptionData(string fileName, out Data_Option option)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        string path = filePath + fileName + ".json";
+        FileInfo fileInfo = new FileInfo(path);
 
-    //    if (fileInfo.Exists == true)
-    //    {
-    //        string fromJson = File.ReadAllText(path);
-    //        //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
-    //        option = JsonUtility.FromJson<Data_Option>(fromJson);
-    //        return true;
-    //    }
+        if (fileInfo.Exists == true)
+        {
+            string fromJson = File.ReadAllText(path);
+            //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
+            option = JsonUtility.FromJson<Data_Option>(fromJson);
+            return true;
+        }
 
-    //    option = default;
-    //    return false;
-    //}
+        option = default;
+        return false;
+    }
     //======================================================================================
     // 중간 세이브 데이터 관련
     //======================================================================================
 
-    public static void SaveCountinueData(string fileName, SaveData_Continue.SetSaveContinue _data)
+    public static void SaveCountinueData(string fileName, Data_Continue _data)
     {
         string filePath = Application.dataPath + "/Save/";
         // 폴더 생성
@@ -164,7 +165,7 @@ public class Static_JsonManager
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
-    public static bool TryLoadCountinueData(string fileName, out SaveData_Continue.SetSaveContinue _data)
+    public static bool TryLoadCountinueData(string fileName, out Data_Continue _data)
     {
         string filePath = Application.dataPath + "/Save/";
         string path = filePath + fileName + ".json";
@@ -174,7 +175,7 @@ public class Static_JsonManager
         {
             string fromJson = File.ReadAllText(path);
             //fromJson = Static_AES.Program.Decrypt(fromJson, "SaveOptionData");      // 복화
-            _data = JsonUtility.FromJson<SaveData_Continue.SetSaveContinue>(fromJson);
+            _data = JsonUtility.FromJson<Data_Continue>(fromJson);
             return true;
         }
 

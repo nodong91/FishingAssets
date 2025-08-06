@@ -71,7 +71,7 @@ public class Game_Manager : MonoBehaviour
         {
             if (instMain == null)
             {
-                instMain = Instantiate(mainUI);
+                instMain = Instantiate(mainUI, transform);
                 instMain.SetStart();
             }
             return instMain;
@@ -93,7 +93,7 @@ public class Game_Manager : MonoBehaviour
         {
             if (instFollow == null)
             {
-                instFollow = Instantiate(followManager);
+                instFollow = Instantiate(followManager, transform);
                 instFollow.SetStart();
             }
             return instFollow;
@@ -107,7 +107,7 @@ public class Game_Manager : MonoBehaviour
         {
             if (instInventory == null)
             {
-                instInventory = Instantiate(inventory);
+                instInventory = Instantiate(inventory, transform);
                 instInventory.SetStart();
             }
             return instInventory;
@@ -121,7 +121,7 @@ public class Game_Manager : MonoBehaviour
         {
             if (instFishGuide == null)
             {
-                instFishGuide = Instantiate(fishGuide);
+                instFishGuide = Instantiate(fishGuide, transform);
                 instFishGuide.SetStart();
             }
             return instFishGuide;
@@ -135,7 +135,7 @@ public class Game_Manager : MonoBehaviour
         {
             if (instLanding == null)
             {
-                instLanding = Instantiate(landingUI);
+                instLanding = Instantiate(landingUI, transform);
                 instLanding.SetStart();
             }
             return instLanding;
@@ -149,7 +149,7 @@ public class Game_Manager : MonoBehaviour
         {
             if (instNews == null)
             {
-                instNews = Instantiate(newsUI);
+                instNews = Instantiate(newsUI, transform);
                 instNews.SetStart();
             }
             return instNews;
@@ -163,7 +163,7 @@ public class Game_Manager : MonoBehaviour
         {
             if (instFishing == null)
             {
-                instFishing = Instantiate(fishingManager);
+                instFishing = Instantiate(fishingManager, transform);
                 instFishing.SetStart();
             }
             return instFishing;
@@ -177,7 +177,7 @@ public class Game_Manager : MonoBehaviour
         {
             if (instDialog == null)
             {
-                instDialog = Instantiate(dialogManager);
+                instDialog = Instantiate(dialogManager, transform);
                 instDialog.SetStart();
             }
             return instDialog;

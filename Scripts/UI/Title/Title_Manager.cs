@@ -1,47 +1,58 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Title_Manager : MonoBehaviour
 {
-    public Button startButton, closeButton, unloadButton;
-    public LoadingManager loadingManager;
+    public Custom_Button continueButton, newStartButton, loadButton, settingButton, exitButton;
 
     void Start()
     {
-        startButton.onClick.AddListener(StartButton);
-        closeButton.onClick.AddListener(CloseButton);
-        unloadButton.onClick.AddListener(UnloadButton);
+        continueButton.deleClicked = ContinueButton;
+        newStartButton.deleClicked = NewStartButton;
+        loadButton.deleClicked = LoadButton;
+        settingButton.deleClicked = SettingButton;
+        exitButton.deleClicked = ExitButton;
+
+        LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
 
         StartCoroutine(MovingUnit());
     }
 
-    void StartButton()
+    void ContinueButton()
     {
-        loadingManager.OpenLoading();
-    }
-
-    void CloseButton()
-    {
-        loadingManager.CloseLoading();
         OffAll();
+        LoadingManager.current.OpenLoading();
     }
 
-    void UnloadButton()
+    void NewStartButton()
     {
-        loadingManager.Unloading();
+
     }
 
-    public Transform startPoint, endPoint;
+    void LoadButton()
+    {
+        LoadingManager.current.Unloading();
+    }
+
+    void SettingButton()
+    {
+        Option_Manager.current.OpenCanvas(true);
+    }
+
+    void ExitButton()
+    {
+        Application.Quit();
+    }
+
+    [Header(" -Ship")]
     public Transform player;
+    public Transform startPoint, endPoint;
     public float speed = 0.1f;
     public Material reflectionMaterial;
-    public GameObject all;
 
     public void OffAll()
     {
         StopAllCoroutines();
-        all.SetActive(false);
     }
 
     IEnumerator MovingUnit()
@@ -66,5 +77,10 @@ public class Title_Manager : MonoBehaviour
 
             player.position = startPoint.position;
         }
+    }
+
+    void LoadingComplate()
+    {
+        Debug.LogWarning("LoadingComplate");
     }
 }

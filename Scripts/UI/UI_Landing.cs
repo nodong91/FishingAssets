@@ -97,6 +97,8 @@ public class UI_Landing : MonoBehaviour
                 OpenCanvasUI(backCanvas, 1f - alpha);
             yield return null;
         }
+        if (inlanding == false)
+            SaveData_Continue.current.SetContinue();// 섬에서 나갈 때 저장
     }
 
     void OpenCanvasUI(CanvasGroup _canvas, float _alpha)
@@ -113,7 +115,6 @@ public class UI_Landing : MonoBehaviour
         outLanding?.Invoke();
         Game_Manager.current.OutOfControll(false);
         Game_Manager.current.GetInventory.CloseShop();
-        SaveData_Continue.current.SetContinue();// 섬에서 나갈 때 저장
     }
 
     void RestButton()// 휴식
@@ -130,7 +131,6 @@ public class UI_Landing : MonoBehaviour
     void ShipyardButton()// 조선소
     {
         SetLandingCanvas(false);        // 조선소 버튼 누르면
-
         Game_Manager.current.GetDialog.DialogStart(landingData.shipyardNPC);
     }
 

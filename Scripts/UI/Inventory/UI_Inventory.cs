@@ -81,7 +81,6 @@ public class UI_Inventory : MonoBehaviour
             currentType = SlotType.None;
             myBox.OpenCanvas(false);
             shop.OpenCanvas(false);
-            shop.CloseButton();
         }
     }
 
@@ -305,7 +304,6 @@ public class UI_Inventory : MonoBehaviour
             }
         }
     }
-
 
     public Data_Quest[] questData;
     void UseItem(ItemStruct _item)

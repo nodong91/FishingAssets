@@ -20,7 +20,7 @@ public class UI_Inventory_Base : MonoBehaviour
     public string saveData { get; set; }
 
     public Canvas canvas;
-    public CanvasStruct[] canvasStructs;
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public GridLayoutGroup gridLayoutGroup;
     public UI_Inventory_Slot inventorySlot;
     float slotSize;
@@ -67,7 +67,13 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public virtual void OpenCanvas(bool _open)
     {
-        StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
+        StaticOpenCanvas.deleEndOpen = EndOpenCanvas;
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+    }
+
+    void EndOpenCanvas()
+    {
+        Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// Ã¢´ÝÈú ¶§ ÀúÀå
     }
 
     public void EmptyInventory()

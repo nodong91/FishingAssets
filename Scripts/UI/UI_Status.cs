@@ -5,7 +5,7 @@ using static UI_Main;
 
 public class UI_Status : MonoBehaviour, IPointerClickHandler
 {
-    public CanvasStruct[] canvasStructs;
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
 
     public PartsStruct boatStruct;
     public PartsStruct engineStruct;
@@ -31,7 +31,8 @@ public class UI_Status : MonoBehaviour, IPointerClickHandler
 
     public void OpenCanvas(bool _open)
     {
-        StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
+        StaticOpenCanvas.deleEndOpen = null;
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
 
     public void AddParts(PartsStruct _struct)

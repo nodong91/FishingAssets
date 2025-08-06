@@ -7,10 +7,18 @@ using UnityEngine.SceneManagement;
 public class LoadingManager : MonoBehaviour
 {
     public string[] sceneNames;
-    List<AsyncOperation> async;
-    public float value;
+    List<AsyncOperation> asyncOperation;
     public Image background;
     bool open;
+    int complateIndex;
+
+    public static LoadingManager current;
+
+    private void Awake()
+    {
+        current = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     private void Start()
     {
@@ -26,22 +34,22 @@ public class LoadingManager : MonoBehaviour
     {
         yield return StartCoroutine(SetScreen(true));
 
-        value = 0;
-        async = new List<AsyncOperation>();
+        complateIndex = 0;
+        asyncOperation = new List<AsyncOperation>();
         for (int i = 0; i < sceneNames.Length; i++)
         {
-            async.Add(SceneManager.LoadSceneAsync(sceneNames[i], LoadSceneMode.Additive));
-            StartCoroutine(LoadSceneTest(i));
+            asyncOperation.Add(SceneManager.LoadSceneAsync(sceneNames[i], LoadSceneMode.Additive));
+            StartCoroutine(LoadingScene(i));
         }
     }
 
     public void CloseLoading()
     {
-        if (value == async.Count)
+        if (complateIndex == asyncOperation.Count)
         {
-            for (int i = 0; i < async.Count; i++)
+            for (int i = 0; i < asyncOperation.Count; i++)
             {
-                async[i].allowSceneActivation = true;
+                asyncOperation[i].allowSceneActivation = true;
             }
             StartCoroutine(CloseSetting());
         }
@@ -49,6 +57,7 @@ public class LoadingManager : MonoBehaviour
 
     IEnumerator CloseSetting()
     {
+        deleComplate?.Invoke();
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(SetScreen(false));
     }
@@ -64,26 +73,41 @@ public class LoadingManager : MonoBehaviour
             normalize += Time.deltaTime * 10f;
             float alpha = Mathf.Lerp(1f - targetAlpha, targetAlpha, normalize);
             background.material.SetFloat("_Normalize", alpha);
-            yield return null;
             background.gameObject.SetActive(alpha > 0);
+            yield return null;
         }
     }
 
-    IEnumerator LoadSceneTest(int _index)
+    IEnumerator LoadingScene(int _index)
     {
-        async[_index].allowSceneActivation = false;
+        asyncOperation[_index].allowSceneActivation = false;
         //while (!async[_index].isDone)
         bool loading = true;
         while (loading == true)
         {
-            value += async[_index].progress / 0.9f;
-            if (async[_index].progress == 0.9f)
+            if (asyncOperation[_index].progress == 0.9f)
             {
                 loading = false;
             }
             yield return null;
+            Debug.LogWarning(sceneNames[_index] + asyncOperation[_index].progress);
+        }
+
+        // 완료 체크
+        Debug.LogWarning(sceneNames[_index]);
+        complateIndex++;
+        if (complateIndex == asyncOperation.Count)
+        {
+            for (int i = 0; i < asyncOperation.Count; i++)
+            {
+                asyncOperation[i].allowSceneActivation = true;
+            }
+            StartCoroutine(CloseSetting());
         }
     }
+
+    public delegate void DeleComplate();
+    public DeleComplate deleComplate;
 
     public void Unloading()
     {

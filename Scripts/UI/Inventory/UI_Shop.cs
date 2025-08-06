@@ -34,11 +34,6 @@ public class UI_Shop : UI_Inventory_Base
         fixAllButton.onClick.AddListener(FixAllButton);
     }
 
-    public void CloseButton()
-    {
-        Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// Ã¢´ÝÈú ¶§ ÀúÀå
-    }
-
     void SetToggle(int _index)
     {
         if (groupToggles[_index].isOn == true)

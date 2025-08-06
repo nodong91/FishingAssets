@@ -51,6 +51,7 @@ public class Reflection_Manager : MonoBehaviour
     void Start()
     {
         GameObject reflectionCameraGo = new GameObject("ReflectionCamera");
+        reflectionCameraGo.transform.SetParent(transform);
         reflectionCamera = reflectionCameraGo.AddComponent<Camera>();
         reflectionCamera.enabled = false;
 
@@ -76,7 +77,7 @@ public class Reflection_Manager : MonoBehaviour
             }
         }
     }
-    
+
     void Update()
     {
         OnPostRender();

@@ -1,77 +1,96 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 {
-    public void Call()
-    {
-        Debug.LogWarning("SoundManager Call()");
-    }
-    [SerializeField]
-    private AudioSource bgmSource01, bgmSource02, fxSource;
-    public AudioSource bgmSource;
-    public bool bgmSet = false;
+    private AudioSource BGMSource;
+    public bool bgmMute;
+    public float bgmVolume;
 
-    public bool BGMMute;
-    public float BGMVolume;
+    private AudioSource fxSource;
     public bool fxMute;
     public float fxVolume;
 
-    public void SetAudio()
+    Coroutine changeBGM;
+    Queue<AudioSource> audioQueue = new Queue<AudioSource>();
+
+    AudioSource TryAudioSource()
     {
-        bgmSource01 = gameObject.AddComponent<AudioSource>();
-        bgmSource01.loop = true;
-        bgmSource01.mute = BGMMute;
-        bgmSource01.volume = BGMVolume;
-        bgmSource01.playOnAwake = false;
+        if (audioQueue.Count > 0)
+            return audioQueue.Dequeue();
 
-        bgmSource02 = gameObject.AddComponent<AudioSource>();
-        bgmSource02.loop = true;
-        bgmSource02.mute = true;
-        bgmSource02.volume = BGMVolume;
-        bgmSource02.playOnAwake = false;
-
-        fxSource = gameObject.AddComponent<AudioSource>();
-        fxSource.mute = fxMute;
-        fxSource.volume = fxVolume;
+        AudioSource audioSource = new GameObject("[ InstanteAudio ]").AddComponent<AudioSource>();
+        audioSource.transform.SetParent(transform, false);
+        return audioSource;
     }
 
-    public void Audio_SetBGM(string _id)
+    public void Audio_BGM(string _id)
     {
-        bgmSet = !bgmSet;
-        //  추가 음악 변경
-        AudioSource newSource = (bgmSet == true) ? bgmSource01 : bgmSource02;
-        newSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
-        newSource.loop = true;
-        newSource.Play();
+        AudioSource audioSource = TryAudioSource();
+        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
+        audioSource.loop = true;
+        audioSource.mute = bgmMute;
+        audioSource.volume = bgmVolume;
+        audioSource.Play();
 
         if (changeBGM != null)
             StopCoroutine(changeBGM);
-        changeBGM = StartCoroutine(CrossFadeAudio(newSource));
-    }
-    Coroutine changeBGM;
-    public void SetBGMVolume(float _value)
-    {
-        BGMVolume = _value;
-        bgmSource01.volume = BGMVolume;
+        changeBGM = StartCoroutine(PlayBGMAudio(audioSource));
     }
 
-    IEnumerator CrossFadeAudio(AudioSource _newSource)
+    public void SetBGMVolume(float _value)
     {
-        _newSource.mute = BGMMute;
-        if (bgmSource != null)
+        bgmVolume = _value;
+        if (BGMSource != null)
+            BGMSource.volume = bgmVolume;
+    }
+
+    public void SetBGMMute(bool _isOn)
+    {
+        bgmMute = _isOn;
+        if (BGMSource != null)
+            BGMSource.mute = _isOn;
+    }
+
+    IEnumerator PlayBGMAudio(AudioSource _audioSource)
+    {
+        _audioSource.mute = bgmMute;
+        if (BGMSource != null)
         {
             float normalize = 0.0f;
             while (normalize < 1.0f)
             {
                 normalize += Time.fixedDeltaTime * 0.5f;
-                _newSource.volume = Mathf.Lerp(0.0f, BGMVolume, normalize);
-                bgmSource.volume = BGMVolume - _newSource.volume;
+                _audioSource.volume = Mathf.Lerp(0.0f, bgmVolume, normalize);
+                BGMSource.volume = bgmVolume - _audioSource.volume;
                 yield return null;
             }
-            bgmSource.mute = true;
+            BGMSource.Stop();
+            audioQueue.Enqueue(BGMSource);
         }
-        bgmSource = _newSource;
+        BGMSource = _audioSource;
+    }
+
+    public void Audio_FX(string _id)
+    {
+        AudioSource audioSource = TryAudioSource();
+        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
+        audioSource.loop = false;
+        audioSource.mute = fxMute;
+        audioSource.volume = fxVolume;
+        audioSource.pitch = Random.Range(0.7f, 1.3f);
+        audioSource.Play();
+
+        StartCoroutine(PlayFXAudio(audioSource));
+    }
+
+    IEnumerator PlayFXAudio(AudioSource _audioSource)
+    {
+        float clipLength = _audioSource.clip.length;
+        yield return new WaitForSeconds(clipLength);
+
+        audioQueue.Enqueue(_audioSource);
     }
 
     public void Audio_SetFX(string _id)
@@ -82,9 +101,17 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         fxSource.Play();
     }
 
+    public void SetFXMute(bool _isOn)
+    {
+        fxMute = _isOn;
+        if (fxSource != null)
+            fxSource.mute = _isOn;
+    }
+
     public void SetFXVolume(float _value)
     {
         fxVolume = _value;
-        fxSource.volume = fxVolume;
+        if (fxSource != null)
+            fxSource.volume = fxVolume;
     }
 }

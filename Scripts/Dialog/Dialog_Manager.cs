@@ -10,7 +10,7 @@ using static Data_Dialog;
 
 public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 {
-    public CanvasStruct[] canvasStructs;
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public Data_NPC dataNPC;
     Data_Dialog dataDialog;
     DialogStruct dialog;
@@ -45,7 +45,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         dialogText.fontSize = defaultSize;
         dialogText.color = Color.white;
 
-        OpenCanvas(false);
+        OpenCanvas(false);// 시작 닫기
     }
 
     public void DialogStart(Data_NPC _npc)
@@ -77,7 +77,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             dialogSelectButton[i] = button;
         }
         DialogAction();
-        OpenCanvas(true);
+        OpenCanvas(true);// 대화 시작
     }
 
     Dialog_SelectButton GetSelectButton()
@@ -90,7 +90,13 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     public void OpenCanvas(bool _open)
     {
-        StartCoroutine(OpenCanvasMoving(canvasStructs, _open));
+        StaticOpenCanvas.deleEndOpen = EndOpenCanvas;
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+    }
+
+    void EndOpenCanvas()
+    {
+
     }
 
     void DialogAction()
@@ -212,7 +218,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     public void OutDialog()
     {
         StopAllCoroutines();
-        OpenCanvas(false);
+        OpenCanvas(false);// 대화 완료
     }
 
     void StartActing()
