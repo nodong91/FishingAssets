@@ -4,6 +4,7 @@ using UnityEngine;
 public class Title_Manager : MonoBehaviour
 {
     public Custom_Button continueButton, newStartButton, loadButton, settingButton, exitButton;
+    public Option_Manager optionManager;
 
     void Start()
     {
@@ -13,6 +14,8 @@ public class Title_Manager : MonoBehaviour
         settingButton.deleClicked = SettingButton;
         exitButton.deleClicked = ExitButton;
 
+        if (Option_Manager.current == null)
+            Instantiate(optionManager);
         LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
 
         StartCoroutine(MovingUnit());
@@ -20,8 +23,9 @@ public class Title_Manager : MonoBehaviour
 
     void ContinueButton()
     {
-        OffAll();
-        LoadingManager.current.OpenLoading();
+        StopAllCoroutines();
+        Option_Manager.current.OpenCanvas(false);
+        LoadingManager.current.GoMain();
     }
 
     void NewStartButton()
@@ -31,7 +35,7 @@ public class Title_Manager : MonoBehaviour
 
     void LoadButton()
     {
-        LoadingManager.current.Unloading();
+
     }
 
     void SettingButton()
@@ -41,7 +45,11 @@ public class Title_Manager : MonoBehaviour
 
     void ExitButton()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
     [Header(" -Ship")]
@@ -49,11 +57,6 @@ public class Title_Manager : MonoBehaviour
     public Transform startPoint, endPoint;
     public float speed = 0.1f;
     public Material reflectionMaterial;
-
-    public void OffAll()
-    {
-        StopAllCoroutines();
-    }
 
     IEnumerator MovingUnit()
     {

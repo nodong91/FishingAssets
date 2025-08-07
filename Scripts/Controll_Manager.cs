@@ -52,6 +52,13 @@ public class Controll_Manager : MonoBehaviour
         Singleton_Controller.INSTANCE.key_Esc += Key_Esc;
     }
 
+    void RemoveMouse()
+    {
+        Singleton_Controller.INSTANCE.key_MouseLeft -= InputMouseLeft;
+        Singleton_Controller.INSTANCE.key_MouseRight -= InputMouseRight;
+        Singleton_Controller.INSTANCE.key_MouseWheel -= InputMouseWheel;
+    }
+
     void RemoveKeyCode()
     {
         Singleton_Controller.INSTANCE.key_W -= Direction_UP;

@@ -101,6 +101,9 @@ public class Reflection_Manager : MonoBehaviour
     // 판떼기 위치에 따라 카메라 위치 바뀌게
     void RenderReflection()
     {
+        if (mainCamera == null)
+            return;
+
         reflectionCamera.CopyFrom(mainCamera);
         reflectionCamera.cullingMask = reflectionCamera.cullingMask & ~(1 << LayerMask.NameToLayer("Water"));// Water 빼기
 

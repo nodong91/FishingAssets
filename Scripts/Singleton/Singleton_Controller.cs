@@ -7,7 +7,7 @@ public class Singleton_Controller : MonoSingleton<Singleton_Controller>
 {
     public bool outOfControll;
     public delegate void Holder(bool _input);
-    Dictionary<KeyCode, Holder> keyCodeSets;
+    Dictionary<KeyCode, Holder> keyCodeSets = new Dictionary<KeyCode, Holder>();
 
     private void Update()
     {
@@ -85,6 +85,35 @@ public class Singleton_Controller : MonoSingleton<Singleton_Controller>
     public Key_Bool key_6;
     public Key_Bool key_7;
     public Key_Bool key_8;
+
+    public void ResetDefault()
+    {
+        key_MouseLeft = null;
+        key_MouseRight = null;
+        key_MouseWheel = null;
+
+        key_Q = null;
+        key_W = null;
+        key_E = null;
+        key_R = null;
+        key_A = null;
+        key_S = null;
+        key_D = null;
+        key_F = null;
+        key_Tab = null;
+        key_Esc = null;
+        key_LeftShift = null;
+        key_SpaceBar = null;
+
+        key_1 = null;
+        key_2 = null;
+        key_3 = null;
+        key_4 = null;
+        key_5 = null;
+        key_6 = null;
+        key_7 = null;
+        key_8 = null;
+    }
 
     void Key_Q(bool _input) { key_Q?.Invoke(_input); }
     void Key_W(bool _input) { key_W?.Invoke(_input); }

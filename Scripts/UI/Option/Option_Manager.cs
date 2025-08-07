@@ -17,6 +17,7 @@ public class Option_Manager : MonoBehaviour
     private void Awake()
     {
         current = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
@@ -26,7 +27,7 @@ public class Option_Manager : MonoBehaviour
         audioManager.SetStart();
         closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
         SetToggle();
-        
+
         OpenCanvas(false);
     }
 
@@ -34,6 +35,8 @@ public class Option_Manager : MonoBehaviour
     {
         StaticOpenCanvas.deleEndOpen = EndOpenCanvas;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+        if (_open == true)
+            toggles[0].isOn = true;
     }
 
     void EndOpenCanvas()
@@ -49,7 +52,7 @@ public class Option_Manager : MonoBehaviour
             int index = i;
             toggles[i].onValueChanged.AddListener(delegate { InputToggle(index); });
         }
-        toggles[0].isOn = true;
+        //toggles[0].isOn = true;
         goTitleButton.deleClicked = GoTitle;
     }
 
@@ -61,7 +64,8 @@ public class Option_Manager : MonoBehaviour
 
     void GoTitle()
     {
-        LoadingManager.current.Unloading();
+        LoadingManager.current.GoTitle();
+        OpenCanvas(false);
     }
 
 

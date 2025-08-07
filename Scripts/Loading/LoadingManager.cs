@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class LoadingManager : MonoBehaviour
 {
+    public string[] currentNames;
     public string[] sceneNames;
     List<AsyncOperation> asyncOperation;
     public Image background;
@@ -17,22 +18,41 @@ public class LoadingManager : MonoBehaviour
     private void Awake()
     {
         current = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        StartCoroutine(SetScreen(false));
+        GoTitle();
     }
 
-    public void OpenLoading()
+
+    public void GoTitle()
     {
+        sceneNames = new string[1];
+        sceneNames[0] = "Title";
+
+        OpenLoading();
+    }
+
+    public void GoMain()
+    {
+        sceneNames = new string[2];
+        sceneNames[0] = "SampleScene";
+        sceneNames[1] = "Fishing";
+
+        OpenLoading();
+    }
+
+    void OpenLoading()
+    {
+        Singleton_Controller.INSTANCE.ResetDefault();
         StartCoroutine(StartLoading());
     }
 
     IEnumerator StartLoading()
     {
-        yield return StartCoroutine(SetScreen(true));
+        yield return StartCoroutine(OpenScreen(true));
+        yield return StartCoroutine(UnloadScene());
 
         complateIndex = 0;
         asyncOperation = new List<AsyncOperation>();
@@ -43,26 +63,22 @@ public class LoadingManager : MonoBehaviour
         }
     }
 
-    public void CloseLoading()
+    IEnumerator OpenScene(List<AsyncOperation> _async)
     {
-        if (complateIndex == asyncOperation.Count)
+        complateIndex++;
+        if (complateIndex == _async.Count)
         {
-            for (int i = 0; i < asyncOperation.Count; i++)
+            for (int i = 0; i < _async.Count; i++)
             {
-                asyncOperation[i].allowSceneActivation = true;
+                _async[i].allowSceneActivation = true;
             }
-            StartCoroutine(CloseSetting());
         }
-    }
 
-    IEnumerator CloseSetting()
-    {
-        deleComplate?.Invoke();
         yield return new WaitForSeconds(1f);
-        yield return StartCoroutine(SetScreen(false));
+        yield return StartCoroutine(OpenScreen(false));
     }
 
-    IEnumerator SetScreen(bool _open)
+    IEnumerator OpenScreen(bool _open)
     {
         open = _open;
 
@@ -95,33 +111,23 @@ public class LoadingManager : MonoBehaviour
 
         // 완료 체크
         Debug.LogWarning(sceneNames[_index]);
-        complateIndex++;
-        if (complateIndex == asyncOperation.Count)
-        {
-            for (int i = 0; i < asyncOperation.Count; i++)
-            {
-                asyncOperation[i].allowSceneActivation = true;
-            }
-            StartCoroutine(CloseSetting());
-        }
+        yield return StartCoroutine(OpenScene(asyncOperation));
+
+        currentNames = sceneNames;
+        deleComplate?.Invoke();
     }
 
     public delegate void DeleComplate();
     public DeleComplate deleComplate;
 
-    public void Unloading()
-    {
-        StartCoroutine(UnloadScene());
-    }
-
     IEnumerator UnloadScene()
     {
-        for (int i = 0; i < sceneNames.Length; i++)
+        for (int i = 0; i < currentNames.Length; i++)
         {
-            var sceneName = SceneManager.GetSceneByName(sceneNames[i]);
+            var sceneName = SceneManager.GetSceneByName(currentNames[i]);
             if (sceneName.isLoaded)
             {
-                var unloadScene = SceneManager.UnloadSceneAsync(sceneNames[i]);
+                var unloadScene = SceneManager.UnloadSceneAsync(currentNames[i]);
                 while (!unloadScene.isDone)
                 {
                     yield return null;
