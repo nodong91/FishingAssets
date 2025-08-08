@@ -17,7 +17,6 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
     public bool envMute;
     public float envVolume;
 
-    Coroutine changeBGM;
     Queue<AudioSource> audioQueue = new Queue<AudioSource>();
 
     AudioSource TryAudioSource()
@@ -38,7 +37,6 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
     public void Audio_BGM(string _id)
     {
         AudioSource audioSource = (_id != null) ? TryAudioSource() : null;
-        Debug.LogWarning($"{_id} : {audioSource}");
         if (_id != null)
         {
             audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
@@ -48,10 +46,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
             audioSource.pitch = 1.0f;
             audioSource.Play();
         }
-
-        if (changeBGM != null)
-            StopCoroutine(changeBGM);
-        changeBGM = StartCoroutine(PlayBGMAudio(audioSource));
+        StartCoroutine(PlayBGMAudio(audioSource));
     }
 
     public void SetBGMVolume(float _value)
@@ -82,6 +77,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
                 BGMSource.volume = bgmVolume - volume;
                 yield return null;
             }
+            BGMSource.volume = 0.0f;
             BGMSource.Stop();
             audioQueue.Enqueue(BGMSource);
         }
