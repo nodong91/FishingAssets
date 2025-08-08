@@ -266,6 +266,8 @@ public class Data_Manager : Data_Parse
             public float bgmVolume;
             public bool fxMute;
             public float fxVolume;
+            public bool envMute;
+            public float envVolume;
         }
         public AudioStruct audioStruct;
     }

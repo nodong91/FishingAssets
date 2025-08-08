@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Trigger_Landing : Trigger_Setting
 {
+    public int themeMusic;
     public Sprite iconImage;
     Unit_Player player;
     Coroutine setLanding;
@@ -58,6 +59,8 @@ public class Trigger_Landing : Trigger_Setting
 
     IEnumerator SetLanding()
     {
+        Option_Manager.current.SetThemeMusic(themeMusic);
+
         cameraPosition.SetActive(true);
         SetLandingUI();
 
@@ -96,5 +99,6 @@ public class Trigger_Landing : Trigger_Setting
         // 카메라 포커스 제거
         cameraPosition.SetActive(false);
         Game_Manager.current.GetMainUI.OpenCanvas(true);
+        Game_Manager.current.SetThemeMusic();
     }
 }

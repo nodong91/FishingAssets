@@ -49,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d0ca49f728a674ca2f8ba2769e10cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameRate: 120
   player: {fileID: 6434570628557643809}
   cameraManager: {fileID: 4750831354325366058}
   controllManager: {fileID: 7132285091646476290}
@@ -61,6 +60,7 @@ MonoBehaviour:
   newsUI: {fileID: 8490069190649058968, guid: 6c79d15896fdb96429a2382817cc9999, type: 3}
   fishingManager: {fileID: 904380196646563992, guid: cd270496318610d41b3a2fff9aba5fa8, type: 3}
   fishGuide: {fileID: 7975754962175278531, guid: 9c0dc0fbfae1f434dba4bd501f078d10, type: 3}
+  themeMusic: -1
 --- !u!114 &6425624509944780435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +73,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a6aadd956069bf49b3362e7143b43c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  continueData:
+    playerPosition: {x: 0, y: 0, z: 0}
+    playerRotation: {x: 0, y: 0, z: 0, w: 0}
+    playerScale: {x: 0, y: 0, z: 0}
+    timeSpeed: 0
+    minute: 0
+    hour: 0
+    day: 0
+    weatherType: 0
+    energy: 0
+    money: 0
+    destroySlot: []
   saveData: SaveContinue
 --- !u!1 &2594382530091273144
 GameObject:

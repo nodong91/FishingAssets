@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,8 +10,8 @@ public class Audio_Manager : MonoBehaviour
     public TMP_Text audioText;
     public int currentAudio;
     public string[] audioStrings;
-    public Slider BGM_Slider, FX_Slider;
-    public Toggle bgm_Mute, fx_Mute;
+    public Slider BGM_Slider, FX_Slider, env_Slider;
+    public Toggle bgm_Mute, fx_Mute, env_Mute;
 
     public void SetStart()
     {
@@ -18,38 +19,43 @@ public class Audio_Manager : MonoBehaviour
 
         prevButton.onClick.AddListener(delegate { NextButton(-1); });
         nextButton.onClick.AddListener(delegate { NextButton(1); });
+
         BGM_Slider.onValueChanged.AddListener(BGMVolume);
-        FX_Slider.onValueChanged.AddListener(FXVolume);
         bgm_Mute.onValueChanged.AddListener(BGMMute);
+        FX_Slider.onValueChanged.AddListener(FXVolume);
         fx_Mute.onValueChanged.AddListener(FXMute);
+        env_Slider.onValueChanged.AddListener(EnvVolume);
+        env_Mute.onValueChanged.AddListener(EnvMute);
 
         // UI ¼¼ÆÃ
         BGMVolume(audioStruct.bgmVolume);
         BGMMute(audioStruct.bgmMute);
         FXVolume(audioStruct.fxVolume);
         FXMute(audioStruct.fxMute);
-
-        PlayBGMAudio();
+        EnvVolume(audioStruct.envVolume);
+        EnvMute(audioStruct.envMute);
     }
 
     void NextButton(int _index)
     {
-        currentAudio += _index;
-        if (currentAudio >= audioStrings.Length)
+        int index = currentAudio + _index;
+        if (index >= audioStrings.Length)
         {
-            currentAudio = 0;
+            index = 0;
         }
-        else if (currentAudio < 0)
+        else if (index < 0)
         {
-            currentAudio = audioStrings.Length - 1;
+            index = audioStrings.Length - 1;
         }
-        PlayBGMAudio();
+        PlayBGMAudio(index);
     }
 
-    void PlayBGMAudio()
+    public void PlayBGMAudio(int _index)
     {
-        audioText.text = audioStrings[currentAudio];
-        Singleton_Audio.INSTANCE.Audio_BGM(audioStrings[currentAudio]);
+        Debug.LogWarning($"BGM - {audioStrings[_index]}");
+        currentAudio = _index;
+        audioText.text = audioStrings[_index];
+        Singleton_Audio.INSTANCE.Audio_BGM(audioStrings[_index]);
     }
 
     void BGMVolume(float _value)
@@ -73,6 +79,18 @@ public class Audio_Manager : MonoBehaviour
     {
         Singleton_Audio.INSTANCE.SetFXMute(_isOn);
         fx_Mute.isOn = _isOn;
+    }
+
+    void EnvVolume(float _value)
+    {
+        Singleton_Audio.INSTANCE.SetEnvironmentVolume(_value);
+        env_Slider.value = _value;
+    }
+
+    void EnvMute(bool _isOn)
+    {
+        Singleton_Audio.INSTANCE.SetEnvironmentMute(_isOn);
+        env_Mute.isOn = _isOn;
     }
 
     private void Update()

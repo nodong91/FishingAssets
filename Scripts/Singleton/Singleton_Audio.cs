@@ -1,22 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 {
-    private AudioSource BGMSource;
+    public AudioSource BGMSource;
     public bool bgmMute;
     public float bgmVolume;
 
-    private AudioSource fxSource;
+    public AudioSource fxSource;
     public bool fxMute;
     public float fxVolume;
+
+    public AudioSource envSource;
+    public bool envMute;
+    public float envVolume;
 
     Coroutine changeBGM;
     Queue<AudioSource> audioQueue = new Queue<AudioSource>();
 
     AudioSource TryAudioSource()
     {
+        Debug.LogWarning($"빈거 있는지 : {audioQueue.Count > 0}");
         if (audioQueue.Count > 0)
             return audioQueue.Dequeue();
 
@@ -25,14 +31,23 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         return audioSource;
     }
 
+    //===========================================================================================================================
+    // 배경 음악
+    //===========================================================================================================================
+
     public void Audio_BGM(string _id)
     {
-        AudioSource audioSource = TryAudioSource();
-        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
-        audioSource.loop = true;
-        audioSource.mute = bgmMute;
-        audioSource.volume = bgmVolume;
-        audioSource.Play();
+        AudioSource audioSource = (_id != null) ? TryAudioSource() : null;
+        Debug.LogWarning($"{_id} : {audioSource}");
+        if (_id != null)
+        {
+            audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
+            audioSource.mute = bgmMute;
+            audioSource.volume = bgmVolume;
+            audioSource.loop = true;
+            audioSource.pitch = 1.0f;
+            audioSource.Play();
+        }
 
         if (changeBGM != null)
             StopCoroutine(changeBGM);
@@ -43,7 +58,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
     {
         bgmVolume = _value;
         if (BGMSource != null)
-            BGMSource.volume = bgmVolume;
+            BGMSource.volume = _value;
     }
 
     public void SetBGMMute(bool _isOn)
@@ -55,15 +70,16 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 
     IEnumerator PlayBGMAudio(AudioSource _audioSource)
     {
-        _audioSource.mute = bgmMute;
         if (BGMSource != null)
         {
             float normalize = 0.0f;
             while (normalize < 1.0f)
             {
                 normalize += Time.fixedDeltaTime * 0.5f;
-                _audioSource.volume = Mathf.Lerp(0.0f, bgmVolume, normalize);
-                BGMSource.volume = bgmVolume - _audioSource.volume;
+                float volume = Mathf.Lerp(0.0f, bgmVolume, normalize);
+                if (_audioSource != null)
+                    _audioSource.volume = volume;
+                BGMSource.volume = bgmVolume - volume;
                 yield return null;
             }
             BGMSource.Stop();
@@ -72,16 +88,44 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         BGMSource = _audioSource;
     }
 
+    //===========================================================================================================================
+    // 효과음
+    //===========================================================================================================================
+
+
     public void Audio_FX(string _id)
     {
+        if (_id == null)
+            return;
+
         AudioSource audioSource = TryAudioSource();
+        Debug.LogWarning($"{_id} : {audioSource}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
-        audioSource.loop = false;
         audioSource.mute = fxMute;
         audioSource.volume = fxVolume;
+        audioSource.loop = false;
+        audioSource.pitch = 1f;
+        audioSource.Play();
+
+        fxSource = audioSource;
+        StartCoroutine(PlayFXAudio(audioSource));
+    }
+
+    public void Audio_Dialog(string _id)
+    {
+        if (_id == null)
+            return;
+
+        AudioSource audioSource = TryAudioSource();
+        Debug.LogWarning($"{_id} : {audioSource}");
+        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
+        audioSource.mute = fxMute;
+        audioSource.volume = fxVolume;
+        audioSource.loop = false;
         audioSource.pitch = Random.Range(0.7f, 1.3f);
         audioSource.Play();
 
+        fxSource = audioSource;
         StartCoroutine(PlayFXAudio(audioSource));
     }
 
@@ -91,14 +135,6 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         yield return new WaitForSeconds(clipLength);
 
         audioQueue.Enqueue(_audioSource);
-    }
-
-    public void Audio_SetFX(string _id)
-    {
-        fxSource.Stop();
-        fxSource.pitch = Random.Range(0.7f, 1.3f);
-        fxSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
-        fxSource.Play();
     }
 
     public void SetFXMute(bool _isOn)
@@ -112,6 +148,70 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
     {
         fxVolume = _value;
         if (fxSource != null)
-            fxSource.volume = fxVolume;
+            fxSource.volume = _value;
+    }
+
+    //===========================================================================================================================
+    // 환경음
+    //===========================================================================================================================
+
+    public void Audio_Environment(string _id)
+    {
+        ResetEnvironment();
+        if (_id == null)
+            return;
+
+        AudioSource audioSource = TryAudioSource();
+        Debug.LogWarning($"{_id} : {audioSource}");
+        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
+        audioSource.mute = envMute;
+        audioSource.volume = envVolume;
+        audioSource.loop = true;
+        audioSource.pitch = 1f;
+        audioSource.Play();
+
+        envSource = audioSource;
+    }
+
+    public void SetEnvironmentMute(bool _isOn)
+    {
+        envMute = _isOn;
+        if (envSource != null)
+            envSource.mute = _isOn;
+    }
+
+    public void SetEnvironmentVolume(float _value)
+    {
+        envVolume = _value;
+        if (envSource != null)
+            envSource.volume = _value;
+    }
+
+
+
+
+
+
+
+    void ResetEnvironment()
+    {
+        StartCoroutine(PlayEnvironmentAudio());
+    }
+
+    IEnumerator PlayEnvironmentAudio()
+    {
+        if (envSource != null)
+        {
+            float normalize = 0.0f;
+            while (normalize < 1.0f)
+            {
+                normalize += Time.fixedDeltaTime * 0.5f;
+                float volume = Mathf.Lerp(0.0f, bgmVolume, normalize);
+                envSource.volume = bgmVolume - volume;
+                yield return null;
+            }
+            envSource.Stop();
+            audioQueue.Enqueue(envSource);
+        }
     }
 }

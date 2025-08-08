@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
 
 public class LoadingManager : MonoBehaviour
 {
+    public int frameRate = 60;
     public string[] currentNames;
     public string[] sceneNames;
     List<AsyncOperation> asyncOperation;
@@ -22,6 +24,7 @@ public class LoadingManager : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = frameRate;
         GoTitle();
     }
 
@@ -41,6 +44,15 @@ public class LoadingManager : MonoBehaviour
         sceneNames[1] = "Fishing";
 
         OpenLoading();
+    }
+
+    public void GoExit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
     void OpenLoading()
@@ -72,10 +84,10 @@ public class LoadingManager : MonoBehaviour
             {
                 _async[i].allowSceneActivation = true;
             }
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(OpenScreen(false));
+            deleComplate?.Invoke();
         }
-
-        yield return new WaitForSeconds(1f);
-        yield return StartCoroutine(OpenScreen(false));
     }
 
     IEnumerator OpenScreen(bool _open)
@@ -106,15 +118,13 @@ public class LoadingManager : MonoBehaviour
                 loading = false;
             }
             yield return null;
-            Debug.LogWarning(sceneNames[_index] + asyncOperation[_index].progress);
         }
+        Debug.LogWarning(sceneNames[_index] + asyncOperation[_index].progress);
 
         // 완료 체크
-        Debug.LogWarning(sceneNames[_index]);
         yield return StartCoroutine(OpenScene(asyncOperation));
 
         currentNames = sceneNames;
-        deleComplate?.Invoke();
     }
 
     public delegate void DeleComplate();

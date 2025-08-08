@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -6,7 +7,7 @@ public class Option_Manager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public Button closeButton;
-    public Custom_Button goTitleButton;
+    public Custom_Button goTitleButton, goExitButton;
     const string saveData = "SaveOptionData";
     public Data_Option optionData;
 
@@ -52,8 +53,14 @@ public class Option_Manager : MonoBehaviour
             int index = i;
             toggles[i].onValueChanged.AddListener(delegate { InputToggle(index); });
         }
-        //toggles[0].isOn = true;
-        goTitleButton.deleClicked = GoTitle;
+
+        goTitleButton.SetButton(GoTitle, EnterButton);
+        goExitButton.SetButton(GoExit, EnterButton);
+    }
+
+    void EnterButton()
+    {
+        Singleton_Audio.INSTANCE.Audio_FX("pop-39222");
     }
 
     void InputToggle(int _index)
@@ -65,10 +72,24 @@ public class Option_Manager : MonoBehaviour
     void GoTitle()
     {
         LoadingManager.current.GoTitle();
+        Singleton_Audio.INSTANCE.Audio_Environment(null);
         OpenCanvas(false);
     }
 
+    void GoExit()
+    {
+        LoadingManager.current.GoExit();
+    }
 
+    public void SetThemeMusic(int _musicIndex)
+    {
+        if (_musicIndex < 0)
+        {
+            Singleton_Audio.INSTANCE.Audio_BGM(null);
+            return;
+        }
+        audioManager.PlayBGMAudio(_musicIndex);
+    }
 
 
 
@@ -89,6 +110,8 @@ public class Option_Manager : MonoBehaviour
                 bgmVolume = Singleton_Audio.INSTANCE.bgmVolume,
                 fxMute = Singleton_Audio.INSTANCE.fxMute,
                 fxVolume = Singleton_Audio.INSTANCE.fxVolume,
+                envMute = Singleton_Audio.INSTANCE.envMute,
+                envVolume = Singleton_Audio.INSTANCE.envVolume,
             },
         };
         Static_JsonManager.SaveOptionData(saveData, optionData);
@@ -110,6 +133,8 @@ public class Option_Manager : MonoBehaviour
                     bgmVolume = 1f,
                     fxMute = false,
                     fxVolume = 1f,
+                    envMute = false,
+                    envVolume = 1f,
                 },
 
             };

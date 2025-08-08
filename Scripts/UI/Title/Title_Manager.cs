@@ -5,20 +5,28 @@ public class Title_Manager : MonoBehaviour
 {
     public Custom_Button continueButton, newStartButton, loadButton, settingButton, exitButton;
     public Option_Manager optionManager;
+    public string buttonSound = "pop-39222";
 
     void Start()
     {
-        continueButton.deleClicked = ContinueButton;
-        newStartButton.deleClicked = NewStartButton;
-        loadButton.deleClicked = LoadButton;
-        settingButton.deleClicked = SettingButton;
-        exitButton.deleClicked = ExitButton;
+        continueButton.SetButton(ContinueButton, EnterButton);
+        newStartButton.SetButton(NewStartButton, EnterButton);
+        loadButton.SetButton(LoadButton, EnterButton);
+        settingButton.SetButton(SettingButton, EnterButton);
+        exitButton.SetButton(ExitButton, EnterButton);
 
         if (Option_Manager.current == null)
             Instantiate(optionManager);
+
+        Option_Manager.current.SetThemeMusic(0);
         LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
 
         StartCoroutine(MovingUnit());
+    }
+
+    void EnterButton()
+    {
+        Singleton_Audio.INSTANCE.Audio_FX(buttonSound);
     }
 
     void ContinueButton()
@@ -45,14 +53,10 @@ public class Title_Manager : MonoBehaviour
 
     void ExitButton()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        LoadingManager.current.GoExit();
     }
 
-    [Header(" -Ship")]
+    [Header(" [ Ship ]")]
     public Transform player;
     public Transform startPoint, endPoint;
     public float speed = 0.1f;

@@ -1,10 +1,9 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class Game_Manager : MonoBehaviour
 {
-    public int frameRate = 60;
-
     public Unit_Player player;
     public Camera_Manager cameraManager;
     public Controll_Manager controllManager;
@@ -17,6 +16,8 @@ public class Game_Manager : MonoBehaviour
     public UI_NewsManager newsUI;
     public Fishing_Manager fishingManager;
     public FishGuide fishGuide;
+    public int themeMusic;
+    public string oceanSound = "Ocean 02";
 
     public static Game_Manager current;
 
@@ -27,10 +28,16 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
-        Application.targetFrameRate = frameRate;
         SaveData_Continue.current.GetContinue();
 
+        SetThemeMusic();
         PlayerMove();
+    }
+
+    public void SetThemeMusic()
+    {
+        Option_Manager.current.SetThemeMusic(themeMusic);
+        Singleton_Audio.INSTANCE.Audio_Environment(oceanSound);
     }
 
     public void InputLeftMouse(bool _input)

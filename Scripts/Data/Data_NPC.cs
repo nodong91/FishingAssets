@@ -4,6 +4,7 @@ using UnityEngine;
 public class Data_NPC : ScriptableObject
 {
     public Texture texture;
+    public string sound;
     public Data_Dialog[] dataDialogs;
     public Data_Quest[] dataQuests;
 }

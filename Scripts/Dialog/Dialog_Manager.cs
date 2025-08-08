@@ -3,7 +3,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UI_Main;
 using static Trigger_Landing;
 using System.Collections.Generic;
 using static Data_Dialog;
@@ -15,7 +14,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     Data_Dialog dataDialog;
     DialogStruct dialog;
 
-    public string FXSound;
     const float defaultTypingSpeed = 0.1f;
     const int defaultSize = 15;
 
@@ -370,7 +368,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             }
             if (typing == true)
             {
-                //Singleton_Audio.INSTANCE.Audio_SetFX(FXSound);
+                Singleton_Audio.INSTANCE.Audio_Dialog(dataNPC.sound);
                 dialogText.UpdateVertexData();
                 yield return new WaitForSeconds(typingSpeed);
             }

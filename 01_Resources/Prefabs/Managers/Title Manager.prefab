@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 1205220005317796935}
   - component: {fileID: 7511974732572736140}
   m_Layer: 5
-  m_Name: Button Load
+  m_Name: Button Credit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -758,6 +758,7 @@ MonoBehaviour:
   settingButton: {fileID: 2197804034823460085}
   exitButton: {fileID: 4671025152279485303}
   optionManager: {fileID: 4794084166072294511, guid: c8bdb841c0b36c84695b5b84b692b95d, type: 3}
+  buttonSound: Wooden Bat Hits Baseball Run
   player: {fileID: 7312806836633773497}
   startPoint: {fileID: 1374850409221482215}
   endPoint: {fileID: 2494353964355495517}
@@ -1122,7 +1123,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Load Game
+  m_text: Credit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cfe8bda87046e3b40954ac887d3d7aad, type: 2}
   m_sharedMaterial: {fileID: 1439861293519628721, guid: cfe8bda87046e3b40954ac887d3d7aad, type: 2}
@@ -1819,10 +1820,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6849055672996457047}
     m_Modifications:
-    - target: {fileID: 589861450064533479, guid: 9788657367cc50442910b126d90400fe, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8251988879791314165, guid: 9788657367cc50442910b126d90400fe, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35
@@ -1885,42 +1882,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6849055672996457047}
     m_Modifications:
-    - target: {fileID: 1271983441386039919, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271983441386039919, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271983441386039919, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271983441386039919, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271983441386039919, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271983441386039919, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271983441386039919, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271983441386039919, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1271983441386039919, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3797233889539951741, guid: bf13c18789631de439b5a3a463f90589, type: 3}
       propertyPath: m_Name
       value: ReflectionManager
@@ -1963,22 +1924,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3827802920888772380, guid: bf13c18789631de439b5a3a463f90589, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6334063371342356896, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6334063371342356896, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6334063371342356896, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8999780620493820813, guid: bf13c18789631de439b5a3a463f90589, type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
