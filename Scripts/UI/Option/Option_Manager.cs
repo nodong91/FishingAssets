@@ -10,8 +10,11 @@ public class Option_Manager : MonoBehaviour
     public Custom_Button goTitleButton, goExitButton;
     const string saveData = "SaveOptionData";
     public Data_Option optionData;
+    public Toggle[] toggles;
+    public GameObject[] test;
 
     public Audio_Manager audioManager;
+    public Quality_Manager qualityManager;
 
     public static Option_Manager current;
 
@@ -26,6 +29,7 @@ public class Option_Manager : MonoBehaviour
         LoadOption();
 
         audioManager.SetStart();
+        qualityManager.SetStart();
         closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
         SetToggle();
 
@@ -44,14 +48,14 @@ public class Option_Manager : MonoBehaviour
     {
         SaveOption();
     }
-    public Toggle[] toggles;
-    public GameObject[] test;
+
     void SetToggle()
     {
         for (int i = 0; i < toggles.Length; i++)
         {
             int index = i;
             toggles[i].onValueChanged.AddListener(delegate { InputToggle(index); });
+            InputToggle(index);
         }
 
         goTitleButton.SetButton(GoTitle, EnterButton);
@@ -60,7 +64,8 @@ public class Option_Manager : MonoBehaviour
 
     void EnterButton()
     {
-        Singleton_Audio.INSTANCE.Audio_FX("pop-39222");
+        string soundName = "pop-39222";
+        Singleton_Audio.INSTANCE.Audio_FX(soundName);
     }
 
     void InputToggle(int _index)
@@ -104,6 +109,7 @@ public class Option_Manager : MonoBehaviour
     {
         optionData = new Data_Option
         {
+            qualityLevel = QualitySettings.GetQualityLevel(),
             audioStruct = new Data_Option.AudioStruct
             {
                 bgmMute = Singleton_Audio.INSTANCE.bgmMute,

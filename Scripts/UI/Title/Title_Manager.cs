@@ -5,7 +5,7 @@ public class Title_Manager : MonoBehaviour
 {
     public Custom_Button continueButton, newStartButton, loadButton, settingButton, exitButton;
     public Option_Manager optionManager;
-    public string buttonSound = "pop-39222";
+    public string soundName = "pop-39222";
 
     void Start()
     {
@@ -26,7 +26,7 @@ public class Title_Manager : MonoBehaviour
 
     void EnterButton()
     {
-        Singleton_Audio.INSTANCE.Audio_FX(buttonSound);
+        Singleton_Audio.INSTANCE.Audio_FX(soundName);
     }
 
     void ContinueButton()

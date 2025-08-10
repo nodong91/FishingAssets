@@ -258,6 +258,7 @@ public class Data_Manager : Data_Parse
     [System.Serializable]
     public struct Data_Option
     {
+        public int qualityLevel;
         [System.Serializable]
         public struct AudioStruct
         {
