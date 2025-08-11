@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,9 +16,15 @@ public class Audio_Manager : MonoBehaviour
     public Toggle bgm_Mute, fx_Mute, env_Mute;
     const float divide = 10f;
     bool onSet;
+    Dictionary<string, int> tryStringToIndex = new Dictionary<string, int>();
     //===========================================================================================================================
     public void SetStart()
     {
+        tryStringToIndex.Clear();
+        for (int i = 0; i < audioStrings.Length; i++)
+        {
+            tryStringToIndex[audioStrings[i]] = i;
+        }
         prevButton.onClick.AddListener(delegate { NextButton(-1); });
         nextButton.onClick.AddListener(delegate { NextButton(1); });
 
@@ -67,10 +75,23 @@ public class Audio_Manager : MonoBehaviour
 
     public void PlayBGMAudio(int _index)
     {
-        Debug.LogWarning($"BGM - {audioStrings[_index]}");
         currentAudio = _index;
         audioText.text = audioStrings[_index];
         Singleton_Audio.INSTANCE.Audio_BGM(audioStrings[_index]);
+    }
+
+    public void PlayBGMAudio(string _id)
+    {
+        if (tryStringToIndex.TryGetValue(_id, out int index))
+        {
+            PlayBGMAudio(index);
+        }
+        else
+        {
+            Singleton_Audio.INSTANCE.Audio_BGM(null);
+            Debug.LogError($"Audio string '{_id}' not found in the list.");
+        }
+        Debug.LogWarning($"BGM - {_id}>>>{index}");
     }
 
     void BGMVolume(float _value)

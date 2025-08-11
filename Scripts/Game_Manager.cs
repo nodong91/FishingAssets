@@ -16,7 +16,7 @@ public class Game_Manager : MonoBehaviour
     public UI_NewsManager newsUI;
     public Fishing_Manager fishingManager;
     public FishGuide fishGuide;
-    public int themeMusic;
+    public string themeMusic;
     public string oceanSound = "Ocean 02";
 
     public static Game_Manager current;

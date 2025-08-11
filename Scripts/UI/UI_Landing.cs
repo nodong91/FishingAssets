@@ -125,12 +125,15 @@ public class UI_Landing : MonoBehaviour
     void ShopButton()
     {
         SetLandingCanvas(false);        // 샵 버튼 누르면
+
+        Option_Manager.current.SetThemeMusic(landingData.shopNPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart(landingData.shopNPC);
     }
 
     void ShipyardButton()// 조선소
     {
         SetLandingCanvas(false);        // 조선소 버튼 누르면
+        Option_Manager.current.SetThemeMusic(landingData.shipyardNPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart(landingData.shipyardNPC);
     }
 
@@ -144,6 +147,7 @@ public class UI_Landing : MonoBehaviour
     {
         Game_Manager.current.GetInventory.CloseShop();
         Game_Manager.current.GetDialog.OutDialog();
+        Option_Manager.current.SetThemeMusic("");
         SetLandingCanvas(true);// 백버튼
     }
 }
