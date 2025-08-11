@@ -14,6 +14,7 @@ public class UI_Inventory : MonoBehaviour
     public UI_MyBox myBox;
     public UI_Shop shop;
     public Image iconImage;
+    public bool OnFix { get; set; }
 
     public bool onDrag, onCheck;
     Coroutine slotMoving, movingMoney;
@@ -482,7 +483,6 @@ public class UI_Inventory : MonoBehaviour
         myBox.DistroySlot();
     }
 
-    public bool OnFix { get; set; }
     public void FixAll()
     {
         myBox.FixAll();
@@ -498,13 +498,26 @@ public class UI_Inventory : MonoBehaviour
             return;
 
         UI_Inventory_Base getInventory = GetInventory(_dragSlotType);
-        if (getInventory == null)
+        if (getInventory == null || _dragSlotType == SlotType.None)
         {
+            onCheck = false;
+            IconImageColor(onCheck);
             // 체크칸 모두 제거
             myBox.ClearCheckList();
             shop.ClearCheckList();
             return;
         }
         onCheck = getInventory.SetCheck(enterSlot, selectItemClass);
+        IconImageColor(onCheck);
+    }
+
+    void IconImageColor(bool _onCheck)
+    {
+        if (iconImage == null)
+            return;
+
+        // 아이콘 색상 변경
+        Color iconColor = _onCheck ? Color.white : P01_Utility.HexToColor("800000");
+        iconImage.color = iconColor;
     }
 }

@@ -88,6 +88,12 @@ public class Option_Manager : MonoBehaviour
 
     public void SetThemeMusic(string _music)
     {
+        if (string.IsNullOrEmpty(_music))
+        {
+            Singleton_Audio.INSTANCE.Audio_BGM(null);
+            Debug.LogWarning("Theme music is null or empty.");
+            return;
+        }
         audioManager.PlayBGMAudio(_music);
     }
 

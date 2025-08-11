@@ -147,7 +147,7 @@ public class UI_Landing : MonoBehaviour
     {
         Game_Manager.current.GetInventory.CloseShop();
         Game_Manager.current.GetDialog.OutDialog();
-        Option_Manager.current.SetThemeMusic("");
+        Option_Manager.current.SetThemeMusic(null);
         SetLandingCanvas(true);// น้น๖ฦฐ
     }
 }

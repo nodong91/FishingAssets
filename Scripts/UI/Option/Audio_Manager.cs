@@ -91,7 +91,6 @@ public class Audio_Manager : MonoBehaviour
             Singleton_Audio.INSTANCE.Audio_BGM(null);
             Debug.LogError($"Audio string '{_id}' not found in the list.");
         }
-        Debug.LogWarning($"BGM - {_id}>>>{index}");
     }
 
     void BGMVolume(float _value)
