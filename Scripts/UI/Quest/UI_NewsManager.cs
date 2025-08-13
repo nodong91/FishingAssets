@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class UI_NewsManager : MonoBehaviour
 {
-    public List<Data_Quest> myQuestList = new List<Data_Quest>();
+    //public List<Data_Quest> myQuestList = new List<Data_Quest>();
     public int newspaperDay;// 신문 구입 날짜 - 날짜형 퀘스트를 위해
 
-    public Data_Quest[] questData;
+    public Data_Quest[] questDatas;
 
     public UI_NewsSlot questSlot;
     public UI_NewsSlot[] questSlots;
@@ -25,6 +25,7 @@ public class UI_NewsManager : MonoBehaviour
         questCanvas.gameObject.SetActive(false);
         closeButton.onClick.AddListener(CloseButton);
 
+        SetQuest();
         DisplayQuest(null);// 정보창 닫기
     }
 
@@ -36,36 +37,44 @@ public class UI_NewsManager : MonoBehaviour
         return inst;
     }
 
-    void DisplayQuest(Data_Quest _questData)
+    void DisplayQuest(Data_Quest _questDatas)
     {
-        questDisplay.gameObject.SetActive(_questData != null);
-        if (_questData != null)
+        questDisplay.gameObject.SetActive(_questDatas != null);
+        if (_questDatas != null)
         {
-            questDisplay.SetDisplay(_questData);
+            questDisplay.SetDisplay(_questDatas);
         }
     }
 
-    public void SetQuest(Data_Quest[] _questData)
+    public void SetQuest(Data_Quest[] _questDatas)
     {
-        questData = _questData;
-        Debug.LogWarning(_questData.Length);
+        questDatas = _questDatas;
+        Debug.LogWarning(_questDatas.Length);
         // 비우기
         for (int i = 0; i < questSlots.Length; i++)
         {
             queueSlot.Enqueue(questSlots[i]);
             questSlots[i].gameObject.SetActive(false);
         }
+    }
 
-        questSlots = new UI_NewsSlot[_questData.Length];
-        for (int i = 0; i < _questData.Length; i++)
+    void DisplayNewsPaper()
+    {
+        questSlots = new UI_NewsSlot[questDatas.Length];
+        for (int i = 0; i < questDatas.Length; i++)
         {
             UI_NewsSlot slot = TrySlot();
             slot.gameObject.SetActive(true);
-            slot.SetQuest(_questData[i]);
+            slot.SetQuest(questDatas[i]);
             slot.deleClick = DisplayQuest;
             questSlots[i] = slot;
         }
+    }
 
+    public void OpenNewsPaper()
+    {
+        SetQuest(questDatas);// 임시 
+        DisplayNewsPaper();// 임시 
         if (openCanvas != null)
             StopCoroutine(openCanvas);
         openCanvas = StartCoroutine(OpenCanvas());
@@ -113,8 +122,22 @@ public class UI_NewsManager : MonoBehaviour
         questCanvas.gameObject.SetActive(false);
     }
 
-    public void AddQuest(Data_Quest _quest)
+    //public void AddQuest(Data_Quest _quest)
+    //{
+    //    myQuestList.Add(_quest);
+    //}
+
+
+
+
+
+
+
+    void SetQuest()
     {
-        myQuestList.Add(_quest);
+        Debug.LogError("asdfadsfadsffsdfasdf");
+        Option_Manager.current.GetQuestManager.GetNewspaper(questDatas);
+        //Option_Manager.current.GetQuestManager.SetStart();
+        //Option_Manager.current.GetQuestManager.OpenQuestCanvas();
     }
 }

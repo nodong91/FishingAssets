@@ -15,6 +15,8 @@ public class Option_Manager : MonoBehaviour
 
     public Audio_Manager audioManager;
     public Quality_Manager qualityManager;
+    public UI_QuestManager questManager;
+    public UI_QuestManager GetQuestManager => questManager;
 
     public static Option_Manager current;
 

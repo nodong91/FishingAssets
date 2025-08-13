@@ -20,7 +20,6 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 
     AudioSource TryAudioSource()
     {
-        Debug.LogWarning($"ºó°Å ÀÖ´ÂÁö : {audioQueue.Count > 0}");
         if (audioQueue.Count > 0)
             return audioQueue.Dequeue();
 
@@ -66,6 +65,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
     {
         if (BGMSource != null)
         {
+            AudioSource originSource = BGMSource;
             float normalize = 0.0f;
             while (normalize < 1.0f)
             {
@@ -73,12 +73,12 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
                 float volume = Mathf.Lerp(0.0f, bgmVolume, normalize);
                 if (_audioSource != null)
                     _audioSource.volume = volume;
-                BGMSource.volume = bgmVolume - volume;
+                originSource.volume = bgmVolume - volume;
                 yield return null;
             }
-            BGMSource.volume = 0.0f;
-            BGMSource.Stop();
-            audioQueue.Enqueue(BGMSource);
+            originSource.volume = 0.0f;
+            originSource.Stop();
+            audioQueue.Enqueue(originSource);
         }
         BGMSource = _audioSource;
     }
@@ -111,7 +111,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
             return;
 
         AudioSource audioSource = TryAudioSource();
-        Debug.LogWarning($"{_id} : {audioSource}");
+        Debug.Log($"{_id} : {audioSource}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
         audioSource.mute = fxMute;
         audioSource.volume = fxVolume;

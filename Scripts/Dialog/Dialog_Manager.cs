@@ -3,7 +3,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static Trigger_Landing;
 using System.Collections.Generic;
 using static Data_Dialog;
 
@@ -31,7 +30,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     public int currentDialog;
 
     public Dialog_SelectButton selectButton;
-    public Dialog_SelectButton[] dialogSelectButton;
+    public List<Dialog_SelectButton> dialogSelectButton = new List<Dialog_SelectButton>();
     private readonly Queue<Dialog_SelectButton> selectButtonQueue = new Queue<Dialog_SelectButton>();
 
     RectTransform rectParent;
@@ -53,28 +52,57 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         NPC_Image.texture = _npc.texture;
         NPC_Image.SetNativeSize();
 
+        DialogStart(_npc.dataDialogs[0]);
+        // 퀘스트가 있는지 확인
+        List<Data_Quest> checkQuests = Option_Manager.current.GetQuestManager.CheckNPC(_npc.npc_ID);
+        Debug.LogError($"{_npc.npc_ID} : {checkQuests.Count}");
+        // 퀘스트가 있다면 선택지 버튼 생성
+        for (int i = 0; i < checkQuests.Count; i++)
+        {
+            Dialog_SelectButton button = SetSelectButton(checkQuests[i].selectStruct);
+            button.transform.SetAsFirstSibling();// 순서 변경
+            button.questData = checkQuests[i];
+        }
+        OpenCanvas(true);// 대화 시작
+    }
+
+    public void DialogStart(Data_Dialog _dialog)
+    {
+        dataDialog = _dialog;
+
         // 기존 버튼 큐에 추가 및 제거
-        for (int i = 0; i < dialogSelectButton.Length; i++)
+        for (int i = 0; i < dialogSelectButton.Count; i++)
         {
             dialogSelectButton[i].gameObject.SetActive(false);
             selectButtonQueue.Enqueue(dialogSelectButton[i]);
         }
+        dialogSelectButton.Clear();
 
         currentDialog = 0;
         endDialog = false;
         selectCanvas.gameObject.SetActive(false);
-        dialogSelectButton = new Dialog_SelectButton[dataDialog.selectStructs.Length];
+        // 선택 버튼 생성
         for (int i = 0; i < dataDialog.selectStructs.Length; i++)
         {
-            int index = i;
-            Dialog_SelectButton button = GetSelectButton();
-            button.gameObject.SetActive(true);
-            button.SetStart(dataDialog.selectStructs[i], InputButton);
-            button.transform.SetSiblingIndex(index);// 순서 변경
-            dialogSelectButton[i] = button;
+            Dialog_SelectButton button = SetSelectButton(dataDialog.selectStructs[i]);
+            button.transform.SetAsLastSibling();// 순서 변경
         }
         DialogAction();
-        OpenCanvas(true);// 대화 시작
+    }
+
+    Dialog_SelectButton SetSelectButton(SelectStruct _selectStruct)
+    {
+        Dialog_SelectButton button = GetSelectButton();
+        button.gameObject.SetActive(true);
+        button.SetStart(_selectStruct, InputButton);
+        dialogSelectButton.Add(button);
+        return button;
+    }
+
+    void InputButton(SelectStruct.SelectType _selectType)
+    {
+        Debug.LogWarning($"선택지 버튼 : {_selectType}");
+
     }
 
     Dialog_SelectButton GetSelectButton()
@@ -150,7 +178,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     {
         endDialog = true;
         // 메뉴 출력
-        for (int i = 0; i < dialogSelectButton.Length; i++)
+        for (int i = 0; i < dialogSelectButton.Count; i++)
         {
             dialogSelectButton[i].gameObject.SetActive(true);
         }
@@ -170,41 +198,14 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void InputButton(SelectStruct.SelectType _selectType)
-    {
-        Debug.LogWarning($"선택지 버튼 : {_selectType}");
-        switch (_selectType)
-        {
-            case SelectStruct.SelectType.Out:
-
-                break;
-            case SelectStruct.SelectType.None:
-
-                break;
-            case SelectStruct.SelectType.OpenShop:
-                OpenShop();
-                break;
-
-            case SelectStruct.SelectType.OpenShipyard:
-                OpenShipyard();
-                break;
-
-            case SelectStruct.SelectType.Quest:
-
-                break;
-        }
-    }
-
     void OpenShop()
     {
-        LandingStruct getLandingData = Game_Manager.current.GetLanding.GetLandingData;
-        Game_Manager.current.GetInventory.OpenShop(getLandingData);
+
     }
 
     void OpenShipyard()
     {
-        LandingStruct getLandingData = Game_Manager.current.GetLanding.GetLandingData;
-        Game_Manager.current.GetInventory.OpenShipyard(getLandingData);
+
     }
 
     void OpenQuest()

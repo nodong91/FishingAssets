@@ -10,8 +10,6 @@ public class Data_Quest : ScriptableObject
     public int deadLine;
     public string[] resultID;
 
-    //public int GetLasDay()
-    //{
-
-    //}
+    public Data_Dialog.SelectStruct selectStruct;// 대화 선택 버튼
+    public Data_Dialog dialogData;
 }

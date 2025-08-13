@@ -306,7 +306,6 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public Data_Quest[] questData;
     void UseItem(ItemStruct _item)
     {
         switch (_item.itemType)
@@ -316,7 +315,7 @@ public class UI_Inventory : MonoBehaviour
                 break;
             case ItemStruct.ItemType.Fish:
                 Debug.LogWarning("UseItem");
-                Game_Manager.current.GetNews.SetQuest(questData);
+                Game_Manager.current.GetNews.OpenNewsPaper();
                 break;
             case ItemStruct.ItemType.Used:
 
@@ -501,10 +500,10 @@ public class UI_Inventory : MonoBehaviour
         if (getInventory == null || _dragSlotType == SlotType.None)
         {
             onCheck = false;
-            IconImageColor(onCheck);
             // 체크칸 모두 제거
             myBox.ClearCheckList();
             shop.ClearCheckList();
+            IconImageColor(onCheck);
             return;
         }
         onCheck = getInventory.SetCheck(enterSlot, selectItemClass);

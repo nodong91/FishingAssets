@@ -1,4 +1,6 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Trigger_Landing;
@@ -25,7 +27,7 @@ public class UI_Landing : MonoBehaviour
     public Button storageButton;
     public Button shopButton;
     public Button shipyardButton;
-    bool inlanding;
+    bool inlanding, onDialog;
     public Button backButton;
     private CanvasGroup backCanvas;
 
@@ -124,14 +126,15 @@ public class UI_Landing : MonoBehaviour
 
     void ShopButton()
     {
-        SetLandingCanvas(false);        // 샵 버튼 누르면
-
+        onDialog = true;
+        SetLandingCanvas(false);        // 샵 버튼 누르면 랜드 UI 제거
         Option_Manager.current.SetThemeMusic(landingData.shopNPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart(landingData.shopNPC);
     }
 
     void ShipyardButton()// 조선소
     {
+        onDialog = true;
         SetLandingCanvas(false);        // 조선소 버튼 누르면
         Option_Manager.current.SetThemeMusic(landingData.shipyardNPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart(landingData.shipyardNPC);
@@ -139,6 +142,7 @@ public class UI_Landing : MonoBehaviour
 
     void StorageButton()
     {
+        onDialog = false;
         SetLandingCanvas(false);// 창고
         Game_Manager.current.GetInventory.OpenStorage(true);
     }
@@ -146,7 +150,8 @@ public class UI_Landing : MonoBehaviour
     void BackButton()
     {
         Game_Manager.current.GetInventory.CloseShop();
-        Game_Manager.current.GetDialog.OutDialog();
+        if (onDialog == true)
+            Game_Manager.current.GetDialog.OutDialog();
         Option_Manager.current.SetThemeMusic(null);
         SetLandingCanvas(true);// 백버튼
     }
