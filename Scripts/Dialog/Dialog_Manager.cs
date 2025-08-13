@@ -10,7 +10,7 @@ using static Data_Dialog;
 public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
-    public Data_NPC dataNPC;
+    Data_NPC dataNPC;
     Data_Dialog dataDialog;
     DialogStruct dialog;
 
@@ -32,7 +32,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     public Dialog_SelectButton selectButton;
     public Dialog_SelectButton[] dialogSelectButton;
-    Queue<Dialog_SelectButton> selectButtonQueue = new Queue<Dialog_SelectButton>();
+    private readonly Queue<Dialog_SelectButton> selectButtonQueue = new Queue<Dialog_SelectButton>();
 
     RectTransform rectParent;
 
@@ -69,8 +69,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             int index = i;
             Dialog_SelectButton button = GetSelectButton();
             button.gameObject.SetActive(true);
-            button.deleSelect = InputButton;
-            button.SetStart(dataDialog.selectStructs[i]);
+            button.SetStart(dataDialog.selectStructs[i], InputButton);
             button.transform.SetSiblingIndex(index);// 순서 변경
             dialogSelectButton[i] = button;
         }
@@ -177,7 +176,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         switch (_selectType)
         {
             case SelectStruct.SelectType.Out:
-                //OutDialog();
+
                 break;
             case SelectStruct.SelectType.None:
 
@@ -368,7 +367,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             }
             if (typing == true)
             {
-                Singleton_Audio.INSTANCE.Audio_Dialog(dataNPC.sound);
+                Singleton_Audio.INSTANCE.Audio_Dialog(dataNPC.voice);
                 dialogText.UpdateVertexData();
                 yield return new WaitForSeconds(typingSpeed);
             }

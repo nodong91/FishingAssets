@@ -86,14 +86,15 @@ public class Option_Manager : MonoBehaviour
         LoadingManager.current.GoExit();
     }
 
-    public void SetThemeMusic(int _musicIndex)
+    public void SetThemeMusic(string _music)
     {
-        if (_musicIndex < 0)
+        if (string.IsNullOrEmpty(_music))
         {
             Singleton_Audio.INSTANCE.Audio_BGM(null);
+            Debug.LogWarning("Theme music is null or empty.");
             return;
         }
-        audioManager.PlayBGMAudio(_musicIndex);
+        audioManager.PlayBGMAudio(_music);
     }
 
 

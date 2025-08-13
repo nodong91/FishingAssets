@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static Data_Dialog;
+using static Data_Dialog.SelectStruct;
 
 public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -9,19 +11,19 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
 
     SelectStruct selectStruct;
 
-    public delegate void DeleSelect(SelectStruct.SelectType _type);
-    public DeleSelect deleSelect;
+    public Action<SelectType> clickAction;
 
-    public void SetStart(SelectStruct _selectStruct)
+    public void SetStart(SelectStruct _selectStruct, Action<SelectType> _clickAction)
     {
         selectStruct = _selectStruct;
+        clickAction = _clickAction;
         buttonText.text = _selectStruct.selectDialog;
         boxImage.gameObject.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        deleSelect?.Invoke(selectStruct.selectType);
+        clickAction?.Invoke(selectStruct.selectType);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

@@ -5,6 +5,7 @@ public class Title_Manager : MonoBehaviour
 {
     public Custom_Button continueButton, newStartButton, loadButton, settingButton, exitButton;
     public Option_Manager optionManager;
+    public string titleTheme = "Main Theme";
     public string soundName = "pop-39222";
 
     void Start()
@@ -15,13 +16,7 @@ public class Title_Manager : MonoBehaviour
         settingButton.SetButton(SettingButton, EnterButton);
         exitButton.SetButton(ExitButton, EnterButton);
 
-        if (Option_Manager.current == null)
-            Instantiate(optionManager);
-
-        Option_Manager.current.SetThemeMusic(0);
-        LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
-
-        StartCoroutine(MovingUnit());
+        StartCoroutine(SetManager());
     }
 
     void EnterButton()
@@ -62,9 +57,16 @@ public class Title_Manager : MonoBehaviour
     public float speed = 0.1f;
     public Material reflectionMaterial;
 
-    IEnumerator MovingUnit()
+    IEnumerator SetManager()
     {
-        while (true)
+        if (Option_Manager.current == null)
+            Instantiate(optionManager);
+
+        LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
+        yield return null;
+
+        Option_Manager.current.SetThemeMusic(titleTheme); // 테마 음악 설정
+        while (true)// Loop the movement
         {
             player.gameObject.SetActive(true);
             float normalize = 0f;
