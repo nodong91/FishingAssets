@@ -34,7 +34,6 @@ public class UI_Main : MonoBehaviour
         fishingButton.onClick.AddListener(FishingButton);
 
         SetCameraCanvas();
-        Debug.LogWarning("menuState");
     }
 
     void SetCameraCanvas()

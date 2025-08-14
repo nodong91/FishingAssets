@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b221023b99a972241ab64272e5028cd8, type: 3}
-  m_Name: Data_Quest_Tiger
+  m_Name: Data_Qs0001
   m_EditorClassIdentifier: 
   title: "\uC5D8\uB9AC\uAC8C\uC774\uD130 \uAC00\uC544"
   description: "\uB0B4\uAC00 \uB09A\uC740 \uC5ED\uB300\uAE09 \uC6D4\uCC99 \uBC30\uC2A4\uB97C
@@ -18,9 +18,16 @@ MonoBehaviour:
     \uADF8\uB140\uC11D\uC744 \uC7A1\uC544\uC918. \uBCF5\uC218\uB97C \uD574\uC57C\uACA0\uC5B4!!"
   npc_ID: Shipyard NPC
   deadLine: 1
-  resultID:
-  - 
+  needItems:
+  - Fs_1001
   selectStruct:
     selectDialog: "\uADF8 \uB140\uC11D\uC744 \uC7A1\uC544 \uC654\uC5B4."
     selectType: 4
-  dialogData: {fileID: 11400000, guid: 6421208ed8e4b8249be3ad8412184c45, type: 2}
+  successDialogData: {fileID: 11400000, guid: 6421208ed8e4b8249be3ad8412184c45, type: 2}
+  failDialogData: {fileID: 11400000, guid: 7a5ea26b943137440a9e1d15bbcde3cd, type: 2}
+  resultData:
+    inventorySize: {x: 5, y: 5}
+    money: 0
+    itemID:
+    - Fs_1001
+    - Fs_2001

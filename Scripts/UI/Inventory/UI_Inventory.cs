@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
+using static Data_Quest;
 using static Trigger_Landing;
 using static UI_Inventory_Base;
 using static UI_Inventory_Slot;
@@ -115,6 +116,29 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
+    public void OpenQuestResult(bool _open)
+    {
+        if (resultItem.itemID == null || resultItem.itemID.Length == 0)
+            return;
+
+        if (currentType != SlotType.QuestResult)
+        {
+            ResultStruct result = resultItem;
+            currentType = SlotType.QuestResult;
+            myBox.OpenCanvas(_open);
+            shop.SetQuestResult(_open, result);
+
+            resultItem = default; // 퀘스트 결과 아이템 초기화
+        }
+    }
+
+    ResultStruct resultItem;
+    public void SetQuestResult(ResultStruct _resultItem)
+    {
+        // 퀘스트 결과 아이템 세팅
+        resultItem = _resultItem;
+    }
+
     void Update()// 아이템 추가 테스트
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -172,6 +196,7 @@ public class UI_Inventory : MonoBehaviour
     void SetEmptySlot(UI_Inventory_Slot _slot)// 슬롯 비우기
     {
         UI_Inventory_Base getInventory = GetInventory(enterSlotType);
+        Debug.LogWarning("SetEmptySlot: " + _slot.slotNum.x + ", " + _slot.slotNum.y);
         getInventory.SlotEmpty(_slot);
     }
 
@@ -258,6 +283,7 @@ public class UI_Inventory : MonoBehaviour
 
             if (_slot.empty == true)
                 return;
+
             // 픽업
             selectSlot = _slot.GetLinkSlot;
             selectItemClass = selectSlot.itemClass;
@@ -423,9 +449,9 @@ public class UI_Inventory : MonoBehaviour
                 return myBox;
 
             case SlotType.Shop:
-                return shop;
-
+            case SlotType.Shipyard:
             case SlotType.Storage:
+            case SlotType.QuestResult:
                 return shop;
         }
         return null;
@@ -518,5 +544,31 @@ public class UI_Inventory : MonoBehaviour
         // 아이콘 색상 변경
         Color iconColor = _onCheck ? Color.white : P01_Utility.HexToColor("800000");
         iconImage.color = iconColor;
+    }
+
+    //===========================================================================================================================
+    // 가방 안에 아이템이 있는지 확인
+    //===========================================================================================================================
+
+    List<UI_Inventory_Slot> checkSlot = new List<UI_Inventory_Slot>();
+    public bool CheckQuestItem(string[] _needItems)
+    {
+        checkSlot.Clear();
+        bool check = true;
+        for (int i = 0; i < _needItems.Length; i++)
+        {
+            check = myBox.CheckItem(_needItems[i], out UI_Inventory_Slot _slot);
+            if (check == false)
+                return false;
+            checkSlot.Add(_slot.GetLinkSlot);
+        }
+        // 아이템이 모두 있는 경우
+        for (int i = 0; i < checkSlot.Count; i++)
+        {
+            UI_Inventory_Slot slot = checkSlot[i];
+            myBox.SlotEmpty(slot);// 해당 아이템을 비우기
+        }
+        Debug.LogWarning("CheckQuestItem: " + checkSlot.Count + " items found.");
+        return check;
     }
 }

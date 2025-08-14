@@ -32,6 +32,8 @@ public class Option_Manager : MonoBehaviour
 
         audioManager.SetStart();
         qualityManager.SetStart();
+        questManager.SetStart();
+
         closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
         SetToggle();
 
@@ -43,7 +45,10 @@ public class Option_Manager : MonoBehaviour
         StaticOpenCanvas.deleEndOpen = EndOpenCanvas;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
         if (_open == true)
+        {
             toggles[0].isOn = true;
+            questManager.OpenManager();
+        }
     }
 
     void EndOpenCanvas()
@@ -93,7 +98,6 @@ public class Option_Manager : MonoBehaviour
         if (string.IsNullOrEmpty(_music))
         {
             Singleton_Audio.INSTANCE.Audio_BGM(null);
-            Debug.LogWarning("Theme music is null or empty.");
             return;
         }
         audioManager.PlayBGMAudio(_music);

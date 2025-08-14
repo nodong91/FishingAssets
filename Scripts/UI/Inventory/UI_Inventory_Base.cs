@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
 using static UI_Inventory_Slot;
-using static UI_Main;
 
 public class UI_Inventory_Base : MonoBehaviour
 {
@@ -14,7 +13,8 @@ public class UI_Inventory_Base : MonoBehaviour
         Shop,
         Shipyard,
         Storage,
-        MyBox
+        QuestResult,
+        MyBox,
     }
     public SlotType slotType = SlotType.None;
     public string saveData { get; set; }
@@ -58,8 +58,8 @@ public class UI_Inventory_Base : MonoBehaviour
         while (saveInventoryData == null)
             yield return null;
 
-        SetInventorySlot();// 데이터 불러온 이후
-        yield return new WaitForEndOfFrame();
+        SetInventorySlot(GetSaveInventoryData.invenSize);// 데이터 불러온 이후
+        yield return null;
 
         LoadItem(saveInventoryData);
         SetLoadDestroy();
@@ -91,13 +91,7 @@ public class UI_Inventory_Base : MonoBehaviour
         }
     }
 
-    public void SetDefault()
-    {
-        EmptyInventory();
-        SetInventorySlot();// 디폴트 세팅
-    }
-
-    void SetInventorySlot()
+   public void SetInventorySlot(Vector2Int _size)
     {
         if (allSlots != null)
         {
@@ -108,7 +102,7 @@ public class UI_Inventory_Base : MonoBehaviour
             }
         }
 
-        inventorySize = saveInventoryData.invenSize;
+        inventorySize = _size;
         gridLayoutGroup.cellSize = new Vector2(1f, 1f) * slotSize;
         gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         gridLayoutGroup.constraintCount = inventorySize.x;
@@ -200,6 +194,7 @@ public class UI_Inventory_Base : MonoBehaviour
             return iconQueue.Dequeue();
         }
         Image baseImage = Game_Manager.current.GetInventory.iconImage;
+        baseImage.color = Color.white;
         return Instantiate(baseImage, iconParent);
     }
 
@@ -345,7 +340,19 @@ public class UI_Inventory_Base : MonoBehaviour
         checkList.Clear();
     }
 
-
+    public bool CheckItem(string _itemID, out UI_Inventory_Slot _slot)
+    {
+        foreach (var slot in allSlots)
+        {
+            if (slot.itemClass?.item.id == _itemID)// 아이템 ID가 같은지
+            {
+                _slot = slot;
+                return true;
+            }
+        }
+        _slot = null;
+        return false;
+    }
 
 
 
@@ -456,7 +463,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public List<Vector2Int> destroySlot = new List<Vector2Int>();
     public List<Vector2Int> GetDestroySlot { get { return destroySlot; } }
-    public void DistroySlot()
+    public void DistroySlot()// 슬롯 부수기
     {
         bool find = false;
         while (find == false)
@@ -478,13 +485,13 @@ public class UI_Inventory_Base : MonoBehaviour
         }
     }
 
-    public void FixSlot(UI_Inventory_Slot _slot)
+    public void FixSlot(UI_Inventory_Slot _slot)// 슬롯 복구
     {
         _slot.FixSlot();
         destroySlot.Remove(_slot.slotNum);
     }
 
-    public void FixAll()
+    public void FixAll()// 모든 슬롯 복구
     {
         for (int i = 0; i < destroySlot.Count; i++)
         {

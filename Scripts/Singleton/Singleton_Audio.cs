@@ -93,7 +93,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
             return;
 
         AudioSource audioSource = TryAudioSource();
-        Debug.LogWarning($"{_id} : {audioSource}");
+        Debug.Log($"{_id} : {audioSource}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
         audioSource.mute = fxMute;
         audioSource.volume = fxVolume;

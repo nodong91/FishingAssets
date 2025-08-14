@@ -17,6 +17,10 @@ public class UI_NewsDisplay : MonoBehaviour
         npcText.text = _quest.npc_ID;
         descriptionText.text = _quest.description;
         deadLineText.text = (_quest.deadLine > 0) ? "남은 시간 " + _quest.deadLine + "일" : null;
-        resultParent.gameObject.SetActive((_quest.resultID.Length > 0) == true);
+        Debug.LogWarning($"Quest Display: {resultParent.name}");
+        Debug.LogWarning($"Quest Display: {_quest.title}");
+        Debug.LogWarning($"Quest Display: {_quest.resultData.inventorySize}");
+        Debug.LogWarning($"Quest Display: {_quest.resultData.itemID.Length}");
+        resultParent.gameObject.SetActive((_quest.resultData.itemID.Length > 0) == true);
     }
 }

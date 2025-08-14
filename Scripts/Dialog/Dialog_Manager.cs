@@ -55,7 +55,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         DialogStart(_npc.dataDialogs[0]);
         // 퀘스트가 있는지 확인
         List<Data_Quest> checkQuests = Option_Manager.current.GetQuestManager.CheckNPC(_npc.npc_ID);
-        Debug.LogError($"{_npc.npc_ID} : {checkQuests.Count}");
         // 퀘스트가 있다면 선택지 버튼 생성
         for (int i = 0; i < checkQuests.Count; i++)
         {
@@ -185,7 +184,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         typingCoroutine = StartCoroutine(SetSelectDialog());
     }
 
-    IEnumerator SetSelectDialog()
+    IEnumerator SetSelectDialog()// 선택지 버튼 열기
     {
         selectCanvas.gameObject.SetActive(true);
         float normalize = 0f;
@@ -196,6 +195,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             rectParent.anchoredPosition = Vector3.Lerp(Vector3.down * 30f, Vector3.zero, normalize);
             yield return null;
         }
+        // 보상이 있으면 보상 인벤토리 열기
+        Game_Manager.current.GetInventory.OpenQuestResult(true);
     }
 
     void OpenShop()
@@ -266,6 +267,9 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    //===================================================================================================
+    // 글자 움직임   
+    //===================================================================================================
     void SetActingText(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         switch (type.actionType)
@@ -385,6 +389,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
         else
         {
+            // 다음 대화 진행
             //StartCoroutine(WaitingNext());
         }
     }
@@ -404,6 +409,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        DialogAction();
+        DialogAction();// 대화 액션 실행
     }
 }

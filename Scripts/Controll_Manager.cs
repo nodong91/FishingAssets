@@ -28,7 +28,7 @@ public class Controll_Manager : MonoBehaviour
     {
         if (_input==false)
             Option_Manager.current.OpenCanvas(true);
-        Debug.LogWarning("Key_Esc");
+        Debug.Log("Key_Esc");
     }
 
     void SetMouse()
