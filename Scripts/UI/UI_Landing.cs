@@ -147,7 +147,7 @@ public class UI_Landing : MonoBehaviour
         Game_Manager.current.GetInventory.OpenStorage(true);
     }
 
-    void BackButton()
+    public void BackButton()
     {
         Game_Manager.current.GetInventory.CloseShop();
         if (onDialog == true)
