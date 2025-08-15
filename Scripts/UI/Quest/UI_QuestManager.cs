@@ -185,7 +185,17 @@ public class UI_QuestManager : MonoBehaviour
     void SetQuestDisplay(CustomButtonStruct _quest)
     {
         // 퀘스트가 있는지 확인
-        questInfoText.text = $"{_quest.questData.title} : {_quest.questData.npc_ID}\n완료? ({_quest.isComplate})";
+        string questInfo = $"{_quest.questData.title} : {_quest.questData.npc_ID}\n완료? ({_quest.isComplate})";
+        questInfo += $"\n\n{_quest.questData.description}";
+        if(_quest.questData.needItems != null)
+        {
+            questInfo += $"\n\n필요한 아이템 : ";
+            for (int i = 0; i < _quest.questData.needItems.Length; i++)
+            {
+                questInfo += $"\n- {_quest.questData.needItems[i]}";
+            }
+        }
+        questInfoText.text = questInfo;
     }
 
     //===================================================================================================
