@@ -206,6 +206,6 @@ public class UI_QuestManager : MonoBehaviour
     {
         // 퀘스트 데이터를 저장하는 로직
         // 예: PlayerPrefs, 파일 저장 등
-        Debug.LogError("퀘스트 데이터 저장");
+        Debug.LogError("현재 퀘스트 진행 상황 저장 해야함");
     }
 }

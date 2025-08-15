@@ -41,7 +41,7 @@ public class Fishing_Manager : MonoBehaviour
         fishingSubAgility.SetStart();
         fishingSubHealth.SetStart();
     }
-
+    public FishingTest fishingTest;
     public void StartGame(Data_Manager.FishStruct _fishStruct)
     {
         Game_Manager.current.OutOfControll(true);
@@ -55,7 +55,8 @@ public class Fishing_Manager : MonoBehaviour
         fishStruct = _fishStruct;
         randomSize = fishStruct.GetRandom();
 
-        StateMachine(FishingState.Hit);
+        //StateMachine(FishingState.Hit);
+        fishingTest.SetFishing();
     }
 
     void EndGame(FishingState _fishState)

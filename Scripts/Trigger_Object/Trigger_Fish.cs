@@ -6,7 +6,7 @@ public class Trigger_Fish : MonoBehaviour
     public Trigger_Setting triggerSetting;
     public string id;
     public FishStruct fishStruct;
-    
+
     void Start()
     {
         SetFish(id);
