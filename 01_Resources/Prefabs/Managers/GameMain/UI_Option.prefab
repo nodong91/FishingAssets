@@ -1640,18 +1640,24 @@ MonoBehaviour:
       fxVolume: 0
       envMute: 0
       envVolume: 0
+  screenStruct:
+  - toggle: {fileID: 1531890454574340330}
+    screenObject: {fileID: 7249765144454371076}
+  - toggle: {fileID: 1124972288570539855}
+    screenObject: {fileID: 3977230350518802786}
+  - toggle: {fileID: 476188344818082304}
+    screenObject: {fileID: 7852614497360432612}
+  - toggle: {fileID: 2153958893568858324}
+    screenObject: {fileID: 5516848146290050042}
+  - toggle: {fileID: 8194120538920177607}
+    screenObject: {fileID: 5419628223533472185}
   toggles:
   - {fileID: 1531890454574340330}
   - {fileID: 1124972288570539855}
   - {fileID: 476188344818082304}
   - {fileID: 2153958893568858324}
   - {fileID: 8194120538920177607}
-  test:
-  - {fileID: 7249765144454371076}
-  - {fileID: 3977230350518802786}
-  - {fileID: 7852614497360432612}
-  - {fileID: 5516848146290050042}
-  - {fileID: 5419628223533472185}
+  screenObject: []
   audioManager: {fileID: 1273746834801687523}
   qualityManager: {fileID: 2822856618487094095}
   questManager: {fileID: 3533901614401609095}
@@ -6897,8 +6903,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee314ceb869b164c8ce56c7c89c1376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customButtonList: []
   questParent: {fileID: 2608167050473521173}
-  customButtons: []
   questButtonPrefab: {fileID: 5290170234835891692}
   questDataTest:
   - {fileID: 11400000, guid: 896ef83c74d161543a2225305362a3c0, type: 2}

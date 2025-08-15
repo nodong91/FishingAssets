@@ -10,8 +10,13 @@ public class Option_Manager : MonoBehaviour
     public Custom_Button goTitleButton, goExitButton;
     const string saveData = "SaveOptionData";
     public Data_Option optionData;
-    public Toggle[] toggles;
-    public GameObject[] test;
+    [System.Serializable]
+    public struct ScreenStruct
+    {
+        public Toggle toggle;
+        public GameObject screenObject;
+    }
+    public ScreenStruct[] screenStruct;
 
     public Audio_Manager audioManager;
     public Quality_Manager qualityManager;
@@ -46,7 +51,7 @@ public class Option_Manager : MonoBehaviour
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
         if (_open == true)
         {
-            toggles[0].isOn = true;
+            screenStruct[0].toggle.isOn = true;
             questManager.OpenManager();
         }
     }
@@ -58,10 +63,10 @@ public class Option_Manager : MonoBehaviour
 
     void SetToggle()
     {
-        for (int i = 0; i < toggles.Length; i++)
+        for (int i = 0; i < screenStruct.Length; i++)
         {
             int index = i;
-            toggles[i].onValueChanged.AddListener(delegate { InputToggle(index); });
+            screenStruct[i].toggle.onValueChanged.AddListener(delegate { InputToggle(index); });
             InputToggle(index);
         }
 
@@ -77,7 +82,7 @@ public class Option_Manager : MonoBehaviour
 
     void InputToggle(int _index)
     {
-        test[_index].gameObject.SetActive(toggles[_index].isOn);
+        screenStruct[_index].screenObject.gameObject.SetActive(screenStruct[_index].toggle.isOn);
     }
 
 

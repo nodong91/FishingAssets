@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class Title_Manager : MonoBehaviour
 {
-    public Custom_Button continueButton, newStartButton, loadButton, settingButton, exitButton;
+    public Custom_Button continueButton, newStartButton, creditButton, settingButton, exitButton;
     public Option_Manager optionManager;
+    public Credit_Rolling creditRolling;
+    private Credit_Rolling instCreditRolling;
     public string titleTheme = "Main Theme";
     public string soundName = "pop-39222";
 
@@ -12,7 +14,7 @@ public class Title_Manager : MonoBehaviour
     {
         continueButton.SetButton(ContinueButton, EnterButton);
         newStartButton.SetButton(NewStartButton, EnterButton);
-        loadButton.SetButton(LoadButton, EnterButton);
+        creditButton.SetButton(CreditButton, EnterButton);
         settingButton.SetButton(SettingButton, EnterButton);
         exitButton.SetButton(ExitButton, EnterButton);
 
@@ -36,9 +38,11 @@ public class Title_Manager : MonoBehaviour
 
     }
 
-    void LoadButton()
+    void CreditButton()
     {
-
+        if (instCreditRolling == null)
+            instCreditRolling = Instantiate(creditRolling);
+        instCreditRolling.OpenCanvas(true);
     }
 
     void SettingButton()
@@ -62,7 +66,8 @@ public class Title_Manager : MonoBehaviour
         if (Option_Manager.current == null)
             Instantiate(optionManager);
 
-        LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
+        if (LoadingManager.current != null)
+            LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
         yield return null;
 
         Option_Manager.current.SetThemeMusic(titleTheme); // 테마 음악 설정

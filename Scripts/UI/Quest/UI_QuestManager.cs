@@ -1,6 +1,3 @@
-using NUnit.Framework.Interfaces;
-using NUnit.Framework.Internal;
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -46,13 +43,9 @@ public class UI_QuestManager : MonoBehaviour
     CustomButtonStruct currentButton;
     public TMP_Text questInfoText;
 
-    private void Awake()
-    {
-    
-    }
-
     void ToggleClick(CustomButtonStruct _customToggle)
     {
+        SaveQuestData();
         if (currentButton?.customButton == _customToggle.customButton)
             return;
 
@@ -192,6 +185,17 @@ public class UI_QuestManager : MonoBehaviour
     void SetQuestDisplay(CustomButtonStruct _quest)
     {
         // 퀘스트가 있는지 확인
-        questInfoText.text = $"{_quest.questData.title} : {_quest.questData.npc_ID}\nComp {_quest.isComplate}";
+        questInfoText.text = $"{_quest.questData.title} : {_quest.questData.npc_ID}\n완료? ({_quest.isComplate})";
+    }
+
+    //===================================================================================================
+    // 퀘스트 내용 저장
+    //===================================================================================================
+
+    void SaveQuestData()
+    {
+        // 퀘스트 데이터를 저장하는 로직
+        // 예: PlayerPrefs, 파일 저장 등
+        Debug.LogError("퀘스트 데이터 저장");
     }
 }
