@@ -86,7 +86,7 @@ public class Unit_Player : MonoBehaviour
         if (triggerGameObject.Count == 0)
             return;
 
-        closestDistance = float.MaxValue;
+        float closestDistance = float.MaxValue;
         Trigger_Setting tempTarget = null;
         for (int i = 0; i < triggerGameObject.Count; i++)
         {
@@ -104,6 +104,7 @@ public class Unit_Player : MonoBehaviour
         }
         Game_Manager.current.GetFollow.AddClosestTarget(closestTarget);
     }
+    //================================================================================================================================================
     //public Reflection_Manager reflection_Manager;
     public float shipHight, waveSpeed = 2f;
     float runningTime;
@@ -241,7 +242,6 @@ public class Unit_Player : MonoBehaviour
 
     public List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
     public Trigger_Setting closestTarget;
-    public float closestDistance;
 
     private void OnTriggerEnter(Collider other)
     {

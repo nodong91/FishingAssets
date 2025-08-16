@@ -72,9 +72,9 @@ public class UI_Main : MonoBehaviour
 
     public void FishingButton()
     {
-        string id = "Fs_1001";
-        Data_Manager.FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];
-        Game_Manager.current.GetFishing.StartGame(fishStruct);
+        //string id = "Fs_1001";
+        //Data_Manager.FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];
+        //Game_Manager.current.GetFishing.StartGame(fishStruct);
     }
     //===========================================================================================================================
     // 경고 문구

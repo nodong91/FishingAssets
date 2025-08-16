@@ -169,7 +169,7 @@ public class UI_Inventory : MonoBehaviour
             acquisition = Game_Manager.current.GetTimeUI.day,
         };
         selectItemClass = itemClass;
-        DragSlot();
+        DragSlot();// 아이템 추가
     }
 
     void SellItem(string _id)
@@ -254,12 +254,12 @@ public class UI_Inventory : MonoBehaviour
                     Debug.LogWarning("돈 없음");
                 }
             }
-            else
+            else// 놓을 수 없다면
             {
                 if (selectSlot == null)
                 {
                     // 낚시 성공등 트레이드가 아닌 경우?
-                    Debug.LogWarning("낚시 성공등 트레이드가 아닌 경우?");
+                    Debug.LogError("낚시 성공등 트레이드가 아닌 경우?");
                 }
                 else
                 {
@@ -291,7 +291,7 @@ public class UI_Inventory : MonoBehaviour
 
             SetOriginItemClass();// 기존 위치 저장
             SetEmptySlot(selectSlot);// 위치 비우기
-            DragSlot();
+            DragSlot();// 드래그 시작
         }
     }
 
@@ -398,9 +398,8 @@ public class UI_Inventory : MonoBehaviour
 
     IEnumerator DragingSlot()
     {
-        Image inst = iconImage;
         iconImage.gameObject.SetActive(true);
-        if (selectSlot != null)
+        if (selectItemClass != null)
         {
             ItemStruct itemStruct = selectItemClass.item;
             SetIconImage(itemStruct);
@@ -408,8 +407,8 @@ public class UI_Inventory : MonoBehaviour
 
         while (onDrag == true)
         {
-            inst.transform.position = Input.mousePosition;
-            inst.transform.rotation = Quaternion.Euler(0f, 0f, selectItemClass.angle);
+            iconImage.transform.position = Input.mousePosition;
+            iconImage.transform.rotation = Quaternion.Euler(0f, 0f, selectItemClass.angle);
             yield return null;
         }
         iconImage.gameObject.SetActive(false);

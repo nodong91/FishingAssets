@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Fishing_Manager : MonoBehaviour
 {
-    public Fishing_Camera fishingCamera;
+    public FishingTest fishingTest;
+    //public Fishing_Camera fishingCamera;
     public enum FishingState
     {
         Ready,
@@ -33,7 +34,9 @@ public class Fishing_Manager : MonoBehaviour
 
     public void SetStart()
     {
-        fishingCamera.OffCamera();
+        fishingTest.OffCamera();
+        fishingTest.deleEndFishing = FishingComplate;
+        //fishingCamera.OffCamera();
 
         fishingHit.SetStart();
         fishingMain.SetStart();
@@ -41,22 +44,21 @@ public class Fishing_Manager : MonoBehaviour
         fishingSubAgility.SetStart();
         fishingSubHealth.SetStart();
     }
-    public FishingTest fishingTest;
+
     public void StartGame(Data_Manager.FishStruct _fishStruct)
     {
         Game_Manager.current.OutOfControll(true);
 
         Transform player = Game_Manager.current.player.transform;
-        fishingCamera.transform.position = player.position;
-        fishingCamera.transform.rotation = player.rotation;
+        fishingTest.transform.position = player.position;
+        fishingTest.transform.rotation = player.rotation;
 
-        fishingCamera.SetCamera();
+        fishingTest.SetCamera();
 
-        fishStruct = _fishStruct;
+        fishStruct = _fishStruct;// 잡힌 물고기
         randomSize = fishStruct.GetRandom();
 
         //StateMachine(FishingState.Hit);
-        fishingTest.SetFishing();
     }
 
     void EndGame(FishingState _fishState)
@@ -140,7 +142,7 @@ public class Fishing_Manager : MonoBehaviour
     void StateReady()
     {
         Game_Manager.current.OutOfControll(false);
-        fishingCamera.OffCamera();
+        fishingTest.OffCamera();
         fishStruct = default;
     }
 
@@ -178,5 +180,24 @@ public class Fishing_Manager : MonoBehaviour
     {
         fishingComplate.SetFish(fishStruct, randomSize);// 물고기 스탯 출력
         StateMachine(FishingState.Ready);
+    }
+
+    void FishingComplate(bool _comp)
+    {
+        if (_comp == true)
+        {
+            Debug.LogError("낚시 성공");
+            fishingComplate.SetFish(fishStruct, randomSize);// 물고기 스탯 출력
+        }
+        else
+        {
+            Debug.LogError("낚시 실패");
+        }
+        inputMouseLeft = null;
+        inputMouseRight = null;
+
+        Game_Manager.current.OutOfControll(false);
+        fishingTest.OffCamera();
+        fishStruct = default;
     }
 }
