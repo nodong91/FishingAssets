@@ -19,7 +19,6 @@ public class UI_Main : MonoBehaviour
     public UI_Status statusUI;
     public Button inventoryButton;
     public Button fishGuideButton;
-    public Button fishingButton;
 
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
 
@@ -31,7 +30,6 @@ public class UI_Main : MonoBehaviour
     {
         inventoryButton.onClick.AddListener(InventoryButton);
         fishGuideButton.onClick.AddListener(FishGuideButton);
-        fishingButton.onClick.AddListener(FishingButton);
 
         SetCameraCanvas();
     }
@@ -43,7 +41,7 @@ public class UI_Main : MonoBehaviour
         cameraCanvas.worldCamera = Game_Manager.current.cameraManager.UICamera;
     }
 
-    void InventoryButton()
+    public void InventoryButton()
     {
         if ((menuState & MenuState.Inventory) == 0)
         {
@@ -70,12 +68,6 @@ public class UI_Main : MonoBehaviour
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
 
-    public void FishingButton()
-    {
-        //string id = "Fs_1001";
-        //Data_Manager.FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];
-        //Game_Manager.current.GetFishing.StartGame(fishStruct);
-    }
     //===========================================================================================================================
     // 경고 문구
     //===========================================================================================================================

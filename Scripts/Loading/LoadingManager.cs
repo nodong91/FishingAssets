@@ -119,7 +119,7 @@ public class LoadingManager : MonoBehaviour
             }
             yield return null;
         }
-        Debug.LogWarning(sceneNames[_index] + asyncOperation[_index].progress);
+        Debug.Log(sceneNames[_index] + asyncOperation[_index].progress);
 
         // 완료 체크
         yield return StartCoroutine(OpenScene(asyncOperation));

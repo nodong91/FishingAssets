@@ -114,7 +114,7 @@ public class UI_Shop : UI_Inventory_Base
         groupToggles[currentIndex].isOn = true;// 첫번째 탭 열기
     }
 
-    public void SetQuestResult(bool _open, ResultStruct _result)
+    public void SetResult(bool _open, ResultStruct _result = default)
     {
         inventoryID = "QuestResult";
         currentIndex = 0;
@@ -123,14 +123,14 @@ public class UI_Shop : UI_Inventory_Base
         layoutGroup.padding.top = 40;
         layoutGroup.padding.bottom = 15;
 
-        slotType = SlotType.QuestResult;
+        slotType = SlotType.Result;
         toggleGroup.gameObject.SetActive(false);
         fixGroup.gameObject.SetActive(false);
 
         if (_open)
         {
             SetShopItem();// 열릴때 세팅
-            SetQuestItem(_result);
+            SetResultItem(_result);
         }
     }
 
@@ -167,7 +167,7 @@ public class UI_Shop : UI_Inventory_Base
                 SetInventoryItem(saveData);
                 break;
 
-            case SlotType.QuestResult:
+            case SlotType.Result:
                 
                 break;
         }
@@ -231,7 +231,7 @@ public class UI_Shop : UI_Inventory_Base
         }
     }
 
-    public void SetQuestItem(ResultStruct _result)// 상점 고정 아이템 세팅
+    public void SetResultItem(ResultStruct _result)// 상점 고정 아이템 세팅
     {
         //for (int i = 0; i < setID.Length; i++)
         //{

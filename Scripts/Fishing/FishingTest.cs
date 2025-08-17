@@ -2,6 +2,8 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
+using static Data_Manager;
+using static Data_Quest;
 
 public class FishingTest : MonoBehaviour
 {
@@ -82,6 +84,11 @@ public class FishingTest : MonoBehaviour
     void ResetFishing()
     {
         setObject.SetActive(true);
+
+        Vector3 tempPoint = Random.insideUnitSphere * fieldRadius;
+        fishPoint = new Vector3(tempPoint.x, 0f, tempPoint.z) + transform.position;
+        fishPrefab.transform.position = fishPoint;
+        catchPrefab.transform.position = transform.position;
 
         catchAmount = 1f;
         fishAmount = 1f;
@@ -170,9 +177,11 @@ public class FishingTest : MonoBehaviour
 
     void FollowHPUI()
     {
-
         followUI.position = Camera.main.WorldToScreenPoint(fishPrefab.transform.position + offset);
     }
+    //==================================================================================================================================
+    // ¾×¼Ç
+    //==================================================================================================================================
 
 #if UNITY_EDITOR
     void OnDrawGizmos()

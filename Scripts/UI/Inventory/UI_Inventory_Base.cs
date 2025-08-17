@@ -13,7 +13,7 @@ public class UI_Inventory_Base : MonoBehaviour
         Shop,
         Shipyard,
         Storage,
-        QuestResult,
+        Result,
         MyBox,
     }
     public SlotType slotType = SlotType.None;

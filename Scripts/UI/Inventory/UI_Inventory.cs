@@ -116,24 +116,35 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void OpenQuestResult(bool _open)
+    public void OpenResult()
     {
         if (resultItem.itemID == null || resultItem.itemID.Length == 0)
             return;
 
-        if (currentType != SlotType.QuestResult)
+        if (currentType != SlotType.Result)
         {
             ResultStruct result = resultItem;
-            currentType = SlotType.QuestResult;
-            myBox.OpenCanvas(_open);
-            shop.SetQuestResult(_open, result);
-
-            resultItem = default; // 퀘스트 결과 아이템 초기화
+            currentType = SlotType.Result;
+            myBox.OpenCanvas(true);
+            shop.SetResult(true, result);
         }
     }
 
+    public void CloseResult()
+    {
+        if (currentType == SlotType.Result)
+        {
+            currentType = SlotType.None;
+            myBox.OpenCanvas(false);
+            shop.SetResult(false);
+
+            resultItem = default; // 퀘스트 결과 아이템 초기화
+        }
+        Game_Manager.current.GetMainUI.OpenCanvas(true);
+    }
+
     ResultStruct resultItem;
-    public void SetQuestResult(ResultStruct _resultItem)
+    public void SetResult(ResultStruct _resultItem)
     {
         // 퀘스트 결과 아이템 세팅
         resultItem = _resultItem;
@@ -450,7 +461,7 @@ public class UI_Inventory : MonoBehaviour
             case SlotType.Shop:
             case SlotType.Shipyard:
             case SlotType.Storage:
-            case SlotType.QuestResult:
+            case SlotType.Result:
                 return shop;
         }
         return null;
@@ -561,13 +572,17 @@ public class UI_Inventory : MonoBehaviour
                 return false;
             checkSlot.Add(_slot.GetLinkSlot);
         }
+        Debug.LogWarning("CheckQuestItem: " + checkSlot.Count + " items found.");
+        return check;
+    }
+
+    public void RemoveQuestItem()
+    {
         // 아이템이 모두 있는 경우
         for (int i = 0; i < checkSlot.Count; i++)
         {
             UI_Inventory_Slot slot = checkSlot[i];
             myBox.SlotEmpty(slot);// 해당 아이템을 비우기
         }
-        Debug.LogWarning("CheckQuestItem: " + checkSlot.Count + " items found.");
-        return check;
     }
 }

@@ -1,9 +1,10 @@
+using NUnit.Framework.Interfaces;
 using System.Collections;
-using UnityEngine;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections.Generic;
 using static Data_Dialog;
 
 public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
@@ -195,8 +196,9 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             rectParent.anchoredPosition = Vector3.Lerp(Vector3.down * 30f, Vector3.zero, normalize);
             yield return null;
         }
+
         // 보상이 있으면 보상 인벤토리 열기
-        Game_Manager.current.GetInventory.OpenQuestResult(true);
+        Game_Manager.current.GetInventory.OpenResult();
     }
 
     void OpenShop()

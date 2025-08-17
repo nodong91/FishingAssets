@@ -95,6 +95,6 @@ public class Title_Manager : MonoBehaviour
 
     void LoadingComplate()
     {
-        Debug.LogWarning("LoadingComplate");
+        Debug.Log("LoadingComplate");
     }
 }

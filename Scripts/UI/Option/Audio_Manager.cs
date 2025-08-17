@@ -73,7 +73,7 @@ public class Audio_Manager : MonoBehaviour
         PlayBGMAudio(index);
     }
 
-    public void PlayBGMAudio(int _index)
+    void PlayBGMAudio(int _index)
     {
         currentAudio = _index;
         audioText.text = audioStrings[_index];

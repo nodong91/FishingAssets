@@ -23,9 +23,7 @@ public class Trigger_Fish : MonoBehaviour
 
     void FishingStart()
     {
-        //string id = "Fs_1001";
-        //Data_Manager.FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];
         triggerSetting.gameObject.SetActive(false);// 트리거 오브젝트 비활성화
-        Game_Manager.current.GetFishing.StartGame(fishStruct);
+        Game_Manager.current.GetFishing.FishingStart(fishStruct);
     }
 }
