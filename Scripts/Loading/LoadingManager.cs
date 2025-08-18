@@ -7,7 +7,6 @@ using UnityEngine.Playables;
 
 public class LoadingManager : MonoBehaviour
 {
-    public int frameRate = 60;
     public string[] currentNames;
     public string[] sceneNames;
     List<AsyncOperation> asyncOperation;
@@ -24,7 +23,6 @@ public class LoadingManager : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = frameRate;
         GoTitle();
     }
 

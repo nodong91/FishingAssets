@@ -121,7 +121,10 @@ public class Option_Manager : MonoBehaviour
     {
         optionData = new Data_Option
         {
-            qualityLevel = QualitySettings.GetQualityLevel(),
+            qualityLevel = qualityManager.qualityDropdown.value,
+            resolutionIndex = qualityManager.resolutionDropdown.value,
+            fullScreen = qualityManager.fullScreenToggle.isOn,
+            frameRateIndex = qualityManager.frameRateDropdown.value,
             audioStruct = new Data_Option.AudioStruct
             {
                 bgmMute = Singleton_Audio.INSTANCE.bgmMute,

@@ -258,7 +258,11 @@ public class Data_Manager : Data_Parse
     [System.Serializable]
     public struct Data_Option
     {
+        public bool fullScreen;
         public int qualityLevel;
+        public int resolutionIndex;
+        public int frameRateIndex;
+
         [System.Serializable]
         public struct AudioStruct
         {

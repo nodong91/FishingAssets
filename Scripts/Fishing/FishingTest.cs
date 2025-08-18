@@ -85,9 +85,7 @@ public class FishingTest : MonoBehaviour
     {
         setObject.SetActive(true);
 
-        Vector3 tempPoint = Random.insideUnitSphere * fieldRadius;
-        fishPoint = new Vector3(tempPoint.x, 0f, tempPoint.z) + transform.position;
-        fishPrefab.transform.position = fishPoint;
+        fishPrefab.transform.position = transform.position;
         catchPrefab.transform.position = transform.position;
 
         catchAmount = 1f;
