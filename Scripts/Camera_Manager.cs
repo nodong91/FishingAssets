@@ -8,6 +8,11 @@ public class Camera_Manager : MonoBehaviour
     public CinemachineCamera cinemachineCamera;
     public Camera UICamera;
     public GameObject focusTarget;
+    public Transform GetFocusTarget
+    {
+        get
+        { return focusTarget.transform; }
+    }
     public Vector3 offset;
     CinemachineRotationComposer rotationComposer;
     CinemachineOrbitalFollow orbitalFollow;

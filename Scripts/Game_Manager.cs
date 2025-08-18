@@ -19,6 +19,8 @@ public class Game_Manager : MonoBehaviour
     public string themeMusic;
     public string oceanSound = "Ocean 02";
 
+    public UI_QuestManager questManager;
+
     public static Game_Manager current;
 
     private void Awake()
@@ -42,7 +44,7 @@ public class Game_Manager : MonoBehaviour
 
     public void InputLeftMouse(bool _input)
     {
-        player.State_Action(_input);
+        GetPlayer.State_Action(_input);
     }
 
     public void InputRightMouse(bool _input)
@@ -53,12 +55,12 @@ public class Game_Manager : MonoBehaviour
     public void PlayerMove()
     {
         controllManager.SetDirection();
-        player.StateMove(controllManager.dirction);
+        GetPlayer.StateMove(controllManager.dirction);
     }
 
     public void PlayerEscape()
     {
-        player.StateEscape();
+        GetPlayer.StateEscape();
     }
 
     public void OutOfControll(bool _isOn)
@@ -71,6 +73,19 @@ public class Game_Manager : MonoBehaviour
     //====================================================================================================================
     // 매니저 가져오기
     //====================================================================================================================
+    private Unit_Player instPlayer;
+    public Unit_Player GetPlayer
+    {
+        get
+        {
+            if (instPlayer == null)
+            {
+                instPlayer = Instantiate(player, transform);
+            }
+            return instPlayer;
+        }
+    }
+
     private UI_Main instMain;
     public UI_Main GetMainUI
     {
@@ -188,6 +203,20 @@ public class Game_Manager : MonoBehaviour
                 instDialog.SetStart();
             }
             return instDialog;
+        }
+    }
+
+    private UI_QuestManager instQuest;
+    public UI_QuestManager GetQuestUI
+    {
+        get
+        {
+            if (instQuest == null)
+            {
+                instQuest = Instantiate(questManager, transform);
+                instQuest.SetStart();
+            }
+            return instQuest;
         }
     }
 }

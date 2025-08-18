@@ -69,7 +69,7 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
             {
                 Debug.Log($"Quest selected: {questData.title}");
 
-                Option_Manager.current.GetQuestManager.ComplateQuest(questData);
+                Game_Manager.current.GetQuestUI.ComplateQuest(questData);
                 Game_Manager.current.GetInventory.SetResult(questData.resultData);// 퀘스트 완료 후 결과 아이템 설정
                 Game_Manager.current.GetInventory.RemoveQuestItem();
 

@@ -136,7 +136,7 @@ public class UI_NewsManager : MonoBehaviour
     void SetQuest()
     {
         Debug.LogError("신문 퀘스트 세팅");
-        Option_Manager.current.GetQuestManager.GetNewspaper(questDatas);
+        Game_Manager.current.GetQuestUI.GetNewspaper(questDatas);
         //Option_Manager.current.GetQuestManager.SetStart();
         //Option_Manager.current.GetQuestManager.OpenQuestCanvas();
     }

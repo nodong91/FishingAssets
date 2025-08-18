@@ -89,9 +89,10 @@ public class UI_QuestManager : MonoBehaviour
         ToggleClick(customButtonList[0]);
     }
 
-    public void OpenManager()
+    public void OpenCanvas(bool _open)
     {
         ToggleClick(customButtonList[0]);
+        Debug.LogWarning($"OpenQuestCanvas : {_open}");
     }
 
     public void AddQuest(Data_Quest _questData)

@@ -11,14 +11,16 @@ public class UI_Main : MonoBehaviour
     {
         Inventory = 1 << 0,
         Fishing = 1 << 1,
-        //Status = 1 << 2,
-
+        Quest = 1 << 2,
+        Option = 1 << 3,
     }
     public MenuState menuState;
     public UI_Time timeUI;
     public UI_Status statusUI;
     public Button inventoryButton;
     public Button fishGuideButton;
+    public Button questButton;
+    public Button optionButton;
 
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
 
@@ -30,6 +32,8 @@ public class UI_Main : MonoBehaviour
     {
         inventoryButton.onClick.AddListener(InventoryButton);
         fishGuideButton.onClick.AddListener(FishGuideButton);
+        questButton.onClick.AddListener(QuestButton);
+        optionButton.onClick.AddListener(OptionButton);
 
         SetCameraCanvas();
     }
@@ -60,6 +64,16 @@ public class UI_Main : MonoBehaviour
     void FishGuideButton()
     {
         Game_Manager.current.GetFishGuide.OpenCanvas(true);
+    }
+
+    void QuestButton()
+    {
+        Game_Manager.current.GetQuestUI.OpenCanvas(true);
+    }
+
+    void OptionButton()
+    {
+        Debug.LogWarning("Option Button Clicked");
     }
 
     public void OpenCanvas(bool _open)

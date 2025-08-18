@@ -17,10 +17,15 @@ public class Unit_Player : MonoBehaviour
 
     public float moveSpeed = 0.01f;
     public Vector2 dirction;
+    Transform FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
 
     private void Start()
     {
         StateMachine(State.Idle);
+        if (FocusTarget == null)
+            return;
+
+        FocusTarget.position = transform.position;
     }
 
     //================================================================================================================================================
@@ -156,11 +161,11 @@ public class Unit_Player : MonoBehaviour
 
     void SetMoving()
     {
-        GameObject focusTarget = Game_Manager.current.cameraManager.focusTarget;
+        //Transform focusTarget = Game_Manager.current.cameraManager.GetFocusTarget;
+        FocusTarget.position = transform.position;
 
-        focusTarget.transform.position = transform.position;
         Vector3 dir = new Vector3(dirction.x, 0f, dirction.y);
-        Vector3 target = transform.position + focusTarget.transform.TransformDirection(dir).normalized;
+        Vector3 target = transform.position + FocusTarget.TransformDirection(dir).normalized;
         //Vector3 target = transform.position + focusTarget.transform.forward;
 
         float speed = moveSpeed * Time.deltaTime;

@@ -54,7 +54,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
         DialogStart(_npc.dataDialogs[0]);
         // 퀘스트가 있는지 확인
-        List<Data_Quest> checkQuests = Option_Manager.current.GetQuestManager.CheckNPC(_npc.npc_ID);
+        List<Data_Quest> checkQuests = Game_Manager.current.GetQuestUI.CheckNPC(_npc.npc_ID);
         // 퀘스트가 있다면 선택지 버튼 생성
         for (int i = 0; i < checkQuests.Count; i++)
         {

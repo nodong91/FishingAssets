@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -20,8 +19,6 @@ public class Option_Manager : MonoBehaviour
 
     public Audio_Manager audioManager;
     public Quality_Manager qualityManager;
-    public UI_QuestManager questManager;
-    public UI_QuestManager GetQuestManager => questManager;
 
     public static Option_Manager current;
 
@@ -37,7 +34,6 @@ public class Option_Manager : MonoBehaviour
 
         audioManager.SetStart();
         qualityManager.SetStart();
-        questManager.SetStart();
 
         closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
         SetToggle();
@@ -52,7 +48,6 @@ public class Option_Manager : MonoBehaviour
         if (_open == true)
         {
             screenStruct[0].toggle.isOn = true;
-            questManager.OpenManager();
         }
     }
 

@@ -56,7 +56,7 @@ public class Title_Manager : MonoBehaviour
     }
 
     [Header(" [ Ship ]")]
-    public Transform player;
+    public Unit_Player player;
     public Transform startPoint, endPoint;
     public float speed = 0.1f;
     public Material reflectionMaterial;
@@ -73,28 +73,41 @@ public class Title_Manager : MonoBehaviour
         Option_Manager.current.SetThemeMusic(titleTheme); // 테마 음악 설정
         while (true)// Loop the movement
         {
-            player.gameObject.SetActive(true);
+            GetPlayer.gameObject.SetActive(true);
             float normalize = 0f;
             while (normalize < 1f)
             {
                 normalize += Time.deltaTime * speed;
-                Vector3 startPosition = new Vector3(startPoint.position.x, player.transform.position.y, startPoint.position.z);
-                Vector3 endPosition = new Vector3(endPoint.position.x, player.transform.position.y, endPoint.position.z);
-                player.transform.position = Vector3.Lerp(startPosition, endPosition, normalize);
+                Vector3 startPosition = new Vector3(startPoint.position.x, GetPlayer.transform.position.y, startPoint.position.z);
+                Vector3 endPosition = new Vector3(endPoint.position.x, GetPlayer.transform.position.y, endPoint.position.z);
+                GetPlayer.transform.position = Vector3.Lerp(startPosition, endPosition, normalize);
                 yield return null;
 
                 string shipPosition = "_ShipPosition";
-                reflectionMaterial.SetVector(shipPosition, player.position);
+                reflectionMaterial.SetVector(shipPosition, GetPlayer.transform.position);
             }
-            player.gameObject.SetActive(false);
+            GetPlayer.gameObject.SetActive(false);
             yield return new WaitForSeconds(1f);
 
-            player.position = startPoint.position;
+            GetPlayer.transform.position = startPoint.position;
         }
     }
 
     void LoadingComplate()
     {
         Debug.Log("LoadingComplate");
+    }
+
+    private Unit_Player instPlayer;
+    public Unit_Player GetPlayer
+    {
+        get
+        {
+            if (instPlayer == null)
+            {
+                instPlayer = Instantiate(player, transform);
+            }
+            return instPlayer;
+        }
     }
 }
