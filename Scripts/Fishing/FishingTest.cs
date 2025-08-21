@@ -3,14 +3,73 @@ using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
-using static Data_Quest;
 
 public class FishingTest : MonoBehaviour
 {
     public CinemachineCamera[] cameraPoint;
     public GameObject setObject;
 
-    public void SetCamera()
+    [Header(" [ Catch ]")]
+    // 원형 바운더리 안에서 랜덤 이동
+    public GameObject catchPrefab;
+    private Vector3 catchPoint = Vector3.zero;
+
+    public float catchRadius = 5f;// 물고기를 잡는 범위
+    private float catchSpeed = 1f;// 낚시대가 물고기를 향해 이동하는 속도
+    public float catchPower = 1f;// 낚시대의 힘
+    public float catchHealth;// 낚시대의 체력
+    private float catchMaxHealth = 10f;// 낚시대의 최대 체력
+    private float catchAttakSpeed = 1.5f;// 물고기를 공격하는 빈도
+    public Image catchImage;
+
+    [Header(" [ Fish ]")]
+    public GameObject fishPrefab;
+    private float randomTime = 0f;
+    private Vector3 fishPoint = Vector3.zero;
+
+    private float fieldRadius = 10f;// 낚시터의 반지름
+    private Vector2 fishRange = new Vector2(0.5f, 1.5f);// 물고기가 방향을 바꾸는 시간 범위
+    private float fishSpeed = 2f;// 물고기가 이동하는 속도
+    public float fishPower = 1f;// 물고기의 힘
+    public float fishHealth;// 물고기의 체력
+    private float fishMaxHealth = 10f;// 물고기의 최대 체력
+    private float fishAttackSpeed = 0.5f; // 물고기가 공격하는 빈도
+    public Image fishImage;
+
+    bool isFishing = false;
+    bool isCatching = false;
+    public Vector3 offset = new Vector3(0f, 0f, 0f);
+
+    public delegate void DeleEndFishing(bool _comp);
+    public DeleEndFishing deleEndFishing;
+
+    private void Start()
+    {
+        catchImage.material = Instantiate(catchImage.material);
+        fishImage.material = Instantiate(fishImage.material);
+    }
+
+    public void SetFishing(FishStruct _fishStruct)
+    {
+        SetFishStruct(_fishStruct);// 물고기 정보 설정
+        ResetFishing();
+
+        SetCamera();
+        StartCoroutine(Fishing());
+        StartCoroutine(FishingDamage());
+    }
+
+    void SetFishStruct(FishStruct _fishStruct)
+    {
+        fishSpeed = _fishStruct.fishSpeed;
+        fishPower = _fishStruct.fishPower;
+        fishMaxHealth = _fishStruct.fishHealth;
+        fieldRadius = _fishStruct.fieldRadius;
+        fishAttackSpeed = _fishStruct.fishAttackSpeed;
+        fishRange = _fishStruct.fishRange;
+    }
+
+    void SetCamera()
     {
         float distance = 10000f;
         Transform cameraPosition = Game_Manager.current.cameraManager.cinemachineCamera.transform;
@@ -26,9 +85,6 @@ public class FishingTest : MonoBehaviour
         }
         closestCamera.gameObject.SetActive(true);
         closestCamera.Follow = catchPrefab.transform;
-
-        transform.position = transform.position;
-        SetFishing();
     }
 
     public void OffCamera()
@@ -39,64 +95,25 @@ public class FishingTest : MonoBehaviour
         }
     }
 
-    public GameObject fishPrefab;
-    // 원형 바운더리 안에서 랜덤 이동
-    // fishPrefab의 위치를 기준으로 반지름 5의 원형 바운더리 안에서 랜덤하게 이동하는 스크립트
-    public GameObject catchPrefab;
-    public float catchRadius = 5f;
-    public float moveSpeed = 2f;
-    private float catchAttakSpeed = 1.5f;// 물고기를 공격하는 빈도
-    private Vector3 catchPoint;
-
-    public float fieldRadius = 10f;
-    private float fishAttackSpeed = 0.5f; // 물고기가 공격하는 빈도
-
-    private float randomTime = 0f;
-    private Vector3 fishPoint = Vector3.zero;
-    private Vector2 fishRange = new Vector2(0.5f, 1.5f);
-    public float fishSpeed = 10f;
-
-    public float catchAmount;
-    public float fishAmount;
-    public Image catchImage, fishImage;
-
-    bool isFishing = false;
-    bool isCatching = false;
-    public RectTransform followUI;
-    public Vector3 offset = new Vector3(0f, 0f, 0f);
-
-    public delegate void DeleEndFishing(bool _comp);
-    public DeleEndFishing deleEndFishing;
-
-    private void Start()
-    {
-        catchImage.material = Instantiate(catchImage.material);
-        fishImage.material = Instantiate(fishImage.material);
-    }
-
-    public void SetFishing()
-    {
-        ResetFishing();
-        StartCoroutine(Fishing());
-        StartCoroutine(FishingDamage());
-    }
-
     void ResetFishing()
     {
         setObject.SetActive(true);
 
+        Transform player = Game_Manager.current.player.transform;
+        transform.SetPositionAndRotation(player.position, player.rotation);
+
         fishPrefab.transform.position = transform.position;
         catchPrefab.transform.position = transform.position;
 
-        catchAmount = 1f;
-        fishAmount = 1f;
-        fishImage.material.SetFloat("_FillAmount", fishAmount);
-        catchImage.material.SetFloat("_FillAmount", catchAmount);
-        isFishing = true;
+        catchHealth = catchMaxHealth;
+        fishHealth = fishMaxHealth;
+        fishImage.material.SetFloat("_FillAmount", fishHealth);
+        catchImage.material.SetFloat("_FillAmount", catchHealth);
     }
 
     IEnumerator Fishing()
     {
+        isFishing = true;
         while (isFishing)
         {
             OnRayCast();
@@ -112,22 +129,22 @@ public class FishingTest : MonoBehaviour
             if (isCatching == true)
             {
                 // 물고기가 잡히는 상태일 때 공격 빈도에 따라 대기
-                fishAmount -= 0.1f;
-                fishImage.material.SetFloat("_FillAmount", fishAmount);
-                if (fishAmount <= 0f)
+                fishHealth -= catchPower;
+                fishImage.material.SetFloat("_FillAmount", fishHealth / fishMaxHealth);
+                if (fishHealth <= 0f)
                 {
-                    FishingComplate(true);
+                    FishingComplate(true);// 성공
                 }
                 yield return new WaitForSeconds(catchAttakSpeed);
             }
             else
             {
                 // 물고기가 공격하는 빈도에 따라 대기
-                catchAmount -= 0.1f;
-                catchImage.material.SetFloat("_FillAmount", catchAmount);
-                if (catchAmount <= 0f)
+                catchHealth -= fishPower;
+                catchImage.material.SetFloat("_FillAmount", catchHealth / catchMaxHealth);
+                if (catchHealth <= 0f)
                 {
-                    FishingComplate(false);
+                    FishingComplate(false);// 실패
                 }
                 yield return new WaitForSeconds(fishAttackSpeed);
             }
@@ -154,7 +171,7 @@ public class FishingTest : MonoBehaviour
             Vector3 direction = offset.normalized;
             catchPoint = transform.position + direction * Mathf.Clamp(offset.magnitude, 0f, fieldRadius);
         }
-        catchPrefab.transform.position = Vector3.Lerp(catchPrefab.transform.position, catchPoint, Time.deltaTime * moveSpeed);
+        catchPrefab.transform.position = Vector3.Lerp(catchPrefab.transform.position, catchPoint, Time.deltaTime * catchSpeed);
     }
 
     void FishMovement()
@@ -175,7 +192,7 @@ public class FishingTest : MonoBehaviour
 
     void FollowHPUI()
     {
-        followUI.position = Camera.main.WorldToScreenPoint(fishPrefab.transform.position + offset);
+        fishImage.rectTransform.position = Camera.main.WorldToScreenPoint(fishPrefab.transform.position + offset);
     }
     //==================================================================================================================================
     // 액션

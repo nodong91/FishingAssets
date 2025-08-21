@@ -16,11 +16,12 @@ public class Game_Manager : MonoBehaviour
     public UI_NewsManager newsUI;
     public Fishing_Manager fishingManager;
     public FishGuide fishGuide;
+    public Skill_Manager skillManager;
     public string themeMusic;
     public string oceanSound = "Ocean 02";
 
     public UI_QuestManager questManager;
-
+    public Data_Manager.SetStatus Status => GetSkill.setStatus;
     public static Game_Manager current;
 
     private void Awake()
@@ -203,6 +204,20 @@ public class Game_Manager : MonoBehaviour
                 instDialog.SetStart();
             }
             return instDialog;
+        }
+    }
+
+    private Skill_Manager instSkill;
+    public Skill_Manager GetSkill
+    {
+        get
+        {
+            if (instSkill == null)
+            {
+                instSkill = Instantiate(skillManager, transform);
+                instSkill.SetStart();
+            }
+            return instSkill;
         }
     }
 

@@ -291,9 +291,297 @@ MonoBehaviour:
   - id: Fs_1001
     itemStruct:
       id: Fs_1001
-      name: Pale Chub
+      name: Herring
       itemType: 1
-      explanation: 
+      explanation: "\uCCAD\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.2
+      price: 200
+    fishType: 1
+    size: {x: 10, y: 20}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1002
+    itemStruct:
+      id: Fs_1002
+      name: Rockfish
+      itemType: 1
+      explanation: "\uBCFC\uB77D"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.2
+      price: 280
+    fishType: 0
+    size: {x: 20, y: 45}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 4}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1003
+    itemStruct:
+      id: Fs_1003
+      name: Mackerel
+      itemType: 1
+      explanation: "\uACE0\uB4F1\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.2
+      price: 250
+    fishType: 2
+    size: {x: 30, y: 50}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 0.3, y: 1.5}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1004
+    itemStruct:
+      id: Fs_1004
+      name: Horse Mackerel
+      itemType: 1
+      explanation: "\uC804\uAC31\uC774"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.2
+      price: 180
+    fishType: 1
+    size: {x: 15, y: 30}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1005
+    itemStruct:
+      id: Fs_1005
+      name: Sea Bass
+      itemType: 1
+      explanation: "\uB18D\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.6
+      price: 600
+    fishType: 0
+    size: {x: 50, y: 100}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1006
+    itemStruct:
+      id: Fs_1006
+      name: Red Sea Bream
+      itemType: 1
+      explanation: "\uCC38\uB3D4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.4
+      price: 500
+    fishType: 0
+    size: {x: 40, y: 80}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1007
+    itemStruct:
+      id: Fs_1007
+      name: Black Sea Bream
+      itemType: 1
+      explanation: "\uAC10\uC131\uB3D4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.4
+      price: 450
+    fishType: 0
+    size: {x: 30, y: 60}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1008
+    itemStruct:
+      id: Fs_1008
+      name: Flounder
+      itemType: 1
+      explanation: "\uAD11\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.4
+      price: 550
+    fishType: 2
+    size: {x: 30, y: 70}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1009
+    itemStruct:
+      id: Fs_1009
+      name: Striped Beakfish
+      itemType: 1
+      explanation: "\uB3CC\uB3D4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.4
+      price: 400
+    fishType: 0
+    size: {x: 25, y: 50}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1010
+    itemStruct:
+      id: Fs_1010
+      name: Mullet
+      itemType: 1
+      explanation: "\uC22D\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.8
+      price: 350
+    fishType: 2
+    size: {x: 45, y: 90}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1011
+    itemStruct:
+      id: Fs_1011
+      name: Old Tire
+      itemType: 1
+      explanation: "\uB0A1\uC740 \uD0C0\uC774\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 1.2
+      price: 10
+    fishType: 0
+    size: {x: 8, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1012
+    itemStruct:
+      id: Fs_1012
+      name: Plastic Bottle
+      itemType: 1
+      explanation: "\uD398\uD2B8\uBCD1"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.2
+      price: 5
+    fishType: 1
+    size: {x: 3, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1013
+    itemStruct:
+      id: Fs_1013
+      name: Rusty Can
+      itemType: 1
+      explanation: "\uB179\uC2A8 \uAE61\uD1B5"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
       maxAmount: 1
       shape:
@@ -302,62 +590,688 @@ MonoBehaviour:
       iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
       weight: 0.2
       price: 15
-    fishType: 0
-    size: {x: 10, y: 20}
+    fishType: 1
+    size: {x: 2, y: 0}
     freshness: 0
-    fishStamina: 100
-    fishPower: 0.1
-    fishROA: 90
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
     fishSpeed: 1
-    fishTurnDelay: {x: 1, y: 3}
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1014
+    itemStruct:
+      id: Fs_1014
+      name: Scrap Wood
+      itemType: 1
+      explanation: "\uD3D0\uBAA9\uC7AC"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.5
+      price: 20
+    fishType: 2
+    size: {x: 6, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_1015
+    itemStruct:
+      id: Fs_1015
+      name: Common Engine Parts
+      itemType: 1
+      explanation: "\uC77C\uBC18 \uC5D4\uC9C4 \uC7AC\uB8CC"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 1.5
+      price: 500
+    fishType: 0
+    size: {x: 10, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
     hitValue: {x: 0.1, y: 0.5}
   - id: Fs_2001
     itemStruct:
       id: Fs_2001
-      name: Bass
+      name: Yellowtail
       itemType: 1
-      explanation: 
-      icon: {fileID: 21300000, guid: 7bf99e228d7913249bf876e02713a33d, type: 3}
+      explanation: "\uBC29\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 1.2
+      price: 3000
+    fishType: 2
+    size: {x: 60, y: 120}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2002
+    itemStruct:
+      id: Fs_2002
+      name: Sevenband Grouper
+      itemType: 1
+      explanation: "\uB2A5\uC131\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 1
+      price: 3500
+    fishType: 0
+    size: {x: 50, y: 100}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2003
+    itemStruct:
+      id: Fs_2003
+      name: Giant Sea Bass
+      itemType: 1
+      explanation: "\uB3D7\uB3D4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.6
+      price: 5000
+    fishType: 0
+    size: {x: 100, y: 180}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2004
+    itemStruct:
+      id: Fs_2004
+      name: Octopus
+      itemType: 1
+      explanation: "\uBB38\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 1
+      price: 3000
+    fishType: 1
+    size: {x: 150, y: 250}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2005
+    itemStruct:
+      id: Fs_2005
+      name: Amberjack
+      itemType: 1
+      explanation: "\uBD80\uC2DC\uB9AC"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 1.5
+      price: 4000
+    fishType: 0
+    size: {x: 80, y: 150}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2006
+    itemStruct:
+      id: Fs_2006
+      name: Spotted Grouper
+      itemType: 1
+      explanation: "\uC790\uBC14\uB9AC"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 1.2
+      price: 4500
+    fishType: 2
+    size: {x: 70, y: 130}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2007
+    itemStruct:
+      id: Fs_2007
+      name: Tiger Puffer
+      itemType: 1
+      explanation: "\uD669\uBCF5\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.5
+      price: 1000
+    fishType: 2
+    size: {x: 20, y: 40}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2008
+    itemStruct:
+      id: Fs_2008
+      name: Ocean Sunfish
+      itemType: 1
+      explanation: "\uAC1C\uBCF5\uCE58"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
       maxAmount: 1
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
       iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
       weight: 2
-      price: 130
-    fishType: 1
-    size: {x: 40, y: 60}
+      price: 6000
+    fishType: 0
+    size: {x: 150, y: 250}
     freshness: 0
-    fishStamina: 100
-    fishPower: 0.1
-    fishROA: 120
-    fishSpeed: 0.5
-    fishTurnDelay: {x: 1, y: 4}
-    hitValue: {x: 0.03, y: 0.6}
-  - id: Fs_3001
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2009
     itemStruct:
-      id: Fs_3001
-      name: Gobiidae
+      id: Fs_2009
+      name: Tuna
       itemType: 1
-      explanation: 
-      icon: {fileID: 21300000, guid: b8dc588068be4db419bb46792dc7db96, type: 3}
+      explanation: "\uCC38\uCE58"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
       maxAmount: 1
       shape:
       - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 0, y: -1}
-      iconSize: {x: 3, y: 2, z: 0.25, w: 0.5}
-      weight: 1
-      price: 70
-    fishType: 2
-    size: {x: 40, y: 50}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 2
+      price: 10000
+    fishType: 0
+    size: {x: 200, y: 400}
     freshness: 0
-    fishStamina: 100
-    fishPower: 0.1
-    fishROA: 50
-    fishSpeed: 2
-    fishTurnDelay: {x: 0.3, y: 1.5}
-    hitValue: {x: 0.05, y: 0.7}
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2010
+    itemStruct:
+      id: Fs_2010
+      name: Swordfish
+      itemType: 1
+      explanation: "\uD669\uC0C8\uCE58"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 2.4
+      price: 12000
+    fishType: 1
+    size: {x: 250, y: 500}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2011
+    itemStruct:
+      id: Fs_2011
+      name: Old Net
+      itemType: 1
+      explanation: "\uB0A1\uC740 \uADF8\uBB3C"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.5
+      price: 50
+    fishType: 2
+    size: {x: 10, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2012
+    itemStruct:
+      id: Fs_2012
+      name: Broken Bottle
+      itemType: 1
+      explanation: "\uAE68\uC9C4 \uBCD1"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.1
+      price: 40
+    fishType: 1
+    size: {x: 2, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2013
+    itemStruct:
+      id: Fs_2013
+      name: Seaweed
+      itemType: 1
+      explanation: "\uD574\uCD08"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.1
+      price: 30
+    fishType: 2
+    size: {x: 4, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2014
+    itemStruct:
+      id: Fs_2014
+      name: Rebar Piece
+      itemType: 1
+      explanation: "\uCCA0\uC870\uAC01"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.2
+      price: 60
+    fishType: 0
+    size: {x: 2, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_2015
+    itemStruct:
+      id: Fs_2015
+      name: Advanced Engine Parts
+      itemType: 1
+      explanation: "\uACE0\uAE09 \uC5D4\uC9C4 \uC7AC\uB8CC"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 2
+      price: 2000
+    fishType: 0
+    size: {x: 10, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_3001
+    itemStruct:
+      id: Fs_3001
+      name: Sturgeon
+      itemType: 1
+      explanation: "\uCCA0\uAC11\uC0C1\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 2.5
+      price: 20000
+    fishType: 0
+    size: {x: 150, y: 300}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_3002
+    itemStruct:
+      id: Fs_3002
+      name: Grouper
+      itemType: 1
+      explanation: "\uB2E4\uAE08\uBC14\uB9AC"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 1.5
+      price: 30000
+    fishType: 1
+    size: {x: 80, y: 150}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_3003
+    itemStruct:
+      id: Fs_3003
+      name: Marlin
+      itemType: 1
+      explanation: "\uCCAD\uC0C8\uCE58"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 2.5
+      price: 35000
+    fishType: 2
+    size: {x: 300, y: 600}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_3004
+    itemStruct:
+      id: Fs_3004
+      name: Giant Squid
+      itemType: 1
+      explanation: "\uB300\uC655 \uC624\uC9D5\uC5B4"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 5
+      price: 40000
+    fishType: 2
+    size: {x: 500, y: 1000}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_3005
+    itemStruct:
+      id: Fs_3005
+      name: Dolphin Fish
+      itemType: 1
+      explanation: "\uB9CC\uC0C8\uAE30"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 3
+      price: 40000
+    fishType: 0
+    size: {x: 100, y: 180}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_3006
+    itemStruct:
+      id: Fs_3006
+      name: Discarded Pad
+      itemType: 1
+      explanation: "\uBC84\uB824\uC9C4 \uD328\uB4DC"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.4
+      price: 200
+    fishType: 1
+    size: {x: 3, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_3007
+    itemStruct:
+      id: Fs_3007
+      name: Discarded Phone
+      itemType: 1
+      explanation: "\uBC84\uB824\uC9C4 \uD3F0"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 0.2
+      price: 500
+    fishType: 1
+    size: {x: 1, y: 5}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_3008
+    itemStruct:
+      id: Fs_3008
+      name: Rare Engine Parts
+      itemType: 1
+      explanation: "\uD76C\uADC0 \uC5D4\uC9C4 \uC7AC\uB8CC"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 2.5
+      price: 10000
+    fishType: 0
+    size: {x: 10, y: 0}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_4001
+    itemStruct:
+      id: Fs_4001
+      name: Great White Shark
+      itemType: 1
+      explanation: "\uBC31\uC0C1\uC544\uB9AC"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 7
+      price: 100000
+    fishType: 0
+    size: {x: 600, y: 1200}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_4002
+    itemStruct:
+      id: Fs_4002
+      name: Ancient Arapaima
+      itemType: 1
+      explanation: "\uACE0\uB300 \uD53C\uB77C\uB8E8\uCFE0"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 9
+      price: 200000
+    fishType: 2
+    size: {x: 400, y: 800}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
+  - id: Fs_4003
+    itemStruct:
+      id: Fs_4003
+      name: The King of the Deep
+      itemType: 1
+      explanation: "\uC2EC\uD574\uC758 \uC655"
+      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
+      maxAmount: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 10
+      price: 300000
+    fishType: 0
+    size: {x: 700, y: 1500}
+    freshness: 0
+    fishHealth: 10
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 1, y: 3}
+    hitValue: {x: 0.1, y: 0.5}
   partsStruct:
   - id: Pt_1001
     name: Boat

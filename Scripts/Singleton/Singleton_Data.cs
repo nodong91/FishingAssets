@@ -11,8 +11,6 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     //public Dictionary<string, Skill_Set> Dict_SkillSet = new Dictionary<string, Skill_Set>();
     //public Translation translation;
     public Dictionary<string, FishStruct> Dict_Fish = new Dictionary<string, FishStruct>();
-    public Dictionary<string, PartsStruct> Dict_Parts = new Dictionary<string, PartsStruct>();
-    public Dictionary<string, EquipStruct> Dict_Equip = new Dictionary<string, EquipStruct>();
     public Dictionary<string, UsedStruct> Dict_Used = new Dictionary<string, UsedStruct>();
     public Dictionary<string, ItemStruct> Dict_Item = new Dictionary<string, ItemStruct>();
 
@@ -92,23 +90,6 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     //    return Dict_Temp;
     //}
 
-    public void SetDictionary_Equip(List<EquipStruct> _data)
-    {
-        Dict_Equip = new Dictionary<string, EquipStruct>();
-        for (int i = 0; i < _data.Count; i++)
-        {
-            string id = _data[i].itemStruct.id;
-            if (Dict_Equip.ContainsKey(id) == true)
-            {
-                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
-            }
-            else
-            {
-                Dict_Equip[id] = _data[i];
-            }
-        }
-    }
-
     public void SetDictionary_Used(List<UsedStruct> _data)
     {
         Dict_Used = new Dictionary<string, UsedStruct>();
@@ -143,23 +124,6 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         }
     }
 
-    public void SetDictionary_Parts(List<PartsStruct> _data)
-    {
-        Dict_Parts = new Dictionary<string, PartsStruct>();
-        for (int i = 0; i < _data.Count; i++)
-        {
-            string id = _data[i].id;
-            if (Dict_Parts.ContainsKey(id) == true)
-            {
-                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
-            }
-            else
-            {
-                Dict_Parts[id] = _data[i];
-            }
-        }
-    }
-
     public void SetDictionary_Item(List<ItemStruct> _data)
     {
         Dict_Item = new Dictionary<string, ItemStruct>();
@@ -182,10 +146,6 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         if (_id.Contains("Fs"))
         {
             return Dict_Fish[_id].itemStruct;
-        }
-        else if (_id.Contains("Eq"))
-        {
-            return Dict_Equip[_id].itemStruct;
         }
         else if (_id.Contains("Us"))
         {

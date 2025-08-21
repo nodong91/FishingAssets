@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UI_QuestManager : MonoBehaviour
 {
+    public Data_Quest[] questDataTest;
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public Dictionary<string, List<Data_Quest>> questDictionary = new Dictionary<string, List<Data_Quest>>();
 
     [System.Serializable]
@@ -31,17 +33,42 @@ public class UI_QuestManager : MonoBehaviour
             isComplate = true;
         }
     }
-    public List<CustomButtonStruct> customButtonList = new List<CustomButtonStruct>();
+    private List<CustomButtonStruct> customButtonList = new List<CustomButtonStruct>();
     public RectTransform questParent;
     public Custom_Button questButtonPrefab;
-    public Data_Quest[] questDataTest;
+    public Custom_Button closeButton;
 
     [Header("Quest List")]
-    public List<Data_Quest> questList = new List<Data_Quest>();
-    public List<Data_Quest> complateList = new List<Data_Quest>();
+    private List<Data_Quest> questList = new List<Data_Quest>();
+    private List<Data_Quest> complateList = new List<Data_Quest>();
     private Queue<CustomButtonStruct> toggleQueue = new Queue<CustomButtonStruct>();
     CustomButtonStruct currentButton;
     public TMP_Text questInfoText;
+
+    public void SetStart()
+    {
+        // 초기화
+        questDictionary.Clear();
+        for (int i = 0; i < questDataTest.Length; i++)
+        {
+            Data_Quest quest = questDataTest[i];
+            int index = i;
+            AddQuest(quest);
+        }
+        closeButton.SetButton(delegate { OpenCanvas(false); });
+        ToggleClick(customButtonList[0]);
+    }
+
+    public void OpenCanvas(bool _open)
+    {
+        if (_open)
+        {
+            ToggleClick(customButtonList[0]);
+            StaticOpenCanvas.deleEndOpen = null;
+        }
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+        Debug.LogWarning($"OpenQuestCanvas : {_open}");
+    }
 
     void ToggleClick(CustomButtonStruct _customToggle)
     {
@@ -74,25 +101,6 @@ public class UI_QuestManager : MonoBehaviour
         Custom_Button toggle = Instantiate(questButtonPrefab, questParent);
         CustomButtonStruct customButton = new CustomButtonStruct(toggle);
         return customButton;
-    }
-
-    public void SetStart()
-    {
-        // 초기화
-        questDictionary.Clear();
-        for (int i = 0; i < questDataTest.Length; i++)
-        {
-            Data_Quest quest = questDataTest[i];
-            int index = i;
-            AddQuest(quest);
-        }
-        ToggleClick(customButtonList[0]);
-    }
-
-    public void OpenCanvas(bool _open)
-    {
-        ToggleClick(customButtonList[0]);
-        Debug.LogWarning($"OpenQuestCanvas : {_open}");
     }
 
     public void AddQuest(Data_Quest _questData)
@@ -188,7 +196,7 @@ public class UI_QuestManager : MonoBehaviour
         // 퀘스트가 있는지 확인
         string questInfo = $"{_quest.questData.title} : {_quest.questData.npc_ID}\n완료? ({_quest.isComplate})";
         questInfo += $"\n\n{_quest.questData.description}";
-        if(_quest.questData.needItems != null)
+        if (_quest.questData.needItems != null)
         {
             questInfo += $"\n\n필요한 아이템 : ";
             for (int i = 0; i < _quest.questData.needItems.Length; i++)

@@ -1,7 +1,7 @@
 using UnityEngine;
-using NUnit.Framework;
+using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Collections;
+using static Data_Manager;
 
 
 
@@ -35,49 +35,50 @@ public class Skill_Manager : MonoBehaviour
     public RectTransform slotParent;
     public Skill_Slot slot;
     public Vector2Int skillMap;
+    public float slotSize = 50f; // Size of each skill slot
     public RectTransform instParent;
     public Canvas canvas;
 
     public Skill_Slot startSlot;
     public Skill_Slot[,] allSlot;
 
+    // 스탯 추가
+    public Data_Manager.SetStatus defaultStatus, addStatus, setStatus;// 기본 스탯
+    public List<Vector2Int> enableSlotLIst = new List<Vector2Int>();// 활성화된 슬롯 리스트
+
+    private void Start()
+    {
+        UpdateData();
+    }
+
+    public void SetStart()
+    {
+        UpdateData();
+    }
+
     public void UpdateData()
     {
         SetParent();
-
         allSlot = new Skill_Slot[skillMap.x, skillMap.y];
         for (int y = 0; y < skillMap.y; y++)
         {
             for (int x = 0; x < skillMap.x; x++)
             {
                 Skill_Slot inst = Instantiate(slot, instParent);
-                inst.rect.anchoredPosition = new Vector2(x, y) * 60f;
                 inst.slotNode = new Vector2Int(x, y);
                 inst.name = inst.slotNode.ToString();
                 inst.hide = true;
+                inst.deleSlotAction = AddSlot;
+                inst.SetStart();
+                inst.SetNearBySlot(skillMap);   // 근처 슬롯 설정
                 allSlot[x, y] = inst;
             }
         }
+        startSlot = allSlot[skillMap.x / 2, skillMap.y / 2];
 
-        foreach (Skill_Slot slot in allSlot)
-        {
-            for (int y = -1; y <= 1; y++)
-            {
-                for (int x = -1; x <= 1; x++)
-                {
-                    if (x == 0 && y == 0)
-                        continue;
-
-                    int slotX = x + slot.slotNode.x;
-                    int slotY = y + slot.slotNode.y;
-                    if (slotX >= 0 && slotX < skillMap.x && slotY >= 0 && slotY < skillMap.y)
-                    {
-                        if (x == 0 || y == 0)
-                            slot.nearbySlot.Add(allSlot[slotX, slotY]);
-                    }
-                }
-            }
-        }
+        startSlot.startSlot = true;
+        startSlot.hide = false;
+        startSlot.boxImage.gameObject.SetActive(true);
     }
 
     void SetParent()
@@ -89,19 +90,74 @@ public class Skill_Manager : MonoBehaviour
         instParent.SetParent(slotParent);
         instParent.anchoredPosition = Vector2.zero;
         instParent.localScale = Vector2.one;
+        SetGrid();
     }
 
-    void Start()
+    void SetGrid()
     {
-        StartCoroutine(iejfjejf());
+        GridLayoutGroup grid = instParent.gameObject.AddComponent<GridLayoutGroup>();
+        grid.cellSize = Vector2.one * slotSize;
+        grid.spacing = Vector2.one * slotSize * 0.1f;
+        grid.startCorner = GridLayoutGroup.Corner.UpperLeft;
+        grid.startAxis = GridLayoutGroup.Axis.Horizontal;
+        grid.childAlignment = TextAnchor.UpperLeft;
+        grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+        grid.constraintCount = skillMap.x;
     }
 
-    IEnumerator iejfjejf()
+    public void AddSlot(Vector2Int _addNode)// 스킬 슬롯 추가
     {
-        yield return null;
-        startSlot.startSlot = true;
-        startSlot.hide = false;
-        startSlot.boxImage.gameObject.SetActive(true);
-        //startSlot.CheckNearbySlot();
+        enableSlotLIst.Add(_addNode);
+        Skill_Slot slot = allSlot[_addNode.x, _addNode.y];
+        for (int i = 0; i < slot.nearbySlot.Count; i++)// 주변 슬롯 열기
+        {
+            Skill_Slot near = allSlot[slot.nearbySlot[i].x, slot.nearbySlot[i].y];
+            near.SetHide(false);
+        }
+        AddStatuts(slot.statusList);
+
+        setStatus.SettingStatus(defaultStatus);
+        setStatus.AddStatus(addStatus);
+    }
+
+    void AddStatuts(StatusStruct _status)
+    {
+        for(int i = 0; i < _status.setStatus.Count; i++)
+        {
+            Debug.LogWarning($"{_status.setStatus} {_status.setStatus[i].value}");
+            switch (_status.setStatus[i].statusType)
+            {
+                case StatusStruct.StatusType.CatchRadius:
+                    addStatus.catchRadius += _status.setStatus[i].value;
+                    break;
+                case StatusStruct.StatusType.CatchSpeed:
+                    addStatus.catchSpeed += _status.setStatus[i].value;
+                    break;
+                case StatusStruct.StatusType.CatchPower:
+                    addStatus.catchPower += _status.setStatus[i].value;
+                    break;
+                case StatusStruct.StatusType.CatchHealth:
+                    addStatus.catchHealth += _status.setStatus[i].value;
+                    break;
+                case StatusStruct.StatusType.CatchAttakSpeed:
+                    addStatus.catchAttakSpeed += _status.setStatus[i].value;
+                    break;
+                case StatusStruct.StatusType.ShipSpeed:
+                    addStatus.shipSpeed += _status.setStatus[i].value;
+                    break;
+                case StatusStruct.StatusType.MaxWeight:
+                    addStatus.maxWeight += _status.setStatus[i].value;
+                    break;
+                case StatusStruct.StatusType.MaxEnergy:
+                    addStatus.maxEnergy += _status.setStatus[i].value;
+                    break;
+                case StatusStruct.StatusType.MaxBoxSize:
+                    addStatus.maxBoxSize += new Vector2Int((int)_status.setStatus[i].value, (int)_status.setStatus[i].value);
+                    break;
+                case StatusStruct.StatusType.Freshness:
+                    addStatus.freshness += _status.setStatus[i].value;
+                    break;
+            }
+        }
     }
 }

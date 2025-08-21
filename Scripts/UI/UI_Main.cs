@@ -73,6 +73,7 @@ public class UI_Main : MonoBehaviour
 
     void OptionButton()
     {
+        Option_Manager.current.OpenCanvas(true);
         Debug.LogWarning("Option Button Clicked");
     }
 

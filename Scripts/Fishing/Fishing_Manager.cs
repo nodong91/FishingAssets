@@ -3,56 +3,85 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
 using static Data_Quest;
-//using static Data_Manager;
 
 public class Fishing_Manager : MonoBehaviour
 {
     public FishingTest fishingTest;
-    //public Fishing_Camera fishingCamera;
-    public enum FishingState
+    private FishingTest instFishing;
+    public FishingTest GetFishingTest
     {
-        Ready,
-        Hit,
-        Main,
-        Sub,
-        Complate
+        get
+        {
+            if (instFishing == null)
+            {
+                instFishing = Instantiate(fishingTest, transform);
+            }
+            return instFishing;
+        }
     }
-    public FishingState state;
+
     public FishStruct fishStruct;
     public FishStruct.RandomSize randomSize;
 
-    public delegate void DeleInputMouse(bool _input);
-    public DeleInputMouse inputMouseLeft;
-    public DeleInputMouse inputMouseRight;
-    // 순서
-    // 히트 - 파이트 - 릴링 - 파이트 - 릴링 - 물고기 체력방전 시 캐치, 줄이 못버티면 놓침
-    // 파이트 - 성공 (물고기 체력), 실패 (줄 타격)
-    // 릴링 - 지속적으로 물고기 체력 타격
-    // 릴링 시 물고기가 공격할 때(색이 변하던가 해서 알려줘야) 영역안에 들어가 있으면 줄 타격 (너무 영역이 크면 빠져나가기 힘들게)
-
     public void SetStart()
     {
-        fishingTest.OffCamera();
-        fishingTest.deleEndFishing = FishingComplate;
+        GetFishingTest.OffCamera();
+        GetFishingTest.deleEndFishing = FishingComplate;
 
         SetComplate();
+    }
+    //==================================================================================================================================
+    FishStruct[] fishStructs;
+    int fishingAmount; // 낚시 횟수
+    public void SetFishingStart(FishStruct[] _fishStructs, int _fishingAmount)
+    {
+        // 낚시 시작
+        fishStructs = _fishStructs;
+        fishingAmount = _fishingAmount;
+        FishingStart();
+    }
+
+    void FishingStart()
+    {
+        fishingAmount--;
+        if (fishingAmount > 0)
+        {
+            startButton.gameObject.SetActive(true); // 버튼 활성화
+        }
+        else
+        {
+            startButton.gameObject.SetActive(false); // 버튼 비활성화
+            Debug.LogWarning("낚시 횟수가 0 이하입니다.");
+        }
+
+        //if (fishStructs.Length > 0)
+        //{
+        //FishStruct randomFish = fishStructs[Random.Range(0, fishStructs.Length)];
+        //FishingStart(randomFish);// 랜덤 물고기로 낚시 시작
+        fishStruct = Singleton_Data.INSTANCE.Dict_Fish["Fs_1001"];
+        GetFishingTest.SetFishing(fishStruct);// 낚시 시작
+        randomSize = fishStruct.GetRandom();
+
+        Option_Manager.current.SetThemeMusic("Battle");
+        Game_Manager.current.GetMainUI.OpenCanvas(false);
+        Game_Manager.current.OutOfControll(true);
+        //}
+        //else
+        //{
+        //    Debug.LogError("낚시할 물고기가 없습니다.");
+        //}
     }
 
     public void FishingStart(FishStruct _fishStruct)
     {
-        Game_Manager.current.GetMainUI.OpenCanvas(false);
+        fishStruct = _fishStruct;// 물고기 정보
+        randomSize = fishStruct.GetRandom();
 
         Option_Manager.current.SetThemeMusic("Battle");
+        Game_Manager.current.GetMainUI.OpenCanvas(false);
         Game_Manager.current.OutOfControll(true);
 
-        Transform player = Game_Manager.current.player.transform;
-        fishingTest.transform.position = player.position;
-        fishingTest.transform.rotation = player.rotation;
-
-        fishingTest.SetCamera();
-
-        fishStruct = _fishStruct;// 잡힌 물고기
-        randomSize = fishStruct.GetRandom();
+        GetFishingTest.SetFishing(_fishStruct);// 낚시 시작
     }
 
     void FishingComplate(bool _comp)
@@ -60,12 +89,11 @@ public class Fishing_Manager : MonoBehaviour
         if (_comp == true)
         {
             Debug.LogError("낚시 성공");
-            SetFish(fishStruct, randomSize);// 물고기 스탯 출력
+            SetFish();// 물고기 스탯 출력
         }
         else
         {
             Debug.LogError("낚시 실패");
-            EndFishing();
         }
         Option_Manager.current.SetThemeMusic(null);// 테마 음악 초기화
     }
@@ -75,11 +103,8 @@ public class Fishing_Manager : MonoBehaviour
         Game_Manager.current.GetInventory.CloseResult();
         Game_Manager.current.GetMainUI.OpenCanvas(true);// 메인 UI 다시 열기
 
-        inputMouseLeft = null;
-        inputMouseRight = null;
-
         Game_Manager.current.OutOfControll(false);// 게임 컨트롤 가능
-        fishingTest.OffCamera();// 카메라 꺼짐
+        GetFishingTest.OffCamera();// 카메라 꺼짐
         fishStruct = default;
     }
 
@@ -89,19 +114,18 @@ public class Fishing_Manager : MonoBehaviour
 
     public GameObject fishInfomation;
     public Button closeButton;
-    public Button resultButton; // 결과 버튼 (필요시 사용)
+    public Button startButton, resultButton; // 결과 버튼 (필요시 사용)
 
     void SetComplate()
     {
         fishInfomation.gameObject.SetActive(false);
         closeButton.onClick.AddListener(CloseButton);
+        startButton.onClick.AddListener(FishingStart);
         resultButton.onClick.AddListener(ResultButton);
     }
 
-    public void SetFish(FishStruct _fishStruct, FishStruct.RandomSize _randomSize)
+    public void SetFish()// 낚시 성공 후 물고기 정보 설정
     {
-        fishStruct = _fishStruct;
-        randomSize = _randomSize;
         StartCoroutine(SetDisplaying());
     }
 

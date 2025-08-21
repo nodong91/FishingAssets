@@ -229,7 +229,7 @@ public class Unit_Player : MonoBehaviour
         {
             if (closestTarget != null)
             {
-                closestTarget.TriggerAction();
+                closestTarget.TriggerAction();// 가까운 트리거 액션
                 triggerGameObject.Remove(closestTarget);
                 closestTarget = null;
                 Game_Manager.current.GetFollow.AddClosestTarget(null);// 팔로우 유아이 제거

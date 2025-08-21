@@ -44,14 +44,6 @@ public class Data_Manager : Data_Parse
             {
                 SetFish(GetCSV_Data[i]);
             }
-            else if (csv_Type.Contains("Parts"))
-            {
-                SetParts(GetCSV_Data[i]);
-            }
-            else if (csv_Type.Contains("Equip"))
-            {
-                SetEquip(GetCSV_Data[i]);
-            }
             else if (csv_Type.Contains("Used"))
             {
                 SetUsed(GetCSV_Data[i]);
@@ -82,38 +74,15 @@ public class Data_Manager : Data_Parse
                 itemStruct = tempItem,
                 fishType = (FishStruct.FishType)System.Enum.Parse(typeof(FishStruct.FishType), elements[8]),
                 size = Parse_Vector2(elements[9]),
-                fishStamina = Parse_Float(elements[10]),
+                fishHealth = Parse_Float(elements[10]),
                 fishPower = Parse_Float(elements[11]),
-                fishROA = Parse_Float(elements[12]),
+                fieldRadius = Parse_Float(elements[12]),
                 fishSpeed = Parse_Float(elements[13]),
-                fishTurnDelay = Parse_Vector2(elements[14]),
-                hitValue = Parse_Vector2(elements[15]),
+                fishAttackSpeed = Parse_Float(elements[14]),
+                fishRange = Parse_Vector2(elements[15]),
+                hitValue = Parse_Vector2(elements[16]),
             };
             fishStruct.Add(tempData);
-        }
-    }
-
-    void SetEquip(TextAsset _textAsset)
-    {
-        equipStruct.Clear();
-        string[] data = _textAsset.text.Split(new char[] { '\n' });
-        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
-        {
-            string[] elements = data[i].Split(new char[] { ',' });
-            ItemStruct tempItem = GetItemStruct(elements);
-            tempItem.itemType = ItemStruct.ItemType.Equip;// 타입 세팅
-            EquipStruct tempData = new EquipStruct
-            {
-                id = tempItem.id,
-                itemStruct = tempItem,
-                fishingArea = Parse_Float(elements[8]),
-                lodPower = Parse_Float(elements[9]),
-                reelingSpeed = Parse_Float(elements[10]),
-                reelingAcceleration = Parse_Float(elements[11]),
-                hitPoint = Parse_Float(elements[12]),
-                hitSpeed = Parse_Float(elements[13]),
-            };
-            equipStruct.Add(tempData);
         }
     }
 
@@ -177,33 +146,6 @@ public class Data_Manager : Data_Parse
         return temp;
     }
 
-    void SetParts(TextAsset _textAsset)
-    {
-        partsStruct.Clear();
-        string[] data = _textAsset.text.Split(new char[] { '\n' });
-        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
-        {
-            string[] elements = data[i].Split(new char[] { ',' });
-            PartsStruct tempData = new PartsStruct
-            {
-                id = elements[0].Trim(),
-                name = elements[1],
-                partsType = (PartsStruct.PartsType)System.Enum.Parse(typeof(PartsStruct.PartsType), elements[2]),
-                explanation = elements[3],
-                icon = FindSprite(elements[4]),
-                price = Parse_Float(elements[5]),
-                addStatus = new SetStatus
-                {
-                    maxSpeed = Parse_Float(elements[6]),
-                    maxWeight = Parse_Float(elements[7]),
-                    maxEnergy = Parse_Float(elements[8]),
-                    maxBoxSize = Parse_Vector2Int(elements[9]),
-                    freshness = Parse_Float(elements[10]),
-                },
-            };
-            partsStruct.Add(tempData);
-        }
-    }
     void SetDialog(TextAsset _textAsset)
     {
         dialogStruct.Clear();
@@ -280,46 +222,48 @@ public class Data_Manager : Data_Parse
     [System.Serializable]
     public class SetStatus
     {
-        public float maxSpeed;// 속도
+        public float catchRadius;// 물고기를 잡는 범위
+        public float catchSpeed;// 낚시대가 물고기를 향해 이동하는 속도
+        public float catchPower;// 낚시대의 힘
+        public float catchHealth;// 낚시대의 체력
+        public float catchMaxHealth;// 낚시대의 최대 체력
+        public float catchAttakSpeed;// 물고기를 공격하는 빈도
+
+        public float shipSpeed;// 배의 이동 속도
         public float maxWeight;// 인벤토리 중량
         public float maxEnergy;// 연료통 크기
         public Vector2Int maxBoxSize;// 인벤토리 크기
-        public float freshness;// 신선도 유지
-    }
+        public float freshness;// 신선도 유지 - 꼭 필요한가??????
 
-    [System.Serializable]
-    public struct PartsStruct
-    {
-        public string id;
-        public string name;
-        public enum PartsType
+        public void SettingStatus(SetStatus _status)
         {
-            None,
-            Body,
-            Engine,
-            Box
+            catchRadius = _status.catchRadius;
+            catchSpeed = _status.catchSpeed;
+            catchPower = _status.catchPower;
+            catchHealth = _status.catchHealth;
+            catchMaxHealth = _status.catchMaxHealth;
+            catchAttakSpeed = _status.catchAttakSpeed;
+            shipSpeed = _status.shipSpeed;
+            maxWeight = _status.maxWeight;
+            maxEnergy = _status.maxEnergy;
+            maxBoxSize = _status.maxBoxSize;
+            freshness = _status.freshness;
         }
-        public PartsType partsType;
-        [TextArea]
-        public string explanation;// 설명
-        public Sprite icon;
-        public float price;
-        public SetStatus addStatus;
-    }
 
-    [System.Serializable]
-    public struct EquipStruct
-    {
-        [HideInInspector]
-        public string id;
-        public ItemStruct itemStruct;
-
-        public float fishingArea;// 공격 영역
-        public float lodPower;// 초당 끌려가는 힘 - 높을 수록 쉽게 끌려감
-        public float reelingSpeed;// 낚시 회전 속도
-        public float reelingAcceleration;// 릴링 가속도
-        public float hitPoint;// 물고기 잡을 위치
-        public float hitSpeed;// 물고기 찌 움직임
+        public void AddStatus(SetStatus _status)
+        {
+            catchRadius += _status.catchRadius;
+            catchSpeed += _status.catchSpeed;
+            catchPower += _status.catchPower;
+            catchHealth += _status.catchHealth;
+            catchMaxHealth += _status.catchMaxHealth;
+            catchAttakSpeed += _status.catchAttakSpeed;
+            shipSpeed += _status.shipSpeed;
+            maxWeight += _status.maxWeight;
+            maxEnergy += _status.maxEnergy;
+            maxBoxSize += _status.maxBoxSize;
+            freshness += _status.freshness;
+        }
     }
 
     [System.Serializable]
@@ -378,11 +322,12 @@ public class Data_Manager : Data_Parse
         public float freshness;// 신선도
 
         // 낚시 관련
-        public float fishStamina;
-        public float fishPower;// 물고기 방어력
-        public float fishROA;// 물고기 활동 범위 (다음 이동 각도) range of activity 
-        public float fishSpeed;
-        public Vector2 fishTurnDelay;// 방향 바뀌는 딜레이 시간
+        public float fishHealth;// 물고기 체력
+        public float fishPower;// 물고기 공격력
+        public float fieldRadius;// 물고기 활동 범위
+        public float fishSpeed;// 물고기 이동 속도
+        public float fishAttackSpeed;// 물고기 공격 속도
+        public Vector2 fishRange;// 방향 바뀌는 딜레이 시간
         public Vector2 hitValue; // 크리티컬 ; 히트 0~1
 
         [System.Serializable]
@@ -445,24 +390,51 @@ public class Data_Manager : Data_Parse
         }
         public DialogType[] dialogTypes;
     }
+    [System.Serializable]
+    public class StatusStruct
+    {
+        public string name;
+        public string description;
+        public string icon;
+        public int price; // 가격 정보
+        public enum StatusType
+        {
+            CatchRadius,// 낚시 반경
+            CatchSpeed,// 낚시 속도
+            CatchPower,// 낚시 파워
+            CatchHealth,// 낚시 체력
+            CatchAttakSpeed,// 낚시 공격 속도
+            ShipSpeed,// 배 이동 속도
+            MaxWeight,// 최대 인벤토리 무게
+            MaxEnergy,// 최대 에너지
+            MaxBoxSize,// 최대 인벤토리 크기
+            Freshness,// 신선도
+            LuckFish,// 희귀 물고기 확률
+            FishAmount,// 낚시 횟수 증가
+            FishPrice,// 물고기 가격 증가
+        }
+        [System.Serializable]
+        public struct SetStruct
+        {
+            public StatusType statusType;
+            public float value;
+        }
+        public List<SetStruct> setStatus;
+    }
 
     //==================================================================================
     // Data
     //==================================================================================
 
     [Header(" [ Data ]")]
-    public List<EquipStruct> equipStruct = new List<EquipStruct>();
     public List<UsedStruct> usedStruct = new List<UsedStruct>();
     public List<FishStruct> fishStruct = new List<FishStruct>();
-    public List<PartsStruct> partsStruct = new List<PartsStruct>();
     public List<DialogStruct> dialogStruct = new List<DialogStruct>();
     public List<ItemStruct> itemStruct = new List<ItemStruct>();
 
     private void Awake()
     {
         Singleton_Data.INSTANCE.SetDictionary_Fish(fishStruct);
-        Singleton_Data.INSTANCE.SetDictionary_Parts(partsStruct);
-        Singleton_Data.INSTANCE.SetDictionary_Equip(equipStruct);
         Singleton_Data.INSTANCE.SetDictionary_Used(usedStruct);
         Singleton_Data.INSTANCE.SetDictionary_Dialog(dialogStruct);
         Singleton_Data.INSTANCE.SetDictionary_Audio(audioClip);

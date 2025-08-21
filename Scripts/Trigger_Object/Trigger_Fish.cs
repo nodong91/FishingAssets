@@ -16,14 +16,20 @@ public class Trigger_Fish : MonoBehaviour
 
     void SetFish(string _id)
     {
+        if (fishingAmount <= 0)
+            return;
+
         id = _id;
         fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];
         //randomSize = fishStruct.GetRandom();
     }
 
+    public FishStruct[] fishStructs;
+    public int fishingAmount = 2; // 낚시 횟수
+
     void FishingStart()
     {
+        Game_Manager.current.GetFishing.SetFishingStart(fishStructs, fishingAmount);
         triggerSetting.gameObject.SetActive(false);// 트리거 오브젝트 비활성화
-        Game_Manager.current.GetFishing.FishingStart(fishStruct);
     }
 }

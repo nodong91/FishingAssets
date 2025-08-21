@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using UnityEngine;
 using static Data_Manager;
+using static Skill_Slot;
 
 public class Static_JsonManager
 {
@@ -117,6 +118,34 @@ public class Static_JsonManager
     //    jsonCards = default;
     //    return false;
     //}
+    public static void SaveSkillData(string fileName, List<StatusStruct> _data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        // 폴더 생성
+        FindFolder(filePath);
+
+        string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
+        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        File.WriteAllText(filePath + fileName + ".json", toJson);
+    }
+
+    public static bool TryLoadSkillData(string fileName, out List<StatusStruct> data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        string path = filePath + fileName + ".json";
+        FileInfo fileInfo = new FileInfo(path);
+
+        if (fileInfo.Exists == true)
+        {
+            string fromJson = File.ReadAllText(path);
+            //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
+            data = JsonHelper.FromJson<StatusStruct>(fromJson);
+            return true;
+        }
+
+        data = default;
+        return false;
+    }
 
     //======================================================================================
     // 옵션 데이터 관련
