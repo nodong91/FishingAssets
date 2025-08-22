@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 
@@ -48,14 +49,6 @@ public class Data_Manager : Data_Parse
             {
                 SetUsed(GetCSV_Data[i]);
             }
-            else if (csv_Type.Contains("Dialog"))
-            {
-                SetDialog(GetCSV_Data[i]);
-            }
-            else if (csv_Type.Contains("Item"))
-            {
-                SetItem(GetCSV_Data[i]);
-            }
         }
     }
 
@@ -80,7 +73,7 @@ public class Data_Manager : Data_Parse
                 fishSpeed = Parse_Float(elements[13]),
                 fishAttackSpeed = Parse_Float(elements[14]),
                 fishRange = Parse_Vector2(elements[15]),
-                hitValue = Parse_Vector2(elements[16]),
+                fishTime = (FishStruct.FishTime)System.Enum.Parse(typeof(FishStruct.FishTime), elements[16]),
             };
             fishStruct.Add(tempData);
         }
@@ -114,7 +107,7 @@ public class Data_Manager : Data_Parse
             name = _elements[1],
             explanation = _elements[2],
             icon = FindSprite(_elements[3]),
-            maxAmount = Parse_Int(_elements[4]),
+            itemClass = (ItemStruct.ItemClass)System.Enum.Parse(typeof(ItemStruct.ItemClass), _elements[4]),
             shape = tempShape,
             iconSize = TryIconSize(tempShape),
             weight = Parse_Float(_elements[6]),
@@ -144,35 +137,6 @@ public class Data_Manager : Data_Parse
 
         Vector4 temp = new Vector4(x, y, centerY, centerX);
         return temp;
-    }
-
-    void SetDialog(TextAsset _textAsset)
-    {
-        dialogStruct.Clear();
-        string[] data = _textAsset.text.Split(new char[] { '\n' });
-        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
-        {
-            string[] elements = data[i].Split(new char[] { ',' });
-            DialogStruct tempData = new DialogStruct
-            {
-                id = elements[0].Trim(),
-                contents = elements[1],
-            };
-            dialogStruct.Add(tempData);
-        }
-    }
-
-    void SetItem(TextAsset _textAsset)
-    {
-        itemStruct.Clear();
-        string[] data = _textAsset.text.Split(new char[] { '\n' });
-        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
-        {
-            string[] elements = data[i].Split(new char[] { ',' });
-
-            ItemStruct tempData = GetItemStruct(elements);
-            itemStruct.Add(tempData);
-        }
     }
 #endif
 
@@ -298,7 +262,15 @@ public class Data_Manager : Data_Parse
         [TextArea]
         public string explanation;// 설명
         public Sprite icon;
-        public int maxAmount;
+        public enum ItemClass
+        {
+            Legendary,
+            Epic,
+            Rare,
+            Uncommon,
+            Common,
+        }
+        public ItemClass itemClass;// 아이템 등급
         public Vector2Int[] shape;
         public Vector4 iconSize;
         public float weight;
@@ -306,20 +278,21 @@ public class Data_Manager : Data_Parse
     }
 
     [System.Serializable]
-    public struct FishStruct
+    public struct FishStruct// 물고기 정보
     {
         [HideInInspector]
         public string id;
         public ItemStruct itemStruct;
         public enum FishType
         {
-            Strength,
-            Agility,
-            Health,
+            Coastal,
+            Shallow,
+            Oceanic,
+            Abyssal,
+            Hadal,
         }
         public FishType fishType;
         public Vector2 size;
-        public float freshness;// 신선도
 
         // 낚시 관련
         public float fishHealth;// 물고기 체력
@@ -328,7 +301,13 @@ public class Data_Manager : Data_Parse
         public float fishSpeed;// 물고기 이동 속도
         public float fishAttackSpeed;// 물고기 공격 속도
         public Vector2 fishRange;// 방향 바뀌는 딜레이 시간
-        public Vector2 hitValue; // 크리티컬 ; 히트 0~1
+        public enum FishTime
+        {
+            Any,
+            Day,
+            Night,
+        }
+        public FishTime fishTime;
 
         [System.Serializable]
         public struct RandomSize
@@ -390,6 +369,7 @@ public class Data_Manager : Data_Parse
         }
         public DialogType[] dialogTypes;
     }
+
     [System.Serializable]
     public class StatusStruct
     {
@@ -429,14 +409,11 @@ public class Data_Manager : Data_Parse
     [Header(" [ Data ]")]
     public List<UsedStruct> usedStruct = new List<UsedStruct>();
     public List<FishStruct> fishStruct = new List<FishStruct>();
-    public List<DialogStruct> dialogStruct = new List<DialogStruct>();
-    public List<ItemStruct> itemStruct = new List<ItemStruct>();
 
     private void Awake()
     {
         Singleton_Data.INSTANCE.SetDictionary_Fish(fishStruct);
         Singleton_Data.INSTANCE.SetDictionary_Used(usedStruct);
-        Singleton_Data.INSTANCE.SetDictionary_Dialog(dialogStruct);
         Singleton_Data.INSTANCE.SetDictionary_Audio(audioClip);
     }
 }

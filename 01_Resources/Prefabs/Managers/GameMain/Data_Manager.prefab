@@ -49,9 +49,7 @@ MonoBehaviour:
   - {fileID: 102900000, guid: b9203b0359c3b02409bafe735d4ce8a7, type: 3}
   - {fileID: 102900000, guid: 42a92d95aec19fb40b557eebd57da110, type: 3}
   CSV_Data:
-  - {fileID: 4900000, guid: 63df2980f32e92241bcd7f734b5f4cd9, type: 3}
-  - {fileID: 4900000, guid: 2c1cae21fb9892444a35c728a959fcc5, type: 3}
-  - {fileID: 4900000, guid: f4fae08d822bb9a409ea2f80630e22a2, type: 3}
+  - {fileID: 4900000, guid: d397816a5bebb97479fc19c3bfc030f1, type: 3}
   - {fileID: 4900000, guid: 05eb149bca1b9bb4bab49f9e7841d79e, type: 3}
   audioClip:
   - {fileID: 8300000, guid: 8cd6faccb66a78c40bcc0f474415d90b, type: 3}
@@ -194,70 +192,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 198f80daf8b8ac544beb49cc01b16f2c, type: 3}
   - {fileID: 21300000, guid: 3d63422b354f9474a9104de93b2dda2f, type: 3}
   - {fileID: 21300000, guid: f0c2b184bc21a3f4daebf4e3b2f48e9e, type: 3}
-  equipStruct:
-  - id: Eq_0001
-    itemStruct:
-      id: Eq_0001
-      name: fishing rod for practice
-      itemType: 0
-      explanation: 
-      icon: {fileID: 21300000, guid: 91cdc7bd53b3507418bcb8b86946d7bb, type: 3}
-      maxAmount: 1
-      shape:
-      - {x: 1, y: 0}
-      - {x: 0, y: -1}
-      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
-      weight: 0.2
-      price: 15
-    fishingArea: 0.1
-    lodPower: 1
-    reelingSpeed: 300
-    reelingAcceleration: 1
-    hitPoint: 1
-    hitSpeed: 1
-  - id: Eq_0002
-    itemStruct:
-      id: Eq_0002
-      name: bamboo fishing rod
-      itemType: 0
-      explanation: 
-      icon: {fileID: 21300000, guid: 95af63e89959298479df131007c8bc47, type: 3}
-      maxAmount: 1
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      iconSize: {x: 3, y: 2, z: 0.25, w: 0.5}
-      weight: 2
-      price: 130
-    fishingArea: 0.1
-    lodPower: 2
-    reelingSpeed: 1000
-    reelingAcceleration: 2
-    hitPoint: 2
-    hitSpeed: 2
-  - id: Eq_0003
-    itemStruct:
-      id: Eq_0003
-      name: carbon fishing rod
-      itemType: 0
-      explanation: 
-      icon: {fileID: 21300000, guid: b8dc588068be4db419bb46792dc7db96, type: 3}
-      maxAmount: 1
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 0, y: -1}
-      iconSize: {x: 3, y: 2, z: 0.25, w: 0.5}
-      weight: 1
-      price: 70
-    fishingArea: 0.1
-    lodPower: 3
-    reelingSpeed: 100
-    reelingAcceleration: 3
-    hitPoint: 3
-    hitSpeed: 3
   usedStruct:
   - id: Us_1001
     itemStruct:
@@ -266,7 +200,7 @@ MonoBehaviour:
       itemType: 2
       explanation: 
       icon: {fileID: 21300000, guid: bce3f09e06ae50e4488f0a9d2a393918, type: 3}
-      maxAmount: 5
+      itemClass: 5
       shape:
       - {x: 0, y: 0}
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
@@ -280,7 +214,7 @@ MonoBehaviour:
       itemType: 2
       explanation: Bait Coast
       icon: {fileID: 21300000, guid: 328cb977f05a0ba4b8e06989fab520cc, type: 3}
-      maxAmount: 10
+      itemClass: 10
       shape:
       - {x: 0, y: 0}
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
@@ -295,7 +229,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uCCAD\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -304,14 +238,13 @@ MonoBehaviour:
       price: 200
     fishType: 1
     size: {x: 10, y: 20}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1002
     itemStruct:
       id: Fs_1002
@@ -319,7 +252,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uBCFC\uB77D"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -328,14 +261,13 @@ MonoBehaviour:
       price: 280
     fishType: 0
     size: {x: 20, y: 45}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 4}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1003
     itemStruct:
       id: Fs_1003
@@ -343,7 +275,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uACE0\uB4F1\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -352,14 +284,13 @@ MonoBehaviour:
       price: 250
     fishType: 2
     size: {x: 30, y: 50}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 0.3, y: 1.5}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1004
     itemStruct:
       id: Fs_1004
@@ -367,7 +298,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uC804\uAC31\uC774"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -376,14 +307,13 @@ MonoBehaviour:
       price: 180
     fishType: 1
     size: {x: 15, y: 30}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1005
     itemStruct:
       id: Fs_1005
@@ -391,7 +321,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uB18D\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -400,14 +330,13 @@ MonoBehaviour:
       price: 600
     fishType: 0
     size: {x: 50, y: 100}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1006
     itemStruct:
       id: Fs_1006
@@ -415,7 +344,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uCC38\uB3D4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -424,14 +353,13 @@ MonoBehaviour:
       price: 500
     fishType: 0
     size: {x: 40, y: 80}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1007
     itemStruct:
       id: Fs_1007
@@ -439,7 +367,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uAC10\uC131\uB3D4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -448,14 +376,13 @@ MonoBehaviour:
       price: 450
     fishType: 0
     size: {x: 30, y: 60}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1008
     itemStruct:
       id: Fs_1008
@@ -463,7 +390,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uAD11\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -472,14 +399,13 @@ MonoBehaviour:
       price: 550
     fishType: 2
     size: {x: 30, y: 70}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1009
     itemStruct:
       id: Fs_1009
@@ -487,7 +413,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uB3CC\uB3D4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -496,14 +422,13 @@ MonoBehaviour:
       price: 400
     fishType: 0
     size: {x: 25, y: 50}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1010
     itemStruct:
       id: Fs_1010
@@ -511,7 +436,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uC22D\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -520,14 +445,13 @@ MonoBehaviour:
       price: 350
     fishType: 2
     size: {x: 45, y: 90}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1011
     itemStruct:
       id: Fs_1011
@@ -535,7 +459,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uB0A1\uC740 \uD0C0\uC774\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -544,14 +468,13 @@ MonoBehaviour:
       price: 10
     fishType: 0
     size: {x: 8, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1012
     itemStruct:
       id: Fs_1012
@@ -559,7 +482,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uD398\uD2B8\uBCD1"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -568,14 +491,13 @@ MonoBehaviour:
       price: 5
     fishType: 1
     size: {x: 3, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1013
     itemStruct:
       id: Fs_1013
@@ -583,7 +505,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uB179\uC2A8 \uAE61\uD1B5"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -592,14 +514,13 @@ MonoBehaviour:
       price: 15
     fishType: 1
     size: {x: 2, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1014
     itemStruct:
       id: Fs_1014
@@ -607,7 +528,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uD3D0\uBAA9\uC7AC"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -616,14 +537,13 @@ MonoBehaviour:
       price: 20
     fishType: 2
     size: {x: 6, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_1015
     itemStruct:
       id: Fs_1015
@@ -631,7 +551,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uC77C\uBC18 \uC5D4\uC9C4 \uC7AC\uB8CC"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -640,14 +560,13 @@ MonoBehaviour:
       price: 500
     fishType: 0
     size: {x: 10, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2001
     itemStruct:
       id: Fs_2001
@@ -655,7 +574,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uBC29\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -664,14 +583,13 @@ MonoBehaviour:
       price: 3000
     fishType: 2
     size: {x: 60, y: 120}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2002
     itemStruct:
       id: Fs_2002
@@ -679,7 +597,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uB2A5\uC131\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -688,14 +606,13 @@ MonoBehaviour:
       price: 3500
     fishType: 0
     size: {x: 50, y: 100}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2003
     itemStruct:
       id: Fs_2003
@@ -703,7 +620,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uB3D7\uB3D4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -712,14 +629,13 @@ MonoBehaviour:
       price: 5000
     fishType: 0
     size: {x: 100, y: 180}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2004
     itemStruct:
       id: Fs_2004
@@ -727,7 +643,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uBB38\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -736,14 +652,13 @@ MonoBehaviour:
       price: 3000
     fishType: 1
     size: {x: 150, y: 250}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2005
     itemStruct:
       id: Fs_2005
@@ -751,7 +666,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uBD80\uC2DC\uB9AC"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -760,14 +675,13 @@ MonoBehaviour:
       price: 4000
     fishType: 0
     size: {x: 80, y: 150}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2006
     itemStruct:
       id: Fs_2006
@@ -775,7 +689,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uC790\uBC14\uB9AC"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -784,14 +698,13 @@ MonoBehaviour:
       price: 4500
     fishType: 2
     size: {x: 70, y: 130}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2007
     itemStruct:
       id: Fs_2007
@@ -799,7 +712,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uD669\uBCF5\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -808,14 +721,13 @@ MonoBehaviour:
       price: 1000
     fishType: 2
     size: {x: 20, y: 40}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2008
     itemStruct:
       id: Fs_2008
@@ -823,7 +735,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uAC1C\uBCF5\uCE58"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -832,14 +744,13 @@ MonoBehaviour:
       price: 6000
     fishType: 0
     size: {x: 150, y: 250}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2009
     itemStruct:
       id: Fs_2009
@@ -847,7 +758,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uCC38\uCE58"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -856,14 +767,13 @@ MonoBehaviour:
       price: 10000
     fishType: 0
     size: {x: 200, y: 400}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2010
     itemStruct:
       id: Fs_2010
@@ -871,7 +781,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uD669\uC0C8\uCE58"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -880,14 +790,13 @@ MonoBehaviour:
       price: 12000
     fishType: 1
     size: {x: 250, y: 500}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2011
     itemStruct:
       id: Fs_2011
@@ -895,7 +804,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uB0A1\uC740 \uADF8\uBB3C"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -904,14 +813,13 @@ MonoBehaviour:
       price: 50
     fishType: 2
     size: {x: 10, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2012
     itemStruct:
       id: Fs_2012
@@ -919,7 +827,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uAE68\uC9C4 \uBCD1"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -928,14 +836,13 @@ MonoBehaviour:
       price: 40
     fishType: 1
     size: {x: 2, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2013
     itemStruct:
       id: Fs_2013
@@ -943,7 +850,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uD574\uCD08"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -952,14 +859,13 @@ MonoBehaviour:
       price: 30
     fishType: 2
     size: {x: 4, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2014
     itemStruct:
       id: Fs_2014
@@ -967,7 +873,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uCCA0\uC870\uAC01"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -976,14 +882,13 @@ MonoBehaviour:
       price: 60
     fishType: 0
     size: {x: 2, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_2015
     itemStruct:
       id: Fs_2015
@@ -991,7 +896,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uACE0\uAE09 \uC5D4\uC9C4 \uC7AC\uB8CC"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1000,14 +905,13 @@ MonoBehaviour:
       price: 2000
     fishType: 0
     size: {x: 10, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_3001
     itemStruct:
       id: Fs_3001
@@ -1015,7 +919,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uCCA0\uAC11\uC0C1\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1024,14 +928,13 @@ MonoBehaviour:
       price: 20000
     fishType: 0
     size: {x: 150, y: 300}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_3002
     itemStruct:
       id: Fs_3002
@@ -1039,7 +942,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uB2E4\uAE08\uBC14\uB9AC"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1048,14 +951,13 @@ MonoBehaviour:
       price: 30000
     fishType: 1
     size: {x: 80, y: 150}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_3003
     itemStruct:
       id: Fs_3003
@@ -1063,7 +965,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uCCAD\uC0C8\uCE58"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1072,14 +974,13 @@ MonoBehaviour:
       price: 35000
     fishType: 2
     size: {x: 300, y: 600}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_3004
     itemStruct:
       id: Fs_3004
@@ -1087,7 +988,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uB300\uC655 \uC624\uC9D5\uC5B4"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1096,14 +997,13 @@ MonoBehaviour:
       price: 40000
     fishType: 2
     size: {x: 500, y: 1000}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_3005
     itemStruct:
       id: Fs_3005
@@ -1111,7 +1011,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uB9CC\uC0C8\uAE30"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1120,14 +1020,13 @@ MonoBehaviour:
       price: 40000
     fishType: 0
     size: {x: 100, y: 180}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_3006
     itemStruct:
       id: Fs_3006
@@ -1135,7 +1034,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uBC84\uB824\uC9C4 \uD328\uB4DC"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1144,14 +1043,13 @@ MonoBehaviour:
       price: 200
     fishType: 1
     size: {x: 3, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_3007
     itemStruct:
       id: Fs_3007
@@ -1159,7 +1057,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uBC84\uB824\uC9C4 \uD3F0"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1168,14 +1066,13 @@ MonoBehaviour:
       price: 500
     fishType: 1
     size: {x: 1, y: 5}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_3008
     itemStruct:
       id: Fs_3008
@@ -1183,7 +1080,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uD76C\uADC0 \uC5D4\uC9C4 \uC7AC\uB8CC"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1192,14 +1089,13 @@ MonoBehaviour:
       price: 10000
     fishType: 0
     size: {x: 10, y: 0}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_4001
     itemStruct:
       id: Fs_4001
@@ -1207,7 +1103,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uBC31\uC0C1\uC544\uB9AC"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1216,14 +1112,13 @@ MonoBehaviour:
       price: 100000
     fishType: 0
     size: {x: 600, y: 1200}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_4002
     itemStruct:
       id: Fs_4002
@@ -1231,7 +1126,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uACE0\uB300 \uD53C\uB77C\uB8E8\uCFE0"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1240,14 +1135,13 @@ MonoBehaviour:
       price: 200000
     fishType: 2
     size: {x: 400, y: 800}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
+    fishTime: 1
   - id: Fs_4003
     itemStruct:
       id: Fs_4003
@@ -1255,7 +1149,7 @@ MonoBehaviour:
       itemType: 1
       explanation: "\uC2EC\uD574\uC758 \uC655"
       icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      maxAmount: 1
+      itemClass: 0
       shape:
       - {x: -1, y: 0}
       - {x: 0, y: 1}
@@ -1264,50 +1158,12 @@ MonoBehaviour:
       price: 300000
     fishType: 0
     size: {x: 700, y: 1500}
-    freshness: 0
     fishHealth: 10
     fishPower: 1
     fieldRadius: 10
     fishSpeed: 1
     fishAttackSpeed: 1
     fishRange: {x: 1, y: 3}
-    hitValue: {x: 0.1, y: 0.5}
-  partsStruct:
-  - id: Pt_1001
-    name: Boat
-    partsType: 1
-    explanation: 
-    icon: {fileID: 21300000, guid: 288d52472b19c4b4c8e7ecb64780f7ec, type: 3}
-    price: 1000
-    addStatus:
-      maxSpeed: 1.3
-      maxWeight: 100
-      maxEnergy: 0
-      maxBoxSize: {x: 0, y: 0}
-      freshness: 0
-  - id: Pt_2001
-    name: Engine
-    partsType: 2
-    explanation: 
-    icon: {fileID: 21300000, guid: 539550bde256a934680a39d08a303202, type: 3}
-    price: 675
-    addStatus:
-      maxSpeed: 1
-      maxWeight: 0
-      maxEnergy: 30
-      maxBoxSize: {x: 0, y: 0}
-      freshness: 0
-  - id: Pt_3001
-    name: Box
-    partsType: 3
-    explanation: 
-    icon: {fileID: 21300000, guid: 87cc3497b12867545a25c42509505e38, type: 3}
-    price: 345
-    addStatus:
-      maxSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      maxBoxSize: {x: 5, y: 6}
-      freshness: 10
+    fishTime: 1
   dialogStruct: []
   itemStruct: []

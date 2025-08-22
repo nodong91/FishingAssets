@@ -5881,20 +5881,22 @@ MonoBehaviour:
       itemType: 0
       explanation: 
       icon: {fileID: 0}
-      maxAmount: 0
+      itemClass: 0
       shape: []
       iconSize: {x: 0, y: 0, z: 0, w: 0}
       weight: 0
       price: 0
     fishType: 0
     size: {x: 0, y: 0}
-    freshness: 0
-    fishStamina: 0
+    fishHealth: 0
     fishPower: 0
-    fishROA: 0
+    fieldRadius: 0
     fishSpeed: 0
-    fishTurnDelay: {x: 0, y: 0}
-    hitValue: {x: 0, y: 0}
+    fishAttackSpeed: 0
+    fishRange: {x: 0, y: 0}
+    fishTime: 0
+  fishStructs: []
+  fishingAmount: 2
 --- !u!1 &1024289101
 GameObject:
   m_ObjectHideFlags: 0
@@ -5950,20 +5952,22 @@ MonoBehaviour:
       itemType: 0
       explanation: 
       icon: {fileID: 0}
-      maxAmount: 0
+      itemClass: 0
       shape: []
       iconSize: {x: 0, y: 0, z: 0, w: 0}
       weight: 0
       price: 0
     fishType: 0
     size: {x: 0, y: 0}
-    freshness: 0
-    fishStamina: 0
+    fishHealth: 0
     fishPower: 0
-    fishROA: 0
+    fieldRadius: 0
     fishSpeed: 0
-    fishTurnDelay: {x: 0, y: 0}
-    hitValue: {x: 0, y: 0}
+    fishAttackSpeed: 0
+    fishRange: {x: 0, y: 0}
+    fishTime: 0
+  fishStructs: []
+  fishingAmount: 2
 --- !u!1 &1042617664
 GameObject:
   m_ObjectHideFlags: 0
@@ -16358,20 +16362,22 @@ MonoBehaviour:
       itemType: 0
       explanation: 
       icon: {fileID: 0}
-      maxAmount: 0
+      itemClass: 0
       shape: []
       iconSize: {x: 0, y: 0, z: 0, w: 0}
       weight: 0
       price: 0
     fishType: 0
     size: {x: 0, y: 0}
-    freshness: 0
-    fishStamina: 0
+    fishHealth: 0
     fishPower: 0
-    fishROA: 0
+    fieldRadius: 0
     fishSpeed: 0
-    fishTurnDelay: {x: 0, y: 0}
-    hitValue: {x: 0, y: 0}
+    fishAttackSpeed: 0
+    fishRange: {x: 0, y: 0}
+    fishTime: 0
+  fishStructs: []
+  fishingAmount: 2
 --- !u!1 &1907801178
 GameObject:
   m_ObjectHideFlags: 0
@@ -16387,7 +16393,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1907801179
 Transform:
   m_ObjectHideFlags: 0

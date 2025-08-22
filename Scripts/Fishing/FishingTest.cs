@@ -52,6 +52,7 @@ public class FishingTest : MonoBehaviour
     public void SetFishing(FishStruct _fishStruct)
     {
         SetFishStruct(_fishStruct);// 물고기 정보 설정
+        SetFishingLod();
         ResetFishing();
 
         SetCamera();
@@ -67,6 +68,15 @@ public class FishingTest : MonoBehaviour
         fieldRadius = _fishStruct.fieldRadius;
         fishAttackSpeed = _fishStruct.fishAttackSpeed;
         fishRange = _fishStruct.fishRange;
+    }
+
+    void SetFishingLod()
+    {
+        catchRadius = 5f;
+        catchSpeed = 1f;
+        catchPower = 1f;
+        catchMaxHealth = 10f;
+        catchAttakSpeed = 1.5f;
     }
 
     void SetCamera()

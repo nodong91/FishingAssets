@@ -274,6 +274,7 @@ public class Unit_Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Finish")
         {
+            Debug.LogWarning("배 데미지~~~");
             if (HealthPoint > 0)
             {
                 HealthPoint--;

@@ -53,31 +53,14 @@ MonoBehaviour:
   - {fileID: 1474192570402545791}
   setObject: {fileID: 8404391962062131411}
   catchPrefab: {fileID: 8870751853943195754}
+  catchRadius: 2
+  catchPower: 1
+  catchHealth: 0
   catchImage: {fileID: 771889954876943877}
   fishPrefab: {fileID: 7827393670671673099}
+  fishPower: 1
+  fishHealth: 0
   fishImage: {fileID: 9052672677965564799}
-  fishStruct:
-    id: 
-    itemStruct:
-      id: 
-      name: 
-      itemType: 0
-      explanation: 
-      icon: {fileID: 0}
-      maxAmount: 0
-      shape: []
-      iconSize: {x: 0, y: 0, z: 0, w: 0}
-      weight: 0
-      price: 0
-    fishType: 0
-    size: {x: 0, y: 0}
-    freshness: 0
-    fishStamina: 0
-    fishPower: 0
-    fishROA: 0
-    fishSpeed: 0
-    fishTurnDelay: {x: 0, y: 0}
-    hitValue: {x: 0, y: 0}
   offset: {x: 0, y: 0, z: 0}
 --- !u!114 &875714323081289923
 MonoBehaviour:
@@ -231,7 +214,7 @@ Transform:
   m_GameObject: {fileID: 3284862002501086301}
   serializedVersion: 2
   m_LocalRotation: {x: 0.16365387, y: -0.76570994, z: 0.21464428, w: 0.58380955}
-  m_LocalPosition: {x: 15.05, y: 7.4, z: 6.43}
+  m_LocalPosition: {x: 15.05, y: 15, z: 6.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -336,7 +319,7 @@ Transform:
   m_GameObject: {fileID: 3812361053296128858}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00089217763, y: -0.96287847, z: 0.26991513, w: 0.0031834454}
-  m_LocalPosition: {x: 3.5, y: 4.2, z: 12.7}
+  m_LocalPosition: {x: 3.5, y: 15, z: 12.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -705,7 +688,7 @@ Transform:
   m_GameObject: {fileID: 5194709084596338129}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.5, y: 8.7, z: 0.3}
+  m_LocalPosition: {x: -13.5, y: 15, z: 0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -996,7 +979,7 @@ Transform:
   m_GameObject: {fileID: 8907038921126461590}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 3.5, z: 10.4}
+  m_LocalPosition: {x: -10, y: 15, z: 10.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

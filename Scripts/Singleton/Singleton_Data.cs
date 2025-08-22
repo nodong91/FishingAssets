@@ -4,7 +4,6 @@ using static Data_Manager;
 
 public class Singleton_Data : MonoSingleton<Singleton_Data>
 {
-    public Dictionary<string, DialogStruct> Dict_Dialog = new Dictionary<string, DialogStruct>();
     //public Dictionary<string, Data_Manager.TranslateString> Dict_DialogString = new Dictionary<string, Data_Manager.TranslateString>();
     //public Dictionary<string, Data_Manager.TranslateString> Dict_TranslateString = new Dictionary<string, Data_Manager.TranslateString>();
     public Dictionary<string, AudioClip> Dict_Audio = new Dictionary<string, AudioClip>();
@@ -12,24 +11,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     //public Translation translation;
     public Dictionary<string, FishStruct> Dict_Fish = new Dictionary<string, FishStruct>();
     public Dictionary<string, UsedStruct> Dict_Used = new Dictionary<string, UsedStruct>();
-    public Dictionary<string, ItemStruct> Dict_Item = new Dictionary<string, ItemStruct>();
 
-    public void SetDictionary_Dialog(List<DialogStruct> _data)
-    {
-        Dict_Dialog = new Dictionary<string, DialogStruct>();
-        for (int i = 0; i < _data.Count; i++)
-        {
-            string id = _data[i].id;
-            if (Dict_Dialog.ContainsKey(id) == true)
-            {
-                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
-            }
-            else
-            {
-                Dict_Dialog[id] = _data[i];
-            }
-        }
-    }
 
     //public void SetDictionary_DialogString(List<Data_Manager.TranslateString> _data)
     //{
@@ -120,23 +102,6 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
             else
             {
                 Dict_Fish[id] = _data[i];
-            }
-        }
-    }
-
-    public void SetDictionary_Item(List<ItemStruct> _data)
-    {
-        Dict_Item = new Dictionary<string, ItemStruct>();
-        for (int i = 0; i < _data.Count; i++)
-        {
-            string id = _data[i].id;
-            if (Dict_Item.ContainsKey(id) == true)
-            {
-                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
-            }
-            else
-            {
-                Dict_Item[id] = _data[i];
             }
         }
     }
