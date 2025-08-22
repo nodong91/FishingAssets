@@ -109,7 +109,7 @@ public class FishingTest : MonoBehaviour
     {
         setObject.SetActive(true);
 
-        Transform player = Game_Manager.current.player.transform;
+        Transform player = Game_Manager.current.GetPlayer.transform;
         transform.SetPositionAndRotation(player.position, player.rotation);
 
         fishPrefab.transform.position = transform.position;

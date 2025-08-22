@@ -48,7 +48,7 @@ public class Trigger_Landing : Trigger_Setting
 
     void SetLandingAction()
     {
-        player = Game_Manager.current.player;
+        player = Game_Manager.current.GetPlayer;
         CheckQuest();
 
         if (setLanding != null)

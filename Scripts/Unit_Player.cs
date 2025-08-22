@@ -12,6 +12,7 @@ public class Unit_Player : MonoBehaviour
         Idle,
         Move,
         Damage,
+        Destroy
     }
     public State state = State.None;
 
@@ -54,6 +55,9 @@ public class Unit_Player : MonoBehaviour
                 break;
             case State.Damage:
 
+                break;
+            case State.Destroy:
+                StateDestroy();
                 break;
         }
     }
@@ -198,17 +202,26 @@ public class Unit_Player : MonoBehaviour
         StateMachine(State.Damage);
 
         Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
-        Game_Manager.current.cameraManager.InputShake();
+        Game_Manager.current.cameraManager.InputShake();// 카메라 흔들기
         float normalize = 0f;
         while (normalize < 1f)
         {
             normalize += Time.deltaTime;
             float speed = (1f - normalize) * 0.1f;
             transform.position = Vector3.Lerp(transform.position, _target, speed);
-            CheckClosestUnit();
+            CheckClosestUnit();// 가까운 트리거 체크
             yield return null;
         }
-        StateMachine(State.Idle);
+
+        if (HealthPoint > 0)
+            StateMachine(State.Idle);// 다시 대기 상태
+        else
+            StateMachine(State.Destroy);
+    }
+
+    void StateDestroy()
+    {
+
     }
 
     //================================================================================================================================================
@@ -283,6 +296,7 @@ public class Unit_Player : MonoBehaviour
             }
             else
             {
+
                 Debug.LogWarning("배 파괴!!!!!!!!!!!!!!!!!!!!");
             }
         }

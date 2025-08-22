@@ -87,7 +87,7 @@ public class Reflection_Manager : MonoBehaviour
         if (Game_Manager.current == null)
             return;
         string shipPosition = "_ShipPosition";
-        Transform player = Game_Manager.current.player.transform;
+        Transform player = Game_Manager.current.GetPlayer.transform;
         reflectionMaterial.SetVector(shipPosition, player.position);
         reflectionMaterial.SetFloat("_WaveSpeed", waveSpeed);
     }

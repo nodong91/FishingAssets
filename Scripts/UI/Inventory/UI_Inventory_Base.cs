@@ -91,7 +91,7 @@ public class UI_Inventory_Base : MonoBehaviour
         }
     }
 
-   public void SetInventorySlot(Vector2Int _size)
+    public void SetInventorySlot(Vector2Int _size)
     {
         if (allSlots != null)
         {
@@ -480,6 +480,7 @@ public class UI_Inventory_Base : MonoBehaviour
                     SlotEmpty(linkSlot);
                 }
                 allSlots[x, y].DestroySlot();// 슬롯 부수기
+                destroySlot ??= new List<Vector2Int>();// 초기화
                 destroySlot.Add(new Vector2Int(x, y));
             }
         }

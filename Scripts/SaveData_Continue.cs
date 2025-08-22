@@ -21,9 +21,9 @@ public class SaveData_Continue : MonoBehaviour
     {
         continueData = new Data_Continue
         {
-            playerPosition = Game_Manager.current.player.transform.position,
-            playerRotation = Game_Manager.current.player.transform.rotation,
-            playerScale = Game_Manager.current.player.transform.localScale,
+            playerPosition = Game_Manager.current.GetPlayer.transform.position,
+            playerRotation = Game_Manager.current.GetPlayer.transform.rotation,
+            playerScale = Game_Manager.current.GetPlayer.transform.localScale,
 
             timeSpeed = Game_Manager.current.GetTimeUI.timeSpeed,
             minute = Game_Manager.current.GetTimeUI.minute,
@@ -45,9 +45,9 @@ public class SaveData_Continue : MonoBehaviour
         if (continueData == null)
             return;
         // 위치
-        Game_Manager.current.player.transform.position = continueData.playerPosition;
-        Game_Manager.current.player.transform.rotation = continueData.playerRotation;
-        Game_Manager.current.player.transform.localScale = continueData.playerScale;
+        Game_Manager.current.GetPlayer.transform.position = continueData.playerPosition;
+        Game_Manager.current.GetPlayer.transform.rotation = continueData.playerRotation;
+        Game_Manager.current.GetPlayer.transform.localScale = continueData.playerScale;
 
         float timeSpeed = continueData.timeSpeed;
         float minute = continueData.minute;
@@ -74,7 +74,7 @@ public class SaveData_Continue : MonoBehaviour
         {
             continueData = new Data_Continue
             {
-                playerPosition = Vector3.zero,
+                playerPosition = new Vector3(0f, 0f, 15f),// 초기 위치
                 playerRotation = Quaternion.identity,
                 playerScale = Vector3.one,
 
