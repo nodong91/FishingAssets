@@ -33,6 +33,7 @@ public class Fishing_Manager : MonoBehaviour
     //==================================================================================================================================
     FishStruct[] fishStructs;
     int fishingAmount; // 낚시 횟수
+
     public void SetFishingStart(FishStruct[] _fishStructs, int _fishingAmount)
     {
         // 낚시 시작
@@ -113,15 +114,15 @@ public class Fishing_Manager : MonoBehaviour
     //==================================================================================================================================
 
     public GameObject fishInfomation;
-    public Button closeButton;
-    public Button startButton, resultButton; // 결과 버튼 (필요시 사용)
+    public Custom_Button closeButton;
+    public Custom_Button startButton, resultButton; // 결과 버튼 (필요시 사용)
 
     void SetComplate()
     {
         fishInfomation.gameObject.SetActive(false);
-        closeButton.onClick.AddListener(CloseButton);
-        startButton.onClick.AddListener(FishingStart);
-        resultButton.onClick.AddListener(ResultButton);
+        closeButton.SetButton(CloseButton);
+        startButton.SetButton(FishingStart);
+        resultButton.SetButton(ResultButton);
     }
 
     public void SetFish()// 낚시 성공 후 물고기 정보 설정

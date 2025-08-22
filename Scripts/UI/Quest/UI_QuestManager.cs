@@ -57,6 +57,7 @@ public class UI_QuestManager : MonoBehaviour
         }
         closeButton.SetButton(delegate { OpenCanvas(false); });
         ToggleClick(customButtonList[0]);
+        OpenCanvas(false);
     }
 
     public void OpenCanvas(bool _open)

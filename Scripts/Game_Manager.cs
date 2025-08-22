@@ -21,7 +21,7 @@ public class Game_Manager : MonoBehaviour
     public string oceanSound = "Ocean 02";
 
     public UI_QuestManager questManager;
-    public Data_Manager.SetStatus Status => GetSkill.setStatus;
+    public Data_Manager.SetStatus GetStatus => GetSkill.setStatus;
     public static Game_Manager current;
 
     private void Awake()

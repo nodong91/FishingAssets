@@ -29,24 +29,21 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
         switch (selectStruct.selectType)
         {
             case SelectType.Out:
-                // Handle Out action
-                Debug.Log("Out action selected.");
+                // 섬 나가기
                 Game_Manager.current.GetLanding.BackButton();
                 break;
             case SelectType.OpenShop:
-                // Handle OpenShop action
-                Debug.Log("OpenShop action selected.");
+                // 상점 열기
                 LandingStruct getLandingData = Game_Manager.current.GetLanding.GetLandingData;
                 Game_Manager.current.GetInventory.OpenShop(getLandingData);
                 break;
             case SelectType.OpenShipyard:
-                // Handle OpenShipyard action
-                Debug.Log("OpenShipyard action selected.");
-                getLandingData = Game_Manager.current.GetLanding.GetLandingData;
-                Game_Manager.current.GetInventory.OpenShipyard(getLandingData);
+                // 조선소 열기
+                Game_Manager.current.GetSkill.OpenCanvas(true);
+                Game_Manager.current.GetLanding.OutDialog();
                 break;
             case SelectType.Quest:
-                // Handle Quest action
+                // 퀘스트 열기
                 if (questData != null)
                 {
                     // 인벤토리 안에 해당 아이템이 있는지 확인

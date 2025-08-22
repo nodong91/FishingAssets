@@ -1,17 +1,21 @@
 
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Data_Manager;
 
-public class Skill_Slot : MonoBehaviour
+
+public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
     public bool startSlot;
     public Vector2Int slotNode;
     public bool onSlot, hide;
     public List<Vector2Int> nearbySlot = new List<Vector2Int>();
     public RectTransform rect;
-    public Custom_Button slotButton;
+    //public Custom_Button slotButton;
     public Image boxImage;
 
     public StatusStruct statusList;
@@ -21,28 +25,22 @@ public class Skill_Slot : MonoBehaviour
 
     public void SetStart()
     {
-        slotButton.SetButton(SlotButton);
-        boxImage.color = Color.gray;
+        //slotButton.SetButton(SlotButton);
+        gageImage.fillAmount = 0f;
         if (hide == true)
             boxImage.gameObject.SetActive(false);
         StatusStruct statusStruct = new StatusStruct
         {
-            //setStatus = new List<StatusStruct.SetStruct>()
-            //{
-
-            //},
+            setStatus = new List<StatusStruct.SetStruct>()
+            {
+                new StatusStruct.SetStruct
+                {
+                    statusType = StatusStruct.StatusType.CatchRadius,
+                    value = 0.5f, // 임시로 CatchRadius 값 설정
+                }
+            },
         };
         statusList = statusStruct;// 임시로 CatchRadius만 설정
-    }
-
-    void SlotButton()
-    {
-        if (onSlot == false)
-        {
-            onSlot = true;
-            boxImage.color = Color.white;
-            deleSlotAction?.Invoke(slotNode);
-        }
     }
 
     public void SetNearBySlot(Vector2Int _map)
@@ -72,9 +70,67 @@ public class Skill_Slot : MonoBehaviour
 
         hide = _hide;
         boxImage.gameObject.SetActive(!hide);
-        if (hide == false)
-            boxImage.color = Color.gray;
-        else
-            boxImage.color = Color.white;
+    }
+
+    //==================================================================================================================================
+    // Input
+    //==================================================================================================================================
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        // 인포메이션
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        transform.localScale = Vector3.one * 1.1f;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (inputSlotCoroutine != null)
+            StopCoroutine(inputSlotCoroutine);
+
+        transform.localScale = Vector3.one;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        // 누르고 있기
+        inputSlotCoroutine = StartCoroutine(InputSlot());
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (inputSlotCoroutine != null)
+            StopCoroutine(inputSlotCoroutine);
+
+        if (onSlot == false)
+        {
+            gageImage.fillAmount = 0f;
+        }
+    }
+
+    void SlotButton()
+    {
+        if (onSlot == false)
+        {
+            onSlot = true;
+            deleSlotAction?.Invoke(slotNode);
+        }
+    }
+
+    Coroutine inputSlotCoroutine;
+    public Image gageImage;
+    IEnumerator InputSlot()
+    {
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime;
+            gageImage.fillAmount = Mathf.Lerp(0f, 1f, normalize);
+            yield return null;
+        }
+        SlotButton();
     }
 }

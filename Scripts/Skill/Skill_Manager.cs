@@ -3,9 +3,6 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using static Data_Manager;
 
-
-
-
 #if UNITY_EDITOR
 using UnityEditor;
 [CustomEditor(typeof(Skill_Manager))]
@@ -32,28 +29,39 @@ public class Editor_Skill_Manager : Editor
 
 public class Skill_Manager : MonoBehaviour
 {
+    public CanvasGroup canvasGroup;
     public RectTransform slotParent;
     public Skill_Slot slot;
     public Vector2Int skillMap;
     public float slotSize = 50f; // Size of each skill slot
     public RectTransform instParent;
-    public Canvas canvas;
+    public Custom_Button closeButton;
 
     public Skill_Slot startSlot;
     public Skill_Slot[,] allSlot;
 
     // Ω∫≈» √ﬂ∞°
-    public Data_Manager.SetStatus defaultStatus, addStatus, setStatus;// ±‚∫ª Ω∫≈»
+    public SetStatus defaultStatus, addStatus, setStatus;// ±‚∫ª Ω∫≈»
     public List<Vector2Int> enableSlotLIst = new List<Vector2Int>();// »∞º∫»≠µ» ΩΩ∑‘ ∏ÆΩ∫∆Æ
-
-    private void Start()
-    {
-        UpdateData();
-    }
 
     public void SetStart()
     {
         UpdateData();
+        closeButton.SetButton(CloseCanvas);
+        OpenCanvas(false);
+    }
+
+    public void OpenCanvas(bool _open)
+    {
+        canvasGroup.alpha = _open ? 1f : 0f;
+        canvasGroup.interactable = _open;
+        canvasGroup.blocksRaycasts = _open;
+    }
+
+    void CloseCanvas()
+    {
+        OpenCanvas(false);
+        Game_Manager.current.GetLanding.BackButton();
     }
 
     public void UpdateData()
@@ -122,7 +130,10 @@ public class Skill_Manager : MonoBehaviour
 
     void AddStatuts(StatusStruct _status)
     {
-        for(int i = 0; i < _status.setStatus.Count; i++)
+        //if (_status.setStatus == null || _status.setStatus.Count == 0)
+        //    return;
+
+        for (int i = 0; i < _status.setStatus.Count; i++)
         {
             Debug.LogWarning($"{_status.setStatus} {_status.setStatus[i].value}");
             switch (_status.setStatus[i].statusType)

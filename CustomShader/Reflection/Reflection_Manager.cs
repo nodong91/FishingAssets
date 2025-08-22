@@ -61,6 +61,7 @@ public class Reflection_Manager : MonoBehaviour
         reflectionTexture = new RenderTexture(Screen.width, Screen.height, 24);
         reflectionTexture.useMipMap = true;
 
+        reflectionMaterial.SetFloat("_WaveSpeed", waveSpeed);
         //InstanceWater();
     }
 
@@ -88,8 +89,7 @@ public class Reflection_Manager : MonoBehaviour
             return;
         string shipPosition = "_ShipPosition";
         Transform player = Game_Manager.current.GetPlayer.transform;
-        reflectionMaterial.SetVector(shipPosition, player.position);
-        reflectionMaterial.SetFloat("_WaveSpeed", waveSpeed);
+        reflectionMaterial.SetVector(shipPosition, player.position);// 플레이어 위치 업데이트
     }
 
     private void OnPostRender()

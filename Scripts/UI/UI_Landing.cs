@@ -135,7 +135,7 @@ public class UI_Landing : MonoBehaviour
     void ShipyardButton()// 조선소
     {
         onDialog = true;
-        SetLandingCanvas(false);        // 조선소 버튼 누르면
+        SetLandingCanvas(false);        // 조선소 버튼 누르면 랜드 UI 제거
         Option_Manager.current.SetThemeMusic(landingData.shipyardNPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart(landingData.shipyardNPC);
     }
@@ -143,16 +143,24 @@ public class UI_Landing : MonoBehaviour
     void StorageButton()
     {
         onDialog = false;
-        SetLandingCanvas(false);// 창고
+        SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
         Game_Manager.current.GetInventory.OpenStorage(true);
     }
 
     public void BackButton()
     {
         Game_Manager.current.GetInventory.CloseShop();
-        if (onDialog == true)
-            Game_Manager.current.GetDialog.OutDialog();
+        OutDialog();// 대화창 닫기
         Option_Manager.current.SetThemeMusic(null);
         SetLandingCanvas(true);// 백버튼
+    }
+
+    public void OutDialog()
+    {
+        if (onDialog == true)
+        {
+            onDialog = false;
+            Game_Manager.current.GetDialog.OutDialog();
+        }
     }
 }
