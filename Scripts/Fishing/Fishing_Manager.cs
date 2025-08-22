@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using static Data_Manager;
 using static Data_Quest;
 
@@ -20,13 +19,16 @@ public class Fishing_Manager : MonoBehaviour
         }
     }
 
-    public FishStruct fishStruct;
-    public FishStruct.RandomSize randomSize;
+    private FishStruct fishStruct;
+    private FishStruct.RandomSize randomSize;
+
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
 
     public void SetStart()
     {
         GetFishingTest.OffCamera();
         GetFishingTest.deleEndFishing = FishingComplate;
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));
 
         SetComplate();
     }
@@ -71,6 +73,7 @@ public class Fishing_Manager : MonoBehaviour
         //{
         //    Debug.LogError("낚시할 물고기가 없습니다.");
         //}
+        Game_Manager.current.GetInventory.CloseResult();
     }
 
     public void FishingStart(FishStruct _fishStruct)
@@ -95,6 +98,7 @@ public class Fishing_Manager : MonoBehaviour
         else
         {
             Debug.LogError("낚시 실패");
+            StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
         }
         Option_Manager.current.SetThemeMusic(null);// 테마 음악 초기화
     }
@@ -103,8 +107,9 @@ public class Fishing_Manager : MonoBehaviour
     {
         Game_Manager.current.GetInventory.CloseResult();
         Game_Manager.current.GetMainUI.OpenCanvas(true);// 메인 UI 다시 열기
-
         Game_Manager.current.OutOfControll(false);// 게임 컨트롤 가능
+
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));
         GetFishingTest.OffCamera();// 카메라 꺼짐
         fishStruct = default;
     }
@@ -115,14 +120,14 @@ public class Fishing_Manager : MonoBehaviour
 
     public GameObject fishInfomation;
     public Custom_Button closeButton;
-    public Custom_Button startButton, resultButton; // 결과 버튼 (필요시 사용)
+    public Custom_Button startButton, outButton; // 결과 버튼 (필요시 사용)
 
     void SetComplate()
     {
         fishInfomation.gameObject.SetActive(false);
         closeButton.SetButton(CloseButton);
         startButton.SetButton(FishingStart);
-        resultButton.SetButton(ResultButton);
+        outButton.SetButton(OutButton);
     }
 
     public void SetFish()// 낚시 성공 후 물고기 정보 설정
@@ -147,9 +152,10 @@ public class Fishing_Manager : MonoBehaviour
         Game_Manager.current.GetInventory.SetResult(fishResult);// 퀘스트 완료 후 결과 아이템 설정
         Game_Manager.current.GetInventory.OpenResult();
         Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
     }
     //public Action deleEndFishing;
-    void ResultButton()
+    void OutButton()
     {
         EndFishing(); // 낚시 완료 후 델리게이트 호출
     }

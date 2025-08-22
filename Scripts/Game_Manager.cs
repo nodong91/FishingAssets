@@ -35,6 +35,10 @@ public class Game_Manager : MonoBehaviour
 
         SetThemeMusic();
         PlayerMove();
+
+        GetQuestUI.SetStart();
+        GetSkill.SetStart();
+        GetDialog.SetStart();
     }
 
     public void SetThemeMusic()
@@ -201,7 +205,6 @@ public class Game_Manager : MonoBehaviour
             if (instDialog == null)
             {
                 instDialog = Instantiate(dialogManager, transform);
-                instDialog.SetStart();
             }
             return instDialog;
         }
@@ -215,7 +218,6 @@ public class Game_Manager : MonoBehaviour
             if (instSkill == null)
             {
                 instSkill = Instantiate(skillManager, transform);
-                instSkill.SetStart();
             }
             return instSkill;
         }
@@ -229,7 +231,6 @@ public class Game_Manager : MonoBehaviour
             if (instQuest == null)
             {
                 instQuest = Instantiate(questManager, transform);
-                instQuest.SetStart();
             }
             return instQuest;
         }

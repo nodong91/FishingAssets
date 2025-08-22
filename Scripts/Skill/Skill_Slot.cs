@@ -10,9 +10,10 @@ using static Data_Manager;
 
 public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
+    public CanvasGroup canvasGroup;
     public bool startSlot;
     public Vector2Int slotNode;
-    public bool onSlot, hide;
+    public bool onSlot;
     public List<Vector2Int> nearbySlot = new List<Vector2Int>();
     public RectTransform rect;
     //public Custom_Button slotButton;
@@ -27,8 +28,6 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     {
         //slotButton.SetButton(SlotButton);
         gageImage.fillAmount = 0f;
-        if (hide == true)
-            boxImage.gameObject.SetActive(false);
         StatusStruct statusStruct = new StatusStruct
         {
             setStatus = new List<StatusStruct.SetStruct>()
@@ -62,14 +61,23 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             }
         }
     }
-
-    public void SetHide(bool _hide)
+    bool hide = true;
+    public void SetHide(bool _hide, Vector3 _prev = default)
     {
-        if (onSlot == true && hide == false)
+        if (onSlot == true && _hide == false)
             return;
 
-        hide = _hide;
-        boxImage.gameObject.SetActive(!hide);
+        if (hide == true && _prev != default)
+        {
+            hide = false;
+            StartCoroutine(OpeningSlot(_prev));
+        }
+        else
+        {
+            canvasGroup.alpha = _hide == true ? 0f : 1f;
+            canvasGroup.interactable = !_hide;
+            canvasGroup.blocksRaycasts = !_hide;
+        }
     }
 
     //==================================================================================================================================
@@ -96,8 +104,9 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        // 누르고 있기
-        inputSlotCoroutine = StartCoroutine(InputSlot());
+        if (onSlot == false)
+            // 누르고 있기
+            inputSlotCoroutine = StartCoroutine(InputSlot());
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -117,11 +126,27 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         {
             onSlot = true;
             deleSlotAction?.Invoke(slotNode);
+            StartCoroutine(OnSlot());
+        }
+    }
+
+    IEnumerator OnSlot()
+    {
+        Vector3 prev = Vector3.one * 1.2f;
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime;
+            float curveValue = openingCurve.Evaluate(normalize);
+            boxImage.transform.localScale = Vector3.Lerp(prev, Vector3.one, curveValue);
+            yield return null;
         }
     }
 
     Coroutine inputSlotCoroutine;
     public Image gageImage;
+    public AnimationCurve openingCurve;
+
     IEnumerator InputSlot()
     {
         float normalize = 0f;
@@ -132,5 +157,20 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             yield return null;
         }
         SlotButton();
+    }
+
+    IEnumerator OpeningSlot(Vector3 _prev)
+    {
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime * 5f;
+            float curveValue = openingCurve.Evaluate(normalize);
+            boxImage.transform.position = Vector3.Lerp(_prev, transform.position, curveValue);
+            canvasGroup.alpha = Mathf.Lerp(0f, 1f, normalize);
+            yield return null;
+        }
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
     }
 }

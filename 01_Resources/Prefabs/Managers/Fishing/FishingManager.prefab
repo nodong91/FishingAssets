@@ -784,11 +784,11 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 50, y: 50}
-  m_Spacing: {x: 0, y: 0}
+  m_Spacing: {x: 5, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
 --- !u!1 &5183461620009632560
@@ -1417,34 +1417,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishingTest: {fileID: 9117868187199123241, guid: 8125b97785b5c87419a7814d786a2585, type: 3}
-  fishStruct:
-    id: 
-    itemStruct:
-      id: 
-      name: 
-      itemType: 0
-      explanation: 
-      icon: {fileID: 0}
-      itemClass: 0
-      shape: []
-      iconSize: {x: 0, y: 0, z: 0, w: 0}
-      weight: 0
-      price: 0
-    fishType: 0
-    size: {x: 0, y: 0}
-    fishHealth: 0
-    fishPower: 0
-    fieldRadius: 0
-    fishSpeed: 0
-    fishAttackSpeed: 0
-    fishRange: {x: 0, y: 0}
-    fishTime: 0
-  randomSize:
-    id: 
-    size: 0
-    weight: 0
-    price: 0
+  canvasStructs:
+  - direction: 1
+    rect: {fileID: 758331773567249844}
+    canvasGroup: {fileID: 0}
+    targetPosition: {x: 0, y: 0}
   fishInfomation: {fileID: 2305347004915630054}
   closeButton: {fileID: 5759816598399242025}
   startButton: {fileID: 6211767675659152569}
-  resultButton: {fileID: 1352764231766857670}
+  outButton: {fileID: 1352764231766857670}

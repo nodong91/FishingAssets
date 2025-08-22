@@ -75,20 +75,21 @@ public class Skill_Manager : MonoBehaviour
                 Skill_Slot inst = Instantiate(slot, instParent);
                 inst.slotNode = new Vector2Int(x, y);
                 inst.name = inst.slotNode.ToString();
-                inst.hide = true;
+                inst.SetHide(true);
                 inst.deleSlotAction = AddSlot;
                 inst.SetStart();
                 inst.SetNearBySlot(skillMap);   // 근처 슬롯 설정
+                inst.openingCurve = openingCurve; // 애니메이션 곡선 설정
                 allSlot[x, y] = inst;
             }
         }
         startSlot = allSlot[skillMap.x / 2, skillMap.y / 2];
 
         startSlot.startSlot = true;
-        startSlot.hide = false;
+        startSlot.SetHide(false);
         startSlot.boxImage.gameObject.SetActive(true);
     }
-
+    public AnimationCurve openingCurve;
     void SetParent()
     {
         if (instParent != null)
@@ -120,7 +121,7 @@ public class Skill_Manager : MonoBehaviour
         for (int i = 0; i < slot.nearbySlot.Count; i++)// 주변 슬롯 열기
         {
             Skill_Slot near = allSlot[slot.nearbySlot[i].x, slot.nearbySlot[i].y];
-            near.SetHide(false);
+            near.SetHide(false, slot.transform.position);
         }
         AddStatuts(slot.statusList);
 
