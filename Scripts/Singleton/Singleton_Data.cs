@@ -7,7 +7,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     //public Dictionary<string, Data_Manager.TranslateString> Dict_DialogString = new Dictionary<string, Data_Manager.TranslateString>();
     //public Dictionary<string, Data_Manager.TranslateString> Dict_TranslateString = new Dictionary<string, Data_Manager.TranslateString>();
     public Dictionary<string, AudioClip> Dict_Audio = new Dictionary<string, AudioClip>();
-    //public Dictionary<string, Skill_Set> Dict_SkillSet = new Dictionary<string, Skill_Set>();
+    public Dictionary<string, Sprite> Dict_Sprite = new Dictionary<string, Sprite>();
     //public Translation translation;
     public Dictionary<string, FishStruct> Dict_Fish = new Dictionary<string, FishStruct>();
     public Dictionary<string, UsedStruct> Dict_Used = new Dictionary<string, UsedStruct>();
@@ -140,6 +140,23 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
             else
             {
                 Dict_Audio[id] = _data[i];
+            }
+        }
+    }
+
+    public void SetDictionary_Sprite(List<Sprite> _data)
+    {
+        Dict_Sprite = new Dictionary<string, Sprite>();
+        for (int i = 0; i < _data.Count; i++)
+        {
+            string id = _data[i].name;
+            if (Dict_Sprite.ContainsKey(id) == true)
+            {
+                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
+            }
+            else
+            {
+                Dict_Sprite[id] = _data[i];
             }
         }
     }

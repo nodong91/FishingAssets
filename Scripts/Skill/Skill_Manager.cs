@@ -43,7 +43,10 @@ public class Skill_Manager : MonoBehaviour
     // 스탯 추가
     public SetStatus defaultStatus, addStatus, setStatus;// 기본 스탯
     public List<Vector2Int> enableSlotLIst = new List<Vector2Int>();// 활성화된 슬롯 리스트
+    public AnimationCurve openingCurve;
+    StatusStruct[,] statusStructs;
 
+    public Skill_Infomation infomation;
     public void SetStart()
     {
         UpdateData();
@@ -64,8 +67,31 @@ public class Skill_Manager : MonoBehaviour
         Game_Manager.current.GetLanding.BackButton();
     }
 
+    void LoadData()
+    {
+        statusStructs = new StatusStruct[skillMap.x, skillMap.y];
+        if (Static_JsonManager.TryLoadSkillData("SkillMap", out List<StatusStruct> _statusStructs))
+        {
+            int index = 0;
+            for (int y = 0; y < skillMap.y; y++)
+            {
+                for (int x = 0; x < skillMap.x; x++)
+                {
+                    statusStructs[x, y] = _statusStructs[index];
+                    index++;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Failed to load skill data.");
+        }
+    }
+
     public void UpdateData()
     {
+        LoadData();// 데이타 불러오기
+
         SetParent();
         allSlot = new Skill_Slot[skillMap.x, skillMap.y];
         for (int y = 0; y < skillMap.y; y++)
@@ -77,6 +103,10 @@ public class Skill_Manager : MonoBehaviour
                 inst.name = inst.slotNode.ToString();
                 inst.SetHide(true);
                 inst.deleSlotAction = AddSlot;
+                inst.deleSlotPosition = infomation.SetPosition;
+
+                StatusStruct status = statusStructs[x, y];
+                inst.status = status;
                 inst.SetStart();
                 inst.SetNearBySlot(skillMap);   // 근처 슬롯 설정
                 inst.openingCurve = openingCurve; // 애니메이션 곡선 설정
@@ -89,7 +119,7 @@ public class Skill_Manager : MonoBehaviour
         startSlot.SetHide(false);
         startSlot.boxImage.gameObject.SetActive(true);
     }
-    public AnimationCurve openingCurve;
+
     void SetParent()
     {
         if (instParent != null)
@@ -123,7 +153,7 @@ public class Skill_Manager : MonoBehaviour
             Skill_Slot near = allSlot[slot.nearbySlot[i].x, slot.nearbySlot[i].y];
             near.SetHide(false, slot.transform.position);
         }
-        AddStatuts(slot.statusList);
+        AddStatuts(slot.status);
 
         setStatus.SettingStatus(defaultStatus);
         setStatus.AddStatus(addStatus);

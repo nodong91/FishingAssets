@@ -340,35 +340,35 @@ public class Data_Manager : Data_Parse
         }
     }
 
-    [System.Serializable]
-    public struct DialogStruct
-    {
-        public string id;
-        public string contents;
+    //[System.Serializable]
+    //public struct DialogStruct
+    //{
+    //    public string id;
+    //    public string contents;
 
-        public enum ActionType
-        {
-            None,
-            Move,
-            Wave,
-            Jitter
-        }
+    //    public enum ActionType
+    //    {
+    //        None,
+    //        Move,
+    //        Wave,
+    //        Jitter
+    //    }
 
-        [System.Serializable]
-        public struct DialogType
-        {
-            public Vector2Int dialogIndex;// 움직일 문장 시작과 끝 인덱스
-            public float textSize;
-            public float typingSpeed;
-            public string textColor;
-            [Header("Action")]
-            public ActionType actionType;
-            public float actionSpeed;
-            public float actionInterval;
-            public Vector2 actionAngle;
-        }
-        public DialogType[] dialogTypes;
-    }
+    //    [System.Serializable]
+    //    public struct DialogType
+    //    {
+    //        public Vector2Int dialogIndex;// 움직일 문장 시작과 끝 인덱스
+    //        public float textSize;
+    //        public float typingSpeed;
+    //        public string textColor;
+    //        [Header("Action")]
+    //        public ActionType actionType;
+    //        public float actionSpeed;
+    //        public float actionInterval;
+    //        public Vector2 actionAngle;
+    //    }
+    //    public DialogType[] dialogTypes;
+    //}
 
     [System.Serializable]
     public class StatusStruct
@@ -415,5 +415,6 @@ public class Data_Manager : Data_Parse
         Singleton_Data.INSTANCE.SetDictionary_Fish(fishStruct);
         Singleton_Data.INSTANCE.SetDictionary_Used(usedStruct);
         Singleton_Data.INSTANCE.SetDictionary_Audio(audioClip);
+        Singleton_Data.INSTANCE.SetDictionary_Sprite(sprites);
     }
 }

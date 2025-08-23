@@ -63,22 +63,7 @@ namespace P01.Editor
 
             if (GUILayout.Button($"Load", buttonText, GUILayout.Height(30f)))
             {
-                if (Static_JsonManager.TryLoadSkillData("SkillMap", out List<StatusStruct> _statusStructs))
-                {
-                    int index = 0;
-                    for (int y = 0; y < skillMap.y; y++)
-                    {
-                        for (int x = 0; x < skillMap.x; x++)
-                        {
-                            statusStructs[x, y] = _statusStructs[index];
-                            index++;
-                        }
-                    }
-                }
-                else
-                {
-                    Debug.LogError("Failed to load skill data.");
-                }
+                LoadData();
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -96,6 +81,26 @@ namespace P01.Editor
             }
             Debug.LogError($"{status.Count}°³ ÀúÀå");
             Static_JsonManager.SaveSkillData("SkillMap", status);
+        }
+
+        void LoadData()
+        {
+            if (Static_JsonManager.TryLoadSkillData("SkillMap", out List<StatusStruct> _statusStructs))
+            {
+                int index = 0;
+                for (int y = 0; y < skillMap.y; y++)
+                {
+                    for (int x = 0; x < skillMap.x; x++)
+                    {
+                        statusStructs[x, y] = _statusStructs[index];
+                        index++;
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError("Failed to load skill data.");
+            }
         }
 
         void SetNode()

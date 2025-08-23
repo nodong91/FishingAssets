@@ -1,7 +1,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,30 +15,29 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public bool onSlot;
     public List<Vector2Int> nearbySlot = new List<Vector2Int>();
     public RectTransform rect;
-    //public Custom_Button slotButton;
-    public Image boxImage;
+    public Image iconImage, boxImage;
 
-    public StatusStruct statusList;
+    bool hide = true;
+
+    Coroutine inputSlotCoroutine;
+    public Image gageImage;
+    public AnimationCurve openingCurve { get; set; }
+    public StatusStruct status { get; set; }
 
     public delegate void DeleSlotAction(Vector2Int _grid);
     public DeleSlotAction deleSlotAction;
 
+    public delegate void DeleSlotPosition(StatusStruct _status, Vector2 _position = default);
+    public DeleSlotPosition deleSlotPosition;
+
     public void SetStart()
     {
-        //slotButton.SetButton(SlotButton);
         gageImage.fillAmount = 0f;
-        StatusStruct statusStruct = new StatusStruct
+        if (status.icon != null)
         {
-            setStatus = new List<StatusStruct.SetStruct>()
-            {
-                new StatusStruct.SetStruct
-                {
-                    statusType = StatusStruct.StatusType.CatchRadius,
-                    value = 0.5f, // 임시로 CatchRadius 값 설정
-                }
-            },
-        };
-        statusList = statusStruct;// 임시로 CatchRadius만 설정
+            if (Singleton_Data.INSTANCE.Dict_Sprite.ContainsKey(status.icon))
+                iconImage.sprite = Singleton_Data.INSTANCE.Dict_Sprite[status.icon];
+        }
     }
 
     public void SetNearBySlot(Vector2Int _map)
@@ -61,7 +59,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             }
         }
     }
-    bool hide = true;
+
     public void SetHide(bool _hide, Vector3 _prev = default)
     {
         if (onSlot == true && _hide == false)
@@ -92,6 +90,8 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = Vector3.one * 1.1f;
+        Vector2 vector2 = eventData.position;
+        deleSlotPosition?.Invoke(status, transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -100,6 +100,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             StopCoroutine(inputSlotCoroutine);
 
         transform.localScale = Vector3.one;
+        deleSlotPosition?.Invoke(null);
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -142,10 +143,6 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             yield return null;
         }
     }
-
-    Coroutine inputSlotCoroutine;
-    public Image gageImage;
-    public AnimationCurve openingCurve;
 
     IEnumerator InputSlot()
     {
