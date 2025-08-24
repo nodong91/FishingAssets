@@ -24,6 +24,7 @@ namespace P01.Editor
 
         StatusStruct[,] statusStructs;
         SerializedObject targetObject;
+        bool tutorialToggle;
 
         private void OnEnable()
         {
@@ -38,6 +39,31 @@ namespace P01.Editor
                 normal = { textColor = Color.yellow },
                 alignment = TextAnchor.MiddleCenter
             };
+            GUIStyle guiText = new()
+            {
+                fontSize = 13,
+                normal = { textColor = Color.yellow },
+                alignment = TextAnchor.MiddleLeft
+            };
+
+            EditorGUILayout.BeginVertical();
+            if (GUILayout.Button("사용법", buttonText, GUILayout.Height(20f)))
+            {
+                tutorialToggle = !tutorialToggle;
+            }
+            if (tutorialToggle == true)
+            {
+                guiText.normal.textColor = Color.gray;
+                GUILayout.Space(10f);
+                GUILayout.Label(" 1. SkillMap 에 노드 사이즈 기입", guiText);
+                GUILayout.Label(" 2. Set Field 클릭", guiText);
+                GUILayout.Label(" 3. 저장된 파일이 있는 경우 Load 선택", guiText);
+                GUILayout.Label(" 4. 노드 버튼 클릭 후 내용 기입", guiText);
+                GUILayout.Label(" 5. Save 클릭하여 스킬 트리 저장", guiText);
+
+                GUILayout.Space(10f);
+            }
+            EditorGUILayout.EndVertical();
 
             skillMap = EditorGUILayout.Vector2IntField("SkillMap", skillMap);
             if (GUILayout.Button($"Set Field : {skillMap}", buttonText, GUILayout.Height(30f)))
@@ -111,7 +137,7 @@ namespace P01.Editor
                 for (int x = 0; x < skillMap.x; x++)
                 {
                     statusStructs[x, y] = new StatusStruct();
-                    statusStructs[x, y].setStatus = new List<StatusStruct.SetStruct>();
+                    //statusStructs[x, y].setStatus = new List<StatusStruct.SetStruct>();
                 }
             }
         }
@@ -149,9 +175,9 @@ namespace P01.Editor
             StatusStruct setStatus = statusStructs[_x, _y];
 
             string setName = $"{setStatus.name} ({_x}:{_y})";
-            setName += $"\nCount : {setStatus.setStatus.Count}";
+            //setName += $"\nCount : {setStatus.setStatus.Count}";
             setName += $"\nPrice : {setStatus.price}";
-            GUI.color = (setStatus.setStatus.Count > 0) ? Color.white : Color.gray;
+            GUI.color = (setStatus.name?.Length > 0) ? Color.white : Color.gray;
 
             if (GUILayout.Button(setName, buttonText, GUILayout.Width(_width), GUILayout.Height(_width)))
             {

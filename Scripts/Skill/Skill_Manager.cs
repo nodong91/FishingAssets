@@ -41,7 +41,7 @@ public class Skill_Manager : MonoBehaviour
     public Skill_Slot[,] allSlot;
 
     // Ω∫≈» √ﬂ∞°
-    public SetStatus defaultStatus, addStatus, setStatus;// ±‚∫ª Ω∫≈»
+    public SetStatus addStatus;// ±‚∫ª Ω∫≈»
     public List<Vector2Int> enableSlotLIst = new List<Vector2Int>();// »∞º∫»≠µ» ΩΩ∑‘ ∏ÆΩ∫∆Æ
     public AnimationCurve openingCurve;
     StatusStruct[,] statusStructs;
@@ -153,53 +153,7 @@ public class Skill_Manager : MonoBehaviour
             Skill_Slot near = allSlot[slot.nearbySlot[i].x, slot.nearbySlot[i].y];
             near.SetHide(false, slot.transform.position);
         }
-        AddStatuts(slot.status);
-
-        setStatus.SettingStatus(defaultStatus);
-        setStatus.AddStatus(addStatus);
-    }
-
-    void AddStatuts(StatusStruct _status)
-    {
-        //if (_status.setStatus == null || _status.setStatus.Count == 0)
-        //    return;
-
-        for (int i = 0; i < _status.setStatus.Count; i++)
-        {
-            Debug.LogWarning($"{_status.setStatus} {_status.setStatus[i].value}");
-            switch (_status.setStatus[i].statusType)
-            {
-                case StatusStruct.StatusType.CatchRadius:
-                    addStatus.catchRadius += _status.setStatus[i].value;
-                    break;
-                case StatusStruct.StatusType.CatchSpeed:
-                    addStatus.catchSpeed += _status.setStatus[i].value;
-                    break;
-                case StatusStruct.StatusType.CatchPower:
-                    addStatus.catchPower += _status.setStatus[i].value;
-                    break;
-                case StatusStruct.StatusType.CatchHealth:
-                    addStatus.catchHealth += _status.setStatus[i].value;
-                    break;
-                case StatusStruct.StatusType.CatchAttakSpeed:
-                    addStatus.catchAttakSpeed += _status.setStatus[i].value;
-                    break;
-                case StatusStruct.StatusType.ShipSpeed:
-                    addStatus.shipSpeed += _status.setStatus[i].value;
-                    break;
-                case StatusStruct.StatusType.MaxWeight:
-                    addStatus.maxWeight += _status.setStatus[i].value;
-                    break;
-                case StatusStruct.StatusType.MaxEnergy:
-                    addStatus.maxEnergy += _status.setStatus[i].value;
-                    break;
-                case StatusStruct.StatusType.MaxBoxSize:
-                    addStatus.maxBoxSize += new Vector2Int((int)_status.setStatus[i].value, (int)_status.setStatus[i].value);
-                    break;
-                case StatusStruct.StatusType.Freshness:
-                    addStatus.freshness += _status.setStatus[i].value;
-                    break;
-            }
-        }
+        addStatus.AddStatus(slot.status.addStatus);
+        Game_Manager.current.AddStatus();
     }
 }

@@ -189,7 +189,6 @@ public class Data_Manager : Data_Parse
         public float catchRadius;// 물고기를 잡는 범위
         public float catchSpeed;// 낚시대가 물고기를 향해 이동하는 속도
         public float catchPower;// 낚시대의 힘
-        public float catchHealth;// 낚시대의 체력
         public float catchMaxHealth;// 낚시대의 최대 체력
         public float catchAttakSpeed;// 물고기를 공격하는 빈도
 
@@ -197,14 +196,17 @@ public class Data_Manager : Data_Parse
         public float maxWeight;// 인벤토리 중량
         public float maxEnergy;// 연료통 크기
         public Vector2Int maxBoxSize;// 인벤토리 크기
-        public float freshness;// 신선도 유지 - 꼭 필요한가??????
+        public float freshness;// 신선도 유지 - 꼭 필요한가??????  
+
+        public float LuckFish;// 희귀 물고기 확률
+        public float FishAmount;// 낚시 횟수 증가
+        public float FishPrice;// 판매 물고기 가격 증가
 
         public void SettingStatus(SetStatus _status)
         {
             catchRadius = _status.catchRadius;
             catchSpeed = _status.catchSpeed;
             catchPower = _status.catchPower;
-            catchHealth = _status.catchHealth;
             catchMaxHealth = _status.catchMaxHealth;
             catchAttakSpeed = _status.catchAttakSpeed;
             shipSpeed = _status.shipSpeed;
@@ -212,6 +214,9 @@ public class Data_Manager : Data_Parse
             maxEnergy = _status.maxEnergy;
             maxBoxSize = _status.maxBoxSize;
             freshness = _status.freshness;
+            LuckFish = _status.LuckFish;
+            FishAmount = _status.FishPrice;
+            FishPrice = _status.FishPrice;
         }
 
         public void AddStatus(SetStatus _status)
@@ -219,7 +224,6 @@ public class Data_Manager : Data_Parse
             catchRadius += _status.catchRadius;
             catchSpeed += _status.catchSpeed;
             catchPower += _status.catchPower;
-            catchHealth += _status.catchHealth;
             catchMaxHealth += _status.catchMaxHealth;
             catchAttakSpeed += _status.catchAttakSpeed;
             shipSpeed += _status.shipSpeed;
@@ -227,7 +231,20 @@ public class Data_Manager : Data_Parse
             maxEnergy += _status.maxEnergy;
             maxBoxSize += _status.maxBoxSize;
             freshness += _status.freshness;
+            LuckFish += _status.LuckFish;
+            FishAmount += _status.FishPrice;
+            FishPrice += _status.FishPrice;
         }
+    }
+
+    [System.Serializable]
+    public class StatusStruct
+    {
+        public string name;
+        public string description;
+        public string icon;
+        public int price; // 가격 정보
+        public SetStatus addStatus;
     }
 
     [System.Serializable]
@@ -369,38 +386,6 @@ public class Data_Manager : Data_Parse
     //    }
     //    public DialogType[] dialogTypes;
     //}
-
-    [System.Serializable]
-    public class StatusStruct
-    {
-        public string name;
-        public string description;
-        public string icon;
-        public int price; // 가격 정보
-        public enum StatusType
-        {
-            CatchRadius,// 낚시 반경
-            CatchSpeed,// 낚시 속도
-            CatchPower,// 낚시 파워
-            CatchHealth,// 낚시 체력
-            CatchAttakSpeed,// 낚시 공격 속도
-            ShipSpeed,// 배 이동 속도
-            MaxWeight,// 최대 인벤토리 무게
-            MaxEnergy,// 최대 에너지
-            MaxBoxSize,// 최대 인벤토리 크기
-            Freshness,// 신선도
-            LuckFish,// 희귀 물고기 확률
-            FishAmount,// 낚시 횟수 증가
-            FishPrice,// 물고기 가격 증가
-        }
-        [System.Serializable]
-        public struct SetStruct
-        {
-            public StatusType statusType;
-            public float value;
-        }
-        public List<SetStruct> setStatus;
-    }
 
     //==================================================================================
     // Data
