@@ -3,38 +3,31 @@ using UnityEngine;
 using static Data_Manager;
 using static Data_Quest;
 
-public class Fishing_Manager : MonoBehaviour
+public class Fishing_Manager : FishingTest
 {
-    public FishingTest fishingTest;
-    private FishingTest instFishing;
-    public FishingTest GetFishingTest
-    {
-        get
-        {
-            if (instFishing == null)
-            {
-                instFishing = Instantiate(fishingTest, transform);
-            }
-            return instFishing;
-        }
-    }
+    [Header(" [ Manager ]")]
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
 
     private FishStruct fishStruct;
-    private FishStruct.RandomSize randomSize;
+    private FishStruct.RandomSize randomSize; 
+    
+    FishStruct[] fishStructs;
+    int fishingAmount; // 낚시 횟수
 
-    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
+    public GameObject fishInfomation;
+    public Custom_Button closeButton;
+    public Custom_Button startButton, outButton; // 결과 버튼 (필요시 사용)
+
+    //==================================================================================================================================
 
     public void SetStart()
     {
-        GetFishingTest.OffCamera();
-        GetFishingTest.deleEndFishing = FishingComplate;
+        OffCamera();
+        deleEndFishing = FishingComplate;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));
 
         SetComplate();
     }
-    //==================================================================================================================================
-    FishStruct[] fishStructs;
-    int fishingAmount; // 낚시 횟수
 
     public void SetFishingStart(FishStruct[] _fishStructs, int _fishingAmount)
     {
@@ -57,35 +50,22 @@ public class Fishing_Manager : MonoBehaviour
             Debug.LogWarning("낚시 횟수가 0 이하입니다.");
         }
 
-        //if (fishStructs.Length > 0)
-        //{
-        //FishStruct randomFish = fishStructs[Random.Range(0, fishStructs.Length)];
-        //FishingStart(randomFish);// 랜덤 물고기로 낚시 시작
-        fishStruct = Singleton_Data.INSTANCE.Dict_Fish["Fs_1001"];
-        GetFishingTest.SetFishing(fishStruct);// 낚시 시작
-        randomSize = fishStruct.GetRandom();
-
-        Option_Manager.current.SetThemeMusic("Battle");
-        Game_Manager.current.GetMainUI.OpenCanvas(false);
-        Game_Manager.current.OutOfControll(true);
-        //}
-        //else
-        //{
-        //    Debug.LogError("낚시할 물고기가 없습니다.");
-        //}
-        Game_Manager.current.GetInventory.CloseResult();
+        FishStruct fish = Singleton_Data.INSTANCE.Dict_Fish["Fs_1001"];
+        FishingStart(fish);
+        SetStart(fishStruct);// 낚시 시작
     }
 
     public void FishingStart(FishStruct _fishStruct)
     {
         fishStruct = _fishStruct;// 물고기 정보
         randomSize = fishStruct.GetRandom();
+        SetStart(_fishStruct);// 낚시 시작
 
         Option_Manager.current.SetThemeMusic("Battle");
         Game_Manager.current.GetMainUI.OpenCanvas(false);
         Game_Manager.current.OutOfControll(true);
 
-        GetFishingTest.SetFishing(_fishStruct);// 낚시 시작
+        Game_Manager.current.GetInventory.CloseResult();
     }
 
     void FishingComplate(bool _comp)
@@ -110,17 +90,13 @@ public class Fishing_Manager : MonoBehaviour
         Game_Manager.current.OutOfControll(false);// 게임 컨트롤 가능
 
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));
-        GetFishingTest.OffCamera();// 카메라 꺼짐
+        OffCamera();// 카메라 꺼짐
         fishStruct = default;
     }
 
     //==================================================================================================================================
     // 낚시 
     //==================================================================================================================================
-
-    public GameObject fishInfomation;
-    public Custom_Button closeButton;
-    public Custom_Button startButton, outButton; // 결과 버튼 (필요시 사용)
 
     void SetComplate()
     {
@@ -154,7 +130,7 @@ public class Fishing_Manager : MonoBehaviour
         Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
     }
-    //public Action deleEndFishing;
+
     void OutButton()
     {
         EndFishing(); // 낚시 완료 후 델리게이트 호출

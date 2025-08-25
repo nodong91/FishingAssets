@@ -186,18 +186,21 @@ public class Data_Manager : Data_Parse
     [System.Serializable]
     public class SetStatus
     {
+        [Header(" [ Catch ]")]
         public float catchRadius;// 물고기를 잡는 범위
         public float catchSpeed;// 낚시대가 물고기를 향해 이동하는 속도
         public float catchPower;// 낚시대의 힘
         public float catchMaxHealth;// 낚시대의 최대 체력
         public float catchAttakSpeed;// 물고기를 공격하는 빈도
 
+        [Header(" [ Ship ]")]
         public float shipSpeed;// 배의 이동 속도
         public float maxWeight;// 인벤토리 중량
         public float maxEnergy;// 연료통 크기
         public Vector2Int maxBoxSize;// 인벤토리 크기
         public float freshness;// 신선도 유지 - 꼭 필요한가??????  
 
+        [Header(" [ Fish ]")]
         public float LuckFish;// 희귀 물고기 확률
         public float FishAmount;// 낚시 횟수 증가
         public float FishPrice;// 판매 물고기 가격 증가
