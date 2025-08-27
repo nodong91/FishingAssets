@@ -22,12 +22,12 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     Coroutine inputSlotCoroutine;
     public Image gageImage;
     public AnimationCurve openingCurve { get; set; }
-    public StatusStruct status { get; set; }
+    public SkillStatus status { get; set; }
 
     public delegate void DeleSlotAction(Vector2Int _grid);
     public DeleSlotAction deleSlotAction;
 
-    public delegate void DeleSlotPosition(StatusStruct _status, Vector2 _position = default);
+    public delegate void DeleSlotPosition(SkillStatus _status, Vector2 _position = default);
     public DeleSlotPosition deleSlotPosition;
 
     public void SetStart()

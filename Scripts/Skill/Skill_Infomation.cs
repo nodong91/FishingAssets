@@ -17,7 +17,7 @@ public class Skill_Infomation : MonoBehaviour
         SetPosition(null);
     }
 
-    public void SetPosition(StatusStruct _status, Vector2 _position = default)
+    public void SetPosition(SkillStatus _status, Vector2 _position = default)
     {
         float alpha = (_status == null) ? 0f : 1f;
         Vector2 viewportPoint;

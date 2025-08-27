@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 public class Game_Manager : MonoBehaviour
@@ -38,7 +36,7 @@ public class Game_Manager : MonoBehaviour
         SaveData_Continue.current.GetContinue();
 
         SetThemeMusic();
-        SetDefaultStatus();
+        SetDefaultStatus();// 스테이트 세팅
         PlayerMove();
 
         GetQuestUI.SetStart();
@@ -57,6 +55,7 @@ public class Game_Manager : MonoBehaviour
         defaultStatus.shipSpeed = 2f;// 배의 이동 속도
         defaultStatus.maxWeight = 1f;// 인벤토리 중량
         defaultStatus.maxEnergy = 10f;// 연료통 크기
+        defaultStatus.efficient = 0.1f;// 에너지 효율
         defaultStatus.maxBoxSize = new Vector2Int(0, 0);// 인벤토리 크기
         defaultStatus.shipHealth = 3;// 배 체력
         defaultStatus.freshness = 1f;// 신선도 유지 - 꼭 필요한가??????  
@@ -108,10 +107,10 @@ public class Game_Manager : MonoBehaviour
         controllManager.ResetControll();
     }
 
-
     //====================================================================================================================
     // 매니저 가져오기
     //====================================================================================================================
+
     private Unit_Player instPlayer;
     public Unit_Player GetPlayer
     {

@@ -3,7 +3,6 @@ using static Data_Manager;
 
 public class SaveData_Continue : MonoBehaviour
 {
-
     public Data_Continue continueData;
     public string saveData = "SaveContinue";
 

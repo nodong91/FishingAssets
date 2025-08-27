@@ -22,7 +22,7 @@ namespace P01.Editor
         Vector2Int skillMap;
         Vector2 scrollPosition;
 
-        StatusStruct[,] statusStructs;
+        SkillStatus[,] statusStructs;
         SerializedObject targetObject;
         bool tutorialToggle;
         const string saveTreeData = "Skill_Tree";
@@ -97,12 +97,12 @@ namespace P01.Editor
 
         void SaveData()
         {
-            List<StatusStruct> status = new List<StatusStruct>();
+            List<SkillStatus> status = new List<SkillStatus>();
             for (int y = 0; y < skillMap.y; y++)
             {
                 for (int x = 0; x < skillMap.x; x++)
                 {
-                    StatusStruct skillClass = statusStructs[x, y];
+                    SkillStatus skillClass = statusStructs[x, y];
                     status.Add(skillClass);
                 }
             }
@@ -112,7 +112,7 @@ namespace P01.Editor
      
         void LoadData()
         {
-            if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<StatusStruct> _statusStructs))
+            if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<SkillStatus> _statusStructs))
             {
                 int index = 0;
                 for (int y = 0; y < skillMap.y; y++)
@@ -132,12 +132,12 @@ namespace P01.Editor
 
         void SetNode()
         {
-            statusStructs = new StatusStruct[skillMap.x, skillMap.y];
+            statusStructs = new SkillStatus[skillMap.x, skillMap.y];
             for (int y = 0; y < skillMap.y; y++)
             {
                 for (int x = 0; x < skillMap.x; x++)
                 {
-                    statusStructs[x, y] = new StatusStruct();
+                    statusStructs[x, y] = new SkillStatus();
                     //statusStructs[x, y].setStatus = new List<StatusStruct.SetStruct>();
                 }
             }
@@ -173,7 +173,7 @@ namespace P01.Editor
                 alignment = TextAnchor.MiddleCenter
             };
 
-            StatusStruct setStatus = statusStructs[_x, _y];
+            SkillStatus setStatus = statusStructs[_x, _y];
 
             string setName = $"{setStatus.name} ({_x}:{_y})";
             //setName += $"\nCount : {setStatus.setStatus.Count}";
@@ -187,7 +187,7 @@ namespace P01.Editor
             GUI.color = Color.white;
         }
 
-        private void OpenSettingWindow(StatusStruct _setStatus)
+        private void OpenSettingWindow(SkillStatus _setStatus)
         {
             // 새 창 열기
             SkillSettingWindow.ShowWindow(_setStatus);
@@ -196,18 +196,18 @@ namespace P01.Editor
 
     public class SkillSettingWindow : EditorWindow
     {
-        public static void ShowWindow(StatusStruct _setStatus)
+        public static void ShowWindow(SkillStatus _setStatus)
         {
             // 새 창을 열고 의존성 경로 가져오기
             SkillSettingWindow window = GetWindow<SkillSettingWindow>($"Slot Infomation");
             window.GetDependencies(_setStatus);
             window.Show();
         }
-        [SerializeField] private StatusStruct setStatus;
+        [SerializeField] private SkillStatus setStatus;
         SerializedObject targetObject;
         Vector2 scrollPosition;
 
-        public void GetDependencies(StatusStruct _setStatus)
+        public void GetDependencies(SkillStatus _setStatus)
         {
             targetObject = new SerializedObject(this);
             setStatus = _setStatus;

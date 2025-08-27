@@ -118,7 +118,7 @@ public class Static_JsonManager
     //    jsonCards = default;
     //    return false;
     //}
-    public static void SaveSkillData(string fileName, List<StatusStruct> _data)
+    public static void SaveSkillData(string fileName, List<SkillStatus> _data)
     {
         string filePath = Application.dataPath + "/Save/";
         // 폴더 생성
@@ -129,7 +129,7 @@ public class Static_JsonManager
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
-    public static bool TryLoadSkillData(string fileName, out List<StatusStruct> data)
+    public static bool TryLoadSkillData(string fileName, out List<SkillStatus> data)
     {
         string filePath = Application.dataPath + "/Save/";
         string path = filePath + fileName + ".json";
@@ -139,7 +139,7 @@ public class Static_JsonManager
         {
             string fromJson = File.ReadAllText(path);
             //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
-            data = JsonHelper.FromJson<StatusStruct>(fromJson);
+            data = JsonHelper.FromJson<SkillStatus>(fromJson);
             return true;
         }
 

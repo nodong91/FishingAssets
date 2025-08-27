@@ -1,9 +1,7 @@
-
-//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.EventSystems.EventTrigger;
+using static Data_Manager;
 
 public class Unit_Player : MonoBehaviour
 {
@@ -17,22 +15,23 @@ public class Unit_Player : MonoBehaviour
     }
     public State state = State.None;
 
+    Data_Manager.SetStatus status;
     public float moveSpeed = 1f;
     public int health;
     public float energy;
+    public float efficient;// 에너지 효율
     private Vector2 dirction;
-    Transform FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
-    Coroutine stateAction;
-
-    private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
-    private Trigger_Setting closestTarget;
-
-    Data_Manager.SetStatus status;
+    // 물위에서 배의 움직임
     private float shipHight = -0.1f;
     private float waveSpeed = 2f;
     private float targetAngle = 10f;
     float runningTime;
     public GameObject playerObject;
+    Transform FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
+    Coroutine stateAction;
+
+    private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
+    private Trigger_Setting closestTarget;
 
     Quaternion prevAngle, setAngle;
     float randomTime, runningRandomTime;
@@ -54,6 +53,7 @@ public class Unit_Player : MonoBehaviour
         moveSpeed = status.shipSpeed;
         health = status.shipHealth;
         energy = status.maxEnergy;
+        efficient = status.catchPower;
     }
 
     //================================================================================================================================================
@@ -114,9 +114,9 @@ public class Unit_Player : MonoBehaviour
             SetMoving();
             CheckClosestUnit();
 
-            energy -= 0.01f;// 임시
+            energy -= status.efficient * Time.deltaTime;// 임시
             Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
-            if(energy <= 0)
+            if (energy <= 0)
             {
                 StateMachine(State.Destroy);
             }
@@ -229,7 +229,7 @@ public class Unit_Player : MonoBehaviour
         Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
         Game_Manager.current.cameraManager.InputShake();// 카메라 흔들기
         float normalize = 0f;
-        while (normalize < 1f)
+        while (normalize < 1f)// 뒤로 밀려나기
         {
             normalize += Time.deltaTime;
             float speed = (1f - normalize) * 0.1f;
@@ -246,7 +246,15 @@ public class Unit_Player : MonoBehaviour
 
     void StateDestroy()
     {
+        Data_Continue continueData = SaveData_Continue.current.continueData;
+        // 위치
+        transform.position = continueData.playerPosition;
+        transform.rotation = continueData.playerRotation;
+        transform.localScale = continueData.playerScale;
+        FocusTarget.position = transform.position;
 
+        SetStatus();
+        StateMachine(State.Idle);// 다시 대기 상태
     }
 
     //================================================================================================================================================
@@ -271,11 +279,6 @@ public class Unit_Player : MonoBehaviour
             }
         }
     }
-
-    //================================================================================================================================================
-    // 낚시
-    //================================================================================================================================================
-
     //================================================================================================================================================
     // 충돌
     //================================================================================================================================================
@@ -316,7 +319,6 @@ public class Unit_Player : MonoBehaviour
             }
             else
             {
-
                 Debug.LogWarning("배 파괴!!!!!!!!!!!!!!!!!!!!");
             }
         }

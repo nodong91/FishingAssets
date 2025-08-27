@@ -197,6 +197,7 @@ public class Data_Manager : Data_Parse
         public float shipSpeed;// 배의 이동 속도
         public float maxWeight;// 인벤토리 중량
         public float maxEnergy;// 연료통 크기
+        public float efficient;// 에너지 효율
         public Vector2Int maxBoxSize;// 인벤토리 크기
         public int shipHealth;// 배 체력
         public float freshness;// 신선도 유지 - 꼭 필요한가??????  
@@ -216,7 +217,9 @@ public class Data_Manager : Data_Parse
             shipSpeed = _status.shipSpeed;
             maxWeight = _status.maxWeight;
             maxEnergy = _status.maxEnergy;
+            efficient = _status.efficient;
             maxBoxSize = _status.maxBoxSize;
+            shipHealth = _status.shipHealth;
             freshness = _status.freshness;
             LuckFish = _status.LuckFish;
             FishAmount = _status.FishPrice;
@@ -233,7 +236,9 @@ public class Data_Manager : Data_Parse
             shipSpeed += _status.shipSpeed * _remove;
             maxWeight += _status.maxWeight * _remove;
             maxEnergy += _status.maxEnergy * _remove;
+            efficient += _status.efficient * _remove;
             maxBoxSize += _status.maxBoxSize * _remove;
+            shipHealth += _status.shipHealth * _remove;
             freshness += _status.freshness * _remove;
             LuckFish += _status.LuckFish * _remove;
             FishAmount += _status.FishPrice * _remove;
@@ -242,7 +247,7 @@ public class Data_Manager : Data_Parse
     }
 
     [System.Serializable]
-    public class StatusStruct
+    public class SkillStatus
     {
         public string name;
         public string description;

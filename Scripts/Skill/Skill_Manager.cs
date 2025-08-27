@@ -45,7 +45,7 @@ public class Skill_Manager : MonoBehaviour
     public SetStatus addStatus;// 기본 스탯
     public List<Vector2Int> enableSlotLIst = new List<Vector2Int>();// 활성화된 슬롯 리스트
     public AnimationCurve openingCurve;
-    StatusStruct[,] statusStructs;
+    SkillStatus[,] statusStructs;
 
     public Skill_Infomation infomation;
 
@@ -76,9 +76,9 @@ public class Skill_Manager : MonoBehaviour
 
     void LoadData()
     {
-        statusStructs = new StatusStruct[skillMap.x, skillMap.y];
+        statusStructs = new SkillStatus[skillMap.x, skillMap.y];
         // 스킬 트리 불러오기
-        if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<StatusStruct> _statusStructs))
+        if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<SkillStatus> _statusStructs))
         {
             int index = 0;
             for (int y = 0; y < skillMap.y; y++)
@@ -127,7 +127,7 @@ public class Skill_Manager : MonoBehaviour
                 inst.deleSlotAction = AddSlot;
                 inst.deleSlotPosition = infomation.SetPosition;
 
-                StatusStruct status = statusStructs[x, y];
+                SkillStatus status = statusStructs[x, y];
                 inst.status = status;
                 inst.SetStart();
                 inst.SetNearBySlot(skillMap);   // 근처 슬롯 설정
