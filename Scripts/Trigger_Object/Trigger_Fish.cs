@@ -6,12 +6,14 @@ public class Trigger_Fish : MonoBehaviour
     public Trigger_Setting triggerSetting;
     public string id;
     public FishStruct fishStruct;
+    public Sprite catchIcon;
 
     void Start()
     {
         SetFish(id);
         triggerSetting.deleTriggerAction = FishingStart;// 낚시 게임 스타트
-        triggerSetting.GetIconSprite = fishStruct.itemStruct.icon;// 트리거 아이콘 설정
+        //triggerSetting.GetIconSprite = fishStruct.itemStruct.icon;// 트리거 아이콘 설정
+        triggerSetting.GetIconSprite = catchIcon;// 트리거 아이콘 설정
     }
 
     void SetFish(string _id)

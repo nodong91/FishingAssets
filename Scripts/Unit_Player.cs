@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class Unit_Player : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class Unit_Player : MonoBehaviour
     public State state = State.None;
 
     public float moveSpeed = 1f;
-    public int HealthPoint;
+    public int health;
+    public float energy;
     private Vector2 dirction;
     Transform FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
     Coroutine stateAction;
@@ -25,8 +27,9 @@ public class Unit_Player : MonoBehaviour
     private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
     private Trigger_Setting closestTarget;
 
+    Data_Manager.SetStatus status;
     private float shipHight = -0.1f;
-    private float  waveSpeed = 2f;
+    private float waveSpeed = 2f;
     private float targetAngle = 10f;
     float runningTime;
     public GameObject playerObject;
@@ -47,9 +50,10 @@ public class Unit_Player : MonoBehaviour
 
     public void SetStatus()
     {
-        Data_Manager.SetStatus status = Game_Manager.current.currentStatus;
+        status = Game_Manager.current.currentStatus;
         moveSpeed = status.shipSpeed;
-        HealthPoint = status.shipHealth;
+        health = status.shipHealth;
+        energy = status.maxEnergy;
     }
 
     //================================================================================================================================================
@@ -109,6 +113,13 @@ public class Unit_Player : MonoBehaviour
         {
             SetMoving();
             CheckClosestUnit();
+
+            energy -= 0.01f;// 임시
+            Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
+            if(energy <= 0)
+            {
+                StateMachine(State.Destroy);
+            }
             yield return null;
         }
     }
@@ -227,7 +238,7 @@ public class Unit_Player : MonoBehaviour
             yield return null;
         }
 
-        if (HealthPoint > 0)
+        if (health > 0)
             StateMachine(State.Idle);// 다시 대기 상태
         else
             StateMachine(State.Destroy);
@@ -297,9 +308,9 @@ public class Unit_Player : MonoBehaviour
         if (collision.gameObject.tag == "Finish")
         {
             Debug.LogWarning("배 데미지~~~");
-            if (HealthPoint > 0)
+            if (health > 0)
             {
-                HealthPoint--;
+                health--;
                 Vector3 offset = (transform.position - collision.transform.position).normalized;
                 StateClash(offset);
             }

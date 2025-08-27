@@ -27,6 +27,8 @@ public class UI_Main : MonoBehaviour
     public Canvas cameraCanvas;
     public TMPro.TMP_Text warnningText;
     Coroutine textActing;
+    [Header("[ Ship ]")]
+    public Image shipEnergy;
 
     public void SetStart()
     {
@@ -34,6 +36,7 @@ public class UI_Main : MonoBehaviour
         fishGuideButton.onClick.AddListener(FishGuideButton);
         questButton.onClick.AddListener(QuestButton);
         optionButton.onClick.AddListener(OptionButton);
+        shipEnergy.material = Instantiate(shipEnergy.material);
 
         SetCameraCanvas();
     }
@@ -106,5 +109,10 @@ public class UI_Main : MonoBehaviour
             warnningText.alpha = 1f - normalize;
             yield return null;
         }
+    }
+
+    public void SetEnergy(float _energy)
+    {
+        shipEnergy.material.SetFloat("_FillAmount", _energy);
     }
 }

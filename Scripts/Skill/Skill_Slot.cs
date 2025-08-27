@@ -1,8 +1,10 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 using static Data_Manager;
 
@@ -12,11 +14,10 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public bool startSlot;
     public Vector2Int slotNode;
     public bool onSlot;
+    public bool hide = true;
     public List<Vector2Int> nearbySlot = new List<Vector2Int>();
     public RectTransform rect;
     public Image iconImage, boxImage;
-
-    bool hide = true;
 
     Coroutine inputSlotCoroutine;
     public Image gageImage;
@@ -61,8 +62,8 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void SetHide(bool _hide, Vector3 _prev = default)
     {
-        if (onSlot == true && _hide == false)
-            return;
+        //if (onSlot == true && _hide == false)
+        //    return;
 
         boxImage.gameObject.SetActive(!_hide);
         if (hide == true && _prev != default)
@@ -70,6 +71,16 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             hide = false;
             StartCoroutine(OpeningSlot(_prev));
         }
+    }
+
+    public void ResetSlot()
+    {
+        EnableSlot(false);
+        if (startSlot == true)
+            return;
+
+        hide = true;
+        boxImage.gameObject.SetActive(false);
     }
 
     //==================================================================================================================================
@@ -115,11 +126,17 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         }
     }
 
-    void EnableSlot()
+    public void EnableSlot(bool _enable)
+    {
+        onSlot = _enable;
+        gageImage.fillAmount = _enable == true ? 1f : 0f;
+    }
+
+    void EnableAction()
     {
         if (onSlot == false)
         {
-            onSlot = true;
+            EnableSlot(true);
             deleSlotAction?.Invoke(slotNode);
             StartCoroutine(OnSlot());
         }
@@ -147,7 +164,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             gageImage.fillAmount = Mathf.Lerp(0f, 1f, normalize);
             yield return null;
         }
-        EnableSlot();
+        EnableAction();
     }
 
     IEnumerator OpeningSlot(Vector3 _prev)// ½½·Ô ¿­¸®±â

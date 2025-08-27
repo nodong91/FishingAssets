@@ -54,9 +54,9 @@ public class Game_Manager : MonoBehaviour
         defaultStatus.catchMaxHealth = 10f;// 낚시대의 최대 체력
         defaultStatus.catchAttakSpeed = 1.5f;// 물고기를 공격하는 빈도
 
-        defaultStatus.shipSpeed = 1f;// 배의 이동 속도
+        defaultStatus.shipSpeed = 2f;// 배의 이동 속도
         defaultStatus.maxWeight = 1f;// 인벤토리 중량
-        defaultStatus.maxEnergy = 1f;// 연료통 크기
+        defaultStatus.maxEnergy = 10f;// 연료통 크기
         defaultStatus.maxBoxSize = new Vector2Int(0, 0);// 인벤토리 크기
         defaultStatus.shipHealth = 3;// 배 체력
         defaultStatus.freshness = 1f;// 신선도 유지 - 꼭 필요한가??????  

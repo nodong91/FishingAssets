@@ -223,21 +223,21 @@ public class Data_Manager : Data_Parse
             FishPrice = _status.FishPrice;
         }
 
-        public void AddStatus(SetStatus _status)
+        public void AddStatus(SetStatus _status, int _remove = 1)
         {
-            catchRadius += _status.catchRadius;
-            catchSpeed += _status.catchSpeed;
-            catchPower += _status.catchPower;
-            catchMaxHealth += _status.catchMaxHealth;
-            catchAttakSpeed += _status.catchAttakSpeed;
-            shipSpeed += _status.shipSpeed;
-            maxWeight += _status.maxWeight;
-            maxEnergy += _status.maxEnergy;
-            maxBoxSize += _status.maxBoxSize;
-            freshness += _status.freshness;
-            LuckFish += _status.LuckFish;
-            FishAmount += _status.FishPrice;
-            FishPrice += _status.FishPrice;
+            catchRadius += _status.catchRadius * _remove;
+            catchSpeed += _status.catchSpeed * _remove;
+            catchPower += _status.catchPower * _remove;
+            catchMaxHealth += _status.catchMaxHealth * _remove;
+            catchAttakSpeed += _status.catchAttakSpeed * _remove;
+            shipSpeed += _status.shipSpeed * _remove;
+            maxWeight += _status.maxWeight * _remove;
+            maxEnergy += _status.maxEnergy * _remove;
+            maxBoxSize += _status.maxBoxSize * _remove;
+            freshness += _status.freshness * _remove;
+            LuckFish += _status.LuckFish * _remove;
+            FishAmount += _status.FishPrice * _remove;
+            FishPrice += _status.FishPrice * _remove;
         }
     }
 

@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using static Data_Manager;
-using UnityEngine.UIElements;
 
 
 #if UNITY_EDITOR
@@ -32,12 +31,12 @@ public class Editor_Skill_Manager : Editor
 public class Skill_Manager : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
+    public Custom_Button closeButton;
     public RectTransform slotParent;
     public Skill_Slot slot;
     public Vector2Int skillMap;
     public float slotSize = 50f; // Size of each skill slot
     public RectTransform instParent;
-    public Custom_Button closeButton;
 
     public Skill_Slot startSlot;
     public Skill_Slot[,] allSlot;
@@ -181,7 +180,7 @@ public class Skill_Manager : MonoBehaviour
     void SetSlot(Vector2Int _addNode)
     {
         Skill_Slot slot = allSlot[_addNode.x, _addNode.y];
-        slot.gageImage.fillAmount = 1f;
+        slot.EnableSlot(true);// 활성화
         for (int i = 0; i < slot.nearbySlot.Count; i++)// 주변 슬롯 열기
         {
             Skill_Slot near = allSlot[slot.nearbySlot[i].x, slot.nearbySlot[i].y];
@@ -196,6 +195,20 @@ public class Skill_Manager : MonoBehaviour
 
     void SkillReset()
     {
-
+        for (int i = 0; i < enableSlotLIst.Count; i++)
+        {
+            Skill_Slot slot = allSlot[enableSlotLIst[i].x, enableSlotLIst[i].y];
+            slot.ResetSlot();// 비활성화
+            for (int j = 0; j < slot.nearbySlot.Count; j++)// 주변 슬롯 열기
+            {
+                Skill_Slot near = allSlot[slot.nearbySlot[j].x, slot.nearbySlot[j].y];
+                near.ResetSlot();
+            }
+            // 스탯 제거
+            addStatus.AddStatus(slot.status.addStatus, -1);
+            Game_Manager.current.AddStatus();
+        }
+        enableSlotLIst.Clear();
+        Static_JsonManager.SaveEnableSkillData(saveEnableData, enableSlotLIst);// 활성화 된 스킬 저장
     }
 }
