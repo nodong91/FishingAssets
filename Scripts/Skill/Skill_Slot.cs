@@ -9,7 +9,6 @@ using static Data_Manager;
 
 public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-    public CanvasGroup canvasGroup;
     public bool startSlot;
     public Vector2Int slotNode;
     public bool onSlot;
@@ -65,16 +64,11 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         if (onSlot == true && _hide == false)
             return;
 
+        boxImage.gameObject.SetActive(!_hide);
         if (hide == true && _prev != default)
         {
             hide = false;
             StartCoroutine(OpeningSlot(_prev));
-        }
-        else
-        {
-            canvasGroup.alpha = _hide == true ? 0f : 1f;
-            canvasGroup.interactable = !_hide;
-            canvasGroup.blocksRaycasts = !_hide;
         }
     }
 
@@ -121,7 +115,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         }
     }
 
-    void SlotButton()
+    void EnableSlot()
     {
         if (onSlot == false)
         {
@@ -137,14 +131,14 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         float normalize = 0f;
         while (normalize < 1f)
         {
-            normalize += Time.deltaTime;
+            normalize += Time.deltaTime * 5f;
             float curveValue = openingCurve.Evaluate(normalize);
-            boxImage.transform.localScale = Vector3.Lerp(prev, Vector3.one, curveValue);
+            boxImage.transform.localScale = Vector3.one * (1f + curveValue * 0.3f);
             yield return null;
         }
     }
 
-    IEnumerator InputSlot()
+    IEnumerator InputSlot()// ½½·Ô È°¼ºÈ­
     {
         float normalize = 0f;
         while (normalize < 1f)
@@ -153,21 +147,19 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             gageImage.fillAmount = Mathf.Lerp(0f, 1f, normalize);
             yield return null;
         }
-        SlotButton();
+        EnableSlot();
     }
 
-    IEnumerator OpeningSlot(Vector3 _prev)
+    IEnumerator OpeningSlot(Vector3 _prev)// ½½·Ô ¿­¸®±â
     {
         float normalize = 0f;
         while (normalize < 1f)
         {
             normalize += Time.deltaTime * 5f;
             float curveValue = openingCurve.Evaluate(normalize);
-            boxImage.transform.position = Vector3.Lerp(_prev, transform.position, curveValue);
-            canvasGroup.alpha = Mathf.Lerp(0f, 1f, normalize);
+            boxImage.transform.position = Vector3.Lerp(_prev, transform.position, normalize * 5f);
+            boxImage.transform.rotation = Quaternion.Euler(0f, 0f, curveValue * 90f);
             yield return null;
         }
-        canvasGroup.interactable = true;
-        canvasGroup.blocksRaycasts = true;
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using static Data_Dialog;
 using static Data_Dialog.SelectStruct;
 using static Trigger_Landing;
+using static UI_Inventory_Base;
 
 public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -39,9 +40,15 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
                 break;
             case SelectType.OpenShipyard:
                 // 조선소 열기
+                 getLandingData = Game_Manager.current.GetLanding.GetLandingData;
+                Game_Manager.current.GetInventory.OpenShipyard(getLandingData);
+                break;
+
+            case SelectType.Upgrade:
                 Game_Manager.current.GetSkill.OpenCanvas(true);
                 Game_Manager.current.GetLanding.OutDialog();
                 break;
+
             case SelectType.Quest:
                 // 퀘스트 열기
                 if (questData != null)

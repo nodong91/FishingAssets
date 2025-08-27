@@ -54,11 +54,22 @@ public class UI_Landing : MonoBehaviour
         {
             GameObject targetPoint = _landingData.landingSetting[i].landingPoint;
             GameObject followUI = GetFollowUI(_landingData.landingSetting[i].landingType);
+            dictLandingUI[targetPoint] = followUI;
             followUI.SetActive(true);
             Game_Manager.current.GetFollow.AddFollowUI(targetPoint, followUI);
         }
         SetLandingCanvas(true);// Ω√¿€
         Game_Manager.current.OutOfControll(true);
+    }
+    Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
+    void RemoveUI()
+    {
+        for (int i = 0; i < landingData.landingSetting.Length; i++)
+        {
+            GameObject targetPoint = landingData.landingSetting[i].landingPoint;
+            dictLandingUI[targetPoint].SetActive(false);
+            Game_Manager.current.GetFollow.RemoveFollowUI(targetPoint);
+        }
     }
 
     GameObject GetFollowUI(LandingSetting.LandingType _type)
@@ -117,6 +128,7 @@ public class UI_Landing : MonoBehaviour
         outLanding?.Invoke();
         Game_Manager.current.OutOfControll(false);
         Game_Manager.current.GetInventory.CloseShop();
+        RemoveUI();
     }
 
     void RestButton()// »ﬁΩƒ

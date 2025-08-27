@@ -1,11 +1,10 @@
 using System.Collections;
 using Unity.Cinemachine;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
 
-public class FishingTest : MonoBehaviour
+public class Fishing_Game : Fishing_Skill
 {
     public CinemachineCamera[] cameraPoint;
     public GameObject setObject;
@@ -19,18 +18,8 @@ public class FishingTest : MonoBehaviour
     public float catchHealth;// 낚시대의 체력
     public Image catchImage;
 
-    [Header(" [ Fish ]")]
-    public GameObject fishPrefab;
-    private float randomTime = 0f;
-    private Vector3 fishPoint = Vector3.zero;
-
-    public FishStruct fishStatus;
-    public float fishHealth;
-    public Image fishImage;
-
     bool isFishing = false;
     bool isCatching = false;
-    public Vector3 offset = new Vector3(0f, 0f, 0f);
 
     public delegate void DeleEndFishing(bool _comp);
     public DeleEndFishing deleEndFishing;
@@ -110,7 +99,7 @@ public class FishingTest : MonoBehaviour
         isFishing = true;
         while (isFishing)
         {
-            OnRayCast();
+            CatchMovement();
             FishMovement();
             yield return null;
         }
@@ -124,6 +113,7 @@ public class FishingTest : MonoBehaviour
             {
                 // 물고기가 잡히는 상태일 때 공격 빈도에 따라 대기
                 fishHealth -= catchStatus.catchPower;
+                //TakeSkill();
                 fishImage.material.SetFloat("_FillAmount", fishHealth / fishStatus.fishHealth);
                 if (fishHealth <= 0f)
                 {
@@ -154,42 +144,29 @@ public class FishingTest : MonoBehaviour
         setObject.SetActive(false);
     }
 
-    void OnRayCast()
+    void CatchMovement()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         int downhillLayer = 1 << LayerMask.NameToLayer("Water");
         if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, downhillLayer))
         {
             Debug.LogWarning(hit.transform.name);
-            Vector3 offset = (hit.point - transform.position);
-            Vector3 direction = offset.normalized;
-            catchPoint = transform.position + direction * Mathf.Clamp(offset.magnitude, 0f, fishStatus.fieldRadius);
+            Vector3 hitOffset = (hit.point - transform.position);
+            Vector3 direction = hitOffset.normalized;
+            catchPoint = transform.position + direction * Mathf.Clamp(hitOffset.magnitude, 0f, fishStatus.fieldRadius);
         }
         catchPrefab.transform.position = Vector3.Lerp(catchPrefab.transform.position, catchPoint, Time.deltaTime * catchStatus.catchSpeed);
+        // 캐치 영역 안에 있는지 체크
+        Vector3 catchOffset = fishPrefab.transform.position - catchPrefab.transform.position;
+        isCatching = (catchOffset.magnitude < catchStatus.catchRadius);
     }
-
-    void FishMovement()
+  
+    void FishDamage()
     {
-        FollowHPUI();
-        if (randomTime < Time.time)
-        {
-            randomTime = Time.time + Random.Range(fishStatus.fishRange.x, fishStatus.fishRange.y);
-            Vector3 tempPoint = Random.insideUnitSphere * fishStatus.fieldRadius;
-            fishPoint = new Vector3(tempPoint.x, 0f, tempPoint.z) + transform.position;
-        }
-        // fishPrefab의 위치를 기준으로 반지름 5의 원형 바운더리 안에서 랜덤하게 이동
-        fishPrefab.transform.position = Vector3.Lerp(fishPrefab.transform.position, fishPoint, Time.deltaTime * fishStatus.fishSpeed);
 
-        Vector3 offset = fishPrefab.transform.position - catchPrefab.transform.position;
-        isCatching = (offset.magnitude < catchStatus.catchRadius);
-    }
-
-    void FollowHPUI()
-    {
-        fishImage.rectTransform.position = Camera.main.WorldToScreenPoint(fishPrefab.transform.position + offset);
     }
     //==================================================================================================================================
-    // 액션
+    // Gizmos
     //==================================================================================================================================
 
 #if UNITY_EDITOR
@@ -197,7 +174,7 @@ public class FishingTest : MonoBehaviour
     {
         // Gizmos를 사용하여 물고기의 이동 범위를 시각화
         UnityEditor.Handles.color = Gizmos.color = isCatching == true ? Color.green : Color.red;
-        Gizmos.DrawSphere(fishPoint, 1f);
+        Gizmos.DrawSphere(fishTargetPoint, 1f);
         UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, fishStatus.fieldRadius);
         UnityEditor.Handles.DrawWireDisc(catchPrefab.transform.position, Vector3.up, catchStatus.catchRadius);
 

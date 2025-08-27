@@ -92,10 +92,11 @@ public class UI_Shop : UI_Inventory_Base
         layoutGroup.padding.bottom = 40;
 
         slotType = SlotType.Shop;// SetShipyard
-        toggleGroup.gameObject.SetActive(true);
+        toggleGroup.gameObject.SetActive(false);
         fixGroup.gameObject.SetActive(true);
-
-        groupToggles[currentIndex].isOn = true;// 첫번째 탭 열기
+        if (_open)
+            SetShopItem();// 열릴때 세팅
+        //groupToggles[currentIndex].isOn = true;// 첫번째 탭 열기
     }
 
     public void SetStorage(bool _open)

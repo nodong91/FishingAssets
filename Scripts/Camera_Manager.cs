@@ -22,9 +22,9 @@ public class Camera_Manager : MonoBehaviour
     Vector2 currentInput;
     float currentX, currentY;
     const float rotateSpeed = 0.1f;
-    public Vector2 zoomLimit = new Vector2(0.5f, 3.0f);
+    Vector2 zoomLimit = new Vector2(1.0f, 2.0f);
 
-    Coroutine stoping, zooming, shaking;
+    Coroutine zooming, shaking;
     Coroutine onRotate;
     //[SerializeField] 
     float x, y;

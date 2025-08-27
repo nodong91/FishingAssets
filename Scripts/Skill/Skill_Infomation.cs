@@ -7,6 +7,7 @@ public class Skill_Infomation : MonoBehaviour
 {
     public RectTransform rect;
     public TMP_Text text_Neme;
+    public TMP_Text text_Description;
     public TMP_Text text_Price;
     public CanvasGroup canvasGroup;
     Coroutine moving;
@@ -41,6 +42,7 @@ public class Skill_Infomation : MonoBehaviour
             return;
 
         text_Neme.text = _status.name;
+        text_Description.text = _status.description;
         text_Price.text = _status.price.ToString();
 
     }

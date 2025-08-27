@@ -351,7 +351,7 @@ public class UI_Inventory : MonoBehaviour
 
                 break;
             case ItemStruct.ItemType.Fish:
-                Debug.LogWarning("UseItem");
+                Debug.LogWarning("Fish");
                 Game_Manager.current.GetNews.OpenNewsPaper();
                 break;
             case ItemStruct.ItemType.Used:

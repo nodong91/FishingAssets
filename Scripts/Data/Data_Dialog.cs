@@ -69,6 +69,7 @@ public class Data_Dialog : ScriptableObject
             OpenShop = 2,
             OpenShipyard = 3,
             Quest = 4,
+            Upgrade = 5,
         }
         public SelectType selectType;
     }

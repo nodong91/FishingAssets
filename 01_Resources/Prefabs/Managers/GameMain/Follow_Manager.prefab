@@ -251,7 +251,49 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1548236061317441308}
   followUI: {fileID: 1121588952145903129}
-  offset: {x: 0, y: 1, z: 0}
+  offset: {x: 0, y: 0, z: 0}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 9.374999
+      outSlope: 9.374999
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.15316571
+    - serializedVersion: 3
+      time: 0.21762922
+      value: 0.89471227
+      inSlope: -2.250039
+      outSlope: -2.250039
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.27120352
+    - serializedVersion: 3
+      time: 0.50598866
+      value: 0.65843177
+      inSlope: 1.0789639
+      outSlope: 1.0789639
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.41802952
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.034883685
+      outSlope: 0.034883685
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.7253545
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7550878057838379677
 GameObject:
   m_ObjectHideFlags: 0

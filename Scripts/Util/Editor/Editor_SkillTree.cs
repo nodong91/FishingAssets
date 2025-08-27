@@ -25,6 +25,7 @@ namespace P01.Editor
         StatusStruct[,] statusStructs;
         SerializedObject targetObject;
         bool tutorialToggle;
+        const string saveTreeData = "Skill_Tree";
 
         private void OnEnable()
         {
@@ -106,12 +107,12 @@ namespace P01.Editor
                 }
             }
             Debug.LogError($"{status.Count}개 저장");
-            Static_JsonManager.SaveSkillData("SkillMap", status);
+            Static_JsonManager.SaveSkillData(saveTreeData, status);
         }
-
+     
         void LoadData()
         {
-            if (Static_JsonManager.TryLoadSkillData("SkillMap", out List<StatusStruct> _statusStructs))
+            if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<StatusStruct> _statusStructs))
             {
                 int index = 0;
                 for (int y = 0; y < skillMap.y; y++)
@@ -216,13 +217,14 @@ namespace P01.Editor
         {
             if (targetObject != null)
             {
+                scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
                 targetObject.Update();
 
                 // setStatus는 위에서 선언한 List의 변수명
                 SerializedProperty prop = targetObject.FindProperty("setStatus");
                 EditorGUILayout.PropertyField(prop, new GUIContent(prop.displayName));
-
                 targetObject.ApplyModifiedProperties();
+                EditorGUILayout.EndScrollView();
 
                 // 예시로 버튼을 추가
                 if (GUILayout.Button("Close", GUILayout.Height(30f)))

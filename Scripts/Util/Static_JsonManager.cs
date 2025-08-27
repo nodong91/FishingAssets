@@ -147,6 +147,35 @@ public class Static_JsonManager
         return false;
     }
 
+    public static void SaveEnableSkillData(string fileName, List<Vector2Int> _data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        // 폴더 생성
+        FindFolder(filePath);
+
+        string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
+        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        File.WriteAllText(filePath + fileName + ".json", toJson);
+    }
+
+    public static bool TryLoadEnableSkillData(string fileName, out List<Vector2Int> data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        string path = filePath + fileName + ".json";
+        FileInfo fileInfo = new FileInfo(path);
+
+        if (fileInfo.Exists == true)
+        {
+            string fromJson = File.ReadAllText(path);
+            //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
+            data = JsonHelper.FromJson<Vector2Int>(fromJson);
+            return true;
+        }
+
+        data = default;
+        return false;
+    }
+
     //======================================================================================
     // 옵션 데이터 관련
     //======================================================================================

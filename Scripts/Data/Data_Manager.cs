@@ -198,6 +198,7 @@ public class Data_Manager : Data_Parse
         public float maxWeight;// 인벤토리 중량
         public float maxEnergy;// 연료통 크기
         public Vector2Int maxBoxSize;// 인벤토리 크기
+        public int shipHealth;// 배 체력
         public float freshness;// 신선도 유지 - 꼭 필요한가??????  
 
         [Header(" [ Fish ]")]

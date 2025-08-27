@@ -3,7 +3,7 @@ using UnityEngine;
 using static Data_Manager;
 using static Data_Quest;
 
-public class Fishing_Manager : FishingTest
+public class Fishing_Manager : Fishing_Game
 {
     [Header(" [ Manager ]")]
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;

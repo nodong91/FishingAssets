@@ -7,6 +7,7 @@ public class Game_Manager : MonoBehaviour
     public Unit_Player player;
     public Camera_Manager cameraManager;
     public Controll_Manager controllManager;
+
     [Header("[ UI ]")]
     public UI_Main mainUI;
     public Follow_Manager followManager;
@@ -35,9 +36,9 @@ public class Game_Manager : MonoBehaviour
     void Start()
     {
         SaveData_Continue.current.GetContinue();
-        SetDefaultStatus();
 
         SetThemeMusic();
+        SetDefaultStatus();
         PlayerMove();
 
         GetQuestUI.SetStart();
@@ -57,6 +58,7 @@ public class Game_Manager : MonoBehaviour
         defaultStatus.maxWeight = 1f;// 인벤토리 중량
         defaultStatus.maxEnergy = 1f;// 연료통 크기
         defaultStatus.maxBoxSize = new Vector2Int(0, 0);// 인벤토리 크기
+        defaultStatus.shipHealth = 3;// 배 체력
         defaultStatus.freshness = 1f;// 신선도 유지 - 꼭 필요한가??????  
 
         defaultStatus.LuckFish = 1f;// 희귀 물고기 확률
@@ -67,8 +69,10 @@ public class Game_Manager : MonoBehaviour
 
     public void AddStatus()
     {
-        currentStatus.SettingStatus(defaultStatus);
-        currentStatus.AddStatus(GetStatus);
+        currentStatus.SettingStatus(defaultStatus);// 디폴트 스탯 적용
+        currentStatus.AddStatus(GetStatus);// 추가 스탯 적용
+
+        GetPlayer.SetStatus();
     }
 
     public void SetThemeMusic()

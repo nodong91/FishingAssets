@@ -16,9 +16,25 @@ public class Unit_Player : MonoBehaviour
     }
     public State state = State.None;
 
-    public float moveSpeed = 0.01f;
-    public Vector2 dirction;
+    public float moveSpeed = 1f;
+    public int HealthPoint;
+    private Vector2 dirction;
     Transform FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
+    Coroutine stateAction;
+
+    private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
+    private Trigger_Setting closestTarget;
+
+    private float shipHight = -0.1f;
+    private float  waveSpeed = 2f;
+    private float targetAngle = 10f;
+    float runningTime;
+    public GameObject playerObject;
+
+    Quaternion prevAngle, setAngle;
+    float randomTime, runningRandomTime;
+
+    public AnimationCurve rotateCurve;// 위아래 흔들릴 때 로테이션
 
     private void Start()
     {
@@ -27,6 +43,13 @@ public class Unit_Player : MonoBehaviour
             return;
 
         FocusTarget.position = transform.position;
+    }
+
+    public void SetStatus()
+    {
+        Data_Manager.SetStatus status = Game_Manager.current.currentStatus;
+        moveSpeed = status.shipSpeed;
+        HealthPoint = status.shipHealth;
     }
 
     //================================================================================================================================================
@@ -114,16 +137,7 @@ public class Unit_Player : MonoBehaviour
         Game_Manager.current.GetFollow.AddClosestTarget(closestTarget);
     }
     //================================================================================================================================================
-    //public Reflection_Manager reflection_Manager;
-    public float shipHight, waveSpeed = 2f;
-    float runningTime;
-    public GameObject playerObject;
 
-    Quaternion prevAngle, setAngle;
-    public float targetAngle = 10f;
-    float randomTime, runningRandomTime;
-
-    public AnimationCurve rotateCurve;// 위아래 흔들릴 때 로테이션
 
     private void Update()
     {
@@ -228,9 +242,6 @@ public class Unit_Player : MonoBehaviour
     // 액션
     //================================================================================================================================================
 
-    Coroutine stateAction;
-    //bool action = false;
-
     public void EventAction()// 어택 이벤트
     {
 
@@ -253,13 +264,11 @@ public class Unit_Player : MonoBehaviour
     //================================================================================================================================================
     // 낚시
     //================================================================================================================================================
-    public int HealthPoint;
+
     //================================================================================================================================================
     // 충돌
     //================================================================================================================================================
 
-    public List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
-    public Trigger_Setting closestTarget;
 
     private void OnTriggerEnter(Collider other)
     {
