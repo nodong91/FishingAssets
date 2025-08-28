@@ -120,7 +120,7 @@ public class Static_JsonManager
     //}
     public static void SaveSkillData(string fileName, List<SkillStatus> _data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + "/SaveData/";
         // 폴더 생성
         FindFolder(filePath);
 
@@ -131,7 +131,7 @@ public class Static_JsonManager
 
     public static bool TryLoadSkillData(string fileName, out List<SkillStatus> data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + "/SaveData/";
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 

@@ -36,6 +36,8 @@ public class Unit_Player : MonoBehaviour
     Quaternion prevAngle, setAngle;
     float randomTime, runningRandomTime;
 
+    public string clashSound = "small-rock-break-194553";
+
     public AnimationCurve rotateCurve;// 위아래 흔들릴 때 로테이션
 
     private void Start()
@@ -218,19 +220,8 @@ public class Unit_Player : MonoBehaviour
 
     }
 
-    public void StateClash(Vector3 _offset)
-    {
-        Vector3 target = transform.position + _offset;
-        if (state != State.Damage)
-            StartCoroutine(MovingClash(target));
-
-        Debug.LogWarning("충돌!!!!!!!!!!!!!!!!!!!!");
-    }
-
     IEnumerator MovingClash(Vector3 _target)
     {
-        StateMachine(State.Damage);
-
         Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
         Game_Manager.current.cameraManager.InputShake();// 카메라 흔들기
         float normalize = 0f;
@@ -329,13 +320,17 @@ public class Unit_Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Finish")
         {
-            Debug.LogWarning("배 데미지~~~");
-            if (health > 0)
+            if (health > 0 && state != State.Damage)
             {
+                StateMachine(State.Damage);
+
                 health--;
+                Singleton_Audio.INSTANCE.Audio_FX(clashSound);
                 Game_Manager.current.GetMainUI.SetHealthPoint(health);
-                Vector3 offset = (transform.position - collision.transform.position).normalized;
-                StateClash(offset);
+                Vector3 direction = (transform.position - collision.transform.position).normalized;
+                Vector3 target = transform.position + direction;
+                StartCoroutine(MovingClash(target));
+                Debug.LogWarning("충돌!!!!!!!!!!!!!!!!!!!!");
             }
             else
             {

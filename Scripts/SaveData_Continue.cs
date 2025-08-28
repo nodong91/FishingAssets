@@ -1,5 +1,6 @@
 using UnityEngine;
 using static Data_Manager;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class SaveData_Continue : MonoBehaviour
 {
@@ -30,9 +31,8 @@ public class SaveData_Continue : MonoBehaviour
             day = Game_Manager.current.GetTimeUI.day,
             weatherType = Game_Manager.current.GetTimeUI.weatherType,
 
+            money = Game_Manager.current.GetMainUI.TryMoney,
             energy = Game_Manager.current.GetInventory.TryEnergy,
-            money = Game_Manager.current.GetInventory.TryMoney,
-
             destroySlot = Game_Manager.current.GetInventory.TryDestroySlot,
         };
         SaveContinue();
@@ -54,7 +54,8 @@ public class SaveData_Continue : MonoBehaviour
         int day = continueData.day;
         Game_Manager.current.GetTimeUI.SetStart(timeSpeed, minute, hour, day);// ½Ã°£
 
-        Game_Manager.current.GetInventory.TryMoney = continueData.money;// µ·
+        Game_Manager.current.GetMainUI.TryMoney = continueData.money;// µ·
+        Game_Manager.current.GetInventory.TryEnergy = continueData.energy;// ³²Àº ¿¡³ÊÁö
         Game_Manager.current.GetInventory.TryDestroySlot = continueData.destroySlot;// ºÎ¼­Áø ½½·Ô
     }
 

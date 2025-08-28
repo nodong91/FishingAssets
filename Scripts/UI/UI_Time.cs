@@ -1,9 +1,14 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UI_Time : MonoBehaviour
 {
     public TMPro.TMP_Text hourText, minuteText, weekText;
+    Light DayLight => Game_Manager.current.dayLight;
+    Color DayColor => Game_Manager.current.dayColor;
+    Color NightColor => Game_Manager.current.nightColor;
+
     public enum WeatherType
     {
         Sun,
@@ -11,6 +16,13 @@ public class UI_Time : MonoBehaviour
         Cloud
     }
     public WeatherType weatherType;
+    public enum LightMode
+    {
+        None,
+        Day,
+        Night,
+    }
+    public LightMode lightMode = LightMode.None;
     public float timeSpeed = 10f;
     public float minute = 0;
     public int hour = 0;
@@ -33,6 +45,18 @@ public class UI_Time : MonoBehaviour
         minute = _minute;
         hour = _hour;
         day = _day;
+        if (hour >= 5f && hour < 18f)
+        {
+            // ³·
+            lightMode = LightMode.Day;
+            DayLight.color = DayColor;
+        }
+        else
+        {
+            // ¹ã
+            lightMode = LightMode.Night;
+            DayLight.color = NightColor;
+        }
     }
 
     private void Update()
@@ -54,5 +78,23 @@ public class UI_Time : MonoBehaviour
         hourText.text = hourStr;
         minuteText.text = minuteStr;
         weekText.text = ((WEEK)(day % 7)).ToString();
+
+
+
+        // ¶óÀÌÆ® º¯°æ
+        if (hour >= 5f && hour < 6f)
+        {
+            // ³·
+            lightMode = LightMode.Day;
+            float normalize = minute * 0.02f;
+            DayLight.color = Color.Lerp(NightColor, DayColor, normalize);
+        }
+        else if (hour >= 18f && hour < 19f)
+        {
+            // ¹ã
+            lightMode = LightMode.Night;
+            float normalize = minute * 0.02f;
+            DayLight.color = Color.Lerp(DayColor, NightColor, normalize);
+        }
     }
 }

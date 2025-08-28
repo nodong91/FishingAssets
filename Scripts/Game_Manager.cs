@@ -25,7 +25,7 @@ public class Game_Manager : MonoBehaviour
     public Data_Manager.SetStatus GetStatus => GetSkill.addStatus;
 
     public Light dayLight;
-    public Color dayColor;
+    public Color dayColor, nightColor;
 
     public static Game_Manager current;
 
@@ -38,15 +38,15 @@ public class Game_Manager : MonoBehaviour
     {
         SaveData_Continue.current.GetContinue();
 
+        GetMainUI.SetStart();
+        GetQuestUI.SetStart();
+        GetSkill.SetStart();
+        GetDialog.SetStart();
+
         SetThemeMusic();
         SetDefaultStatus();// 기본 스테이트 세팅
         AddStatus();// 추가 스테이트 세팅
         PlayerMove();
-
-        GetQuestUI.SetStart();
-        GetSkill.SetStart();
-        GetDialog.SetStart();
-        GetMainUI.SetStart();
     }
 
     void SetDefaultStatus()

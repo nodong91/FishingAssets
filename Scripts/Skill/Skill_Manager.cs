@@ -128,10 +128,10 @@ public class Skill_Manager : MonoBehaviour
                 inst.deleSlotPosition = infomation.SetPosition;
 
                 SkillStatus status = statusStructs[x, y];
-                inst.status = status;
+                inst.Status = status;
                 inst.SetStart();
                 inst.SetNearBySlot(skillMap);   // 근처 슬롯 설정
-                inst.openingCurve = openingCurve; // 애니메이션 곡선 설정
+                //inst.openingCurve = openingCurve; // 애니메이션 곡선 설정
                 allSlot[x, y] = inst;
             }
         }
@@ -187,7 +187,7 @@ public class Skill_Manager : MonoBehaviour
             near.SetHide(false, slot.transform.position);
         }
         // 스탯 추가
-        addStatus.AddStatus(slot.status.addStatus);
+        addStatus.AddStatus(slot.Status.addStatus);
         Game_Manager.current.AddStatus();
     }
 
@@ -205,7 +205,7 @@ public class Skill_Manager : MonoBehaviour
                 near.ResetSlot();
             }
             // 스탯 제거
-            addStatus.AddStatus(slot.status.addStatus, -1);
+            addStatus.AddStatus(slot.Status.addStatus, -1);
             Game_Manager.current.AddStatus();
         }
         enableSlotLIst.Clear();

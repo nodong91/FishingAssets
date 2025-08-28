@@ -33,6 +33,8 @@ public class UI_Main : MonoBehaviour
 
     public void SetStart()
     {
+        HealthSize = maxHealthImage.rectTransform.sizeDelta;
+
         inventoryButton.onClick.AddListener(InventoryButton);
         fishGuideButton.onClick.AddListener(FishGuideButton);
         questButton.onClick.AddListener(QuestButton);
@@ -140,16 +142,72 @@ public class UI_Main : MonoBehaviour
             yield return null;
         }
     }
-    public int HealthWidth = 66;
+    public Vector2 HealthSize;
     public void SetHealthPoint(int _point)
     {
         RectTransform rectTransform = currentHealthImage.rectTransform;
-        rectTransform.sizeDelta = new Vector2(HealthWidth * _point, rectTransform.sizeDelta.y);
+        rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
     }
 
     public void SetMaxHealthPoint(int _point)
     {
         RectTransform rectTransform = maxHealthImage.rectTransform;
-        rectTransform.sizeDelta = new Vector2(HealthWidth * _point, rectTransform.sizeDelta.y);
+        rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
+    }
+
+    //===========================================================================================================================
+    // 돈
+    //===========================================================================================================================
+
+    public TMPro.TMP_Text moneyText;
+    Coroutine movingMoney;
+    float moneyValue;
+    public float TryMoney
+    {
+        get { return moneyValue; }
+        set
+        {
+            float money = value;
+            moneyText.text = money.ToString();
+            moneyValue = money;
+        }
+    }
+
+    public void MoveMoney(float _price)
+    {
+        if (moneyValue + _price < 0f)
+            return;
+
+        if (movingMoney != null)
+            StopCoroutine(movingMoney);
+        movingMoney = StartCoroutine(MoneyMoving(_price));
+    }
+
+    IEnumerator MoneyMoving(float _price)
+    {
+        float prevMoney = moneyValue;
+        moneyValue = moneyValue + _price;
+        SaveData_Continue.current.SetContinue(); // 팔거나 사면 저장
+        yield return null;
+
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime;
+            float textValue = Mathf.Lerp(prevMoney, moneyValue, normalize);
+            moneyText.text = Mathf.Round(textValue).ToString();
+
+            //if (_price < 0f)// 판매인 경우
+            //{
+            //    if (moneyValue <= prevMoney)
+            //        moveMoney = false;
+            //}
+            //else if (_price > 0f)// 구매인 경우
+            //{
+            //    if (moneyValue >= prevMoney)
+            //        moveMoney = false;
+            //}
+            yield return null;
+        }
     }
 }

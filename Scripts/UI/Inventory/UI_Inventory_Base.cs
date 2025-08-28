@@ -462,30 +462,43 @@ public class UI_Inventory_Base : MonoBehaviour
     }
 
     public List<Vector2Int> destroySlot = new List<Vector2Int>();
-    public List<Vector2Int> GetDestroySlot { get { return destroySlot; } }
     public void DistroySlot()// 슬롯 부수기
     {
-        bool find = false;
-        while (find == false)
+        if(destroySlot == null)
+            destroySlot = new List<Vector2Int>();
+        Debug.LogWarning(allSlots);
+        Debug.LogWarning(destroySlot);
+        if (allSlots.Length > destroySlot.Count)
         {
-            int x = Random.Range(0, inventorySize.x);
-            int y = Random.Range(0, inventorySize.y);
-
-            if (allSlots[x, y].destroy == false)
+            bool find = false;
+            while (find == false)
             {
-                find = true;
-                UI_Inventory_Slot linkSlot = allSlots[x, y].GetLinkSlot;
-                if (linkSlot?.empty == false)
+                int x = Random.Range(0, inventorySize.x);
+                int y = Random.Range(0, inventorySize.y);
+
+                if (allSlots[x, y].destroy == false)
                 {
-                    SlotEmpty(linkSlot);
+                    find = true;
+                    UI_Inventory_Slot linkSlot = allSlots[x, y].GetLinkSlot;
+                    if (linkSlot?.empty == false)
+                    {
+                        SlotEmpty(linkSlot);
+                    }
+                    allSlots[x, y].DestroySlot();// 슬롯 부수기
+                    destroySlot ??= new List<Vector2Int>();// 초기화
+                    destroySlot.Add(new Vector2Int(x, y));
                 }
-                allSlots[x, y].DestroySlot();// 슬롯 부수기
-                destroySlot ??= new List<Vector2Int>();// 초기화
-                destroySlot.Add(new Vector2Int(x, y));
             }
+        }
+        else
+        {
+            Debug.LogError("빈 슬롯 없어서 못부셔!!!!");
         }
     }
 
+    //===========================================================================================================================
+    // 수리하기
+    //===========================================================================================================================
     public void FixSlot(UI_Inventory_Slot _slot)// 슬롯 복구
     {
         _slot.FixSlot();

@@ -1,10 +1,7 @@
-
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem.HID;
 using UnityEngine.UI;
 using static Data_Manager;
 
@@ -21,8 +18,8 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     Coroutine inputSlotCoroutine;
     public Image gageImage;
-    public AnimationCurve openingCurve { get; set; }
-    public SkillStatus status { get; set; }
+    public AnimationCurve OpeningCurve => Game_Manager.current.GetSkill.openingCurve;
+    public SkillStatus Status { get; set; }
 
     public delegate void DeleSlotAction(Vector2Int _grid);
     public DeleSlotAction deleSlotAction;
@@ -33,10 +30,10 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void SetStart()
     {
         gageImage.fillAmount = 0f;
-        if (status.icon != null)
+        if (Status.icon != null)
         {
-            if (Singleton_Data.INSTANCE.Dict_Sprite.ContainsKey(status.icon))
-                iconImage.sprite = Singleton_Data.INSTANCE.Dict_Sprite[status.icon];
+            if (Singleton_Data.INSTANCE.Dict_Sprite.ContainsKey(Status.icon))
+                iconImage.sprite = Singleton_Data.INSTANCE.Dict_Sprite[Status.icon];
         }
     }
 
@@ -96,7 +93,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     {
         transform.localScale = Vector3.one * 1.1f;
         Vector2 vector2 = eventData.position;
-        deleSlotPosition?.Invoke(status, transform.position);
+        deleSlotPosition?.Invoke(Status, transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -149,7 +146,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         while (normalize < 1f)
         {
             normalize += Time.deltaTime * 5f;
-            float curveValue = openingCurve.Evaluate(normalize);
+            float curveValue = OpeningCurve.Evaluate(normalize);
             boxImage.transform.localScale = Vector3.one * (1f + curveValue * 0.3f);
             yield return null;
         }
@@ -173,7 +170,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         while (normalize < 1f)
         {
             normalize += Time.deltaTime * 5f;
-            float curveValue = openingCurve.Evaluate(normalize);
+            float curveValue = OpeningCurve.Evaluate(normalize);
             boxImage.transform.position = Vector3.Lerp(_prev, transform.position, normalize * 5f);
             boxImage.transform.rotation = Quaternion.Euler(0f, 0f, curveValue * 90f);
             yield return null;

@@ -7,7 +7,6 @@ using static Data_Quest;
 using static Trigger_Landing;
 using static UI_Inventory_Base;
 using static UI_Inventory_Slot;
-using static UI_Main;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -19,25 +18,14 @@ public class UI_Inventory : MonoBehaviour
     public bool OnFix { get; set; }
 
     public bool onDrag, onCheck;
-    Coroutine slotMoving, movingMoney;
+    Coroutine slotMoving;
     float energyValue;
     public float TryEnergy
     {
         get { return energyValue; }
         set { energyValue = value; }
     }
-    float moneyValue;
-    public float TryMoney
-    {
-        get { return moneyValue; }
-        set
-        {
-            float money = value;
-            moneyText.text = money.ToString();
-            moneyValue = money;
-        }
-    }
-    public TMPro.TMP_Text moneyText;
+
     public UI_Inventory_Infomation infomation;
     public List<Vector2Int> TryDestroySlot
     {
@@ -53,11 +41,12 @@ public class UI_Inventory : MonoBehaviour
 
     int slotSize = 40;
 
+
+    float GetMoney => Game_Manager.current.GetMainUI.TryMoney;
     public void SetStart()
     {
         myBox.SetSlotSize = slotSize;
         shop.SetSlotSize = slotSize;
-
         myBox.SetStart();
         shop.SetStart();
 
@@ -188,19 +177,19 @@ public class UI_Inventory : MonoBehaviour
     {
         ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_id);
         float price = item.price;
-        MoveMoney(price);
+        Game_Manager.current.GetMainUI.MoveMoney(price);
     }
 
     bool BuyItem(string _id)// 구매
     {
         ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_id);
-        if (moneyValue < item.price)
+        if (GetMoney < item.price)
             return false;
 
         if (myBox.AddItem(item) == true)// 살 공간이 있으면 슬롯세팅
         {
             float price = -item.price;
-            MoveMoney(price);
+            Game_Manager.current.GetMainUI.MoveMoney(price);
         }
         return true;
     }
@@ -217,22 +206,22 @@ public class UI_Inventory : MonoBehaviour
         if (selectSlotType == SlotType.Shop && enterSlotType == SlotType.MyBox)// 구매
         {
             float price = selectItemClass.item.price;
-            Debug.LogWarning(moneyValue + ">>>>" + price);
-            if (moneyValue < price)
+            Debug.LogWarning(GetMoney + ">>>>" + price);
+            if (GetMoney < price)
             {
                 Debug.LogWarning("돈없음");
                 return false;// 돈없음
             }
             else
             {
-                MoveMoney(-price);
+                Game_Manager.current.GetMainUI.MoveMoney(-price);
                 Debug.LogWarning("구매");
             }
         }
         else if (selectSlotType == SlotType.MyBox && enterSlotType == SlotType.Shop)// 판매
         {
             float price = selectItemClass.item.price;
-            MoveMoney(price);
+            Game_Manager.current.GetMainUI.MoveMoney(price);
             Debug.LogWarning("판매");
         }
         return true;
@@ -470,44 +459,6 @@ public class UI_Inventory : MonoBehaviour
                 return shop;
         }
         return null;
-    }
-
-    void MoveMoney(float _price)
-    {
-        if (moneyValue + _price < 0f)
-            return;
-
-        if (movingMoney != null)
-            StopCoroutine(movingMoney);
-        movingMoney = StartCoroutine(MoneyMoving(_price));
-
-    }
-
-    IEnumerator MoneyMoving(float _price)
-    {
-        float prevMoney = moneyValue;
-        moneyValue += _price;
-
-        SaveData_Continue.current.SetContinue(); // 팔거나 사면 저장
-
-        bool moveMoney = true;
-        while (moveMoney == true)
-        {
-            prevMoney = Mathf.Lerp(prevMoney, moneyValue, 0.1f);
-            moneyText.text = Mathf.Round(prevMoney).ToString();
-
-            if (_price < 0f)// 판매인 경우
-            {
-                if (prevMoney <= moneyValue)
-                    moveMoney = false;
-            }
-            else if (_price > 0f)// 구매인 경우
-            {
-                if (prevMoney >= moneyValue)
-                    moveMoney = false;
-            }
-            yield return null;
-        }
     }
 
     public void SetInfomation(UI_Inventory_Slot _slot)

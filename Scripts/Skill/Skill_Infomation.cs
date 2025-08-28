@@ -5,12 +5,13 @@ using static Data_Manager;
 
 public class Skill_Infomation : MonoBehaviour
 {
+    public CanvasGroup canvasGroup;
     public RectTransform rect;
     public TMP_Text text_Neme;
     public TMP_Text text_Description;
     public TMP_Text text_Price;
-    public CanvasGroup canvasGroup;
     Coroutine moving;
+    public AnimationCurve OpeningCurve => Game_Manager.current.GetSkill.openingCurve;
 
     private void Start()
     {
@@ -55,9 +56,16 @@ public class Skill_Infomation : MonoBehaviour
             normalize += Time.deltaTime * 5f;
             yield return null;
 
+            if(_alpha > 0)
+            {
+                rect.pivot = Vector2.Lerp(rect.pivot, _viewportPoint, normalize);
+                //rect.transform.position = _position;
+                rect.transform.position = Vector3.Lerp(rect.position, _position, normalize);
+                float curveValue = OpeningCurve.Evaluate(normalize);
+                canvasGroup.transform.rotation = Quaternion.Euler(0f, 0f, curveValue * 10f);
+                //canvasGroup.transform.localScale = Vector3.one * (1f + curveValue * 0.3f);
+            }
             canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, _alpha, normalize);
-            rect.pivot = Vector2.Lerp(rect.pivot, _viewportPoint, normalize);
-            rect.position = Vector3.Lerp(rect.position, _position, normalize);
         }
     }
 }
