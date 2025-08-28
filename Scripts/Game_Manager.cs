@@ -24,6 +24,9 @@ public class Game_Manager : MonoBehaviour
     public Data_Manager.SetStatus currentStatus;
     public Data_Manager.SetStatus GetStatus => GetSkill.addStatus;
 
+    public Light dayLight;
+    public Color dayColor;
+
     public static Game_Manager current;
 
     private void Awake()
@@ -36,12 +39,14 @@ public class Game_Manager : MonoBehaviour
         SaveData_Continue.current.GetContinue();
 
         SetThemeMusic();
-        SetDefaultStatus();// 스테이트 세팅
+        SetDefaultStatus();// 기본 스테이트 세팅
+        AddStatus();// 추가 스테이트 세팅
         PlayerMove();
 
         GetQuestUI.SetStart();
         GetSkill.SetStart();
         GetDialog.SetStart();
+        GetMainUI.SetStart();
     }
 
     void SetDefaultStatus()
@@ -63,7 +68,6 @@ public class Game_Manager : MonoBehaviour
         defaultStatus.LuckFish = 1f;// 희귀 물고기 확률
         defaultStatus.FishAmount = 1f;// 낚시 횟수 증가
         defaultStatus.FishPrice = 1f;// 판매 물고기 가격 증가
-        AddStatus();
     }
 
     public void AddStatus()
@@ -132,7 +136,6 @@ public class Game_Manager : MonoBehaviour
             if (instMain == null)
             {
                 instMain = Instantiate(mainUI, transform);
-                instMain.SetStart();
             }
             return instMain;
         }

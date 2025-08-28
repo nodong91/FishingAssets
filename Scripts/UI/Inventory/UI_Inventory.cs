@@ -7,6 +7,7 @@ using static Data_Quest;
 using static Trigger_Landing;
 using static UI_Inventory_Base;
 using static UI_Inventory_Slot;
+using static UI_Main;
 
 public class UI_Inventory : MonoBehaviour
 {
@@ -314,6 +315,7 @@ public class UI_Inventory : MonoBehaviour
         }
         else if (_slot.empty == false)
         {
+            Debug.LogWarning($"{currentType} 클릭!!!!!!!!!!!!!!!!!!!!");
             switch (currentType)
             {
                 case SlotType.Shop:// 샵이 열려있을 때 우클릭
@@ -334,10 +336,13 @@ public class UI_Inventory : MonoBehaviour
                     SetEmptySlot(_slot.GetLinkSlot);
                     break;
                 case SlotType.Storage:// 창고가 열려있을 때 우클릭
-                    Debug.LogWarning("창고 클릭!!!!!!!!!!!!!!!!!!!!");
+                    break;
+                case SlotType.Result:
+                    break;
+                case SlotType.MyBox:
+                    UseItem(_slot.itemClass.item);// 사용하기
                     break;
                 default:
-                    UseItem(_slot.itemClass.item);// 사용하기
                     break;
             }
         }

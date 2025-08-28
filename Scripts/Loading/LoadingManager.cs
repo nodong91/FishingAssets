@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.Playables;
 
 public class LoadingManager : MonoBehaviour
 {
@@ -25,7 +24,6 @@ public class LoadingManager : MonoBehaviour
     {
         GoTitle();
     }
-
 
     public void GoTitle()
     {

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class UI_Main : MonoBehaviour
 {
-
     [Flags]
     public enum MenuState
     {
@@ -15,6 +14,8 @@ public class UI_Main : MonoBehaviour
         Option = 1 << 3,
     }
     public MenuState menuState;
+
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public UI_Time timeUI;
     public UI_Status statusUI;
     public Button inventoryButton;
@@ -22,13 +23,13 @@ public class UI_Main : MonoBehaviour
     public Button questButton;
     public Button optionButton;
 
-    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
-
+    public CanvasGroup fadeScreen;
     public Canvas cameraCanvas;
     public TMPro.TMP_Text warnningText;
     Coroutine textActing;
     [Header("[ Ship ]")]
     public Image shipEnergy;
+    public Image currentHealthImage, maxHealthImage;
 
     public void SetStart()
     {
@@ -39,6 +40,7 @@ public class UI_Main : MonoBehaviour
         shipEnergy.material = Instantiate(shipEnergy.material);
 
         SetCameraCanvas();
+        SetFadeScreen(false);
     }
 
     void SetCameraCanvas()
@@ -48,7 +50,7 @@ public class UI_Main : MonoBehaviour
         cameraCanvas.worldCamera = Game_Manager.current.cameraManager.UICamera;
     }
 
-    public void InventoryButton()
+    void InventoryButton()
     {
         if ((menuState & MenuState.Inventory) == 0)
         {
@@ -114,5 +116,40 @@ public class UI_Main : MonoBehaviour
     public void SetEnergy(float _energy)
     {
         shipEnergy.material.SetFloat("_FillAmount", _energy);
+    }
+
+    Coroutine openFadeScreen;
+    public void SetFadeScreen(bool _open)
+    {
+        if (openFadeScreen != null)
+            StopCoroutine(openFadeScreen);
+        openFadeScreen = StartCoroutine(OpenFadeScreen(_open));
+    }
+
+    IEnumerator OpenFadeScreen(bool _open)
+    {
+        float prevAlpha = fadeScreen.alpha;
+        float targetAlpha = _open == true ? 1f : 0f;
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime * 3f;
+            fadeScreen.alpha = Mathf.Lerp(prevAlpha, targetAlpha, normalize);
+            fadeScreen.blocksRaycasts = fadeScreen.alpha > 0f;
+            fadeScreen.interactable = fadeScreen.alpha > 0f;
+            yield return null;
+        }
+    }
+    public int HealthWidth = 66;
+    public void SetHealthPoint(int _point)
+    {
+        RectTransform rectTransform = currentHealthImage.rectTransform;
+        rectTransform.sizeDelta = new Vector2(HealthWidth * _point, rectTransform.sizeDelta.y);
+    }
+
+    public void SetMaxHealthPoint(int _point)
+    {
+        RectTransform rectTransform = maxHealthImage.rectTransform;
+        rectTransform.sizeDelta = new Vector2(HealthWidth * _point, rectTransform.sizeDelta.y);
     }
 }

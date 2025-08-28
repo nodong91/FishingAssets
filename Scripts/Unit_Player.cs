@@ -51,8 +51,13 @@ public class Unit_Player : MonoBehaviour
     {
         status = Game_Manager.current.currentStatus;
         moveSpeed = status.shipSpeed;
+
         health = status.shipHealth;
+        Game_Manager.current.GetMainUI.SetMaxHealthPoint(status.shipHealth);
+        Game_Manager.current.GetMainUI.SetHealthPoint(health);
+
         energy = status.maxEnergy;
+        Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
         efficient = status.catchPower;
     }
 
@@ -246,13 +251,27 @@ public class Unit_Player : MonoBehaviour
 
     void StateDestroy()
     {
+        StartCoroutine(ResetPosition());
+    }
+
+    IEnumerator ResetPosition()
+    {
+        Game_Manager.current.GetMainUI.SetFadeScreen(true);
+        yield return new WaitForSeconds(0.5f);
+
+        // 견인 되는 연출 필요
+        // 위치 변경
         Data_Continue continueData = SaveData_Continue.current.continueData;
         // 위치
         transform.position = continueData.playerPosition;
         transform.rotation = continueData.playerRotation;
         transform.localScale = continueData.playerScale;
         FocusTarget.position = transform.position;
+        yield return new WaitForSeconds(1f);
 
+        Game_Manager.current.GetMainUI.SetFadeScreen(false);
+        yield return new WaitForSeconds(0.5f);
+        // 스탯 리셋
         SetStatus();
         StateMachine(State.Idle);// 다시 대기 상태
     }
@@ -314,6 +333,7 @@ public class Unit_Player : MonoBehaviour
             if (health > 0)
             {
                 health--;
+                Game_Manager.current.GetMainUI.SetHealthPoint(health);
                 Vector3 offset = (transform.position - collision.transform.position).normalized;
                 StateClash(offset);
             }
