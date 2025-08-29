@@ -14,39 +14,39 @@ public class UI_Shop : UI_Inventory_Base
     //===========================================================================================================================
 
     [Header("- Shop")]
-    private Data_Shop[] shopItem;
     public Data_NPC npc;
     public VerticalLayoutGroup layoutGroup;
     public ToggleGroup toggleGroup;
-    public Toggle[] groupToggles;
     public GameObject fixGroup;
     public Button fixButton, fixAllButton;
 
     public override void SetStart()
     {
         base.SetStart();
-        shopItem = new Data_Shop[groupToggles.Length];
-        for (int i = 0; i < groupToggles.Length; i++)
+        for (int i = 0; i < toggleButtons.Length; i++)
         {
             int index = i;
-            groupToggles[i].onValueChanged.AddListener(delegate { SetToggle(index); });
+            toggleButtons[i].SetButton(delegate { SetToggle(index); });
+            toggleButtons[i].buttonImage.material = Instantiate(toggleButtons[i].buttonImage.material);
+            toggleButtons[i].buttonImage.material.SetFloat("_FillAmount", 0f);
         }
+        SetToggle(0);
         fixButton.onClick.AddListener(FixButton);
         fixAllButton.onClick.AddListener(FixAllButton);
     }
 
     void SetToggle(int _index)
     {
-        if (groupToggles[_index].isOn == true)
-        {
-            currentIndex = _index;
-            SetShopItem();
-        }
-        else if (saveData != null)
+        toggleButtons[currentIndex].buttonImage.material.SetFloat("_FillAmount", 0f);
+        toggleButtons[_index].buttonImage.material.SetFloat("_FillAmount", 1f);
+
+        if (currentIndex != _index)
         {
             // 탭 닫힐때 저장
             Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 디폴트로 저장
+            currentIndex = _index;
         }
+        SetShopItem();
     }
 
     void FixButton()
@@ -64,11 +64,11 @@ public class UI_Shop : UI_Inventory_Base
         base.OpenCanvas(_open);
     }
 
-    public void SetShop(bool _open, LandingStruct _landingStruct)
+    public void SetShop(bool _open, Data_NPC _npc)
     {
-        inventoryID = _landingStruct.landingID + "_Shop";
+        npc = _npc;
+        inventoryID = _npc.npc_ID;
         currentIndex = 0;
-        shopItem[currentIndex] = _landingStruct.shopData;
         OpenCanvas(_open);
 
         layoutGroup.padding.top = 15;
@@ -82,24 +82,24 @@ public class UI_Shop : UI_Inventory_Base
             SetShopItem();// 열릴때 세팅
     }
 
-    public void SetShipyard(bool _open, LandingStruct _landingStruct)
+    public void SetShipyard(bool _open, Data_NPC _npc)
     {
-        inventoryID = _landingStruct.landingID + "_Shipyard";
+        npc = _npc;
+        inventoryID = _npc.npc_ID;
         currentIndex = 0;
-        shopItem = _landingStruct.shipyardData;
         OpenCanvas(_open);
 
-        layoutGroup.padding.top = 40;
+        layoutGroup.padding.top = 15;
         layoutGroup.padding.bottom = 40;
 
         slotType = SlotType.Shop;// SetShipyard
         toggleGroup.gameObject.SetActive(false);
         fixGroup.gameObject.SetActive(true);
+
         if (_open)
             SetShopItem();// 열릴때 세팅
-        //groupToggles[currentIndex].isOn = true;// 첫번째 탭 열기
     }
-
+    public Custom_Button[] toggleButtons;
     public void SetStorage(bool _open)
     {
         inventoryID = "MyStorage";
@@ -113,7 +113,7 @@ public class UI_Shop : UI_Inventory_Base
         toggleGroup.gameObject.SetActive(true);
         fixGroup.gameObject.SetActive(false);
 
-        groupToggles[currentIndex].isOn = true;// 첫번째 탭 열기
+        SetToggle(currentIndex);
     }
 
     public void SetResult(bool _open, ResultStruct _result = default)
@@ -139,12 +139,12 @@ public class UI_Shop : UI_Inventory_Base
     //===========================================================================================================================
     // 상점 물건 배치
     //===========================================================================================================================
-    public int resetDay = 0;
+    int resetDay = -1;
     public int currentIndex = 0;
     public string inventoryID;
     void SetShopItem()
     {
-        Debug.LogWarning("상점 세팅");
+        Debug.LogWarning($"상점 세팅 {npc?.npc_ID}");
         saveData = inventoryID + currentIndex;
         LoadInventory();
         switch (slotType)
@@ -166,11 +166,12 @@ public class UI_Shop : UI_Inventory_Base
                 break;
 
             case SlotType.Storage:
+                // 저장된 내용 불러오기
                 SetInventoryItem(saveData);
                 break;
 
             case SlotType.Result:
-                
+
                 break;
         }
     }
@@ -179,10 +180,10 @@ public class UI_Shop : UI_Inventory_Base
     {
         int checkDay = Game_Manager.current.GetTimeUI.day;
         resetDay = GetSaveInventoryData.lastSetDay;
-        Debug.LogWarning("날짜 체크!!! " + checkDay + " " + resetDay);
+        Debug.LogWarning($"날짜 체크!!! : {resetDay} = {checkDay}");
         if (resetDay != checkDay)
         {
-            resetDay = checkDay;
+            //resetDay = checkDay;
             return true;
         }
         return false;
@@ -195,8 +196,8 @@ public class UI_Shop : UI_Inventory_Base
 
     IEnumerator DisplayItem()
     {
-        EmptyInventory();
-        SetInventorySlot(GetSaveInventoryData.invenSize);
+        EmptyInventory();// 비우기
+        SetInventorySlot(npc.invenSize);// 인벤토리 세팅
         yield return null;
 
         SetFixedItem();
@@ -205,7 +206,8 @@ public class UI_Shop : UI_Inventory_Base
 
     void SetFixedItem()// 상점 고정 아이템 세팅
     {
-        string[] setID = shopItem[currentIndex].fixedID;
+        //string[] setID = shopItem[currentIndex].fixedID;
+        string[] setID = npc.fixedID;
         for (int i = 0; i < setID.Length; i++)
         {
             ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(setID[i]);
@@ -218,7 +220,8 @@ public class UI_Shop : UI_Inventory_Base
 
     void SetRandomItem()// 상점 랜덤 아이템 세팅
     {
-        List<string> setID = new List<string>(shopItem[currentIndex].randomID);
+        //List<string> setID = new List<string>(shopItem[currentIndex].randomID);
+        List<string> setID = new List<string>(npc.fixedID);
         setID = P01_Utility.ShuffleList(setID, 0);
 
         // 아이템 반복 되지 않게 세팅

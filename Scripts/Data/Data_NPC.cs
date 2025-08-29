@@ -9,5 +9,6 @@ public class Data_NPC : ScriptableObject
     public string voice;// NPC의 음성 파일 이름
     public Data_Dialog[] dataDialogs;
 
+    public Vector2Int invenSize;
     public string[] fixedID, randomID;// 파는 물건
 }

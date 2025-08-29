@@ -31,9 +31,6 @@ public class Trigger_Landing : Trigger_Setting
         public string landingID;
         public LandingSetting[] landingSetting;
 
-        public Data_Shop shopData;
-        public Data_Shop[] shipyardData;
-
         public Data_NPC shopNPC;
         public Data_NPC shipyardNPC;
     }

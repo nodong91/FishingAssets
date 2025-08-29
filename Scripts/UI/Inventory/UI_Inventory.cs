@@ -76,23 +76,23 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void OpenShop(LandingStruct _shopData)
+    public void OpenShop(Data_NPC _npc)
     {
         if (currentType != SlotType.Shop)
         {
             currentType = SlotType.Shop;
             myBox.OpenCanvas(true);
-            shop.SetShop(true, _shopData);
+            shop.SetShop(true, _npc);
         }
     }
 
-    public void OpenShipyard(LandingStruct _shopData)
+    public void OpenShipyard(Data_NPC _npc)
     {
         if (currentType != SlotType.Shipyard)
         {
             currentType = SlotType.Shipyard;
             myBox.OpenCanvas(true);
-            shop.SetShipyard(true, _shopData);
+            shop.SetShipyard(true, _npc);
         }
     }
 

@@ -36,12 +36,12 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
             case SelectType.OpenShop:
                 // 상점 열기
                 LandingStruct getLandingData = Game_Manager.current.GetLanding.GetLandingData;
-                Game_Manager.current.GetInventory.OpenShop(getLandingData);
+                Game_Manager.current.GetInventory.OpenShop(getLandingData.shopNPC);
                 break;
             case SelectType.OpenShipyard:
                 // 조선소 열기
                  getLandingData = Game_Manager.current.GetLanding.GetLandingData;
-                Game_Manager.current.GetInventory.OpenShipyard(getLandingData);
+                Game_Manager.current.GetInventory.OpenShipyard(getLandingData.shipyardNPC);
                 break;
 
             case SelectType.Upgrade:
