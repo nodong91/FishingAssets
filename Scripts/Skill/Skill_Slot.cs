@@ -127,7 +127,6 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     {
         onSlot = _enable;
         gageImage.fillAmount = _enable == true ? 1f : 0f; 
-        Singleton_Audio.INSTANCE.Audio_FX("water-drip-45622");
     }
 
     void EnableAction()
@@ -155,7 +154,6 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     IEnumerator InputSlot()// 슬롯 활성화
     {
-        Singleton_Audio.INSTANCE.Audio_FX("flash-329364");// 중간에 끊을 수 있어야
         float normalize = 0f;
         while (normalize < 1f)
         {

@@ -15,6 +15,7 @@ public class UI_Shop : UI_Inventory_Base
 
     [Header("- Shop")]
     private Data_Shop[] shopItem;
+    public Data_NPC npc;
     public VerticalLayoutGroup layoutGroup;
     public ToggleGroup toggleGroup;
     public Toggle[] groupToggles;

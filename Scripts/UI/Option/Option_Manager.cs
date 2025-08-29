@@ -122,6 +122,8 @@ public class Option_Manager : MonoBehaviour
             frameRateIndex = qualityManager.frameRateDropdown.value,
             audioStruct = new Data_Option.AudioStruct
             {
+                masterMute = Singleton_Audio.INSTANCE.masterMute,
+                masterVolume = Singleton_Audio.INSTANCE.masterVolume,
                 bgmMute = Singleton_Audio.INSTANCE.bgmMute,
                 bgmVolume = Singleton_Audio.INSTANCE.bgmVolume,
                 fxMute = Singleton_Audio.INSTANCE.fxMute,

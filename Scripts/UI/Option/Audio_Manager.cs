@@ -12,8 +12,8 @@ public class Audio_Manager : MonoBehaviour
     public TMP_Text audioText;
     public int currentAudio;
     public string[] audioStrings;
-    public Slider bgm_Slider, fx_Slider, env_Slider;
-    public Toggle bgm_Mute, fx_Mute, env_Mute;
+    public Slider master_Slider, bgm_Slider, fx_Slider, env_Slider;
+    public Toggle master_Mute, bgm_Mute, fx_Mute, env_Mute;
     const float divide = 10f;
     bool onSet;
     Dictionary<string, int> tryStringToIndex = new Dictionary<string, int>();
@@ -27,6 +27,11 @@ public class Audio_Manager : MonoBehaviour
         }
         prevButton.onClick.AddListener(delegate { NextButton(-1); });
         nextButton.onClick.AddListener(delegate { NextButton(1); });
+
+        master_Mute.onValueChanged.AddListener(MasterMute);
+        master_Slider.onValueChanged.AddListener(MasterVolume);
+        master_Slider.maxValue = divide;
+        master_Slider.wholeNumbers = true;
 
         bgm_Mute.onValueChanged.AddListener(BGMMute);
         bgm_Slider.onValueChanged.AddListener(BGMVolume);
@@ -51,6 +56,8 @@ public class Audio_Manager : MonoBehaviour
     {
         AudioStruct audioStruct = Option_Manager.current.optionData.audioStruct;
         // UI ¼¼ÆÃ
+        master_Slider.value = audioStruct.masterVolume * divide;
+        master_Mute.isOn = audioStruct.masterMute;
         bgm_Slider.value = audioStruct.bgmVolume * divide;
         bgm_Mute.isOn = audioStruct.bgmMute;
         fx_Slider.value = audioStruct.fxVolume * divide;
@@ -92,6 +99,16 @@ public class Audio_Manager : MonoBehaviour
             Debug.LogError($"Audio string '{_id}' not found in the list.");
         }
     }
+    void MasterVolume(float _value)
+    {
+        float value = _value / divide;
+        Singleton_Audio.INSTANCE.SetMasterVolume(value);
+    }
+
+    void MasterMute(bool _isOn)
+    {
+        Singleton_Audio.INSTANCE.SetMasterMute(_isOn);
+    }
 
     void BGMVolume(float _value)
     {
@@ -112,12 +129,6 @@ public class Audio_Manager : MonoBehaviour
         Singleton_Audio.INSTANCE.SetFXVolume(value);
     }
 
-    void SetFxPrev()
-    {
-        string soundName = "pop-39222";
-        Singleton_Audio.INSTANCE.Audio_FX(soundName);
-    }
-
     void FXMute(bool _isOn)
     {
         Singleton_Audio.INSTANCE.SetFXMute(_isOn);
@@ -132,5 +143,11 @@ public class Audio_Manager : MonoBehaviour
     void EnvMute(bool _isOn)
     {
         Singleton_Audio.INSTANCE.SetEnvironmentMute(_isOn);
+    }
+
+    void SetFxPrev()
+    {
+        string soundName = "pop-39222";
+        Singleton_Audio.INSTANCE.Audio_FX(soundName);
     }
 }

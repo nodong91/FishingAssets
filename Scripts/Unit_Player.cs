@@ -27,7 +27,7 @@ public class Unit_Player : MonoBehaviour
     private float targetAngle = 10f;
     float runningTime;
     public GameObject playerObject;
-    Transform FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
+    GameObject FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
     Coroutine stateAction;
 
     private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
@@ -46,7 +46,7 @@ public class Unit_Player : MonoBehaviour
         if (FocusTarget == null)
             return;
 
-        FocusTarget.position = transform.position;
+        FocusTarget.transform.position = transform.position;
     }
 
     public void SetStatus()
@@ -197,11 +197,13 @@ public class Unit_Player : MonoBehaviour
 
     void SetMoving()
     {
+        if (FocusTarget == null)
+            return;
         //Transform focusTarget = Game_Manager.current.cameraManager.GetFocusTarget;
-        FocusTarget.position = transform.position;
+        FocusTarget.transform.position = transform.position;
 
         Vector3 dir = new Vector3(dirction.x, 0f, dirction.y);
-        Vector3 target = transform.position + FocusTarget.TransformDirection(dir).normalized;
+        Vector3 target = transform.position + FocusTarget.transform.TransformDirection(dir).normalized;
         //Vector3 target = transform.position + focusTarget.transform.forward;
 
         float speed = moveSpeed * Time.deltaTime;
@@ -249,15 +251,15 @@ public class Unit_Player : MonoBehaviour
     {
         Game_Manager.current.GetMainUI.SetFadeScreen(true);
         yield return new WaitForSeconds(0.5f);
-
+        Debug.LogError("견인 되는 연출 필요");
         // 견인 되는 연출 필요
         // 위치 변경
         Data_Continue continueData = SaveData_Continue.current.continueData;
         // 위치
-        transform.position = continueData.playerPosition;
-        transform.rotation = continueData.playerRotation;
+        transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
         transform.localScale = continueData.playerScale;
-        FocusTarget.position = transform.position;
+        if (FocusTarget != null)
+            FocusTarget.transform.position = transform.position;
         yield return new WaitForSeconds(1f);
 
         Game_Manager.current.GetMainUI.SetFadeScreen(false);

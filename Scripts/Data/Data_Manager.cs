@@ -173,6 +173,8 @@ public class Data_Manager : Data_Parse
         public struct AudioStruct
         {
             // 사운드 관련
+            public bool masterMute;
+            public float masterVolume;
             public bool bgmMute;
             public float bgmVolume;
             public bool fxMute;
