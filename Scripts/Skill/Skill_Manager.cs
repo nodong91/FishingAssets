@@ -73,26 +73,21 @@ public class Skill_Manager : MonoBehaviour
         OpenCanvas(false);
         Game_Manager.current.GetLanding.BackButton();
     }
-
+    public Data_SkillTree skillTreeData;
     void LoadData()
     {
+        skillMap = skillTreeData.skillMapSize;
         statusStructs = new SkillStatus[skillMap.x, skillMap.y];
+
         // 스킬 트리 불러오기
-        if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<SkillStatus> _statusStructs))
+        int index = 0;
+        for (int y = 0; y < skillMap.y; y++)
         {
-            int index = 0;
-            for (int y = 0; y < skillMap.y; y++)
+            for (int x = 0; x < skillMap.x; x++)
             {
-                for (int x = 0; x < skillMap.x; x++)
-                {
-                    statusStructs[x, y] = _statusStructs[index];
-                    index++;
-                }
+                statusStructs[x, y] = skillTreeData.skillList[index];
+                index++;
             }
-        }
-        else
-        {
-            Debug.LogError("Failed to load skill data.");
         }
 
         // 활성화된 스킬 불러오기
@@ -101,6 +96,34 @@ public class Skill_Manager : MonoBehaviour
             enableSlotLIst = _enableSlotLIst;
         }
     }
+
+    //void LoadData()
+    //{
+    //    statusStructs = new SkillStatus[skillMap.x, skillMap.y];
+    //    // 스킬 트리 불러오기
+    //    if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<SkillStatus> _statusStructs))
+    //    {
+    //        int index = 0;
+    //        for (int y = 0; y < skillMap.y; y++)
+    //        {
+    //            for (int x = 0; x < skillMap.x; x++)
+    //            {
+    //                statusStructs[x, y] = _statusStructs[index];
+    //                index++;
+    //            }
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("Failed to load skill data.");
+    //    }
+
+    //    // 활성화된 스킬 불러오기
+    //    if (Static_JsonManager.TryLoadEnableSkillData(saveEnableData, out List<Vector2Int> _enableSlotLIst))
+    //    {
+    //        enableSlotLIst = _enableSlotLIst;
+    //    }
+    //}
 
     void SettingLoadSlot()
     {

@@ -32,7 +32,7 @@ public class Quality_Manager : MonoBehaviour
 
         Data_Option optionData = Option_Manager.current.optionData;
         ToggleFullScreen(optionData.fullScreen);
-        SetQualityLevel(optionData.qualityLevel);
+        //SetQualityLevel(optionData.qualityLevel);
         SetResolution(optionData.resolutionIndex);
         SetFrameRate(optionData.frameRateIndex);
         DebugText();

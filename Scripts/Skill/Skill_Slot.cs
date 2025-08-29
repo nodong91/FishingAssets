@@ -92,7 +92,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = Vector3.one * 1.1f;
-        Vector2 vector2 = eventData.position;
+        //Vector2 vector2 = eventData.position;
         deleSlotPosition?.Invoke(Status, transform.position);
     }
 
@@ -126,7 +126,8 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void EnableSlot(bool _enable)
     {
         onSlot = _enable;
-        gageImage.fillAmount = _enable == true ? 1f : 0f;
+        gageImage.fillAmount = _enable == true ? 1f : 0f; 
+        Singleton_Audio.INSTANCE.Audio_FX("water-drip-45622");
     }
 
     void EnableAction()
@@ -154,6 +155,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     IEnumerator InputSlot()// 슬롯 활성화
     {
+        Singleton_Audio.INSTANCE.Audio_FX("flash-329364");// 중간에 끊을 수 있어야
         float normalize = 0f;
         while (normalize < 1f)
         {

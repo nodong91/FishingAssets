@@ -19,13 +19,14 @@ namespace P01.Editor
             window.minSize = new Vector2(500f, 200f);
             window.Show();
         }
-        Vector2Int skillMap;
+        //Vector2Int skillMap;
         Vector2 scrollPosition;
 
         SkillStatus[,] statusStructs;
         SerializedObject targetObject;
         bool tutorialToggle;
         const string saveTreeData = "Skill_Tree";
+        Data_SkillTree skillTreeData;
 
         private void OnEnable()
         {
@@ -66,8 +67,15 @@ namespace P01.Editor
             }
             EditorGUILayout.EndVertical();
 
-            skillMap = EditorGUILayout.Vector2IntField("SkillMap", skillMap);
-            if (GUILayout.Button($"Set Field : {skillMap}", buttonText, GUILayout.Height(30f)))
+            skillTreeData = EditorGUILayout.ObjectField(skillTreeData, typeof(Data_SkillTree), true) as Data_SkillTree;
+            if (skillTreeData == null)
+            {
+                GUILayout.Space(10f);
+                GUILayout.Label(" Data_SkillTree 데이터가 없음", guiText);
+                return;
+            }
+            //skillMap = EditorGUILayout.Vector2IntField("SkillMap", skillMap);
+            if (GUILayout.Button($"Set Field : {skillTreeData.skillMapSize}", buttonText, GUILayout.Height(30f)))
             {
                 SetNode();
             }
@@ -98,44 +106,57 @@ namespace P01.Editor
         void SaveData()
         {
             List<SkillStatus> status = new List<SkillStatus>();
-            for (int y = 0; y < skillMap.y; y++)
+            for (int y = 0; y < skillTreeData.skillMapSize.y; y++)
             {
-                for (int x = 0; x < skillMap.x; x++)
+                for (int x = 0; x < skillTreeData.skillMapSize.x; x++)
                 {
                     SkillStatus skillClass = statusStructs[x, y];
                     status.Add(skillClass);
                 }
             }
+            skillTreeData.skillList = status;
             Debug.LogError($"{status.Count}개 저장");
-            Static_JsonManager.SaveSkillData(saveTreeData, status);
+            //Static_JsonManager.SaveSkillData(saveTreeData, status);
         }
-     
+
         void LoadData()
         {
-            if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<SkillStatus> _statusStructs))
+            if (skillTreeData == null)
+                return;
+
+            int index = 0;
+            for (int y = 0; y < skillTreeData.skillMapSize.y; y++)
             {
-                int index = 0;
-                for (int y = 0; y < skillMap.y; y++)
+                for (int x = 0; x < skillTreeData.skillMapSize.x; x++)
                 {
-                    for (int x = 0; x < skillMap.x; x++)
-                    {
-                        statusStructs[x, y] = _statusStructs[index];
-                        index++;
-                    }
+                    statusStructs[x, y] = skillTreeData.skillList[index];
+                    index++;
                 }
             }
-            else
-            {
-                Debug.LogError("Failed to load skill data.");
-            }
+            //if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<SkillStatus> _statusStructs))
+            //{
+            //    int index = 0;
+            //    for (int y = 0; y < skillTreeData.skillMapSize.y; y++)
+            //    {
+            //        for (int x = 0; x < skillTreeData.skillMapSize.x; x++)
+            //        {
+            //            statusStructs[x, y] = _statusStructs[index];
+            //            index++;
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    Debug.LogError("Failed to load skill data.");
+            //}
         }
 
         void SetNode()
         {
-            statusStructs = new SkillStatus[skillMap.x, skillMap.y];
-            for (int y = 0; y < skillMap.y; y++)
+            statusStructs = new SkillStatus[skillTreeData.skillMapSize.x, skillTreeData.skillMapSize.y];
+            for (int y = 0; y < skillTreeData.skillMapSize.y; y++)
             {
-                for (int x = 0; x < skillMap.x; x++)
+                for (int x = 0; x < skillTreeData.skillMapSize.x; x++)
                 {
                     statusStructs[x, y] = new SkillStatus();
                     //statusStructs[x, y].setStatus = new List<StatusStruct.SetStruct>();
@@ -150,12 +171,12 @@ namespace P01.Editor
                 return;
 
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
-            float amount = (float)skillMap.x;
+            float amount = (float)skillTreeData.skillMapSize.x;
             float width = (position.width - 3.2f * (amount)) / amount;
-            for (int y = 0; y < skillMap.y; y++)
+            for (int y = 0; y < skillTreeData.skillMapSize.y; y++)
             {
                 EditorGUILayout.BeginHorizontal();
-                for (int x = 0; x < skillMap.x; x++)
+                for (int x = 0; x < skillTreeData.skillMapSize.x; x++)
                 {
                     SetButton(x, y, width);
                 }

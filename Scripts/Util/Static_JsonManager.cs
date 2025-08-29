@@ -118,34 +118,34 @@ public class Static_JsonManager
     //    jsonCards = default;
     //    return false;
     //}
-    public static void SaveSkillData(string fileName, List<SkillStatus> _data)
-    {
-        string filePath = Application.dataPath + "/SaveData/";
-        // 폴더 생성
-        FindFolder(filePath);
+    //public static void SaveSkillData(string fileName, List<SkillStatus> _data)
+    //{
+    //    string filePath = Application.dataPath + "/SaveData/";
+    //    // 폴더 생성
+    //    FindFolder(filePath);
 
-        string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
-        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
-        File.WriteAllText(filePath + fileName + ".json", toJson);
-    }
+    //    string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
+    //    //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+    //    File.WriteAllText(filePath + fileName + ".json", toJson);
+    //}
 
-    public static bool TryLoadSkillData(string fileName, out List<SkillStatus> data)
-    {
-        string filePath = Application.dataPath + "/SaveData/";
-        string path = filePath + fileName + ".json";
-        FileInfo fileInfo = new FileInfo(path);
+    //public static bool TryLoadSkillData(string fileName, out List<SkillStatus> data)
+    //{
+    //    string filePath = Application.dataPath + "/SaveData/";
+    //    string path = filePath + fileName + ".json";
+    //    FileInfo fileInfo = new FileInfo(path);
 
-        if (fileInfo.Exists == true)
-        {
-            string fromJson = File.ReadAllText(path);
-            //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
-            data = JsonHelper.FromJson<SkillStatus>(fromJson);
-            return true;
-        }
+    //    if (fileInfo.Exists == true)
+    //    {
+    //        string fromJson = File.ReadAllText(path);
+    //        //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
+    //        data = JsonHelper.FromJson<SkillStatus>(fromJson);
+    //        return true;
+    //    }
 
-        data = default;
-        return false;
-    }
+    //    data = default;
+    //    return false;
+    //}
 
     public static void SaveEnableSkillData(string fileName, List<Vector2Int> _data)
     {
