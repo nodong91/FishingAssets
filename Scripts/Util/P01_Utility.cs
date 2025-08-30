@@ -22,7 +22,6 @@ public class P01_Utility
 
     public static List<T> ShuffleList<T>(List<T> list, int seed)
     {
-        List<T> tempList = new List<T>();
         System.Random prng = new System.Random(seed);
         for (int i = 0; i < list.Count-1; i++)
         {
@@ -32,6 +31,21 @@ public class P01_Utility
             list[i] = tempItem;
         }
         return list;
+    }
+
+    public static Queue<T> ShuffleQueue<T>(List<T> list, int seed)
+    {
+        Queue<T> tempQueue = new Queue<T>();
+        System.Random prng = new System.Random(seed);
+        for (int i = 0; i < list.Count - 1; i++)
+        {
+            int randomIndex = prng.Next(i, list.Count);
+            T tempItem = list[randomIndex];
+            list[randomIndex] = list[i];
+            list[i] = tempItem;
+            tempQueue.Enqueue(tempItem);
+        }
+        return tempQueue;
     }
 
     // È®·ü ±¸ÇÏ±â

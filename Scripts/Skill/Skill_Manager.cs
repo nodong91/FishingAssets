@@ -30,11 +30,12 @@ public class Editor_Skill_Manager : Editor
 
 public class Skill_Manager : MonoBehaviour
 {
+    public Data_SkillTree skillTreeData;
     public CanvasGroup canvasGroup;
     public Custom_Button closeButton;
     public RectTransform slotParent;
     public Skill_Slot slot;
-    public Vector2Int skillMap;
+    private Vector2Int skillMap;
     public float slotSize = 50f; // Size of each skill slot
     public RectTransform instParent;
 
@@ -49,7 +50,6 @@ public class Skill_Manager : MonoBehaviour
 
     public Skill_Infomation infomation;
 
-    const string saveTreeData = "Skill_Tree";// 스킬 트리 내용
     const string saveEnableData = "Skill_Enabled";// 활성화 된 스킬 저장
 
     public void SetStart()
@@ -73,7 +73,7 @@ public class Skill_Manager : MonoBehaviour
         OpenCanvas(false);
         Game_Manager.current.GetLanding.BackButton();
     }
-    public Data_SkillTree skillTreeData;
+
     void LoadData()
     {
         skillMap = skillTreeData.skillMapSize;
@@ -96,34 +96,6 @@ public class Skill_Manager : MonoBehaviour
             enableSlotLIst = _enableSlotLIst;
         }
     }
-
-    //void LoadData()
-    //{
-    //    statusStructs = new SkillStatus[skillMap.x, skillMap.y];
-    //    // 스킬 트리 불러오기
-    //    if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<SkillStatus> _statusStructs))
-    //    {
-    //        int index = 0;
-    //        for (int y = 0; y < skillMap.y; y++)
-    //        {
-    //            for (int x = 0; x < skillMap.x; x++)
-    //            {
-    //                statusStructs[x, y] = _statusStructs[index];
-    //                index++;
-    //            }
-    //        }
-    //    }
-    //    else
-    //    {
-    //        Debug.LogError("Failed to load skill data.");
-    //    }
-
-    //    // 활성화된 스킬 불러오기
-    //    if (Static_JsonManager.TryLoadEnableSkillData(saveEnableData, out List<Vector2Int> _enableSlotLIst))
-    //    {
-    //        enableSlotLIst = _enableSlotLIst;
-    //    }
-    //}
 
     void SettingLoadSlot()
     {
@@ -154,7 +126,7 @@ public class Skill_Manager : MonoBehaviour
                 inst.Status = status;
                 inst.SetStart();
                 inst.SetNearBySlot(skillMap);   // 근처 슬롯 설정
-                //inst.openingCurve = openingCurve; // 애니메이션 곡선 설정
+
                 allSlot[x, y] = inst;
             }
         }
@@ -194,8 +166,7 @@ public class Skill_Manager : MonoBehaviour
 
     public void AddSlot(Vector2Int _addNode)// 스킬 슬롯 추가
     {
-        SetSlot(_addNode);
-
+        ActiveSlot(_addNode);
         enableSlotLIst.Add(_addNode);
         Static_JsonManager.SaveEnableSkillData(saveEnableData, enableSlotLIst);// 활성화 된 스킬 저장
     }
@@ -212,6 +183,12 @@ public class Skill_Manager : MonoBehaviour
         // 스탯 추가
         addStatus.AddStatus(slot.Status.addStatus);
         Game_Manager.current.AddStatus();
+    }
+
+    void ActiveSlot(Vector2Int _addNode)
+    {
+        SetSlot(_addNode);
+        Singleton_Audio.INSTANCE.Audio_FX("beep-6-96243");
     }
 
     public Custom_Button resetButton;// 스킬 초기화 버튼

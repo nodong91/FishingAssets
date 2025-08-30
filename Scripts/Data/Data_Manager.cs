@@ -65,7 +65,7 @@ public class Data_Manager : Data_Parse
             {
                 id = tempItem.id,
                 itemStruct = tempItem,
-                fishType = (FishStruct.FishType)System.Enum.Parse(typeof(FishStruct.FishType), elements[8]),
+                areaType = (AreaType)System.Enum.Parse(typeof(AreaType), elements[8]),
                 size = Parse_Vector2(elements[9]),
                 fishHealth = Parse_Float(elements[10]),
                 fishPower = Parse_Float(elements[11]),
@@ -305,21 +305,23 @@ public class Data_Manager : Data_Parse
         public float price;
     }
 
+    public enum AreaType
+    {
+        None = 0,
+        Shallow = 1,
+        Coastal = 2,
+        Oceanic = 3,
+        Abyssal = 4,
+        Hadal = 5,
+    }
+
     [System.Serializable]
     public struct FishStruct// 물고기 정보
     {
         [HideInInspector]
         public string id;
         public ItemStruct itemStruct;
-        public enum FishType
-        {
-            Coastal,
-            Shallow,
-            Oceanic,
-            Abyssal,
-            Hadal,
-        }
-        public FishType fishType;
+        public AreaType areaType;
         public Vector2 size;
 
         // 낚시 관련

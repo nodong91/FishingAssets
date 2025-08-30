@@ -92,7 +92,7 @@ public class UI_Shop : UI_Inventory_Base
         layoutGroup.padding.top = 15;
         layoutGroup.padding.bottom = 40;
 
-        slotType = SlotType.Shop;// SetShipyard
+        slotType = SlotType.Shipyard;// SetShipyard
         toggleGroup.gameObject.SetActive(false);
         fixGroup.gameObject.SetActive(true);
 
@@ -154,6 +154,7 @@ public class UI_Shop : UI_Inventory_Base
                 break;
 
             case SlotType.Shop:
+            case SlotType.Shipyard:
                 if (CheckResetDay() == true)
                 {
                     SetItemDisplay();// 상점 물건 리셋
@@ -183,7 +184,7 @@ public class UI_Shop : UI_Inventory_Base
         Debug.LogWarning($"날짜 체크!!! : {resetDay} = {checkDay}");
         if (resetDay != checkDay)
         {
-            //resetDay = checkDay;
+            resetDay = checkDay;
             return true;
         }
         return false;
