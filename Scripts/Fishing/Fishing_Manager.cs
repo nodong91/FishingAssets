@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using static Data_Manager;
 using static Data_Quest;
@@ -9,38 +10,82 @@ public class Fishing_Manager : Fishing_Game
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
 
     private FishStruct fishStruct;
-    private FishStruct.RandomSize randomSize; 
-    
-    FishStruct[] fishStructs;
-    int fishingAmount; // 낚시 횟수
+    private FishStruct.RandomSize randomSize;
 
     public GameObject fishInfomation;
     public Custom_Button closeButton;
     public Custom_Button startButton, outButton; // 결과 버튼 (필요시 사용)
+    Dictionary<string, List<FishStruct>> dictFishStruct = new Dictionary<string, List<FishStruct>>();
 
+    AreaType areaType;
+    public Queue<FishStruct> fishStructs = new Queue<FishStruct>();// 나올 물고기 묶음
     //==================================================================================================================================
 
     public void SetStart()
     {
         OffCamera();
         deleEndFishing = FishingComplate;
+        SetDictionary_FishStruct();// 타입별로 물고기 구분
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));
 
         SetComplate();
     }
 
-    public void SetFishingStart(FishStruct[] _fishStructs, int _fishingAmount)
+    void SetDictionary_FishStruct()
+    {
+        Dictionary<string, FishStruct> dictFish = Singleton_Data.INSTANCE.Dict_Fish;
+        foreach (var child in dictFish)
+        {
+            FishStruct fishStruct = child.Value;
+            string type = fishStruct.areaType.ToString() + fishStruct.fishDayType.ToString();
+            if (dictFishStruct.ContainsKey(type))
+            {
+                dictFishStruct[type].Add(fishStruct);
+            }
+            else
+            {
+                dictFishStruct[type] = new List<FishStruct> { fishStruct };
+                Debug.LogError(type);
+            }
+        }
+    }
+
+    public void SetFishingStart(AreaType _areaType)
     {
         // 낚시 시작
-        fishStructs = _fishStructs;
-        fishingAmount = _fishingAmount;
+        areaType = _areaType;
+        int fishingAmount = Random.Range(1, 5);
+        //string day = Game_Manager.current.GetMainUI.timeUI.lightMode.ToString();
+        string day = DayType.Any.ToString();
+        string type = areaType.ToString() + day;
+        Debug.LogError(type);
+        // 물고기 세팅
+        fishStructs.Clear();
+        for (int i = 0; i < fishingAmount; i++)
+        {
+            FishStruct fish = TryFishStruct(type);
+            fishStructs.Enqueue(fish);
+            Debug.LogWarning(fish.id);
+        }
         FishingStart();
+    }
+
+    FishStruct TryFishStruct(string _type)
+    {
+        if (dictFishStruct.ContainsKey(_type))
+        {
+            List<FishStruct> fishList = dictFishStruct[_type];
+            int randomIndex = Random.Range(0, fishList.Count);
+            FishStruct randomFish = fishList[randomIndex];
+            return randomFish;
+        }
+        return default;
     }
 
     void FishingStart()
     {
-        fishingAmount--;
-        if (fishingAmount > 0)
+        FishStruct fish = fishStructs.Dequeue();
+        if (fishStructs.Count > 0)
         {
             startButton.gameObject.SetActive(true); // 버튼 활성화
         }
@@ -50,7 +95,6 @@ public class Fishing_Manager : Fishing_Game
             Debug.LogWarning("낚시 횟수가 0 이하입니다.");
         }
 
-        FishStruct fish = Singleton_Data.INSTANCE.Dict_Fish["Fs_1001"];
         FishingStart(fish);
         SetStart(fishStruct);// 낚시 시작
     }

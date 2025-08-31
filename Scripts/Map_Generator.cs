@@ -76,9 +76,11 @@ public class Map_Generator : MonoBehaviour
     public Node[,] nodeMap;
     private List<Node> allNodes;
 
+    public Trigger_Fish triggerFish;
+
     public void UpdateData()
     {
-        SetMapGrid();
+        SetNodeGrid();
     }
 
     private void Start()
@@ -88,18 +90,18 @@ public class Map_Generator : MonoBehaviour
 
     public void SetStart()
     {
-        SetMapGrid();
+        SetNodeGrid();
         for (int i = 0; i < 13; i++)
         {
-            Node node = GetTypeNode(Data_Manager.AreaType.Shallow);
-            GameObject inst = Instantiate(aaaaaa);
+            Data_Manager.AreaType areaType = Data_Manager.AreaType.Shallow;
+            Node node = GetTypeNode(areaType);// 임시 연안 노드 랜덤으로 가져오기
+            Trigger_Fish inst = Instantiate(triggerFish, transform);
+            inst.SetAreaType(areaType);
             inst.transform.position = node.worldPosition;
         }
     }
 
-    public GameObject aaaaaa;
-
-    public void SetMapGrid()
+    public void SetNodeGrid()
     {
         worldSize = (Vector2)worldGrid * nodeSize;
 
@@ -118,40 +120,41 @@ public class Map_Generator : MonoBehaviour
 
                 Vector3 hitPoint = TryNodeHit(worldPoint + Vector3.up * 1000f);
                 nodeMap[x, y] = new Node(hitPoint, grid);
-                Data_Manager.AreaType areaType;
-                if (hitPoint.y <= -4f)
-                {
-                    areaType = Data_Manager.AreaType.Hadal;
-                    hadalNodes.Add(nodeMap[x, y]);
-                }
-                else if (hitPoint.y <= -3f)
-                {
-                    areaType = Data_Manager.AreaType.Abyssal;
-                    abyssalNodes.Add(nodeMap[x, y]);
-                }
-                else if (hitPoint.y <= -2f)
-                {
-                    areaType = Data_Manager.AreaType.Oceanic;
-                    oceanicNodes.Add(nodeMap[x, y]);
-                }
-                else if (hitPoint.y <= -1f)
-                {
-                    areaType = Data_Manager.AreaType.Coastal;
-                    coastalNodes.Add(nodeMap[x, y]);
-                }
-                else if (hitPoint.y <= 0.1f)
-                {
-                    areaType = Data_Manager.AreaType.Shallow;
-                    shallowNodes.Add(nodeMap[x, y]);
-                }
-                else
-                {
-                    areaType = Data_Manager.AreaType.None;
-                }
+                Data_Manager.AreaType areaType = SetNodeType(hitPoint.y, nodeMap[x, y]);// 노드 타입 세팅
                 nodeMap[x, y].SetNodeType(areaType);
                 allNodes.Add(nodeMap[x, y]);
             }
         }
+    }
+
+    Data_Manager.AreaType SetNodeType(float _hitPointY, Node _node)
+    {
+        if (_hitPointY <= -4f)
+        {
+            hadalNodes.Add(_node);
+            return Data_Manager.AreaType.Hadal;
+        }
+        else if (_hitPointY <= -3f)
+        {
+            abyssalNodes.Add(_node);
+            return Data_Manager.AreaType.Abyssal;
+        }
+        else if (_hitPointY <= -2f)
+        {
+            oceanicNodes.Add(_node);
+            return Data_Manager.AreaType.Oceanic;
+        }
+        else if (_hitPointY <= -1f)
+        {
+            coastalNodes.Add(_node);
+            return Data_Manager.AreaType.Coastal;
+        }
+        else if (_hitPointY <= 0.1f)
+        {
+            shallowNodes.Add(_node);
+            return Data_Manager.AreaType.Shallow;
+        }
+        return Data_Manager.AreaType.None;
     }
 
     List<Node> shallowNodes = new List<Node>();

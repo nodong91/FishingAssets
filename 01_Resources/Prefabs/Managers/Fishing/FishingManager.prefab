@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0251791e9ec4f8545894db6359f1e33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonImage: {fileID: 0}
 --- !u!1 &827511464796425664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,6 +2226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0251791e9ec4f8545894db6359f1e33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonImage: {fileID: 0}
 --- !u!1 &7790819702981179509
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,6 +2351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0251791e9ec4f8545894db6359f1e33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonImage: {fileID: 0}
 --- !u!1 &8366726973347893165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2358,7 +2361,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5105185164973434481}
-  - component: {fileID: 7674513761026267751}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -2382,20 +2384,6 @@ Transform:
   - {fileID: 3142095342164396387}
   m_Father: {fileID: 8580180322504569233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7674513761026267751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8366726973347893165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c66572042e0b144b86378d387da6b36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fishHealth: 0
-  fishImage: {fileID: 0}
 --- !u!1 &8471282505503401236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,7 +2469,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 354449a7b7d650045be6f59c033555fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  fishPrefab: {fileID: 8366726973347893165}
+  fishTargetPoint: {x: 0, y: 0, z: 0}
+  fishHealth: 0
+  fishSpeed: 0
+  fishImage: {fileID: 7286090953366414297}
+  offset: {x: 0, y: 0, z: 0}
+  fishStatus:
+    id: 
+    itemStruct:
+      id: 
+      name: 
+      itemType: 0
+      explanation: 
+      icon: {fileID: 0}
+      itemClass: 0
+      shape: []
+      iconSize: {x: 0, y: 0, z: 0, w: 0}
+      weight: 0
+      price: 0
+    areaType: 0
+    size: {x: 0, y: 0}
+    fishHealth: 0
+    fishPower: 0
+    fieldRadius: 0
+    fishSpeed: 0
+    fishAttackSpeed: 0
+    fishRange: {x: 0, y: 0}
+    fishTime: 0
   cameraPoint:
   - {fileID: 4784126195983310209}
   - {fileID: 3340761013930263738}
@@ -2498,6 +2513,7 @@ MonoBehaviour:
     shipSpeed: 0
     maxWeight: 0
     maxEnergy: 0
+    efficient: 0
     maxBoxSize: {x: 0, y: 0}
     shipHealth: 0
     freshness: 0
@@ -2506,32 +2522,6 @@ MonoBehaviour:
     FishPrice: 0
   catchHealth: 0
   catchImage: {fileID: 1300032977911400099}
-  fishPrefab: {fileID: 8366726973347893165}
-  fishStatus:
-    id: 
-    itemStruct:
-      id: 
-      name: 
-      itemType: 0
-      explanation: 
-      icon: {fileID: 0}
-      itemClass: 0
-      shape: []
-      iconSize: {x: 0, y: 0, z: 0, w: 0}
-      weight: 0
-      price: 0
-    fishType: 0
-    size: {x: 0, y: 0}
-    fishHealth: 0
-    fishPower: 0
-    fieldRadius: 0
-    fishSpeed: 0
-    fishAttackSpeed: 0
-    fishRange: {x: 0, y: 0}
-    fishTime: 0
-  fishHealth: 0
-  fishImage: {fileID: 7286090953366414297}
-  offset: {x: 0, y: 0, z: 0}
   canvasStructs:
   - direction: 1
     rect: {fileID: 758331773567249844}

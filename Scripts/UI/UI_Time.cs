@@ -16,13 +16,7 @@ public class UI_Time : MonoBehaviour
         Cloud
     }
     public WeatherType weatherType;
-    public enum LightMode
-    {
-        None,
-        Day,
-        Night,
-    }
-    public LightMode lightMode = LightMode.None;
+    public Data_Manager.DayType lightMode = Data_Manager.DayType.Any;
     public float timeSpeed = 10f;
     public float minute = 0;
     public int hour = 0;
@@ -48,13 +42,13 @@ public class UI_Time : MonoBehaviour
         if (hour >= 5f && hour < 18f)
         {
             // ³·
-            lightMode = LightMode.Day;
+            lightMode = Data_Manager.DayType.Day;
             DayLight.color = DayColor;
         }
         else
         {
             // ¹ã
-            lightMode = LightMode.Night;
+            lightMode = Data_Manager.DayType.Night;
             DayLight.color = NightColor;
         }
     }
@@ -85,14 +79,14 @@ public class UI_Time : MonoBehaviour
         if (hour >= 5f && hour < 6f)
         {
             // ³·
-            lightMode = LightMode.Day;
+            lightMode = Data_Manager.DayType.Day;
             float normalize = minute * 0.02f;
             DayLight.color = Color.Lerp(NightColor, DayColor, normalize);
         }
         else if (hour >= 18f && hour < 19f)
         {
             // ¹ã
-            lightMode = LightMode.Night;
+            lightMode = Data_Manager.DayType.Night;
             float normalize = minute * 0.02f;
             DayLight.color = Color.Lerp(DayColor, NightColor, normalize);
         }

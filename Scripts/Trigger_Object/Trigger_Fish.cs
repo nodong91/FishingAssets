@@ -4,34 +4,26 @@ using static Data_Manager;
 public class Trigger_Fish : MonoBehaviour
 {
     public Trigger_Setting triggerSetting;
-    public string id;
-    public FishStruct fishStruct;
+    AreaType areaType;
+    public int fishingAmount = 2; // 낚시 횟수
     public Sprite catchIcon;
 
     void Start()
     {
-        SetFish(id);
         triggerSetting.deleTriggerAction = FishingStart;// 낚시 게임 스타트
         //triggerSetting.GetIconSprite = fishStruct.itemStruct.icon;// 트리거 아이콘 설정
         triggerSetting.GetIconSprite = catchIcon;// 트리거 아이콘 설정
     }
 
-    void SetFish(string _id)
+    public void SetAreaType(AreaType _areaType)
     {
-        if (fishingAmount <= 0)
-            return;
-
-        id = _id;
-        fishStruct = Singleton_Data.INSTANCE.Dict_Fish[id];
-        //randomSize = fishStruct.GetRandom();
+        areaType = _areaType;
+        fishingAmount = Random.Range(1, 5);// 임시
     }
-
-    public FishStruct[] fishStructs;
-    public int fishingAmount = 2; // 낚시 횟수
 
     void FishingStart()
     {
-        Game_Manager.current.GetFishing.SetFishingStart(fishStructs, fishingAmount);
+        Game_Manager.current.GetFishing.SetFishingStart(areaType);
         triggerSetting.gameObject.SetActive(false);// 트리거 오브젝트 비활성화
     }
 }

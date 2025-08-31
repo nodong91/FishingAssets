@@ -73,7 +73,7 @@ public class Data_Manager : Data_Parse
                 fishSpeed = Parse_Float(elements[13]),
                 fishAttackSpeed = Parse_Float(elements[14]),
                 fishRange = Parse_Vector2(elements[15]),
-                fishTime = (FishStruct.FishTime)System.Enum.Parse(typeof(FishStruct.FishTime), elements[16]),
+                fishDayType = (DayType)System.Enum.Parse(typeof(DayType), elements[16]),
             };
             fishStruct.Add(tempData);
         }
@@ -315,6 +315,13 @@ public class Data_Manager : Data_Parse
         Hadal = 5,
     }
 
+    public enum DayType
+    {
+        Any,
+        Day,
+        Night,
+    }
+
     [System.Serializable]
     public struct FishStruct// 물고기 정보
     {
@@ -331,13 +338,7 @@ public class Data_Manager : Data_Parse
         public float fishSpeed;// 물고기 이동 속도
         public float fishAttackSpeed;// 물고기 공격 속도
         public Vector2 fishRange;// 방향 바뀌는 딜레이 시간
-        public enum FishTime
-        {
-            Any,
-            Day,
-            Night,
-        }
-        public FishTime fishTime;
+        public DayType fishDayType;// 등장 시간
 
         [System.Serializable]
         public struct RandomSize
