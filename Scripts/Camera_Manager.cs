@@ -172,8 +172,8 @@ public class Camera_Manager : MonoBehaviour
         orbitalFollow.VerticalAxis.Value = Mathf.Lerp(orbitalFollow.VerticalAxis.Value, y, speed);
 
         Vector3 camPos = cinemachineCamera.transform.position;
-        //Vector3 offset = (focusTarget.transform.position - new Vector3(camPos.x, focusTarget.transform.position.y, camPos.z));
-        Vector3 offset = (focusTarget.transform.position - camPos);
+        Vector3 offset = (focusTarget.transform.position - new Vector3(camPos.x, focusTarget.transform.position.y, camPos.z));
+        //Vector3 offset = (focusTarget.transform.position - camPos);
         focusTarget.transform.rotation = Quaternion.LookRotation(offset, Vector3.up);
     }
 
