@@ -4,8 +4,7 @@ using static Data_Manager;
 public class Trigger_Fish : MonoBehaviour
 {
     public Trigger_Setting triggerSetting;
-    AreaType areaType;
-    public int fishingAmount = 2; // ³¬½Ã È½¼ö
+    public AreaType areaType;
     public Sprite catchIcon;
 
     void Start()
@@ -18,7 +17,6 @@ public class Trigger_Fish : MonoBehaviour
     public void SetAreaType(AreaType _areaType)
     {
         areaType = _areaType;
-        fishingAmount = Random.Range(1, 5);// ÀÓ½Ã
     }
 
     void FishingStart()

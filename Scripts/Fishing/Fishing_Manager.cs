@@ -55,10 +55,10 @@ public class Fishing_Manager : Fishing_Game
         // ≥¨Ω√ Ω√¿€
         areaType = _areaType;
         int fishingAmount = Random.Range(1, 5);
-        //string day = Game_Manager.current.GetMainUI.timeUI.lightMode.ToString();
-        string day = DayType.Any.ToString();
+        string day = Game_Manager.current.GetMainUI.timeUI.lightMode.ToString();
+        //string day = DayType.Any.ToString();
         string type = areaType.ToString() + day;
-        Debug.LogError(type);
+        Debug.LogError($"≥¨Ω√≈Õ ≈∏¿‘ : {type}, ≥¨Ω√ »Ωºˆ : {fishingAmount}");
         // π∞∞Ì±‚ ºº∆√
         fishStructs.Clear();
         for (int i = 0; i < fishingAmount; i++)
