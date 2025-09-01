@@ -112,19 +112,19 @@ public class Fishing_Game : Fishing_Skill
             CatchMovement();
             FishMovement();
 
-            float distance = (fishPrefab.transform.position - transform.position).magnitude;
-            Debug.LogWarning($"{distance}{coolingTime - Time.time}");
-            if (distance < 1f && coolingTime < Time.time)
-            {
-                coolingTime = Time.time + fishAttackTime;
-                fishState = FishState.Attacking;
-                AttackState();
-            }
-            else if (fishState != FishState.Attacking)// 공격중이 아닌경우
-            {
-                fishState = FishState.Moving;
-                RandomMove();
-            }
+            //float distance = (fishPrefab.transform.position - transform.position).magnitude;
+            //Debug.LogWarning($"{distance}{coolingTime - Time.time}");
+            //if (distance < 1f && coolingTime < Time.time)
+            //{
+            //    coolingTime = Time.time + fishAttackTime;
+            //    fishState = FishState.Attacking;
+            //    AttackState();
+            //}
+            //else if (fishState != FishState.Attacking)// 공격중이 아닌경우
+            //{
+            //    fishState = FishState.Moving;
+            //    RandomMove();
+            //}
             yield return null;
         }
     }

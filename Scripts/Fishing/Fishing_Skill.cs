@@ -68,6 +68,7 @@ public class Fishing_Skill : MonoBehaviour
     public void FishMovement()
     {
         fishImage.rectTransform.position = Camera.main.WorldToScreenPoint(fishPrefab.transform.position + offset);//FollowHPUI
+        RandomMove();
     }
 
     public void RandomMove()
