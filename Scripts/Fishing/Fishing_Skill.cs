@@ -68,6 +68,10 @@ public class Fishing_Skill : MonoBehaviour
     public void FishMovement()
     {
         fishImage.rectTransform.position = Camera.main.WorldToScreenPoint(fishPrefab.transform.position + offset);//FollowHPUI
+    }
+
+    public void RandomMove()
+    {
         if (randomTime < Time.time)
         {
             randomTime = Time.time + Random.Range(fishStatus.fishRange.x, fishStatus.fishRange.y);
@@ -79,5 +83,15 @@ public class Fishing_Skill : MonoBehaviour
         float fishSpeed = Time.deltaTime * fishStatus.fishSpeed;
         fishPrefab.transform.position = Vector3.Lerp(fishPrefab.transform.position, fishTargetPoint, fishSpeed);
         fishPrefab.transform.rotation = Quaternion.Slerp(fishPrefab.transform.rotation, Quaternion.LookRotation(fishDirection), fishSpeed);
+    }
+
+    public void AttackState()
+    {
+        StartCoroutine(Attacking());
+    }
+
+    IEnumerator Attacking()
+    {
+        yield return null;
     }
 }
