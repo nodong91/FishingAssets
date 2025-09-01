@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
 using static Data_Quest;
-using static Trigger_Landing;
 using static UI_Inventory_Base;
 using static UI_Inventory_Slot;
 
@@ -40,6 +39,7 @@ public class UI_Inventory : MonoBehaviour
     ItemClass originItemClass;
 
     int slotSize = 40;
+    ResultStruct resultItem;
 
 
     float GetMoney => Game_Manager.current.GetMainUI.TryMoney;
@@ -133,7 +133,6 @@ public class UI_Inventory : MonoBehaviour
         Game_Manager.current.GetMainUI.OpenCanvas(true);
     }
 
-    ResultStruct resultItem;
     public void SetResult(ResultStruct _resultItem)
     {
         // 퀘스트 결과 아이템 세팅
@@ -144,19 +143,17 @@ public class UI_Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            Game_Manager.current.GetMainUI.MoveMoney(1000f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
             string randomID = "Fs_" + Random.Range(1, 4) + "001";
             FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[randomID];
             FishStruct.RandomSize randomSize = fishStruct.GetRandom();
 
             SetIconImage(fishStruct.itemStruct);
             AddItem(fishStruct.itemStruct);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            string randomID = "Eq_000" + Random.Range(1, 4);
-            BuyItem(randomID);
-            Debug.LogWarning("GetKeyDown2");
         }
     }
 
