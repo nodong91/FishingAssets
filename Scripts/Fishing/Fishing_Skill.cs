@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
+using static Fishing_Game;
 
 public class Fishing_Skill : MonoBehaviour
 {
@@ -65,17 +66,42 @@ public class Fishing_Skill : MonoBehaviour
 
     public FishStruct fishStatus;
 
+    float fishAttackTime = 3f;
+    float coolingTime;
+    public enum FishState
+    {
+        None = 0,
+        Moving = 1,
+        Attacking = 2,
+    }
+    public FishState fishState;
+
+
     public void FishMovement()
     {
         fishImage.rectTransform.position = Camera.main.WorldToScreenPoint(fishPrefab.transform.position + offset);//FollowHPUI
-        RandomMove();
+
+        float distance = (fishPrefab.transform.position - transform.position).magnitude;
+        Debug.LogWarning($"{distance}{coolingTime - Time.time}");
+        if (distance < 1f && coolingTime < Time.time)
+        {
+            coolingTime = Time.time + fishAttackTime;
+            fishState = FishState.Attacking;
+            AttackState();
+        }
+        else if (fishState != FishState.Attacking)// 공격중이 아닌경우
+        {
+            fishState = FishState.Moving;
+            RandomMove();
+        }
     }
 
     public void RandomMove()
     {
         if (randomTime < Time.time)
         {
-            randomTime = Time.time + Random.Range(fishStatus.fishRange.x, fishStatus.fishRange.y);
+            Vector2 range = fishStatus.fishRange;
+            randomTime = Time.time + Random.Range(range.x, range.y);
             Vector3 tempPoint = Random.insideUnitSphere * fishStatus.fieldRadius;
             fishTargetPoint = new Vector3(tempPoint.x, 0f, tempPoint.z) + transform.position;
         }

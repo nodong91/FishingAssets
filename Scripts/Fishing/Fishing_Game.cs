@@ -36,7 +36,6 @@ public class Fishing_Game : Fishing_Skill
         SetFishStruct(_fishStruct);// 물고기 정보 설정
         SetFishingLod(Game_Manager.current.currentStatus);
 
-        coolingTime = Time.time + fishAttackTime;// 물고기 스킬 타임
         ResetFishing();
         SetCamera();
         StartCoroutine(Fishing());
@@ -95,15 +94,7 @@ public class Fishing_Game : Fishing_Skill
         fishImage.material.SetFloat("_FillAmount", fishHealth);
         catchImage.material.SetFloat("_FillAmount", catchHealth);
     }
-    float fishAttackTime = 3f;
-    float coolingTime;
-    public enum FishState
-    {
-        None = 0,
-        Moving = 1,
-        Attacking = 2,
-    }
-    public FishState fishState;
+
     IEnumerator Fishing()
     {
         isFishing = true;
@@ -111,20 +102,6 @@ public class Fishing_Game : Fishing_Skill
         {
             CatchMovement();
             FishMovement();
-
-            //float distance = (fishPrefab.transform.position - transform.position).magnitude;
-            //Debug.LogWarning($"{distance}{coolingTime - Time.time}");
-            //if (distance < 1f && coolingTime < Time.time)
-            //{
-            //    coolingTime = Time.time + fishAttackTime;
-            //    fishState = FishState.Attacking;
-            //    AttackState();
-            //}
-            //else if (fishState != FishState.Attacking)// 공격중이 아닌경우
-            //{
-            //    fishState = FishState.Moving;
-            //    RandomMove();
-            //}
             yield return null;
         }
     }
