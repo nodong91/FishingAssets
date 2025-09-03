@@ -84,6 +84,7 @@ public class Unit_AirPlane : MonoBehaviour
     public GameObject closestTarget;
     public GameObject[] targets;
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         for (int i = 0; i < targets.Length; i++)
@@ -103,4 +104,5 @@ public class Unit_AirPlane : MonoBehaviour
             Handles.Label(transform.position + transform.forward + Vector3.up * 0.2f, $"Forward");
         }
     }
+#endif
 }
