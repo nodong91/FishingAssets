@@ -56,11 +56,18 @@ public class PositionTeset : MonoBehaviour
     }
 #endif
 
+    private void Start()
+    {
+        StartCoroutine(RandomTest());
+    }
+
     IEnumerator RandomTest()
     {
 
         while (true)
         {
+            Vector3 test = SetRandomPosition();
+            target.transform.position = test;
             yield return null;
         }
     }
@@ -75,11 +82,11 @@ public class PositionTeset : MonoBehaviour
         return position;
     }
 
-
     public float angle;
     public float range;
     public float shipSize = 2f;
     public float fieldSize = 10f;
+
     Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
         if (!angleIsGlobal)
