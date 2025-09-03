@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -47,7 +49,7 @@ public class Fishing_Canvas : MonoBehaviour
         countText.gameObject.SetActive(_index > 0);
     }
 
-    void Update()
+    public void FollowUI()
     {
         fishUI.position = Camera.main.WorldToScreenPoint(fishPrefab.position + fishOffset);//FollowHPUI
         catchUI.position = Camera.main.WorldToScreenPoint(catchPrefab.position + shipOffset);//FollowHPUI
@@ -96,5 +98,69 @@ public class Fishing_Canvas : MonoBehaviour
     void SetInfomation()
     {
         infoText.text = fishStruct.itemStruct.name;
+    }
+
+
+
+
+
+
+
+
+
+    public RectTransform arrowParent;
+    public Image arrow;
+    Queue<Image> arrowQueue = new Queue<Image>();
+    List<Image> arrowList = new List<Image>();
+    public void SetArrow(string _cord)
+    {
+        arrowParent.gameObject.SetActive(true);
+        arrowQueue = new Queue<Image>();
+        for (int i = 0; i < arrowList.Count; i++)
+        {
+            arrowQueue.Enqueue(arrowList[i]);
+            arrowList[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < _cord.Length; i++)
+        {
+            Image inst = TryArrow();
+            OnArrow(i, 0f);
+            inst.gameObject.SetActive(true);
+            int cordType = int.Parse(_cord[i].ToString());
+            float rotation = cordType * 90f;
+            inst.transform.rotation = Quaternion.Euler(0f, 0f, rotation);
+        }
+    }
+
+    public void OnArrow(int _index, float _fill)
+    {
+        arrowList[_index].material.SetFloat("_FillAmount", _fill);
+    }
+
+    public void OffArrowAll()
+    {
+        for (int i = 0; i < arrowList.Count; i++)
+        {
+            if (arrowList[i].gameObject.activeSelf == true)
+            {
+                arrowList[i].material.SetFloat("_FillAmount", 0f);
+            }
+        }
+    }
+
+    public void OnArrowPrent(bool _on)
+    {
+        arrowParent.gameObject.SetActive(_on);
+    }
+
+    Image TryArrow()
+    {
+        if (arrowQueue.Count > 0)
+            return arrowQueue.Dequeue();
+        Image inst = Instantiate(arrow, arrowParent);
+        inst.material = Instantiate(inst.material);
+        arrowList.Add(inst);
+        return inst;
     }
 }

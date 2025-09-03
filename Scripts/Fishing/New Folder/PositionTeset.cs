@@ -38,8 +38,8 @@ public class PositionTeset : MonoBehaviour
 
         Gizmos.color = dist > 2f ? Color.blue : Color.red;
         Gizmos.DrawSphere(fish.transform.position, 0.3f);
-        Gizmos.DrawLine(fish.transform.position, target.transform.position);
         Gizmos.DrawLine(fish.transform.position, transform.position);
+        Gizmos.DrawLine(target.transform.position, transform.position);
 
         float currentAngle = Vector3.Angle(transform.forward, fish.transform.position);
 
@@ -50,7 +50,7 @@ public class PositionTeset : MonoBehaviour
 
 
         Gizmos.color = Color.green;
-        Vector3 tempAngle = DirFromAngle(angle, false);
+        Vector3 tempAngle = DirFromAngle(angle);
         Vector3 pos = transform.position + tempAngle * range;
         Gizmos.DrawSphere(pos, 0.3f);
     }
@@ -68,29 +68,39 @@ public class PositionTeset : MonoBehaviour
         {
             Vector3 test = SetRandomPosition();
             target.transform.position = test;
+            //yield return new WaitForSeconds(0.5f);
             yield return null;
         }
     }
 
     Vector3 SetRandomPosition()
     {
-        float currentAngle = Vector3.Angle(transform.forward, fish.transform.position);
-        float randomAngle = Random.Range(-45f, 45f) + currentAngle;
+        if (Vector3.Angle(transform.right, fish.transform.position - transform.position) > 90f)
+        {
+            // ¿ÞÂÊ
+            currentAngle = 360f - Vector3.Angle(transform.forward, fish.transform.position);
+        }
+        else
+        {
+            // ¿À¸¥ÂÊ
+            currentAngle = Vector3.Angle(transform.forward, fish.transform.position);
+        }
+        float minMaxAngle = Random.Range(45f, 90f);
+        int randomIndex = Random.Range((int)0, (int)2) > 0 ? -1 : 1;
+        float randomAngle = minMaxAngle * randomIndex + currentAngle;
+        Vector3 tempAngle = DirFromAngle(randomAngle);
         float randomRange = Random.Range(shipSize, fieldSize);
-        Vector3 tempAngle = DirFromAngle(randomAngle, false);
-        Vector3 position = transform.position + tempAngle * range;
+        Vector3 position = transform.position + tempAngle * randomRange;
         return position;
     }
-
+    public float currentAngle;
     public float angle;
     public float range;
     public float shipSize = 2f;
     public float fieldSize = 10f;
 
-    Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
+    Vector3 DirFromAngle(float angleInDegrees)
     {
-        if (!angleIsGlobal)
-            angleInDegrees += transform.eulerAngles.y;
         return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 }
