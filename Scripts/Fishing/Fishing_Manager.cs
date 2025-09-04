@@ -96,7 +96,7 @@ public class Fishing_Manager : Fishing_Game
         }
 
         FishingStart(fish);
-        SetStart(fishStruct);// ≥¨Ω√ Ω√¿€
+        //SetStart(fishStruct);// ≥¨Ω√ Ω√¿€
     }
 
     public void FishingStart(FishStruct _fishStruct)

@@ -86,6 +86,7 @@ public class UI_Main : MonoBehaviour
 
     public void OpenCanvas(bool _open)
     {
+        Debug.LogWarning($"Main OpenCanvas >>>> {_open}");
         StaticOpenCanvas.deleEndOpen = null;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }

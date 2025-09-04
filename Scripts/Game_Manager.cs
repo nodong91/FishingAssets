@@ -15,7 +15,6 @@ public class Game_Manager : MonoBehaviour
     public UI_Landing landingUI;
     public Dialog_Manager dialogManager;
     public UI_NewsManager newsUI;
-    public Fishing_Manager fishingManager;
     public FishGuide fishGuide;
     public Skill_Manager skillManager;
     public string themeMusic;
@@ -219,20 +218,6 @@ public class Game_Manager : MonoBehaviour
                 instNews.SetStart();
             }
             return instNews;
-        }
-    }
-
-    private Fishing_Manager instFishing;
-    public Fishing_Manager GetFishing
-    {
-        get
-        {
-            if (instFishing == null)
-            {
-                instFishing = Instantiate(fishingManager, transform);
-                instFishing.SetStart();
-            }
-            return instFishing;
         }
     }
 

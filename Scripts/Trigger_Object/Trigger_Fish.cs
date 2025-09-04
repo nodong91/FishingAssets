@@ -23,7 +23,7 @@ public class Trigger_Fish : MonoBehaviour
     {
         //Game_Manager.current.GetFishing.SetFishingStart(areaType);
         Debug.LogWarning("낚시 시작");
-        Game_Manager.current.GetFishingAction.SetFishingStart(areaType);
+        Game_Manager.current.GetFishingAction.SetFishing(areaType);
         triggerSetting.gameObject.SetActive(false);// 트리거 오브젝트 비활성화
     }
 }

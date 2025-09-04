@@ -30,7 +30,9 @@ public class Fishing_Action : MonoBehaviour
     private float catchHealth, catchMaxHealth;
 
     public GameObject fishPrefab;
-    private FishStruct fishStruct;
+    //private FishStruct fishStruct; 
+    FishStruct currentFish;
+    RandomSize currentSize;
     private float fishHealth, fishMaxHealth;
     private float fishSpeed = 0f;
 
@@ -53,15 +55,13 @@ public class Fishing_Action : MonoBehaviour
     float catchDamage = 0.1f;
     Coroutine fishAction;
 
-    //void Start()
-    //{
-    //    SetStart();
-    //}
-
     public void SetStart()
     {
-        fishingCanvas.deleReStart = ReStart;
         SetDictionary_FishStruct();// 미리 사전 세팅
+
+        fishingCanvas.deleReStart = ReStart;
+        fishingCanvas.startButton.SetButton(SetFishingStart);
+        fishingCanvas.SetStart();
     }
 
     void Update()
@@ -95,15 +95,17 @@ public class Fishing_Action : MonoBehaviour
         //SetFishingStart(manager.fishStruct[0]);
     }
 
-    public void SetFishingStart(FishStruct _fishStruct)
+    public void SetFishingStart()
     {
-        fishStruct = _fishStruct;
+        currentFish = fishStructs.Dequeue();// 물고기 정보
+        currentSize = currentFish.GetRandom();
+        fishingCanvas.SetFishing(currentFish);
+
         isFishing = true;
 
-        SetCatch();
-        SetFish();
+        SetCatch();// 낚시 영역 초기화
+        SetFish();// 물고기 스탯 초기화
 
-        fishingCanvas.SetStart(fishStruct);
         StartCoroutine(StartCount());
     }
 
@@ -113,49 +115,39 @@ public class Fishing_Action : MonoBehaviour
 
     void SetDictionary_FishStruct()
     {
-        Dictionary<string, FishStruct> dictFish = Singleton_Data.INSTANCE.Dict_Fish;
-        foreach (var child in dictFish)
+        Dictionary<string, FishStruct> tempDict = Singleton_Data.INSTANCE.Dict_Fish;
+        foreach (var child in tempDict)
         {
-            FishStruct fishStruct = child.Value;
-            string type = fishStruct.areaType.ToString() + fishStruct.fishDayType.ToString();
-            if (dictFishStruct.ContainsKey(type))
+            FishStruct fish = child.Value;
+            string dictType = fish.areaType.ToString() + fish.fishDayType.ToString();
+            if (dictFishStruct.ContainsKey(dictType))
             {
-                dictFishStruct[type].Add(fishStruct);
+                dictFishStruct[dictType].Add(fish);
             }
             else
             {
-                dictFishStruct[type] = new List<FishStruct> { fishStruct };
-                Debug.LogError(type);
+                dictFishStruct[dictType] = new List<FishStruct> { fish };
+                Debug.LogError(dictType);
             }
         }
     }
-
-    public void SetFishingStart(AreaType _areaType)
+  
+    public void SetFishing(AreaType _areaType)
     {
+        areaType = _areaType;
+
+        SetFishList();// 낚시터 세팅
+        SetReady(true);// 낚시 준비
+        //SetFishingStart(currentFish);// 낚시 시작
+    }
+
+    void SetReady(bool _ready)
+    {
+        Game_Manager.current.GetMainUI.timeUI.TimePause(true);// 시간 정지
         transform.position = Game_Manager.current.GetPlayer.transform.position;
         positionComposer.transform.rotation = Quaternion.Euler(45f, Camera.main.transform.rotation.y, 0f);
         positionComposer.gameObject.SetActive(true);
 
-        // 낚시 시작
-        areaType = _areaType;
-        int fishingAmount = Random.Range(1, 5);// 낚시 횟수
-        string day = Game_Manager.current.GetMainUI.timeUI.lightMode.ToString();
-        string type = areaType.ToString() + day;
-        Debug.LogError($"낚시터 타입 : {type}, 낚시 횟수 : {fishingAmount}");
-        // 물고기 세팅
-        fishStructs.Clear();
-        for (int i = 0; i < fishingAmount; i++)
-        {
-            FishStruct fish = TryFishStruct(type);
-            fishStructs.Enqueue(fish);
-            Debug.LogWarning(fish.id);
-        }
-        FishingStart();
-    }
-    void FishingStart()
-    {
-        FishStruct fish = fishStructs.Dequeue();// 물고기 정보
-        //randomSize = fishStruct.GetRandom();
         //if (fishStructs.Count > 0)
         //{
         //    startButton.gameObject.SetActive(true); // 버튼 활성화
@@ -170,9 +162,23 @@ public class Fishing_Action : MonoBehaviour
         Game_Manager.current.GetMainUI.OpenCanvas(false);
         Game_Manager.current.OutOfControll(true);
 
-        Game_Manager.current.GetInventory.CloseResult();
+        //Game_Manager.current.GetInventory.CloseResult();
+    }
 
-        SetFishingStart(fish);// 낚시 시작
+    void SetFishList()
+    {
+        int fishingAmount = Random.Range(1, 5);// 낚시 횟수
+        string day = Game_Manager.current.GetMainUI.timeUI.lightMode.ToString();
+        string cordType = areaType.ToString() + day;
+        Debug.LogError($"낚시터 타입 : {cordType}, 낚시 횟수 : {fishingAmount}");
+        // 물고기 세팅
+        fishStructs.Clear();
+        for (int i = 0; i < fishingAmount; i++)
+        {
+            FishStruct fish = TryFishStruct(cordType);
+            fishStructs.Enqueue(fish);
+            Debug.LogWarning($"{fish.id} : {dictFishStruct.Count}");
+        }
     }
 
     FishStruct TryFishStruct(string _type)
@@ -217,11 +223,11 @@ public class Fishing_Action : MonoBehaviour
     {
         cooling = Time.time + coolTime;
 
-        Vector3 randomPoint = Random.insideUnitSphere * fishStruct.fieldRadius;
+        Vector3 randomPoint = Random.insideUnitSphere * currentFish.fieldRadius;
         fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
         fishPrefab.transform.position = fishTargetPoint;
 
-        fishMaxHealth = fishStruct.fishHealth;
+        fishMaxHealth = currentFish.fishHealth;
         fishHealth = fishMaxHealth;
     }
 
@@ -314,13 +320,13 @@ public class Fishing_Action : MonoBehaviour
             }
             if (catchHealth <= 0f || fishHealth <= 0f)
             {
-                FishingEnd(fishHealth <= 0f);
+                FishingFinish(fishHealth <= 0f);
             }
             yield return null;
         }
     }
 
-    void FishingEnd(bool _success)
+    void FishingFinish(bool _success)
     {
         StopAllCoroutines();
         isFishing = false;
@@ -328,7 +334,7 @@ public class Fishing_Action : MonoBehaviour
 
         fishingCanvas.OnArrowPrent(false);
         fishingCanvas.SetFishSpell(0f);
-        fishingCanvas.SetEnd(_success);
+        fishingCanvas.SetFinish(_success);
     }
 
     Vector3 CatchRayCast()
@@ -340,7 +346,7 @@ public class Fishing_Action : MonoBehaviour
             Debug.LogWarning(hit.transform.name);
             Vector3 hitOffset = (hit.point - transform.position);
             Vector3 direction = hitOffset.normalized;
-            return transform.position + direction * Mathf.Clamp(hitOffset.magnitude, 0f, fishStruct.fieldRadius);
+            return transform.position + direction * Mathf.Clamp(hitOffset.magnitude, 0f, currentFish.fieldRadius);
         }
         return default;
     }
@@ -370,9 +376,9 @@ public class Fishing_Action : MonoBehaviour
     IEnumerator FishMoving()
     {
         float prevSpeed = fishSpeed;
-        float distance = (fishTargetPoint - fishPrefab.transform.position).magnitude / fishStruct.fieldRadius;
-        float randomSpeed = distance * fishStruct.fishSpeed;
-        float randomTime = Random.Range(fishStruct.fishRange.x, fishStruct.fishRange.y) * distance;
+        float distance = (fishTargetPoint - fishPrefab.transform.position).magnitude / currentFish.fieldRadius;
+        float randomSpeed = distance * currentFish.fishSpeed;
+        float randomTime = Random.Range(currentFish.fishRange.x, currentFish.fishRange.y) * distance;
         float normalize = 0f;
         while (normalize < randomTime)
         {
@@ -381,7 +387,7 @@ public class Fishing_Action : MonoBehaviour
             Quaternion targetPoint = Quaternion.LookRotation(fishOffset.normalized);
 
             fishSpeed = Mathf.Lerp(prevSpeed, randomSpeed, normalize);
-            fishPrefab.transform.rotation = Quaternion.Slerp(fishPrefab.transform.rotation, targetPoint, Time.deltaTime * fishStruct.fishSpeed * 0.5f);// 이동하면서 회전은 약간 느리게
+            fishPrefab.transform.rotation = Quaternion.Slerp(fishPrefab.transform.rotation, targetPoint, Time.deltaTime * currentFish.fishSpeed * 0.5f);// 이동하면서 회전은 약간 느리게
             fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * fishSpeed, Space.Self);
             yield return null;
         }
@@ -390,8 +396,8 @@ public class Fishing_Action : MonoBehaviour
 
     IEnumerator FishDodge()// 회피기동
     {
-        float skillSpeed = fishStruct.fishSpeed * 2f;
-        while (fishSpeed > fishStruct.fishSpeed)
+        float skillSpeed = currentFish.fishSpeed * 2f;
+        while (fishSpeed > currentFish.fishSpeed)
         {
             fishSpeed = Mathf.Lerp(skillSpeed, 0f, Time.deltaTime * 0.5f);
             Vector3 fishOffset = (fishTargetPoint - fishPrefab.transform.position);
@@ -431,10 +437,10 @@ public class Fishing_Action : MonoBehaviour
     {
         shake = false;
         float distance = (shipPrefab.transform.position - fishPrefab.transform.position).magnitude;
-        float skillSpeed = fishStruct.fishSpeed * fishStruct.fieldRadius;
+        float skillSpeed = currentFish.fishSpeed * currentFish.fieldRadius;
         while (skillSpeed > 0.1f)
         {
-            skillSpeed = Mathf.Lerp(skillSpeed, 0f, Time.deltaTime * fishStruct.fishSpeed);
+            skillSpeed = Mathf.Lerp(skillSpeed, 0f, Time.deltaTime * currentFish.fishSpeed);
             fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * skillSpeed, Space.Self);
             distance = (shipPrefab.transform.position - fishPrefab.transform.position).magnitude;
             if (distance < shipSize && shake == false)
@@ -482,7 +488,7 @@ public class Fishing_Action : MonoBehaviour
         int randomIndex = Random.Range((int)0, (int)2) > 0 ? -1 : 1;
         float randomAngle = minMaxAngle * randomIndex + currentAngle;
         Vector3 tempAngle = DirFromAngle(randomAngle);
-        float randomRange = Random.Range(shipSize, fishStruct.fieldRadius);
+        float randomRange = Random.Range(shipSize, currentFish.fieldRadius);
         Vector3 position = transform.position + tempAngle * randomRange;
         return position;
     }
@@ -574,7 +580,7 @@ public class Fishing_Action : MonoBehaviour
     {
         Gizmos.color = UnityEditor.Handles.color = Color.yellow;
         Gizmos.DrawSphere(shipPrefab.transform.position, shipSize);
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, fishStruct.fieldRadius);
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, currentFish.fieldRadius);
 
         UnityEditor.Handles.color = Color.red;
         if (catchPrefab != null && catchStatus != null)

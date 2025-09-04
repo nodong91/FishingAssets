@@ -55,6 +55,9 @@ public class UI_Time : MonoBehaviour
 
     private void Update()
     {
+        if (paused == true)
+            return;
+
         minute += Time.deltaTime * timeSpeed;
         if (minute >= 60f)
         {
@@ -90,5 +93,10 @@ public class UI_Time : MonoBehaviour
             float normalize = minute * 0.02f;
             DayLight.color = Color.Lerp(DayColor, NightColor, normalize);
         }
+    }
+    bool paused = false;
+    public void TimePause(bool _pause)
+    {
+        paused = _pause;
     }
 }

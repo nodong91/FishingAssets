@@ -20,27 +20,30 @@ public class Fishing_Canvas : MonoBehaviour
 
     public TMPro.TMP_Text infoText;
     public GameObject infomation;
-    public Button button;
+    public Button closeButton;
+    public Custom_Button startButton;
 
     public delegate void Dele_ReStart();
     public Dele_ReStart deleReStart;
 
-    public void SetStart(Data_Manager.FishStruct _fishStruct)
+    public void SetStart()
+    {
+        catchHP.material = Instantiate(catchHP.material);
+        fishHP.material = Instantiate(fishHP.material);
+        fishSpell.material = Instantiate(fishSpell.material);
+        OpenCanvas(false);
+    }
+
+    public void SetFishing(Data_Manager.FishStruct _fishStruct)
     {
         fishStruct = _fishStruct;
 
-        catchHP.material = Instantiate(catchHP.material);
         catchHP.material.SetColor("_MainColor", catchColor);
         catchHP.material.SetFloat("_FillAmount", 1f);
-
-        fishHP.material = Instantiate(fishHP.material);
         fishHP.material.SetColor("_MainColor", fishColor);
         fishHP.material.SetFloat("_FillAmount", 1f);
-
-        fishSpell.material = Instantiate(fishSpell.material);
         fishSpell.material.SetColor("_MainColor", spellColor);
         fishSpell.material.SetFloat("_FillAmount", 0f);
-        OpenCanvas(false);
     }
 
     public void SetCount(int _index)
@@ -70,7 +73,7 @@ public class Fishing_Canvas : MonoBehaviour
         fishSpell.material.SetFloat("_FillAmount", _spell);
     }
 
-    public void SetEnd(bool _success)
+    public void SetFinish(bool _success)
     {
         //if (_success == true)
         //{
@@ -84,7 +87,7 @@ public class Fishing_Canvas : MonoBehaviour
         infomation.SetActive(_open);
         if (_open == true)
         {
-            button.onClick.AddListener(CloseCanvas);
+            closeButton.onClick.AddListener(CloseCanvas);
             SetInfomation();
         }
     }
