@@ -20,6 +20,7 @@ public class Game_Manager : MonoBehaviour
     public Skill_Manager skillManager;
     public string themeMusic;
     public string oceanSound = "Ocean 02";
+    public Fishing_Action fishingAction;
 
     public UI_QuestManager questManager;
     public Data_Manager.SetStatus defaultStatus;
@@ -232,6 +233,20 @@ public class Game_Manager : MonoBehaviour
                 instFishing.SetStart();
             }
             return instFishing;
+        }
+    }
+
+    private Fishing_Action instFishingAction;
+    public Fishing_Action GetFishingAction
+    {
+        get
+        {
+            if (instFishingAction == null)
+            {
+                instFishingAction = Instantiate(fishingAction, transform);
+                instFishingAction.SetStart();
+            }
+            return instFishingAction;
         }
     }
 

@@ -148,6 +148,8 @@ public class UI_Inventory_Base : MonoBehaviour
 
         Vector2Int[] shape = _slot.itemClass.shape;
         _slot.SetEmpty();// 메인 슬롯 비우기
+
+        Debug.LogWarning($"SetEmptySlot {_slot.slotNum.x} : {_slot.slotNum.y} ({shape.Length})");
         if (shape == null)
             return;
         // 사이즈

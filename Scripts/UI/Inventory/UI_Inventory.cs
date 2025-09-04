@@ -41,8 +41,29 @@ public class UI_Inventory : MonoBehaviour
     int slotSize = 40;
     ResultStruct resultItem;
 
-
     float GetMoney => Game_Manager.current.GetMainUI.TryMoney;
+
+    void Update()// 아이템 추가 테스트
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            Game_Manager.current.GetMainUI.MoveMoney(1000f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            string randomID = addFishTest;
+            if (Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(addFishTest) == false)
+                return;
+            FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[randomID];
+            FishStruct.RandomSize randomSize = fishStruct.GetRandom();
+
+            SetIconImage(fishStruct.itemStruct);
+            AddItem(fishStruct.itemStruct);
+        }
+    }
+    public string addFishTest;
+
     public void SetStart()
     {
         myBox.SetSlotSize = slotSize;
@@ -139,24 +160,6 @@ public class UI_Inventory : MonoBehaviour
         resultItem = _resultItem;
     }
 
-    void Update()// 아이템 추가 테스트
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            Game_Manager.current.GetMainUI.MoveMoney(1000f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            string randomID = "Fs_" + Random.Range(1, 4) + "001";
-            FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[randomID];
-            FishStruct.RandomSize randomSize = fishStruct.GetRandom();
-
-            SetIconImage(fishStruct.itemStruct);
-            AddItem(fishStruct.itemStruct);
-        }
-    }
-
     public void AddItem(ItemStruct _itemStruct)
     {
         ItemClass itemClass = new ItemClass
@@ -194,7 +197,6 @@ public class UI_Inventory : MonoBehaviour
     void SetEmptySlot(UI_Inventory_Slot _slot)// 슬롯 비우기
     {
         UI_Inventory_Base getInventory = GetInventory(enterSlotType);
-        Debug.LogWarning("SetEmptySlot: " + _slot.slotNum.x + ", " + _slot.slotNum.y);
         getInventory.SlotEmpty(_slot);
     }
 

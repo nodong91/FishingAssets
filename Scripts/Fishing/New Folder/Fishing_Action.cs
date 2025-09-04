@@ -1,11 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using static Data_Manager;
+using static Data_Manager.FishStruct;
 
 public class Fishing_Action : MonoBehaviour
 {
-    public Data_Manager manager;
     public enum FishStateType
     {
         None,
@@ -16,7 +17,10 @@ public class Fishing_Action : MonoBehaviour
         Moving,
     }
     public FishStateType fishState;
-
+    [Header(" [ Camera ]")]
+    public CinemachinePositionComposer positionComposer;
+    public float defaultCameraDistance = 15f;
+    [Header(" [ Object ]")]
     public GameObject shipPrefab;
     public float shipSize = 1f;
 
@@ -49,15 +53,15 @@ public class Fishing_Action : MonoBehaviour
     float catchDamage = 0.1f;
     Coroutine fishAction;
 
-    public CinemachinePositionComposer positionComposer;
-    public float defaultCameraDistance = 15f;
+    //void Start()
+    //{
+    //    SetStart();
+    //}
 
-    void Start()
+    public void SetStart()
     {
-        //fishingCanvas = GetComponent<Fishing_Canvas>();
         fishingCanvas.deleReStart = ReStart;
-
-        SetStart(manager.fishStruct[0]);
+        SetDictionary_FishStruct();// 미리 사전 세팅
     }
 
     void Update()
@@ -88,10 +92,10 @@ public class Fishing_Action : MonoBehaviour
     void ReStart()
     {
         StopAllCoroutines();
-        SetStart(manager.fishStruct[0]);
+        //SetFishingStart(manager.fishStruct[0]);
     }
 
-    public void SetStart(FishStruct _fishStruct)
+    public void SetFishingStart(FishStruct _fishStruct)
     {
         fishStruct = _fishStruct;
         isFishing = true;
@@ -101,6 +105,86 @@ public class Fishing_Action : MonoBehaviour
 
         fishingCanvas.SetStart(fishStruct);
         StartCoroutine(StartCount());
+    }
+
+    AreaType areaType;
+    public Queue<FishStruct> fishStructs = new Queue<FishStruct>();// 나올 물고기 묶음
+    Dictionary<string, List<FishStruct>> dictFishStruct = new Dictionary<string, List<FishStruct>>();
+
+    void SetDictionary_FishStruct()
+    {
+        Dictionary<string, FishStruct> dictFish = Singleton_Data.INSTANCE.Dict_Fish;
+        foreach (var child in dictFish)
+        {
+            FishStruct fishStruct = child.Value;
+            string type = fishStruct.areaType.ToString() + fishStruct.fishDayType.ToString();
+            if (dictFishStruct.ContainsKey(type))
+            {
+                dictFishStruct[type].Add(fishStruct);
+            }
+            else
+            {
+                dictFishStruct[type] = new List<FishStruct> { fishStruct };
+                Debug.LogError(type);
+            }
+        }
+    }
+
+    public void SetFishingStart(AreaType _areaType)
+    {
+        transform.position = Game_Manager.current.GetPlayer.transform.position;
+        positionComposer.transform.rotation = Quaternion.Euler(45f, Camera.main.transform.rotation.y, 0f);
+        positionComposer.gameObject.SetActive(true);
+
+        // 낚시 시작
+        areaType = _areaType;
+        int fishingAmount = Random.Range(1, 5);// 낚시 횟수
+        string day = Game_Manager.current.GetMainUI.timeUI.lightMode.ToString();
+        string type = areaType.ToString() + day;
+        Debug.LogError($"낚시터 타입 : {type}, 낚시 횟수 : {fishingAmount}");
+        // 물고기 세팅
+        fishStructs.Clear();
+        for (int i = 0; i < fishingAmount; i++)
+        {
+            FishStruct fish = TryFishStruct(type);
+            fishStructs.Enqueue(fish);
+            Debug.LogWarning(fish.id);
+        }
+        FishingStart();
+    }
+    void FishingStart()
+    {
+        FishStruct fish = fishStructs.Dequeue();// 물고기 정보
+        //randomSize = fishStruct.GetRandom();
+        //if (fishStructs.Count > 0)
+        //{
+        //    startButton.gameObject.SetActive(true); // 버튼 활성화
+        //}
+        //else
+        //{
+        //    startButton.gameObject.SetActive(false); // 버튼 비활성화
+        //    Debug.LogWarning("낚시 횟수가 0 이하입니다.");
+        //}
+
+        Option_Manager.current.SetThemeMusic("Battle");
+        Game_Manager.current.GetMainUI.OpenCanvas(false);
+        Game_Manager.current.OutOfControll(true);
+
+        Game_Manager.current.GetInventory.CloseResult();
+
+        SetFishingStart(fish);// 낚시 시작
+    }
+
+    FishStruct TryFishStruct(string _type)
+    {
+        if (dictFishStruct.ContainsKey(_type))
+        {
+            List<FishStruct> fishList = dictFishStruct[_type];
+            int randomIndex = Random.Range(0, fishList.Count);
+            FishStruct randomFish = fishList[randomIndex];
+            return randomFish;
+        }
+        return default;
     }
 
     IEnumerator StartCount()
@@ -421,7 +505,7 @@ public class Fishing_Action : MonoBehaviour
 
 
 
-
+    [Header(" [ Defense ]")]
     public string skillCord;
     public int currentIndex = 0;
     public int cordCount;

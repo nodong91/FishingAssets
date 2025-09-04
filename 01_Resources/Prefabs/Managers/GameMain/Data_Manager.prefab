@@ -149,6 +149,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 27e0ed1d2bdd51d4493c00e84e5a4ae6, type: 3}
   - {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
   - {fileID: 21300000, guid: 7bf99e228d7913249bf876e02713a33d, type: 3}
+  - {fileID: 21300000, guid: 31566fc518d4bae4bb844f5b468100d2, type: 3}
+  - {fileID: 21300000, guid: a3256453e5024934c8c1c3ac8cbef905, type: 3}
+  - {fileID: 21300000, guid: 4ee6acf09e0bf2a4380100c3695c1eb0, type: 3}
+  - {fileID: 21300000, guid: d92c1a8c68e2e3b419b527831ba3de39, type: 3}
+  - {fileID: 21300000, guid: 1504eadf43f165847a0748f0ebcaa2f0, type: 3}
+  - {fileID: 21300000, guid: 3f2d52b221af50948884eb1dfa6ac296, type: 3}
+  - {fileID: 21300000, guid: 2011a555946603a4ea4be361f9060b39, type: 3}
+  - {fileID: 21300000, guid: 171ef96ea98f069438ff920433a203aa, type: 3}
+  - {fileID: 21300000, guid: 40e1c507445cd3b42bcaa79647087f9d, type: 3}
+  - {fileID: 21300000, guid: b1fd348226f086d48ab896279ac917c3, type: 3}
   - {fileID: 21300000, guid: 6647a9bc09c39e641a578ef2ce3b67ac, type: 3}
   - {fileID: 21300000, guid: b5a101e9756f1fa45a65e59ff8589347, type: 3}
   - {fileID: 21300000, guid: 140981467a2732948bf1de73f738ebbe, type: 3}
@@ -248,64 +258,20 @@ MonoBehaviour:
   - id: Fs_1001
     itemStruct:
       id: Fs_1001
-      name: Herring
+      name: Anchovy
       itemType: 1
-      explanation: "\uCCAD\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.2
-      price: 200
-    areaType: 1
-    size: {x: 10, y: 20}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 2.5
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1002
-    itemStruct:
-      id: Fs_1002
-      name: Rockfish
-      itemType: 1
-      explanation: "\uBCFC\uB77D"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.2
-      price: 280
-    areaType: 2
-    size: {x: 20, y: 45}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 4}
-    fishDayType: 1
-  - id: Fs_1003
-    itemStruct:
-      id: Fs_1003
-      name: Mackerel
-      itemType: 1
-      explanation: "\uACE0\uB4F1\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      explanation: Anchovies are small. slender fish that typically live in large
+        schools. They are widely distributed in temperate and tropical waters worldwide
+        with their diet consisting mainly of plankton. Anchovies are a crucial part
+        of the marine ecosystem serving as a vital food source for other fish birds
+        and marine mammals.
+      icon: {fileID: 21300000, guid: 31566fc518d4bae4bb844f5b468100d2, type: 3}
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 0.2
       price: 250
-    areaType: 3
+    areaType: 1
     size: {x: 30, y: 50}
     fishHealth: 10
     fishPower: 1
@@ -314,877 +280,266 @@ MonoBehaviour:
     fishAttackSpeed: 1
     fishRange: {x: 0.3, y: 1.5}
     fishDayType: 1
+  - id: Fs_1002
+    itemStruct:
+      id: Fs_1002
+      name: Sea Bass
+      itemType: 1
+      explanation: The sea bass has a long sleek body and is characterized by its
+        silvery-white color with black spots. It mainly inhabits rocky areas and
+        estuaries where it's known for its excellent hunting skills. It preys on
+        smaller fish and crustaceans and has a very fast growth rate making it a
+        popular catch for anglers.
+      icon: {fileID: 21300000, guid: a3256453e5024934c8c1c3ac8cbef905, type: 3}
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.5, w: 0.25}
+      weight: 0.6
+      price: 300
+    areaType: 1
+    size: {x: 50, y: 100}
+    fishHealth: 20
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 1
+    fishAttackSpeed: 1
+    fishRange: {x: 0.7, y: 1}
+    fishDayType: 1
+  - id: Fs_1003
+    itemStruct:
+      id: Fs_1003
+      name: Flounder
+      itemType: 1
+      explanation: The flounder is a flatfish with both eyes on one side of its head.
+        It typically hides on sandy or muddy seabeds and has excellent camouflage
+        abilities changing its color to blend in with its surroundings. Its diet
+        consists of shrimp and small fish.
+      icon: {fileID: 21300000, guid: 4ee6acf09e0bf2a4380100c3695c1eb0, type: 3}
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.25}
+      weight: 0.4
+      price: 350
+    areaType: 1
+    size: {x: 30, y: 70}
+    fishHealth: 30
+    fishPower: 1
+    fieldRadius: 10
+    fishSpeed: 2
+    fishAttackSpeed: 1
+    fishRange: {x: 0.7, y: 1}
+    fishDayType: 1
   - id: Fs_1004
     itemStruct:
       id: Fs_1004
-      name: Horse Mackerel
-      itemType: 1
-      explanation: "\uC804\uAC31\uC774"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.2
-      price: 180
-    areaType: 1
-    size: {x: 15, y: 30}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1005
-    itemStruct:
-      id: Fs_1005
-      name: Sea Bass
-      itemType: 1
-      explanation: "\uB18D\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.6
-      price: 600
-    areaType: 2
-    size: {x: 50, y: 100}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1006
-    itemStruct:
-      id: Fs_1006
-      name: Red Sea Bream
-      itemType: 1
-      explanation: "\uCC38\uB3D4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.4
-      price: 500
-    areaType: 2
-    size: {x: 40, y: 80}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1007
-    itemStruct:
-      id: Fs_1007
-      name: Black Sea Bream
-      itemType: 1
-      explanation: "\uAC10\uC131\uB3D4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.4
-      price: 450
-    areaType: 2
-    size: {x: 30, y: 60}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1008
-    itemStruct:
-      id: Fs_1008
-      name: Flounder
-      itemType: 1
-      explanation: "\uAD11\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.4
-      price: 550
-    areaType: 3
-    size: {x: 30, y: 70}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1009
-    itemStruct:
-      id: Fs_1009
-      name: Striped Beakfish
-      itemType: 1
-      explanation: "\uB3CC\uB3D4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.4
-      price: 400
-    areaType: 2
-    size: {x: 25, y: 50}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1010
-    itemStruct:
-      id: Fs_1010
       name: Mullet
       itemType: 1
-      explanation: "\uC22D\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
+      explanation: The mullet is a fish similar in shape to a carp notable for its
+        ability to live in both fresh and saltwater. It primarily inhabits muddy
+        bottoms near coastlines and river mouths feeding on plankton small crustaceans
+        and organic matter. It grows quickly and is widely consumed around the world
+        due to its good taste.
+      icon: {fileID: 21300000, guid: d92c1a8c68e2e3b419b527831ba3de39, type: 3}
+      itemClass: 4
       shape:
       - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      - {x: 1, y: 0}
+      iconSize: {x: 3, y: 1, z: 0.5, w: 0.5}
       weight: 0.8
-      price: 350
-    areaType: 3
+      price: 400
+    areaType: 1
     size: {x: 45, y: 90}
-    fishHealth: 10
+    fishHealth: 40
     fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1011
-    itemStruct:
-      id: Fs_1011
-      name: Old Tire
-      itemType: 1
-      explanation: "\uB0A1\uC740 \uD0C0\uC774\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 1.2
-      price: 10
-    areaType: 2
-    size: {x: 8, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1012
-    itemStruct:
-      id: Fs_1012
-      name: Plastic Bottle
-      itemType: 1
-      explanation: "\uD398\uD2B8\uBCD1"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.2
-      price: 5
-    areaType: 1
-    size: {x: 3, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1013
-    itemStruct:
-      id: Fs_1013
-      name: Rusty Can
-      itemType: 1
-      explanation: "\uB179\uC2A8 \uAE61\uD1B5"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.2
-      price: 15
-    areaType: 1
-    size: {x: 2, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1014
-    itemStruct:
-      id: Fs_1014
-      name: Scrap Wood
-      itemType: 1
-      explanation: "\uD3D0\uBAA9\uC7AC"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.5
-      price: 20
-    areaType: 3
-    size: {x: 6, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_1015
-    itemStruct:
-      id: Fs_1015
-      name: Common Engine Parts
-      itemType: 1
-      explanation: "\uC77C\uBC18 \uC5D4\uC9C4 \uC7AC\uB8CC"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 1.5
-      price: 500
-    areaType: 2
-    size: {x: 10, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
+    fieldRadius: 12
+    fishSpeed: 2
+    fishAttackSpeed: 1.5
+    fishRange: {x: 1, y: 2}
+    fishDayType: 2
   - id: Fs_2001
     itemStruct:
       id: Fs_2001
-      name: Yellowtail
+      name: Octopus
       itemType: 1
-      explanation: "\uBC29\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
+      explanation: The octopus is a mollusk with eight arms well known for its high
+        intelligence. It's a master of camouflage able to change the color and texture
+        of its body at will. It lives hidden in narrow spaces like rock crevices
+        and preys mainly on crabs and shellfish.
+      icon: {fileID: 21300000, guid: 1504eadf43f165847a0748f0ebcaa2f0, type: 3}
+      itemClass: 3
       shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 1.2
-      price: 3000
-    areaType: 3
-    size: {x: 60, y: 120}
-    fishHealth: 10
+      - {x: 1, y: 0}
+      - {x: 0, y: -1}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
+      weight: 1
+      price: 450
+    areaType: 1
+    size: {x: 150, y: 250}
+    fishHealth: 50
     fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
+    fieldRadius: 12
+    fishSpeed: 3
+    fishAttackSpeed: 1.5
+    fishRange: {x: 1, y: 2}
     fishDayType: 1
   - id: Fs_2002
     itemStruct:
       id: Fs_2002
-      name: Sevenband Grouper
+      name: Amberjack
       itemType: 1
-      explanation: "\uB2A5\uC131\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
+      explanation: '"The amberjack is a fish from the jack family that looks similar
+        to the yellowtail. It''s a large species that can grow up to 2 meters long
+        and feeds on smaller fish like anchovies and mackerel. Found in warm oceans
+        worldwide it''s also known as the ""missile of the sea"" among anglers due
+        to its incredible strength."'
+      icon: {fileID: 21300000, guid: 3f2d52b221af50948884eb1dfa6ac296, type: 3}
+      itemClass: 3
       shape:
       - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: -1, y: 1}
       - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 1
-      price: 3500
-    areaType: 2
-    size: {x: 50, y: 100}
-    fishHealth: 10
+      - {x: 1, y: 1}
+      iconSize: {x: 3, y: 2, z: 0.75, w: 0.5}
+      weight: 1.5
+      price: 500
+    areaType: 1
+    size: {x: 80, y: 150}
+    fishHealth: 60
     fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
+    fieldRadius: 12
+    fishSpeed: 3
+    fishAttackSpeed: 2
+    fishRange: {x: 1, y: 2}
+    fishDayType: 2
   - id: Fs_2003
     itemStruct:
       id: Fs_2003
-      name: Giant Sea Bass
+      name: Ocean Sunfish
       itemType: 1
-      explanation: "\uB3D7\uB3D4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
+      explanation: "\"The ocean sunfish is a gigantic marine fish with a blunt body
+        and large fins. It primarily feeds on jellyfish and has a very small brain
+        relative to its body size. It exhibits the unusual behavior of rising to
+        the surface to bask in the sun which is how it earned the name \"\"sunfish.\u201D\""
+      icon: {fileID: 21300000, guid: 2011a555946603a4ea4be361f9060b39, type: 3}
+      itemClass: 3
       shape:
       - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: -1, y: 1}
       - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.6
-      price: 5000
-    areaType: 2
-    size: {x: 100, y: 180}
-    fishHealth: 10
+      - {x: 1, y: 1}
+      - {x: 0, y: 2}
+      - {x: 0, y: -1}
+      iconSize: {x: 3, y: 4, z: 0.75, w: 0.5}
+      weight: 2
+      price: 550
+    areaType: 1
+    size: {x: 150, y: 250}
+    fishHealth: 70
     fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
+    fieldRadius: 14
+    fishSpeed: 3
+    fishAttackSpeed: 2
+    fishRange: {x: 1.5, y: 1}
+    fishDayType: 2
   - id: Fs_2004
     itemStruct:
       id: Fs_2004
-      name: Octopus
+      name: Cutlassfish
       itemType: 1
-      explanation: "\uBB38\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
+      explanation: The ribbonfish is a deep-sea fish with a long flattened silvery-white
+        body. It is primarily active at night and preys on shrimp anchovies and squid.
+        It has sharp teeth and highly developed eyes for hunting in the dark ocean.
+        It is widely distributed in temperate
+      icon: {fileID: 21300000, guid: 171ef96ea98f069438ff920433a203aa, type: 3}
+      itemClass: 3
       shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 1
-      price: 3000
+      - {x: 1, y: 0}
+      - {x: -1, y: -1}
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      iconSize: {x: 3, y: 2, z: 0.25, w: 0.5}
+      weight: 2
+      price: 600
     areaType: 1
-    size: {x: 150, y: 250}
-    fishHealth: 10
+    size: {x: 200, y: 400}
+    fishHealth: 80
     fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
+    fieldRadius: 14
+    fishSpeed: 4
+    fishAttackSpeed: 2
+    fishRange: {x: 1.5, y: 1}
     fishDayType: 1
   - id: Fs_2005
     itemStruct:
       id: Fs_2005
-      name: Amberjack
-      itemType: 1
-      explanation: "\uBD80\uC2DC\uB9AC"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 1.5
-      price: 4000
-    areaType: 2
-    size: {x: 80, y: 150}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_2006
-    itemStruct:
-      id: Fs_2006
-      name: Spotted Grouper
-      itemType: 1
-      explanation: "\uC790\uBC14\uB9AC"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 1.2
-      price: 4500
-    areaType: 3
-    size: {x: 70, y: 130}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_2007
-    itemStruct:
-      id: Fs_2007
-      name: Tiger Puffer
-      itemType: 1
-      explanation: "\uD669\uBCF5\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.5
-      price: 1000
-    areaType: 3
-    size: {x: 20, y: 40}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_2008
-    itemStruct:
-      id: Fs_2008
-      name: Ocean Sunfish
-      itemType: 1
-      explanation: "\uAC1C\uBCF5\uCE58"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 2
-      price: 6000
-    areaType: 2
-    size: {x: 150, y: 250}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_2009
-    itemStruct:
-      id: Fs_2009
-      name: Tuna
-      itemType: 1
-      explanation: "\uCC38\uCE58"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 2
-      price: 10000
-    areaType: 2
-    size: {x: 200, y: 400}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_2010
-    itemStruct:
-      id: Fs_2010
       name: Swordfish
       itemType: 1
-      explanation: "\uD669\uC0C8\uCE58"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
+      explanation: The swordfish scientifically named 'Xiphias gladius' is a large
+        fish distinguished by its long flat sword-like bill. It uses this bill to
+        attack prey and defend itself. Found in warm oceans worldwide it's known
+        as one of the fastest fish in the sea capable of swimming over 100 km/h.
+        Its diet primarily consists of tuna and squid.
+      icon: {fileID: 21300000, guid: 40e1c507445cd3b42bcaa79647087f9d, type: 3}
+      itemClass: 3
       shape:
+      - {x: -2, y: 0}
       - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: 2, y: -1}
+      iconSize: {x: 5, y: 2, z: 0.25, w: 0.5}
       weight: 2.4
-      price: 12000
+      price: 650
     areaType: 1
     size: {x: 250, y: 500}
-    fishHealth: 10
+    fishHealth: 90
     fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_2011
-    itemStruct:
-      id: Fs_2011
-      name: Old Net
-      itemType: 1
-      explanation: "\uB0A1\uC740 \uADF8\uBB3C"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.5
-      price: 50
-    areaType: 3
-    size: {x: 10, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_2012
-    itemStruct:
-      id: Fs_2012
-      name: Broken Bottle
-      itemType: 1
-      explanation: "\uAE68\uC9C4 \uBCD1"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.1
-      price: 40
-    areaType: 1
-    size: {x: 2, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_2013
-    itemStruct:
-      id: Fs_2013
-      name: Seaweed
-      itemType: 1
-      explanation: "\uD574\uCD08"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.1
-      price: 30
-    areaType: 3
-    size: {x: 4, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_2014
-    itemStruct:
-      id: Fs_2014
-      name: Rebar Piece
-      itemType: 1
-      explanation: "\uCCA0\uC870\uAC01"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.2
-      price: 60
-    areaType: 2
-    size: {x: 2, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_2015
-    itemStruct:
-      id: Fs_2015
-      name: Advanced Engine Parts
-      itemType: 1
-      explanation: "\uACE0\uAE09 \uC5D4\uC9C4 \uC7AC\uB8CC"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 2
-      price: 2000
-    areaType: 2
-    size: {x: 10, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
+    fieldRadius: 14
+    fishSpeed: 4
+    fishAttackSpeed: 3
+    fishRange: {x: 1.5, y: 1}
     fishDayType: 1
   - id: Fs_3001
     itemStruct:
       id: Fs_3001
-      name: Sturgeon
-      itemType: 1
-      explanation: "\uCCA0\uAC11\uC0C1\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 2.5
-      price: 20000
-    areaType: 2
-    size: {x: 150, y: 300}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_3002
-    itemStruct:
-      id: Fs_3002
-      name: Grouper
-      itemType: 1
-      explanation: "\uB2E4\uAE08\uBC14\uB9AC"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 1.5
-      price: 30000
-    areaType: 1
-    size: {x: 80, y: 150}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_3003
-    itemStruct:
-      id: Fs_3003
-      name: Marlin
-      itemType: 1
-      explanation: "\uCCAD\uC0C8\uCE58"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 2.5
-      price: 35000
-    areaType: 3
-    size: {x: 300, y: 600}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_3004
-    itemStruct:
-      id: Fs_3004
       name: Giant Squid
       itemType: 1
-      explanation: "\uB300\uC655 \uC624\uC9D5\uC5B4"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
+      explanation: The colossal squid with the scientific name 'Mesonychoteuthis
+        hamiltoni' is the largest invertebrate on Earth. It lives primarily in the
+        cold deep waters of the Antarctic Ocean and can grow up to 14 meters in length.
+        A distinguishing feature is that its tentacles have rotating hooks for catching
+        prey. Since they inhabit the very deep sea research into their ecology is
+        ongoing.
+      icon: {fileID: 21300000, guid: b1fd348226f086d48ab896279ac917c3, type: 3}
+      itemClass: 2
       shape:
       - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: -1, y: -1}
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: -1, y: 1}
       - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      - {x: 1, y: 1}
+      - {x: 0, y: 2}
+      - {x: 0, y: -2}
+      iconSize: {x: 3, y: 5, z: 0.5, w: 0.5}
       weight: 5
-      price: 40000
-    areaType: 3
+      price: 700
+    areaType: 1
     size: {x: 500, y: 1000}
-    fishHealth: 10
+    fishHealth: 100
     fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_3005
-    itemStruct:
-      id: Fs_3005
-      name: Dolphin Fish
-      itemType: 1
-      explanation: "\uB9CC\uC0C8\uAE30"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 3
-      price: 40000
-    areaType: 2
-    size: {x: 100, y: 180}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_3006
-    itemStruct:
-      id: Fs_3006
-      name: Discarded Pad
-      itemType: 1
-      explanation: "\uBC84\uB824\uC9C4 \uD328\uB4DC"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.4
-      price: 200
-    areaType: 1
-    size: {x: 3, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_3007
-    itemStruct:
-      id: Fs_3007
-      name: Discarded Phone
-      itemType: 1
-      explanation: "\uBC84\uB824\uC9C4 \uD3F0"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 0.2
-      price: 500
-    areaType: 1
-    size: {x: 1, y: 5}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_3008
-    itemStruct:
-      id: Fs_3008
-      name: Rare Engine Parts
-      itemType: 1
-      explanation: "\uD76C\uADC0 \uC5D4\uC9C4 \uC7AC\uB8CC"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 2.5
-      price: 10000
-    areaType: 2
-    size: {x: 10, y: 0}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_4001
-    itemStruct:
-      id: Fs_4001
-      name: Great White Shark
-      itemType: 1
-      explanation: "\uBC31\uC0C1\uC544\uB9AC"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 7
-      price: 100000
-    areaType: 2
-    size: {x: 600, y: 1200}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_4002
-    itemStruct:
-      id: Fs_4002
-      name: Ancient Arapaima
-      itemType: 1
-      explanation: "\uACE0\uB300 \uD53C\uB77C\uB8E8\uCFE0"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 9
-      price: 200000
-    areaType: 3
-    size: {x: 400, y: 800}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
-  - id: Fs_4003
-    itemStruct:
-      id: Fs_4003
-      name: The King of the Deep
-      itemType: 1
-      explanation: "\uC2EC\uD574\uC758 \uC655"
-      icon: {fileID: 21300000, guid: 04ba854bc92755741b4b38e8c5c8c27a, type: 3}
-      itemClass: 0
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 10
-      price: 300000
-    areaType: 2
-    size: {x: 700, y: 1500}
-    fishHealth: 10
-    fishPower: 1
-    fieldRadius: 10
-    fishSpeed: 1
-    fishAttackSpeed: 1
-    fishRange: {x: 1, y: 3}
-    fishDayType: 1
+    fieldRadius: 18
+    fishSpeed: 5
+    fishAttackSpeed: 4
+    fishRange: {x: 0.3, y: 0.9}
+    fishDayType: 2
