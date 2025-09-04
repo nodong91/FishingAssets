@@ -116,6 +116,7 @@ namespace P01.Editor
             }
             skillTreeData.skillList = status;
             Debug.LogError($"{status.Count}∞≥ ¿˙¿Â");
+            EditorUtility.SetDirty(skillTreeData);
             //Static_JsonManager.SaveSkillData(saveTreeData, status);
         }
 
