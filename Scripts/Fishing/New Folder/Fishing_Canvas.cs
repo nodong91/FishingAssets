@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Data_Manager;
+using static Data_Quest;
 
 public class Fishing_Canvas : MonoBehaviour
 {
@@ -18,8 +20,6 @@ public class Fishing_Canvas : MonoBehaviour
     public Vector3 fishOffset, shipOffset;
     public TMP_Text countText;
 
-    public TMP_Text infoText;
-    public GameObject infomation;
     public Custom_Button closeButton, startButton, outButton;
     public TMP_Text startTypeText;
 
@@ -31,7 +31,6 @@ public class Fishing_Canvas : MonoBehaviour
         catchHP.material = Instantiate(catchHP.material);
         fishHP.material = Instantiate(fishHP.material);
         fishSpell.material = Instantiate(fishSpell.material);
-        CloseCanvas();
     }
 
     public void SetFishing(Data_Manager.FishStruct _fishStruct)
@@ -83,35 +82,10 @@ public class Fishing_Canvas : MonoBehaviour
         fishSpell.material.SetFloat("_FillAmount", _spell);
     }
 
-    public void SetFinish(bool _success)
+    public void OnOutButton()
     {
-        //if (_success == true)
-        //{
-        //    OpenCanvas(true);
-        //}
-        OpenCanvas();
-    }
-
-    public void OpenCanvas()
-    {
-        infomation.SetActive(true);
         outButton.gameObject.SetActive(true);
-        closeButton.SetButton(CloseCanvas);
-        SetInfomation();
     }
-
-    public void CloseCanvas()
-    {
-        infomation.SetActive(false);
-        //deleReStart?.Invoke();
-    }
-
-    void SetInfomation()
-    {
-        infoText.text = fishStruct.itemStruct.name;
-    }
-
-
 
 
 
@@ -160,7 +134,7 @@ public class Fishing_Canvas : MonoBehaviour
         }
     }
 
-    public void OnArrowPrent(bool _on)
+    public void OnArrowParent(bool _on)
     {
         arrowParent.gameObject.SetActive(_on);
     }

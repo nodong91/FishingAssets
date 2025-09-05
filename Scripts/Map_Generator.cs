@@ -216,7 +216,6 @@ public class Map_Generator : MonoBehaviour
         LayerMask waterLayer = ~(1 << LayerMask.NameToLayer("Water"));
         if (Physics.Raycast(_worldPoint, Vector3.down, out RaycastHit hit, Mathf.Infinity, waterLayer))
         {
-            Debug.LogWarning(hit.transform.name);
             return hit.point;
         }
         return Vector3.zero;

@@ -4,6 +4,7 @@ using Unity.Cinemachine;
 using UnityEngine;
 using static Data_Manager;
 using static Data_Manager.FishStruct;
+using static Data_Quest;
 
 public class Fishing_Action : MonoBehaviour
 {
@@ -40,7 +41,6 @@ public class Fishing_Action : MonoBehaviour
 
     [ColorUsage(true, true)]
     public Color onCatchColor, notCatchColor;
-    private SetStatus defaultStatus;
     public Fishing_Canvas fishingCanvas;
 
     public Transform focusTarget;
@@ -53,8 +53,6 @@ public class Fishing_Action : MonoBehaviour
     private bool shake;
     private bool isFishing = false;
     private bool isCatching = false;
-    float fishDamage = 0.1f;
-    float catchDamage = 0.1f;
     Coroutine fishAction;
 
     AreaType areaType;
@@ -105,18 +103,15 @@ public class Fishing_Action : MonoBehaviour
         Game_Manager.current.GetMainUI.timeUI.TimePause(true);// 시간 정지
         transform.position = Game_Manager.current.GetPlayer.transform.position;
 
-        positionComposer.gameObject.SetActive(true);
-        float rotateY = Camera.main.transform.rotation.y;
-        Debug.LogWarning("iluhaiuhdsioufaououououououououououf                           " + rotateY);
+        float rotateY = Camera.main.transform.rotation.eulerAngles.y;
         positionComposer.transform.rotation = Quaternion.Euler(45f, rotateY, 0f);
+        positionComposer.gameObject.SetActive(true);
 
         // 버튼 활성화
         fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());
 
         Game_Manager.current.GetMainUI.OpenCanvas(false);
         Game_Manager.current.OutOfControll(true);
-
-        //Game_Manager.current.GetInventory.CloseResult();
     }
 
     void SetFishList()
@@ -147,12 +142,6 @@ public class Fishing_Action : MonoBehaviour
         return default;
     }
 
-    void ReStart()
-    {
-        StopAllCoroutines();
-        //SetFishingStart(manager.fishStruct[0]);
-    }
-
     public void SetFishingStart()
     {
         SetCanvasGroup(1.0f);
@@ -167,6 +156,7 @@ public class Fishing_Action : MonoBehaviour
         SetCatch();// 낚시 영역 초기화
         SetFish();// 물고기 스탯 초기화
 
+        OutReward();// 스타트 버튼
         StartCoroutine(StartCount());
     }
 
@@ -194,11 +184,10 @@ public class Fishing_Action : MonoBehaviour
 
     void SetCatch()
     {
-        SetDefaultStatus();
-        catchStatus = defaultStatus;
+        catchStatus = Game_Manager.current.currentStatus;
         catchPrefab.transform.position = shipPrefab.transform.position;
         catchPrefab.transform.localScale = Vector3.one * catchStatus.catchRadius;
-        catchRanderer.material.SetFloat("_Thickness", defaultStatus.catchRadius / catchStatus.catchRadius);
+        //catchRanderer.material.SetFloat("_Thickness", defaultStatus.catchRadius / catchStatus.catchRadius);
 
         catchMaxHealth = catchStatus.catchMaxHealth;
         catchHealth = catchMaxHealth;
@@ -214,28 +203,6 @@ public class Fishing_Action : MonoBehaviour
 
         fishMaxHealth = currentFish.fishHealth;
         fishHealth = fishMaxHealth;
-    }
-
-    void SetDefaultStatus()
-    {
-        defaultStatus = new SetStatus();
-        defaultStatus.catchRadius = 1f;// 물고기를 잡는 범위
-        defaultStatus.catchSpeed = 3f;// 낚시대가 물고기를 향해 이동하는 속도
-        defaultStatus.catchPower = 1f;// 낚시대의 힘
-        defaultStatus.catchMaxHealth = 10f;// 낚시대의 최대 체력
-        defaultStatus.catchAttakSpeed = 1.5f;// 물고기를 공격하는 빈도
-
-        defaultStatus.shipSpeed = 2f;// 배의 이동 속도
-        defaultStatus.maxWeight = 1f;// 인벤토리 중량
-        defaultStatus.maxEnergy = 10f;// 연료통 크기
-        defaultStatus.efficient = 0.5f;// 에너지 효율
-        defaultStatus.maxBoxSize = new Vector2Int(0, 0);// 인벤토리 크기
-        defaultStatus.shipHealth = 3;// 배 체력
-        defaultStatus.freshness = 1f;// 신선도 유지 - 꼭 필요한가??????  
-
-        defaultStatus.LuckFish = 1f;// 희귀 물고기 확률
-        defaultStatus.FishAmount = 1f;// 낚시 횟수 증가
-        defaultStatus.FishPrice = 1f;// 판매 물고기 가격 증가
     }
 
     void FishState(FishStateType _state)
@@ -316,7 +283,6 @@ public class Fishing_Action : MonoBehaviour
         int downhillLayer = 1 << LayerMask.NameToLayer("Water");
         if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, downhillLayer))
         {
-            Debug.LogWarning(hit.transform.name);
             Vector3 hitOffset = (hit.point - transform.position);
             Vector3 direction = hitOffset.normalized;
             return transform.position + direction * Mathf.Clamp(hitOffset.magnitude, 0f, currentFish.fieldRadius);
@@ -331,16 +297,16 @@ public class Fishing_Action : MonoBehaviour
             if (isCatching == true)
             {
                 catchRanderer.material.SetColor("_Color", onCatchColor);
-                fishHealth -= catchDamage;
+                fishHealth -= catchStatus.catchPower;
                 fishingCanvas.SetFishHP(fishHealth / fishMaxHealth);// 물고기에 데미지
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(currentFish.fishAttackSpeed);
             }
             else
             {
                 catchRanderer.material.SetColor("_Color", notCatchColor);
-                catchHealth -= fishDamage;
+                catchHealth -= currentFish.fishPower;
                 fishingCanvas.SetCatchHP(catchHealth / catchMaxHealth);// 낚시에 데미지
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(catchStatus.catchAttakSpeed);
             }
             if (catchHealth <= 0f || fishHealth <= 0f)
             {
@@ -348,20 +314,6 @@ public class Fishing_Action : MonoBehaviour
             }
             yield return null;
         }
-    }
-
-    //===================================================================================================================
-    // 낚시 완료
-    //===================================================================================================================
-    void FishingComplate(bool _success)// 낚시 완료
-    {
-        StopAllCoroutines();
-        isFishing = false;
-        FishState(FishStateType.None);
-
-        fishingCanvas.OnArrowPrent(false);
-        fishingCanvas.SetFishSpell(0f);
-        fishingCanvas.SetFinish(_success);
     }
 
     //===================================================================================================================
@@ -444,7 +396,7 @@ public class Fishing_Action : MonoBehaviour
             yield return null;
         }
         fishingCanvas.SetFishSpell(0f);
-        fishingCanvas.OnArrowPrent(false);
+        fishingCanvas.OnArrowParent(false);
         yield return null;
 
         FishState(FishStateType.Attack);
@@ -466,6 +418,7 @@ public class Fishing_Action : MonoBehaviour
                 if (shakingObject != null)
                     StopCoroutine(shakingObject);
                 shakingObject = StartCoroutine(ShakingObject(shipPrefab));
+                Game_Manager.current.GetPlayer.TakeDamage();
             }
             yield return null;
         }
@@ -573,7 +526,7 @@ public class Fishing_Action : MonoBehaviour
 
     IEnumerator CancelState()
     {
-        fishingCanvas.OnArrowPrent(false);
+        fishingCanvas.OnArrowParent(false);
         fishingCanvas.SetFishSpell(0f);
         FishState(FishStateType.None);
 
@@ -591,6 +544,50 @@ public class Fishing_Action : MonoBehaviour
 
 
 
+    //===================================================================================================================
+    // 낚시 완료
+    //===================================================================================================================
+    void FishingComplate(bool _success)// 낚시 완료
+    {
+        Option_Manager.current.SetThemeMusic(null);// 테마 음악 초기화
+
+        StopAllCoroutines();
+        isFishing = false;
+        FishState(FishStateType.None);
+
+        fishingCanvas.OnArrowParent(false);
+        fishingCanvas.SetFishSpell(0f);
+
+        // 버튼 활성화
+        fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());
+        fishingCanvas.OnOutButton();
+
+        if (_success == true)
+            SetReward();
+    }
+
+    public void SetReward()
+    {
+        ItemStruct fishItem = currentFish.itemStruct;
+        float size = currentSize.size;
+
+        ResultStruct fishResult = new ResultStruct
+        {
+            inventorySize = new Vector2Int(7, 7), // 인벤토리 크기
+            money = 0, // 돈
+            itemID = new string[1] { fishItem.id }, // 아이템 ID
+        };
+
+        Game_Manager.current.GetInventory.SetResult(fishResult);// 퀘스트 완료 후 결과 아이템 설정
+        Game_Manager.current.GetInventory.OpenResult();
+        Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
+    }
+
+    void OutReward()
+    {
+        Game_Manager.current.GetInventory.CloseResult();
+    }
+
 
     //===================================================================================================================
     // 낚시 끝
@@ -606,6 +603,8 @@ public class Fishing_Action : MonoBehaviour
 
         Game_Manager.current.GetMainUI.OpenCanvas(true);
         Game_Manager.current.OutOfControll(false);
+
+        OutReward();// 아웃버튼
 
         fishingSet.SetActive(false);
         this.enabled = false;

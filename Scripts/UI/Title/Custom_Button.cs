@@ -18,6 +18,7 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     public void OnPointerClick(PointerEventData eventData)
     {
         actionClick?.Invoke();
+        transform.localScale = Vector3.one;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

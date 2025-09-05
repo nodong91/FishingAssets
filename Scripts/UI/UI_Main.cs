@@ -30,6 +30,8 @@ public class UI_Main : MonoBehaviour
     [Header("[ Ship ]")]
     public Image shipEnergy;
     public Image currentHealthImage, maxHealthImage;
+    Coroutine openFadeScreen;
+    public Vector2 HealthSize;
 
     public void SetStart()
     {
@@ -121,7 +123,6 @@ public class UI_Main : MonoBehaviour
         shipEnergy.material.SetFloat("_FillAmount", _energy);
     }
 
-    Coroutine openFadeScreen;
     public void SetFadeScreen(bool _open)
     {
         if (openFadeScreen != null)
@@ -143,7 +144,7 @@ public class UI_Main : MonoBehaviour
             yield return null;
         }
     }
-    public Vector2 HealthSize;
+   
     public void SetHealthPoint(int _point)
     {
         RectTransform rectTransform = currentHealthImage.rectTransform;

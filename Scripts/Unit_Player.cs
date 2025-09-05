@@ -56,7 +56,7 @@ public class Unit_Player : MonoBehaviour
 
         health = status.shipHealth;
         Game_Manager.current.GetMainUI.SetMaxHealthPoint(status.shipHealth);
-        Game_Manager.current.GetMainUI.SetHealthPoint(health);
+        Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
 
         energy = status.maxEnergy;
         Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
@@ -224,7 +224,6 @@ public class Unit_Player : MonoBehaviour
 
     IEnumerator MovingClash(Vector3 _target)
     {
-        Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
         Game_Manager.current.cameraManager.InputShake();// 카메라 흔들기
         float normalize = 0f;
         while (normalize < 1f)// 뒤로 밀려나기
@@ -318,25 +317,35 @@ public class Unit_Player : MonoBehaviour
         }
     }
 
+    public void TakeDamage()
+    {
+        if (health > 0)
+        {
+            health--;
+            Singleton_Audio.INSTANCE.Audio_FX(clashSound);
+            Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
+            Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
+        }
+        else
+        {
+            Debug.LogWarning("배 파괴!!!!!!!!!!!!!!!!!!!!");
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Finish")
+        if (collision.gameObject.tag == "Finish")// 충돌체
         {
-            if (health > 0 && state != State.Damage)
+            if (state != State.Damage)
             {
                 StateMachine(State.Damage);
 
-                health--;
-                Singleton_Audio.INSTANCE.Audio_FX(clashSound);
-                Game_Manager.current.GetMainUI.SetHealthPoint(health);
+                TakeDamage();
                 Vector3 direction = (transform.position - collision.transform.position).normalized;
                 Vector3 target = transform.position + direction;
                 StartCoroutine(MovingClash(target));
+
                 Debug.LogWarning("충돌!!!!!!!!!!!!!!!!!!!!");
-            }
-            else
-            {
-                Debug.LogWarning("배 파괴!!!!!!!!!!!!!!!!!!!!");
             }
         }
     }
