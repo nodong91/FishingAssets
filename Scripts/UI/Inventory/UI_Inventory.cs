@@ -422,7 +422,7 @@ public class UI_Inventory : MonoBehaviour
     {
         iconImage.sprite = _itemStruct.icon;
         iconImage.rectTransform.sizeDelta = new Vector2(_itemStruct.iconSize.x, _itemStruct.iconSize.y) * slotSize;
-        iconImage.rectTransform.pivot = new Vector2(_itemStruct.iconSize.w, _itemStruct.iconSize.z);
+        iconImage.rectTransform.pivot = new Vector2(_itemStruct.iconSize.z, _itemStruct.iconSize.w);
     }
 
     void SetDragRotate()

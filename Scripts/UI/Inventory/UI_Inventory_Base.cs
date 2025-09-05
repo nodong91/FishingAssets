@@ -203,7 +203,7 @@ public class UI_Inventory_Base : MonoBehaviour
     void SetImage(Image _image, ItemStruct _itemStruct)
     {
         Vector2 size = new Vector2(_itemStruct.iconSize.x, _itemStruct.iconSize.y);
-        Vector2 pivot = new Vector2(_itemStruct.iconSize.w, _itemStruct.iconSize.z);
+        Vector2 pivot = new Vector2(_itemStruct.iconSize.z, _itemStruct.iconSize.w);
         _image.sprite = _itemStruct.icon;
         _image.rectTransform.sizeDelta = size * slotSize;
         _image.rectTransform.pivot = pivot;

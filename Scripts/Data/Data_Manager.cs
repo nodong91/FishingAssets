@@ -132,11 +132,9 @@ public class Data_Manager : Data_Parse
         }
         int x = maxX - minX + 1;
         int y = maxY - minY + 1;
-        //float centerX = 0.5f - (minX + maxX) * (0.125f*x);
-        //float centerY = 0.5f + (minY + maxY) * (0.125f*y);
 
-        float centerX = 0.5f + (maxX + minX) * 0.125f;
-        float centerY = 0.5f + (maxY + minY) * 0.125f;
+        float centerX = (1f - (minX + maxX) * (1f / x)) * 0.5f;
+        float centerY = (1f + (minY + maxY) * (1f / y)) * 0.5f;
 
         Vector4 temp = new Vector4(x, y, centerX, centerY);
         return temp;

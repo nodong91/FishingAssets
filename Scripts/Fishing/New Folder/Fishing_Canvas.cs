@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,29 +15,30 @@ public class Fishing_Canvas : MonoBehaviour
     [ColorUsage(true, true)]
     public Color catchColor, fishColor, spellColor;
 
-    public Transform fishPrefab, catchPrefab;
     public Vector3 fishOffset, shipOffset;
-    public TMPro.TMP_Text countText;
+    public TMP_Text countText;
 
-    public TMPro.TMP_Text infoText;
+    public TMP_Text infoText;
     public GameObject infomation;
-    public Button closeButton;
-    public Custom_Button startButton;
+    public Custom_Button closeButton, startButton, outButton;
+    public TMP_Text startTypeText;
 
-    public delegate void Dele_ReStart();
-    public Dele_ReStart deleReStart;
+    //public delegate void Dele_ReStart();
+    //public Dele_ReStart deleReStart;
 
     public void SetStart()
     {
         catchHP.material = Instantiate(catchHP.material);
         fishHP.material = Instantiate(fishHP.material);
         fishSpell.material = Instantiate(fishSpell.material);
-        OpenCanvas(false);
+        CloseCanvas();
     }
 
     public void SetFishing(Data_Manager.FishStruct _fishStruct)
     {
         fishStruct = _fishStruct;
+        OnStartButton(0);// ²ô±â
+        outButton.gameObject.SetActive(false);
 
         catchHP.material.SetColor("_MainColor", catchColor);
         catchHP.material.SetFloat("_FillAmount", 1f);
@@ -46,16 +48,24 @@ public class Fishing_Canvas : MonoBehaviour
         fishSpell.material.SetFloat("_FillAmount", 0f);
     }
 
+    public void OnStartButton(int _count, string _areaType = "", string _dayType = "")
+    {
+        startButton.gameObject.SetActive(_count > 0);
+        startTypeText.gameObject.SetActive(_count > 0);
+        startTypeText.text = $"{_areaType}\n<size=15>{_dayType}\nCount : {_count}</size>";
+    }
+
     public void SetCount(int _index)
     {
         countText.text = _index.ToString();
         countText.gameObject.SetActive(_index > 0);
     }
 
-    public void FollowUI()
+    public void FollowUI(Vector3 _fishPoint, Vector3 _catchPoint)
     {
-        fishUI.position = Camera.main.WorldToScreenPoint(fishPrefab.position + fishOffset);//FollowHPUI
-        catchUI.position = Camera.main.WorldToScreenPoint(catchPrefab.position + shipOffset);//FollowHPUI
+        fishUI.position = Camera.main.WorldToScreenPoint(_fishPoint + fishOffset);//FollowHPUI
+        catchUI.position = Camera.main.WorldToScreenPoint(_catchPoint + shipOffset);//FollowHPUI
+        Debug.LogWarning("FollowUI Fishing!!!");
     }
 
     public void SetCatchHP(float _hp)
@@ -79,23 +89,21 @@ public class Fishing_Canvas : MonoBehaviour
         //{
         //    OpenCanvas(true);
         //}
-        OpenCanvas(true);
+        OpenCanvas();
     }
 
-    public void OpenCanvas(bool _open)
+    public void OpenCanvas()
     {
-        infomation.SetActive(_open);
-        if (_open == true)
-        {
-            closeButton.onClick.AddListener(CloseCanvas);
-            SetInfomation();
-        }
+        infomation.SetActive(true);
+        outButton.gameObject.SetActive(true);
+        closeButton.SetButton(CloseCanvas);
+        SetInfomation();
     }
 
     public void CloseCanvas()
     {
         infomation.SetActive(false);
-        deleReStart?.Invoke();
+        //deleReStart?.Invoke();
     }
 
     void SetInfomation()
