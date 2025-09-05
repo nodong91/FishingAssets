@@ -64,7 +64,10 @@ public class Title_Manager : MonoBehaviour
     IEnumerator SetManager()
     {
         if (Option_Manager.current == null)
+        {
             Instantiate(optionManager);
+            Option_Manager.current.SetStart();
+        }
 
         if (LoadingManager.current != null)
             LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료

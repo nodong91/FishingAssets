@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -55,15 +53,27 @@ public class Audio_Manager : MonoBehaviour
     void SetAudioUI()
     {
         AudioStruct audioStruct = Option_Manager.current.optionData.audioStruct;
+        Debug.LogWarning("SetAudioUI : " + audioStruct.masterMute);
         // UI ¼¼ÆÃ
-        master_Slider.value = audioStruct.masterVolume * divide;
-        master_Mute.isOn = audioStruct.masterMute;
-        bgm_Slider.value = audioStruct.bgmVolume * divide;
-        bgm_Mute.isOn = audioStruct.bgmMute;
-        fx_Slider.value = audioStruct.fxVolume * divide;
-        fx_Mute.isOn = audioStruct.fxMute;
-        env_Slider.value = audioStruct.envVolume * divide;
-        env_Mute.isOn = audioStruct.envMute;
+        //master_Slider.value = audioStruct.masterVolume * divide;
+        //master_Mute.isOn = audioStruct.masterMute;
+        MasterVolume(audioStruct.masterVolume * divide);
+        MasterMute(audioStruct.masterMute);
+
+        BGMVolume(audioStruct.bgmVolume * divide);
+        BGMMute(audioStruct.bgmMute);
+
+        FXVolume(audioStruct.fxVolume * divide);
+        FXMute(audioStruct.fxMute);
+
+        EnvVolume(audioStruct.envVolume * divide);
+        EnvMute(audioStruct.envMute);
+        //bgm_Slider.value = audioStruct.bgmVolume * divide;
+        //bgm_Mute.isOn = audioStruct.bgmMute;
+        //fx_Slider.value = audioStruct.fxVolume * divide;
+        //fx_Mute.isOn = audioStruct.fxMute;
+        //env_Slider.value = audioStruct.envVolume * divide;
+        //env_Mute.isOn = audioStruct.envMute;
     }
 
     void NextButton(int _index)
@@ -99,25 +109,30 @@ public class Audio_Manager : MonoBehaviour
             Debug.LogError($"Audio string '{_id}' not found in the list.");
         }
     }
+
     void MasterVolume(float _value)
     {
+        master_Slider.value = _value;
         float value = _value / divide;
         Singleton_Audio.INSTANCE.SetMasterVolume(value);
     }
 
     void MasterMute(bool _isOn)
     {
+        master_Mute.isOn = _isOn;
         Singleton_Audio.INSTANCE.SetMasterMute(_isOn);
     }
 
     void BGMVolume(float _value)
     {
+        bgm_Slider.value = _value;
         float value = _value / divide;
         Singleton_Audio.INSTANCE.SetBGMVolume(value);
     }
 
     void BGMMute(bool _isOn)
     {
+        bgm_Mute.isOn = _isOn;
         Singleton_Audio.INSTANCE.SetBGMMute(_isOn);
     }
 
@@ -125,23 +140,27 @@ public class Audio_Manager : MonoBehaviour
     {
         if (onSet == true)
             SetFxPrev();
+        fx_Slider.value = _value;
         float value = _value / divide;
         Singleton_Audio.INSTANCE.SetFXVolume(value);
     }
 
     void FXMute(bool _isOn)
     {
+        fx_Mute.isOn = _isOn;
         Singleton_Audio.INSTANCE.SetFXMute(_isOn);
     }
 
     void EnvVolume(float _value)
     {
+        env_Slider.value = _value;
         float value = _value / divide;
         Singleton_Audio.INSTANCE.SetEnvironmentVolume(value);
     }
 
     void EnvMute(bool _isOn)
     {
+        env_Mute.isOn = _isOn;
         Singleton_Audio.INSTANCE.SetEnvironmentMute(_isOn);
     }
 

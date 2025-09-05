@@ -28,7 +28,7 @@ public class Option_Manager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    void Start()
+    public void SetStart()
     {
         LoadOption();
 
@@ -38,7 +38,7 @@ public class Option_Manager : MonoBehaviour
         closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
         SetToggle();
 
-        OpenCanvas(false);
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 저장 안하고 닫기
     }
 
     public void OpenCanvas(bool _open)
@@ -132,6 +132,7 @@ public class Option_Manager : MonoBehaviour
                 envVolume = Singleton_Audio.INSTANCE.envVolume,
             },
         };
+        Debug.LogWarning("SaveOption");
         Static_JsonManager.SaveOptionData(saveData, optionData);
     }
 
@@ -147,6 +148,8 @@ public class Option_Manager : MonoBehaviour
             {
                 audioStruct = new Data_Option.AudioStruct
                 {
+                    masterMute = false,
+                    masterVolume = 1f,
                     bgmMute = false,
                     bgmVolume = 1f,
                     fxMute = false,

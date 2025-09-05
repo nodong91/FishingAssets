@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 {
@@ -41,9 +40,10 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         AudioSource audioSource = (_id != null) ? TryAudioSource() : null;
         if (_id != null)
         {
+            Debug.LogWarning("masterMute :   " + masterMute + "   " + _id);
             audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
-            audioSource.mute = bgmMute;
-            audioSource.volume = bgmVolume;
+            audioSource.mute = masterMute == true ? true : bgmMute;
+            audioSource.volume = bgmVolume * masterVolume;
             audioSource.loop = true;
             audioSource.pitch = 1.0f;
             audioSource.Play();

@@ -72,39 +72,6 @@ public class Fishing_Action : MonoBehaviour
         fishingCanvas.SetStart();
     }
 
-    void Update()
-    {
-
-    }
-
-    IEnumerator FishingControll()
-    {
-        while (isFishing == true)
-        {
-            fishingCanvas.FollowUI(fishPrefab.transform.position, catchPrefab.transform.position);
-            if (fishState == FishStateType.Spelling)
-            {
-                if (Input.GetKeyDown(KeyCode.W))
-                {
-                    CancelSkill(0);
-                }
-                if (Input.GetKeyDown(KeyCode.A))
-                {
-                    CancelSkill(1);
-                }
-                if (Input.GetKeyDown(KeyCode.S))
-                {
-                    CancelSkill(2);
-                }
-                if (Input.GetKeyDown(KeyCode.D))
-                {
-                    CancelSkill(3);
-                }
-            }
-            yield return null;
-        }
-    }
-
     void SetDictionary_FishStruct()// 사전 세팅 
     {
         Dictionary<string, FishStruct> tempDict = Singleton_Data.INSTANCE.Dict_Fish;
@@ -221,7 +188,7 @@ public class Fishing_Action : MonoBehaviour
         fishingCanvas.SetCount(0);
         StartCoroutine(CatchMovement());
         StartCoroutine(CheckingCatch());
-        StartCoroutine(FishingControll());
+
         FishState(FishStateType.Idle);
     }
 
@@ -297,6 +264,29 @@ public class Fishing_Action : MonoBehaviour
                 break;
         }
     }
+    void PlayingControll()
+    {
+        fishingCanvas.FollowUI(fishPrefab.transform.position, catchPrefab.transform.position);
+        if (fishState == FishStateType.Spelling)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                CancelSkill(0);
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                CancelSkill(1);
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                CancelSkill(2);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                CancelSkill(3);
+            }
+        }
+    }
 
     IEnumerator CatchMovement()
     {
@@ -315,6 +305,8 @@ public class Fishing_Action : MonoBehaviour
 
             catchOffset = fishPrefab.transform.position - shipPrefab.transform.position;
             positionComposer.CameraDistance = (catchOffset.magnitude * 0.5f) + defaultCameraDistance;
+
+            PlayingControll();
         }
     }
 
