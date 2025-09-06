@@ -40,7 +40,6 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         AudioSource audioSource = (_id != null) ? TryAudioSource() : null;
         if (_id != null)
         {
-            Debug.LogWarning("masterMute :   " + masterMute + "   " + _id);
             audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
             audioSource.mute = masterMute == true ? true : bgmMute;
             audioSource.volume = bgmVolume * masterVolume;

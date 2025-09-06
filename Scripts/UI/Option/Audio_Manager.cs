@@ -53,10 +53,7 @@ public class Audio_Manager : MonoBehaviour
     void SetAudioUI()
     {
         AudioStruct audioStruct = Option_Manager.current.optionData.audioStruct;
-        Debug.LogWarning("SetAudioUI : " + audioStruct.masterMute);
         // UI ¼¼ÆÃ
-        //master_Slider.value = audioStruct.masterVolume * divide;
-        //master_Mute.isOn = audioStruct.masterMute;
         MasterVolume(audioStruct.masterVolume * divide);
         MasterMute(audioStruct.masterMute);
 
@@ -68,12 +65,6 @@ public class Audio_Manager : MonoBehaviour
 
         EnvVolume(audioStruct.envVolume * divide);
         EnvMute(audioStruct.envMute);
-        //bgm_Slider.value = audioStruct.bgmVolume * divide;
-        //bgm_Mute.isOn = audioStruct.bgmMute;
-        //fx_Slider.value = audioStruct.fxVolume * divide;
-        //fx_Mute.isOn = audioStruct.fxMute;
-        //env_Slider.value = audioStruct.envVolume * divide;
-        //env_Mute.isOn = audioStruct.envMute;
     }
 
     void NextButton(int _index)
