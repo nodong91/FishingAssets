@@ -40,6 +40,8 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         AudioSource audioSource = (_id != null) ? TryAudioSource() : null;
         if (_id != null)
         {
+            audioSource.name = $"BGM_{_id}";
+            Debug.Log($"{audioSource.name}");
             audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
             audioSource.mute = masterMute == true ? true : bgmMute;
             audioSource.volume = bgmVolume * masterVolume;
@@ -118,7 +120,8 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
             return;
 
         AudioSource audioSource = TryAudioSource();
-        Debug.Log($"{_id} : {audioSource}");
+        audioSource.name = $"Fx_{_id}";
+        Debug.Log($"{audioSource.name}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
         audioSource.mute = masterMute == true ? true : fxMute;
         audioSource.volume = fxVolume * masterVolume;
@@ -136,7 +139,8 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
             return;
 
         AudioSource audioSource = TryAudioSource();
-        Debug.Log($"{_id} : {audioSource}");
+        audioSource.name = $"Dialog_{_id}";
+        Debug.Log($"{audioSource}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
         audioSource.mute = masterMute == true ? true : fxMute;
         audioSource.volume = fxVolume * masterVolume;
@@ -181,7 +185,8 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
             return;
 
         AudioSource audioSource = TryAudioSource();
-        Debug.LogWarning($"{_id} : {audioSource}");
+        audioSource.name = $"Environment_{_id}";
+        Debug.LogWarning($"{audioSource}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
         audioSource.mute = masterMute == true ? true : envMute;
         audioSource.volume = envVolume * masterVolume;

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.IO;
 using UnityEngine;
 public class DebugToTxt : MonoBehaviour
@@ -15,7 +16,10 @@ public class DebugToTxt : MonoBehaviour
     private string filePath;
     public TMPro.TMP_Text m_Text;
 
-
+    bool open = false;
+    public Custom_Button onButton;
+    public GameObject canvas;
+    public string logString;
 
     public void Awake()
     {
@@ -26,9 +30,9 @@ public class DebugToTxt : MonoBehaviour
         Application.logMessageReceived += LogToTxt;
     }
 
-
     private void Start()
     {
+        onButton.SetButton(OpenCanvas);
         // 생성될 파일의 경로설정
 #if UNITY_EDITOR
         filePath = Application.dataPath;
@@ -37,7 +41,12 @@ public class DebugToTxt : MonoBehaviour
         filePath = Application.persistentDataPath;
 
 #endif  
-        filePath = Application.dataPath + "/Save/";
+    }
+
+    private void OpenCanvas()
+    {
+        open = !open;
+        canvas.SetActive(open);
     }
 
 
@@ -46,76 +55,41 @@ public class DebugToTxt : MonoBehaviour
     //    Application.logMessageReceived += LogToTxt;
     //}
 
-
     private void OnDisable()
     {
         Application.logMessageReceived -= LogToTxt;
     }
 
-
-    public void LogToTxt(string logString, string stackTrace, LogType type)
+    public void LogToTxt(string _logString, string _stackTrace, LogType _type)
     {
-        if (type == LogType.Log)
+        if (_type == LogType.Log)
         {
             if (!isLog)
                 return;
         }
-        else if (type == LogType.Warning)
+        else if (_type == LogType.Warning)
         {
+            _logString = $"<color=#FFFF00>{_logString}</color>";
             if (!isWarning)
                 return;
         }
-        else if (type == LogType.Error)
+        else if (_type == LogType.Error)
         {
+            _logString = $"<color=#FF0000>{_logString}</color>";
             if (!isError)
                 return;
         }
+        logString += $"> {_logString} \n";
         m_Text.text = logString;
-        //// 로그 메세지를 텍스트 파일에 저장
-        //// 파일이 없다면 새롭게 생성
-        //using (StreamWriter sw = new StreamWriter(Path.Combine(filePath, fileName), true))
-        //{
-        //    sw.WriteLine($"[{System.DateTime.Now}] {logString} \n");
-        //}
-    }
-}
-
-public class BiuldDebugTest : MonoBehaviour
-{
-    private void OnEnable()
-    {
-        Application.logMessageReceived += LogToTxt;
     }
 
-    private void OnDisable()
+    private void OnApplicationQuit()
     {
-        Application.logMessageReceived -= LogToTxt;
-    }
-
-    [SerializeField]
-    private bool isLog = true;
-
-    [SerializeField]
-    private bool isWarning = true;
-
-    [SerializeField]
-    private bool isError = true;
-    public void LogToTxt(string logString, string stackTrace, LogType type)
-    {
-        if (type == LogType.Log)
+        // 로그 메세지를 텍스트 파일에 저장
+        // 파일이 없다면 새롭게 생성
+        using (StreamWriter sw = new StreamWriter(Path.Combine(filePath, fileName), true))
         {
-            if (!isLog)
-                return;
-        }
-        else if (type == LogType.Warning)
-        {
-            if (!isWarning)
-                return;
-        }
-        else if (type == LogType.Error)
-        {
-            if (!isError)
-                return;
+            sw.WriteLine($"[{System.DateTime.Now}] {logString} \n");
         }
     }
 }

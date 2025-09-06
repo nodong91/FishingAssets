@@ -290,10 +290,10 @@ public class Unit_Player : MonoBehaviour
             }
         }
     }
+
     //================================================================================================================================================
     // 충돌
     //================================================================================================================================================
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -330,6 +330,12 @@ public class Unit_Player : MonoBehaviour
         {
             Debug.LogWarning("배 파괴!!!!!!!!!!!!!!!!!!!!");
         }
+    }
+
+    public void AddHealth(int _health)
+    {
+        health += _health;
+        Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
     }
 
     private void OnCollisionEnter(Collision collision)

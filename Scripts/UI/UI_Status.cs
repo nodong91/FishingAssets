@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static Data_Manager;
-using static UI_Main;
 
 public class UI_Status : MonoBehaviour, IPointerClickHandler
 {
@@ -14,7 +13,6 @@ public class UI_Status : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-
         OpenCanvas(false);
     }
 

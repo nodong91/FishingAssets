@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using static Data_Manager;
 
@@ -20,12 +18,12 @@ public class Game_Manager : MonoBehaviour
     public Skill_Manager skillManager;
     public string themeMusic;
     public string oceanSound = "Ocean 02";
-    public Fishing_Action fishingAction;
+    public Fishing_Manager fishingAction;
 
     public UI_QuestManager questManager;
-    public Data_Manager.SetStatus defaultStatus;
-    public Data_Manager.SetStatus currentStatus;
-    public Data_Manager.SetStatus GetStatus => GetSkill.addStatus;
+    public SetStatus defaultStatus;
+    public SetStatus currentStatus;
+    public SetStatus GetStatus => GetSkill.addStatus;
 
     public Light dayLight;
     public Color dayColor, nightColor;
@@ -245,17 +243,17 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-    private Fishing_Action instFishingAction;
-    public Fishing_Action GetFishingAction
+    private Fishing_Manager instFishing;
+    public Fishing_Manager GetFishing
     {
         get
         {
-            if (instFishingAction == null)
+            if (instFishing == null)
             {
-                instFishingAction = Instantiate(fishingAction, transform);
-                instFishingAction.SetStart();
+                instFishing = Instantiate(fishingAction, transform);
+                instFishing.SetStart();
             }
-            return instFishingAction;
+            return instFishing;
         }
     }
 

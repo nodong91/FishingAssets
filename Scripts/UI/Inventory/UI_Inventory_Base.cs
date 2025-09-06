@@ -505,10 +505,15 @@ public class UI_Inventory_Base : MonoBehaviour
     {
         _slot.FixSlot();
         destroySlot.Remove(_slot.slotNum);
+        Game_Manager.current.GetPlayer.AddHealth(1);// 데미지
     }
 
     public void FixAll()// 모든 슬롯 복구
     {
+        if (destroySlot == null)
+            return;
+
+        Game_Manager.current.GetPlayer.AddHealth(destroySlot.Count);// 데미지
         for (int i = 0; i < destroySlot.Count; i++)
         {
             int x = destroySlot[i].x;
@@ -516,5 +521,6 @@ public class UI_Inventory_Base : MonoBehaviour
             allSlots[x, y].FixSlot();
         }
         destroySlot.Clear();
+        
     }
 }
