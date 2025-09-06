@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +29,7 @@ public class UI_Landing : MonoBehaviour
     bool inlanding, onDialog;
     public Button backButton;
     private CanvasGroup backCanvas;
+    Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
 
     public void SetStart()
     {
@@ -61,7 +61,7 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(true);// 시작
         Game_Manager.current.OutOfControll(true);
     }
-    Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
+
     void RemoveUI()
     {
         for (int i = 0; i < landingData.landingSetting.Length; i++)
@@ -122,6 +122,9 @@ public class UI_Landing : MonoBehaviour
 
     void OutButton()
     {
+        if (Game_Manager.current.GetPlayer.OutLandingCheck() == false)// 플레이어가 나갈 수 있는지 체크
+            return;
+
         inlanding = false;
         SetLandingCanvas(false);// 섬에서 나가기
 

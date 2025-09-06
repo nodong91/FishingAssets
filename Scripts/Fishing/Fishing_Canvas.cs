@@ -1,14 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static Data_Manager;
-using static Data_Quest;
 
 public class Fishing_Canvas : MonoBehaviour
 {
-    Data_Manager.FishStruct fishStruct;
     public RectTransform catchUI;
     public Image catchHP;
     public RectTransform fishUI;
@@ -23,9 +19,6 @@ public class Fishing_Canvas : MonoBehaviour
     public Custom_Button closeButton, startButton, outButton;
     public TMP_Text startTypeText;
 
-    //public delegate void Dele_ReStart();
-    //public Dele_ReStart deleReStart;
-
     public void SetStart()
     {
         catchHP.material = Instantiate(catchHP.material);
@@ -33,9 +26,8 @@ public class Fishing_Canvas : MonoBehaviour
         fishSpell.material = Instantiate(fishSpell.material);
     }
 
-    public void SetFishing(Data_Manager.FishStruct _fishStruct)
+    public void SetFishing()
     {
-        fishStruct = _fishStruct;
         OnStartButton(0);// ²ô±â
         outButton.gameObject.SetActive(false);
 
@@ -87,11 +79,9 @@ public class Fishing_Canvas : MonoBehaviour
         outButton.gameObject.SetActive(true);
     }
 
-
-
-
-
-
+    //=========================================================================================================
+    // °ø°Ý
+    //=========================================================================================================
 
     public RectTransform arrowParent;
     public Image arrow;

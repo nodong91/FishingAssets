@@ -108,8 +108,8 @@ public class Follow_Manager : MonoBehaviour
                 //}
 
                 FollowTarget_Camera(trans, followUI, offset);
-                Debug.LogWarning($"StartFollowing_Camera : {trans.name}");
             }
+            Debug.LogWarning($"StartFollowing_Camera : {follow_Camera.Count}");
             yield return null;
         }
     }

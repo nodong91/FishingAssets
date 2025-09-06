@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Data_Manager;
 using static Data_Manager.FishStruct;
@@ -45,11 +46,12 @@ public class Fishing_Manager : MonoBehaviour
 
     public Transform focusTarget;
 
-    public float coolTime = 10f;
     private float cooling;
+    public float coolTime = 5f;// 물고기 스탯으로 추가
+    public float spellTime = 3f;// 물고기 스탯으로 추가
+    public float groggyTime = 1f;// 물고기 스탯으로 추가
 
     private Vector3 fishTargetPoint;
-    public float spellTime = 3f;
     private bool shake;
     private bool isFishing = false;
     private bool isCatching = false;
@@ -64,7 +66,6 @@ public class Fishing_Manager : MonoBehaviour
     {
         SetDictionary_FishStruct();// 미리 사전 세팅
 
-        //fishingCanvas.deleReStart = ReStart;
         fishingCanvas.startButton.SetButton(SetFishingStart);
         fishingCanvas.outButton.SetButton(OutFishing);
         fishingCanvas.SetStart();
@@ -144,14 +145,13 @@ public class Fishing_Manager : MonoBehaviour
 
     public void SetFishingStart()
     {
-        SetCanvasGroup(1.0f);
-        Option_Manager.current.SetThemeMusic("Battle");
+        isFishing = true;
 
+        Option_Manager.current.SetThemeMusic("Battle");// 전투 시작
+        SetCanvasGroup(1.0f);// 캔버스 오픈
         currentFish = fishQueue.Dequeue();// 물고기 정보
         currentSize = currentFish.GetRandom();
-        fishingCanvas.SetFishing(currentFish);
-
-        isFishing = true;
+        fishingCanvas.SetFishing();
 
         SetCatch();// 낚시 영역 초기화
         SetFish();// 물고기 스탯 초기화
@@ -266,12 +266,14 @@ public class Fishing_Manager : MonoBehaviour
             focusTarget.position = Vector3.Lerp(fishPrefab.transform.position, shipPrefab.transform.position, 0.5f);
 
             // 캐치 영역 안에 있는지 체크
-            catchOffset = fishPrefab.transform.position - catchPrefab.transform.position;
-            isCatching = (catchOffset.magnitude < catchStatus.catchRadius);
-            yield return null;
+            float catchDistance = (fishPrefab.transform.position - catchPrefab.transform.position).magnitude;
+            isCatching = (catchDistance < catchStatus.catchRadius);
+            Color catchColor = isCatching ? onCatchColor : notCatchColor;
+            catchRanderer.material.SetColor("_Color", catchColor);
 
-            catchOffset = fishPrefab.transform.position - shipPrefab.transform.position;
-            positionComposer.CameraDistance = (catchOffset.magnitude * 0.5f) + defaultCameraDistance;
+            float fishDistance = (fishPrefab.transform.position - shipPrefab.transform.position).magnitude;
+            positionComposer.CameraDistance = (fishDistance * 0.5f) + defaultCameraDistance;
+            yield return null;
 
             PlayingControll();
         }
@@ -296,14 +298,12 @@ public class Fishing_Manager : MonoBehaviour
         {
             if (isCatching == true)
             {
-                catchRanderer.material.SetColor("_Color", onCatchColor);
                 fishHealth -= catchStatus.catchPower;
                 fishingCanvas.SetFishHP(fishHealth / fishMaxHealth);// 물고기에 데미지
                 yield return new WaitForSeconds(currentFish.fishAttackSpeed);
             }
             else
             {
-                catchRanderer.material.SetColor("_Color", notCatchColor);
                 catchHealth -= currentFish.fishPower;
                 fishingCanvas.SetCatchHP(catchHealth / catchMaxHealth);// 낚시에 데미지
                 yield return new WaitForSeconds(catchStatus.catchAttakSpeed);
@@ -329,15 +329,6 @@ public class Fishing_Manager : MonoBehaviour
         else
         {
             fishTargetPoint = SetRandomPosition();
-            //float distance = (fishPrefab.transform.position - fishTargetPoint).magnitude;
-            //if (distance <= fishStruct.fieldRadius * 0.5f)
-            //{
-            //    FishState(FishStateType.Moving);
-            //}
-            //else
-            //{
-            //    FishState(FishStateType.Dodge);
-            //}
             FishState(FishStateType.Moving);
         }
     }
@@ -407,6 +398,7 @@ public class Fishing_Manager : MonoBehaviour
         shake = false;
         float distance = (shipPrefab.transform.position - fishPrefab.transform.position).magnitude;
         float skillSpeed = currentFish.fishSpeed * currentFish.fieldRadius;
+        bool destroy = false;
         while (skillSpeed > 0.1f)
         {
             skillSpeed = Mathf.Lerp(skillSpeed, 0f, Time.deltaTime * currentFish.fishSpeed);
@@ -418,12 +410,31 @@ public class Fishing_Manager : MonoBehaviour
                 if (shakingObject != null)
                     StopCoroutine(shakingObject);
                 shakingObject = StartCoroutine(ShakingObject(shipPrefab));
-                Game_Manager.current.GetPlayer.TakeDamage();
+                destroy = Game_Manager.current.GetPlayer.TakeDamage();// 선박에 데미지
             }
             yield return null;
         }
-        cooling = Time.time + coolTime;
-        FishState(FishStateType.Idle);
+        // 공격 끝난 이후
+        if (destroy == true)
+        {
+            // 파괴 됐을 때
+            FishingComplate(false);
+            OutFishing();
+
+            StartCoroutine(DestroyShip());// 배 부셔져서 낚시 실패
+        }
+        else
+        {
+            cooling = Time.time + coolTime;
+            FishState(FishStateType.Idle);
+        }
+    }
+
+    IEnumerator DestroyShip()
+    {
+        Debug.LogWarning("배 부숴짐");
+        yield return new WaitForSeconds(1f);
+        Game_Manager.current.GetPlayer.FishingDestroy();// 배 부숴짐
     }
 
     Vector3 SetRandomPosition()
@@ -472,15 +483,6 @@ public class Fishing_Manager : MonoBehaviour
         _object.transform.position = originPosition;
     }
 
-
-
-
-
-
-
-
-
-
     //===================================================================================================================
     // 방어
     //===================================================================================================================
@@ -514,7 +516,7 @@ public class Fishing_Manager : MonoBehaviour
             if (cordCount == currentIndex)
             {
                 // 완료
-                StartCoroutine(CancelState());
+                StartCoroutine(CancelState());// 캔슬 성공
             }
         }
         else
@@ -533,16 +535,11 @@ public class Fishing_Manager : MonoBehaviour
         if (shakingObject != null)
             StopCoroutine(shakingObject);
         shakingObject = StartCoroutine(ShakingObject(fishPrefab));
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(groggyTime);// 그로기 타임
 
         cooling = Time.time + coolTime;
         FishState(FishStateType.Idle);
     }
-
-
-
-
-
 
     //===================================================================================================================
     // 낚시 완료
@@ -551,8 +548,8 @@ public class Fishing_Manager : MonoBehaviour
     {
         Option_Manager.current.SetThemeMusic(null);// 테마 음악 초기화
 
-        StopAllCoroutines();
         isFishing = false;
+        StopAllCoroutines();
         FishState(FishStateType.None);
 
         fishingCanvas.OnArrowParent(false);

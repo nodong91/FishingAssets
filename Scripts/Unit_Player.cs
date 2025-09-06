@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static Data_Manager;
 
@@ -30,8 +31,8 @@ public class Unit_Player : MonoBehaviour
     GameObject FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
     Coroutine stateAction;
 
-    private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
-    private Trigger_Setting closestTarget;
+    public List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
+    public Trigger_Setting closestTarget;
 
     Quaternion prevAngle, setAngle;
     float randomTime, runningRandomTime;
@@ -88,7 +89,7 @@ public class Unit_Player : MonoBehaviour
                 stateAction = StartCoroutine(Moving());
                 break;
             case State.Damage:
-
+                TakeDamage();
                 break;
             case State.Destroy:
                 StateDestroy();
@@ -119,7 +120,7 @@ public class Unit_Player : MonoBehaviour
         while (state == State.Move)
         {
             SetMoving();
-            CheckClosestUnit();
+            CheckClosestUnit();// 무브
 
             energy -= status.efficient * Time.deltaTime;// 임시
             Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
@@ -234,7 +235,7 @@ public class Unit_Player : MonoBehaviour
             CheckClosestUnit();// 가까운 트리거 체크
             yield return null;
         }
-
+        // 밀려난 이후 상태 체크
         if (health > 0)
             StateMachine(State.Idle);// 다시 대기 상태
         else
@@ -246,26 +247,61 @@ public class Unit_Player : MonoBehaviour
         StartCoroutine(ResetPosition());
     }
 
+    public void FishingDestroy()
+    {
+        StateMachine(State.Destroy);
+    }
+
     IEnumerator ResetPosition()
     {
         Game_Manager.current.GetMainUI.SetFadeScreen(true);
         yield return new WaitForSeconds(0.5f);
-        Debug.LogError("견인 되는 연출 필요");
+        Debug.LogError("견인 되는 연출 필요 - 보험 회사 도착");
         // 견인 되는 연출 필요
         // 위치 변경
         Data_Continue continueData = SaveData_Continue.current.continueData;
-        // 위치
-        transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
+
+        Vector3 forwardDirection = continueData.playerRotation * Vector3.forward;
+        Vector3 backwardPosition = continueData.playerPosition - forwardDirection * 3f;
+        Vector3 targetPosition = continueData.playerPosition;
+
+        // 마지막 위치로 이동
+        transform.SetPositionAndRotation(backwardPosition, continueData.playerRotation);
         transform.localScale = continueData.playerScale;
+
         if (FocusTarget != null)
             FocusTarget.transform.position = transform.position;
         yield return new WaitForSeconds(1f);
 
         Game_Manager.current.GetMainUI.SetFadeScreen(false);
-        yield return new WaitForSeconds(0.5f);
-        // 스탯 리셋
-        SetStatus();
-        StateMachine(State.Idle);// 다시 대기 상태
+        //yield return new WaitForSeconds(0.5f);
+
+        float noramlize = 0f;
+        while (noramlize < 1f)
+        {
+            noramlize += Time.deltaTime;
+            transform.position = Vector3.Lerp(backwardPosition, targetPosition, noramlize);
+            yield return null;
+        }
+        //StartCoroutine(ShipTowed(backwardPosition));
+        Debug.LogError("견인 되는 연출 필요 - 마을 회사 도착");
+        CheckClosestUnit();// 가까운 트리거 체크
+        //// 스탯 리셋
+        //SetStatus();
+    }
+
+    IEnumerator ShipTowed(Vector3 _targetPosition)//견인 되는 연출
+    {
+        Data_Continue continueData = SaveData_Continue.current.continueData;
+        // 마지막 위치로 이동
+        transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
+        transform.localScale = continueData.playerScale;
+
+        //Vector3 prevPosition = transform.position + transform.forward * -3f;
+        transform.position = _targetPosition;
+
+      
+        yield return null;
     }
 
     //================================================================================================================================================
@@ -289,6 +325,17 @@ public class Unit_Player : MonoBehaviour
                 Game_Manager.current.GetFollow.AddClosestTarget(null);// 팔로우 유아이 제거
             }
         }
+    }
+
+    public bool OutLandingCheck()// 섬에서 나갈 수 있는지 체크
+    {
+        if (health <= 0 || energy <= 0)
+        {
+            Game_Manager.current.GetMainUI.SetWarnningText("배가 움직이지 않아.");
+            return false;
+        }
+        StateMachine(State.Idle);// 다시 대기 상태
+        return true;
     }
 
     //================================================================================================================================================
@@ -317,7 +364,7 @@ public class Unit_Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage()
+    public bool TakeDamage()
     {
         if (health > 0)
         {
@@ -326,10 +373,7 @@ public class Unit_Player : MonoBehaviour
             Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
             Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
         }
-        else
-        {
-            Debug.LogWarning("배 파괴!!!!!!!!!!!!!!!!!!!!");
-        }
+        return health <= 0;
     }
 
     public void AddHealth(int _health)
@@ -346,7 +390,6 @@ public class Unit_Player : MonoBehaviour
             {
                 StateMachine(State.Damage);
 
-                TakeDamage();
                 Vector3 direction = (transform.position - collision.transform.position).normalized;
                 Vector3 target = transform.position + direction;
                 StartCoroutine(MovingClash(target));
