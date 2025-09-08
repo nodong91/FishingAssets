@@ -27,7 +27,7 @@ public class DebugToTxt : MonoBehaviour
 
         // 오늘 날짜로 파일의 이름을 결정
         fileName = System.DateTime.Now.ToString("yyyy-MM-dd");
-        Application.logMessageReceived += LogToTxt;
+        //Application.logMessageReceived += LogToTxt;
     }
 
     private void Start()
@@ -50,10 +50,10 @@ public class DebugToTxt : MonoBehaviour
     }
 
 
-    //private void OnEnable()
-    //{
-    //    Application.logMessageReceived += LogToTxt;
-    //}
+    private void OnEnable()
+    {
+        Application.logMessageReceived += LogToTxt;
+    }
 
     private void OnDisable()
     {

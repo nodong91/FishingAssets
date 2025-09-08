@@ -33,6 +33,7 @@ public class Reflection_Manager : MonoBehaviour
 
     const string TextureName = "_RenderTexture";
     public Material reflectionMaterial;
+    Material instMaterial;
     RenderTexture reflectionTexture;
     public Vector2Int waterSize;
     public float waveSpeed = 2f;
@@ -57,11 +58,12 @@ public class Reflection_Manager : MonoBehaviour
 
         mainCamera = Camera.main;
 
+        instMaterial = Instantiate(reflectionMaterial);
         //reflectionMaterial = reflectionPlane.GetComponent<Renderer>().material;
         reflectionTexture = new RenderTexture(Screen.width, Screen.height, 24);
         reflectionTexture.useMipMap = true;
 
-        reflectionMaterial.SetFloat("_WaveSpeed", waveSpeed);
+        instMaterial.SetFloat("_WaveSpeed", waveSpeed);
         //InstanceWater();
     }
 
@@ -73,7 +75,6 @@ public class Reflection_Manager : MonoBehaviour
             for (int y = 0; y < waterSize.y; y++)
             {
                 Renderer inst = Instantiate(reflectionPlane, _parent);
-                //inst.material = reflectionMaterial;
                 inst.transform.position = (new Vector3(x, 0f, y) * 10f) - (halfSize * 5f);
             }
         }
@@ -89,7 +90,7 @@ public class Reflection_Manager : MonoBehaviour
             return;
         string shipPosition = "_ShipPosition";
         Transform player = Game_Manager.current.GetPlayer.transform;
-        reflectionMaterial.SetVector(shipPosition, player.position);// 플레이어 위치 업데이트
+        instMaterial.SetVector(shipPosition, player.position);// 플레이어 위치 업데이트
     }
 
     private void OnPostRender()
@@ -140,8 +141,8 @@ public class Reflection_Manager : MonoBehaviour
     {
         GL.PushMatrix();
 
-        reflectionMaterial.SetPass(0);
-        reflectionMaterial.SetTexture(TextureName, reflectionTexture);
+        instMaterial.SetPass(0);
+        instMaterial.SetTexture(TextureName, reflectionTexture);
 
         GL.LoadOrtho();
         GL.Begin(GL.QUADS);

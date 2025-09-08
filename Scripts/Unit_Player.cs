@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using static Data_Manager;
 
@@ -16,7 +15,7 @@ public class Unit_Player : MonoBehaviour
     }
     public State state = State.None;
 
-    Data_Manager.SetStatus status;
+    SetStatus status;
     public float moveSpeed = 1f;
     public int health;
     public float energy;
@@ -242,6 +241,24 @@ public class Unit_Player : MonoBehaviour
             StateMachine(State.Destroy);
     }
 
+    public bool TakeDamage()
+    {
+        if (health > 0)
+        {
+            health--;
+            Singleton_Audio.INSTANCE.Audio_FX(clashSound);
+            Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
+            Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
+        }
+        return health <= 0;
+    }
+
+    public void AddHealth(int _health)
+    {
+        health += _health;
+        Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
+    }
+
     void StateDestroy()
     {
         StartCoroutine(ResetPosition());
@@ -260,7 +277,6 @@ public class Unit_Player : MonoBehaviour
         // 견인 되는 연출 필요
         // 위치 변경
         Data_Continue continueData = SaveData_Continue.current.continueData;
-
         Vector3 forwardDirection = continueData.playerRotation * Vector3.forward;
         Vector3 backwardPosition = continueData.playerPosition - forwardDirection * 3f;
         Vector3 targetPosition = continueData.playerPosition;
@@ -362,24 +378,6 @@ public class Unit_Player : MonoBehaviour
             closestTarget = null;
             Game_Manager.current.GetFollow.AddClosestTarget(null);
         }
-    }
-
-    public bool TakeDamage()
-    {
-        if (health > 0)
-        {
-            health--;
-            Singleton_Audio.INSTANCE.Audio_FX(clashSound);
-            Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
-            Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
-        }
-        return health <= 0;
-    }
-
-    public void AddHealth(int _health)
-    {
-        health += _health;
-        Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
     }
 
     private void OnCollisionEnter(Collision collision)

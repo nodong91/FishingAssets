@@ -163,7 +163,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         float clipLength = _audioSource.clip.length;
         yield return new WaitForSeconds(clipLength);
 
-        envSource.gameObject.SetActive(false);
+        _audioSource.gameObject.SetActive(false);
         audioQueue.Enqueue(_audioSource);
     }
 
