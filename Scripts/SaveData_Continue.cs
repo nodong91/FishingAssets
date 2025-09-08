@@ -32,7 +32,7 @@ public class SaveData_Continue : MonoBehaviour
             weatherType = Game_Manager.current.GetTimeUI.weatherType,
 
             money = Game_Manager.current.GetMainUI.TryMoney,
-            energy = Game_Manager.current.GetInventory.TryEnergy,
+            energy = Game_Manager.current.GetPlayer.GetEnergy,
             destroySlot = Game_Manager.current.GetInventory.TryDestroySlot,
         };
         SaveContinue();
@@ -55,7 +55,7 @@ public class SaveData_Continue : MonoBehaviour
         Game_Manager.current.GetTimeUI.SetStart(timeSpeed, minute, hour, day);// 시간
 
         Game_Manager.current.GetMainUI.TryMoney = continueData.money;// 돈
-        Game_Manager.current.GetInventory.TryEnergy = continueData.energy;// 남은 에너지
+        Game_Manager.current.GetPlayer.GetEnergy = continueData.energy;// 남은 에너지
         Game_Manager.current.GetInventory.TryDestroySlot = continueData.destroySlot;// 부서진 슬롯
     }
 

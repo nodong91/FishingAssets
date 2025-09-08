@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
 using static Data_Quest;
-using static Trigger_Landing;
 
 public class UI_Shop : UI_Inventory_Base
 {
@@ -14,7 +13,7 @@ public class UI_Shop : UI_Inventory_Base
     //===========================================================================================================================
 
     [Header("- Shop")]
-    public Data_NPC npc;
+    private Data_NPC npc;
     public VerticalLayoutGroup layoutGroup;
     public ToggleGroup toggleGroup;
     public GameObject fixGroup;

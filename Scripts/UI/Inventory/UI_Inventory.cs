@@ -18,12 +18,6 @@ public class UI_Inventory : MonoBehaviour
 
     public bool onDrag, onCheck;
     Coroutine slotMoving;
-    float energyValue;
-    public float TryEnergy
-    {
-        get { return energyValue; }
-        set { energyValue = value; }
-    }
 
     public UI_Inventory_Infomation infomation;
     public List<Vector2Int> TryDestroySlot

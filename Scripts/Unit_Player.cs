@@ -19,6 +19,15 @@ public class Unit_Player : MonoBehaviour
     public float moveSpeed = 1f;
     public int health;
     public float energy;
+    public float GetEnergy { get { return energy; } set { energy = value; } }
+    public float GetMaxEnergy { get { return status.maxEnergy; } }
+    public void AddEnergy(float _value)
+    {
+        energy += _value;
+        if (energy > status.maxEnergy)
+            energy = status.maxEnergy;
+        Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
+    }
     public float efficient;// 에너지 효율
     private Vector2 dirction;
     // 물위에서 배의 움직임
@@ -30,8 +39,8 @@ public class Unit_Player : MonoBehaviour
     GameObject FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
     Coroutine stateAction;
 
-    public List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
-    public Trigger_Setting closestTarget;
+    private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
+    private Trigger_Setting closestTarget;
 
     Quaternion prevAngle, setAngle;
     float randomTime, runningRandomTime;
@@ -58,9 +67,9 @@ public class Unit_Player : MonoBehaviour
         Game_Manager.current.GetMainUI.SetMaxHealthPoint(status.shipHealth);
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
 
-        energy = status.maxEnergy;
-        Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
-        efficient = status.catchPower;
+        //energy = status.maxEnergy;
+        //Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
+        efficient = status.efficient;
     }
 
     //================================================================================================================================================
@@ -316,7 +325,7 @@ public class Unit_Player : MonoBehaviour
         //Vector3 prevPosition = transform.position + transform.forward * -3f;
         transform.position = _targetPosition;
 
-      
+
         yield return null;
     }
 

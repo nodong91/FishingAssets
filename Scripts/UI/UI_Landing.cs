@@ -6,6 +6,16 @@ using static Trigger_Landing;
 
 public class UI_Landing : MonoBehaviour
 {
+    public enum LandingType
+    {
+        None,
+        Shop,// 생선 가게
+        Shipyard,// 조선소
+        Storage,// 창고
+        Energy,// 휴식
+        Count
+    }
+    public LandingType currentType = LandingType.None;
     public Canvas canvas;
     public CanvasGroup canvasGroup;
 
@@ -38,6 +48,7 @@ public class UI_Landing : MonoBehaviour
         canvas.worldCamera = Game_Manager.current.cameraManager.UICamera;
 
         outButton.onClick.AddListener(OutButton);
+        restButton.onClick.AddListener(RestButton);
         shopButton.onClick.AddListener(ShopButton);
         shipyardButton.onClick.AddListener(ShipyardButton);
         storageButton.onClick.AddListener(StorageButton);
@@ -125,6 +136,7 @@ public class UI_Landing : MonoBehaviour
         if (Game_Manager.current.GetPlayer.OutLandingCheck() == false)// 플레이어가 나갈 수 있는지 체크
             return;
 
+        currentType = LandingType.None;
         inlanding = false;
         SetLandingCanvas(false);// 섬에서 나가기
 
@@ -136,11 +148,15 @@ public class UI_Landing : MonoBehaviour
 
     void RestButton()// 휴식
     {
-
+        currentType = LandingType.Energy;
+        onDialog = false;
+        SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
+        Game_Manager.current.GetEnergyUI.OpenEnergy();
     }
 
     void ShopButton()
     {
+        currentType = LandingType.Shop;
         onDialog = true;
         SetLandingCanvas(false);        // 샵 버튼 누르면 랜드 UI 제거
         Option_Manager.current.SetThemeMusic(landingData.shopNPC.themeMusic);
@@ -149,6 +165,7 @@ public class UI_Landing : MonoBehaviour
 
     void ShipyardButton()// 조선소
     {
+        currentType = LandingType.Shipyard;
         onDialog = true;
         SetLandingCanvas(false);        // 조선소 버튼 누르면 랜드 UI 제거
         Option_Manager.current.SetThemeMusic(landingData.shipyardNPC.themeMusic);
@@ -157,17 +174,33 @@ public class UI_Landing : MonoBehaviour
 
     void StorageButton()
     {
+        currentType = LandingType.Storage;
         onDialog = false;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
         Game_Manager.current.GetInventory.OpenStorage(true);
     }
 
-    public void BackButton()
+    public void BackButton()// 뒤로 가기
     {
-        Game_Manager.current.GetInventory.CloseShop();
-        OutDialog();// 대화창 닫기
-        Option_Manager.current.SetThemeMusic(null);
-        SetLandingCanvas(true);// 백버튼
+        switch (currentType)
+        {
+            case LandingType.None:
+
+                break;
+            case LandingType.Shop:
+            case LandingType.Shipyard:
+                OutDialog();// 대화창 닫기
+                Game_Manager.current.GetInventory.CloseShop();// 상점 닫기
+                Option_Manager.current.SetThemeMusic(null);
+                break;
+            case LandingType.Storage:
+                Game_Manager.current.GetInventory.CloseShop();
+                break;
+            case LandingType.Energy:
+                Game_Manager.current.GetEnergyUI.CloseEnergy();
+                break;
+        }
+        SetLandingCanvas(true);// 랜드 UI 열기
     }
 
     public void OutDialog()
