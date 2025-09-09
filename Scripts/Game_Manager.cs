@@ -48,33 +48,9 @@ public class Game_Manager : MonoBehaviour
         GetDialog.SetStart();
 
         SetThemeMusic();
-        //SetDefaultStatus();// 기본 스테이트 세팅
         AddStatus();// 추가 스테이트 세팅
         PlayerMove();
     }
-
-    //void SetDefaultStatus()
-    //{
-    //    defaultStatus = new SetStatus();
-    //    defaultStatus.catchRadius = 1f;// 물고기를 잡는 범위
-    //    defaultStatus.catchSpeed = 3f;// 낚시대가 물고기를 향해 이동하는 속도
-    //    defaultStatus.catchPower = 1f;// 낚시대의 힘
-    //    defaultStatus.catchMaxHealth = 10f;// 낚시대의 최대 체력
-    //    defaultStatus.catchAttakSpeed = 1.5f;// 물고기를 공격하는 빈도
-
-    //    defaultStatus.shipSpeed = 2f;// 배의 이동 속도
-    //    defaultStatus.maxWeight = 1f;// 인벤토리 중량
-    //    defaultStatus.maxEnergy = 10f;// 연료통 크기
-    //    defaultStatus.efficient = 1f;// 에너지 효율
-    //    defaultStatus.maxBoxSize = new Vector2Int(0, 0);// 인벤토리 크기
-    //    defaultStatus.shipHealth = 3;// 배 체력
-    //    defaultStatus.freshness = 1f;// 신선도 유지 - 꼭 필요한가??????  
-
-    //    defaultStatus.LuckFish = 1f;// 희귀 물고기 확률
-    //    defaultStatus.FishAmount = 1f;// 낚시 횟수 증가
-    //    defaultStatus.FishPrice = 1f;// 판매 물고기 가격 증가
-    //}
-
 
     public void AddStatus()
     {

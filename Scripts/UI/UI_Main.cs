@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +36,7 @@ public class UI_Main : MonoBehaviour
 
     public void SetStart()
     {
+        SetMoney(SaveData_Continue.current.continueData.money);
         HealthSize = maxHealthImage.rectTransform.sizeDelta;
 
         inventoryButton.onClick.AddListener(InventoryButton);
@@ -172,6 +174,13 @@ public class UI_Main : MonoBehaviour
             moneyText.text = money.ToString();
             moneyValue = money;
         }
+    }
+
+    public void SetMoney(float _value)
+    {
+        float money = _value;
+        moneyText.text = money.ToString();
+        moneyValue = money;
     }
 
     public void MoveMoney(float _price)

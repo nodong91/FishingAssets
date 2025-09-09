@@ -157,6 +157,7 @@ public class Data_Manager : Data_Parse
         public int day;
         public UI_Time.WeatherType weatherType;
 
+        public int health;
         public float energy;
         public float money;
         public List<Vector2Int> destroySlot;
@@ -267,12 +268,13 @@ public class Data_Manager : Data_Parse
         public ItemStruct itemStruct;
         public enum UsedType// 사용 효과
         {
-            Energe, // 연료
+            Energy, // 연료
             Bait_Coast, // 연안 미끼
             Bait_Shallow,// 얕은
             Bait_Ocean,// 대양
         }
         public UsedType usedType;
+        public float value;// 효과 수치
     }
 
     [System.Serializable]
@@ -282,7 +284,6 @@ public class Data_Manager : Data_Parse
         public string name;
         public enum ItemType
         {
-            Equip,
             Fish,
             Used,
             Quest,

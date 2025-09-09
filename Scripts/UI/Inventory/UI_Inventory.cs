@@ -297,32 +297,34 @@ public class UI_Inventory : MonoBehaviour
         }
         else if (_slot.empty == false)
         {
+            selectSlot = _slot.GetLinkSlot;
             Debug.LogWarning($"{currentType} 클릭!!!!!!!!!!!!!!!!!!!!");
             switch (currentType)
             {
                 case SlotType.Shop:// 샵이 열려있을 때 우클릭
                 case SlotType.Shipyard:
-                    Debug.LogWarning("Shopping");
                     if (enterSlotType == SlotType.MyBox)// 판매
                     {
+                        Debug.LogWarning("판매");
                         SellItem(_slot.itemClass.item.id);
                     }
                     else if (enterSlotType == SlotType.Shop)// 구매
                     {
+                        Debug.LogWarning("구매");
                         if (BuyItem(_slot.itemClass.item.id) == false)
                         {
                             Game_Manager.current.GetMainUI.SetWarnningText("돈이 없음");
                             return;
                         }
                     }
-                    SetEmptySlot(_slot.GetLinkSlot);
+                    SetEmptySlot(_slot.GetLinkSlot);// 슬롯 비우기
                     break;
                 case SlotType.Storage:// 창고가 열려있을 때 우클릭
                     break;
                 case SlotType.Result:
                     break;
                 case SlotType.MyBox:
-                    UseItem(_slot.itemClass.item);// 사용하기
+                    ItemAction();// 사용하기
                     break;
                 default:
                     break;
@@ -330,22 +332,37 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    void UseItem(ItemStruct _item)
+    void ItemAction()
     {
-        switch (_item.itemType)
+        // 아이템 사용
+        switch (selectSlot.itemClass.item.itemType)
         {
-            case ItemStruct.ItemType.Equip:
-
-                break;
             case ItemStruct.ItemType.Fish:
-                Debug.LogWarning("Fish");
-                Game_Manager.current.GetNews.OpenNewsPaper();
+                UseFish();
+                Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
                 break;
             case ItemStruct.ItemType.Used:
-
+                UseItem();
                 break;
             case ItemStruct.ItemType.Quest:
+                Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
+                break;
+        }
+    }
 
+    void UseFish()
+    {
+        Debug.LogWarning("Fish");
+    }
+
+    void UseItem()
+    {
+        UsedStruct usedStruct = Singleton_Data.INSTANCE.Dict_Used[selectSlot.itemClass.item.id];
+        switch (usedStruct.usedType)
+        {
+            case UsedStruct.UsedType.Energy:
+                Game_Manager.current.GetPlayer.AddEnergy(usedStruct.value);
+                SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
         }
     }

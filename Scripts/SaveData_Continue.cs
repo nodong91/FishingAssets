@@ -31,8 +31,9 @@ public class SaveData_Continue : MonoBehaviour
             day = Game_Manager.current.GetTimeUI.day,
             weatherType = Game_Manager.current.GetTimeUI.weatherType,
 
-            money = Game_Manager.current.GetMainUI.TryMoney,
+            health = Game_Manager.current.GetPlayer.GetHealth,
             energy = Game_Manager.current.GetPlayer.GetEnergy,
+            money = Game_Manager.current.GetMainUI.TryMoney,
             destroySlot = Game_Manager.current.GetInventory.TryDestroySlot,
         };
         SaveContinue();
@@ -41,12 +42,8 @@ public class SaveData_Continue : MonoBehaviour
     public void GetContinue()
     {
         LoadContinue();
-        if (continueData == null)
-            return;
-        // 위치
-        Game_Manager.current.GetPlayer.transform.position = continueData.playerPosition;
-        Game_Manager.current.GetPlayer.transform.rotation = continueData.playerRotation;
-        Game_Manager.current.GetPlayer.transform.localScale = continueData.playerScale;
+        //if (continueData == null)
+        //    return;
 
         float timeSpeed = continueData.timeSpeed;
         float minute = continueData.minute;
@@ -55,7 +52,6 @@ public class SaveData_Continue : MonoBehaviour
         Game_Manager.current.GetTimeUI.SetStart(timeSpeed, minute, hour, day);// 시간
 
         Game_Manager.current.GetMainUI.TryMoney = continueData.money;// 돈
-        Game_Manager.current.GetPlayer.GetEnergy = continueData.energy;// 남은 에너지
         Game_Manager.current.GetInventory.TryDestroySlot = continueData.destroySlot;// 부서진 슬롯
     }
 
@@ -72,10 +68,13 @@ public class SaveData_Continue : MonoBehaviour
         }
         else
         {
+            Data_Status_Default defaultStatusData = Game_Manager.current.defaultStatusData;
+            Vector3 defaultPosition = new Vector3(0.5f, 0.2f, 10.7f);
+            Quaternion defaultRotate = Quaternion.Euler(-0.15f, 103f, 0.02f);
             continueData = new Data_Continue
             {
-                playerPosition = new Vector3(0f, 0f, 15f),// 초기 위치
-                playerRotation = Quaternion.identity,
+                playerPosition = defaultPosition,// 초기 위치
+                playerRotation = defaultRotate,
                 playerScale = Vector3.one,
 
                 timeSpeed = 10f,
@@ -84,7 +83,8 @@ public class SaveData_Continue : MonoBehaviour
                 day = 0,
                 weatherType = UI_Time.WeatherType.Sun,
 
-                energy = 0f,
+                health = defaultStatusData.defaultStatus.shipHealth,
+                energy = defaultStatusData.defaultStatus.maxEnergy,
                 money = 0f,
             };
         }

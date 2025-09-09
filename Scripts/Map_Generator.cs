@@ -75,6 +75,7 @@ public class Map_Generator : MonoBehaviour
     }
     public Node[,] nodeMap;
     private List<Node> allNodes;
+    public int fishCount = 15;
 
     public Trigger_Fish triggerFish;
 
@@ -91,7 +92,7 @@ public class Map_Generator : MonoBehaviour
     public void SetStart()
     {
         SetNodeGrid();
-        for (int i = 0; i < 13; i++)
+        for (int i = 0; i < fishCount; i++)
         {
             Data_Manager.AreaType areaType = Data_Manager.AreaType.Shallow;
             Node node = GetTypeNode(areaType);// 임시 연안 노드 랜덤으로 가져오기

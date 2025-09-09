@@ -18,16 +18,10 @@ public class Unit_Player : MonoBehaviour
     SetStatus status;
     public float moveSpeed = 1f;
     public int health;
+    public int GetHealth { get { return health; } }
     public float energy;
-    public float GetEnergy { get { return energy; } set { energy = value; } }
+    public float GetEnergy { get { return energy; }}
     public float GetMaxEnergy { get { return status.maxEnergy; } }
-    public void AddEnergy(float _value)
-    {
-        energy += _value;
-        if (energy > status.maxEnergy)
-            energy = status.maxEnergy;
-        Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
-    }
     public float efficient;// 에너지 효율
     private Vector2 dirction;
     // 물위에서 배의 움직임
@@ -37,6 +31,7 @@ public class Unit_Player : MonoBehaviour
     float runningTime;
     public GameObject playerObject;
     GameObject FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
+    Data_Continue continueData => SaveData_Continue.current?.continueData;
     Coroutine stateAction;
 
     private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
@@ -51,7 +46,15 @@ public class Unit_Player : MonoBehaviour
 
     private void Start()
     {
-        StateMachine(State.Idle);
+        if (continueData != null)
+        {
+            transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
+            transform.localScale = continueData.playerScale;
+            health = continueData.health;
+            energy = continueData.energy;
+            StateMachine(State.Idle);
+        }
+
         if (FocusTarget == null)
             return;
 
@@ -63,12 +66,12 @@ public class Unit_Player : MonoBehaviour
         status = Game_Manager.current.currentStatus;
         moveSpeed = status.shipSpeed;
 
-        health = status.shipHealth;
+        health = continueData.health;
         Game_Manager.current.GetMainUI.SetMaxHealthPoint(status.shipHealth);
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
 
-        //energy = status.maxEnergy;
-        //Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
+        energy = continueData.energy;
+        Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
         efficient = status.efficient;
     }
 
@@ -138,6 +141,12 @@ public class Unit_Player : MonoBehaviour
             }
             yield return null;
         }
+    }
+    public void AddEnergy(float _value)
+    {
+        energy += _value;
+        energy = Mathf.Clamp(energy, 0f, status.maxEnergy);
+        Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
     }
 
     void CheckClosestUnit()// 아이템이나 채집 같은거 하기 위한 체크
@@ -285,7 +294,7 @@ public class Unit_Player : MonoBehaviour
         Debug.LogError("견인 되는 연출 필요 - 보험 회사 도착");
         // 견인 되는 연출 필요
         // 위치 변경
-        Data_Continue continueData = SaveData_Continue.current.continueData;
+        //Data_Continue continueData = SaveData_Continue.current.continueData;
         Vector3 forwardDirection = continueData.playerRotation * Vector3.forward;
         Vector3 backwardPosition = continueData.playerPosition - forwardDirection * 3f;
         Vector3 targetPosition = continueData.playerPosition;
@@ -313,20 +322,6 @@ public class Unit_Player : MonoBehaviour
         CheckClosestUnit();// 가까운 트리거 체크
         //// 스탯 리셋
         //SetStatus();
-    }
-
-    IEnumerator ShipTowed(Vector3 _targetPosition)//견인 되는 연출
-    {
-        Data_Continue continueData = SaveData_Continue.current.continueData;
-        // 마지막 위치로 이동
-        transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
-        transform.localScale = continueData.playerScale;
-
-        //Vector3 prevPosition = transform.position + transform.forward * -3f;
-        transform.position = _targetPosition;
-
-
-        yield return null;
     }
 
     //================================================================================================================================================
