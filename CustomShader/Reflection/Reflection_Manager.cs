@@ -58,13 +58,15 @@ public class Reflection_Manager : MonoBehaviour
 
         mainCamera = Camera.main;
 
-        instMaterial = Instantiate(reflectionMaterial);
-        //reflectionMaterial = reflectionPlane.GetComponent<Renderer>().material;
         reflectionTexture = new RenderTexture(Screen.width, Screen.height, 24);
         reflectionTexture.useMipMap = true;
 
+        instMaterial = Instantiate(reflectionMaterial);
         instMaterial.SetFloat("_WaveSpeed", waveSpeed);
-        //InstanceWater();
+        for (int i = 0; i < instancer.setBatch.Count; i++)
+        {
+            instancer.setBatch[i].mat[0] = instMaterial;
+        }
     }
 
     void InstanceWater(Transform _parent)

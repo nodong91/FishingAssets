@@ -88,7 +88,7 @@ public class UI_QuestManager : MonoBehaviour
         currentButton = button;
     }
 
-    void ToggleEnter()
+    void ToggleEnter(GameObject _button)
     {
         Debug.Log($"ToggleEnter");
     }

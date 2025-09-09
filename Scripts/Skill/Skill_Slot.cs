@@ -33,7 +33,10 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         if (Status.icon != null)
         {
             if (Singleton_Data.INSTANCE.Dict_Sprite.ContainsKey(Status.icon))
+            {
+                iconImage.gameObject.SetActive(true);
                 iconImage.sprite = Singleton_Data.INSTANCE.Dict_Sprite[Status.icon];
+            }
         }
     }
 
@@ -126,7 +129,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void EnableSlot(bool _enable)
     {
         onSlot = _enable;
-        gageImage.fillAmount = _enable == true ? 1f : 0f; 
+        gageImage.fillAmount = _enable == true ? 1f : 0f;
     }
 
     void EnableAction()
@@ -141,7 +144,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     IEnumerator OnSlot()
     {
-        Vector3 prev = Vector3.one * 1.2f;
+        //Vector3 prev = Vector3.one * 1.2f;
         float normalize = 0f;
         while (normalize < 1f)
         {

@@ -19,6 +19,7 @@ public class Unit_Player : MonoBehaviour
     public float moveSpeed = 1f;
     public int health;
     public int GetHealth { get { return health; } }
+    public bool FullHealth { get { return health >= status.shipHealth; } }
     public float energy;
     public float GetEnergy { get { return energy; }}
     public float GetMaxEnergy { get { return status.maxEnergy; } }
