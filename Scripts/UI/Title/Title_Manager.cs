@@ -12,18 +12,45 @@ public class Title_Manager : MonoBehaviour
 
     void Start()
     {
-        continueButton.SetButton(ContinueButton, EnterButton);
-        newStartButton.SetButton(NewStartButton, EnterButton);
-        creditButton.SetButton(CreditButton, EnterButton);
-        settingButton.SetButton(SettingButton, EnterButton);
-        exitButton.SetButton(ExitButton, EnterButton);
+        continueButton.SetButton(ContinueButton, ActionEnter, ActionExit);
+        newStartButton.SetButton(NewStartButton, ActionEnter, ActionExit);
+        creditButton.SetButton(CreditButton, ActionEnter, ActionExit);
+        settingButton.SetButton(SettingButton, ActionEnter, ActionExit);
+        exitButton.SetButton(ExitButton, ActionEnter, ActionExit);
+
+        originalSize = selectMask.sizeDelta;
+        ActionExit();
 
         StartCoroutine(SetManager());
     }
 
-    void EnterButton()
+    void ActionEnter(GameObject _button)
     {
         Singleton_Audio.INSTANCE.Audio_FX(soundName);
+        selectMask.gameObject.SetActive(true);
+        selectMask.position = _button.transform.position;
+
+        if (enterCoroutine != null)
+            StopCoroutine(enterCoroutine);
+        enterCoroutine = StartCoroutine(ActingEnter());
+    }
+    public RectTransform selectMask;
+    Coroutine enterCoroutine;
+    Vector2 originalSize;
+    IEnumerator ActingEnter()
+    {
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime * 5f;
+            selectMask.sizeDelta = Vector2.Lerp(new Vector2(0, originalSize.y), originalSize, normalize);
+            yield return null;
+        }
+    }
+
+    void ActionExit()
+    {
+        selectMask.gameObject.SetActive(false);
     }
 
     void ContinueButton()

@@ -23,7 +23,7 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
         buttonText.text = _selectStruct.selectDialog;
         boxImage.gameObject.SetActive(false);
     }
-
+    public Data_Dialog testDialog;
     public void OnPointerClick(PointerEventData eventData)
     {
         clickAction?.Invoke(selectStruct.selectType);
@@ -40,11 +40,16 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
                 break;
             case SelectType.OpenShipyard:
                 // 조선소 열기
-                 getLandingData = Game_Manager.current.GetLanding.GetLandingData;
+                getLandingData = Game_Manager.current.GetLanding.GetLandingData;
                 Game_Manager.current.GetInventory.OpenShipyard(getLandingData.shipyardNPC);
                 break;
 
             case SelectType.Upgrade:
+                if (Game_Manager.current.GetPlayer.FullHealth == false)
+                {
+                    Debug.LogWarning("체력이 가득 차지 않았으면 스킬창 못열게");
+                    return;
+                }
                 Game_Manager.current.GetSkill.OpenCanvas(true);
                 Game_Manager.current.GetLanding.OutDialog();
                 break;

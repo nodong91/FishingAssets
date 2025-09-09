@@ -69,7 +69,7 @@ public class Option_Manager : MonoBehaviour
         goExitButton.SetButton(GoExit, EnterButton);
     }
 
-    void EnterButton()
+    void EnterButton(GameObject _button)
     {
         string soundName = "pop-39222";
         Singleton_Audio.INSTANCE.Audio_FX(soundName);
