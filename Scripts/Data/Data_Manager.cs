@@ -269,6 +269,8 @@ public class Data_Manager : Data_Parse
         public enum UsedType// 사용 효과
         {
             Energy, // 연료
+            Health, // 체력
+            Bait, // 미끼
             Bait_Coast, // 연안 미끼
             Bait_Shallow,// 얕은
             Bait_Ocean,// 대양

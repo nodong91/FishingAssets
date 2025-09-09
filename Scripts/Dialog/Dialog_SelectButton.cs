@@ -23,7 +23,7 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
         buttonText.text = _selectStruct.selectDialog;
         boxImage.gameObject.SetActive(false);
     }
-    public Data_Dialog testDialog;
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         clickAction?.Invoke(selectStruct.selectType);
@@ -47,6 +47,9 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
             case SelectType.Upgrade:
                 if (Game_Manager.current.GetPlayer.FullHealth == false)
                 {
+                    getLandingData = Game_Manager.current.GetLanding.GetLandingData;
+                    Data_Dialog warnDialog = getLandingData.shipyardNPC.dataDialogs[1];
+                    Game_Manager.current.GetDialog.DialogStart(warnDialog);
                     Debug.LogWarning("체력이 가득 차지 않았으면 스킬창 못열게");
                     return;
                 }

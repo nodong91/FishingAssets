@@ -50,7 +50,7 @@ MonoBehaviour:
   - {fileID: 102900000, guid: 42a92d95aec19fb40b557eebd57da110, type: 3}
   CSV_Data:
   - {fileID: 4900000, guid: d397816a5bebb97479fc19c3bfc030f1, type: 3}
-  - {fileID: 4900000, guid: 05eb149bca1b9bb4bab49f9e7841d79e, type: 3}
+  - {fileID: 4900000, guid: 39e3880ffb30ab6439aeebe187ac45f7, type: 3}
   audioClip:
   - {fileID: 8300000, guid: 2a8c919394aa89d489709789ab148c31, type: 3}
   - {fileID: 8300000, guid: 6c04344b73df8bc49b527bd516b1d452, type: 3}
@@ -205,6 +205,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a091dde527cd3f441a7d27d23b8baf44, type: 3}
   - {fileID: 21300000, guid: 9fcdfc346692b3c4fb7ddda463b2e93d, type: 3}
   - {fileID: 21300000, guid: 6eb1215059331ee4c9a0644b092a37e7, type: 3}
+  - {fileID: 21300000, guid: f19107dfbad7cca44ad18a0c74b35fd6, type: 3}
+  - {fileID: 21300000, guid: 1f5cadf8d35e8db4680bb2be070296dd, type: 3}
+  - {fileID: 21300000, guid: 74bcf5d71029aff45be52d3ed15d24ec, type: 3}
+  - {fileID: 21300000, guid: f39749dc5c6fa2f4eabb3bcd8d997373, type: 3}
   - {fileID: 21300000, guid: 288d52472b19c4b4c8e7ecb64780f7ec, type: 3}
   - {fileID: 21300000, guid: 6ac306b5e2e2d6d4b8c41f261989ef76, type: 3}
   - {fileID: 21300000, guid: 539550bde256a934680a39d08a303202, type: 3}
@@ -228,36 +232,51 @@ MonoBehaviour:
     itemStruct:
       id: Us_1001
       name: Small Oil Tank
-      itemType: 2
-      explanation: 
-      icon: {fileID: 21300000, guid: bce3f09e06ae50e4488f0a9d2a393918, type: 3}
-      itemClass: 5
-      shape:
-      - {x: 0, y: 0}
+      itemType: 1
+      explanation: "\uC5F0\uB8CC\uD1B5"
+      icon: {fileID: 21300000, guid: 74bcf5d71029aff45be52d3ed15d24ec, type: 3}
+      itemClass: 4
+      shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 3
       price: 10
     usedType: 0
+    value: 0
+  - id: Us_1002
+    itemStruct:
+      id: Us_1002
+      name: "\uC218\uB9AC\uD0A4\uD2B8"
+      itemType: 1
+      explanation: "\uBC30 \uC218\uB9AC \uAC00\uB2A5"
+      icon: {fileID: 21300000, guid: f39749dc5c6fa2f4eabb3bcd8d997373, type: 3}
+      itemClass: 0
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 5
+    usedType: 1
+    value: 0
   - id: Us_2001
     itemStruct:
       id: Us_2001
-      name: Lobworm
-      itemType: 2
-      explanation: Bait Coast
-      icon: {fileID: 21300000, guid: 328cb977f05a0ba4b8e06989fab520cc, type: 3}
-      itemClass: 10
-      shape:
-      - {x: 0, y: 0}
+      name: "\uAC2F\uC9C0\uB801\uC774"
+      itemType: 1
+      explanation: "\"\uACE0\uB4F1\uC5B4 \uC624\uC9D5\uC5B4 \uB4F1\uC774 \uC88B\uC544\uD558\uB294
+        \uBBF8\uB07C\""
+      icon: {fileID: 21300000, guid: 1f5cadf8d35e8db4680bb2be070296dd, type: 3}
+      itemClass: 3
+      shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.1
+      weight: 1
       price: 5
-    usedType: 1
+    usedType: 2
+    value: 0
   fishStruct:
   - id: Fs_1001
     itemStruct:
       id: Fs_1001
       name: Anchovy
-      itemType: 1
+      itemType: 0
       explanation: Anchovies are small. slender fish that typically live in large
         schools. They are widely distributed in temperate and tropical waters worldwide
         with their diet consisting mainly of plankton. Anchovies are a crucial part
@@ -282,7 +301,7 @@ MonoBehaviour:
     itemStruct:
       id: Fs_1002
       name: Sea Bass
-      itemType: 1
+      itemType: 0
       explanation: The sea bass has a long sleek body and is characterized by its
         silvery-white color with black spots. It mainly inhabits rocky areas and
         estuaries where it's known for its excellent hunting skills. It preys on
@@ -308,7 +327,7 @@ MonoBehaviour:
     itemStruct:
       id: Fs_1003
       name: Flounder
-      itemType: 1
+      itemType: 0
       explanation: The flounder is a flatfish with both eyes on one side of its head.
         It typically hides on sandy or muddy seabeds and has excellent camouflage
         abilities changing its color to blend in with its surroundings. Its diet
@@ -335,7 +354,7 @@ MonoBehaviour:
     itemStruct:
       id: Fs_1004
       name: Mullet
-      itemType: 1
+      itemType: 0
       explanation: The mullet is a fish similar in shape to a carp notable for its
         ability to live in both fresh and saltwater. It primarily inhabits muddy
         bottoms near coastlines and river mouths feeding on plankton small crustaceans
@@ -362,7 +381,7 @@ MonoBehaviour:
     itemStruct:
       id: Fs_2001
       name: Octopus
-      itemType: 1
+      itemType: 0
       explanation: The octopus is a mollusk with eight arms well known for its high
         intelligence. It's a master of camouflage able to change the color and texture
         of its body at will. It lives hidden in narrow spaces like rock crevices
@@ -388,7 +407,7 @@ MonoBehaviour:
     itemStruct:
       id: Fs_2002
       name: Amberjack
-      itemType: 1
+      itemType: 0
       explanation: '"The amberjack is a fish from the jack family that looks similar
         to the yellowtail. It''s a large species that can grow up to 2 meters long
         and feeds on smaller fish like anchovies and mackerel. Found in warm oceans
@@ -418,7 +437,7 @@ MonoBehaviour:
     itemStruct:
       id: Fs_2003
       name: Ocean Sunfish
-      itemType: 1
+      itemType: 0
       explanation: "\"The ocean sunfish is a gigantic marine fish with a blunt body
         and large fins. It primarily feeds on jellyfish and has a very small brain
         relative to its body size. It exhibits the unusual behavior of rising to
@@ -449,7 +468,7 @@ MonoBehaviour:
     itemStruct:
       id: Fs_2004
       name: Cutlassfish
-      itemType: 1
+      itemType: 0
       explanation: The ribbonfish is a deep-sea fish with a long flattened silvery-white
         body. It is primarily active at night and preys on shrimp anchovies and squid.
         It has sharp teeth and highly developed eyes for hunting in the dark ocean.
@@ -477,7 +496,7 @@ MonoBehaviour:
     itemStruct:
       id: Fs_2005
       name: Swordfish
-      itemType: 1
+      itemType: 0
       explanation: The swordfish scientifically named 'Xiphias gladius' is a large
         fish distinguished by its long flat sword-like bill. It uses this bill to
         attack prey and defend itself. Found in warm oceans worldwide it's known
@@ -509,7 +528,7 @@ MonoBehaviour:
     itemStruct:
       id: Fs_3001
       name: Giant Squid
-      itemType: 1
+      itemType: 0
       explanation: The colossal squid with the scientific name 'Mesonychoteuthis
         hamiltoni' is the largest invertebrate on Earth. It lives primarily in the
         cold deep waters of the Antarctic Ocean and can grow up to 14 meters in length.

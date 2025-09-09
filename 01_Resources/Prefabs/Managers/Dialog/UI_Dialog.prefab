@@ -54,7 +54,6 @@ MonoBehaviour:
     rect: {fileID: 361050408426295491}
     canvasGroup: {fileID: 0}
     targetPosition: {x: 0, y: 0}
-  dataNPC: {fileID: 0}
   NPC_Image: {fileID: 2944391245610839381}
   dialogText: {fileID: 5779672067204720971}
   selectCanvas: {fileID: 5765649642186398116}
@@ -62,6 +61,7 @@ MonoBehaviour:
   currentDialog: 0
   selectButton: {fileID: 2656269103862480802}
   dialogSelectButton: []
+  testDialog: {fileID: 11400000, guid: e9411cd5469df39418ccee7c1c3b1185, type: 2}
 --- !u!1 &1524562203463979312
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +580,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 4338277466117025685}
   boxImage: {fileID: 6027627596230628192}
+  questData: {fileID: 0}
 --- !u!1 &4700077598634829280
 GameObject:
   m_ObjectHideFlags: 0

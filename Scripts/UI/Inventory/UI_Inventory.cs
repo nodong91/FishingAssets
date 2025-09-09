@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
 using static Data_Quest;
+using static UI_Inventory;
 using static UI_Inventory_Base;
 using static UI_Inventory_Slot;
 
@@ -14,7 +15,7 @@ public class UI_Inventory : MonoBehaviour
     public UI_MyBox myBox;
     public UI_Shop shop;
     public Image iconImage;
-    public bool OnFix { get; set; }
+    bool onRepair;
 
     public bool onDrag, onCheck;
     Coroutine slotMoving;
@@ -269,10 +270,14 @@ public class UI_Inventory : MonoBehaviour
         }
         else// 드래그 중이 아닐 때 클릭
         {
-            if (_slot.destroy == true && OnFix == true)
+            if (_slot.destroy == true && onRepair == true)
             {
-                OnFix = false;
+                onRepair = false;
                 myBox.FixSlot(_slot);    // 하나씩 수리
+                if (selectSlot != null)// 선택된 슬롯이 있으면
+                {
+                    SetEmptySlot(selectSlot);// 선택된 슬롯 비우기
+                }
             }
 
             if (_slot.empty == true)
@@ -295,6 +300,11 @@ public class UI_Inventory : MonoBehaviour
         {
             SetDragRotate();
         }
+        else if (onRepair == true)// 수리 모드일 때
+        {
+            onRepair = false;
+            Game_Manager.current.GetMainUI.SetWarnningText("수리 모드 취소");
+        }
         else if (_slot.empty == false)
         {
             selectSlot = _slot.GetLinkSlot;
@@ -308,12 +318,12 @@ public class UI_Inventory : MonoBehaviour
                         Debug.LogWarning("판매");
                         SellItem(_slot.itemClass.item.id);
                     }
-                    else if (enterSlotType == SlotType.Shop)// 구매
+                    else if (enterSlotType == SlotType.Shop || enterSlotType == SlotType.Shipyard)// 구매
                     {
                         Debug.LogWarning("구매");
                         if (BuyItem(_slot.itemClass.item.id) == false)
                         {
-                            Game_Manager.current.GetMainUI.SetWarnningText("돈이 없음");
+                            Game_Manager.current.GetMainUI.NoMoney();
                             return;
                         }
                     }
@@ -364,7 +374,22 @@ public class UI_Inventory : MonoBehaviour
                 Game_Manager.current.GetPlayer.AddEnergy(usedStruct.value);
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
+            case UsedStruct.UsedType.Health:
+                IndividualRepair();
+                break;
         }
+    }
+
+    public void IndividualRepair()
+    {
+        onRepair = true;
+        // 하나씩 수리 모드
+        Game_Manager.current.GetMainUI.SetWarnningText("수리할 아이템을 선택하세요.");
+    }
+
+    public void AllRepair()
+    {
+        myBox.FixAll();
     }
 
     public void OnPointerEnter(UI_Inventory_Slot _slot, SlotType _dragSlotType)
@@ -482,11 +507,6 @@ public class UI_Inventory : MonoBehaviour
     public void DistroySlot()
     {
         myBox.DistroySlot();
-    }
-
-    public void FixAll()
-    {
-        myBox.FixAll();
     }
 
     //===========================================================================================================================

@@ -50,12 +50,12 @@ public class UI_Shop : UI_Inventory_Base
 
     void FixButton()
     {
-        Game_Manager.current.GetInventory.OnFix = true;
+        Game_Manager.current.GetInventory.IndividualRepair();
     }
 
     void FixAllButton()
     {
-        Game_Manager.current.GetInventory.FixAll();
+        Game_Manager.current.GetInventory.AllRepair();
     }
 
     public override void OpenCanvas(bool _open)
