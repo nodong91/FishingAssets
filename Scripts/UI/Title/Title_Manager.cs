@@ -1,4 +1,6 @@
 using System.Collections;
+using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Title_Manager : MonoBehaviour
@@ -9,9 +11,14 @@ public class Title_Manager : MonoBehaviour
     private Credit_Rolling instCreditRolling;
     public string titleTheme = "Main Theme";
     public string soundName = "pop-39222";
+    public RectTransform selectMask;
+    Coroutine enterCoroutine;
+    Vector2 originalSize;
+    public UI_Popup newGamePopup;
 
     void Start()
     {
+        continueButton.gameObject.SetActive(FindFolder());
         continueButton.SetButton(ContinueButton, ActionEnter, ActionExit);
         newStartButton.SetButton(NewStartButton, ActionEnter, ActionExit);
         creditButton.SetButton(CreditButton, ActionEnter, ActionExit);
@@ -24,6 +31,12 @@ public class Title_Manager : MonoBehaviour
         StartCoroutine(SetManager());
     }
 
+    bool FindFolder()
+    {
+        string filePath = Application.dataPath + "/Save/";
+        return Directory.Exists(filePath);
+    }
+
     void ActionEnter(GameObject _button)
     {
         Singleton_Audio.INSTANCE.Audio_FX(soundName);
@@ -34,9 +47,7 @@ public class Title_Manager : MonoBehaviour
             StopCoroutine(enterCoroutine);
         enterCoroutine = StartCoroutine(ActingEnter());
     }
-    public RectTransform selectMask;
-    Coroutine enterCoroutine;
-    Vector2 originalSize;
+
     IEnumerator ActingEnter()
     {
         float normalize = 0f;
@@ -62,7 +73,36 @@ public class Title_Manager : MonoBehaviour
 
     void NewStartButton()
     {
+        if (FindFolder() == true)
+        {
+            newGamePopup.SetStart();
+            newGamePopup.buttonAction = NewGamePopup;
+        }
+        else
+        {
+            ContinueButton();
+        }
+    }
 
+    void NewGamePopup(bool _action)
+    {
+        if (_action == true)
+        {
+            StartCoroutine(RemoveSaveFile());
+        }
+    }
+
+    IEnumerator RemoveSaveFile()
+    {
+        string path = Application.dataPath + "/Save/";
+        string[] allFiles = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
+        foreach (string file in allFiles)
+        {
+            File.Delete(file);
+        }
+
+        yield return null;
+        ContinueButton();
     }
 
     void CreditButton()

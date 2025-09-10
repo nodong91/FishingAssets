@@ -34,7 +34,6 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         {
             if (Singleton_Data.INSTANCE.Dict_Sprite.ContainsKey(Status.icon))
             {
-                iconImage.gameObject.SetActive(true);
                 iconImage.sprite = Singleton_Data.INSTANCE.Dict_Sprite[Status.icon];
             }
         }

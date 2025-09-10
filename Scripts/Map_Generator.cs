@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.IO.LowLevel.Unsafe;
 
 
 #if UNITY_EDITOR
@@ -120,7 +119,7 @@ public class Map_Generator : MonoBehaviour
                 Vector2Int grid = new Vector2Int(x, y);
 
                 Vector3 hitPoint = TryNodeHit(worldPoint + Vector3.up * 1000f);
-                nodeMap[x, y] = new Node(hitPoint, grid);
+                nodeMap[x, y] = new Node(new Vector3(hitPoint.x, 0f, hitPoint.z), grid);
                 Data_Manager.AreaType areaType = SetNodeType(hitPoint.y, nodeMap[x, y]);// 노드 타입 세팅
                 nodeMap[x, y].SetNodeType(areaType);
                 allNodes.Add(nodeMap[x, y]);

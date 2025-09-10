@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Data_Dialog_Shop
   m_EditorClassIdentifier: 
   dialogStructs:
-  - contents: "\r360 \uCE74\uBA54\uB77C\uAC00 \uC2DC\uAE30\uC0C1\uC870\uC778 \uC774\uC720
-      (DJI OSMO 360)"
+  - contents: "\uC0DD\uC120 \uC0AC\uC138\uC694~\uC2E0\uC120\uD558\uACE0 \uB9DB\uC788\uB294
+      \uC0DD\uC120\uC774 \uC788\uC5B4\uC694."
     dialogTypes:
-    - id: 360
-      dialogIndex: {x: 1, y: 4}
+    - id: "\uC2E0\uC120"
+      dialogIndex: {x: 7, y: 9}
       textSize: 30
       typingSpeed: 0
       textColor: FFFF00
@@ -25,8 +25,8 @@ MonoBehaviour:
       actionSpeed: 20
       actionInterval: 1
       actionAngle: {x: 0, y: 5}
-    - id: "\uC2DC\uAE30\uC0C1\uC870"
-      dialogIndex: {x: 10, y: 14}
+    - id: "\uB9DB\uC788\uB294 \uC0DD\uC120"
+      dialogIndex: {x: 12, y: 18}
       textSize: 30
       typingSpeed: 0
       textColor: 00FFFF
@@ -34,37 +34,8 @@ MonoBehaviour:
       actionSpeed: 0
       actionInterval: 0
       actionAngle: {x: -2, y: 2}
-  - contents: "[\uCF54\uBE0C] \uD3C9\uD654\uB86D\uAC8C \uC990\uAE30\uB77C\uACE0 \uB9CC\uB4E0
-      \uAC8C\uC784\uC5D0\uC11C \uBE44\uC724\uB9AC\uC758 \uB05D\uD310\uC655\uC744
-      \uBCF4\uC5EC\uC900 \uACE0\uC778\uBB3C\uB4E4"
-    dialogTypes:
-    - id: "\uCF54\uBE0C"
-      dialogIndex: {x: 1, y: 3}
-      textSize: 30
-      typingSpeed: 0
-      textColor: FF0000
-      actionType: 2
-      actionSpeed: 5
-      actionInterval: 0.71
-      actionAngle: {x: 0, y: 5}
-    - id: "\uBE44\uC724\uB9AC\uC758 \uB05D\uD310\uC655"
-      dialogIndex: {x: 23, y: 31}
-      textSize: 20
-      typingSpeed: 0
-      textColor: 00FF00
-      actionType: 1
-      actionSpeed: 4
-      actionInterval: 0.5
-      actionAngle: {x: 3, y: 3}
-    - id: "\uACE0\uC778\uBB3C"
-      dialogIndex: {x: 37, y: 40}
-      textSize: 30
-      typingSpeed: 0
-      textColor: 0000FF
-      actionType: 3
-      actionSpeed: 0
-      actionInterval: 0
-      actionAngle: {x: -3, y: 3}
+  - contents: "\uBC18\uAC00\uC6CC\uC694. \uC2E0\uC120\uD55C \uC0DD\uC120 \uC0AC\uAC00\uC138\uC694."
+    dialogTypes: []
   selectStructs:
   - selectDialog: "\uBB3C\uAC74\uC744 \uBCF4\uACE0 \uC2F6\uC5B4"
     selectType: 2

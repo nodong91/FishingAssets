@@ -25,12 +25,14 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Cursor_Manager.current?.OnMouseOver();
         actionEnter?.Invoke(this.gameObject);
         transform.localScale = Vector3.one * 1.2f;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Cursor_Manager.current?.OnMouseExit();
         actionExit?.Invoke();
         transform.localScale = Vector3.one;
     }
