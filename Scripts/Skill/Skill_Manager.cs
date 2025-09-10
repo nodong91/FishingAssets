@@ -130,10 +130,11 @@ public class Skill_Manager : MonoBehaviour
                 allSlot[x, y] = inst;
             }
         }
-        startSlot = allSlot[skillMap.x / 2, skillMap.y / 2];
+        Vector2Int startIndex = skillTreeData.startSlot;
+        startSlot = allSlot[startIndex.x, startIndex.y];
 
         startSlot.startSlot = true;
-        startSlot.SetHide(false);
+        startSlot.SetHide(false);// È°¼ºÈ­
         startSlot.boxImage.gameObject.SetActive(true);
 
 

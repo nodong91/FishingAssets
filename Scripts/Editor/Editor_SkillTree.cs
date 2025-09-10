@@ -19,7 +19,6 @@ namespace P01.Editor
             window.minSize = new Vector2(500f, 200f);
             window.Show();
         }
-        //Vector2Int skillMap;
         Vector2 scrollPosition;
 
         SkillStatus[,] statusStructs;
@@ -27,6 +26,7 @@ namespace P01.Editor
         bool tutorialToggle;
         const string saveTreeData = "Skill_Tree";
         Data_SkillTree skillTreeData;
+        Vector2Int startSlot;
 
         private void OnEnable()
         {
@@ -67,6 +67,7 @@ namespace P01.Editor
             }
             EditorGUILayout.EndVertical();
 
+            startSlot = EditorGUILayout.Vector2IntField("Start Slot", startSlot);
             skillTreeData = EditorGUILayout.ObjectField(skillTreeData, typeof(Data_SkillTree), true) as Data_SkillTree;
             if (skillTreeData == null)
             {
@@ -74,7 +75,6 @@ namespace P01.Editor
                 GUILayout.Label(" Data_SkillTree 데이터가 없음", guiText);
                 return;
             }
-            //skillMap = EditorGUILayout.Vector2IntField("SkillMap", skillMap);
             if (GUILayout.Button($"Set Field : {skillTreeData.skillMapSize}", buttonText, GUILayout.Height(30f)))
             {
                 SetNode();
@@ -115,9 +115,9 @@ namespace P01.Editor
                 }
             }
             skillTreeData.skillList = status;
+            skillTreeData.startSlot = startSlot;
             Debug.LogError($"{status.Count}개 저장");
             EditorUtility.SetDirty(skillTreeData);
-            //Static_JsonManager.SaveSkillData(saveTreeData, status);
         }
 
         void LoadData()
@@ -134,22 +134,7 @@ namespace P01.Editor
                     index++;
                 }
             }
-            //if (Static_JsonManager.TryLoadSkillData(saveTreeData, out List<SkillStatus> _statusStructs))
-            //{
-            //    int index = 0;
-            //    for (int y = 0; y < skillTreeData.skillMapSize.y; y++)
-            //    {
-            //        for (int x = 0; x < skillTreeData.skillMapSize.x; x++)
-            //        {
-            //            statusStructs[x, y] = _statusStructs[index];
-            //            index++;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    Debug.LogError("Failed to load skill data.");
-            //}
+            startSlot = skillTreeData.startSlot;
         }
 
         void SetNode()
@@ -198,10 +183,9 @@ namespace P01.Editor
             SkillStatus setStatus = statusStructs[_x, _y];
 
             string setName = $"{setStatus.name} ({_x}:{_y})";
-            //setName += $"\nCount : {setStatus.setStatus.Count}";
             setName += $"\nPrice : {setStatus.price}";
             GUI.color = (setStatus.name?.Length > 0) ? Color.white : Color.gray;
-
+            GUI.color = (skillTreeData.startSlot.x == _x && skillTreeData.startSlot.y == _y) ? Color.red : GUI.color;
             if (GUILayout.Button(setName, buttonText, GUILayout.Width(_width), GUILayout.Height(_width)))
             {
                 OpenSettingWindow(setStatus);
@@ -215,6 +199,10 @@ namespace P01.Editor
             SkillSettingWindow.ShowWindow(_setStatus);
         }
     }
+
+    //=====================================================================================================================
+    // 새 창 열기
+    //=====================================================================================================================
 
     public class SkillSettingWindow : EditorWindow
     {
@@ -253,7 +241,6 @@ namespace P01.Editor
                 {
                     Close();
                 }
-
             }
         }
     }
