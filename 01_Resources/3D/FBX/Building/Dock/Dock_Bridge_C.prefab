@@ -885,9 +885,10 @@ GameObject:
   - component: {fileID: 7214233960638158699}
   - component: {fileID: 1915957404423235846}
   - component: {fileID: 4304145881928524595}
+  - component: {fileID: 5919905334826374743}
   m_Layer: 0
   m_Name: Dock_Ladder
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -960,6 +961,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5919905334826374743
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2461174371711270242}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.58030844, y: 0.15170042, z: 1.1711701}
+  m_Center: {x: 0.0007558316, y: 0.0011358485, z: 0.58558506}
 --- !u!1 &2905479306725941226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2666,11 +2688,10 @@ GameObject:
   - component: {fileID: 5836482412920820903}
   - component: {fileID: 4747864919361076091}
   - component: {fileID: 150297018042174046}
-  - component: {fileID: 3269511176743828413}
   - component: {fileID: 5396966240301837944}
   m_Layer: 0
   m_Name: Dock_Bridge_A
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2743,27 +2764,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3269511176743828413
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5861991469674560192}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.99, y: 2.55, z: 1.2673955}
-  m_Center: {x: -0.0000000018696866, y: -0.017699007, z: -0.6254628}
 --- !u!65 &5396966240301837944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3226,9 +3226,10 @@ GameObject:
   - component: {fileID: 2579561202832743042}
   - component: {fileID: 7887086647593150860}
   - component: {fileID: 8503345760099867170}
+  - component: {fileID: 2866295076892637215}
   m_Layer: 0
   m_Name: Dock_Stair
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3305,6 +3306,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2866295076892637215
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6795941052800479270}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.3839331, y: 2.33, z: 2.58}
+  m_Center: {x: 0.18452293, y: 0.55, z: 0.98}
 --- !u!1 &6872484727302155557
 GameObject:
   m_ObjectHideFlags: 0
@@ -3319,7 +3341,7 @@ GameObject:
   - component: {fileID: 845513466659480967}
   m_Layer: 0
   m_Name: Dock_Bridge_B
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
