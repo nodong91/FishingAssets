@@ -96,6 +96,7 @@ public class Quality_Manager : MonoBehaviour
     {
         resolutionIndex = _resolutionIndex;
         resolutionDropdown.value = _resolutionIndex;
+        Debug.LogError($"{resolutionList.Count} : {_resolutionIndex}");
         Resolution selectedResolution = resolutionList[_resolutionIndex];
         Screen.SetResolution(selectedResolution.width, selectedResolution.height, fullScreenToggle.isOn);
         DebugText();

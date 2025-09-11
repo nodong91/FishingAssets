@@ -36,8 +36,8 @@ public class LoadingManager : MonoBehaviour
     public void GoMain()
     {
         sceneNames = new string[2];
-        sceneNames[0] = "Island_Main";
-        sceneNames[1] = "SampleScene";
+        sceneNames[0] = "SampleScene";
+        sceneNames[1] = "Island_Main";
 
         OpenLoading();
     }

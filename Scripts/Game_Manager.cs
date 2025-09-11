@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static Data_Manager;
 
@@ -40,6 +41,11 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(SetStart());
+    }
+
+    IEnumerator SetStart()
+    {
         SaveData_Continue.current.GetContinue();
 
         GetMainUI.SetStart();
@@ -48,6 +54,8 @@ public class Game_Manager : MonoBehaviour
         GetDialog.SetStart();
 
         SetThemeMusic();
+        yield return null;
+
         AddStatus();// 추가 스테이트 세팅
         PlayerMove();
     }
