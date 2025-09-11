@@ -57,7 +57,7 @@ public class Follow_Manager : MonoBehaviour
             }
             Vector3 addOffset = offset + Vector3.up * addValue;
             FollowTarget_Camera(closestTarget.transform, followUI.transform, addOffset);
-            Debug.LogWarning($"FollowTarget_Camera : {closestTarget.name}");
+            Debug.Log($"FollowTarget_Camera : {closestTarget.name}");
             yield return null;
         }
         followClosestTarget = null;
@@ -109,7 +109,7 @@ public class Follow_Manager : MonoBehaviour
 
                 FollowTarget_Camera(trans, followUI, offset);
             }
-            Debug.LogWarning($"StartFollowing_Camera : {follow_Camera.Count}");
+            Debug.Log($"StartFollowing_Camera : {follow_Camera.Count}");
             yield return null;
         }
     }

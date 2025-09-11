@@ -397,7 +397,7 @@ public class Unit_Player : MonoBehaviour
                 Vector3 target = transform.position + direction;
                 StartCoroutine(MovingClash(target));
 
-                Debug.LogWarning("충돌!!!!!!!!!!!!!!!!!!!!");
+                Debug.LogWarning($"{collision.gameObject.name} 충돌!!!!!!!!!!!!!!!!!!!! {transform.position}");
             }
         }
     }
