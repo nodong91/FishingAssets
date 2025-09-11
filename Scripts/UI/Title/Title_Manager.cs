@@ -1,6 +1,5 @@
 using System.Collections;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Title_Manager : MonoBehaviour
@@ -11,6 +10,7 @@ public class Title_Manager : MonoBehaviour
     private Credit_Rolling instCreditRolling;
     public string titleTheme = "Main Theme";
     public string soundName = "pop-39222";
+
     public RectTransform selectMask;
     Coroutine enterCoroutine;
     Vector2 originalSize;
@@ -100,7 +100,9 @@ public class Title_Manager : MonoBehaviour
         {
             File.Delete(file);
         }
-
+        Directory.Delete(path, true);
+        // 닫힐때 옵션이 저장이 되는데 창 데이터가 있어서 기존 내용이 저장됨
+        Option_Manager.current.LoadOption();// 옵션 데이터 리셋
         yield return null;
         ContinueButton();
     }

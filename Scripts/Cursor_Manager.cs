@@ -17,8 +17,7 @@ public class Cursor_Manager : MonoBehaviour
 
     public void OnMouseOver()
     {
-        //Cursor.SetCursor(hand, new Vector2(hand.width / 3f, 0f), CursorMode.Auto);
-        Cursor.SetCursor(hand, new Vector2(0f, 0f), CursorMode.ForceSoftware);
+        Cursor.SetCursor(hand, new Vector2(hand.width / 3f, 0f), CursorMode.ForceSoftware);
     }
 
     public void OnMouseExit()

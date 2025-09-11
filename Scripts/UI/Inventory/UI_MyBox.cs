@@ -12,7 +12,6 @@ public class UI_MyBox : UI_Inventory_Base
     {
         slotType = SlotType.MyBox;
         saveData = "MyBag";
-        weightSlider.material = Instantiate(weightSlider.material);
         removeBox.deleRemove = RemoveDragItem;
         base.SetStart();
         // 저장된 내용 불러오기
@@ -28,8 +27,7 @@ public class UI_MyBox : UI_Inventory_Base
     {
         currentWeight += _weight;
         float sliderValue = currentWeight / maxWeight;
-        weightSlider.material.SetFloat("_FillAmount", sliderValue);
-
+        weightSlider.fillAmount = sliderValue;
         Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;   // 내용물에 변경이 있으면 저장
     }
 }

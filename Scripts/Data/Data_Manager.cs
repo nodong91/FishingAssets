@@ -185,6 +185,25 @@ public class Data_Manager : Data_Parse
             public float envVolume;
         }
         public AudioStruct audioStruct;
+
+        public void DefaultOption()
+        {
+            fullScreen = true;
+            qualityLevel = 0;
+            resolutionIndex = 0;
+            frameRateIndex = 0;
+            audioStruct = new AudioStruct
+            {
+                masterMute = false,
+                masterVolume = 1f,
+                bgmMute = false,
+                bgmVolume = 1f,
+                fxMute = false,
+                fxVolume = 1f,
+                envMute = false,
+                envVolume = 1f,
+            };
+        }
     }
 
     [System.Serializable]

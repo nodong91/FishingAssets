@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 using static Data_Manager;
 
@@ -11,9 +12,12 @@ public class Quality_Manager : MonoBehaviour
     public TMP_Dropdown frameRateDropdown;
     public Toggle fullScreenToggle; // Assuming you have a toggle for fullscreen mode
 
-    int resolutionIndex = 0;
+    public int levelIndex = 0;
+    public int resolutionIndex = 0;
+    public bool fullScreen = false;
+    public int frameRate = 0; // Desired frame rate
+
     private List<Resolution> resolutionList = new List<Resolution>();
-    public int frameRate = 60; // Desired frame rate
     private List<int> frameList = new List<int>();
 
     public TMP_Text currentQualityText; // Text to display the current quality level
@@ -31,8 +35,9 @@ public class Quality_Manager : MonoBehaviour
         fullScreenToggle.onValueChanged.AddListener(ToggleFullScreen);
 
         Data_Option optionData = Option_Manager.current.optionData;
+        Debug.LogError($"Quality_Manager SetStart : {optionData.qualityLevel}, {optionData.resolutionIndex}, {optionData.fullScreen}, {optionData.frameRateIndex}");
         ToggleFullScreen(optionData.fullScreen);
-        //SetQualityLevel(optionData.qualityLevel);
+        SetQualityLevel(optionData.qualityLevel);
         SetResolution(optionData.resolutionIndex);
         SetFrameRate(optionData.frameRateIndex);
         DebugText();
@@ -50,6 +55,7 @@ public class Quality_Manager : MonoBehaviour
 
     void SetQualityLevel(int _levelIndex)
     {
+        levelIndex = _levelIndex;
         QualitySettings.SetQualityLevel(_levelIndex, false);
         qualityDropdown.value = _levelIndex;
         Debug.LogWarning(GetCurrentQualityLevel());
@@ -96,7 +102,6 @@ public class Quality_Manager : MonoBehaviour
     {
         resolutionIndex = _resolutionIndex;
         resolutionDropdown.value = _resolutionIndex;
-        Debug.LogError($"{resolutionList.Count} : {_resolutionIndex}");
         Resolution selectedResolution = resolutionList[_resolutionIndex];
         Screen.SetResolution(selectedResolution.width, selectedResolution.height, fullScreenToggle.isOn);
         DebugText();
@@ -104,6 +109,7 @@ public class Quality_Manager : MonoBehaviour
 
     void ToggleFullScreen(bool _isOn)
     {
+        fullScreen = _isOn;
         fullScreenToggle.isOn = _isOn;
         Screen.fullScreen = _isOn;
         DebugText();
@@ -133,6 +139,7 @@ public class Quality_Manager : MonoBehaviour
 
     void SetFrameRate(int _frameIndex)
     {
+        frameRate = _frameIndex;
         frameRateDropdown.value = _frameIndex;
         Application.targetFrameRate = frameList[_frameIndex];
     }

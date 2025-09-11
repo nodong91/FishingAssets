@@ -30,10 +30,9 @@ public class Option_Manager : MonoBehaviour
 
     public void SetStart()
     {
-        LoadOption();
-
-        audioManager.SetStart();
-        qualityManager.SetStart();
+        LoadOption();// 옵션 데이터 로드
+        audioManager.SetStart();// 오디오 매니저 세팅
+        qualityManager.SetStart();// 퀄리티 매니저 세팅
 
         closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
         SetToggle();
@@ -116,10 +115,10 @@ public class Option_Manager : MonoBehaviour
     {
         optionData = new Data_Option
         {
-            qualityLevel = qualityManager.qualityDropdown.value,
-            resolutionIndex = qualityManager.resolutionDropdown.value,
-            fullScreen = qualityManager.fullScreenToggle.isOn,
-            frameRateIndex = qualityManager.frameRateDropdown.value,
+            qualityLevel = qualityManager.levelIndex,
+            resolutionIndex = qualityManager.resolutionIndex,
+            fullScreen = qualityManager.fullScreen,
+            frameRateIndex = qualityManager.frameRate,
             audioStruct = new Data_Option.AudioStruct
             {
                 masterMute = Singleton_Audio.INSTANCE.masterMute,
@@ -132,11 +131,11 @@ public class Option_Manager : MonoBehaviour
                 envVolume = Singleton_Audio.INSTANCE.envVolume,
             },
         };
-        Debug.LogWarning("SaveOption");
+        Debug.Log("SaveOption");
         Static_JsonManager.SaveOptionData(saveData, optionData);
     }
 
-    void LoadOption()
+    public void LoadOption()
     {
         if (Static_JsonManager.TryLoadOptionData(saveData, out Data_Option _data))
         {
@@ -144,21 +143,8 @@ public class Option_Manager : MonoBehaviour
         }
         else
         {
-            optionData = new Data_Option
-            {
-                audioStruct = new Data_Option.AudioStruct
-                {
-                    masterMute = false,
-                    masterVolume = 1f,
-                    bgmMute = false,
-                    bgmVolume = 1f,
-                    fxMute = false,
-                    fxVolume = 1f,
-                    envMute = false,
-                    envVolume = 1f,
-                },
-
-            };
+            optionData = new Data_Option();
+            optionData.DefaultOption();
         }
     }
 }
