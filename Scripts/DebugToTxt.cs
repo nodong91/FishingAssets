@@ -19,7 +19,8 @@ public class DebugToTxt : MonoBehaviour
     bool open = false;
     public Custom_Button onButton;
     public GameObject canvas;
-    public string logString;
+    public string saveLog;
+    string viewLog;
 
     public void Awake()
     {
@@ -35,7 +36,7 @@ public class DebugToTxt : MonoBehaviour
         onButton.SetButton(OpenCanvas);
         // 생성될 파일의 경로설정
 #if UNITY_EDITOR
-        filePath = Application.dataPath;
+        filePath = Application.dataPath + "/Log/";
 
 #elif UNITY_ANDROID
         filePath = Application.persistentDataPath;
@@ -62,6 +63,7 @@ public class DebugToTxt : MonoBehaviour
 
     public void LogToTxt(string _logString, string _stackTrace, LogType _type)
     {
+        string tempString = _logString;
         if (_type == LogType.Log)
         {
             if (!isLog)
@@ -69,27 +71,39 @@ public class DebugToTxt : MonoBehaviour
         }
         else if (_type == LogType.Warning)
         {
-            _logString = $"<color=#FFFF00>{_logString}</color>";
             if (!isWarning)
                 return;
+            tempString = $"<color=#FFFF00>{_logString}</color>";
         }
         else if (_type == LogType.Error)
         {
-            _logString = $"<color=#FF0000>{_logString}</color>";
             if (!isError)
                 return;
+            tempString = $"<color=#FF0000>{_logString}</color>";
         }
-        logString += $"> {_logString} \n";
-        m_Text.text = logString;
+        saveLog += $"> {_logString} \n";
+        viewLog += $"> {tempString} \n";
+        m_Text.text = viewLog;
     }
 
     private void OnApplicationQuit()
     {
         // 로그 메세지를 텍스트 파일에 저장
         // 파일이 없다면 새롭게 생성
+        FindFolder();
         using (StreamWriter sw = new StreamWriter(Path.Combine(filePath, fileName), true))
         {
-            sw.WriteLine($"[{System.DateTime.Now}] {logString} \n");
+            sw.WriteLine($"[{System.DateTime.Now}] {saveLog} \n");
+        }
+    }
+
+    void FindFolder()
+    {
+        DirectoryInfo dirInfo = new DirectoryInfo(filePath);
+        if (dirInfo.Exists == false)
+        {
+            // 없으면 만들기
+            dirInfo.Create();
         }
     }
 }

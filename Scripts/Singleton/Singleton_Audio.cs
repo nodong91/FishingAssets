@@ -73,7 +73,31 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
             audioSource.pitch = 1.0f;
             audioSource.Play();
         }
-        StartCoroutine(PlayBGMAudio(audioSource));
+        AudioSource origin = BGMSource;
+        BGMSource = audioSource;
+        StartCoroutine(PlayBGMAudio(origin));
+    }
+
+    IEnumerator PlayBGMAudio(AudioSource _origin)
+    {
+        float targetVolume = bgmVolume * masterVolume;
+        float normalize = 0.0f;
+        while (normalize < 1.0f)
+        {
+            normalize += Time.fixedDeltaTime * 0.5f;
+            float volume = Mathf.Lerp(0.0f, targetVolume, normalize);
+            if (BGMSource != null)
+                BGMSource.volume = volume;
+            if (_origin != null)
+                _origin.volume = targetVolume - volume;
+            yield return null;
+        }
+        if (_origin == null)
+            yield break;
+        _origin.volume = 0.0f;
+        _origin.Stop();
+        _origin.gameObject.SetActive(false);
+        audioQueue.Enqueue(_origin);
     }
 
     public void SetBGMVolume(float _value)
@@ -88,30 +112,6 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         bgmMute = _isOn;
         if (BGMSource != null)
             BGMSource.mute = masterMute == true ? true : bgmMute;
-    }
-
-    IEnumerator PlayBGMAudio(AudioSource _audioSource)
-    {
-        if (BGMSource != null)
-        {
-            AudioSource originSource = BGMSource;
-            float targetVolume = bgmVolume * masterVolume;
-            float normalize = 0.0f;
-            while (normalize < 1.0f)
-            {
-                normalize += Time.fixedDeltaTime * 0.5f;
-                float volume = Mathf.Lerp(0.0f, targetVolume, normalize);
-                if (_audioSource != null)
-                    _audioSource.volume = volume;
-                originSource.volume = targetVolume - volume;
-                yield return null;
-            }
-            originSource.volume = 0.0f;
-            originSource.Stop();
-            originSource.gameObject.SetActive(false);
-            audioQueue.Enqueue(originSource);
-        }
-        BGMSource = _audioSource;
     }
 
     //===========================================================================================================================
@@ -194,7 +194,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         AudioSource audioSource = TryAudioSource();
         audioSource.gameObject.SetActive(true);
         audioSource.name = $"Environment_{_id}";
-        Debug.LogWarning($"{audioSource}");
+        Debug.LogWarning($"πË∞Ê¿Ω : {_id}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
         audioSource.mute = masterMute == true ? true : envMute;
         audioSource.volume = envVolume * masterVolume;

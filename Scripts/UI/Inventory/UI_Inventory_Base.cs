@@ -521,6 +521,5 @@ public class UI_Inventory_Base : MonoBehaviour
             allSlots[x, y].FixSlot();
         }
         destroySlot.Clear();
-        
     }
 }

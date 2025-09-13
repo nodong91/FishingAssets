@@ -27,7 +27,7 @@ public class Game_Manager : MonoBehaviour
     public Data_Status_Default defaultStatusData;
     //public SetStatus defaultStatus;
     public SetStatus currentStatus;
-    public SetStatus GetStatus => GetSkill.addStatus;
+    public SetStatus GetAddStatus => GetSkill.addStatus;
 
     public Light dayLight;
     public Color dayColor, nightColor;
@@ -57,15 +57,17 @@ public class Game_Manager : MonoBehaviour
         yield return null;
 
         AddStatus();// 추가 스테이트 세팅
-        PlayerMove();
+        GetPlayer.SetStart();
+        //PlayerMove();
     }
 
     public void AddStatus()
     {
+        bool fullHealth = GetPlayer.FullHealth;// 스탯 추가 하기  전 풀피 체크
         currentStatus.SettingStatus(defaultStatusData.defaultStatus);// 디폴트 스탯 적용
-        currentStatus.AddStatus(GetStatus);// 추가 스탯 적용
+        currentStatus.AddStatus(GetAddStatus);// 추가 스탯 적용
 
-        GetPlayer.SetStatus();
+        GetPlayer.SetStatus(fullHealth);// 플레이어에 스탯 적용
     }
 
     public void SetThemeMusic()

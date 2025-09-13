@@ -42,8 +42,7 @@ public class Skill_Manager : MonoBehaviour
     public Skill_Slot startSlot;
     public Skill_Slot[,] allSlot;
 
-    // 스탯 추가
-    public SetStatus addStatus;// 기본 스탯
+    public SetStatus addStatus;// 추가 스탯
     public List<Vector2Int> enableSlotLIst = new List<Vector2Int>();// 활성화된 슬롯 리스트
     public AnimationCurve openingCurve;
     SkillStatus[,] statusStructs;
@@ -167,10 +166,18 @@ public class Skill_Manager : MonoBehaviour
 
     public void AddSlot(Vector2Int _addNode)// 스킬 슬롯 추가
     {
-        ActiveSlot(_addNode);
+        //ActiveSlot(_addNode);
         enableSlotLIst.Add(_addNode);
+        SetSlot(_addNode);
+        Singleton_Audio.INSTANCE.Audio_FX("beep-6-96243");
         Static_JsonManager.SaveEnableSkillData(saveEnableData, enableSlotLIst);// 활성화 된 스킬 저장
     }
+
+    //void ActiveSlot(Vector2Int _addNode)// 스킬 슬롯 활성화
+    //{
+    //    SetSlot(_addNode);
+    //    Singleton_Audio.INSTANCE.Audio_FX("beep-6-96243");
+    //}
 
     void SetSlot(Vector2Int _addNode)
     {
@@ -184,12 +191,6 @@ public class Skill_Manager : MonoBehaviour
         // 스탯 추가
         addStatus.AddStatus(slot.Status.addStatus);
         Game_Manager.current.AddStatus();
-    }
-
-    void ActiveSlot(Vector2Int _addNode)
-    {
-        SetSlot(_addNode);
-        Singleton_Audio.INSTANCE.Audio_FX("beep-6-96243");
     }
 
     public Custom_Button resetButton;// 스킬 초기화 버튼

@@ -6,6 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class Camera_Manager : MonoBehaviour
 {
     public CinemachineCamera cinemachineCamera;
+    public CinemachineVolumeSettings volumeSettings;
     public Camera UICamera;
     public GameObject focusTarget;
     public GameObject GetFocusTarget
@@ -222,5 +223,11 @@ public class Camera_Manager : MonoBehaviour
             cinemachineBasicMultiChannelPerlin.AmplitudeGain = shakeAmount;
             yield return null;
         }
+    }
+    float originalFOV = 10f;
+    public void FocusOut(bool _on)
+    {
+        float targetFOV = _on == true ? 0f : originalFOV;
+        volumeSettings.FocusOffset = targetFOV;
     }
 }

@@ -31,15 +31,14 @@ public class Quality_Manager : MonoBehaviour
         qualityDropdown.onValueChanged.AddListener(SetQualityLevel);
         resolutionDropdown.onValueChanged.AddListener(SetResolution);
         frameRateDropdown.onValueChanged.AddListener(SetFrameRate);
-
         fullScreenToggle.onValueChanged.AddListener(ToggleFullScreen);
 
         Data_Option optionData = Option_Manager.current.optionData;
-        Debug.LogError($"Quality_Manager SetStart : {optionData.qualityLevel}, {optionData.resolutionIndex}, {optionData.fullScreen}, {optionData.frameRateIndex}");
-        ToggleFullScreen(optionData.fullScreen);
-        SetQualityLevel(optionData.qualityLevel);
-        SetResolution(optionData.resolutionIndex);
-        SetFrameRate(optionData.frameRateIndex);
+        fullScreenToggle.isOn = optionData.fullScreen;
+        qualityDropdown.value = optionData.qualityLevel;
+        resolutionDropdown.value = optionData.resolutionIndex;
+        frameRateDropdown.value = optionData.frameRateIndex;
+
         DebugText();
     }
 
@@ -56,9 +55,8 @@ public class Quality_Manager : MonoBehaviour
     void SetQualityLevel(int _levelIndex)
     {
         levelIndex = _levelIndex;
-        QualitySettings.SetQualityLevel(_levelIndex, false);
         qualityDropdown.value = _levelIndex;
-        Debug.LogWarning(GetCurrentQualityLevel());
+        QualitySettings.SetQualityLevel(_levelIndex, false);
     }
 
     void SetResolutionDropbox()
@@ -104,7 +102,6 @@ public class Quality_Manager : MonoBehaviour
         resolutionDropdown.value = _resolutionIndex;
         Resolution selectedResolution = resolutionList[_resolutionIndex];
         Screen.SetResolution(selectedResolution.width, selectedResolution.height, fullScreenToggle.isOn);
-        DebugText();
     }
 
     void ToggleFullScreen(bool _isOn)
@@ -112,7 +109,6 @@ public class Quality_Manager : MonoBehaviour
         fullScreen = _isOn;
         fullScreenToggle.isOn = _isOn;
         Screen.fullScreen = _isOn;
-        DebugText();
     }
 
     public void DecreaseQualityLevel()
@@ -147,10 +143,13 @@ public class Quality_Manager : MonoBehaviour
     void DebugText()
     {
         Resolution selectedResolution = resolutionList[resolutionIndex];
-        string debugText = $"{selectedResolution.width} x {selectedResolution.height}:{resolutionList.Count}({resolutionIndex}), Fullscreen: {fullScreenToggle.isOn}";
-        debugText += $", Frame Rate: {Application.targetFrameRate}Hz";
-        debugText += $", Quality: {GetCurrentQualityLevel()}";
+        string debugText = $"{selectedResolution.width} x {selectedResolution.height}:{resolutionList.Count}({resolutionIndex}), ";
+        debugText+= $", Fullscreen: {fullScreenToggle.isOn}";
+        debugText += $", Frame Rate: {Application.targetFrameRate}Hz({frameRate})";
+        debugText += $", Quality Level: {GetCurrentQualityLevel()}({qualityDropdown})";
         currentQualityText.text = debugText;
+
+        Debug.LogWarning(debugText);
     }
 
     public string GetCurrentQualityLevel()

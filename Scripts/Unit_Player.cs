@@ -15,14 +15,14 @@ public class Unit_Player : MonoBehaviour
     }
     public State state = State.None;
 
-    SetStatus status;
+    SetStatus CurrentStatus => Game_Manager.current.currentStatus;
     public float moveSpeed = 1f;
     public int health;
     public int GetHealth { get { return health; } }
-    public bool FullHealth { get { return health >= status.shipHealth; } }
+    public bool FullHealth { get { return health >= CurrentStatus?.shipHealth; } }
     public float energy;
-    public float GetEnergy { get { return energy; }}
-    public float GetMaxEnergy { get { return status.maxEnergy; } }
+    public float GetEnergy { get { return energy; } }
+    public float GetMaxEnergy { get { return CurrentStatus.maxEnergy; } }
     public float efficient;// 에너지 효율
     private Vector2 dirction;
     // 물위에서 배의 움직임
@@ -62,18 +62,22 @@ public class Unit_Player : MonoBehaviour
         FocusTarget.transform.position = transform.position;
     }
 
-    public void SetStatus()
+    public void SetStatus(bool prevFullHealth)
     {
-        status = Game_Manager.current.currentStatus;
-        moveSpeed = status.shipSpeed;
+        moveSpeed = CurrentStatus.shipSpeed;
 
-        health = continueData.health;
-        Game_Manager.current.GetMainUI.SetMaxHealthPoint(status.shipHealth);
+        health = (prevFullHealth == true) ? CurrentStatus.shipHealth : continueData.health;// 스탯 추가 하기  전 풀피 체크
+        Game_Manager.current.GetMainUI.SetMaxHealthPoint(CurrentStatus.shipHealth);
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
 
         energy = continueData.energy;
-        Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
-        efficient = status.efficient;
+        Game_Manager.current.GetMainUI.SetEnergy(energy / CurrentStatus.maxEnergy);
+        efficient = CurrentStatus.efficient;
+    }
+
+    public void SetStart()
+    {
+
     }
 
     //================================================================================================================================================
@@ -134,8 +138,8 @@ public class Unit_Player : MonoBehaviour
             SetMoving();
             CheckClosestUnit();// 무브
 
-            energy -= status.efficient * Time.deltaTime;// 임시
-            Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
+            energy -= CurrentStatus.efficient * Time.deltaTime;// 임시
+            Game_Manager.current.GetMainUI.SetEnergy(energy / CurrentStatus.maxEnergy);
             if (energy <= 0)
             {
                 StateMachine(State.Destroy);
@@ -146,8 +150,8 @@ public class Unit_Player : MonoBehaviour
     public void AddEnergy(float _value)
     {
         energy += _value;
-        energy = Mathf.Clamp(energy, 0f, status.maxEnergy);
-        Game_Manager.current.GetMainUI.SetEnergy(energy / status.maxEnergy);
+        energy = Mathf.Clamp(energy, 0f, CurrentStatus.maxEnergy);
+        Game_Manager.current.GetMainUI.SetEnergy(energy / CurrentStatus.maxEnergy);
     }
 
     void CheckClosestUnit()// 아이템이나 채집 같은거 하기 위한 체크

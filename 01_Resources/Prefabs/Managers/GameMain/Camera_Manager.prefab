@@ -79,6 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cinemachineCamera: {fileID: 3072174000072831685}
+  volumeSettings: {fileID: 7578573401143621992}
   UICamera: {fileID: 7645638154566824834}
   focusTarget: {fileID: 543734786562183439}
   offset: {x: 0, y: 0, z: 0}
@@ -98,6 +99,7 @@ GameObject:
   - component: {fileID: 1005399239264093885}
   - component: {fileID: 8986735655939830345}
   - component: {fileID: 5757305940954046503}
+  - component: {fileID: 7578573401143621992}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -272,6 +274,23 @@ MonoBehaviour:
   AmplitudeGain: 0
   FrequencyGain: 1
   m_NoiseOffsets: {x: -824.9912, y: -840.1041, z: 29.120575}
+--- !u!114 &7578573401143621992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4141717639666675632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 449ef5ebbe24720439ec31d15f7b6f3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Weight: 1
+  FocusTracking: 4
+  FocusTarget: {fileID: 0}
+  FocusOffset: 10
+  Profile: {fileID: 11400000, guid: 579d9e189fd01c748953b58d9452f81f, type: 2}
 --- !u!1 &8417751973442682444
 GameObject:
   m_ObjectHideFlags: 0
