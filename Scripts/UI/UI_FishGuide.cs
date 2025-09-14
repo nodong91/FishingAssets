@@ -61,6 +61,7 @@ public class FishGuide : MonoBehaviour
 
     public void OpenCanvas(bool _open)
     {
+        Camera_Manager.current.CameraFocus(_open);
         canvas.gameObject.SetActive(_open);
     }
 

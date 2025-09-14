@@ -5,7 +5,6 @@ using static Data_Manager;
 public class Game_Manager : MonoBehaviour
 {
     public Unit_Player player;
-    public Camera_Manager cameraManager;
     public Controll_Manager controllManager;
 
     [Header("[ UI ]")]
@@ -83,7 +82,7 @@ public class Game_Manager : MonoBehaviour
 
     public void InputRightMouse(bool _input)
     {
-        cameraManager?.InputRotate(_input);
+        Camera_Manager.current?.InputRotate(_input);
     }
 
     public void PlayerMove()

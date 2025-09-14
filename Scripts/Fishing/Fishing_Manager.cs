@@ -46,9 +46,11 @@ public class Fishing_Manager : MonoBehaviour
     public Transform focusTarget;
 
     private float cooling;
-    public float coolTime = 5f;// 물고기 스탯으로 추가
-    public float spellTime = 3f;// 물고기 스탯으로 추가
-    public float groggyTime = 1f;// 물고기 스탯으로 추가
+    public float coolTime = 5f;// 공격 쿨타임 - 물고기 스탯으로 추가
+    public float spellTime = 3f;// 공격 스펠 시간 - 물고기 스탯으로 추가
+    public float groggyTime = 1f;// 그로기 - 물고기 스탯으로 추가
+    public int defenseCount = 4;// 방어 커맨드 갯수 - 물고기 스탯으로 추가
+    public float defenseTime = 5f;// 방어 시간 - 물고기 스탯으로 추가
 
     private Vector3 fishTargetPoint;
     private bool shake;
@@ -119,27 +121,68 @@ public class Fishing_Manager : MonoBehaviour
         int fishingAmount = Random.Range(1, 5);// 낚시 횟수
         dayType = Game_Manager.current.GetMainUI.timeUI.lightMode;
         string cordType = areaType.ToString() + dayType.ToString();
-        Debug.LogError($"낚시터 타입 : {cordType}, 낚시 횟수 : {fishingAmount}");
         // 물고기 세팅
         fishQueue.Clear();
         for (int i = 0; i < fishingAmount; i++)
         {
-            FishStruct fish = TryFishStruct(cordType);
-            fishQueue.Enqueue(fish);
-            Debug.LogWarning($"{fish.id} : {dictFishStruct.Count}");
+            if (TryFishStruct(cordType, out FishStruct _fish) == true)
+            {
+                fishQueue.Enqueue(_fish);
+                Debug.LogWarning($"{_fish.id} : {dictFishStruct.Count}");
+            }
         }
     }
 
-    FishStruct TryFishStruct(string _type)
+    bool TryFishStruct(string _type, out FishStruct _fish)
     {
         if (dictFishStruct.ContainsKey(_type))
         {
-            List<FishStruct> fishList = dictFishStruct[_type];
-            int randomIndex = Random.Range(0, fishList.Count);
-            FishStruct randomFish = fishList[randomIndex];
-            return randomFish;
+            List<FishStruct> fishList = dictFishStruct[_type];// 해당 타입 물고기 리스트
+            FishStruct randomFish = Chance(fishList);
+            _fish = randomFish;
+            return true;
         }
-        return default;
+        Debug.LogError($"[Fishing_Manager] 해당 타입 물고기 없음 : {_type}");
+        _fish = default;
+        return false;
+    }
+
+    FishStruct Chance(List<FishStruct> _fishList)
+    {
+        float total = 0;
+        for (int i = 0; i < _fishList.Count; i++)
+        {
+            float fishProbability = TryFishProbability(_fishList[i].itemStruct.itemClass);
+            total += fishProbability;
+        }
+
+        float randomPoint = Random.value * total;
+        for (int i = 0; i < _fishList.Count; i++)
+        {
+            if (randomPoint < TryFishProbability(_fishList[i].itemStruct.itemClass))
+            {
+                return _fishList[i];
+            }
+            else
+            {
+                randomPoint -= TryFishProbability(_fishList[i].itemStruct.itemClass);
+            }
+        }
+        return _fishList[^1];
+    }
+
+    float TryFishProbability(ItemStruct.ItemClass _class)
+    {
+        // 물고기 클래스별 확률
+        return _class switch
+        {
+            ItemStruct.ItemClass.Common => 0.6f + (1f - 0.6f) * 0.5f,
+            ItemStruct.ItemClass.Uncommon => 0.25f,
+            ItemStruct.ItemClass.Rare => 0.1f,
+            ItemStruct.ItemClass.Epic => 0.04f,
+            ItemStruct.ItemClass.Legendary => 0.01f,
+            _ => 0f,
+        };
     }
 
     public void SetFishingStart()
@@ -309,7 +352,7 @@ public class Fishing_Manager : MonoBehaviour
             }
             if (catchHealth <= 0f || fishHealth <= 0f)
             {
-                FishingComplate(fishHealth <= 0f);
+                FishingComplate(fishHealth <= 0f);// 낚시 성공 실패
             }
             yield return null;
         }
@@ -377,12 +420,12 @@ public class Fishing_Manager : MonoBehaviour
         float normalize = 0f;
         while (normalize < spellTime)
         {
-            normalize += Time.deltaTime;
+            normalize += Time.deltaTime / spellTime;
             Quaternion rotation = Quaternion.LookRotation(direction);
-            fishPrefab.transform.rotation = Quaternion.Slerp(fishPrefab.transform.rotation, rotation, Time.deltaTime * 5f / spellTime);
+            fishPrefab.transform.rotation = Quaternion.Slerp(fishPrefab.transform.rotation, rotation, Time.deltaTime * spellTime);
             fishSpeed = Mathf.Lerp(prevSpeed, 0f, normalize);
             fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * fishSpeed, Space.Self);
-            fishingCanvas.SetFishSpell(normalize / spellTime);
+            fishingCanvas.SetFishSpell(normalize);
             yield return null;
         }
         fishingCanvas.SetFishSpell(0f);
@@ -558,12 +601,13 @@ public class Fishing_Manager : MonoBehaviour
         fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());
         fishingCanvas.OnOutButton();
 
-        if (_success == true)
+        if (_success == true)// 낚시 성공
             SetReward();
     }
 
     public void SetReward()
     {
+
         ItemStruct fishItem = currentFish.itemStruct;
         float size = currentSize.size;
 
@@ -575,8 +619,8 @@ public class Fishing_Manager : MonoBehaviour
         };
 
         Game_Manager.current.GetInventory.SetResult(fishResult);// 퀘스트 완료 후 결과 아이템 설정
-        Game_Manager.current.GetInventory.OpenResult();
         Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
+        Game_Manager.current.GetInventory.OpenResult();
     }
 
     void OutReward()

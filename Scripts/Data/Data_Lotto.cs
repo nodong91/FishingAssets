@@ -5,6 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data_Lotto", menuName = "Scriptable Objects/Data_Lotto")]
 public class Data_Lotto : ScriptableObject
 {
+    public enum LotteryType
+    {
+        Spito,
+
+    }
+    public LotteryType lotteryType;
+    public int slotCount = 6; // 슬롯 개수
+    public int price; // 로또 구매 가격
     public Sprite[] sprites;
     public LottoReward[] rewards;
 
@@ -21,29 +29,22 @@ public class Data_Lotto : ScriptableObject
         public Sprite sprite;
         public int reward;
     }
-
-    //public void SetRandom(out int _index, out Sprite _sprite, out int _reward)
-    //{
-    //    _index = Chance();
-    //    _sprite = sprites[_index].sprite;
-    //    _reward = rewards[ChanceReward()].price;
-    //}
     List<LottoSlot> tempSlotList = new List<LottoSlot>();
+    // 랜덤 슬롯 세팅
     public List<LottoSlot> SetRandom(out Sprite _mainSprite, out int _sellPrice)
     {
         // 당첨 금액 먼저
         // 당첨 금액이 0일 경우 - 메인 슬롯 모양 정하고 리스트에서 뺀 다음 랜덤
-        // 0이 아닌경우 - 6번까지 중 랜덤 슬롯 정하고 
+        // 0이 아닌경우 - slotCount번까지 중 랜덤 슬롯 정하고 
         int reward = rewards[ChanceReward()].price;
-        Debug.LogWarning(reward);
-        List<Sprite> tempSpriteList = new List<Sprite>(sprites);
+        List<Sprite> tempSpriteList = new List<Sprite>(sprites);// 리스트 새로 만들기
         Sprite mainSprite = sprites[Random.Range(0, sprites.Length)];
         tempSpriteList.Remove(mainSprite);// 정답 없는 리스트
         tempSlotList.Clear();
         if (reward > 0)
         {
-            int randomNode = Random.Range(0, 6);// 정답 위치 잡기
-            for (int i = 0; i < 6; i++)
+            int randomNode = Random.Range(0, slotCount);// 정답 위치 잡기
+            for (int i = 0; i < slotCount; i++)
             {
                 if (i == randomNode)
                 {
@@ -61,7 +62,7 @@ public class Data_Lotto : ScriptableObject
         }
         else
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < slotCount; i++)
             {
                 Sprite tempSprite = tempSpriteList[Random.Range(0, tempSpriteList.Count)];
                 int tempReward = rewards[Random.Range(1, rewards.Length)].price;// 가격 0 빼고

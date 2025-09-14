@@ -42,7 +42,6 @@ public class UI_Main : MonoBehaviour
         fishGuideButton.onClick.AddListener(FishGuideButton);
         questButton.onClick.AddListener(QuestButton);
         optionButton.onClick.AddListener(OptionButton);
-        //shipEnergy.material = Instantiate(shipEnergy.material);
 
         SetCameraCanvas();
         SetFadeScreen(false);
@@ -52,7 +51,7 @@ public class UI_Main : MonoBehaviour
     {
         warnningText.alpha = 0f;
         cameraCanvas.renderMode = RenderMode.ScreenSpaceCamera;
-        cameraCanvas.worldCamera = Game_Manager.current.cameraManager.UICamera;
+        cameraCanvas.worldCamera = Camera_Manager.current.UICamera;
     }
 
     void InventoryButton()
@@ -60,12 +59,10 @@ public class UI_Main : MonoBehaviour
         if ((menuState & MenuState.Inventory) == 0)
         {
             menuState |= MenuState.Inventory;// ³Ö±â
-            Game_Manager.current.cameraManager.FocusOut(true);
         }
         else
         {
             menuState &= ~MenuState.Inventory;
-            Game_Manager.current.cameraManager.FocusOut(false);
         }
         bool onInventory = (menuState & MenuState.Inventory) != 0;
         Game_Manager.current.GetInventory.OpenInventory(onInventory);
@@ -125,7 +122,6 @@ public class UI_Main : MonoBehaviour
     public void SetEnergy(float _energy)
     {
         shipEnergy.fillAmount = _energy;
-        //shipEnergy.material.SetFloat("_FillAmount", _energy);
     }
 
     public void SetFadeScreen(bool _open)
@@ -154,12 +150,13 @@ public class UI_Main : MonoBehaviour
     {
         //RectTransform rectTransform = currentHealthImage.rectTransform;
         //rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
+        float maxHealthPoint = Game_Manager.current.currentStatus.shipHealth;
         currentHealthImage.fillAmount = _point / maxHealthPoint;
     }
-    float maxHealthPoint;
+    //float maxHealthPoint;
     public void SetMaxHealthPoint(int _point)
     {
-        maxHealthPoint = _point;
+        //maxHealthPoint = _point;
         RectTransform rectTransform = maxHealthImage.rectTransform;
         rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
     }

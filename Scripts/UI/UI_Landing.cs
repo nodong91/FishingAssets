@@ -45,7 +45,7 @@ public class UI_Landing : MonoBehaviour
     {
         canvasGroup.gameObject.SetActive(false);
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
-        canvas.worldCamera = Game_Manager.current.cameraManager.UICamera;
+        canvas.worldCamera = Camera_Manager.current.UICamera;
 
         outButton.onClick.AddListener(OutButton);
         restButton.onClick.AddListener(RestButton);

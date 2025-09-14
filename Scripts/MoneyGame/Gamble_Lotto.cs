@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Gamble_Lotto : MonoBehaviour
 {
+    public Data_Lotto data;
     public LineRenderer lineRenderer;
     LineRenderer instLine;
     //public Transform target;
@@ -13,7 +12,7 @@ public class Gamble_Lotto : MonoBehaviour
     private float distanceToWorldPlane = 10f; // 이건 카메라랑 우리 캐릭터가 사는 평면 사이의 거리
     //[SerializeField] Camera playerCamera; // 이건 우리 카메라
     public Transform slotParent;
-    public Gamble_Lotto_Slot slot;
+    public Gamble_Lotto_Slot answerSlot;
     Gamble_Lotto_Slot setEnterSlot;
     //Vector3 mouseWorldLocation; // 이건 플레이어 캐릭터가 바라봐야 할 곳
 
@@ -21,60 +20,71 @@ public class Gamble_Lotto : MonoBehaviour
     public Camera maskCamera;
 
     public RawImage maskImage;
-    public CanvasGroup maskCanvasGroup;
 
     Vector3 point;
 
-    //public Gamble_Lotto_Canvas gambleLottoCanvas;
+    bool winner;
+    public Custom_Button resetButton;
+    private List<Vector3> positionsList = new List<Vector3>();
+    private List<LineRenderer> lineList = new List<LineRenderer>();
+    private Queue<LineRenderer> lineQueue = new Queue<LineRenderer>();
+    private List<Gamble_Lotto_Slot> enterSlot = new List<Gamble_Lotto_Slot>();
+    List<Gamble_Lotto_Slot> slotList = new List<Gamble_Lotto_Slot>();
+    Queue<Gamble_Lotto_Slot> slotQueue = new Queue<Gamble_Lotto_Slot>();
+
+    public TMPro.TMP_Text testText;
+    public int sellPrice;
 
     void Start()
     {
         resetButton.SetButton(ResetButton);
         maskTexture = new RenderTexture(Screen.width, Screen.height, 24);
         maskTexture.useMipMap = true;
-
         maskImage.texture = maskTexture;
+
+        maskCamera.enabled = false;
         maskCamera.targetTexture = maskTexture;
-        maskCamera.Render();
         SetLotto();
     }
 
     void Update()
     {
-        //if (OnCard == true)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                positionsList.Clear();
-                instLine = TryLine();
-                lineList.Add(instLine);
+            positionsList.Clear();
+            instLine = TryLine();
+            lineList.Add(instLine);
 
-                point = SetWorldPoint();
+            point = SetWorldPoint();
+            SetPoint(point);
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            point = SetWorldPoint();
+            float distance = (point - positionsList[^1]).magnitude;
+            if (distance > 0.2f)// 일정거리가 멀어지면 포인트 기입
+            {
+                if (enterSlot.Contains(setEnterSlot) == false)// 열었는지 확인
+                {
+                    enterSlot.Add(setEnterSlot);
+                    if (setEnterSlot?.iconImage.sprite == answerSlot.iconImage.sprite)
+                    {
+                        winner = true;
+                        testText.text = $"당첨!!!!!! : {sellPrice}";
+                    }
+                    else if (winner == false && enterSlot.Count == slotList.Count)
+                    {
+                        testText.text = "노당첨!!!!!!";
+                    }
+                }
                 SetPoint(point);
             }
-            else if (Input.GetMouseButton(0))
-            {
-                point = SetWorldPoint();
-                float distance = (point - positionsList[^1]).magnitude;
-                if (distance > 0.2f)// 일정거리가 멀어지면 포인트 기입
-                {
-                    if (enterSlot.Contains(setEnterSlot) == false)// 열었는지 확인
-                    {
-                        enterSlot.Add(setEnterSlot);
-                        if (setEnterSlot.iconImage.sprite == slot.iconImage.sprite)
-                        {
-                            winner = true;
-                            testText.text = "당첨!!!!!!";
-                        }
-                        else if (winner == false && enterSlot.Count == slotList.Count)
-                        {
-                            testText.text = "노당첨!!!!!!";
-                        }
-                    }
-                    SetPoint(point);
-                }
-            }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        maskCamera.Render();
     }
 
     private void ResetButton()
@@ -83,20 +93,6 @@ public class Gamble_Lotto : MonoBehaviour
         testText.text = "";
         SetLotto();
     }
-
-    bool winner;
-    public Custom_Button resetButton;
-    public List<Vector3> positionsList = new List<Vector3>();
-    public List<LineRenderer> lineList = new List<LineRenderer>();
-    Queue<LineRenderer> lineQueue = new Queue<LineRenderer>();
-    public List<Gamble_Lotto_Slot> enterSlot = new List<Gamble_Lotto_Slot>();
-    List<Gamble_Lotto_Slot> slotList = new List<Gamble_Lotto_Slot>();
-    Queue<Gamble_Lotto_Slot> slotQueue = new Queue<Gamble_Lotto_Slot>();
-
-    public Data_Lotto data;
-    public TMPro.TMP_Text testText;
-    public int sellPrice;
-    public TMPro.TMP_Text sellPriceText;
 
     public void SetLotto()
     {
@@ -122,7 +118,7 @@ public class Gamble_Lotto : MonoBehaviour
     {
         List<Data_Lotto.LottoSlot> lottoSlots = data.SetRandom(out Sprite _mainSprite, out int _sellPrice);
         sellPrice = _sellPrice;
-        slot.SetSlot(_mainSprite, 0);
+        answerSlot.SetSlot(_mainSprite, 0);
         for (int i = 0; i < lottoSlots.Count; i++)
         {
             Gamble_Lotto_Slot inst = TrySlot();
@@ -130,12 +126,11 @@ public class Gamble_Lotto : MonoBehaviour
             inst.deleEnterSlot = EnterSlot;
             slotList.Add(inst);
         }
-        sellPriceText.text = sellPrice.ToString();
     }
 
     void EnterSlot(Gamble_Lotto_Slot _slot)
     {
-        if (slot != _slot)
+        if (answerSlot != _slot)
             setEnterSlot = _slot;
     }
 
@@ -143,7 +138,7 @@ public class Gamble_Lotto : MonoBehaviour
     {
         if (slotQueue.Count > 0)
             return slotQueue.Dequeue();
-        Gamble_Lotto_Slot inst = Instantiate(slot, slotParent);
+        Gamble_Lotto_Slot inst = Instantiate(answerSlot, slotParent);
         return inst;
     }
 

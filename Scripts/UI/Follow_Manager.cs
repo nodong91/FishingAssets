@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Follow_Manager : MonoBehaviour
 {
     public Canvas canvas;
-    Camera UICamera;
+    Camera UICamera => Camera_Manager.current.UICamera;
     Dictionary<GameObject, GameObject> follow_Camera = new Dictionary<GameObject, GameObject>();
     Dictionary<GameObject, GameObject> follow_Overlay = new Dictionary<GameObject, GameObject>();
 
@@ -21,7 +21,6 @@ public class Follow_Manager : MonoBehaviour
     public void SetStart()
     {
         followUI.gameObject.SetActive(false);
-        UICamera = Game_Manager.current.cameraManager.UICamera;
         canvas.worldCamera = UICamera;
     }
 
@@ -49,7 +48,7 @@ public class Follow_Manager : MonoBehaviour
         while (closestTarget != null)
         {
             float setTime = (Time.time - startTime) * 3f;
-            if(setTime < 1f)
+            if (setTime < 1f)
             {
                 addValue = animationCurve.Evaluate(setTime);
                 imageSize = addValue;

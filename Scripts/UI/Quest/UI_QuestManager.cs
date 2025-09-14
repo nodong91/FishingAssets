@@ -67,6 +67,7 @@ public class UI_QuestManager : MonoBehaviour
             ToggleClick(customButtonList[0]);
             StaticOpenCanvas.deleEndOpen = null;
         }
+        Camera_Manager.current.CameraFocus(_open);
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
         Debug.LogWarning($"OpenQuestCanvas : {_open}");
     }

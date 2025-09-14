@@ -79,6 +79,7 @@ public class UI_Inventory : MonoBehaviour
         {
             currentType = SlotType.None;
         }
+        Camera_Manager.current.CameraFocus(_open);
         myBox.OpenCanvas(_open);
     }
 

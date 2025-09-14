@@ -44,6 +44,7 @@ public class Option_Manager : MonoBehaviour
     {
         StaticOpenCanvas.deleEndOpen = EndOpenCanvas;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+        Camera_Manager.current?.CameraFocus(_open);
         if (_open == true)
         {
             screenStruct[0].toggle.isOn = true;

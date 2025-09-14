@@ -41,6 +41,13 @@ public class Camera_Manager : MonoBehaviour
 
     CinemachineBrain brain;
 
+    public static Camera_Manager current;
+
+    private void Awake()
+    {
+        current = this;
+    }
+
     private void Start()
     {
         SetCameraManager();
@@ -68,7 +75,6 @@ public class Camera_Manager : MonoBehaviour
         {
             UICamera.fieldOfView = mainCamera.fieldOfView;
             cameraData.cameraStack.Add(UICamera);
-            Debug.LogWarning(UICamera.fieldOfView + "       " + mainCamera.fieldOfView);
         }
     }
 
@@ -225,9 +231,10 @@ public class Camera_Manager : MonoBehaviour
         }
     }
     float originalFOV = 10f;
-    public void FocusOut(bool _on)
+    public void CameraFocus(bool _on)
     {
         float targetFOV = _on == true ? 0f : originalFOV;
         volumeSettings.FocusOffset = targetFOV;
+        Debug.LogWarning($"Camera Focus : {_on} {targetFOV} ");//{volumeSettings.FocusOffset
     }
 }

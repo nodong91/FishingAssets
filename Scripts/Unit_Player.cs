@@ -31,7 +31,7 @@ public class Unit_Player : MonoBehaviour
     private float targetAngle = 10f;
     float runningTime;
     public GameObject playerObject;
-    GameObject FocusTarget => Game_Manager.current?.cameraManager.GetFocusTarget;
+    GameObject FocusTarget => Camera_Manager.current?.GetFocusTarget;
     Data_Continue continueData => SaveData_Continue.current?.continueData;
     Coroutine stateAction;
 
@@ -247,7 +247,7 @@ public class Unit_Player : MonoBehaviour
 
     IEnumerator MovingClash(Vector3 _target)
     {
-        Game_Manager.current.cameraManager.InputShake();// 카메라 흔들기
+        Camera_Manager.current.InputShake();// 카메라 흔들기
         float normalize = 0f;
         while (normalize < 1f)// 뒤로 밀려나기
         {
@@ -323,7 +323,7 @@ public class Unit_Player : MonoBehaviour
             yield return null;
         }
         //StartCoroutine(ShipTowed(backwardPosition));
-        Debug.LogError("견인 되는 연출 필요 - 마을 회사 도착");
+        Debug.LogError("견인 되는 연출 필요 - 마을 도착");
         CheckClosestUnit();// 가까운 트리거 체크
         //// 스탯 리셋
         //SetStatus();

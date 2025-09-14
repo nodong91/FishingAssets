@@ -189,9 +189,9 @@ public class Data_Manager : Data_Parse
         public void DefaultOption()
         {
             fullScreen = true;
-            qualityLevel = 0;
-            resolutionIndex = 0;
-            frameRateIndex = 0;
+            qualityLevel = 2;
+            resolutionIndex = 6;
+            frameRateIndex = 2;
             audioStruct = new AudioStruct
             {
                 masterMute = false,

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Playables;
 using UnityEngine.UI;
 using static Data_Manager;
 
@@ -122,7 +121,7 @@ public class Quality_Manager : MonoBehaviour
         frameRateDropdown.ClearOptions();
         HashSet<string> options = new HashSet<string>();
         int currentResolutionIndex = -1;
-        for (int i = 30; i <= 120; i += 30)
+        for (int i = 10; i <= 120; i += 10)
         {
             frameList.Add(i);
             options.Add(i.ToString() + "Hz");

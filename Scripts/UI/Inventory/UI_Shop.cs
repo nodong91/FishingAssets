@@ -17,7 +17,8 @@ public class UI_Shop : UI_Inventory_Base
     public VerticalLayoutGroup layoutGroup;
     public ToggleGroup toggleGroup;
     public GameObject fixGroup;
-    public Button fixButton, fixAllButton;
+    public Button fixButton, fixAllButton; 
+    public Custom_Button[] toggleButtons;
 
     public override void SetStart()
     {
@@ -98,7 +99,7 @@ public class UI_Shop : UI_Inventory_Base
         if (_open)
             SetShopItem();// 열릴때 세팅
     }
-    public Custom_Button[] toggleButtons;
+ 
     public void SetStorage(bool _open)
     {
         inventoryID = "MyStorage";

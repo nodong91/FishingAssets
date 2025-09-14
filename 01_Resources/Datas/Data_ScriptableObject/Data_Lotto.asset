@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e336195f726867d4d911682fc846c44d, type: 3}
   m_Name: Data_Lotto
   m_EditorClassIdentifier: 
+  lotteryType: 0
+  slotCount: 6
+  price: 1000
   sprites:
   - {fileID: 21300000, guid: 328cb977f05a0ba4b8e06989fab520cc, type: 3}
   - {fileID: 21300000, guid: bce3f09e06ae50e4488f0a9d2a393918, type: 3}
@@ -30,9 +33,17 @@ MonoBehaviour:
     value: 43.2
   - price: 1000
     value: 8.8
+  - price: 5000
+    value: 5.98
   - price: 10000
+    value: 1
+  - price: 50000
     value: 0
   - price: 100000
     value: 0
+  - price: 500000
+    value: 0
   - price: 1000000
+    value: 0
+  - price: 5000000
     value: 0
