@@ -35,7 +35,6 @@ public class UI_Main : MonoBehaviour
     public void SetStart()
     {
         SetMoney(SaveData_Continue.current.continueData.money);
-        moneyPosition = moneyTextObject.transform.position;
         HealthSize = maxHealthImage.rectTransform.sizeDelta;
 
         inventoryButton.onClick.AddListener(InventoryButton);
@@ -221,24 +220,27 @@ public class UI_Main : MonoBehaviour
         }
     }
 
+    public RectTransform moneyRect;
+    private Coroutine shakeUI;
     public void NoMoney()
     {
-        moneyTextObject.transform.position = moneyPosition;
-        Debug.LogError("돈이 부족합니다.");
-        //StartCoroutine(ShakeUI());
+        Debug.LogWarning("돈이 부족합니다.");
+        if (shakeUI != null)
+            StopCoroutine(shakeUI);
+        shakeUI = StartCoroutine(ShakeUI());
     }
-    public GameObject moneyTextObject;
-    public Vector3 moneyPosition;
+
     IEnumerator ShakeUI()
     {
         float normalize = 0f;
         while (normalize < 1f)
         {
             normalize += Time.deltaTime * 5f;
-            Vector3 shakePosition = Random.insideUnitSphere * 0.3f * (1f - normalize);
-            moneyTextObject.transform.position = moneyPosition + shakePosition;
+            Vector3 randomPos = Random.insideUnitSphere * 10f;
+            Vector2 shakePosition = randomPos * (1f - normalize);
+            moneyRect.anchoredPosition = shakePosition;
             yield return null;
         }
-        moneyTextObject.transform.position = moneyPosition;
+        moneyRect.anchoredPosition = Vector2.zero;
     }
 }

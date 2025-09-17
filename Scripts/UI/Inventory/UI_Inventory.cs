@@ -294,7 +294,7 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void OnPointerRightClick(UI_Inventory_Slot _slot)
+    public void OnPointerRightClick(UI_Inventory_Slot _slot)// 우클릭 액션
     {
         if (onDrag == true)// 드래그 중일 때
         {
@@ -308,34 +308,42 @@ public class UI_Inventory : MonoBehaviour
         else if (_slot.empty == false)
         {
             selectSlot = _slot.GetLinkSlot;
-            Debug.LogWarning($"{currentType} 클릭!!!!!!!!!!!!!!!!!!!!");
+            Debug.LogWarning($"{currentType} -> 오른 클릭 타입 : {enterSlotType}");
             switch (currentType)
             {
                 case SlotType.Shop:// 샵이 열려있을 때 우클릭
                 case SlotType.Shipyard:
-                    if (enterSlotType == SlotType.MyBox)// 판매
+                    if (enterSlotType == SlotType.MyBox)// 내 인벤토리일때 판매
                     {
-                        Debug.LogWarning("판매");
-                        SellItem(_slot.itemClass.item.id);
+                        SellItem(selectSlot.itemClass.item.id);
                     }
-                    else if (enterSlotType == SlotType.Shop || enterSlotType == SlotType.Shipyard)// 구매
+                    else// 구매
                     {
-                        Debug.LogWarning("구매");
-                        if (BuyItem(_slot.itemClass.item.id) == false)
+                        if (BuyItem(selectSlot.itemClass.item.id) == false)
                         {
-                            Game_Manager.current.GetMainUI.NoMoney();
+                            Game_Manager.current.GetMainUI.NoMoney();// 돈없음
                             return;
                         }
                     }
-                    SetEmptySlot(_slot.GetLinkSlot);// 슬롯 비우기
+                    SetEmptySlot(selectSlot);// 슬롯 비우기
                     break;
+
                 case SlotType.Storage:// 창고가 열려있을 때 우클릭
+                case SlotType.Result:// 보상
+                    if (enterSlotType == SlotType.MyBox)// 내 인벤토리일때
+                    {
+                       
+                    }
+                    else
+                    {
+
+                    }
                     break;
-                case SlotType.Result:
-                    break;
+
                 case SlotType.MyBox:
                     ItemAction();// 사용하기
                     break;
+
                 default:
                     break;
             }
