@@ -197,7 +197,7 @@ public class UI_Shop : UI_Inventory_Base
 
     IEnumerator DisplayItem()
     {
-        EmptyInventory();// 비우기
+        EmptyInventoryAllSlot();// 비우기
         SetInventorySlot(npc.invenSize);// 인벤토리 세팅
         yield return null;
 
@@ -253,7 +253,7 @@ public class UI_Shop : UI_Inventory_Base
 
     IEnumerator DisplayResultItem(ResultStruct _result)
     {
-        EmptyInventory();
+        EmptyInventoryAllSlot();
         SetInventorySlot(_result.inventorySize);
         yield return null;
 

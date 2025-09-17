@@ -47,19 +47,6 @@ public class Unit_Player : MonoBehaviour
 
     private void Start()
     {
-        if (continueData != null)
-        {
-            transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
-            transform.localScale = continueData.playerScale;
-            health = continueData.health;
-            energy = continueData.energy;
-            StateMachine(State.Idle);
-        }
-
-        if (FocusTarget == null)
-            return;
-
-        FocusTarget.transform.position = transform.position;
     }
 
     public void SetStatus(bool prevFullHealth)
@@ -77,7 +64,19 @@ public class Unit_Player : MonoBehaviour
 
     public void SetStart()
     {
+        if (continueData != null)
+        {
+            transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
+            transform.localScale = continueData.playerScale;
+            health = continueData.health;
+            energy = continueData.energy;
+            StateMachine(State.Idle);
+        }
 
+        if (FocusTarget == null)
+            return;
+
+        FocusTarget.transform.position = transform.position;
     }
 
     //================================================================================================================================================

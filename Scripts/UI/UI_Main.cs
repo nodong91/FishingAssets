@@ -148,15 +148,12 @@ public class UI_Main : MonoBehaviour
 
     public void SetHealthPoint(int _point)
     {
-        //RectTransform rectTransform = currentHealthImage.rectTransform;
-        //rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
         float maxHealthPoint = Game_Manager.current.currentStatus.shipHealth;
         currentHealthImage.fillAmount = _point / maxHealthPoint;
     }
-    //float maxHealthPoint;
+
     public void SetMaxHealthPoint(int _point)
     {
-        //maxHealthPoint = _point;
         RectTransform rectTransform = maxHealthImage.rectTransform;
         rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
     }

@@ -48,13 +48,6 @@ public class Camera_Manager : MonoBehaviour
         current = this;
     }
 
-    private void Start()
-    {
-        SetCameraManager();
-        SetUICamera();
-        SetDefault();
-    }
-
     public void SetCameraManager()
     {
         brain = Camera.main.gameObject.GetComponent<CinemachineBrain>();
@@ -65,6 +58,17 @@ public class Camera_Manager : MonoBehaviour
         orbitalFollow = cinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
         cinemachineBasicMultiChannelPerlin = cinemachineCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
         rotationComposer = cinemachineCamera.GetComponent<CinemachineRotationComposer>();
+        cinemachineCamera.Lens.FieldOfView = 45f;
+
+        SetUICamera();
+        SetDefault();
+    }
+
+    public void SetOrbitalTitle()
+    {
+        orbitalFollow.enabled = false;
+        cinemachineCamera.transform.position = new Vector3(0f, 7f, -35f);
+        focusTarget.transform.position = new Vector3(0f, 6f, 0f);
     }
 
     void SetUICamera()
@@ -167,7 +171,7 @@ public class Camera_Manager : MonoBehaviour
             rotateDelegate?.Invoke();
             Rotate();
         }
-        Debug.LogWarning("StopRotating ½÷ֵי!!");
+        Debug.Log("StopRotating ½÷ֵי!!");
     }
 
     private void Rotate()

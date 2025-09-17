@@ -1,5 +1,8 @@
 using System.Collections;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using static Data_Manager;
 
 public class Game_Manager : MonoBehaviour
@@ -24,7 +27,6 @@ public class Game_Manager : MonoBehaviour
     public Energy_Manager energyManager;
 
     public Data_Status_Default defaultStatusData;
-    //public SetStatus defaultStatus;
     public SetStatus currentStatus;
     public SetStatus GetAddStatus => GetSkill.addStatus;
 
@@ -46,6 +48,8 @@ public class Game_Manager : MonoBehaviour
     IEnumerator SetStart()
     {
         SaveData_Continue.current.GetContinue();
+        Camera_Manager.current.SetCameraManager();
+        SetRendererFeature();
 
         GetMainUI.SetStart();
         GetQuestUI.SetStart();
@@ -57,7 +61,6 @@ public class Game_Manager : MonoBehaviour
 
         AddStatus();// 추가 스테이트 세팅
         GetPlayer.SetStart();
-        //PlayerMove();
     }
 
     public void AddStatus()
@@ -67,6 +70,7 @@ public class Game_Manager : MonoBehaviour
         currentStatus.AddStatus(GetAddStatus);// 추가 스탯 적용
 
         GetPlayer.SetStatus(fullHealth);// 플레이어에 스탯 적용
+        GetInventory.myBox.AddInventory(currentStatus.maxBoxSize);// 인벤토리 사이즈 적용
     }
 
     public void SetThemeMusic()
@@ -274,6 +278,37 @@ public class Game_Manager : MonoBehaviour
                 instEnergy.SetStart();
             }
             return instEnergy;
+        }
+    }
+
+
+
+
+
+
+    public int featureIndex = 2;
+    public Material fullscreenMaterial;
+    public FullScreenPassRendererFeature fullScreenRendererFeature;
+    ScriptableRendererData scriptableRendererData;
+    FullScreenPassRendererFeature.InjectionPoint injectionPoint = FullScreenPassRendererFeature.InjectionPoint.AfterRenderingPostProcessing;
+
+    void SetRendererFeature()
+    {
+        var pipeline = ((UniversalRenderPipelineAsset)GraphicsSettings.defaultRenderPipeline);
+        if (pipeline == null)
+            return;
+        var propertyInfo = pipeline.GetType().GetField("m_RendererDataList", BindingFlags.Instance | BindingFlags.NonPublic);
+        scriptableRendererData = ((ScriptableRendererData[])propertyInfo.GetValue(pipeline))[0];
+        Debug.LogWarning($"scriptableRendererData : {scriptableRendererData.rendererFeatures.Count}");
+
+        fullScreenRendererFeature = (FullScreenPassRendererFeature)scriptableRendererData.rendererFeatures[featureIndex];
+        //renderObject = (RenderObjects)scriptableRendererData.rendererFeatures[12];
+
+        if (fullScreenRendererFeature != null)
+        {
+            fullScreenRendererFeature.SetActive(fullscreenMaterial != null);
+            fullScreenRendererFeature.passMaterial = fullscreenMaterial;
+            fullScreenRendererFeature.injectionPoint = injectionPoint;
         }
     }
 }

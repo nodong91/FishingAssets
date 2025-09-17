@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Title_Manager : MonoBehaviour
 {
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
+
     public Custom_Button continueButton, newStartButton, creditButton, settingButton, exitButton;
     public Option_Manager optionManager;
     public Credit_Rolling creditRolling;
@@ -26,9 +28,15 @@ public class Title_Manager : MonoBehaviour
         exitButton.SetButton(ExitButton, ActionEnter, ActionExit);
 
         originalSize = selectMask.sizeDelta;
-        ActionExit();
+        ActionExit(null);
 
         StartCoroutine(SetManager());
+        OnTitle();
+    }
+
+    public void OnTitle()
+    {
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
     }
 
     bool FindFolder()
@@ -37,7 +45,7 @@ public class Title_Manager : MonoBehaviour
         return Directory.Exists(filePath);
     }
 
-    void ActionEnter(GameObject _button)
+    void ActionEnter(Custom_Button _button)
     {
         Singleton_Audio.INSTANCE.Audio_FX(soundName);
         selectMask.gameObject.SetActive(true);
@@ -59,14 +67,20 @@ public class Title_Manager : MonoBehaviour
         }
     }
 
-    void ActionExit()
+    void ActionExit(Custom_Button _button)
     {
         selectMask.gameObject.SetActive(false);
     }
 
     void ContinueButton()
     {
-        StopAllCoroutines();
+        //StopAllCoroutines();
+        StartGame();
+    }
+
+    void StartGame()
+    {
+        isMove = false;
         Option_Manager.current.OpenCanvas(false);
         LoadingManager.current.GoMain();
     }
@@ -80,7 +94,7 @@ public class Title_Manager : MonoBehaviour
         }
         else
         {
-            ContinueButton();
+            StartGame();
         }
     }
 
@@ -104,7 +118,8 @@ public class Title_Manager : MonoBehaviour
         // 닫힐때 옵션이 저장이 되는데 창 데이터가 있어서 기존 내용이 저장됨
         Option_Manager.current.LoadOption();// 옵션 데이터 리셋
         yield return null;
-        ContinueButton();
+
+        StartGame();
     }
 
     void CreditButton()
@@ -117,6 +132,8 @@ public class Title_Manager : MonoBehaviour
     void SettingButton()
     {
         Option_Manager.current.OpenCanvas(true);
+        Option_Manager.current.deleCloseOption = OnTitle;
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));
     }
 
     void ExitButton()
@@ -129,9 +146,12 @@ public class Title_Manager : MonoBehaviour
     public Transform startPoint, endPoint;
     public float speed = 0.1f;
     public Material reflectionMaterial;
-
+    bool isMove = false;
     IEnumerator SetManager()
     {
+        Camera_Manager.current.SetCameraManager();
+        Camera_Manager.current.SetOrbitalTitle();
+
         if (Option_Manager.current == null)
         {
             Instantiate(optionManager);
@@ -143,7 +163,8 @@ public class Title_Manager : MonoBehaviour
         yield return null;
 
         Option_Manager.current.SetThemeMusic(titleTheme); // 테마 음악 설정
-        while (true)// Loop the movement
+        isMove = true;
+        while (isMove == true)// Loop the movement
         {
             GetPlayer.gameObject.SetActive(true);
             float normalize = 0f;
@@ -153,6 +174,7 @@ public class Title_Manager : MonoBehaviour
                 Vector3 startPosition = new Vector3(startPoint.position.x, GetPlayer.transform.position.y, startPoint.position.z);
                 Vector3 endPosition = new Vector3(endPoint.position.x, GetPlayer.transform.position.y, endPoint.position.z);
                 GetPlayer.transform.position = Vector3.Lerp(startPosition, endPosition, normalize);
+                GetPlayer.transform.rotation = Quaternion.Slerp(GetPlayer.transform.rotation, Quaternion.LookRotation(endPosition - startPosition), Time.deltaTime * speed * 10f);
                 yield return null;
 
                 string shipPosition = "_ShipPosition";

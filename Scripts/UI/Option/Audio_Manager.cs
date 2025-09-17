@@ -6,7 +6,7 @@ using static Data_Manager.Data_Option;
 
 public class Audio_Manager : MonoBehaviour
 {
-    public Button prevButton, nextButton;
+    public Custom_Button prevButton, nextButton;
     public TMP_Text audioText;
     public int currentAudio;
     public string[] audioStrings;
@@ -23,8 +23,8 @@ public class Audio_Manager : MonoBehaviour
         {
             tryStringToIndex[audioStrings[i]] = i;
         }
-        prevButton.onClick.AddListener(delegate { NextButton(-1); });
-        nextButton.onClick.AddListener(delegate { NextButton(1); });
+        prevButton.SetButton(delegate { NextButton(-1); }, OnArrowButton, OffArrowButton);
+        nextButton.SetButton(delegate { NextButton(1); }, OnArrowButton, OffArrowButton);
 
         master_Mute.onValueChanged.AddListener(MasterMute);
         master_Slider.onValueChanged.AddListener(MasterVolume);
@@ -159,5 +159,19 @@ public class Audio_Manager : MonoBehaviour
     {
         string soundName = "pop-39222";
         Singleton_Audio.INSTANCE.Audio_FX(soundName);
+    }
+
+    public Sprite onArrow, offArrow;
+
+    void OnArrowButton(Custom_Button _button)
+    {
+        _button.GetButtonImage.sprite = onArrow;
+        _button.GetButtonImage.CrossFadeAlpha(1f, 0.1f, false);
+    }
+
+    void OffArrowButton(Custom_Button _button)
+    {
+        _button.GetButtonImage.sprite = offArrow;
+        _button.GetButtonImage.CrossFadeAlpha(0.5f, 0.1f, false);
     }
 }

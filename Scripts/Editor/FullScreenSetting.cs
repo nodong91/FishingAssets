@@ -5,8 +5,6 @@ using UnityEditor;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Rendering;
 using System.Reflection;
-//using static UnityEditor.Rendering.CameraUI;
-//using UnityEngine.UI.Extensions;
 
 namespace P01.Editor
 {
@@ -41,7 +39,7 @@ namespace P01.Editor
                 alignment = TextAnchor.MiddleCenter
             };
             float height = 20f;
-            float width = position.width * 0.5f;
+            //float width = position.width * 0.5f;
             EditorGUILayout.BeginVertical();
             if (GUILayout.Button("»ç¿ë¹ý", buttonText, GUILayout.Height(20f)))
             {
@@ -89,8 +87,7 @@ namespace P01.Editor
         }
 
         ScriptableRendererData scriptableRendererData;
-        FullScreenPassRendererFeature.InjectionPoint injectionPoint =
-            FullScreenPassRendererFeature.InjectionPoint.AfterRenderingPostProcessing;
+        FullScreenPassRendererFeature.InjectionPoint injectionPoint = FullScreenPassRendererFeature.InjectionPoint.AfterRenderingPostProcessing;
         int featureIndex = 0;
         void SetRendererFeature()
         {

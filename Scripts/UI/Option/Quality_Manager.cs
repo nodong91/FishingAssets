@@ -121,7 +121,7 @@ public class Quality_Manager : MonoBehaviour
         frameRateDropdown.ClearOptions();
         HashSet<string> options = new HashSet<string>();
         int currentResolutionIndex = -1;
-        for (int i = 10; i <= 120; i += 10)
+        for (int i = 30; i <= 120; i += 30)
         {
             frameList.Add(i);
             options.Add(i.ToString() + "Hz");

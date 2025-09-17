@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
 using static Data_Quest;
-using static UI_Inventory;
 using static UI_Inventory_Base;
 using static UI_Inventory_Slot;
 

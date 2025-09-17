@@ -250,12 +250,12 @@ public class Static_JsonManager
         public string name;
         public int lastSetDay;
         public Vector2Int invenSize;
-        public List<UI_Inventory_Base.SaveItemClass> invenClass;
+        public List<UI_Inventory_Base.SaveItemClass> itemClass;
     }
 
     public static void SaveInventory(string fileName, InventoryData _data)
     {
-        Debug.LogWarning($"저장 : {fileName} {(fileName == null || fileName.Length == 0)}");
+        Debug.LogWarning($"저장 : {fileName} ({(fileName == null || fileName.Length == 0)})");
         if (fileName == null || fileName.Length == 0)
             return;
 

@@ -118,12 +118,13 @@ public class Fishing_Manager : MonoBehaviour
 
     void SetFishList()
     {
-        int fishingAmount = Random.Range(1, 5);// 낚시 횟수
+        int addSkillAmount = 0;// 낚시 스킬로 추가 횟수
+        int fishingAmount = Random.Range(1, 5) + addSkillAmount;// 낚시 횟수
         dayType = Game_Manager.current.GetMainUI.timeUI.lightMode;
         string cordType = areaType.ToString() + dayType.ToString();
         // 물고기 세팅
         fishQueue.Clear();
-        for (int i = 0; i < fishingAmount; i++)
+        while (fishingAmount > fishQueue.Count)
         {
             if (TryFishStruct(cordType, out FishStruct _fish) == true)
             {
@@ -133,12 +134,12 @@ public class Fishing_Manager : MonoBehaviour
         }
     }
 
-    bool TryFishStruct(string _type, out FishStruct _fish)
+    bool TryFishStruct(string _type, out FishStruct _fish)// 해당 타입 물고기 중 랜덤
     {
         if (dictFishStruct.ContainsKey(_type))
         {
             List<FishStruct> fishList = dictFishStruct[_type];// 해당 타입 물고기 리스트
-            FishStruct randomFish = Chance(fishList);
+            FishStruct randomFish = FishingChance(fishList);
             _fish = randomFish;
             return true;
         }
@@ -147,37 +148,41 @@ public class Fishing_Manager : MonoBehaviour
         return false;
     }
 
-    FishStruct Chance(List<FishStruct> _fishList)
+    FishStruct FishingChance(List<FishStruct> _fishList)// 확률로 물고기 선택
     {
         float total = 0;
         for (int i = 0; i < _fishList.Count; i++)
         {
-            float fishProbability = TryFishProbability(_fishList[i].itemStruct.itemClass);
+            float fishProbability = GetProbability(_fishList[i].itemStruct.itemClass);
             total += fishProbability;
         }
 
         float randomPoint = Random.value * total;
         for (int i = 0; i < _fishList.Count; i++)
         {
-            if (randomPoint < TryFishProbability(_fishList[i].itemStruct.itemClass))
+            float fishProbability = GetProbability(_fishList[i].itemStruct.itemClass);
+            if (randomPoint < fishProbability)
             {
                 return _fishList[i];
             }
             else
             {
-                randomPoint -= TryFishProbability(_fishList[i].itemStruct.itemClass);
+                randomPoint -= fishProbability;
             }
         }
         return _fishList[^1];
     }
 
-    float TryFishProbability(ItemStruct.ItemClass _class)
+    float GetProbability(ItemStruct.ItemClass _class)
     {
+        float skillIndex = 0;
         // 물고기 클래스별 확률
         return _class switch
         {
-            ItemStruct.ItemClass.Common => 0.6f + (1f - 0.6f) * 0.5f,
-            ItemStruct.ItemClass.Uncommon => 0.25f,
+            // 필요한 물고기가 안나올 확률????? - 낮은 클래스 물고기 안나올 수 있음
+            // 미끼로 확률 조정하는게???
+            ItemStruct.ItemClass.Common => 0.6f + (1f - 0.6f) * 0.5f * skillIndex,
+            ItemStruct.ItemClass.Uncommon => 0.25f + (1f - 0.25f) * 0.5f * skillIndex,
             ItemStruct.ItemClass.Rare => 0.1f,
             ItemStruct.ItemClass.Epic => 0.04f,
             ItemStruct.ItemClass.Legendary => 0.01f,

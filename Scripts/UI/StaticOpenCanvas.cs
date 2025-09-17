@@ -65,9 +65,15 @@ public static class StaticOpenCanvas
                 Vector2 rectPosition = Vector2.Lerp(_canvasStructs[i].targetPosition, Vector2.zero, setLerp);
                 _canvasStructs[i].rect.anchoredPosition = rectPosition;
                 if (_canvasStructs[i].canvasGroup != null)
+                {
                     _canvasStructs[i].canvasGroup.alpha = setLerp;
-
-                _canvasStructs[i].rect.gameObject.SetActive(setLerp > 0);
+                    _canvasStructs[i].canvasGroup.interactable = setLerp > 0;
+                    _canvasStructs[i].canvasGroup.blocksRaycasts = setLerp > 0;
+                }
+                else
+                {
+                    _canvasStructs[i].rect.gameObject.SetActive(setLerp > 0);
+                }
             }
             yield return null;
         }

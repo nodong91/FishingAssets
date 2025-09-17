@@ -164,20 +164,13 @@ public class Skill_Manager : MonoBehaviour
         grid.constraintCount = skillMap.x;
     }
 
-    public void AddSlot(Vector2Int _addNode)// 스킬 슬롯 추가
+    void AddSlot(Vector2Int _addNode)// 스킬 활성화
     {
-        //ActiveSlot(_addNode);
         enableSlotLIst.Add(_addNode);
         SetSlot(_addNode);
         Singleton_Audio.INSTANCE.Audio_FX("beep-6-96243");
         Static_JsonManager.SaveEnableSkillData(saveEnableData, enableSlotLIst);// 활성화 된 스킬 저장
     }
-
-    //void ActiveSlot(Vector2Int _addNode)// 스킬 슬롯 활성화
-    //{
-    //    SetSlot(_addNode);
-    //    Singleton_Audio.INSTANCE.Audio_FX("beep-6-96243");
-    //}
 
     void SetSlot(Vector2Int _addNode)
     {

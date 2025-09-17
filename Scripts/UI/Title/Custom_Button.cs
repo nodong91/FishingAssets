@@ -7,14 +7,15 @@ using UnityEngine.UI;
 public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Image buttonImage;
-    Action actionClick, actionExit;
-    Action<GameObject> actionEnter;
+    public Image GetButtonImage { get { return buttonImage; } }
+    Action actionClick;
+    Action<Custom_Button> actionEnter, actionExit;
 
-    public void SetButton(Action _click, Action<GameObject> _enter = null,Action _exit = null)
+    public void SetButton(Action _click, Action<Custom_Button> _enter = null, Action<Custom_Button> _exit = null)
     {
         actionClick = _click;
         actionEnter = _enter;
-        actionExit= _exit;
+        actionExit = _exit;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -26,14 +27,14 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     public void OnPointerEnter(PointerEventData eventData)
     {
         Cursor_Manager.current?.OnMouseOver();
-        actionEnter?.Invoke(this.gameObject);
+        actionEnter?.Invoke(this);
         transform.localScale = Vector3.one * 1.2f;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         Cursor_Manager.current?.OnMouseExit();
-        actionExit?.Invoke();
+        actionExit?.Invoke(this);
         transform.localScale = Vector3.one;
     }
 }

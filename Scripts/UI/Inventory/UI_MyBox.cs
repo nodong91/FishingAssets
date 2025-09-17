@@ -18,6 +18,16 @@ public class UI_MyBox : UI_Inventory_Base
         SetInventoryItem(saveData);
     }
 
+    public void AddInventory(Vector2Int _inventorySize)
+    {
+        if (inventorySize == _inventorySize)
+            return;
+        Debug.LogWarning($"인벤토리 사이즈 변경 {inventorySize} -> {_inventorySize}");
+        GetSaveInventoryData.invenSize = _inventorySize;
+        Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 창닫힐 때 저장
+        SetInventoryItem(saveData);
+    }
+
     public override void OpenCanvas(bool _open)
     {
         base.OpenCanvas(_open);

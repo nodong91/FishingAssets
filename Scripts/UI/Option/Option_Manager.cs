@@ -5,7 +5,7 @@ using static Data_Manager;
 public class Option_Manager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
-    public Button closeButton;
+    public Custom_Button closeButton;
     public Custom_Button goTitleButton, goExitButton;
     const string saveData = "SaveOptionData";
     public Data_Option optionData;
@@ -34,12 +34,13 @@ public class Option_Manager : MonoBehaviour
         audioManager.SetStart();// 오디오 매니저 세팅
         qualityManager.SetStart();// 퀄리티 매니저 세팅
 
-        closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
+        closeButton.SetButton(delegate { OpenCanvas(false); });
         SetToggle();
 
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 저장 안하고 닫기
     }
-
+    public delegate void DeleCloseOption();
+    public DeleCloseOption deleCloseOption;
     public void OpenCanvas(bool _open)
     {
         StaticOpenCanvas.deleEndOpen = EndOpenCanvas;
@@ -48,6 +49,11 @@ public class Option_Manager : MonoBehaviour
         if (_open == true)
         {
             screenStruct[0].toggle.isOn = true;
+        }
+        else if (deleCloseOption != null)
+        {
+            deleCloseOption.Invoke();
+            deleCloseOption = null;
         }
     }
 
@@ -69,7 +75,7 @@ public class Option_Manager : MonoBehaviour
         goExitButton.SetButton(GoExit, EnterButton);
     }
 
-    void EnterButton(GameObject _button)
+    void EnterButton(Custom_Button _button)
     {
         string soundName = "pop-39222";
         Singleton_Audio.INSTANCE.Audio_FX(soundName);

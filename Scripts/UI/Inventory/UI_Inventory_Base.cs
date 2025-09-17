@@ -46,6 +46,7 @@ public class UI_Inventory_Base : MonoBehaviour
     public void SetInventoryItem(string _saveData)// 기존 비우고 다시 세팅
     {
         saveData = _saveData;
+
         if (loadingItem != null)
             StopCoroutine(loadingItem);
         loadingItem = StartCoroutine(SetLoadingItem());
@@ -53,7 +54,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
     IEnumerator SetLoadingItem()
     {
-        EmptyInventory();
+        EmptyInventoryAllSlot();
         LoadInventory();
         while (saveInventoryData == null)
             yield return null;
@@ -62,7 +63,7 @@ public class UI_Inventory_Base : MonoBehaviour
         yield return null;
 
         LoadItem(saveInventoryData);
-        SetLoadDestroy();
+        SetLoadDestroy();// 부서진 슬롯 세팅
     }
 
     public virtual void OpenCanvas(bool _open)
@@ -76,7 +77,7 @@ public class UI_Inventory_Base : MonoBehaviour
         Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 창닫힐 때 저장
     }
 
-    public void EmptyInventory()
+    public void EmptyInventoryAllSlot()
     {
         if (allSlots == null)
             return;
@@ -87,7 +88,8 @@ public class UI_Inventory_Base : MonoBehaviour
                 continue;
 
             UI_Inventory_Slot slot = item.GetLinkSlot;
-            SlotEmpty(slot);
+            //SlotEmpty(slot);
+            SetEmptySlot(slot);
         }
     }
 
@@ -103,7 +105,7 @@ public class UI_Inventory_Base : MonoBehaviour
         }
 
         inventorySize = _size;
-        gridLayoutGroup.cellSize = new Vector2(1f, 1f) * slotSize;
+        gridLayoutGroup.cellSize = Vector2.one * slotSize;
         gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         gridLayoutGroup.constraintCount = inventorySize.x;
 
@@ -137,45 +139,40 @@ public class UI_Inventory_Base : MonoBehaviour
         return inst;
     }
 
-    public void SlotEmpty(UI_Inventory_Slot _slot)// 비우기
+    public void SlotEmpty(UI_Inventory_Slot _slot)
+    {
+        SetEmptySlot(_slot);
+        SaveDictionary();
+    }
+
+    void SetEmptySlot(UI_Inventory_Slot _slot)// 비우기
     {
         dictItemClass.Remove(_slot.slotNum);
-        SaveDictionary();
 
         SetWeight(-_slot.itemClass.item.weight);// 무게 빼기
-        iconQueue.Enqueue(_slot.GetSlotImage);
-        _slot.GetSlotImage.gameObject.SetActive(false);
+        iconQueue.Enqueue(_slot.GetSlotImage);// 이미지 풀에 넣기
+        _slot.GetSlotImage.gameObject.SetActive(false);// 이미지 비활성화
 
+        // 링크 슬롯 비우기
         Vector2Int[] shape = _slot.itemClass.shape;
-        _slot.SetEmpty();// 메인 슬롯 비우기
-
-        Debug.LogWarning($"SetEmptySlot {_slot.slotNum.x} : {_slot.slotNum.y} ({shape.Length})");
-        if (shape == null)
-            return;
-        // 사이즈
-        for (int i = 0; i < shape.Length; i++)
+        if (shape != null)// 링크 슬롯 비우기
         {
-            int slotX = _slot.slotNum.x + shape[i].x;
-            int slotY = _slot.slotNum.y + shape[i].y;
-            allSlots[slotX, slotY].SetEmpty();
+            for (int i = 0; i < shape.Length; i++)
+            {
+                int slotX = _slot.slotNum.x + shape[i].x;
+                int slotY = _slot.slotNum.y + shape[i].y;
+                allSlots[slotX, slotY].SetEmpty();
+            }
         }
+        _slot.SetEmpty();// 메인 슬롯 비우기
     }
 
     public void SetSlot(UI_Inventory_Slot _slot, ItemClass _itemClass)
     {
-        dictItemClass[_slot.slotNum] = _itemClass;
-        SaveDictionary();
-
         _slot.SetBase(_itemClass);// 메인 슬롯
         if (_itemClass != null)// 비워져 있는지
         {
-            SetWeight(_itemClass.item.weight);// 무게 세팅
-
-            Image iconImage = IconPool();
-            iconImage.transform.SetPositionAndRotation(_slot.transform.position, Quaternion.Euler(0f, 0f, _itemClass.angle));
-            SetImage(iconImage, _itemClass.item);
-            _slot.SetSlotImage = iconImage;// 이미지 세팅
-            // 슬롯 세팅
+            // 링크 슬롯 세팅
             Vector2Int[] shape = _itemClass.shape;
             if (shape != null)
             {
@@ -186,7 +183,17 @@ public class UI_Inventory_Base : MonoBehaviour
                     allSlots[slotX, slotY].SetLink(_slot);
                 }
             }
+            SetWeight(_itemClass.item.weight);// 무게 세팅
+            Image iconImage = IconPool();// 이미지 풀에서 가져오기
+            iconImage.gameObject.SetActive(true);
+            iconImage.transform.position = _slot.transform.position;
+            iconImage.transform.rotation = Quaternion.Euler(0f, 0f, _itemClass.angle);
+
+            _slot.SetSlotImage = iconImage;// 슬롯에 이미지 세팅
+            SetImage(iconImage, _itemClass.item);// 이미지 세팅
         }
+        dictItemClass[_slot.slotNum] = _itemClass;
+        SaveDictionary();
     }
 
     Image IconPool()
@@ -207,7 +214,6 @@ public class UI_Inventory_Base : MonoBehaviour
         _image.sprite = _itemStruct.icon;
         _image.rectTransform.sizeDelta = size * slotSize;
         _image.rectTransform.pivot = pivot;
-        _image.gameObject.SetActive(true);
     }
 
     public UI_Inventory_Slot GetEmptySlot(ItemStruct _item)// 빈슬롯 찾기
@@ -379,7 +385,6 @@ public class UI_Inventory_Base : MonoBehaviour
     }
     Static_JsonManager.InventoryData saveInventoryData;
     public Static_JsonManager.InventoryData GetSaveInventoryData { get { return saveInventoryData; } }
-    Vector2Int defaultInvenSize = new Vector2Int(4, 4);
 
     void SaveDictionary()
     {
@@ -395,12 +400,12 @@ public class UI_Inventory_Base : MonoBehaviour
             };
             saveItems.Add(dictCheck);
         }
-
+        Debug.LogWarning("                          saveItems.Count                   " + saveItems.Count);
         saveInventoryData = new Static_JsonManager.InventoryData
         {
             lastSetDay = Game_Manager.current.GetTimeUI.day,
             invenSize = inventorySize,
-            invenClass = saveItems,
+            itemClass = saveItems,
         };
     }
 
@@ -412,11 +417,12 @@ public class UI_Inventory_Base : MonoBehaviour
         }
         else
         {
+
             saveInventoryData = new Static_JsonManager.InventoryData
             {
                 lastSetDay = -1,
-                invenSize = defaultInvenSize,
-                invenClass = new List<SaveItemClass>(),
+                invenSize = Game_Manager.current.defaultStatusData.defaultStatus.maxBoxSize,
+                itemClass = new List<SaveItemClass>(),
             };
             //Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 디폴트로 저장
         }
@@ -425,16 +431,18 @@ public class UI_Inventory_Base : MonoBehaviour
     void LoadItem(Static_JsonManager.InventoryData _data)
     {
         inventorySize = _data.invenSize;
-        for (int i = 0; i < _data.invenClass.Count; i++)
+        for (int i = 0; i < _data.itemClass.Count; i++)
         {
+            // 새로운 클라스 캡슐화
             ItemClass itemClass = new ItemClass
             {
-                item = Singleton_Data.INSTANCE.GetItemStruct(_data.invenClass[i].id),
-                angle = _data.invenClass[i].angle,
-                shape = _data.invenClass[i].shape,
-                acquisition = _data.invenClass[i].acquisition,
-            };// 새로운 클라스 캡슐화
-            UI_Inventory_Slot slot = allSlots[_data.invenClass[i].slotNum.x, _data.invenClass[i].slotNum.y];
+                item = Singleton_Data.INSTANCE.GetItemStruct(_data.itemClass[i].id),
+                angle = _data.itemClass[i].angle,
+                shape = _data.itemClass[i].shape,
+                acquisition = _data.itemClass[i].acquisition,
+            };
+            Vector2Int slotNum = _data.itemClass[i].slotNum;
+            UI_Inventory_Slot slot = allSlots[slotNum.x, slotNum.y];
             SetSlot(slot, itemClass);
         }
     }
@@ -466,7 +474,7 @@ public class UI_Inventory_Base : MonoBehaviour
     public List<Vector2Int> destroySlot = new List<Vector2Int>();
     public void DistroySlot()// 슬롯 부수기
     {
-        if(destroySlot == null)
+        if (destroySlot == null)
             destroySlot = new List<Vector2Int>();
         Debug.LogWarning(allSlots);
         Debug.LogWarning(destroySlot);

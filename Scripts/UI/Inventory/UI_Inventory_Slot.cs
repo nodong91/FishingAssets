@@ -7,7 +7,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
 {
     public bool empty, destroy;
     public Vector2Int slotNum;
-    public TMPro.TMP_Text m_Text;
+    //public TMPro.TMP_Text m_Text;
     public Image checkImage;
     public Image destroyImage;
     private Image itemImage;
@@ -81,8 +81,8 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     public void SetStart(int _x, int _y)
     {
         slotNum = new Vector2Int(_x, _y);
-        m_Text.text = _x + "/" + _y;
-        gameObject.name = m_Text.text;
+        //m_Text.text = _x + "/" + _y;
+        //gameObject.name = m_Text.text;
         CheckOff();
 
         destroy = false;
