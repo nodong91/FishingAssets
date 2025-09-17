@@ -43,7 +43,9 @@ public class Skill_Infomation : MonoBehaviour
             return;
 
         text_Neme.text = _status.name;
-        text_Description.text = _status.description;
+        int fontSize = (int)(text_Description.fontSize * 0.7f);
+        string addStatusString = $"\n<size={fontSize}>{_status.addStatusString}</size>";
+        text_Description.text = _status.description + addStatusString;
         text_Price.text = _status.price.ToString();
 
     }
@@ -56,7 +58,7 @@ public class Skill_Infomation : MonoBehaviour
             normalize += Time.deltaTime * 5f;
             yield return null;
 
-            if(_alpha > 0)
+            if (_alpha > 0)
             {
                 rect.pivot = Vector2.Lerp(rect.pivot, _viewportPoint, normalize);
                 //rect.transform.position = _position;

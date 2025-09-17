@@ -2,8 +2,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using static Data_Manager;
 
-
-
 #if UNITY_EDITOR
 using UnityEditor;
 
@@ -24,7 +22,6 @@ namespace P01.Editor
         SkillStatus[,] statusStructs;
         SerializedObject targetObject;
         bool tutorialToggle;
-        const string saveTreeData = "Skill_Tree";
         Data_SkillTree skillTreeData;
         Vector2Int startSlot;
 

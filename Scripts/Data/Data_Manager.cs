@@ -227,7 +227,7 @@ public class Data_Manager : Data_Parse
 
         [Header(" [ Fish ]")]
         public float LuckFish;// Èñ±Í ¹°°í±â È®·ü
-        public float FishAmount;// ³¬½Ã È½¼ö Áõ°¡
+        public int FishAmount;// ³¬½Ã È½¼ö Áõ°¡
         public float FishPrice;// ÆÇ¸Å ¹°°í±â °¡°Ý Áõ°¡
 
         public void SettingStatus(SetStatus _status)
@@ -245,7 +245,7 @@ public class Data_Manager : Data_Parse
             shipHealth = _status.shipHealth;
             freshness = _status.freshness;
             LuckFish = _status.LuckFish;
-            FishAmount = _status.FishPrice;
+            FishAmount = _status.FishAmount;
             FishPrice = _status.FishPrice;
         }
 
@@ -264,7 +264,7 @@ public class Data_Manager : Data_Parse
             shipHealth += _status.shipHealth * _remove;
             freshness += _status.freshness * _remove;
             LuckFish += _status.LuckFish * _remove;
-            FishAmount += _status.FishPrice * _remove;
+            FishAmount += _status.FishAmount * _remove;
             FishPrice += _status.FishPrice * _remove;
         }
     }
@@ -273,7 +273,9 @@ public class Data_Manager : Data_Parse
     public class SkillStatus
     {
         public string name;
+        [TextArea]
         public string description;
+        public string addStatusString;
         public string icon;
         public int price; // °¡°Ý Á¤º¸
         public SetStatus addStatus;

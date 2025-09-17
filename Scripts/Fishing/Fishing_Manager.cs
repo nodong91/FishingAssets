@@ -118,7 +118,7 @@ public class Fishing_Manager : MonoBehaviour
 
     void SetFishList()
     {
-        int addSkillAmount = 0;// ³¬½Ã ½ºÅ³·Î Ãß°¡ È½¼ö
+        int addSkillAmount = Game_Manager.current.currentStatus.FishAmount;// ³¬½Ã ½ºÅ³·Î Ãß°¡ È½¼ö
         int fishingAmount = Random.Range(1, 5) + addSkillAmount;// ³¬½Ã È½¼ö
         dayType = Game_Manager.current.GetMainUI.timeUI.lightMode;
         string cordType = areaType.ToString() + dayType.ToString();
@@ -175,7 +175,7 @@ public class Fishing_Manager : MonoBehaviour
 
     float GetProbability(ItemStruct.ItemClass _class)
     {
-        float skillIndex = 0;
+        float skillIndex = Game_Manager.current.currentStatus.LuckFish;
         // ¹°°í±â Å¬·¡½ºº° È®·ü
         return _class switch
         {

@@ -85,12 +85,26 @@ public class Title_Manager : MonoBehaviour
         LoadingManager.current.GoMain();
     }
 
+    private UI_Popup instNewGamePopup;
+    public UI_Popup GetUIPopup
+    {
+        get
+        {
+            if (instNewGamePopup == null)
+            {
+                instNewGamePopup = Instantiate(newGamePopup, transform);
+                instNewGamePopup.SetStart();
+            }
+            return instNewGamePopup;
+        }
+    }
+
     void NewStartButton()
     {
         if (FindFolder() == true)
         {
-            newGamePopup.SetStart();
-            newGamePopup.buttonAction = NewGamePopup;
+            GetUIPopup.buttonAction = NewGamePopup;
+            GetUIPopup.OpenCanvas(true);
         }
         else
         {
@@ -100,6 +114,7 @@ public class Title_Manager : MonoBehaviour
 
     void NewGamePopup(bool _action)
     {
+        Debug.Log("NewGamePopup : " + _action);
         if (_action == true)
         {
             StartCoroutine(RemoveSaveFile());

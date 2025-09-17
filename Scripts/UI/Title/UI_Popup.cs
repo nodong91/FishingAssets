@@ -7,19 +7,15 @@ public class UI_Popup : MonoBehaviour
     public delegate void DeleButtonAction(bool _action);
     public DeleButtonAction buttonAction;
 
-    private void Start()
-    {
-        OpenCanvas(false);
-    }
-
     public void SetStart()
     {
-        yesButton.SetButton(YesButton);
-        noButton.SetButton(NoButton);
-        OpenCanvas(true);
+        yesButton.SetButton(YesButton, Button_Enter, Button_Exit);
+        noButton.SetButton(NoButton, Button_Enter, Button_Exit);
+        Button_Exit(yesButton);
+        Button_Exit(noButton);
     }
 
-    void OpenCanvas(bool _open)
+    public void OpenCanvas(bool _open)
     {
         StaticOpenCanvas.deleEndOpen = null;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
@@ -35,5 +31,15 @@ public class UI_Popup : MonoBehaviour
     {
         buttonAction?.Invoke(false);
         OpenCanvas(false);
+    }
+
+    void Button_Enter(Custom_Button _button)
+    {
+        _button.buttonImage.gameObject.SetActive(true);
+    }
+
+    void Button_Exit(Custom_Button _button)
+    {
+        _button.buttonImage.gameObject.SetActive(false);
     }
 }
