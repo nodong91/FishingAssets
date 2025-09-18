@@ -1,0 +1,247 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
+
+public class Gamble_Lottery : MonoBehaviour
+{
+    public Data_Lotto data;
+
+    public LineRenderer lineRenderer;
+    LineRenderer instLine;
+    //public Transform target;
+    //[SerializeField] Transform observer; // 이건 우리 단순화된 플레이어 캐릭터
+    private float distanceToWorldPlane = 10f; // 이건 카메라랑 우리 캐릭터가 사는 평면 사이의 거리
+    //[SerializeField] Camera playerCamera; // 이건 우리 카메라
+    public Transform slotParent;
+    public Gamble_Lotto_Slot answerSlot;
+    Gamble_Lotto_Slot setEnterSlot;
+    //Vector3 mouseWorldLocation; // 이건 플레이어 캐릭터가 바라봐야 할 곳
+
+    private RenderTexture maskTexture;
+    public Camera maskCamera;
+
+    public RawImage maskImage;
+
+    Vector3 point;
+
+    public Custom_Button resetButton;
+    private List<Vector3> positionsList = new List<Vector3>();
+    private List<LineRenderer> lineList = new List<LineRenderer>();
+    private Queue<LineRenderer> lineQueue = new Queue<LineRenderer>();
+    public List<Gamble_Lotto_Slot> slotList = new List<Gamble_Lotto_Slot>();
+    Queue<Gamble_Lotto_Slot> slotQueue = new Queue<Gamble_Lotto_Slot>();
+
+    public TMPro.TMP_Text testText;
+    public int sellPrice;
+    public bool isAnswer, isWinner;
+
+    void Start()
+    {
+        resetButton.SetButton(CloseButton);
+        maskTexture = new RenderTexture(Screen.width, Screen.height, 24);
+        maskTexture.useMipMap = true;
+        maskImage.texture = maskTexture;
+
+        maskCamera.enabled = false;
+        maskCamera.targetTexture = maskTexture;
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            positionsList.Clear();
+            instLine = TryLine();
+            lineList.Add(instLine);
+
+            point = SetWorldPoint();
+            SetPoint(point);
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            point = SetWorldPoint();
+            float distance = (point - positionsList[^1]).magnitude;
+            if (distance > 0.1f)
+            {
+                SetPoint(point);// 일정거리가 멀어지면 포인트 기입
+                if (setEnterSlot == answerSlot)
+                {
+                    isAnswer = true;
+                }
+                else if (slotList.Contains(setEnterSlot) == true)// 열었는지 확인
+                {
+                    slotQueue.Enqueue(setEnterSlot);
+                    slotList.Remove(setEnterSlot);
+                }
+                // 체크
+                if (isAnswer == true)
+                {
+                    if (answerSlot != setEnterSlot && answerSlot.iconImage.sprite == setEnterSlot.iconImage.sprite)
+                    {
+                        isWinner = true;
+                        testText.text = $"당첨!!!!!! : {sellPrice}";
+                    }
+                    else if (isWinner == false && slotList.Count == 0)
+                    {
+                        testText.text = "노당첨!!!!!!";
+                    }
+                }
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        maskCamera.Render();
+    }
+
+    private void ResetButton()
+    {
+        isWinner = false;
+        isAnswer = false;
+        testText.text = "";
+        SetLotto();
+    }
+
+    public void SetLotto()
+    {
+        // 기존 슬롯, 라인 초기화
+        for (int i = 0; i < slotList.Count; i++)
+        {
+            slotQueue.Enqueue(slotList[i]);
+        }
+        for (int i = 0; i < lineList.Count; i++)
+        {
+            lineList[i].positionCount = 0;
+            lineQueue.Enqueue(lineList[i]);
+        }
+
+        slotList.Clear();
+        lineList.Clear();
+        positionsList.Clear();
+
+        SetRandom();
+    }
+
+    void SetRandom()
+    {
+        List<Data_Lotto.LottoSlot> lottoSlots = data.SetRandom(out Sprite _mainSprite, out int _sellPrice);// 미리 당첨 슬롯, 가격 세팅
+        sellPrice = _sellPrice;
+        answerSlot.SetSlot(_mainSprite, 0);
+        answerSlot.deleEnterSlot = EnterSlot;
+
+        for (int i = 0; i < lottoSlots.Count; i++)
+        {
+            Gamble_Lotto_Slot inst = TrySlot();
+            inst.SetSlot(lottoSlots[i].sprite, lottoSlots[i].reward);
+            inst.deleEnterSlot = EnterSlot;
+            slotList.Add(inst);
+        }
+    }
+
+    void EnterSlot(Gamble_Lotto_Slot _slot)
+    {
+        Debug.LogWarning(_slot);
+        if (_slot != null)
+            setEnterSlot = _slot;
+    }
+
+    Gamble_Lotto_Slot TrySlot()
+    {
+        if (slotQueue.Count > 0)
+            return slotQueue.Dequeue();
+        Gamble_Lotto_Slot inst = Instantiate(answerSlot, slotParent);
+        return inst;
+    }
+
+    LineRenderer TryLine()
+    {
+        if (lineQueue.Count > 0)
+        {
+            return lineQueue.Dequeue();
+        }
+        LineRenderer inst = Instantiate(lineRenderer, transform);
+        return inst;
+    }
+
+    Vector3 SetWorldPoint()
+    {
+        Vector3 mousePoint = Input.mousePosition; // 이건 커서의 x, y 픽셀 위치를 가져오는데, z는 항상 0.0f임. 화면이 2D라서 깊이가 없거든
+        mousePoint.z = distanceToWorldPlane; // 그래서 z를 우리 캐릭터가 사는 평면이랑 카메라 사이의 거리로 바꿔줌
+        return maskCamera.ScreenToWorldPoint(mousePoint);
+
+    }
+
+    void SetPoint(Vector3 _point)
+    {
+        positionsList.Add(_point);
+        Vector3[] positions = positionsList.ToArray();
+        instLine.positionCount = positions.Length;
+        instLine.SetPositions(positions);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public GameObject target;
+    public CanvasGroup canvasGroup;
+    public void OpenCanas()
+    {
+        ResetButton();
+        StartCoroutine(OpenCanvas());
+    }
+
+    IEnumerator OpenCanvas()
+    {
+        canvasGroup.gameObject.SetActive(true);
+        canvasGroup.alpha = 1f;
+        Vector3 prevPoint = Input.mousePosition;
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime * 10f;
+            Vector3 actionPoint = Vector3.Lerp(prevPoint, target.transform.position, normalize);
+            canvasGroup.transform.position = actionPoint;
+            float rotate = Mathf.Lerp(45f, 0f, normalize);
+            canvasGroup.transform.rotation = Quaternion.Euler(0f, 0f, rotate);
+            float size = Mathf.Lerp(0f, 1f, normalize);
+            canvasGroup.transform.localScale = Vector3.one * size;
+            yield return null;
+        }
+    }
+    Coroutine openCanvas;
+    void CloseButton()
+    {
+        if (openCanvas != null)
+            StopCoroutine(openCanvas);
+        openCanvas = StartCoroutine(CloseCanvas());
+    }
+
+    IEnumerator CloseCanvas()
+    {
+        Vector3 prevPoint = canvasGroup.transform.position;
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime * 10f;
+            Vector3 actionPoint = Vector3.Lerp(prevPoint, target.transform.position + Vector3.up * 500f, normalize);
+            canvasGroup.transform.position = actionPoint;
+            float alpha = Mathf.Lerp(0f, 1, normalize);
+            canvasGroup.alpha = 1f - alpha;
+            yield return null;
+        }
+        canvasGroup.gameObject.SetActive(false);
+    }
+}

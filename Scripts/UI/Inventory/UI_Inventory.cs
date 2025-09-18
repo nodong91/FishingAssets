@@ -171,7 +171,9 @@ public class UI_Inventory : MonoBehaviour
     void SellItem(string _id)
     {
         ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_id);
-        float price = item.price;
+        float addPrice = item.price * Game_Manager.current.currentStatus.FishPrice;
+        float price = Mathf.Round(item.price + addPrice);// 스킬 스탯 추가
+        Debug.LogWarning($"Sell Item: {item.name} for {item.price} or {price}");
         Game_Manager.current.GetMainUI.MoveMoney(price);
     }
 
@@ -195,94 +197,87 @@ public class UI_Inventory : MonoBehaviour
         getInventory.SlotEmpty(_slot);
     }
 
-    bool TryTradeItem()// 상점
-    {
-        if (selectSlotType == SlotType.Shop && enterSlotType == SlotType.MyBox)// 구매
-        {
-            float price = selectItemClass.item.price;
-            Debug.LogWarning(GetMoney + ">>>>" + price);
-            if (GetMoney < price)
-            {
-                Debug.LogWarning("돈없음");
-                return false;// 돈없음
-            }
-            else
-            {
-                Game_Manager.current.GetMainUI.MoveMoney(-price);
-                Debug.LogWarning("구매");
-            }
-        }
-        else if (selectSlotType == SlotType.MyBox && enterSlotType == SlotType.Shop)// 판매
-        {
-            float price = selectItemClass.item.price;
-            Game_Manager.current.GetMainUI.MoveMoney(price);
-            Debug.LogWarning("판매");
-        }
-        return true;
-    }
-
     //===========================================================================================================================
     // 인풋 컨트롤
     //===========================================================================================================================
     public void OnPointerLeftClick(UI_Inventory_Slot _slot)
     {
+        Debug.LogWarning($"onDrag:{onDrag} onCheck:{onCheck}");
         // 아이템 체크
         if (onDrag == true)// 드래그 중일 때 드랍
         {
-            if (onCheck == true)// 놓을 수 있다.
-            {
-                if (TryTradeItem() == true)// 트레이드가 가능한지
-                {
-                    if (enterSlotType == SlotType.Shop)// 판매
-                    {
-                        Debug.LogWarning("판매");
-                    }
-                    UI_Inventory_Base getInventory = GetInventory(enterSlotType);
-                    getInventory.SetSlot(enterSlot, selectItemClass);
-                }
-                else
-                {
-                    // 돈없음
-                    UI_Inventory_Base getInventory = GetInventory(selectSlotType);
-                    getInventory.SetSlot(selectSlot, originItemClass);
-                    Game_Manager.current.GetMainUI.SetWarnningText("돈 없음");
-                    Debug.LogWarning("돈 없음");
-                }
-            }
-            else// 놓을 수 없다면
-            {
-                if (selectSlot == null)
-                {
-                    // 낚시 성공등 트레이드가 아닌 경우?
-                    Debug.LogError("낚시 성공등 트레이드가 아닌 경우?");
-                }
-                else
-                {
-                    // 놓을 수 없다면 원래 위치로 돌리기
-                    UI_Inventory_Base getInventory = GetInventory(selectSlotType);
-                    getInventory.SetSlot(selectSlot, originItemClass);
-                    Game_Manager.current.GetMainUI.SetWarnningText("놓을 수 없음");
-                    Debug.LogWarning("놓을 수 없음");
-                }
-            }
-            originItemClass = null;
-            OffDragReset();
+            OnDrag();
         }
-        else// 드래그 중이 아닐 때 클릭
+        else// 드래그 중이 아닐 때
         {
-            if (_slot.destroy == true && onRepair == true)
+            OffDrag(_slot);
+        }
+    }
+
+    private void OnDrag()// 드랍
+    {
+        if (selectSlot == null)
+            return;
+
+        if (onCheck == true)// 놓을 수 있다.
+        {
+            if (selectSlotType != enterSlotType)
             {
-                onRepair = false;
-                myBox.FixSlot(_slot);    // 하나씩 수리
-                if (selectSlot != null)// 선택된 슬롯이 있으면
+                if (enterSlotType == SlotType.MyBox)// 구매
                 {
-                    SetEmptySlot(selectSlot);// 선택된 슬롯 비우기
+                    if (GetMoney < selectItemClass.item.price)// 돈이 부족하면
+                    {
+                        UI_Inventory_Base tempSelect = GetInventory(selectSlotType);
+                        tempSelect.SetSlot(selectSlot, originItemClass);// 원래 위치로 돌리기
+                        Game_Manager.current.GetMainUI.NoMoney();// 돈없음
+
+                        originItemClass = null;
+                        OffDragReset();
+                        return;
+                    }
+                    float price = -selectItemClass.item.price;
+                    Game_Manager.current.GetMainUI.MoveMoney(price);
+                }
+                else if (selectSlotType == SlotType.MyBox)// 판매
+                {
+                    SellItem(selectItemClass.item.id);// 드래그 판매
+                    originItemClass = null;
+                    OffDragReset();
+                    return;
                 }
             }
+            // 다른 인벤토리로 이동
+            UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
+            tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
+        }
+        else// 놓을 수 없다면
+        {
+            UI_Inventory_Base getInventory = GetInventory(selectSlotType);
+            getInventory.SetSlot(selectSlot, originItemClass);// 원래 위치로 돌리기
+            Game_Manager.current.GetMainUI.SetWarnningText("놓을 수 없음");
+            Debug.LogWarning("놓을 수 없음");
+        }
+        originItemClass = null;
+        OffDragReset();
+    }
 
+    private void OffDrag(UI_Inventory_Slot _slot)// 픽업
+    {
+        if (onRepair == true && _slot.destroy == true)// 수리 모드에서 파괴 슬롯 클릭
+        {
+            onRepair = false;
+            myBox.FixSlot(_slot);    // 하나씩 수리
+            if (selectSlot != null)// 선택된 슬롯이 있으면
+            {
+                SetEmptySlot(selectSlot);// 선택된 슬롯 비우기
+            }
+        }
+        else
+        {
             if (_slot.empty == true)
                 return;
 
+            onDrag = true;
             // 픽업
             selectSlot = _slot.GetLinkSlot;
             selectItemClass = selectSlot.itemClass;
@@ -298,7 +293,7 @@ public class UI_Inventory : MonoBehaviour
     {
         if (onDrag == true)// 드래그 중일 때
         {
-            SetDragRotate();
+            SetDragRotate();// 회전
         }
         else if (onRepair == true)// 수리 모드일 때
         {
@@ -315,7 +310,7 @@ public class UI_Inventory : MonoBehaviour
                 case SlotType.Shipyard:
                     if (enterSlotType == SlotType.MyBox)// 내 인벤토리일때 판매
                     {
-                        SellItem(selectSlot.itemClass.item.id);
+                        SellItem(selectSlot.itemClass.item.id);// 우클릭   판매
                     }
                     else// 구매
                     {
@@ -330,13 +325,10 @@ public class UI_Inventory : MonoBehaviour
 
                 case SlotType.Storage:// 창고가 열려있을 때 우클릭
                 case SlotType.Result:// 보상
-                    if (enterSlotType == SlotType.MyBox)// 내 인벤토리일때
+                    UI_Inventory_Base getInventory = enterSlotType == SlotType.MyBox ? shop : myBox;
+                    if (getInventory.AddItem(selectSlot.itemClass.item) == true)// 공간이 있으면 슬롯세팅
                     {
-                       
-                    }
-                    else
-                    {
-
+                        SetEmptySlot(selectSlot);// 슬롯 비우기
                     }
                     break;
 
@@ -357,13 +349,28 @@ public class UI_Inventory : MonoBehaviour
         {
             case ItemStruct.ItemType.Fish:
                 UseFish();
-                Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
                 break;
-            case ItemStruct.ItemType.Used:
-                UseItem();
+
+            case ItemStruct.ItemType.Fuel:
+                UsedStruct usedStruct = Singleton_Data.INSTANCE.Dict_Used[selectSlot.itemClass.item.id];
+                Game_Manager.current.GetPlayer.AddEnergy(usedStruct.value);
+                Debug.LogWarning($"에너지 {usedStruct.value}만큼 회복");
+                SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
+
+            case ItemStruct.ItemType.Repare:
+                IndividualRepair();
+                break;
+
             case ItemStruct.ItemType.Quest:
                 Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
+                break;
+
+            case ItemStruct.ItemType.Lottery:// 복권
+                // 사용한 복권인지는 어떻게 체크?
+                // 사용한 복권은 열지 못하게
+                // 사용한 복권이라면 팔때 당첨 금액을 주는 걸로
+                Game_Manager.current.GetLottery.OpenCanas();// 복권 열기
                 break;
         }
     }
@@ -373,22 +380,7 @@ public class UI_Inventory : MonoBehaviour
         Debug.LogWarning("Fish");
     }
 
-    void UseItem()
-    {
-        UsedStruct usedStruct = Singleton_Data.INSTANCE.Dict_Used[selectSlot.itemClass.item.id];
-        switch (usedStruct.usedType)
-        {
-            case UsedStruct.UsedType.Energy:
-                Game_Manager.current.GetPlayer.AddEnergy(usedStruct.value);
-                SetEmptySlot(selectSlot);// 사용한 아이템 비우기
-                break;
-            case UsedStruct.UsedType.Health:
-                IndividualRepair();
-                break;
-        }
-    }
-
-    public void IndividualRepair()
+    public void IndividualRepair()// 수리 모드
     {
         onRepair = true;
         // 하나씩 수리 모드
@@ -435,8 +427,6 @@ public class UI_Inventory : MonoBehaviour
     void DragSlot()
     {
         SetInfomation(null);// 켜져 있던 정보 끄기
-        onDrag = true;
-
         CheckSlot(enterSlotType);
 
         if (slotMoving != null)

@@ -51,7 +51,7 @@ public class SaveData_Continue : MonoBehaviour
         int day = continueData.day;
         Game_Manager.current.GetTimeUI.SetStart(timeSpeed, minute, hour, day);// ½Ã°£
 
-        Game_Manager.current.GetMainUI.TryMoney = continueData.money;// µ·
+        Game_Manager.current.GetMainUI.SetMoney(continueData.money);// µ·
         Game_Manager.current.GetInventory.TryDestroySlot = continueData.destroySlot;// ºÎ¼­Áø ½½·Ô
     }
 
@@ -77,7 +77,7 @@ public class SaveData_Continue : MonoBehaviour
                 playerRotation = defaultRotate,
                 playerScale = Vector3.one,
 
-                timeSpeed = 10f,
+                timeSpeed = 0.1f,
                 minute = 30f,
                 hour = 7,
                 day = 0,

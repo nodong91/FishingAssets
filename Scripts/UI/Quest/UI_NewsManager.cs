@@ -49,7 +49,7 @@ public class UI_NewsManager : MonoBehaviour
     public void SetQuest(Data_Quest[] _questDatas)
     {
         questDatas = _questDatas;
-        Debug.LogWarning(_questDatas.Length);
+        Debug.LogWarning("신문 퀘스트 세팅");
         // 비우기
         for (int i = 0; i < questSlots.Length; i++)
         {

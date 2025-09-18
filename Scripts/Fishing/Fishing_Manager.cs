@@ -33,7 +33,6 @@ public class Fishing_Manager : MonoBehaviour
     private float catchHealth, catchMaxHealth;
 
     public GameObject fishPrefab;
-    //private FishStruct fishStruct; 
     FishStruct currentFish;
     RandomSize currentSize;
     private float fishHealth, fishMaxHealth;

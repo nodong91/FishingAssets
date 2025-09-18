@@ -7,9 +7,11 @@ public class Fishing_Canvas : MonoBehaviour
 {
     public RectTransform catchUI;
     public Image catchHP;
+
     public RectTransform fishUI;
     public Image fishHP;
     public Image fishSpell;
+
     [ColorUsage(true, true)]
     public Color catchColor, fishColor, spellColor;
 
@@ -22,7 +24,9 @@ public class Fishing_Canvas : MonoBehaviour
     public void SetStart()
     {
         catchHP.material = Instantiate(catchHP.material);
+        catchUI.gameObject.SetActive(false);
         fishHP.material = Instantiate(fishHP.material);
+        fishUI.gameObject.SetActive(false);
         fishSpell.material = Instantiate(fishSpell.material);
     }
 
@@ -50,6 +54,11 @@ public class Fishing_Canvas : MonoBehaviour
     {
         countText.text = _index.ToString();
         countText.gameObject.SetActive(_index > 0);
+        if(_index == 0)
+        {
+            catchUI.gameObject.SetActive(true);
+            fishUI.gameObject.SetActive(true);
+        }
     }
 
     public void FollowUI(Vector3 _fishPoint, Vector3 _catchPoint)

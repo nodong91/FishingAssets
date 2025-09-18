@@ -25,6 +25,7 @@ public class Game_Manager : MonoBehaviour
 
     public UI_QuestManager questManager;
     public Energy_Manager energyManager;
+    public Gamble_Lottery lottery;
 
     public Data_Status_Default defaultStatusData;
     public SetStatus currentStatus;
@@ -281,6 +282,18 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
+    private Gamble_Lottery instLottery;
+    public Gamble_Lottery GetLottery
+    {
+        get
+        {
+            if (instLottery == null)
+            {
+                instLottery = Instantiate(lottery, transform);
+            }
+            return instLottery;
+        }
+    }
 
 
 

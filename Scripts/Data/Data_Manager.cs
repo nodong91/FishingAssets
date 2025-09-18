@@ -60,20 +60,19 @@ public class Data_Manager : Data_Parse
         {
             string[] elements = data[i].Split(new char[] { ',' });
             ItemStruct tempItem = GetItemStruct(elements);
-            tempItem.itemType = ItemStruct.ItemType.Fish;// 타입 세팅
             FishStruct tempData = new FishStruct
             {
                 id = tempItem.id,
                 itemStruct = tempItem,
-                areaType = (AreaType)System.Enum.Parse(typeof(AreaType), elements[8]),
-                size = Parse_Vector2(elements[9]),
-                fishHealth = Parse_Float(elements[10]),
-                fishPower = Parse_Float(elements[11]),
-                fieldRadius = Parse_Float(elements[12]),
-                fishSpeed = Parse_Float(elements[13]),
-                fishAttackSpeed = Parse_Float(elements[14]),
-                fishRange = Parse_Vector2(elements[15]),
-                fishDayType = (DayType)System.Enum.Parse(typeof(DayType), elements[16]),
+                areaType = (AreaType)System.Enum.Parse(typeof(AreaType), elements[9]),
+                size = Parse_Vector2(elements[10]),
+                fishHealth = Parse_Float(elements[11]),
+                fishPower = Parse_Float(elements[12]),
+                fieldRadius = Parse_Float(elements[13]),
+                fishSpeed = Parse_Float(elements[14]),
+                fishAttackSpeed = Parse_Float(elements[15]),
+                fishRange = Parse_Vector2(elements[16]),
+                fishDayType = (DayType)System.Enum.Parse(typeof(DayType), elements[17]),
             };
             fishStruct.Add(tempData);
         }
@@ -87,12 +86,11 @@ public class Data_Manager : Data_Parse
         {
             string[] elements = data[i].Split(new char[] { ',' });
             ItemStruct tempItem = GetItemStruct(elements);
-            tempItem.itemType = ItemStruct.ItemType.Used;// 타입 세팅
             UsedStruct tempData = new UsedStruct
             {
                 id = tempItem.id,
                 itemStruct = tempItem,
-                usedType = (UsedStruct.UsedType)System.Enum.Parse(typeof(UsedStruct.UsedType), elements[8]),
+                value = Parse_Float(elements[9])
             };
             usedStruct.Add(tempData);
         }
@@ -100,7 +98,7 @@ public class Data_Manager : Data_Parse
 
     ItemStruct GetItemStruct(string[] _elements)
     {
-        Vector2Int[] tempShape = Parse_Vector2IntArray(_elements[5].Trim());
+        Vector2Int[] tempShape = Parse_Vector2IntArray(_elements[5].Trim());// 모양
         ItemStruct tempItem = new ItemStruct
         {
             id = _elements[0].Trim(),
@@ -112,6 +110,7 @@ public class Data_Manager : Data_Parse
             iconSize = TryIconSize(tempShape),
             weight = Parse_Float(_elements[6]),
             price = Parse_Float(_elements[7]),
+            itemType = (ItemStruct.ItemType)System.Enum.Parse(typeof(ItemStruct.ItemType), _elements[8]),
         };
         return tempItem;
     }
@@ -287,16 +286,6 @@ public class Data_Manager : Data_Parse
         [HideInInspector]
         public string id;
         public ItemStruct itemStruct;
-        public enum UsedType// 사용 효과
-        {
-            Energy, // 연료
-            Health, // 체력
-            Bait, // 미끼
-            Bait_Coast, // 연안 미끼
-            Bait_Shallow,// 얕은
-            Bait_Ocean,// 대양
-        }
-        public UsedType usedType;
         public float value;// 효과 수치
     }
 
@@ -308,8 +297,10 @@ public class Data_Manager : Data_Parse
         public enum ItemType
         {
             Fish,
-            Used,
+            Fuel,
+            Repare,
             Quest,
+            Lottery,
         }
         public ItemType itemType;
         [TextArea]

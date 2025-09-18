@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -167,12 +168,6 @@ public class UI_Main : MonoBehaviour
     public float TryMoney
     {
         get { return moneyValue; }
-        set
-        {
-            float money = value;
-            moneyText.text = money.ToString();
-            moneyValue = money;
-        }
     }
 
     public void SetMoney(float _value)
@@ -203,21 +198,11 @@ public class UI_Main : MonoBehaviour
         while (normalize < 1f)
         {
             normalize += Time.deltaTime;
-            float textValue = Mathf.Lerp(prevMoney, moneyValue, normalize);
-            moneyText.text = Mathf.Round(textValue).ToString();
-
-            //if (_price < 0f)// 판매인 경우
-            //{
-            //    if (moneyValue <= prevMoney)
-            //        moveMoney = false;
-            //}
-            //else if (_price > 0f)// 구매인 경우
-            //{
-            //    if (moneyValue >= prevMoney)
-            //        moveMoney = false;
-            //}
+            float value = Mathf.Lerp(prevMoney, moneyValue, normalize);
+            moneyText.text = Mathf.Round(value).ToString();
             yield return null;
         }
+        moneyText.text = moneyValue.ToString();
     }
 
     public RectTransform moneyRect;

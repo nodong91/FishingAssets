@@ -400,7 +400,7 @@ public class UI_Inventory_Base : MonoBehaviour
             };
             saveItems.Add(dictCheck);
         }
-        Debug.LogWarning("                          saveItems.Count                   " + saveItems.Count);
+
         saveInventoryData = new Static_JsonManager.InventoryData
         {
             lastSetDay = Game_Manager.current.GetTimeUI.day,
