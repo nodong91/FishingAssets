@@ -9,7 +9,7 @@ public class Energy_Manager : MonoBehaviour
     float energyMaxAmount = 150;
     int energyPrice = 13;
     float prevEnergy;
-    public int buyEnergy;
+    public int buyPrice;
     public float addEnergy;
     public Custom_Button buyButton;
 
@@ -43,6 +43,13 @@ public class Energy_Manager : MonoBehaviour
 
     void FillUpEnergy()
     {
+        float GetMoney = Game_Manager.current.GetMainUI.TryMoney;
+        if (GetMoney < buyPrice)
+        {
+            Game_Manager.current.GetMainUI.NoMoney();// 돈없음
+            Debug.LogWarning("돈이 부족합니다.");
+            return;
+        }
         float energy = addEnergy * energyMaxAmount / 100f;
         Debug.LogWarning($"에너지 충전 {addEnergy}% , {energy}만큼 충전");
         Game_Manager.current.GetPlayer.AddEnergy(energy);
@@ -60,7 +67,7 @@ public class Energy_Manager : MonoBehaviour
         energyText.text = $"{(int)_value}<size=10>%</size>";
         // 1%당 비용  energyMaxAmount / energyPrice;
         addEnergy = _value - prevEnergy;
-        buyEnergy = (int)(addEnergy * (energyMaxAmount / 100f * energyPrice));
-        energyPriceText.text = $"{buyEnergy}원";
+        buyPrice = (int)(addEnergy * (energyMaxAmount / 100f * energyPrice));
+        energyPriceText.text = $"{buyPrice}원";
     }
 }
