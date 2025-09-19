@@ -223,27 +223,30 @@ public class UI_Inventory : MonoBehaviour
         {
             if (selectSlotType != enterSlotType)
             {
-                if (enterSlotType == SlotType.MyBox)// 구매
+                if (currentType == SlotType.Shop || currentType == SlotType.Shipyard)// 상점류
                 {
-                    if (GetMoney < selectItemClass.item.price)// 돈이 부족하면
+                    if (enterSlotType == SlotType.MyBox)// 구매
                     {
-                        UI_Inventory_Base tempSelect = GetInventory(selectSlotType);
-                        tempSelect.SetSlot(selectSlot, originItemClass);// 원래 위치로 돌리기
-                        Game_Manager.current.GetMainUI.NoMoney();// 돈없음
+                        if (GetMoney < selectItemClass.item.price)// 돈이 부족하면
+                        {
+                            UI_Inventory_Base tempSelect = GetInventory(selectSlotType);
+                            tempSelect.SetSlot(selectSlot, originItemClass);// 원래 위치로 돌리기
+                            Game_Manager.current.GetMainUI.NoMoney();// 돈없음
 
+                            originItemClass = null;
+                            OffDragReset();
+                            return;
+                        }
+                        float price = -selectItemClass.item.price;
+                        Game_Manager.current.GetMainUI.MoveMoney(price);
+                    }
+                    else if (selectSlotType == SlotType.MyBox)// 판매
+                    {
+                        SellItem(selectItemClass.item.id);// 드래그 판매
                         originItemClass = null;
                         OffDragReset();
                         return;
                     }
-                    float price = -selectItemClass.item.price;
-                    Game_Manager.current.GetMainUI.MoveMoney(price);
-                }
-                else if (selectSlotType == SlotType.MyBox)// 판매
-                {
-                    SellItem(selectItemClass.item.id);// 드래그 판매
-                    originItemClass = null;
-                    OffDragReset();
-                    return;
                 }
             }
             // 다른 인벤토리로 이동
