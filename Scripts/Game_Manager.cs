@@ -52,26 +52,33 @@ public class Game_Manager : MonoBehaviour
         Camera_Manager.current.SetCameraManager();
         SetRendererFeature();
 
+        SetThemeMusic();
+        SetPlayer();
+        yield return null;
+
         GetMainUI.SetStart();
         GetQuestUI.SetStart();
         GetSkill.SetStart();
         GetDialog.SetStart();
-
-        SetThemeMusic();
-        yield return null;
-
         AddStatus();// 추가 스테이트 세팅
-        GetPlayer.SetStart();
+    }
+
+    void SetPlayer()
+    {
+        if (instPlayer == null)
+        {
+            instPlayer = Instantiate(player, transform);
+            GetPlayer.SetStart();
+        }
     }
 
     public void AddStatus()
     {
-        bool fullHealth = GetPlayer.FullHealth;// 스탯 추가 하기  전 풀피 체크
         currentStatus.SettingStatus(defaultStatusData.defaultStatus);// 디폴트 스탯 적용
         currentStatus.AddStatus(GetAddStatus);// 추가 스탯 적용
-
-        GetPlayer.SetStatus(fullHealth);// 플레이어에 스탯 적용
         GetInventory.myBox.AddInventory(currentStatus.maxBoxSize);// 인벤토리 사이즈 적용
+        bool fullHealth = GetPlayer.FullHealth;// 스탯 추가 하기  전 풀피 체크
+        GetPlayer.SetStatus(fullHealth);// 플레이어에 스탯 적용
     }
 
     public void SetThemeMusic()
@@ -116,10 +123,6 @@ public class Game_Manager : MonoBehaviour
     {
         get
         {
-            if (instPlayer == null)
-            {
-                instPlayer = Instantiate(player, transform);
-            }
             return instPlayer;
         }
     }

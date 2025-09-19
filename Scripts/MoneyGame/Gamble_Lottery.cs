@@ -63,7 +63,7 @@ public class Gamble_Lottery : MonoBehaviour
         {
             point = SetWorldPoint();
             float distance = (point - positionsList[^1]).magnitude;
-            if (distance > 0.1f)
+            if (distance > 0.01f)
             {
                 SetPoint(point);// 일정거리가 멀어지면 포인트 기입
                 if (setEnterSlot == answerSlot)
@@ -78,18 +78,30 @@ public class Gamble_Lottery : MonoBehaviour
                 // 체크
                 if (isAnswer == true)
                 {
-                    if (answerSlot != setEnterSlot && answerSlot.iconImage.sprite == setEnterSlot.iconImage.sprite)
+                    if (CheckImage() == true)
                     {
                         isWinner = true;
                         testText.text = $"당첨!!!!!! : {sellPrice}";
                     }
-                    else if (isWinner == false && slotList.Count == 0)
+                    else if (slotList.Count == 0)
                     {
                         testText.text = "노당첨!!!!!!";
                     }
                 }
             }
         }
+    }
+
+    bool CheckImage()
+    {
+        foreach (var child in slotQueue)
+        {
+            if (answerSlot.iconImage.sprite == child.iconImage.sprite)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void FixedUpdate()

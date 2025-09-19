@@ -33,10 +33,10 @@ public class Quality_Manager : MonoBehaviour
         fullScreenToggle.onValueChanged.AddListener(ToggleFullScreen);
 
         Data_Option optionData = Option_Manager.current.optionData;
-        fullScreenToggle.isOn = optionData.fullScreen;
-        qualityDropdown.value = optionData.qualityLevel;
-        resolutionDropdown.value = optionData.resolutionIndex;
-        frameRateDropdown.value = optionData.frameRateIndex;
+        fullScreenToggle.isOn = fullScreen = optionData.fullScreen;
+        qualityDropdown.value = levelIndex = optionData.qualityLevel;
+        resolutionDropdown.value = resolutionIndex = optionData.resolutionIndex;
+        frameRateDropdown.value = frameRate = optionData.frameRateIndex;
 
         DebugText();
     }
@@ -143,7 +143,7 @@ public class Quality_Manager : MonoBehaviour
     {
         Resolution selectedResolution = resolutionList[resolutionIndex];
         string debugText = $"{selectedResolution.width} x {selectedResolution.height}:{resolutionList.Count}({resolutionIndex}), ";
-        debugText+= $", Fullscreen: {fullScreenToggle.isOn}";
+        debugText += $", Fullscreen: {fullScreenToggle.isOn}";
         debugText += $", Frame Rate: {Application.targetFrameRate}Hz({frameRate})";
         debugText += $", Quality Level: {GetCurrentQualityLevel()}({qualityDropdown})";
         currentQualityText.text = debugText;

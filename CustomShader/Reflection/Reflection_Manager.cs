@@ -88,7 +88,7 @@ public class Reflection_Manager : MonoBehaviour
         //instancer.UpdateBatch();
 
         // 배 부분 물결 안생기게
-        if (Game_Manager.current == null)
+        if (Game_Manager.current == null || Game_Manager.current.GetPlayer == null)
             return;
         string shipPosition = "_ShipPosition";
         Transform player = Game_Manager.current.GetPlayer.transform;

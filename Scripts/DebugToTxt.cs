@@ -36,7 +36,7 @@ public class DebugToTxt : MonoBehaviour
         onButton.SetButton(OpenCanvas);
         // 생성될 파일의 경로설정
 #if UNITY_EDITOR
-        filePath = Application.dataPath + "/Log/";
+        filePath = Application.dataPath + "/Save/";
 
 #elif UNITY_ANDROID
         filePath = Application.persistentDataPath;
