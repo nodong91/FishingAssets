@@ -47,9 +47,8 @@ public class Fishing_Manager : MonoBehaviour
     private float cooling;
     public float coolTime = 5f;// 공격 쿨타임 - 물고기 스탯으로 추가
     public float spellTime = 3f;// 공격 스펠 시간 - 물고기 스탯으로 추가
-    public float groggyTime = 1f;// 그로기 - 물고기 스탯으로 추가
+    public float groggyTime = 1f;// 그로기 - 스킬로 추가
     public int defenseCount = 4;// 방어 커맨드 갯수 - 물고기 스탯으로 추가
-    public float defenseTime = 5f;// 방어 시간 - 물고기 스탯으로 추가
 
     private Vector3 fishTargetPoint;
     private bool shake;
@@ -111,6 +110,9 @@ public class Fishing_Manager : MonoBehaviour
         // 버튼 활성화
         fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());
 
+        fishValue = catchMaxHealth / (catchMaxHealth + fishMaxHealth);
+        fishingCanvas.SetFishHP(fishValue);
+        Debug.LogWarning($"SetReady 게이지 : {catchMaxHealth} / ({catchMaxHealth} + {fishMaxHealth}) = {fishValue}");
         Game_Manager.current.GetMainUI.OpenCanvas(false);
         Game_Manager.current.OutOfControll(true);
     }
@@ -337,24 +339,28 @@ public class Fishing_Manager : MonoBehaviour
         }
         return default;
     }
-
+    float fishValue = 0f;
     IEnumerator CheckingCatch()
     {
         while (isFishing == true)
         {
             if (isCatching == true)
             {
-                fishHealth -= catchStatus.catchPower;
-                fishingCanvas.SetFishHP(fishHealth / fishMaxHealth);// 물고기에 데미지
+                //fishHealth -= catchStatus.catchPower;
+                fishValue -= catchStatus.catchPower / (fishMaxHealth + catchMaxHealth);
                 yield return new WaitForSeconds(currentFish.fishAttackSpeed);
             }
             else
             {
-                catchHealth -= currentFish.fishPower;
-                fishingCanvas.SetCatchHP(catchHealth / catchMaxHealth);// 낚시에 데미지
+                //catchHealth -= currentFish.fishPower;
+                fishValue += currentFish.fishPower / (fishMaxHealth + catchMaxHealth);
+                //fishingCanvas.SetCatchHP(catchHealth / catchMaxHealth);// 낚시에 데미지
                 yield return new WaitForSeconds(catchStatus.catchAttakSpeed);
             }
-            if (catchHealth <= 0f || fishHealth <= 0f)
+            fishingCanvas.SetFishHP(fishValue);// 물고기에 데미지
+            Debug.LogWarning($"CheckingCatch 게이지 : {fishValue}");
+
+            if (fishValue >= 1f || fishValue <= 0f)
             {
                 FishingComplate(fishHealth <= 0f);// 낚시 성공 실패
             }

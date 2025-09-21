@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class LoadingManager : MonoBehaviour
 {
+    public bool open;
     public string[] currentNames;
     public string[] sceneNames;
     List<AsyncOperation> asyncOperation;
-    public Image background;
-    bool open;
+    //public Image background;
+    public RectTransform background;
     int complateIndex;
 
     public static LoadingManager current;
@@ -19,7 +20,6 @@ public class LoadingManager : MonoBehaviour
     {
         current = this;
     }
-
     private void Start()
     {
         GoTitle();
@@ -90,14 +90,18 @@ public class LoadingManager : MonoBehaviour
     {
         open = _open;
 
-        float targetAlpha = open == false ? 0f : 1f;
+        float prevHight = open == true ? -(Screen.height + 100) : 0f;
+        float targetHight = open == true ? 0f : Screen.height + 100;
+        float targetAlpha = open == true ? 1f : 0f;
         float normalize = 0f;
         while (normalize < 1f)
         {
-            normalize += Time.deltaTime * 10f;
+            normalize += Time.deltaTime * 2f;
             float alpha = Mathf.Lerp(1f - targetAlpha, targetAlpha, normalize);
-            background.material.SetFloat("_Normalize", alpha);
-            background.gameObject.SetActive(alpha > 0);
+            float hight = Mathf.Lerp(prevHight, targetHight, normalize);
+            background.anchoredPosition = new Vector2(0f, hight);
+            //background.material.SetFloat("_Normalize", alpha);
+            //background.gameObject.SetActive(alpha > 0);
             yield return null;
         }
     }

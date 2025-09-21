@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class Fishing_Canvas : MonoBehaviour
 {
-    public RectTransform catchUI;
-    public Image catchHP;
+    //public RectTransform catchUI;
+    //public Image catchHP;
 
     public RectTransform fishUI;
     public Image fishHP;
@@ -23,8 +23,8 @@ public class Fishing_Canvas : MonoBehaviour
 
     public void SetStart()
     {
-        catchHP.material = Instantiate(catchHP.material);
-        catchUI.gameObject.SetActive(false);
+        //catchHP.material = Instantiate(catchHP.material);
+        //catchUI.gameObject.SetActive(false);
         fishHP.material = Instantiate(fishHP.material);
         fishUI.gameObject.SetActive(false);
         fishSpell.material = Instantiate(fishSpell.material);
@@ -35,8 +35,8 @@ public class Fishing_Canvas : MonoBehaviour
         OnStartButton(0);// ²ô±â
         outButton.gameObject.SetActive(false);
 
-        catchHP.material.SetColor("_MainColor", catchColor);
-        catchHP.material.SetFloat("_FillAmount", 1f);
+        //catchHP.material.SetColor("_MainColor", catchColor);
+        //catchHP.material.SetFloat("_FillAmount", 1f);
         fishHP.material.SetColor("_MainColor", fishColor);
         fishHP.material.SetFloat("_FillAmount", 1f);
         fishSpell.material.SetColor("_MainColor", spellColor);
@@ -54,9 +54,9 @@ public class Fishing_Canvas : MonoBehaviour
     {
         countText.text = _index.ToString();
         countText.gameObject.SetActive(_index > 0);
-        if(_index == 0)
+        if (_index == 0)
         {
-            catchUI.gameObject.SetActive(true);
+            //catchUI.gameObject.SetActive(true);
             fishUI.gameObject.SetActive(true);
         }
     }
@@ -64,14 +64,14 @@ public class Fishing_Canvas : MonoBehaviour
     public void FollowUI(Vector3 _fishPoint, Vector3 _catchPoint)
     {
         fishUI.position = Camera.main.WorldToScreenPoint(_fishPoint + fishOffset);//FollowHPUI
-        catchUI.position = Camera.main.WorldToScreenPoint(_catchPoint + shipOffset);//FollowHPUI
+        //catchUI.position = Camera.main.WorldToScreenPoint(_catchPoint + shipOffset);//FollowHPUI
         Debug.LogWarning("FollowUI Fishing!!!");
     }
 
-    public void SetCatchHP(float _hp)
-    {
-        catchHP.material.SetFloat("_FillAmount", _hp);
-    }
+    //public void SetCatchHP(float _hp)
+    //{
+    //    catchHP.material.SetFloat("_FillAmount", _hp);
+    //}
 
     public void SetFishHP(float _hp)
     {
@@ -147,4 +147,21 @@ public class Fishing_Canvas : MonoBehaviour
         arrowList.Add(inst);
         return inst;
     }
+
+
+
+
+
+
+
+
+
+
+
+    //public Image fishingImage;
+    //public void SetFishingImage(float _test)
+    //{
+    //    fishingImage.material = Instantiate(fishingImage.material);
+    //    fishingImage.material.SetFloat("_FillAmount", _test);
+    //}
 }
