@@ -80,7 +80,7 @@ public class LoadingManager : MonoBehaviour
             {
                 _async[i].allowSceneActivation = true;
             }
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2.5f);// 완료 후 잠시 대기
             yield return StartCoroutine(OpenScreen(false));
             deleComplate?.Invoke();
         }
@@ -96,12 +96,11 @@ public class LoadingManager : MonoBehaviour
         float normalize = 0f;
         while (normalize < 1f)
         {
-            normalize += Time.deltaTime * 2f;
+            normalize += Time.deltaTime * 1.5f;
             float alpha = Mathf.Lerp(1f - targetAlpha, targetAlpha, normalize);
             float hight = Mathf.Lerp(prevHight, targetHight, normalize);
             background.anchoredPosition = new Vector2(0f, hight);
-            //background.material.SetFloat("_Normalize", alpha);
-            //background.gameObject.SetActive(alpha > 0);
+            background.gameObject.SetActive(alpha > 0);
             yield return null;
         }
     }

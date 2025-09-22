@@ -36,6 +36,7 @@ public class UI_Inventory : MonoBehaviour
     ResultStruct resultItem;
 
     float GetMoney => Game_Manager.current.GetMainUI.TryMoney;
+    public string addFishTest;
 
     void Update()// 아이템 추가 테스트
     {
@@ -47,16 +48,19 @@ public class UI_Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             string randomID = addFishTest;
-            if (Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(addFishTest) == false)
+            if (Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(randomID) == false)
                 return;
+
+            onDrag = true;
+            selectSlotType = SlotType.MyBox;
             FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[randomID];
             FishStruct.RandomSize randomSize = fishStruct.GetRandom();
+            Debug.LogWarning($"{randomID} > {Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(randomID)}");
 
             SetIconImage(fishStruct.itemStruct);
             AddItem(fishStruct.itemStruct);
         }
     }
-    public string addFishTest;
 
     public void SetStart()
     {
@@ -216,14 +220,15 @@ public class UI_Inventory : MonoBehaviour
 
     private void OnDrag()// 드랍
     {
-        if (selectSlot == null)
-            return;
 
         if (onCheck == true)// 놓을 수 있다.
         {
             if (selectSlotType != enterSlotType)
             {
-                if (currentType == SlotType.Shop || currentType == SlotType.Shipyard)// 상점류
+                if (selectSlot == null)
+                    return;
+                // 현재 열린 타입이 상점류인 경우
+                if (currentType == SlotType.Shop || currentType == SlotType.Shipyard)
                 {
                     if (enterSlotType == SlotType.MyBox)// 구매
                     {
@@ -444,6 +449,7 @@ public class UI_Inventory : MonoBehaviour
         {
             ItemStruct itemStruct = selectItemClass.item;
             SetIconImage(itemStruct);
+            Debug.LogWarning($"uihikkjfasd{itemStruct.id}");
         }
 
         while (onDrag == true)

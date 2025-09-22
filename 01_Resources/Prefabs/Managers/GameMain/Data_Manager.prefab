@@ -98,6 +98,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9d8ca081a4e9ebe49bce38fd3490eddd, type: 3}
   - {fileID: 8300000, guid: 0de4a308352ba8543b82d8d303ae6783, type: 3}
   sprites:
+  - {fileID: 21300000, guid: 3d63422b354f9474a9104de93b2dda2f, type: 3}
   - {fileID: 21300000, guid: 328cb977f05a0ba4b8e06989fab520cc, type: 3}
   - {fileID: 21300000, guid: bce3f09e06ae50e4488f0a9d2a393918, type: 3}
   - {fileID: 21300000, guid: bacb81b4b1bc69a4da0608eb7384015d, type: 3}
@@ -224,7 +225,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 03c171d36dbadf94b81b55a054fc6590, type: 3}
   - {fileID: 21300000, guid: 80c5ae9cbeee81a468b6ceada7f3cd8f, type: 3}
   - {fileID: 21300000, guid: 198f80daf8b8ac544beb49cc01b16f2c, type: 3}
-  - {fileID: 21300000, guid: 3d63422b354f9474a9104de93b2dda2f, type: 3}
   usedStruct:
   - id: Us_1001
     itemStruct:
@@ -297,14 +297,17 @@ MonoBehaviour:
       weight: 0.2
       price: 250
     areaType: 1
+    fishDayType: 1
     size: {x: 30, y: 50}
     fishHealth: 10
     fishPower: 1
-    fieldRadius: 10
     fishSpeed: 1
+    fishCoolTime: 10
     fishAttackSpeed: 1
-    fishRange: {x: 0.3, y: 1.5}
-    fishDayType: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 0.3, y: 1.5}
   - id: Fs_1002
     itemStruct:
       id: Fs_1002
@@ -323,14 +326,17 @@ MonoBehaviour:
       weight: 0.6
       price: 300
     areaType: 1
+    fishDayType: 1
     size: {x: 50, y: 100}
     fishHealth: 20
-    fishPower: 1
-    fieldRadius: 10
+    fishPower: 2
     fishSpeed: 1
+    fishCoolTime: 10
     fishAttackSpeed: 1
-    fishRange: {x: 0.7, y: 1}
-    fishDayType: 1
+    fishSpellTime: 2
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 0.7, y: 1}
   - id: Fs_1003
     itemStruct:
       id: Fs_1003
@@ -350,14 +356,17 @@ MonoBehaviour:
       weight: 0.4
       price: 350
     areaType: 1
+    fishDayType: 1
     size: {x: 30, y: 70}
     fishHealth: 30
-    fishPower: 1
-    fieldRadius: 10
+    fishPower: 3
     fishSpeed: 2
+    fishCoolTime: 10
     fishAttackSpeed: 1
-    fishRange: {x: 0.7, y: 1}
-    fishDayType: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 5
+    fishTurnDelay: {x: 0.7, y: 1}
   - id: Fs_1004
     itemStruct:
       id: Fs_1004
@@ -377,14 +386,17 @@ MonoBehaviour:
       weight: 0.8
       price: 400
     areaType: 1
+    fishDayType: 2
     size: {x: 45, y: 90}
     fishHealth: 40
-    fishPower: 1
-    fieldRadius: 12
+    fishPower: 4
     fishSpeed: 2
+    fishCoolTime: 12
     fishAttackSpeed: 1.5
-    fishRange: {x: 1, y: 2}
-    fishDayType: 2
+    fishSpellTime: 3
+    fishGroggyTime: 2
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 1, y: 2}
   - id: Fs_2001
     itemStruct:
       id: Fs_2001
@@ -403,14 +415,17 @@ MonoBehaviour:
       weight: 1
       price: 450
     areaType: 1
+    fishDayType: 1
     size: {x: 150, y: 250}
     fishHealth: 50
-    fishPower: 1
-    fieldRadius: 12
+    fishPower: 5
     fishSpeed: 3
+    fishCoolTime: 12
     fishAttackSpeed: 1.5
-    fishRange: {x: 1, y: 2}
-    fishDayType: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 5
+    fishTurnDelay: {x: 1, y: 2}
   - id: Fs_2002
     itemStruct:
       id: Fs_2002
@@ -433,14 +448,17 @@ MonoBehaviour:
       weight: 1.5
       price: 500
     areaType: 1
+    fishDayType: 2
     size: {x: 80, y: 150}
     fishHealth: 60
-    fishPower: 1
-    fieldRadius: 12
+    fishPower: 6
     fishSpeed: 3
+    fishCoolTime: 12
     fishAttackSpeed: 2
-    fishRange: {x: 1, y: 2}
-    fishDayType: 2
+    fishSpellTime: 4
+    fishGroggyTime: 3
+    fishDefenseCount: 6
+    fishTurnDelay: {x: 1, y: 2}
   - id: Fs_2003
     itemStruct:
       id: Fs_2003
@@ -464,14 +482,17 @@ MonoBehaviour:
       weight: 2
       price: 550
     areaType: 1
+    fishDayType: 2
     size: {x: 150, y: 250}
     fishHealth: 70
-    fishPower: 1
-    fieldRadius: 14
+    fishPower: 7
     fishSpeed: 3
+    fishCoolTime: 14
     fishAttackSpeed: 2
-    fishRange: {x: 1.5, y: 1}
-    fishDayType: 2
+    fishSpellTime: 3
+    fishGroggyTime: 3
+    fishDefenseCount: 7
+    fishTurnDelay: {x: 1.5, y: 1}
   - id: Fs_2004
     itemStruct:
       id: Fs_2004
@@ -492,14 +513,17 @@ MonoBehaviour:
       weight: 2
       price: 600
     areaType: 1
+    fishDayType: 1
     size: {x: 200, y: 400}
     fishHealth: 80
-    fishPower: 1
-    fieldRadius: 14
+    fishPower: 8
     fishSpeed: 4
+    fishCoolTime: 14
     fishAttackSpeed: 2
-    fishRange: {x: 1.5, y: 1}
-    fishDayType: 1
+    fishSpellTime: 2
+    fishGroggyTime: 2
+    fishDefenseCount: 5
+    fishTurnDelay: {x: 1.5, y: 1}
   - id: Fs_2005
     itemStruct:
       id: Fs_2005
@@ -524,14 +548,17 @@ MonoBehaviour:
       weight: 2.4
       price: 650
     areaType: 1
+    fishDayType: 1
     size: {x: 250, y: 500}
     fishHealth: 90
-    fishPower: 1
-    fieldRadius: 14
+    fishPower: 9
     fishSpeed: 4
+    fishCoolTime: 14
     fishAttackSpeed: 3
-    fishRange: {x: 1.5, y: 1}
-    fishDayType: 1
+    fishSpellTime: 2
+    fishGroggyTime: 1
+    fishDefenseCount: 5
+    fishTurnDelay: {x: 1.5, y: 1}
   - id: Fs_3001
     itemStruct:
       id: Fs_3001
@@ -560,11 +587,14 @@ MonoBehaviour:
       weight: 5
       price: 700
     areaType: 1
+    fishDayType: 2
     size: {x: 500, y: 1000}
     fishHealth: 100
-    fishPower: 1
-    fieldRadius: 18
+    fishPower: 10
     fishSpeed: 5
+    fishCoolTime: 18
     fishAttackSpeed: 4
-    fishRange: {x: 0.3, y: 0.9}
-    fishDayType: 2
+    fishSpellTime: 2
+    fishGroggyTime: 1
+    fishDefenseCount: 6
+    fishTurnDelay: {x: 0.3, y: 0.9}

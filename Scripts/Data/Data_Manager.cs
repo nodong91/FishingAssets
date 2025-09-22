@@ -65,14 +65,17 @@ public class Data_Manager : Data_Parse
                 id = tempItem.id,
                 itemStruct = tempItem,
                 areaType = (AreaType)System.Enum.Parse(typeof(AreaType), elements[9]),
-                size = Parse_Vector2(elements[10]),
-                fishHealth = Parse_Float(elements[11]),
-                fishPower = Parse_Float(elements[12]),
-                fieldRadius = Parse_Float(elements[13]),
+                fishDayType = (DayType)System.Enum.Parse(typeof(DayType), elements[10]),
+                size = Parse_Vector2(elements[11]),
+                fishHealth = Parse_Float(elements[12]),
+                fishPower = Parse_Float(elements[13]),
                 fishSpeed = Parse_Float(elements[14]),
-                fishAttackSpeed = Parse_Float(elements[15]),
-                fishRange = Parse_Vector2(elements[16]),
-                fishDayType = (DayType)System.Enum.Parse(typeof(DayType), elements[17]),
+                fishCoolTime = Parse_Float(elements[15]),
+                fishAttackSpeed = Parse_Float(elements[16]),
+                fishSpellTime = Parse_Float(elements[17]),
+                fishGroggyTime = Parse_Float(elements[18]),
+                fishDefenseCount = Parse_Int(elements[19]),
+                fishTurnDelay = Parse_Vector2(elements[20]),
             };
             fishStruct.Add(tempData);
         }
@@ -345,16 +348,19 @@ public class Data_Manager : Data_Parse
         public string id;
         public ItemStruct itemStruct;
         public AreaType areaType;
+        public DayType fishDayType;// 등장 시간
         public Vector2 size;
 
         // 낚시 관련
         public float fishHealth;// 물고기 체력
         public float fishPower;// 물고기 공격력
-        public float fieldRadius;// 물고기 활동 범위
         public float fishSpeed;// 물고기 이동 속도
+        public float fishCoolTime;// 물고기 공격 쿨타임
         public float fishAttackSpeed;// 물고기 공격 속도
-        public Vector2 fishRange;// 방향 바뀌는 딜레이 시간
-        public DayType fishDayType;// 등장 시간
+        public float fishSpellTime;// 공격할 때 딜레이 시간
+        public float fishGroggyTime;// 방어 성공 시 그로기 시간
+        public int fishDefenseCount;// 공격시 입력 개수
+        public Vector2 fishTurnDelay;// 방향 바뀌는 딜레이 시간
 
         [System.Serializable]
         public struct RandomSize

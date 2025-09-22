@@ -5,26 +5,17 @@ using UnityEngine.UI;
 
 public class Fishing_Canvas : MonoBehaviour
 {
-    //public RectTransform catchUI;
-    //public Image catchHP;
-
     public RectTransform fishUI;
     public Image fishHP;
     public Image fishSpell;
 
-    [ColorUsage(true, true)]
-    public Color catchColor, fishColor, spellColor;
-
-    public Vector3 fishOffset, shipOffset;
     public TMP_Text countText;
 
-    public Custom_Button closeButton, startButton, outButton;
+    public Custom_Button startButton, outButton;
     public TMP_Text startTypeText;
 
     public void SetStart()
     {
-        //catchHP.material = Instantiate(catchHP.material);
-        //catchUI.gameObject.SetActive(false);
         fishHP.material = Instantiate(fishHP.material);
         fishUI.gameObject.SetActive(false);
         fishSpell.material = Instantiate(fishSpell.material);
@@ -35,11 +26,7 @@ public class Fishing_Canvas : MonoBehaviour
         OnStartButton(0);// ²ô±â
         outButton.gameObject.SetActive(false);
 
-        //catchHP.material.SetColor("_MainColor", catchColor);
-        //catchHP.material.SetFloat("_FillAmount", 1f);
-        fishHP.material.SetColor("_MainColor", fishColor);
         fishHP.material.SetFloat("_FillAmount", 1f);
-        fishSpell.material.SetColor("_MainColor", spellColor);
         fishSpell.material.SetFloat("_FillAmount", 0f);
     }
 
@@ -56,22 +43,15 @@ public class Fishing_Canvas : MonoBehaviour
         countText.gameObject.SetActive(_index > 0);
         if (_index == 0)
         {
-            //catchUI.gameObject.SetActive(true);
             fishUI.gameObject.SetActive(true);
         }
     }
 
     public void FollowUI(Vector3 _fishPoint, Vector3 _catchPoint)
     {
-        fishUI.position = Camera.main.WorldToScreenPoint(_fishPoint + fishOffset);//FollowHPUI
-        //catchUI.position = Camera.main.WorldToScreenPoint(_catchPoint + shipOffset);//FollowHPUI
+        fishUI.position = Camera.main.WorldToScreenPoint(_fishPoint);//FollowHPUI
         Debug.LogWarning("FollowUI Fishing!!!");
     }
-
-    //public void SetCatchHP(float _hp)
-    //{
-    //    catchHP.material.SetFloat("_FillAmount", _hp);
-    //}
 
     public void SetFishHP(float _hp)
     {
@@ -83,9 +63,10 @@ public class Fishing_Canvas : MonoBehaviour
         fishSpell.material.SetFloat("_FillAmount", _spell);
     }
 
-    public void OnOutButton()
+    public void FishingOver()
     {
         outButton.gameObject.SetActive(true);
+        fishUI.gameObject.SetActive(false);
     }
 
     //=========================================================================================================
@@ -95,7 +76,8 @@ public class Fishing_Canvas : MonoBehaviour
     public RectTransform arrowParent;
     public Image arrow;
     Queue<Image> arrowQueue = new Queue<Image>();
-    List<Image> arrowList = new List<Image>();
+    private List<Image> arrowList = new List<Image>();
+
     public void SetArrow(string _cord)
     {
         arrowParent.gameObject.SetActive(true);
@@ -109,7 +91,7 @@ public class Fishing_Canvas : MonoBehaviour
         for (int i = 0; i < _cord.Length; i++)
         {
             Image inst = TryArrow();
-            OnArrow(i, 0f);
+            OnArrow(i, false);
             inst.gameObject.SetActive(true);
             int cordType = int.Parse(_cord[i].ToString());
             float rotation = cordType * 90f;
@@ -117,18 +99,18 @@ public class Fishing_Canvas : MonoBehaviour
         }
     }
 
-    public void OnArrow(int _index, float _fill)
+    public void OnArrow(int _index, bool _enable)
     {
-        arrowList[_index].material.SetFloat("_FillAmount", _fill);
+        arrowList[_index].color = _enable == true ? Color.green : Color.gray;
     }
 
-    public void OffArrowAll()
+    public void InputFail()// ½ÇÆÐ ½Ã ÀüºÎ ²ô±â
     {
         for (int i = 0; i < arrowList.Count; i++)
         {
             if (arrowList[i].gameObject.activeSelf == true)
             {
-                arrowList[i].material.SetFloat("_FillAmount", 0f);
+                OnArrow(i, false);
             }
         }
     }
@@ -147,21 +129,4 @@ public class Fishing_Canvas : MonoBehaviour
         arrowList.Add(inst);
         return inst;
     }
-
-
-
-
-
-
-
-
-
-
-
-    //public Image fishingImage;
-    //public void SetFishingImage(float _test)
-    //{
-    //    fishingImage.material = Instantiate(fishingImage.material);
-    //    fishingImage.material.SetFloat("_FillAmount", _test);
-    //}
 }
