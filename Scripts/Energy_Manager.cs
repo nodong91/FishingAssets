@@ -43,13 +43,9 @@ public class Energy_Manager : MonoBehaviour
 
     void FillUpEnergy()
     {
-        float GetMoney = Game_Manager.current.GetMainUI.TryMoney;
-        if (GetMoney < buyPrice)
-        {
-            Game_Manager.current.GetMainUI.NoMoney();// 돈없음
-            Debug.LogWarning("돈이 부족합니다.");
+        if (Game_Manager.current.CheckMoney(buyPrice) == false)
             return;
-        }
+
         float energy = addEnergy * energyMaxAmount / 100f;
         Debug.LogWarning($"에너지 충전 {addEnergy}% , {energy}만큼 충전");
         Game_Manager.current.GetPlayer.AddEnergy(energy);

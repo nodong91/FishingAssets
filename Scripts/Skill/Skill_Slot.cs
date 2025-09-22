@@ -24,7 +24,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public delegate void DeleSlotAction(Vector2Int _grid);
     public DeleSlotAction deleSlotAction;
 
-    public delegate void DeleSlotPosition(SkillStatus _status, Vector2 _position = default);
+    public delegate void DeleSlotPosition(SkillStatus _status, Vector3 _position = default);
     public DeleSlotPosition deleSlotPosition;
 
     public void SetStart()
@@ -94,7 +94,6 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = Vector3.one * 1.1f;
-        //Vector2 vector2 = eventData.position;
         deleSlotPosition?.Invoke(Status, transform.position);
     }
 
@@ -109,6 +108,9 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (Game_Manager.current.CheckMoney(Status.price) == false)
+            return;
+
         if (onSlot == false)
             // 누르고 있기
             inputSlotCoroutine = StartCoroutine(InputSlot());
@@ -131,19 +133,8 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         gageImage.fillAmount = _enable == true ? 1f : 0f;
     }
 
-    void EnableAction()
-    {
-        if (onSlot == false)
-        {
-            EnableSlot(true);
-            deleSlotAction?.Invoke(slotNode);
-            StartCoroutine(OnSlot());
-        }
-    }
-
     IEnumerator OnSlot()
     {
-        //Vector3 prev = Vector3.one * 1.2f;
         float normalize = 0f;
         while (normalize < 1f)
         {
@@ -163,7 +154,12 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             gageImage.fillAmount = Mathf.Lerp(0f, 1f, normalize);
             yield return null;
         }
-        EnableAction();
+        // 스킬 활성화
+        float price = -Status.price;
+        Game_Manager.current.GetMainUI.MoveMoney(price);// 돈 이동
+
+        deleSlotAction?.Invoke(slotNode);
+        StartCoroutine(OnSlot());
     }
 
     IEnumerator OpeningSlot(Vector3 _prev)// 슬롯 열리기

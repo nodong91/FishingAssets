@@ -74,10 +74,12 @@ public class Game_Manager : MonoBehaviour
 
     public void AddStatus()
     {
+        bool fullHealth = GetPlayer.FullHealth;// 스탯 적용 하기 전 풀피 체크
+        Debug.LogWarning($"AddStatus 시 풀피 체크 : {fullHealth}");
         currentStatus.SettingStatus(defaultStatusData.defaultStatus);// 디폴트 스탯 적용
         currentStatus.AddStatus(GetAddStatus);// 추가 스탯 적용
+
         GetInventory.myBox.AddInventory(currentStatus.maxBoxSize);// 인벤토리 사이즈 적용
-        bool fullHealth = GetPlayer.FullHealth;// 스탯 추가 하기  전 풀피 체크
         GetPlayer.SetStatus(fullHealth);// 플레이어에 스탯 적용
     }
 
@@ -114,6 +116,15 @@ public class Game_Manager : MonoBehaviour
         controllManager.ResetControll();
     }
 
+    public bool CheckMoney(float _price)
+    {
+        if (GetMainUI.TryMoney < _price)
+        {
+            GetMainUI.NoMoney();// 구매할 돈없음
+            return false;
+        }
+        return true;
+    }
     //====================================================================================================================
     // 매니저 가져오기
     //====================================================================================================================

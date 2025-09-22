@@ -31,6 +31,7 @@ public class Editor_Skill_Manager : Editor
 public class Skill_Manager : MonoBehaviour
 {
     public Data_SkillTree skillTreeData;
+    public Canvas canvas;
     public CanvasGroup canvasGroup;
     public Custom_Button closeButton;
     public RectTransform slotParent;
@@ -54,6 +55,9 @@ public class Skill_Manager : MonoBehaviour
     public void SetStart()
     {
         UpdateData();
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.worldCamera = Camera_Manager.current.UICamera;
+
         closeButton.SetButton(CloseCanvas);
         resetButton.SetButton(SkillReset);
 
@@ -135,7 +139,6 @@ public class Skill_Manager : MonoBehaviour
         startSlot.startSlot = true;
         startSlot.SetHide(false);// È°¼ºÈ­
         startSlot.boxImage.gameObject.SetActive(true);
-
 
         SettingLoadSlot();
     }

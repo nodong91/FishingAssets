@@ -367,8 +367,9 @@ public class Fishing_Manager : MonoBehaviour
 
     void IdleState()
     {
-        if (cooling < Time.time)
+        if (currentFish.fishCoolTime > 0f && cooling < Time.time)
         {
+            // 쿨타임이 0인 경우 공격하지 않음
             FishState(FishStateType.Spelling);// 특수 기술
         }
         else
@@ -419,12 +420,13 @@ public class Fishing_Manager : MonoBehaviour
         SetSkillCord();
 
         float prevSpeed = fishSpeed;
-        Vector3 direction = (shipPrefab.transform.position - fishPrefab.transform.position).normalized;
+
         float normalize = 0f;
         while (normalize < currentFish.fishSpellTime)
         {
             normalize += Time.deltaTime / currentFish.fishSpellTime;
-            Quaternion rotation = Quaternion.LookRotation(direction);
+            Vector3 direction = (shipPrefab.transform.position - fishPrefab.transform.position);
+            Quaternion rotation = Quaternion.LookRotation(direction.normalized);
             fishPrefab.transform.rotation = Quaternion.Slerp(fishPrefab.transform.rotation, rotation, Time.deltaTime * currentFish.fishSpellTime);
             fishSpeed = Mathf.Lerp(prevSpeed, 0f, normalize);// 서시히 정지
             fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * fishSpeed, Space.Self);
@@ -441,14 +443,14 @@ public class Fishing_Manager : MonoBehaviour
     IEnumerator FishAttack()// 발사
     {
         shake = false;
-        float distance = (shipPrefab.transform.position - fishPrefab.transform.position).magnitude;
-        float skillSpeed = currentFish.fishSpeed * fieldRadius;
+        //float skillSpeed = currentFish.fishSpeed * fieldRadius;
+        float skillSpeed = fieldRadius;
         bool destroy = false;
         while (skillSpeed > 0.1f)
         {
-            skillSpeed = Mathf.Lerp(skillSpeed, 0f, Time.deltaTime * currentFish.fishSpeed);
+            skillSpeed = Mathf.Lerp(skillSpeed, 0f, Time.deltaTime * fieldRadius);
             fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * skillSpeed, Space.Self);
-            distance = (shipPrefab.transform.position - fishPrefab.transform.position).magnitude;
+            float distance = (shipPrefab.transform.position - fishPrefab.transform.position).magnitude;
             if (distance < shipSize && shake == false)
             {
                 shake = true;

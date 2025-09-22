@@ -184,7 +184,7 @@ public class UI_Inventory : MonoBehaviour
     bool BuyItem(string _id)// 구매
     {
         ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_id);
-        if (GetMoney < item.price)
+        if (Game_Manager.current.CheckMoney(item.price) == false)
             return false;
 
         if (myBox.AddItem(item) == true)// 살 공간이 있으면 슬롯세팅
@@ -232,11 +232,11 @@ public class UI_Inventory : MonoBehaviour
                 {
                     if (enterSlotType == SlotType.MyBox)// 구매
                     {
-                        if (GetMoney < selectItemClass.item.price)// 돈이 부족하면
+                        // 돈이 부족하면
+                        if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == false)
                         {
                             UI_Inventory_Base tempSelect = GetInventory(selectSlotType);
                             tempSelect.SetSlot(selectSlot, originItemClass);// 원래 위치로 돌리기
-                            Game_Manager.current.GetMainUI.NoMoney();// 돈없음
 
                             originItemClass = null;
                             OffDragReset();
@@ -318,15 +318,12 @@ public class UI_Inventory : MonoBehaviour
                 case SlotType.Shipyard:
                     if (enterSlotType == SlotType.MyBox)// 내 인벤토리일때 판매
                     {
-                        SellItem(selectSlot.itemClass.item.id);// 우클릭   판매
+                        SellItem(selectSlot.itemClass.item.id);// 우클릭 판매
                     }
                     else// 구매
                     {
                         if (BuyItem(selectSlot.itemClass.item.id) == false)
-                        {
-                            Game_Manager.current.GetMainUI.NoMoney();// 돈없음
                             return;
-                        }
                     }
                     SetEmptySlot(selectSlot);// 슬롯 비우기
                     break;

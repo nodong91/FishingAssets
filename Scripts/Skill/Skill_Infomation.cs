@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static Data_Manager;
 
 public class Skill_Infomation : MonoBehaviour
@@ -18,7 +19,7 @@ public class Skill_Infomation : MonoBehaviour
         SetPosition(null);
     }
 
-    public void SetPosition(SkillStatus _status, Vector2 _position = default)
+    public void SetPosition(SkillStatus _status, Vector3 _position = default)
     {
         float alpha = (_status == null) ? 0f : 1f;
         Vector2 viewportPoint;
@@ -29,9 +30,9 @@ public class Skill_Infomation : MonoBehaviour
         }
         else
         {
-            viewportPoint = Camera.main.ScreenToViewportPoint(_position);
-            float viewX = viewportPoint.x;
-            float viewY = Mathf.Round(viewportPoint.y);
+            viewportPoint = Camera_Manager.current.UICamera.ScreenToViewportPoint(_position);
+            float viewX = Mathf.Ceil(viewportPoint.x);
+            float viewY = Mathf.Ceil(viewportPoint.y);
             viewportPoint = new Vector2(viewX, viewY);
         }
 
@@ -50,7 +51,7 @@ public class Skill_Infomation : MonoBehaviour
 
     }
 
-    IEnumerator SetMoving(Vector2 _position, Vector2 _viewportPoint, float _alpha)
+    IEnumerator SetMoving(Vector3 _position, Vector2 _viewportPoint, float _alpha)
     {
         float normalize = 0f;
         while (normalize < 1f)
