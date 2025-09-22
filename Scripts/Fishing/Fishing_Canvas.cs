@@ -101,7 +101,7 @@ public class Fishing_Canvas : MonoBehaviour
 
     public void OnArrow(int _index, bool _enable)
     {
-        arrowList[_index].color = _enable == true ? Color.green : Color.gray;
+        arrowList[_index].color = _enable == true ? Color.red : Color.white;
     }
 
     public void InputFail()// 실패 시 전부 끄기

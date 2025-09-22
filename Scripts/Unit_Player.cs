@@ -265,6 +265,7 @@ public class Unit_Player : MonoBehaviour
 
     public bool TakeDamage()
     {
+        Debug.LogWarning($"TakeDamage - {health}");
         if (health > 0)
         {
             health--;

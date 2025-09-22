@@ -27,14 +27,14 @@ public class Fishing_Manager : MonoBehaviour
     public GameObject shipPrefab;
     public float shipSize = 1f;
 
-    private const float fieldRadius = 10f;
+    private const float fieldRadius = 15f;
     public GameObject catchPrefab;
     public Renderer catchRanderer;
     private SetStatus catchStatus;
 
-    public GameObject fishPrefab;
     FishStruct currentFish;
     RandomSize currentSize;
+    public GameObject fishPrefab;
     private float fishHealth = 0f;
     private float fishSpeed = 0f;
     private float cooling;
@@ -46,7 +46,6 @@ public class Fishing_Manager : MonoBehaviour
     public Transform focusTarget;
 
     private Vector3 fishTargetPoint;
-    private bool shake;
     private bool isFishing = false;
     private bool isCatching = false;
     Coroutine fishAction;
@@ -60,6 +59,7 @@ public class Fishing_Manager : MonoBehaviour
     public void SetStart()
     {
         SetDictionary_FishStruct();// 미리 사전 세팅
+        cinemachineBasicMultiChannelPerlin = positionComposer.GetComponent<CinemachineBasicMultiChannelPerlin>();
 
         fishingCanvas.startButton.SetButton(FishingStartButton);
         fishingCanvas.outButton.SetButton(OutFishing);
@@ -191,6 +191,7 @@ public class Fishing_Manager : MonoBehaviour
         Option_Manager.current.SetThemeMusic("Battle");// 전투 시작
 
         currentFish = fishQueue.Dequeue();// 물고기 정보
+        tempText.text = currentFish.itemStruct.name;
         currentSize = currentFish.GetRandom();
         fishingCanvas.SetFishing();
 
@@ -305,6 +306,7 @@ public class Fishing_Manager : MonoBehaviour
             Vector3 catchOffset = CatchRayCast() - catchPrefab.transform.position;
             catchSpeed = Mathf.Lerp(catchSpeed, catchStatus.catchSpeed * Mathf.Clamp01(catchOffset.magnitude), 0.1f);
             catchPrefab.transform.Translate(catchOffset.normalized * Time.deltaTime * catchSpeed, Space.World);
+
             focusTarget.position = Vector3.Lerp(fishPrefab.transform.position, shipPrefab.transform.position, 0.5f);
 
             // 캐치 영역 안에 있는지 체크
@@ -439,24 +441,24 @@ public class Fishing_Manager : MonoBehaviour
 
         FishState(FishStateType.Attack);
     }
-
+    public TMPro.TMP_Text tempText;
     IEnumerator FishAttack()// 발사
     {
-        shake = false;
         //float skillSpeed = currentFish.fishSpeed * fieldRadius;
-        float skillSpeed = fieldRadius;
+        //float skillSpeed = fieldRadius;
+        bool damaged = false;
         bool destroy = false;
-        while (skillSpeed > 0.1f)
+        float normalize = 0f;
+        while (normalize < 1f)
         {
-            skillSpeed = Mathf.Lerp(skillSpeed, 0f, Time.deltaTime * fieldRadius);
-            fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * skillSpeed, Space.Self);
+            normalize += Time.deltaTime;
+            float skillSpeed = Mathf.Lerp(fieldRadius * 2f, 0f, normalize);
+            fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * skillSpeed, Space.Self);// 이동
             float distance = (shipPrefab.transform.position - fishPrefab.transform.position).magnitude;
-            if (distance < shipSize && shake == false)
+            if (distance < shipSize && damaged == false)
             {
-                shake = true;
-                if (shakingObject != null)
-                    StopCoroutine(shakingObject);
-                shakingObject = StartCoroutine(ShakingObject(shipPrefab));
+                damaged = true;
+                SetShaking();
                 destroy = Game_Manager.current.GetPlayer.TakeDamage();// 선박에 데미지
             }
             yield return null;
@@ -514,27 +516,41 @@ public class Fishing_Manager : MonoBehaviour
     //===================================================================================================================
     // 흔들기
     //===================================================================================================================
-
+    bool shaking;
     Coroutine shakingObject;
-    IEnumerator ShakingObject(GameObject _object)
+    public Transform shakeTarget;
+    void SetShaking()
     {
-        Vector3 originPosition = _object.transform.position;
+        if (shakingObject != null)
+            StopCoroutine(shakingObject);
+        shakingObject = StartCoroutine(Shaking());
+    }
+
+    CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin;
+    float shakeTime = 1f, shakeValue = 5f;
+    IEnumerator Shaking()
+    {
         float normalize = 0f;
         while (normalize < 1f)
         {
-            normalize += Time.deltaTime * 3f;
-            Vector3 shakePosition = Random.insideUnitSphere * 0.3f * (1f - normalize);
-            _object.transform.position = originPosition + shakePosition;
+            normalize += Time.deltaTime * (1f / shakeTime);
+            float shakeAmount = Mathf.Lerp(shakeValue, 0f, normalize);
+            cinemachineBasicMultiChannelPerlin.AmplitudeGain = shakeAmount;
             yield return null;
         }
-        _object.transform.position = originPosition;
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SetShaking();
+        }
     }
 
     //===================================================================================================================
     // 방어
     //===================================================================================================================
 
-    //[Header(" [ Defense ]")]
     private string skillCord;
     private int currentIndex = 0;
     private int cordCount;
@@ -579,9 +595,7 @@ public class Fishing_Manager : MonoBehaviour
         fishingCanvas.SetFishSpell(0f);
         FishState(FishStateType.None);
 
-        if (shakingObject != null)
-            StopCoroutine(shakingObject);
-        shakingObject = StartCoroutine(ShakingObject(fishPrefab));
+        SetShaking();
         yield return new WaitForSeconds(currentFish.fishGroggyTime);// 그로기 타임
 
         cooling = Time.time + currentFish.fishCoolTime;
