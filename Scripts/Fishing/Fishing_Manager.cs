@@ -19,7 +19,6 @@ public class Fishing_Manager : MonoBehaviour
     }
     public FishStateType fishState;
     public GameObject fishingSet;
-    public CanvasGroup canvasGroup;
     [Header(" [ Camera ]")]
     public CinemachinePositionComposer positionComposer;
     public float defaultCameraDistance = 15f;
@@ -86,8 +85,8 @@ public class Fishing_Manager : MonoBehaviour
 
     public void SetFishing(AreaType _areaType)// 트리거 닿았을 때 낚시 시작
     {
-        SetCanvasGroup(0.0f);
         areaType = _areaType;
+        fishingCanvas.SetCount(0);// 카운트 제거
 
         SetFishList();// 낚시터 세팅
         SetReady(true);// 낚시 준비
@@ -202,13 +201,6 @@ public class Fishing_Manager : MonoBehaviour
         StartCoroutine(StartCount());
     }
 
-    void SetCanvasGroup(float _alpha)
-    {
-        canvasGroup.alpha = _alpha;
-        canvasGroup.interactable = (_alpha > 0);
-        canvasGroup.blocksRaycasts = (_alpha > 0);
-    }
-
     IEnumerator StartCount()
     {
         for (int i = 0; i < 3; i++)
@@ -220,7 +212,6 @@ public class Fishing_Manager : MonoBehaviour
         fishingCanvas.SetCount(0);// 카운트 완료
         yield return null;
 
-        SetCanvasGroup(1.0f);// 캔버스 오픈
         StartCoroutine(CatchMovement());
         StartCoroutine(CheckingCatch());
 

@@ -39,9 +39,10 @@ public class Fishing_Canvas : MonoBehaviour
         startTypeText.gameObject.SetActive(_count > 0);
         startTypeText.text = $"{_areaType}\n<size=15>{_dayType}\nCount : {_count}</size>";
     }
-
+    public Animator animator;
     public void SetCount(int _index)
     {
+        animator.Play("Critical", -1, 0f);
         countText.text = _index.ToString();
         countText.gameObject.SetActive(_index > 0);
         if (_index == 0)

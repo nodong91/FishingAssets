@@ -596,6 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0251791e9ec4f8545894db6359f1e33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonImage: {fileID: 0}
 --- !u!1 &5593872473638110037
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,6 +685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0251791e9ec4f8545894db6359f1e33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonImage: {fileID: 0}
 --- !u!1 &6562322801119253757
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,23 +806,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee314ceb869b164c8ce56c7c89c1376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  customButtonList: []
-  questParent: {fileID: 4766281256033559502}
-  questButtonPrefab: {fileID: 3421992848044398135}
   questDataTest:
-  - {fileID: 11400000, guid: 896ef83c74d161543a2225305362a3c0, type: 2}
   - {fileID: 11400000, guid: ebd0c8905fe0c77429f7cc63e33bc9e8, type: 2}
   - {fileID: 11400000, guid: 0a97142d240ec3f40a582c19aed18bb0, type: 2}
   - {fileID: 11400000, guid: 0aa9ee085b3cd794baf9774174de696a, type: 2}
-  closeButton: {fileID: 5523720330824460043}
-  questList: []
-  complateList: []
-  questInfoText: {fileID: 744693657356307530}
   canvasStructs:
   - direction: 1
     rect: {fileID: 5795710128644330865}
     canvasGroup: {fileID: 0}
     targetPosition: {x: 0, y: 0}
+  questParent: {fileID: 4766281256033559502}
+  questButtonPrefab: {fileID: 3421992848044398135}
+  closeButton: {fileID: 5523720330824460043}
+  questInfoText: {fileID: 744693657356307530}
 --- !u!1 &8602624258963690175
 GameObject:
   m_ObjectHideFlags: 0
