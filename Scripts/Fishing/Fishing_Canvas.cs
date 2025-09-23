@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Fishing_Canvas : MonoBehaviour
 {
+    public Canvas canvas;
     public RectTransform fishUI;
     public Image fishHP;
     public Image fishSpell;
@@ -16,6 +17,8 @@ public class Fishing_Canvas : MonoBehaviour
 
     public void SetStart()
     {
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.worldCamera = Camera_Manager.current.UICamera;
         fishHP.material = Instantiate(fishHP.material);
         fishUI.gameObject.SetActive(false);
         fishSpell.material = Instantiate(fishSpell.material);
@@ -47,10 +50,18 @@ public class Fishing_Canvas : MonoBehaviour
         }
     }
 
-    public void FollowUI(Vector3 _fishPoint, Vector3 _catchPoint)
+    public void FollowUI(Vector3 _fishPoint)
     {
-        fishUI.position = Camera.main.WorldToScreenPoint(_fishPoint);//FollowHPUI
+        fishUI.position = UIPosition(_fishPoint);
+    }
+
+    Vector3 UIPosition(Vector3 _fishPoint)
+    {
         Debug.LogWarning("FollowUI Fishing!!!");
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(_fishPoint);
+        Camera UICamera = canvas.worldCamera;
+        Vector3 followPosition = UICamera.ScreenToWorldPoint(screenPosition);
+        return followPosition;
     }
 
     public void SetFishHP(float _hp)
@@ -128,5 +139,30 @@ public class Fishing_Canvas : MonoBehaviour
         inst.material = Instantiate(inst.material);
         arrowList.Add(inst);
         return inst;
+    }
+
+    public Fishing_Damage fishingDamage;
+    public Queue<Fishing_Damage> QueueDamage = new Queue<Fishing_Damage>();
+    public void SetDamage(float _damage, bool _cri)
+    {
+        Fishing_Damage inst = TryFishingDamage();
+        inst.gameObject.SetActive(true);
+        inst.rect.position = fishUI.position;
+        inst.SetStart(_damage.ToString(), _cri);
+    }
+
+    Fishing_Damage TryFishingDamage()
+    {
+        if (QueueDamage.Count > 0)
+            return QueueDamage.Dequeue();
+        Fishing_Damage inst = Instantiate(fishingDamage, canvas.transform);
+        inst.deleDamage = AddPool;
+        return inst;
+    }
+
+    void AddPool(Fishing_Damage _damage)
+    {
+        QueueDamage.Enqueue(_damage);
+        _damage.gameObject.SetActive(false);
     }
 }

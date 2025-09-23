@@ -242,7 +242,6 @@ public class Fishing_Manager : MonoBehaviour
         fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
         fishPrefab.transform.position = fishTargetPoint;
 
-
         fishHealth = currentFish.fishHealth / (catchStatus.catchMaxHealth + currentFish.fishHealth);
         fishingCanvas.SetFishHP(fishHealth);
         Debug.LogWarning($"SetReady °ÔÀÌÁö : {currentFish.fishHealth} / ({catchStatus.catchMaxHealth} + {currentFish.fishHealth}) = {fishHealth}");
@@ -274,9 +273,10 @@ public class Fishing_Manager : MonoBehaviour
                 break;
         }
     }
+
     void PlayingControll()
     {
-        fishingCanvas.FollowUI(fishPrefab.transform.position, catchPrefab.transform.position);
+        fishingCanvas.FollowUI(fishPrefab.transform.position);
         if (fishState == FishStateType.Spelling)
         {
             if (Input.GetKeyDown(KeyCode.W))
@@ -342,8 +342,13 @@ public class Fishing_Manager : MonoBehaviour
         {
             if (isCatching == true)
             {
+                bool critical = Random.Range(0f, 1f) > 0.5f;
                 // ³¬½Ã´ë Èû¸¸Å­ µ¥¹ÌÁö
-                fishHealth -= catchStatus.catchPower / (currentFish.fishHealth + catchStatus.catchMaxHealth);
+                float setDamage = critical ? catchStatus.catchPower + catchStatus.catchPower * 0.2f : catchStatus.catchPower;
+                float damage = setDamage / (currentFish.fishHealth + catchStatus.catchMaxHealth);
+                fishHealth -= damage;
+
+                fishingCanvas.SetDamage(setDamage, critical);
                 yield return new WaitForSeconds(currentFish.fishAttackSpeed);
             }
             else
@@ -516,9 +521,11 @@ public class Fishing_Manager : MonoBehaviour
     //===================================================================================================================
     // Èçµé±â
     //===================================================================================================================
-    bool shaking;
+
     Coroutine shakingObject;
-    public Transform shakeTarget;
+    CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin;
+    float shakeTime = 1f, shakeValue = 5f;
+
     void SetShaking()
     {
         if (shakingObject != null)
@@ -526,8 +533,6 @@ public class Fishing_Manager : MonoBehaviour
         shakingObject = StartCoroutine(Shaking());
     }
 
-    CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin;
-    float shakeTime = 1f, shakeValue = 5f;
     IEnumerator Shaking()
     {
         float normalize = 0f;
@@ -537,13 +542,6 @@ public class Fishing_Manager : MonoBehaviour
             float shakeAmount = Mathf.Lerp(shakeValue, 0f, normalize);
             cinemachineBasicMultiChannelPerlin.AmplitudeGain = shakeAmount;
             yield return null;
-        }
-    }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SetShaking();
         }
     }
 

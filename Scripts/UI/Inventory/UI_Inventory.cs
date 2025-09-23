@@ -446,7 +446,6 @@ public class UI_Inventory : MonoBehaviour
         {
             ItemStruct itemStruct = selectItemClass.item;
             SetIconImage(itemStruct);
-            Debug.LogWarning($"uihikkjfasd{itemStruct.id}");
         }
 
         while (onDrag == true)
