@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Fishing_Canvas : MonoBehaviour
 {
     public Canvas canvas;
+
     public RectTransform fishUI;
     public Image fishHP;
     public Image fishSpell;
@@ -14,6 +15,7 @@ public class Fishing_Canvas : MonoBehaviour
 
     public Custom_Button startButton, outButton;
     public TMP_Text startTypeText;
+    public Animator animator;
 
     public void SetStart()
     {
@@ -39,16 +41,17 @@ public class Fishing_Canvas : MonoBehaviour
         startTypeText.gameObject.SetActive(_count > 0);
         startTypeText.text = $"{_areaType}\n<size=15>{_dayType}\nCount : {_count}</size>";
     }
-    public Animator animator;
+
     public void SetCount(int _index)
     {
         animator.Play("Critical", -1, 0f);
         countText.text = _index.ToString();
         countText.gameObject.SetActive(_index > 0);
-        if (_index == 0)
-        {
-            fishUI.gameObject.SetActive(true);
-        }
+    }
+
+    public void SetFishUI()
+    {
+        fishUI.gameObject.SetActive(true);
     }
 
     public void FollowUI(Vector3 _fishPoint)

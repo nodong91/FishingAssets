@@ -26,6 +26,7 @@ public class Game_Manager : MonoBehaviour
     public UI_QuestManager questManager;
     public Energy_Manager energyManager;
     public Gamble_Lottery lottery;
+    public Tutorial_Manager tutorial;
 
     public Data_Status_Default defaultStatusData;
     public SetStatus currentStatus;
@@ -124,6 +125,14 @@ public class Game_Manager : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public void StartFishing(AreaType _areaType)
+    {
+        // 낚시가 처음인지 확인
+        // 공격하는 물고기가 처음인지 확인
+        GetTutorial.TutorialPause();
+        GetFishing.SetFishing(_areaType);
     }
     //====================================================================================================================
     // 매니저 가져오기
@@ -309,7 +318,18 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-
+    private Tutorial_Manager instTutorial;
+    public Tutorial_Manager GetTutorial
+    {
+        get
+        {
+            if (instTutorial == null)
+            {
+                instTutorial = Instantiate(tutorial, transform);
+            }
+            return instTutorial;
+        }
+    }
 
 
 

@@ -210,6 +210,7 @@ public class Fishing_Manager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         fishingCanvas.SetCount(0);// 카운트 완료
+        fishingCanvas.SetFishUI();
         yield return null;
 
         StartCoroutine(CatchMovement());
@@ -349,7 +350,6 @@ public class Fishing_Manager : MonoBehaviour
                 yield return new WaitForSeconds(catchStatus.catchAttakSpeed);
             }
             fishingCanvas.SetFishHP(fishHealth);
-            Debug.LogWarning($"CheckingCatch 게이지 : {fishHealth}");
 
             if (fishHealth >= 1f || fishHealth <= 0f)
             {
