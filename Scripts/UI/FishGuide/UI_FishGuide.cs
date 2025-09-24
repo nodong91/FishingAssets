@@ -1,13 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class FishGuide : MonoBehaviour
 {
-    public Canvas canvas;
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
+    //public Canvas canvas;
     [System.Serializable]
     public struct FishStructGuide
     {
@@ -26,7 +26,6 @@ public class FishGuide : MonoBehaviour
     int cardAmount;
     GridLayoutGroup gridLayoutGroup;
     public UI_FishCard cardBase;
-    UI_FishCard selectCard;
     public Button closeButton;
 
     public Toggle[] toggles;
@@ -62,7 +61,15 @@ public class FishGuide : MonoBehaviour
     public void OpenCanvas(bool _open)
     {
         Camera_Manager.current.CameraFocus(_open);
-        canvas.gameObject.SetActive(_open);
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+        if (_open == true)
+        {
+            toggles[0].isOn = true;
+            currentIndex = 0;
+            UI_FishCard tempCard = currentFishStruct.cards[0];
+            SelectCard(tempCard);
+            //SetToggle(0);
+        }
     }
 
     void SetToggle(int _index)
@@ -205,22 +212,10 @@ public class FishGuide : MonoBehaviour
 
     void SelectCard(UI_FishCard _card)
     {
-        if (selectCard == null)
-        {
-            selectCard = Instantiate(cardBase, cardBase.transform.parent);
-            CanvasGroup canvasGroup = selectCard.AddComponent<CanvasGroup>();
-            canvasGroup.interactable = false;
-            canvasGroup.blocksRaycasts = false;
-            selectCard.transform.localScale = Vector3.one * 1.3f;
-        }
-
-        selectCard.gameObject.SetActive(_card != null);
-        if (_card != null)
-        {
-            selectCard.transform.position = _card.transform.position;
-            SetCard(selectCard, _card.fishStruct);
-        }
+        fishInfo.SetStart(_card);
     }
+
+    public UI_FishInfo fishInfo;
 
     //===========================================================================================================================
     // 저장 및 불러오기

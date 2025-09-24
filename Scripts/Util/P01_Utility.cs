@@ -112,7 +112,7 @@ public class P01_Utility
         return EventSystem.current.IsPointerOverGameObject();
     }
 
-    public static Color HexToColor(string hex)
+    public static Color HexToColor(string hex)// 6 or 8ÀÚ¸®
     {
         hex = "#" + hex;
         ColorUtility.TryParseHtmlString(hex, out Color color);

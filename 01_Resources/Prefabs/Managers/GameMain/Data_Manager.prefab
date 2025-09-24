@@ -98,7 +98,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9d8ca081a4e9ebe49bce38fd3490eddd, type: 3}
   - {fileID: 8300000, guid: 0de4a308352ba8543b82d8d303ae6783, type: 3}
   sprites:
-  - {fileID: 21300000, guid: 3d63422b354f9474a9104de93b2dda2f, type: 3}
   - {fileID: 21300000, guid: 328cb977f05a0ba4b8e06989fab520cc, type: 3}
   - {fileID: 21300000, guid: bce3f09e06ae50e4488f0a9d2a393918, type: 3}
   - {fileID: 21300000, guid: bacb81b4b1bc69a4da0608eb7384015d, type: 3}
@@ -251,12 +250,12 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 5
-    value: 1
+    value: 0
   - id: Us_2001
     itemStruct:
       id: Us_2001
       name: "\uAC2F\uC9C0\uB801\uC774"
-      itemType: 3
+      itemType: 0
       explanation: "\uACE0\uB4F1\uC5B4 \uC624\uC9D5\uC5B4 \uB4F1\uC774 \uC88B\uC544\uD558\uB294
         \uBBF8\uB07C"
       icon: {fileID: 21300000, guid: 1f5cadf8d35e8db4680bb2be070296dd, type: 3}
@@ -265,20 +264,34 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 5
-    value: 1
-  - id: Us_2002
+    value: 0
+  - id: Us_3001
     itemStruct:
-      id: Us_2002
+      id: Us_3001
       name: "\uB610\uB610\uBCF5\uAD8C"
       itemType: 4
       explanation: "\uC77C\uD655\uCC9C\uAE08\uC744 \uB178\uB9AC\uC138\uC694."
-      icon: {fileID: 0}
+      icon: {fileID: 21300000, guid: b8dc588068be4db419bb46792dc7db96, type: 3}
       itemClass: 3
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 100
-    value: 1
+    value: 0
+  - id: Us_3002
+    itemStruct:
+      id: Us_3002
+      name: "\uC2E0\uBB38"
+      itemType: 3
+      explanation: "\uC624\uB298\uC758 \uB274\uC2A4"
+      icon: {fileID: 21300000, guid: f37ea9fe9dd3bac419fa6c827317052d, type: 3}
+      itemClass: 4
+      shape:
+      - {x: 0, y: 1}
+      iconSize: {x: 1, y: 2, z: 0.5, w: 0.75}
+      weight: 1
+      price: 100
+    value: 0
   fishStruct:
   - id: Fs_1001
     itemStruct:
@@ -302,7 +315,7 @@ MonoBehaviour:
     fishHealth: 10
     fishPower: 1
     fishSpeed: 1
-    fishCoolTime: 10
+    fishCoolTime: 0
     fishAttackSpeed: 1
     fishSpellTime: 3
     fishGroggyTime: 1
@@ -331,7 +344,7 @@ MonoBehaviour:
     fishHealth: 20
     fishPower: 2
     fishSpeed: 1
-    fishCoolTime: 10
+    fishCoolTime: 0
     fishAttackSpeed: 1
     fishSpellTime: 2
     fishGroggyTime: 1

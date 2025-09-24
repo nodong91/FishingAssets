@@ -1,14 +1,14 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public GameObject card;
+    public RectTransform card;
     public Data_Manager.FishStruct fishStruct;
-    public TMPro.TMP_Text text_Name, amount, minSize, maxSize;
     public Image iconImage;
+    public TMPro.TMP_Text nameText, idText;
+    //public TMPro.TMP_Text  amount, minSize, maxSize;
 
     public delegate void DeleSelectCard(UI_FishCard _card);
     public DeleSelectCard deleSelectCard;
@@ -17,35 +17,32 @@ public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     {
         fishStruct = _fishStruct;
 
-        text_Name.gameObject.SetActive(_fishClass != null);
-        amount.gameObject.SetActive(_fishClass != null);
-        minSize.gameObject.SetActive(_fishClass != null);
-        maxSize.gameObject.SetActive(_fishClass != null);
+        Data_Manager.ItemStruct itemStruct = _fishStruct.itemStruct;
+        nameText.text = (_fishClass != null) ? itemStruct.name : "???";
+        idText.text = itemStruct.id;
+        iconImage.sprite = itemStruct.icon;
+        iconImage.color = _fishClass != null ? Color.white : P01_Utility.HexToColor("000000CC");
+        iconImage.rectTransform.sizeDelta = SetIconImage(itemStruct, 20f);
+    }
 
-        if (_fishClass != null)
-        {
-            text_Name.text = _fishStruct.itemStruct.name;
-            amount.text = _fishClass.amount.ToString();
-            minSize.text = _fishClass.minSize.ToString();
-            maxSize.text = _fishClass.maxSize.ToString();
-        }
-        iconImage.sprite = _fishStruct.itemStruct.icon;
-        iconImage.color = _fishClass != null ? Color.white : Color.black;
+    public static Vector2 SetIconImage(Data_Manager.ItemStruct _itemStruct, float _size)
+    {
+        return new Vector2(_itemStruct.iconSize.x, _itemStruct.iconSize.y) * _size;
     }
 
     public void CardDisplay(bool _onDisplay)
     {
-        card.SetActive(_onDisplay);
+        card.gameObject.SetActive(_onDisplay);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        deleSelectCard?.Invoke(this);
+        card.localScale = Vector3.one * 1.1f;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        deleSelectCard?.Invoke(default);
+        card.localScale = Vector3.one;
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -53,7 +50,7 @@ public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         switch (eventData.button)
         {
             case PointerEventData.InputButton.Left:
-
+                deleSelectCard?.Invoke(this);
                 break;
 
             case PointerEventData.InputButton.Right:
