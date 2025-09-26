@@ -77,8 +77,11 @@ public static class StaticOpenCanvas
             }
             yield return null;
         }
-        if (_open == false)// 캔버스 닫히고 난후 저장용
+        // 캔버스 닫히고 난후 저장용
+        if (_open == false)
+        {
             deleEndOpen?.Invoke();
+        }
     }
 }
 

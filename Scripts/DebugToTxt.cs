@@ -19,7 +19,7 @@ public class DebugToTxt : MonoBehaviour
     bool open = false;
     public Custom_Button onButton;
     public GameObject canvas;
-    public string saveLog;
+    string saveLog;
     string viewLog;
 
     public void Awake()
@@ -49,7 +49,6 @@ public class DebugToTxt : MonoBehaviour
         open = !open;
         canvas.SetActive(open);
     }
-
 
     private void OnEnable()
     {

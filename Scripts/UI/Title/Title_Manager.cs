@@ -6,7 +6,6 @@ public class Title_Manager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
 
-    public Custom_Button continueButton, newStartButton, creditButton, settingButton, exitButton;
     public Option_Manager optionManager;
     public Credit_Rolling creditRolling;
     private Credit_Rolling instCreditRolling;
@@ -17,6 +16,10 @@ public class Title_Manager : MonoBehaviour
     Coroutine enterCoroutine;
     Vector2 originalSize;
     public UI_Popup newGamePopup;
+    [Header(" [ Buttons ]")]
+    public Custom_Button continueButton;
+    public Custom_Button newStartButton, creditButton, settingButton, exitButton;
+    public TMPro.TMP_Text continueText, newStartText, creditText, settingText, exitText;
 
     void Start()
     {
@@ -33,9 +36,23 @@ public class Title_Manager : MonoBehaviour
         StartCoroutine(SetManager());
         OnTitle();
     }
+    const string _continue = "LMn_0001";
+    const string _newStart = "LMn_0002";
+    const string _credit = "LMn_0003";
+    const string _setting = "LMn_0004";
+    const string _exit = "LMn_0005";
+    void TextSetting()
+    {
+        continueText.text = Singleton_Data.INSTANCE.GetLanguage(_continue);
+        newStartText.text = Singleton_Data.INSTANCE.GetLanguage(_newStart);
+        creditText.text = Singleton_Data.INSTANCE.GetLanguage(_credit);
+        settingText.text = Singleton_Data.INSTANCE.GetLanguage(_setting);
+        exitText.text = Singleton_Data.INSTANCE.GetLanguage(_exit);
+    }
 
     public void OnTitle()
     {
+        TextSetting();
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
     }
 

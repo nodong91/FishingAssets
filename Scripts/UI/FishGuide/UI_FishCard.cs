@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public RectTransform card;
+    bool unknown = false;
+    public bool GetUnknown { get { return unknown; } }
     public Data_Manager.FishStruct fishStruct;
     public Image iconImage;
     public TMPro.TMP_Text nameText, idText;
@@ -16,9 +18,9 @@ public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public void SetCard(Data_Manager.FishStruct _fishStruct, FishGuide.SaveFishClass _fishClass)
     {
         fishStruct = _fishStruct;
-
+        unknown = (_fishClass == null);
         Data_Manager.ItemStruct itemStruct = _fishStruct.itemStruct;
-        nameText.text = (_fishClass != null) ? itemStruct.name : "???";
+        nameText.text = (_fishClass != null) ? Singleton_Data.INSTANCE.GetLanguage(itemStruct.name) : "???";
         idText.text = itemStruct.id;
         iconImage.sprite = itemStruct.icon;
         iconImage.color = _fishClass != null ? Color.white : P01_Utility.HexToColor("000000CC");

@@ -12,6 +12,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     public Dictionary<string, FishStruct> Dict_Fish = new Dictionary<string, FishStruct>();
     public Dictionary<string, UsedStruct> Dict_Used = new Dictionary<string, UsedStruct>();
 
+    public Dictionary<string, LanguageStruct> Dict_Language = new Dictionary<string, LanguageStruct>();
 
     //public void SetDictionary_DialogString(List<Data_Manager.TranslateString> _data)
     //{
@@ -159,5 +160,50 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
                 Dict_Sprite[id] = _data[i];
             }
         }
+    }
+
+    public void SetDictionary_Language(List<LanguageStruct> _data)
+    {
+        Dict_Language = new Dictionary<string, LanguageStruct>();
+        for (int i = 0; i < _data.Count; i++)
+        {
+            string id = _data[i].id;
+            if (Dict_Language.ContainsKey(id) == true)
+            {
+                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
+            }
+            else
+            {
+                Dict_Language[id] = _data[i];
+            }
+        }
+    }
+
+    public enum LanguageType
+    {
+        English,
+        Korean,
+        Japanese,
+        Count
+    }
+    public LanguageType languageType = LanguageType.English;
+
+    public string GetLanguage(string _id)
+    {
+        if (Dict_Language.ContainsKey(_id) == true)
+        {
+            switch (languageType)
+            {
+                case LanguageType.English:
+                    return Dict_Language[_id].english;
+
+                case LanguageType.Korean:
+                    return Dict_Language[_id].korean;
+
+                case LanguageType.Japanese:
+                    return Dict_Language[_id].japanese;
+            }
+        }
+        return _id;
     }
 }

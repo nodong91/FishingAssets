@@ -24,7 +24,6 @@ public class UI_MyBox : UI_Inventory_Base
             return;
         Debug.LogWarning($"인벤토리 사이즈 변경 {inventorySize} -> {_inventorySize}");
         GetSaveInventoryData.invenSize = _inventorySize;
-        Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 창닫힐 때 저장
         SetInventoryItem(saveData);
     }
 
@@ -38,6 +37,6 @@ public class UI_MyBox : UI_Inventory_Base
         currentWeight += _weight;
         float sliderValue = currentWeight / maxWeight;
         weightSlider.fillAmount = sliderValue;
-        Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;   // 내용물에 변경이 있으면 저장
+        //Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;   // 내용물에 변경이 있으면 저장
     }
 }

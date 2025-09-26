@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using static Data_Manager;
-using static Skill_Slot;
 
 public class Static_JsonManager
 {

@@ -17,7 +17,6 @@ public class UI_Popup : MonoBehaviour
 
     public void OpenCanvas(bool _open)
     {
-        StaticOpenCanvas.deleEndOpen = null;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
 

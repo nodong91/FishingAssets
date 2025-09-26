@@ -239,6 +239,5 @@ public class Camera_Manager : MonoBehaviour
     {
         float targetFOV = _on == true ? 0f : originalFOV;
         volumeSettings.FocusOffset = targetFOV;
-        Debug.LogWarning($"Camera Focus : {_on} {targetFOV} ");//{volumeSettings.FocusOffset
     }
 }

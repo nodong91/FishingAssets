@@ -42,8 +42,7 @@ public class UI_Shop : UI_Inventory_Base
 
         if (currentIndex != _index)
         {
-            // 탭 닫힐때 저장
-            Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 디폴트로 저장
+            Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;  // 토글 변경 시 저장
             currentIndex = _index;
         }
         SetShopItem();

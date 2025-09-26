@@ -76,10 +76,10 @@ public class Game_Manager : MonoBehaviour
     public void AddStatus()
     {
         bool fullHealth = GetPlayer.FullHealth;// 스탯 적용 하기 전 풀피 체크
-        Debug.LogWarning($"AddStatus 시 풀피 체크 : {fullHealth}");
         currentStatus.SettingStatus(defaultStatusData.defaultStatus);// 디폴트 스탯 적용
         currentStatus.AddStatus(GetAddStatus);// 추가 스탯 적용
 
+        Debug.LogWarning($"AddStatus 시 풀피 체크 : {fullHealth} 인벤토리 - {currentStatus.maxBoxSize}");
         GetInventory.myBox.AddInventory(currentStatus.maxBoxSize);// 인벤토리 사이즈 적용
         GetPlayer.SetStatus(fullHealth);// 플레이어에 스탯 적용
     }

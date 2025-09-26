@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-
-
 #if UNITY_EDITOR
 using UnityEditor;
 
@@ -48,6 +46,10 @@ public class Data_Manager : Data_Parse
             else if (csv_Type.Contains("Used"))
             {
                 SetUsed(GetCSV_Data[i]);
+            }
+            else if (csv_Type.Contains("Language"))
+            {
+                SetLanguageStruct(GetCSV_Data[i]);
             }
         }
     }
@@ -118,6 +120,24 @@ public class Data_Manager : Data_Parse
         return tempItem;
     }
 
+    void SetLanguageStruct(TextAsset _textAsset)
+    {
+        languageStruct.Clear();
+        string[] data = _textAsset.text.Split(new char[] { '\n' });
+        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
+        {
+            string[] elements = data[i].Split(new char[] { ',' });
+            LanguageStruct tempData = new LanguageStruct
+            {
+                id = elements[0].Trim(),
+                english = elements[1],
+                korean = elements[2],
+                japanese = elements[3],
+            };
+            languageStruct.Add(tempData);
+        }
+    }
+
     Vector4 TryIconSize(Vector2Int[] _shape)
     {
         int minX = 0, minY = 0, maxX = 0, maxY = 0;
@@ -168,6 +188,8 @@ public class Data_Manager : Data_Parse
     [System.Serializable]
     public struct Data_Option
     {
+        public int language;
+        // 그래픽 관련
         public bool fullScreen;
         public int qualityLevel;
         public int resolutionIndex;
@@ -393,35 +415,14 @@ public class Data_Manager : Data_Parse
         }
     }
 
-    //[System.Serializable]
-    //public struct DialogStruct
-    //{
-    //    public string id;
-    //    public string contents;
-
-    //    public enum ActionType
-    //    {
-    //        None,
-    //        Move,
-    //        Wave,
-    //        Jitter
-    //    }
-
-    //    [System.Serializable]
-    //    public struct DialogType
-    //    {
-    //        public Vector2Int dialogIndex;// 움직일 문장 시작과 끝 인덱스
-    //        public float textSize;
-    //        public float typingSpeed;
-    //        public string textColor;
-    //        [Header("Action")]
-    //        public ActionType actionType;
-    //        public float actionSpeed;
-    //        public float actionInterval;
-    //        public Vector2 actionAngle;
-    //    }
-    //    public DialogType[] dialogTypes;
-    //}
+    [System.Serializable]
+    public struct LanguageStruct
+    {
+        public string id;
+        [TextArea] public string english;
+        [TextArea] public string korean;
+        [TextArea] public string japanese;
+    }
 
     //==================================================================================
     // Data
@@ -430,11 +431,13 @@ public class Data_Manager : Data_Parse
     [Header(" [ Data ]")]
     public List<UsedStruct> usedStruct = new List<UsedStruct>();
     public List<FishStruct> fishStruct = new List<FishStruct>();
+    public List<LanguageStruct> languageStruct = new List<LanguageStruct>();
 
     private void Awake()
     {
         Singleton_Data.INSTANCE.SetDictionary_Fish(fishStruct);
         Singleton_Data.INSTANCE.SetDictionary_Used(usedStruct);
+        Singleton_Data.INSTANCE.SetDictionary_Language(languageStruct);
         Singleton_Data.INSTANCE.SetDictionary_Audio(audioClip);
         Singleton_Data.INSTANCE.SetDictionary_Sprite(sprites);
     }

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class FishGuide : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
-    //public Canvas canvas;
     [System.Serializable]
     public struct FishStructGuide
     {
@@ -15,7 +14,6 @@ public class FishGuide : MonoBehaviour
         public CanvasGroup canvasGroup;
         public List<UI_FishCard> cards;
     }
-    public List<FishStructGuide> fishStructList;
     private FishStructGuide currentFishStruct;
 
     public List<Data_Manager.FishStruct> allFishStruct;// 일단 물고기 정보 대신
@@ -23,7 +21,7 @@ public class FishGuide : MonoBehaviour
     public Transform parent;
     public CanvasGroup parentBase;
     public Vector2Int guideSize;
-    int cardAmount;
+    int cardAmount;// 총 카드 개수
     GridLayoutGroup gridLayoutGroup;
     public UI_FishCard cardBase;
     public Button closeButton;
@@ -67,7 +65,7 @@ public class FishGuide : MonoBehaviour
             toggles[0].isOn = true;
             currentIndex = 0;
             UI_FishCard tempCard = currentFishStruct.cards[0];
-            SelectCard(tempCard);
+            SelectCard(tempCard);// 제일 앞 카드 정보 출력
             //SetToggle(0);
         }
     }
@@ -88,9 +86,10 @@ public class FishGuide : MonoBehaviour
         SetcurrentStructCheck();
     }
 
+    // 도감에 있는지 확인
     void SetcurrentStructCheck()
     {
-        int startIndex = currentIndex * cardAmount;
+        int startIndex = currentIndex * cardAmount;// 시작 넘버
         for (int i = 0; i < currentFishStruct.cards.Count; i++)
         {
             UI_FishCard tempCard = currentFishStruct.cards[i];
@@ -101,15 +100,19 @@ public class FishGuide : MonoBehaviour
                 continue;
             }
             tempCard.CardDisplay(true);
-            // 도감에 있는지 확인
-            SetCard(tempCard, allFishStruct[index]);
+            CheckCard(tempCard, allFishStruct[index]);
         }
+        SetCompleteSlider();// 슬라이더 표기
     }
-
-    void SetCard(UI_FishCard _card, Data_Manager.FishStruct _fish)
+    public int alskdfjlakjdf;
+    void CheckCard(UI_FishCard _card, Data_Manager.FishStruct _fish)
     {
         string id = _fish.itemStruct.id;
         bool onDict = dictFishClass.ContainsKey(id);// 도감을 못 만들었으면 까맣게
+        if (onDict)
+        {
+            alskdfjlakjdf++;
+        }
         SaveFishClass tempFish = onDict == true ? dictFishClass[id] : null;
         _card.SetCard(_fish, tempFish);
     }
@@ -144,7 +147,7 @@ public class FishGuide : MonoBehaviour
         SaveFishGuide();
     }
 
-    IEnumerator MoveChange(bool _out)
+    IEnumerator MoveChange(bool _out)// 그리드 교체
     {
         FishStructGuide tempStruct = new FishStructGuide
         {
@@ -216,6 +219,16 @@ public class FishGuide : MonoBehaviour
     }
 
     public UI_FishInfo fishInfo;
+    public Slider completeSlider;
+    public TMPro.TMP_Text completeText;
+    void SetCompleteSlider()// 슬라이트 표기
+    {
+        int currentCount = dictFishClass.Count;
+        int allCount = allFishStruct.Count;
+        completeSlider.value = (float)currentCount / allCount;
+        float fontSize = completeText.fontSize - completeText.fontSize * 0.2f;
+        completeText.text = $"{completeSlider.value * 100f}<size={fontSize}>%</size>";
+    }
 
     //===========================================================================================================================
     // 저장 및 불러오기

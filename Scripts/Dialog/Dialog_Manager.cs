@@ -112,15 +112,9 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         return inst;
     }
 
-    public void OpenCanvas(bool _open)
+    void OpenCanvas(bool _open)
     {
-        StaticOpenCanvas.deleEndOpen = EndOpenCanvas;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
-    }
-
-    void EndOpenCanvas()
-    {
-
     }
 
     void DialogAction()

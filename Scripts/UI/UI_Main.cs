@@ -90,7 +90,6 @@ public class UI_Main : MonoBehaviour
 
     public void OpenCanvas(bool _open)
     {
-        StaticOpenCanvas.deleEndOpen = null;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
 

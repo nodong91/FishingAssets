@@ -190,7 +190,7 @@ public class Fishing_Manager : MonoBehaviour
         Option_Manager.current.SetThemeMusic("Battle");// 전투 시작
 
         currentFish = fishQueue.Dequeue();// 물고기 정보
-        tempText.text = currentFish.itemStruct.name;
+        tempText.text = Singleton_Data.INSTANCE.GetLanguage(currentFish.itemStruct.name);
         currentSize = currentFish.GetRandom();
         fishingCanvas.SetFishing();
 

@@ -68,12 +68,15 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public virtual void OpenCanvas(bool _open)
     {
-        StaticOpenCanvas.deleEndOpen = EndOpenCanvas;
+        if (_open == false)
+            StaticOpenCanvas.deleEndOpen += EndOpenCanvas;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
 
     void EndOpenCanvas()
     {
+        StaticOpenCanvas.deleEndOpen -= EndOpenCanvas;
+        Debug.LogError($"{gameObject.name} : {dictItemClass.Count}");
         Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 창닫힐 때 저장
     }
 
@@ -142,7 +145,7 @@ public class UI_Inventory_Base : MonoBehaviour
     public void SlotEmpty(UI_Inventory_Slot _slot)
     {
         SetEmptySlot(_slot);
-        SaveDictionary();
+        SaveDictionary();// 슬롯 비우기
     }
 
     void SetEmptySlot(UI_Inventory_Slot _slot)// 비우기
@@ -424,7 +427,6 @@ public class UI_Inventory_Base : MonoBehaviour
                 invenSize = Game_Manager.current.defaultStatusData.defaultStatus.maxBoxSize,
                 itemClass = new List<SaveItemClass>(),
             };
-            //Static_JsonManager.SaveInventory(saveData, saveInventoryData); ;// 디폴트로 저장
         }
     }
 

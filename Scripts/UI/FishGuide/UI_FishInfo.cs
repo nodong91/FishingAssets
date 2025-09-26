@@ -13,13 +13,20 @@ public class UI_FishInfo : MonoBehaviour
         iconImage.color = _card.iconImage.color;
 
         Data_Manager.ItemStruct itemStruct = _card.fishStruct.itemStruct;
-        nameText.text = itemStruct.name;
-        idText.text = itemStruct.id;
-        classText.text = itemStruct.itemClass.ToString();
-        maxSizeText.text = itemStruct.weight.ToString();
-        priceText.text = itemStruct.price.ToString();
-        discriptionText.text = itemStruct.explanation.ToString();
         iconImage.rectTransform.sizeDelta = UI_FishCard.SetIconImage(itemStruct, 40f);
 
+        SetItemStruct(itemStruct, _card.GetUnknown);
+    }
+
+    void SetItemStruct(Data_Manager.ItemStruct _itemStruct, bool _unknown)
+    {
+        string unknown = "???";
+        nameText.text = _unknown ? unknown : Singleton_Data.INSTANCE.GetLanguage(_itemStruct.name);
+        idText.text = _unknown ? unknown : _itemStruct.id;
+        classText.text = _unknown ? unknown : _itemStruct.itemClass.ToString();
+        maxSizeText.text = _unknown ? unknown : _itemStruct.weight.ToString();
+        priceText.text = _unknown ? unknown : _itemStruct.price.ToString();
+        discriptionText.alignment = _unknown ? TMPro.TextAlignmentOptions.Center : TMPro.TextAlignmentOptions.TopLeft;
+        discriptionText.text = _unknown ? unknown : Singleton_Data.INSTANCE.GetLanguage(_itemStruct.explanation);
     }
 }

@@ -9,6 +9,7 @@ public class Option_Manager : MonoBehaviour
     public Custom_Button goTitleButton, goExitButton;
     const string saveData = "SaveOptionData";
     public Data_Option optionData;
+
     [System.Serializable]
     public struct ScreenStruct
     {
@@ -17,6 +18,7 @@ public class Option_Manager : MonoBehaviour
     }
     public ScreenStruct[] screenStruct;
 
+    public TranslateLanguage translateLanguage;
     public Audio_Manager audioManager;
     public Quality_Manager qualityManager;
 
@@ -31,6 +33,7 @@ public class Option_Manager : MonoBehaviour
     public void SetStart()
     {
         LoadOption();// 옵션 데이터 로드
+        translateLanguage.SetStart();// 컨트롤 쪽 세팅
         audioManager.SetStart();// 오디오 매니저 세팅
         qualityManager.SetStart();// 퀄리티 매니저 세팅
 
@@ -43,7 +46,8 @@ public class Option_Manager : MonoBehaviour
     public DeleCloseOption deleCloseOption;
     public void OpenCanvas(bool _open)
     {
-        StaticOpenCanvas.deleEndOpen = EndOpenCanvas;
+        if (_open == false)
+            StaticOpenCanvas.deleEndOpen += EndOpenCanvas;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
         Camera_Manager.current?.CameraFocus(_open);
         if (_open == true)
@@ -59,6 +63,7 @@ public class Option_Manager : MonoBehaviour
 
     void EndOpenCanvas()
     {
+        StaticOpenCanvas.deleEndOpen -= EndOpenCanvas;
         SaveOption();
     }
 
@@ -122,6 +127,7 @@ public class Option_Manager : MonoBehaviour
     {
         optionData = new Data_Option
         {
+            language = (int)Singleton_Data.INSTANCE.languageType,
             qualityLevel = qualityManager.levelIndex,
             resolutionIndex = qualityManager.resolutionIndex,
             fullScreen = qualityManager.fullScreen,
@@ -138,7 +144,7 @@ public class Option_Manager : MonoBehaviour
                 envVolume = Singleton_Audio.INSTANCE.envVolume,
             },
         };
-        Debug.Log("SaveOption");
+        Debug.LogWarning("옵션 저장");
         Static_JsonManager.SaveOptionData(saveData, optionData);
     }
 

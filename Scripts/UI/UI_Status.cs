@@ -18,7 +18,6 @@ public class UI_Status : MonoBehaviour, IPointerClickHandler
 
     public void OpenCanvas(bool _open)
     {
-        StaticOpenCanvas.deleEndOpen = null;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
 
