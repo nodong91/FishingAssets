@@ -12,7 +12,22 @@ public class TranslateLanguage : MonoBehaviour
         int count = (int)Singleton_Data.LanguageType.Count;
         for (int i = 0; i < count; i++)
         {
-            string option = ((Singleton_Data.LanguageType)i).ToString();
+            string option = string.Empty;
+            switch (i)
+            {
+                case 0:
+                    option = "English";
+                    break;
+                case 1:
+                    option = "ÇÑ±¹¾î";
+                    break;
+                case 2:
+                    option = "ìíÜâåÞ";
+                    break;
+                case 3:
+                    option = "ñéÙþ";
+                    break;
+            }
             options.Add(option);
         }
         dropdown.AddOptions(new List<string>(options));

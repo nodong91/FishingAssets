@@ -184,6 +184,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         English,
         Korean,
         Japanese,
+        Chinese,
         Count
     }
     public LanguageType languageType = LanguageType.English;
@@ -192,16 +193,32 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     {
         if (Dict_Language.ContainsKey(_id) == true)
         {
+            string text = string.Empty;
             switch (languageType)
             {
                 case LanguageType.English:
-                    return Dict_Language[_id].english;
+                    text = Dict_Language[_id].english;
+                    if (text != null && text.Length > 0)
+                        return text;
+                    break;
 
                 case LanguageType.Korean:
-                    return Dict_Language[_id].korean;
+                    text = Dict_Language[_id].korean;
+                    if (text != null && text.Length > 0)
+                        return text;
+                    break;
 
                 case LanguageType.Japanese:
-                    return Dict_Language[_id].japanese;
+                    text = Dict_Language[_id].japanese;
+                    if (text != null && text.Length > 0)
+                        return text;
+                    break;
+
+                case LanguageType.Chinese:
+                    text = Dict_Language[_id].chinese;
+                    if (text != null && text.Length > 0)
+                        return text;
+                    break;
             }
         }
         return _id;

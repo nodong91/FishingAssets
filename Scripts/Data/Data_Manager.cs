@@ -133,6 +133,7 @@ public class Data_Manager : Data_Parse
                 english = elements[1],
                 korean = elements[2],
                 japanese = elements[3],
+                chinese = elements[4],
             };
             languageStruct.Add(tempData);
         }
@@ -422,6 +423,7 @@ public class Data_Manager : Data_Parse
         [TextArea] public string english;
         [TextArea] public string korean;
         [TextArea] public string japanese;
+        [TextArea] public string chinese;
     }
 
     //==================================================================================
