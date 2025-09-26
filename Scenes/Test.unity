@@ -420,6 +420,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fa17aefd32a0f04893261e0b44f3a08, type: 3}
+--- !u!20 &896927732 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 7645638154566824834, guid: dbc8d557b227b514bafb53322b741ae3, type: 3}
+  m_PrefabInstance: {fileID: 1952945933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &961739749
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +536,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1047
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -731,6 +736,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6932479370400974334, guid: 8b3c29e9d921cc34abc256083f3ee526, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -856,10 +865,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gamble Lotto
       objectReference: {fileID: 0}
-    - target: {fileID: 428730274000438520, guid: f561aa3a8fec2fe48a5c67ea84e17d20, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 581163118094456818, guid: f561aa3a8fec2fe48a5c67ea84e17d20, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -900,6 +905,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1245293488108117655, guid: f561aa3a8fec2fe48a5c67ea84e17d20, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 896927732}
+    - target: {fileID: 5050288544872660930, guid: f561aa3a8fec2fe48a5c67ea84e17d20, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7582560389689969618, guid: f561aa3a8fec2fe48a5c67ea84e17d20, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -919,7 +936,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1351101437434421187, guid: dbc8d557b227b514bafb53322b741ae3, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5082977652500789878, guid: dbc8d557b227b514bafb53322b741ae3, type: 3}
+      propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5082977652500789878, guid: dbc8d557b227b514bafb53322b741ae3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.0070581
+      objectReference: {fileID: 0}
+    - target: {fileID: 5082977652500789878, guid: dbc8d557b227b514bafb53322b741ae3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -9.537169
       objectReference: {fileID: 0}
     - target: {fileID: 8185886332845559576, guid: dbc8d557b227b514bafb53322b741ae3, type: 3}
       propertyPath: m_LocalPosition.x

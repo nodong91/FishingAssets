@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -115,7 +116,12 @@ public class Option_Manager : MonoBehaviour
     }
 
 
-
+    public bool TryOptionFile()
+    {
+        string filePath = Application.dataPath + "/Save/" + saveData + ".json";
+        FileInfo fileInfo = new FileInfo(filePath);
+        return fileInfo.Exists;
+    }
 
 
 

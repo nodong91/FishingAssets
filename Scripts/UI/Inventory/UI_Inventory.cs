@@ -175,7 +175,7 @@ public class UI_Inventory : MonoBehaviour
     void SellItem(string _id)
     {
         ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_id);
-        float addPrice = item.price * Game_Manager.current.currentStatus.FishPrice;
+        float addPrice = item.price * Game_Manager.current.currentStatus.FishPrice;// 퍼센트 만큼 
         float price = Mathf.Round(item.price + addPrice);// 스킬 스탯 추가
         Debug.LogWarning($"Sell Item: {item.name} for {item.price} or {price}");
         Game_Manager.current.GetMainUI.MoveMoney(price);
@@ -376,6 +376,7 @@ public class UI_Inventory : MonoBehaviour
                 // 사용한 복권은 열지 못하게
                 // 사용한 복권이라면 팔때 당첨 금액을 주는 걸로
                 Game_Manager.current.GetLottery.OpenCanas();// 복권 열기
+                SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
         }
     }

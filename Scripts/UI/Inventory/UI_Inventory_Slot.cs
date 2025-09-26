@@ -7,7 +7,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
 {
     public bool empty, destroy;
     public Vector2Int slotNum;
-    //public TMPro.TMP_Text m_Text;
+
     public Image checkImage;
     public Image destroyImage;
     private Image itemImage;

@@ -20,10 +20,13 @@ public class Title_Manager : MonoBehaviour
     public Custom_Button continueButton;
     public Custom_Button newStartButton, creditButton, settingButton, exitButton;
     public TMPro.TMP_Text continueText, newStartText, creditText, settingText, exitText;
+    bool continueEnable;
 
     void Start()
     {
-        continueButton.gameObject.SetActive(FindFolder());
+        continueEnable = TryOptionFile();
+        Debug.LogWarning($"{Option_Manager.current} {continueEnable}");
+        continueButton.gameObject.SetActive(continueEnable);
         continueButton.SetButton(ContinueButton, ActionEnter, ActionExit);
         newStartButton.SetButton(NewStartButton, ActionEnter, ActionExit);
         creditButton.SetButton(CreditButton, ActionEnter, ActionExit);
@@ -36,6 +39,14 @@ public class Title_Manager : MonoBehaviour
         StartCoroutine(SetManager());
         OnTitle();
     }
+
+    public bool TryOptionFile()
+    {
+        string filePath = Application.dataPath + "/Save/" + "SaveContinue" + ".json";
+        FileInfo fileInfo = new FileInfo(filePath);
+        return fileInfo.Exists;
+    }
+
     const string _continue = "LMn_0001";
     const string _newStart = "LMn_0002";
     const string _credit = "LMn_0003";
@@ -56,11 +67,11 @@ public class Title_Manager : MonoBehaviour
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
     }
 
-    bool FindFolder()
-    {
-        string filePath = Application.dataPath + "/Save/";
-        return Directory.Exists(filePath);
-    }
+    //bool FindFolder()
+    //{
+    //    string filePath = Application.dataPath + "/Save/";
+    //    return Directory.Exists(filePath);
+    //}
 
     void ActionEnter(Custom_Button _button)
     {
@@ -118,8 +129,9 @@ public class Title_Manager : MonoBehaviour
 
     void NewStartButton()
     {
-        if (FindFolder() == true)
+        if (continueEnable == true)
         {
+            // 저장 파일 제거
             GetUIPopup.buttonAction = NewGamePopup;
             GetUIPopup.OpenCanvas(true);
         }

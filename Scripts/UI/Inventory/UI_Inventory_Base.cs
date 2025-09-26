@@ -40,7 +40,8 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public virtual void SetStart()
     {
-        OpenCanvas(false);
+        // 저장 안하고 닫기
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));
     }
 
     public void SetInventoryItem(string _saveData)// 기존 비우고 다시 세팅
@@ -76,7 +77,7 @@ public class UI_Inventory_Base : MonoBehaviour
     void EndOpenCanvas()
     {
         StaticOpenCanvas.deleEndOpen -= EndOpenCanvas;
-        Debug.LogError($"{gameObject.name} : {dictItemClass.Count}");
+        Debug.LogError($"{gameObject.name} : {dictItemClass.Count} ({saveData})");
         Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 창닫힐 때 저장
     }
 

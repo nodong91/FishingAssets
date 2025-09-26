@@ -19,8 +19,14 @@ public class UI_Inventory_Infomation : MonoBehaviour
 
         ItemStruct item = _slot.itemClass.item;
         nameText.text = Singleton_Data.INSTANCE.GetLanguage(item.name);
-        Debug.LogWarning($"{Singleton_Data.INSTANCE.GetLanguage(item.name)} ({item.name})");
-        priceText.text = item.price.ToString();
+
+        float addPrice = 0f;
+        if (Game_Manager.current.GetInventory.enterSlotType == UI_Inventory_Base.SlotType.MyBox)// 인벤토리 아이템 가격
+            addPrice = item.price * Game_Manager.current.currentStatus.FishPrice * 0.01f;// 퍼센트 만큼 
+
+        float price = Mathf.Round(item.price + addPrice);// 스킬 스탯 추가
+        Debug.LogWarning($"{Singleton_Data.INSTANCE.GetLanguage(item.name)} ({item.name}) : {item.price} + {Game_Manager.current.currentStatus.FishPrice} = {price}");
+        priceText.text = price.ToString();
         typeText.text = item.itemType.ToString();
 
         if (Game_Manager.current.GetInventory.enterSlotType == UI_Inventory_Base.SlotType.MyBox)
