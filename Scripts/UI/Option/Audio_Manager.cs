@@ -9,20 +9,28 @@ public class Audio_Manager : MonoBehaviour
     public Custom_Button prevButton, nextButton;
     public TMP_Text audioText;
     public int currentAudio;
-    public string[] audioStrings;
+    //public string[] audioStrings;
     public Slider master_Slider, bgm_Slider, fx_Slider, env_Slider;
     public Toggle master_Mute, bgm_Mute, fx_Mute, env_Mute;
     const float divide = 10f;
     bool onSet;
-    Dictionary<string, int> tryStringToIndex = new Dictionary<string, int>();
+    Dictionary<Data_Manager.AudioStruct, int> tryAudioStructToIndex = new Dictionary<Data_Manager.AudioStruct, int>();
+
+    const string soundName = "Fx_0001";
     //===========================================================================================================================
     public void SetStart()
     {
-        tryStringToIndex.Clear();
-        for (int i = 0; i < audioStrings.Length; i++)
+        tryAudioStructToIndex.Clear();
+        int index = 0;
+        foreach (var child in Singleton_Data.INSTANCE.Dict_Audio)
         {
-            tryStringToIndex[audioStrings[i]] = i;
+            if(child.Value.type == Data_Manager.AudioStruct.AudioType.BGM)
+            {
+                index++;
+                tryAudioStructToIndex[child.Value] = index;
+            }
         }
+        
         prevButton.SetButton(delegate { NextButton(-1); }, OnArrowButton, OffArrowButton);
         nextButton.SetButton(delegate { NextButton(1); }, OnArrowButton, OffArrowButton);
 
@@ -70,13 +78,13 @@ public class Audio_Manager : MonoBehaviour
     void NextButton(int _index)
     {
         int index = currentAudio + _index;
-        if (index >= audioStrings.Length)
+        if (index >= tryAudioStructToIndex.Count)
         {
             index = 0;
         }
         else if (index < 0)
         {
-            index = audioStrings.Length - 1;
+            index = tryAudioStructToIndex.Count - 1;
         }
         PlayBGMAudio(index);
     }
@@ -84,13 +92,32 @@ public class Audio_Manager : MonoBehaviour
     void PlayBGMAudio(int _index)
     {
         currentAudio = _index;
-        audioText.text = audioStrings[_index];
-        Singleton_Audio.INSTANCE.Audio_BGM(audioStrings[_index]);
+        if (TryAudioStruct(_index, out Data_Manager.AudioStruct _data) == false)
+        {
+            return;
+        }
+        audioText.text = _data.clip.name;
+        Singleton_Audio.INSTANCE.Audio_BGM(_data.id);
     }
+    bool TryAudioStruct(int _index, out Data_Manager.AudioStruct _data)
+    {
+        foreach (var child in tryAudioStructToIndex)
+        {
+            if (child.Value.Equals(_index))
+            {
+                _data = child.Key;
+                return true;
+            }
+        }
+        _data = default;
+        return false;
+    }
+
 
     public void PlayBGMAudio(string _id)
     {
-        if (tryStringToIndex.TryGetValue(_id, out int index))
+        Data_Manager.AudioStruct data = Singleton_Data.INSTANCE.Dict_Audio[_id];
+        if (tryAudioStructToIndex.TryGetValue(data, out int index))// 아이템 찾기
         {
             PlayBGMAudio(index);
         }
@@ -157,7 +184,6 @@ public class Audio_Manager : MonoBehaviour
 
     void SetFxPrev()
     {
-        string soundName = "pop-39222";
         Singleton_Audio.INSTANCE.Audio_FX(soundName);
     }
 

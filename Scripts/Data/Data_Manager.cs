@@ -51,6 +51,11 @@ public class Data_Manager : Data_Parse
             {
                 SetLanguageStruct(GetCSV_Data[i]);
             }
+            else if (csv_Type.Contains("Audio"))
+            {
+                SetAudioStruct(GetCSV_Data[i]);
+            }
+
         }
     }
 
@@ -136,6 +141,23 @@ public class Data_Manager : Data_Parse
                 chinese = elements[4],
             };
             languageStruct.Add(tempData);
+        }
+    }
+
+    void SetAudioStruct(TextAsset _textAsset)
+    {
+        audioStruct.Clear();
+        string[] data = _textAsset.text.Split(new char[] { '\n' });
+        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
+        {
+            string[] elements = data[i].Split(new char[] { ',' });
+            AudioStruct tempData = new AudioStruct
+            {
+                id = elements[0].Trim(),
+                clip = Parse_AudioClip(elements[1]),
+                type = (AudioStruct.AudioType)System.Enum.Parse(typeof(AudioStruct.AudioType), elements[2]),
+            };
+            audioStruct.Add(tempData);
         }
     }
 
@@ -426,6 +448,20 @@ public class Data_Manager : Data_Parse
         [TextArea] public string chinese;
     }
 
+    [System.Serializable]
+    public struct AudioStruct
+    {
+        public string id;
+        public AudioClip clip;
+        public enum AudioType
+        {
+            BGM = 0,
+            FX = 1,
+            Environment=2,
+        }
+        public AudioType type;
+    }
+
     //==================================================================================
     // Data
     //==================================================================================
@@ -434,13 +470,14 @@ public class Data_Manager : Data_Parse
     public List<UsedStruct> usedStruct = new List<UsedStruct>();
     public List<FishStruct> fishStruct = new List<FishStruct>();
     public List<LanguageStruct> languageStruct = new List<LanguageStruct>();
+    public List<AudioStruct> audioStruct = new List<AudioStruct>();
 
     private void Awake()
     {
         Singleton_Data.INSTANCE.SetDictionary_Fish(fishStruct);
         Singleton_Data.INSTANCE.SetDictionary_Used(usedStruct);
         Singleton_Data.INSTANCE.SetDictionary_Language(languageStruct);
-        Singleton_Data.INSTANCE.SetDictionary_Audio(audioClip);
-        Singleton_Data.INSTANCE.SetDictionary_Sprite(sprites);
+        Singleton_Data.INSTANCE.SetDictionary_Audio(audioStruct);
+        Singleton_Data.INSTANCE.SetDictionary_Sprite(GetSprite_Data);
     }
 }

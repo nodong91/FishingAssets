@@ -41,13 +41,9 @@ public class Unit_Player : MonoBehaviour
     Quaternion prevAngle, setAngle;
     float randomTime, runningRandomTime;
 
-    public string clashSound = "small-rock-break-194553";
+    const string clashSound = "FX_0004";
 
     public AnimationCurve rotateCurve;// 위아래 흔들릴 때 로테이션
-
-    private void Start()
-    {
-    }
 
     public void SetStatus(bool prevFullHealth)
     {

@@ -22,6 +22,7 @@ public class Option_Manager : MonoBehaviour
     public TranslateLanguage translateLanguage;
     public Audio_Manager audioManager;
     public Quality_Manager qualityManager;
+    const string soundName = "Fx_0001";
 
     public static Option_Manager current;
 
@@ -83,7 +84,6 @@ public class Option_Manager : MonoBehaviour
 
     void EnterButton(Custom_Button _button)
     {
-        string soundName = "pop-39222";
         Singleton_Audio.INSTANCE.Audio_FX(soundName);
     }
 

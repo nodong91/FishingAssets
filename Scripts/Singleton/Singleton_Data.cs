@@ -6,7 +6,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
 {
     //public Dictionary<string, Data_Manager.TranslateString> Dict_DialogString = new Dictionary<string, Data_Manager.TranslateString>();
     //public Dictionary<string, Data_Manager.TranslateString> Dict_TranslateString = new Dictionary<string, Data_Manager.TranslateString>();
-    public Dictionary<string, AudioClip> Dict_Audio = new Dictionary<string, AudioClip>();
+    public Dictionary<string, AudioStruct> Dict_Audio = new Dictionary<string, AudioStruct>();
     public Dictionary<string, Sprite> Dict_Sprite = new Dictionary<string, Sprite>();
     //public Translation translation;
     public Dictionary<string, FishStruct> Dict_Fish = new Dictionary<string, FishStruct>();
@@ -120,20 +120,12 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         return default;
     }
 
-    //public enum Translation
-    //{
-    //    Korean,
-    //    English,
-    //    Japanese,
-    //    Chinese
-    //}
-
-    public void SetDictionary_Audio(List<AudioClip> _data)
+    public void SetDictionary_Audio(List<AudioStruct> _data)
     {
-        Dict_Audio = new Dictionary<string, AudioClip>();
+        Dict_Audio = new Dictionary<string, AudioStruct>();
         for (int i = 0; i < _data.Count; i++)
         {
-            string id = _data[i].name;
+            string id = _data[i].id;
             if (Dict_Audio.ContainsKey(id) == true)
             {
                 Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
@@ -198,28 +190,22 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
             {
                 case LanguageType.English:
                     text = Dict_Language[_id].english;
-                    if (text != null && text.Length > 0)
-                        return text;
                     break;
 
                 case LanguageType.Korean:
                     text = Dict_Language[_id].korean;
-                    if (text != null && text.Length > 0)
-                        return text;
                     break;
 
                 case LanguageType.Japanese:
                     text = Dict_Language[_id].japanese;
-                    if (text != null && text.Length > 0)
-                        return text;
                     break;
 
                 case LanguageType.Chinese:
                     text = Dict_Language[_id].chinese;
-                    if (text != null && text.Length > 0)
-                        return text;
                     break;
             }
+            if (string.IsNullOrEmpty(text) == false)
+                return text;
         }
         return _id;
     }

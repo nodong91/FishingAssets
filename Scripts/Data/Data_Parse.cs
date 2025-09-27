@@ -173,18 +173,20 @@ public class Data_Parse : MonoBehaviour
             if (_str.Equals(sprites[i].name))
                 return sprites[i];
         }
+        Debug.LogError("해당 파일이 없음");
         return null;
     }
 
-    //public Data_ItemSet FindDefaultItem(string _str)
-    //{
-    //    for (int i = 0; i < defaultItem.Count; i++)
-    //    {
-    //        if (_str.Contains(defaultItem[i].name))
-    //            return defaultItem[i];
-    //    }
-    //    return null;
-    //}
+    public AudioClip Parse_AudioClip(string _str)
+    {
+        for (int i = 0; i < audioClip.Count; i++)
+        {
+            if (_str.Contains(audioClip[i].name))
+                return audioClip[i];
+        }
+        Debug.LogError("해당 파일이 없음");
+        return null;
+    }
 
     public Vector2Int[] Parse_Vector2IntArray(string _str)
     {
@@ -261,10 +263,12 @@ public class Data_Parse : MonoBehaviour
 
     [Header(" [ Resource ] ")]
     /* 구글 스플레트 시트에서 "파일 - 다운로드 - 쉼표로 구분된 값" 으로 저장*/
-    [SerializeField] List<TextAsset> CSV_Data = new List<TextAsset>();
+    List<TextAsset> CSV_Data = new List<TextAsset>();
+    List<AudioClip> audioClip = new List<AudioClip>();
+    List<Sprite> sprites = new List<Sprite>();
     public List<TextAsset> GetCSV_Data { get { return CSV_Data; } }
-    public List<AudioClip> audioClip = new List<AudioClip>();
-    public List<Sprite> sprites = new List<Sprite>();
+    public List<AudioClip> GetAudio_Data { get { return audioClip; } }
+    public List<Sprite> GetSprite_Data { get { return sprites; } }
     //public List<Skill_Set> skillSet = new List<Skill_Set>();
     //public List<Unit_Animation> units = new List<Unit_Animation>();
 }

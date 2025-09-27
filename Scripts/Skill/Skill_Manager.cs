@@ -49,7 +49,7 @@ public class Skill_Manager : MonoBehaviour
     SkillStatus[,] statusStructs;
 
     public Skill_Infomation infomation;
-
+    const string activeSkill = "Fx_003";
     const string saveEnableData = "Skill_Enabled";// 활성화 된 스킬 저장
 
     public void SetStart()
@@ -166,12 +166,12 @@ public class Skill_Manager : MonoBehaviour
         grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         grid.constraintCount = skillMap.x;
     }
-
+   
     void AddSlot(Vector2Int _addNode)// 스킬 활성화
     {
         enableSlotLIst.Add(_addNode);
         SetSlot(_addNode);
-        Singleton_Audio.INSTANCE.Audio_FX("beep-6-96243");
+        Singleton_Audio.INSTANCE.Audio_FX(activeSkill);
         Static_JsonManager.SaveEnableSkillData(saveEnableData, enableSlotLIst);// 활성화 된 스킬 저장
     }
 

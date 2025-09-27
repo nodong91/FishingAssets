@@ -66,7 +66,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
             audioSource.gameObject.SetActive(true);
             audioSource.name = $"BGM_{_id}";
             Debug.Log($"{audioSource.name}");
-            audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
+            audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
             audioSource.mute = masterMute == true ? true : bgmMute;
             audioSource.volume = bgmVolume * masterVolume;
             audioSource.loop = true;
@@ -127,7 +127,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         audioSource.gameObject.SetActive(true);
         audioSource.name = $"Fx_{_id}";
         Debug.Log($"{audioSource.name}");
-        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
+        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
         audioSource.mute = masterMute == true ? true : fxMute;
         audioSource.volume = fxVolume * masterVolume;
         audioSource.loop = false;
@@ -147,7 +147,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         audioSource.gameObject.SetActive(true);
         audioSource.name = $"Dialog_{_id}";
         Debug.Log($"{audioSource}");
-        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
+        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
         audioSource.mute = masterMute == true ? true : fxMute;
         audioSource.volume = fxVolume * masterVolume;
         audioSource.loop = false;
@@ -195,7 +195,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         audioSource.gameObject.SetActive(true);
         audioSource.name = $"Environment_{_id}";
         Debug.LogWarning($"πË∞Ê¿Ω : {_id}");
-        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id];
+        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
         audioSource.mute = masterMute == true ? true : envMute;
         audioSource.volume = envVolume * masterVolume;
         audioSource.loop = true;

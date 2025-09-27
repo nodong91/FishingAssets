@@ -20,7 +20,7 @@ public class Game_Manager : MonoBehaviour
     public FishGuide fishGuide;
     public Skill_Manager skillManager;
     public string themeMusic;
-    public string oceanSound = "Ocean 02";
+    private string oceanSound = "Env_0001";
     public Fishing_Manager fishingAction;
 
     public UI_QuestManager questManager;

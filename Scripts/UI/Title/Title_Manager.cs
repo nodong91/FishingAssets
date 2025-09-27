@@ -9,8 +9,8 @@ public class Title_Manager : MonoBehaviour
     public Option_Manager optionManager;
     public Credit_Rolling creditRolling;
     private Credit_Rolling instCreditRolling;
-    public string titleTheme = "Main Theme";
-    public string soundName = "pop-39222";
+    private string titleTheme = "BGM_0001";
+    private string soundName = "FX_0001";
 
     public RectTransform selectMask;
     Coroutine enterCoroutine;
@@ -25,7 +25,7 @@ public class Title_Manager : MonoBehaviour
     void Start()
     {
         continueEnable = TryOptionFile();
-        Debug.LogWarning($"{Option_Manager.current} {continueEnable}");
+        Debug.LogWarning($"Option_Manager : {continueEnable}");
         continueButton.gameObject.SetActive(continueEnable);
         continueButton.SetButton(ContinueButton, ActionEnter, ActionExit);
         newStartButton.SetButton(NewStartButton, ActionEnter, ActionExit);
