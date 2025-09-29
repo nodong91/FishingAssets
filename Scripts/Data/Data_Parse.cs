@@ -269,6 +269,4 @@ public class Data_Parse : MonoBehaviour
     public List<TextAsset> GetCSV_Data { get { return CSV_Data; } }
     public List<AudioClip> GetAudio_Data { get { return audioClip; } }
     public List<Sprite> GetSprite_Data { get { return sprites; } }
-    //public List<Skill_Set> skillSet = new List<Skill_Set>();
-    //public List<Unit_Animation> units = new List<Unit_Animation>();
 }

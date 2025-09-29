@@ -4,9 +4,10 @@ using UnityEngine.UI;
 public class UI_MyBox : UI_Inventory_Base
 {
     [Header("- Box")]
-    public Image weightSlider;
+    public Slider weightSlider;
     public float currentWeight, maxWeight;
     public UI_Inventory_Remove_Box removeBox;
+    public TMPro.TMP_Text weightText;
 
     public override void SetStart()
     {
@@ -36,7 +37,8 @@ public class UI_MyBox : UI_Inventory_Base
     {
         currentWeight += _weight;
         float sliderValue = currentWeight / maxWeight;
-        weightSlider.fillAmount = sliderValue;
+        weightSlider.value = sliderValue;
+        weightText.text = $"{currentWeight}kg";
         //Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;   // 내용물에 변경이 있으면 저장
     }
 }

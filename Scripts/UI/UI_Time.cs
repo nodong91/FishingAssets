@@ -1,15 +1,17 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UI_Time : MonoBehaviour
 {
     public TMPro.TMP_Text hourText, minuteText;
-    public RectTransform weekObject;
     public TMPro.TMP_Text weekText;
     Light DayLight => Game_Manager.current.dayLight;
     Color DayColor => Game_Manager.current.dayColor;
     Color NightColor => Game_Manager.current.nightColor;
+    public Image dayIcon, nightIcon;
+    Coroutine timeUpdate;
+    public Material skyboxMatial;
 
     public enum WeatherType
     {
@@ -25,19 +27,9 @@ public class UI_Time : MonoBehaviour
     public int day = 0;
     bool paused = false;
 
-    public enum WEEK
-    {
-        Monday = 0,
-        Tuesday = 1,
-        Wednesday = 2,
-        Thursday = 3,
-        Friday = 4,
-        Saturday = 5,
-        Sunday = 6
-    }
-
     public void SetStart(float _timeSpeed, float _minute, int _hour, int _day)
     {
+        skyboxMatial = RenderSettings.skybox;
         timeSpeed = _timeSpeed;
         minute = _minute;
         hour = _hour;
@@ -47,83 +39,122 @@ public class UI_Time : MonoBehaviour
             // ³·
             lightMode = Data_Manager.DayType.Day;
             DayLight.color = DayColor;
+            dayIcon.rectTransform.anchoredPosition = new Vector2(dayIcon.rectTransform.anchoredPosition.x, 0f);
+            nightIcon.rectTransform.anchoredPosition = new Vector2(nightIcon.rectTransform.anchoredPosition.x, -30f);
         }
         else
         {
             // ¹ã
             lightMode = Data_Manager.DayType.Night;
             DayLight.color = NightColor;
+            dayIcon.rectTransform.anchoredPosition = new Vector2(dayIcon.rectTransform.anchoredPosition.x, 30f);
+            nightIcon.rectTransform.anchoredPosition = new Vector2(nightIcon.rectTransform.anchoredPosition.x, 0f);
+        }
+        TimePause(false);
+    }
+
+    IEnumerator TimeUpdate()
+    {
+        while (paused == false)
+        {
+            yield return new WaitForSeconds(timeSpeed);
+            //minute += Time.deltaTime * timeSpeed;
+            minute++;
+            if (minute >= 6f)
+            {
+                minute = 0f;
+                hour++;
+                if (hour >= 24)
+                {
+                    hour = 0;
+                    day++;
+                }
+            }
+
+            string minuteStr = ((int)minute * 10).ToString("D2");
+            string hourStr = hour.ToString("D2");
+            hourText.text = hourStr;
+            minuteText.text = minuteStr;
+            WeekPosition(day % 7);
+            yield return null;
+
+            if (hour == 18 && lightMode == Data_Manager.DayType.Day)
+            {
+                StartCoroutine(DayChange(Data_Manager.DayType.Night));
+            }
+            else if (hour == 5 && lightMode == Data_Manager.DayType.Night)
+            {
+                StartCoroutine(DayChange(Data_Manager.DayType.Day));
+            }
         }
     }
 
     private void Update()
     {
-        if (paused == true)
-            return;
-
-        minute += Time.deltaTime * timeSpeed;
-        if (minute >= 60f)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            minute = 0f;
-            hour++;
-            if (hour >= 24)
+            paused = !paused;
+            TimePause(paused);
+        }
+    }
+
+    IEnumerator DayChange(Data_Manager.DayType _dayType)
+    {
+        Debug.LogWarning($"j  {_dayType}");
+        lightMode = _dayType;
+        Color prevColor = DayLight.color;
+        Color targetColor = lightMode == Data_Manager.DayType.Day ? DayColor : NightColor;
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime;
+            skyboxMatial.SetFloat("_Amount", lightMode == Data_Manager.DayType.Day ? 1f - normalize : normalize);
+            // ¶óÀÌÆ® º¯°æ
+            DayLight.color = Color.Lerp(prevColor, targetColor, normalize);
+            float active = Mathf.Lerp(-30f, 0f, normalize);
+            float remove = Mathf.Lerp(0f, 30f, normalize);
+            switch (lightMode)
             {
-                hour = 0;
-                day++;
+                case Data_Manager.DayType.Day:
+
+                    dayIcon.rectTransform.anchoredPosition = new Vector2(dayIcon.rectTransform.anchoredPosition.x, active);
+                    nightIcon.rectTransform.anchoredPosition = new Vector2(nightIcon.rectTransform.anchoredPosition.x, remove);
+                    break;
+
+                case Data_Manager.DayType.Night:
+                    nightIcon.rectTransform.anchoredPosition = new Vector2(nightIcon.rectTransform.anchoredPosition.x, active);
+                    dayIcon.rectTransform.anchoredPosition = new Vector2(dayIcon.rectTransform.anchoredPosition.x, remove);
+                    break;
             }
-        }
-
-        string minuteStr = ((int)minute).ToString("D2");
-        string hourStr = hour.ToString("D2");
-        hourText.text = hourStr;
-        minuteText.text = minuteStr;
-        WeekPosition(day % 7);
-
-
-        // ¶óÀÌÆ® º¯°æ
-        if (hour >= 5f && hour < 6f)
-        {
-            // ³·
-            lightMode = Data_Manager.DayType.Day;
-            float normalize = minute * 0.02f;
-            DayLight.color = Color.Lerp(NightColor, DayColor, normalize);
-        }
-        else if (hour >= 18f && hour < 19f)
-        {
-            // ¹ã
-            lightMode = Data_Manager.DayType.Night;
-            float normalize = minute * 0.02f;
-            DayLight.color = Color.Lerp(DayColor, NightColor, normalize);
+            yield return null;
         }
     }
 
     void WeekPosition(int _index)
     {
         float targetX = Mathf.Lerp(-60f, 60f, _index / 6f);
-        weekObject.anchoredPosition = new Vector2(targetX, 0f);
-        //weekText.text = ((WEEK)_index).ToString();
         switch (_index)
         {
             case 0:
-                weekText.text = "S";
+                weekText.text = "Sun";
                 break;
             case 1:
-                weekText.text = "M";
+                weekText.text = "Mon";
                 break;
             case 2:
-                weekText.text = "T";
+                weekText.text = "Tue";
                 break;
             case 3:
-                weekText.text = "W";
+                weekText.text = "Wed";
                 break;
             case 4:
-                weekText.text = "T";
+                weekText.text = "Thu";
                 break;
             case 5:
-                weekText.text = "F";
+                weekText.text = "Fri";
                 break;
             case 6:
-                weekText.text = "S";
+                weekText.text = "Sat";
                 break;
             default:
                 break;
@@ -133,5 +164,9 @@ public class UI_Time : MonoBehaviour
     public void TimePause(bool _pause)
     {
         paused = _pause;
+
+        if (timeUpdate != null)
+            StopCoroutine(timeUpdate);
+        timeUpdate = StartCoroutine(TimeUpdate());
     }
 }

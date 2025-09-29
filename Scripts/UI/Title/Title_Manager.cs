@@ -9,8 +9,14 @@ public class Title_Manager : MonoBehaviour
     public Option_Manager optionManager;
     public Credit_Rolling creditRolling;
     private Credit_Rolling instCreditRolling;
-    private string titleTheme = "BGM_0001";
-    private string soundName = "FX_0001";
+    const string titleTheme = "BGM_0001";
+    const string soundName = "FX_0001";
+
+    const string _continue = "LMn_0001";
+    const string _newStart = "LMn_0002";
+    const string _credit = "LMn_0003";
+    const string _setting = "LMn_0004";
+    const string _exit = "LMn_0005";
 
     public RectTransform selectMask;
     Coroutine enterCoroutine;
@@ -47,11 +53,6 @@ public class Title_Manager : MonoBehaviour
         return fileInfo.Exists;
     }
 
-    const string _continue = "LMn_0001";
-    const string _newStart = "LMn_0002";
-    const string _credit = "LMn_0003";
-    const string _setting = "LMn_0004";
-    const string _exit = "LMn_0005";
     void TextSetting()
     {
         continueText.text = Singleton_Data.INSTANCE.GetLanguage(_continue);

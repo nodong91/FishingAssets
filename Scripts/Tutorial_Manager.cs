@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static Tutorial_Manager;
-using static Tutorial_Manager.TutorialStruct;
 
 public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
 {
@@ -93,7 +91,7 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
         ingOpenCanvas = StartCoroutine(ING_TutorialAction(tutorialStruct.tutorialSet[currentTutorial]));
     }
 
-    IEnumerator ING_TutorialAction(TutorialSet _tutorialSet)
+    IEnumerator ING_TutorialAction(TutorialStruct.TutorialSet _tutorialSet)
     {
         acting = true;
         boxRect.anchoredPosition = _tutorialSet.position;
