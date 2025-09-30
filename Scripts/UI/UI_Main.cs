@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,30 +17,30 @@ public class UI_Main : MonoBehaviour
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public UI_Time timeUI;
     public UI_Status statusUI;
-    public Button inventoryButton;
-    public Button fishGuideButton;
-    public Button questButton;
-    public Button optionButton;
+    public Custom_Button inventoryButton;
+    public Custom_Button fishGuideButton;
+    public Custom_Button questButton;
+    public Custom_Button optionButton;
 
     public CanvasGroup fadeScreen;
     public Canvas cameraCanvas;
     public TMPro.TMP_Text warnningText;
     Coroutine textActing;
     [Header("[ Ship ]")]
-    public Image shipEnergy;
+    public Slider shipEnergy;
     public Image currentHealthImage, maxHealthImage;
     Coroutine openFadeScreen;
     public Vector2 HealthSize;
 
     public void SetStart()
     {
-        SetMoney(SaveData_Continue.current.continueData.money);
+        SetMoney(Singleton_Continue.INSTANCE.continueData.money);
         HealthSize = maxHealthImage.rectTransform.sizeDelta;
 
-        inventoryButton.onClick.AddListener(InventoryButton);
-        fishGuideButton.onClick.AddListener(FishGuideButton);
-        questButton.onClick.AddListener(QuestButton);
-        optionButton.onClick.AddListener(OptionButton);
+        inventoryButton.SetButton(InventoryButton);
+        fishGuideButton.SetButton(FishGuideButton);
+        questButton.SetButton(QuestButton);
+        optionButton.SetButton(OptionButton);
 
         SetCameraCanvas();
         SetFadeScreen(false);
@@ -52,6 +51,30 @@ public class UI_Main : MonoBehaviour
         warnningText.alpha = 0f;
         cameraCanvas.renderMode = RenderMode.ScreenSpaceCamera;
         cameraCanvas.worldCamera = Camera_Manager.current.UICamera;
+    }
+
+    void AllClose()
+    {
+        switch (menuState)
+        {
+            case MenuState.Inventory:
+                menuState &= ~MenuState.Inventory;
+                Game_Manager.current.GetInventory.OpenInventory(false);
+                statusUI.OpenCanvas(false);
+                break;
+            case MenuState.Fishing:
+                menuState &= ~MenuState.Fishing;
+                Game_Manager.current.GetFishGuide.OpenCanvas(false);
+                break;
+            case MenuState.Quest:
+                menuState &= ~MenuState.Quest;
+                Game_Manager.current.GetQuestUI.OpenCanvas(false);
+                break;
+            case MenuState.Option:
+                menuState &= ~MenuState.Option;
+                Option_Manager.current.OpenCanvas(false);
+                break;
+        }
     }
 
     void InventoryButton()
@@ -71,24 +94,27 @@ public class UI_Main : MonoBehaviour
 
     void FishGuideButton()
     {
+        AllClose();
         menuState |= MenuState.Fishing;// 넣기
         Game_Manager.current.GetFishGuide.OpenCanvas(true);
     }
 
     void QuestButton()
     {
+        AllClose();
         menuState |= MenuState.Quest;// 넣기
         Game_Manager.current.GetQuestUI.OpenCanvas(true);
     }
 
     void OptionButton()
     {
+        AllClose();
         menuState |= MenuState.Option;// 넣기
         Option_Manager.current.OpenCanvas(true);
         Debug.LogWarning("Option Button Clicked");
     }
 
-    public void OpenCanvas(bool _open)
+    public void OpenCanvas(bool _open)// 메인 유아이 캔버스
     {
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
@@ -120,7 +146,7 @@ public class UI_Main : MonoBehaviour
 
     public void SetEnergy(float _energy)
     {
-        shipEnergy.fillAmount = _energy;
+        shipEnergy.value = _energy;
     }
 
     public void SetFadeScreen(bool _open)
@@ -147,8 +173,12 @@ public class UI_Main : MonoBehaviour
 
     public void SetHealthPoint(int _point)
     {
-        float maxHealthPoint = Game_Manager.current.currentStatus.shipHealth;
-        currentHealthImage.fillAmount = _point / maxHealthPoint;
+        //float maxHealthPoint = Game_Manager.current.currentStatus.shipHealth;
+        //currentHealthImage.fillAmount = _point / maxHealthPoint;
+        //Debug.LogWarning($"SetHealthPoint : {_point} / {maxHealthPoint}");
+
+        RectTransform rectTransform = currentHealthImage.rectTransform;
+        rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
     }
 
     public void SetMaxHealthPoint(int _point)
@@ -190,7 +220,7 @@ public class UI_Main : MonoBehaviour
     {
         float prevMoney = moneyValue;
         moneyValue = moneyValue + _price;
-        SaveData_Continue.current.SetContinue(); // 팔거나 사면 저장
+        Singleton_Continue.INSTANCE.SetContinue(); // 팔거나 사면 저장
         yield return null;
 
         float normalize = 0f;

@@ -22,7 +22,7 @@ public class Option_Manager : MonoBehaviour
     public TranslateLanguage translateLanguage;
     public Audio_Manager audioManager;
     public Quality_Manager qualityManager;
-    const string soundName = "Fx_0001";
+    const string soundName = "FX_0001";
 
     public static Option_Manager current;
 

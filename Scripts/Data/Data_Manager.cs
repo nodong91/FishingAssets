@@ -36,24 +36,24 @@ public class Data_Manager : Data_Parse
     public override void DataSetting()
     {
         base.DataSetting();
-        for (int i = 0; i < GetCSV_Data.Count; i++)
+        for (int i = 0; i < CSV_Data.Count; i++)
         {
-            string csv_Type = GetCSV_Data[i].name;
+            string csv_Type = CSV_Data[i].name;
             if (csv_Type.Contains("Fish"))
             {
-                SetFish(GetCSV_Data[i]);
+                SetFish(CSV_Data[i]);
             }
             else if (csv_Type.Contains("Used"))
             {
-                SetUsed(GetCSV_Data[i]);
+                SetUsed(CSV_Data[i]);
             }
             else if (csv_Type.Contains("Language"))
             {
-                SetLanguageStruct(GetCSV_Data[i]);
+                SetLanguageStruct(CSV_Data[i]);
             }
             else if (csv_Type.Contains("Audio"))
             {
-                SetAudioStruct(GetCSV_Data[i]);
+                SetAudioStruct(CSV_Data[i]);
             }
 
         }
@@ -478,6 +478,6 @@ public class Data_Manager : Data_Parse
         Singleton_Data.INSTANCE.SetDictionary_Used(usedStruct);
         Singleton_Data.INSTANCE.SetDictionary_Language(languageStruct);
         Singleton_Data.INSTANCE.SetDictionary_Audio(audioStruct);
-        Singleton_Data.INSTANCE.SetDictionary_Sprite(GetSprite_Data);
+        Singleton_Data.INSTANCE.SetDictionary_Sprite(sprites);
     }
 }

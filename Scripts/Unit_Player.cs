@@ -32,7 +32,7 @@ public class Unit_Player : MonoBehaviour
     float runningTime;
     public GameObject playerObject;
     GameObject FocusTarget => Camera_Manager.current?.GetFocusTarget;
-    Data_Continue continueData => SaveData_Continue.current?.continueData;
+    Data_Continue continueData => Singleton_Continue.INSTANCE?.continueData;
     Coroutine stateAction;
 
     private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static Data_Manager;
 
 public class UI_Time : MonoBehaviour
 {
@@ -9,9 +10,10 @@ public class UI_Time : MonoBehaviour
     Light DayLight => Game_Manager.current.dayLight;
     Color DayColor => Game_Manager.current.dayColor;
     Color NightColor => Game_Manager.current.nightColor;
+    Color setEmissionColor;
+    Color emissionColor => Game_Manager.current.emissionColor;
     public Image dayIcon, nightIcon;
     Coroutine timeUpdate;
-    public Material skyboxMatial;
 
     public enum WeatherType
     {
@@ -20,36 +22,40 @@ public class UI_Time : MonoBehaviour
         Cloud
     }
     public WeatherType weatherType;
-    public Data_Manager.DayType lightMode = Data_Manager.DayType.Any;
+    public DayType lightMode = DayType.Any;
     public float timeSpeed = 10f;
     public float minute = 0;
     public int hour = 0;
     public int day = 0;
-    bool paused = false;
+    public bool paused = false;
 
-    public void SetStart(float _timeSpeed, float _minute, int _hour, int _day)
+    public void SetStart(Data_Continue _data)
     {
-        skyboxMatial = RenderSettings.skybox;
-        timeSpeed = _timeSpeed;
-        minute = _minute;
-        hour = _hour;
-        day = _day;
+        timeSpeed = _data.timeSpeed;
+        minute = _data.minute;
+        hour = _data.hour;
+        day = _data.day;
         if (hour >= 5f && hour < 18f)
         {
             // ³·
-            lightMode = Data_Manager.DayType.Day;
+            lightMode = DayType.Day;
             DayLight.color = DayColor;
             dayIcon.rectTransform.anchoredPosition = new Vector2(dayIcon.rectTransform.anchoredPosition.x, 0f);
             nightIcon.rectTransform.anchoredPosition = new Vector2(nightIcon.rectTransform.anchoredPosition.x, -30f);
+            setEmissionColor = Color.black;
+            RenderSettings.skybox.SetFloat("_Amount", 0f);
         }
         else
         {
             // ¹ã
-            lightMode = Data_Manager.DayType.Night;
+            lightMode = DayType.Night;
             DayLight.color = NightColor;
             dayIcon.rectTransform.anchoredPosition = new Vector2(dayIcon.rectTransform.anchoredPosition.x, 30f);
             nightIcon.rectTransform.anchoredPosition = new Vector2(nightIcon.rectTransform.anchoredPosition.x, 0f);
+            setEmissionColor = emissionColor;
+            RenderSettings.skybox.SetFloat("_Amount", 1f);
         }
+        Shader.SetGlobalColor("_EmissionColor", setEmissionColor);
         TimePause(false);
     }
 
@@ -58,7 +64,7 @@ public class UI_Time : MonoBehaviour
         while (paused == false)
         {
             yield return new WaitForSeconds(timeSpeed);
-            //minute += Time.deltaTime * timeSpeed;
+
             minute++;
             if (minute >= 6f)
             {
@@ -78,55 +84,49 @@ public class UI_Time : MonoBehaviour
             WeekPosition(day % 7);
             yield return null;
 
-            if (hour == 18 && lightMode == Data_Manager.DayType.Day)
+            if (hour == 18 && lightMode == DayType.Day)
             {
-                StartCoroutine(DayChange(Data_Manager.DayType.Night));
+                StartCoroutine(DayChange(DayType.Night));
             }
-            else if (hour == 5 && lightMode == Data_Manager.DayType.Night)
+            else if (hour == 5 && lightMode == DayType.Night)
             {
-                StartCoroutine(DayChange(Data_Manager.DayType.Day));
+                StartCoroutine(DayChange(DayType.Day));
             }
         }
     }
 
-    private void Update()
+    IEnumerator DayChange(DayType _dayType)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            paused = !paused;
-            TimePause(paused);
-        }
-    }
-
-    IEnumerator DayChange(Data_Manager.DayType _dayType)
-    {
-        Debug.LogWarning($"j  {_dayType}");
+        Debug.LogWarning($"¹ã³· : {_dayType}");
         lightMode = _dayType;
         Color prevColor = DayLight.color;
-        Color targetColor = lightMode == Data_Manager.DayType.Day ? DayColor : NightColor;
+        Color targetColor = lightMode == DayType.Day ? DayColor : NightColor;
         float normalize = 0f;
         while (normalize < 1f)
         {
             normalize += Time.deltaTime;
-            skyboxMatial.SetFloat("_Amount", lightMode == Data_Manager.DayType.Day ? 1f - normalize : normalize);
+            RenderSettings.skybox.SetFloat("_Amount", lightMode == DayType.Day ? 1f - normalize : normalize);
             // ¶óÀÌÆ® º¯°æ
             DayLight.color = Color.Lerp(prevColor, targetColor, normalize);
             float active = Mathf.Lerp(-30f, 0f, normalize);
             float remove = Mathf.Lerp(0f, 30f, normalize);
             switch (lightMode)
             {
-                case Data_Manager.DayType.Day:
+                case DayType.Day:
 
                     dayIcon.rectTransform.anchoredPosition = new Vector2(dayIcon.rectTransform.anchoredPosition.x, active);
                     nightIcon.rectTransform.anchoredPosition = new Vector2(nightIcon.rectTransform.anchoredPosition.x, remove);
                     break;
 
-                case Data_Manager.DayType.Night:
+                case DayType.Night:
                     nightIcon.rectTransform.anchoredPosition = new Vector2(nightIcon.rectTransform.anchoredPosition.x, active);
                     dayIcon.rectTransform.anchoredPosition = new Vector2(dayIcon.rectTransform.anchoredPosition.x, remove);
                     break;
             }
             yield return null;
+            Color targetEmissionColor = lightMode == DayType.Day ? Color.black : emissionColor;
+            setEmissionColor = Color.Lerp(setEmissionColor, targetEmissionColor, normalize);
+            Shader.SetGlobalColor("_EmissionColor", setEmissionColor);
         }
     }
 
@@ -164,7 +164,6 @@ public class UI_Time : MonoBehaviour
     public void TimePause(bool _pause)
     {
         paused = _pause;
-
         if (timeUpdate != null)
             StopCoroutine(timeUpdate);
         timeUpdate = StartCoroutine(TimeUpdate());

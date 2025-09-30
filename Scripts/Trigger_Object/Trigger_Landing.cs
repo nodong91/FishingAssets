@@ -77,6 +77,7 @@ public class Trigger_Landing : Trigger_Setting
         // NPC 누가 퀘스트를 가지고 있는지 확인
         // 대화에 표시를 해야하기 때문
         //List<Data_Quest> myQuestList = Game_Manager.current.GetNews.myQuestList;
+        Debug.LogError("NPC 누가 퀘스트를 가지고 있는지 확인");
 
     }
 

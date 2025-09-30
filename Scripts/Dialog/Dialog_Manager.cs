@@ -103,12 +103,12 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         Debug.LogWarning($"선택지 버튼 : {_selectType}");
 
     }
-
+    public RectTransform gridRect;
     Dialog_SelectButton GetSelectButton()
     {
         if (selectButtonQueue.Count > 0)
             return selectButtonQueue.Dequeue();
-        Dialog_SelectButton inst = Instantiate(selectButton, rectParent);
+        Dialog_SelectButton inst = Instantiate(selectButton, gridRect);
         return inst;
     }
 

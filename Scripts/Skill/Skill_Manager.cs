@@ -49,7 +49,7 @@ public class Skill_Manager : MonoBehaviour
     SkillStatus[,] statusStructs;
 
     public Skill_Infomation infomation;
-    const string activeSkill = "Fx_003";
+    const string activeSkill = "FX_0003";
     const string saveEnableData = "Skill_Enabled";// 활성화 된 스킬 저장
 
     public void SetStart()

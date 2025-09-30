@@ -53,6 +53,7 @@ public class UI_Landing : MonoBehaviour
         shipyardButton.onClick.AddListener(ShipyardButton);
         storageButton.onClick.AddListener(StorageButton);
         backButton.onClick.AddListener(BackButton);
+
         backCanvas = backButton.GetComponent<CanvasGroup>();
     }
 
@@ -122,7 +123,7 @@ public class UI_Landing : MonoBehaviour
             yield return null;
         }
         if (inlanding == false)
-            SaveData_Continue.current.SetContinue();// 섬에서 나갈 때 저장
+            Singleton_Continue.INSTANCE.SetContinue();// 섬에서 나갈 때 저장
     }
 
     void OpenCanvasUI(CanvasGroup _canvas, float _alpha)

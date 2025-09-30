@@ -27,6 +27,8 @@ public class Fishing_Manager : MonoBehaviour
     public float shipSize = 1f;
 
     private const float fieldRadius = 15f;
+    const string bgmBattle = "BGM_0002";
+
     public GameObject catchPrefab;
     public Renderer catchRanderer;
     private SetStatus catchStatus;
@@ -47,7 +49,7 @@ public class Fishing_Manager : MonoBehaviour
     private Vector3 fishTargetPoint;
     private bool isFishing = false;
     private bool isCatching = false;
-    Coroutine fishAction;
+    Coroutine fishAction; 
 
     AreaType areaType;
     DayType dayType;
@@ -187,7 +189,7 @@ public class Fishing_Manager : MonoBehaviour
     {
         isFishing = true;
 
-        Option_Manager.current.SetThemeMusic("Battle");// 전투 시작
+        Option_Manager.current.SetThemeMusic(bgmBattle);// 전투 시작
 
         currentFish = fishQueue.Dequeue();// 물고기 정보
         tempText.text = Singleton_Data.INSTANCE.GetLanguage(currentFish.itemStruct.name);

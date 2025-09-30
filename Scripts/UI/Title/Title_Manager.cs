@@ -1,6 +1,9 @@
 using System.Collections;
 using System.IO;
+using UnityEditor.Overlays;
 using UnityEngine;
+using static Data_Manager;
+using static Unity.Cinemachine.CinemachineSplineRoll;
 
 public class Title_Manager : MonoBehaviour
 {
@@ -44,6 +47,32 @@ public class Title_Manager : MonoBehaviour
 
         StartCoroutine(SetManager());
         OnTitle();
+        SetTime();
+    }
+    public Light DayLight;
+    public Color nightColor;
+    [ColorUsage(true, true)]
+    public Color emissionColor;
+    public Material skyboxMatial;
+
+    void SetTime()
+    {
+        RenderSettings.skybox = Instantiate(skyboxMatial);
+        Data_Continue data = Singleton_Continue.INSTANCE.LoadContinue();
+        if (data != null && (data.hour < 5f || data.hour > 18f))
+        {
+            // ¹ã
+            DayLight.color = nightColor;
+            Shader.SetGlobalColor("_EmissionColor", emissionColor);
+            RenderSettings.skybox.SetFloat("_Amount", 1f);
+        }
+        else
+        {
+            // ³·
+            DayLight.color = Color.white;
+            Shader.SetGlobalColor("_EmissionColor", Color.black);
+            RenderSettings.skybox.SetFloat("_Amount", 0f);
+        }
     }
 
     public bool TryOptionFile()

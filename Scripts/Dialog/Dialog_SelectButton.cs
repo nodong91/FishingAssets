@@ -53,6 +53,8 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
                     Debug.LogWarning("체력이 가득 차지 않았으면 스킬창 못열게");
                     return;
                 }
+                Debug.LogWarning("인벤토리 닫아야");
+                Game_Manager.current.GetInventory.CloseShop();
                 Game_Manager.current.GetSkill.OpenCanvas(true);
                 Game_Manager.current.GetLanding.OutDialog();
                 break;

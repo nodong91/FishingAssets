@@ -34,6 +34,9 @@ public class Game_Manager : MonoBehaviour
 
     public Light dayLight;
     public Color dayColor, nightColor;
+    [ColorUsage(true,true)]
+    public Color emissionColor;
+    public Material skyboxMatial;
 
     public static Game_Manager current;
 
@@ -49,10 +52,10 @@ public class Game_Manager : MonoBehaviour
 
     IEnumerator SetStart()
     {
-        SaveData_Continue.current.GetContinue();
+        //RenderSettings.skybox = Instantiate(skyboxMatial);
+        Singleton_Continue.INSTANCE.GetContinue();
         Camera_Manager.current.SetCameraManager();
         SetRendererFeature();
-
         SetThemeMusic();
         SetPlayer();
         yield return null;

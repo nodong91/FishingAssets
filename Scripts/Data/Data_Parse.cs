@@ -263,10 +263,7 @@ public class Data_Parse : MonoBehaviour
 
     [Header(" [ Resource ] ")]
     /* 구글 스플레트 시트에서 "파일 - 다운로드 - 쉼표로 구분된 값" 으로 저장*/
-    List<TextAsset> CSV_Data = new List<TextAsset>();
-    List<AudioClip> audioClip = new List<AudioClip>();
-    List<Sprite> sprites = new List<Sprite>();
-    public List<TextAsset> GetCSV_Data { get { return CSV_Data; } }
-    public List<AudioClip> GetAudio_Data { get { return audioClip; } }
-    public List<Sprite> GetSprite_Data { get { return sprites; } }
+    public List<TextAsset> CSV_Data = new List<TextAsset>();
+    public List<AudioClip> audioClip = new List<AudioClip>();
+    public List<Sprite> sprites = new List<Sprite>();
 }

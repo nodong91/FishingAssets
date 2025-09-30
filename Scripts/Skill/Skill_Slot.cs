@@ -27,15 +27,14 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public delegate void DeleSlotPosition(SkillStatus _status, Vector3 _position = default);
     public DeleSlotPosition deleSlotPosition;
 
+    Dictionary<string, Sprite> sprites => Singleton_Data.INSTANCE.Dict_Sprite;
+
     public void SetStart()
     {
         gageImage.fillAmount = 0f;
-        if (Status.icon != null)
+        if (Status.icon != null && sprites.ContainsKey(Status.icon))
         {
-            if (Singleton_Data.INSTANCE.Dict_Sprite.ContainsKey(Status.icon))
-            {
-                iconImage.sprite = Singleton_Data.INSTANCE.Dict_Sprite[Status.icon];
-            }
+            iconImage.sprite = sprites[Status.icon];
         }
     }
 
