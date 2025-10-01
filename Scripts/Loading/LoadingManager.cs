@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LoadingManager : MonoBehaviour
@@ -10,9 +9,9 @@ public class LoadingManager : MonoBehaviour
     public string[] currentNames;
     public string[] sceneNames;
     List<AsyncOperation> asyncOperation;
-    //public Image background;
     public RectTransform background;
     int complateIndex;
+    public string volume;
 
     public static LoadingManager current;
 

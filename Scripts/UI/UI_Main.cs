@@ -60,7 +60,7 @@ public class UI_Main : MonoBehaviour
             case MenuState.Inventory:
                 menuState &= ~MenuState.Inventory;
                 Game_Manager.current.GetInventory.OpenInventory(false);
-                statusUI.OpenCanvas(false);
+                //statusUI.OpenCanvas(false);
                 break;
             case MenuState.Fishing:
                 menuState &= ~MenuState.Fishing;
@@ -79,17 +79,19 @@ public class UI_Main : MonoBehaviour
 
     void InventoryButton()
     {
-        if ((menuState & MenuState.Inventory) == 0)
-        {
+        AllClose();
+        //if ((menuState & MenuState.Inventory) == 0)
+        //{
             menuState |= MenuState.Inventory;// ³Ö±â
-        }
-        else
-        {
-            menuState &= ~MenuState.Inventory;
-        }
-        bool onInventory = (menuState & MenuState.Inventory) != 0;
-        Game_Manager.current.GetInventory.OpenInventory(onInventory);
-        statusUI.OpenCanvas(onInventory);
+        //}
+        //else
+        //{
+        //    menuState &= ~MenuState.Inventory;
+        //}
+        //bool onInventory = (menuState & MenuState.Inventory) != 0;
+        //Game_Manager.current.GetInventory.OpenInventory(onInventory);
+        //statusUI.OpenCanvas(onInventory);
+        Game_Manager.current.GetInventory.OpenInventory(true);
     }
 
     void FishGuideButton()

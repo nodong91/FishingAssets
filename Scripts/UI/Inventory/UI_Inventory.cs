@@ -72,6 +72,10 @@ public class UI_Inventory : MonoBehaviour
         SetInfomation(null);// 인포메이션 제거
     }
 
+    //===========================================================================================================================
+    // 열기
+    //===========================================================================================================================
+
     public void OpenInventory(bool _open)
     {
         if (_open == true)
@@ -153,6 +157,10 @@ public class UI_Inventory : MonoBehaviour
         Game_Manager.current.GetMainUI.OpenCanvas(true);
     }
 
+    //===========================================================================================================================
+    // 
+    //===========================================================================================================================
+
     public void SetResult(ResultStruct _resultItem)
     {
         // 퀘스트 결과 아이템 세팅
@@ -220,7 +228,6 @@ public class UI_Inventory : MonoBehaviour
 
     private void OnDrag()// 드랍
     {
-
         if (onCheck == true)// 놓을 수 있다.
         {
             if (selectSlotType != enterSlotType)

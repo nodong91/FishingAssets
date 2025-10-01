@@ -1,6 +1,7 @@
 using System.Collections;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static Data_Manager;
 
 public class Title_Manager : MonoBehaviour
@@ -28,9 +29,12 @@ public class Title_Manager : MonoBehaviour
     public Custom_Button newStartButton, creditButton, settingButton, exitButton;
     public TMPro.TMP_Text continueText, newStartText, creditText, settingText, exitText;
     bool continueEnable;
+    public TMPro.TMP_Text volume;
 
     void Start()
     {
+        volume.text = LoadingManager.current.volume;
+
         continueEnable = TryOptionFile();
         Debug.LogWarning($"Option_Manager : {continueEnable}");
         continueButton.gameObject.SetActive(continueEnable);
