@@ -39,11 +39,13 @@ public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        Cursor_Manager.current?.OnMouseOver();
         card.localScale = Vector3.one * 1.1f;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        Cursor_Manager.current?.OnMouseExit();
         card.localScale = Vector3.one;
     }
 

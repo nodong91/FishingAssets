@@ -165,10 +165,15 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     public void OnPointerEnter(PointerEventData eventData)
     {
         dele_Enter?.Invoke(this);
+        if (empty == false)
+        {
+            Cursor_Manager.current?.OnMouseOver();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         dele_Exit?.Invoke();
+        Cursor_Manager.current?.OnMouseExit();
     }
 }

@@ -1,9 +1,7 @@
 using System.Collections;
 using System.IO;
-using UnityEditor.Overlays;
 using UnityEngine;
 using static Data_Manager;
-using static Unity.Cinemachine.CinemachineSplineRoll;
 
 public class Title_Manager : MonoBehaviour
 {

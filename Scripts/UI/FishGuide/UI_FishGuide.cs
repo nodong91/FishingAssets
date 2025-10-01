@@ -24,7 +24,7 @@ public class FishGuide : MonoBehaviour
     int cardAmount;// ÃÑ Ä«µå °³¼ö
     GridLayoutGroup gridLayoutGroup;
     public UI_FishCard cardBase;
-    public Button closeButton;
+    public Custom_Button closeButton;
 
     public Toggle[] toggles;
     public int currentIndex;
@@ -52,7 +52,7 @@ public class FishGuide : MonoBehaviour
         toggles[0].isOn = true;
         SetInstanceStruct();
 
-        closeButton.onClick.AddListener(delegate { OpenCanvas(false); });
+        closeButton.SetButton(delegate { OpenCanvas(false); });
         OpenCanvas(false);
     }
 
