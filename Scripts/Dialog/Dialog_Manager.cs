@@ -18,7 +18,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     bool typing;
     public RawImage NPC_Image;
-    public TMP_Text dialogText;
+    public TMP_Text nameText, dialogText;
     public CanvasGroup selectCanvas;
 
     private float typingSpeed;
@@ -32,6 +32,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     public Dialog_SelectButton selectButton;
     public List<Dialog_SelectButton> dialogSelectButton = new List<Dialog_SelectButton>();
     private readonly Queue<Dialog_SelectButton> selectButtonQueue = new Queue<Dialog_SelectButton>();
+    public RectTransform gridRect;
 
     RectTransform rectParent;
 
@@ -103,7 +104,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         Debug.LogWarning($"선택지 버튼 : {_selectType}");
 
     }
-    public RectTransform gridRect;
+
     Dialog_SelectButton GetSelectButton()
     {
         if (selectButtonQueue.Count > 0)
@@ -140,6 +141,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     IEnumerator StartDialog()
     {
         dialog = dataDialog.dialogStructs[currentDialog];
+        nameText.text = dataNPC.npc_ID;
         dialogText.text = TryDialogString();
         dialogText.ForceMeshUpdate(true);// 메쉬 재 생성 (리셋)
         dialogText.alpha = 0f;// 모든 글자 숨김
@@ -186,7 +188,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         {
             normalize += Time.deltaTime * 10f;
             selectCanvas.alpha = normalize;
-            rectParent.anchoredPosition = Vector3.Lerp(Vector3.down * 30f, Vector3.zero, normalize);
+            rectParent.anchoredPosition = Vector3.Lerp(Vector3.up * 30f, Vector3.zero, normalize);
             yield return null;
         }
 

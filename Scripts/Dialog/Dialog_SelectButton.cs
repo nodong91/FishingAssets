@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using static Data_Dialog;
 using static Data_Dialog.SelectStruct;
 using static Trigger_Landing;
-using static UI_Inventory_Base;
 
 public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -20,10 +19,13 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
     {
         selectStruct = _selectStruct;
         clickAction = _clickAction;
-        buttonText.text = _selectStruct.selectDialog;
+        string setText = string.Empty;
+        if (_selectStruct.selectType == SelectType.Quest)
+            setText = $"<color=#FFFF00>Quese </color>";
+        buttonText.text = setText + _selectStruct.selectDialog;
         boxImage.gameObject.SetActive(false);
     }
-    
+
     public void OnPointerClick(PointerEventData eventData)
     {
         clickAction?.Invoke(selectStruct.selectType);
@@ -102,11 +104,13 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        transform.localScale = Vector3.one * 1.1f;
         boxImage.gameObject.SetActive(true);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        transform.localScale = Vector3.one;
         boxImage.gameObject.SetActive(false);
     }
 }

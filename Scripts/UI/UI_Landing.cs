@@ -31,13 +31,13 @@ public class UI_Landing : MonoBehaviour
     public DeleOutLanding outLanding;
     Coroutine opening;
     [Header("Buttons")]
-    public Button outButton;
-    public Button restButton;
-    public Button storageButton;
-    public Button shopButton;
-    public Button shipyardButton;
+    public Custom_Button outButton;
+    public Custom_Button restButton;
+    public Custom_Button storageButton;
+    public Custom_Button shopButton;
+    public Custom_Button shipyardButton;
     bool inlanding, onDialog;
-    public Button backButton;
+    public Custom_Button backButton;
     private CanvasGroup backCanvas;
     Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
 
@@ -47,12 +47,12 @@ public class UI_Landing : MonoBehaviour
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = Camera_Manager.current.UICamera;
 
-        outButton.onClick.AddListener(OutButton);
-        restButton.onClick.AddListener(RestButton);
-        shopButton.onClick.AddListener(ShopButton);
-        shipyardButton.onClick.AddListener(ShipyardButton);
-        storageButton.onClick.AddListener(StorageButton);
-        backButton.onClick.AddListener(BackButton);
+        outButton.SetButton(OutButton);
+        restButton.SetButton(RestButton);
+        shopButton.SetButton(ShopButton);
+        shipyardButton.SetButton(ShipyardButton);
+        storageButton.SetButton(StorageButton);
+        backButton.SetButton(BackButton);
 
         backCanvas = backButton.GetComponent<CanvasGroup>();
     }
