@@ -24,6 +24,9 @@ public class Option_Manager : MonoBehaviour
     public Quality_Manager qualityManager;
     const string soundName = "FX_0001";
 
+    public delegate void DeleCloseOption();
+    public DeleCloseOption deleCloseOption;
+
     public static Option_Manager current;
 
     private void Awake()
@@ -39,13 +42,24 @@ public class Option_Manager : MonoBehaviour
         audioManager.SetStart();// 오디오 매니저 세팅
         qualityManager.SetStart();// 퀄리티 매니저 세팅
 
-        closeButton.SetButton(delegate { OpenCanvas(false); });
+        closeButton.SetButton(CloseCanvas);
         SetToggle();
 
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 저장 안하고 닫기
     }
-    public delegate void DeleCloseOption();
-    public DeleCloseOption deleCloseOption;
+
+    public void CloseCanvas()
+    {
+        if (Game_Manager.current == null)
+        {
+            OpenCanvas(false);
+        }
+        else
+        {
+            Game_Manager.current.GetMainUI?.CloseCanvas();
+        }
+    }
+
     public void OpenCanvas(bool _open)
     {
         if (_open == false)

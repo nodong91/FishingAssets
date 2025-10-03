@@ -26,6 +26,7 @@ public class UI_Main : MonoBehaviour
     public Canvas cameraCanvas;
     public TMPro.TMP_Text warnningText;
     Coroutine textActing;
+
     [Header("[ Ship ]")]
     public Slider shipEnergy;
     public Image currentHealthImage, maxHealthImage;
@@ -41,6 +42,7 @@ public class UI_Main : MonoBehaviour
         fishGuideButton.SetButton(FishGuideButton);
         questButton.SetButton(QuestButton);
         optionButton.SetButton(OptionButton);
+        //backButton.SetButton(BackButton);
 
         SetCameraCanvas();
         SetFadeScreen(false);
@@ -53,14 +55,17 @@ public class UI_Main : MonoBehaviour
         cameraCanvas.worldCamera = Camera_Manager.current.UICamera;
     }
 
-    void AllClose()
+    public void CloseCanvas()
     {
+        if (menuState == 0)
+            return;
+
         switch (menuState)
         {
             case MenuState.Inventory:
                 menuState &= ~MenuState.Inventory;
                 Game_Manager.current.GetInventory.OpenInventory(false);
-                //statusUI.OpenCanvas(false);
+                statusUI.OpenCanvas(false);
                 break;
             case MenuState.Fishing:
                 menuState &= ~MenuState.Fishing;
@@ -75,14 +80,15 @@ public class UI_Main : MonoBehaviour
                 Option_Manager.current.OpenCanvas(false);
                 break;
         }
+        OpenCanvas(true);
     }
 
     void InventoryButton()
     {
-        AllClose();
+        OpenCanvas(false);
         //if ((menuState & MenuState.Inventory) == 0)
         //{
-            menuState |= MenuState.Inventory;// 持扁
+        menuState |= MenuState.Inventory;// 持扁
         //}
         //else
         //{
@@ -91,26 +97,27 @@ public class UI_Main : MonoBehaviour
         //bool onInventory = (menuState & MenuState.Inventory) != 0;
         //Game_Manager.current.GetInventory.OpenInventory(onInventory);
         //statusUI.OpenCanvas(onInventory);
+        statusUI.OpenCanvas(true);
         Game_Manager.current.GetInventory.OpenInventory(true);
     }
 
     void FishGuideButton()
     {
-        AllClose();
+        OpenCanvas(false);
         menuState |= MenuState.Fishing;// 持扁
         Game_Manager.current.GetFishGuide.OpenCanvas(true);
     }
 
     void QuestButton()
     {
-        AllClose();
+        OpenCanvas(false);
         menuState |= MenuState.Quest;// 持扁
         Game_Manager.current.GetQuestUI.OpenCanvas(true);
     }
 
     void OptionButton()
     {
-        AllClose();
+        OpenCanvas(false);
         menuState |= MenuState.Option;// 持扁
         Option_Manager.current.OpenCanvas(true);
         Debug.LogWarning("Option Button Clicked");
@@ -137,6 +144,7 @@ public class UI_Main : MonoBehaviour
     {
         warnningText.alpha = 1f;
         yield return new WaitForSeconds(1f);
+
         float normalize = 0f;
         while (normalize < 1f)
         {

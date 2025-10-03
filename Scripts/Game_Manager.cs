@@ -52,7 +52,6 @@ public class Game_Manager : MonoBehaviour
 
     IEnumerator SetStart()
     {
-        //RenderSettings.skybox = Instantiate(skyboxMatial);
         Singleton_Continue.INSTANCE.GetContinue();
         Camera_Manager.current.SetCameraManager();
         SetRendererFeature();

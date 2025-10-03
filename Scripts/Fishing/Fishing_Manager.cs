@@ -370,7 +370,7 @@ public class Fishing_Manager : MonoBehaviour
         if (currentFish.fishCoolTime > 0f && cooling < Time.time)
         {
             // 쿨타임이 0인 경우 공격하지 않음
-            FishState(FishStateType.Spelling);// 특수 기술
+            FishState(FishStateType.Spelling);// 스킬 기술
         }
         else
         {
@@ -420,7 +420,6 @@ public class Fishing_Manager : MonoBehaviour
         SetSkillCord();
 
         float prevSpeed = fishSpeed;
-
         float normalize = 0f;
         while (normalize < currentFish.fishSpellTime)
         {
@@ -548,7 +547,6 @@ public class Fishing_Manager : MonoBehaviour
 
     void SetSkillCord()
     {
-        fishState = FishStateType.Spelling;
         currentIndex = 0;
         skillCord = string.Empty;
         cordCount = currentFish.fishDefenseCount;

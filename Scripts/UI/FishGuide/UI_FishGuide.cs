@@ -24,7 +24,7 @@ public class FishGuide : MonoBehaviour
     int cardAmount;// ÃÑ Ä«µå °³¼ö
     GridLayoutGroup gridLayoutGroup;
     public UI_FishCard cardBase;
-    public Custom_Button closeButton;
+    public Custom_Button backButton;
 
     public Toggle[] toggles;
     public int currentIndex;
@@ -52,9 +52,10 @@ public class FishGuide : MonoBehaviour
         toggles[0].isOn = true;
         SetInstanceStruct();
 
-        closeButton.SetButton(delegate { OpenCanvas(false); });
+        backButton.SetButton(CloseCanvas);
         OpenCanvas(false);
     }
+    public void CloseCanvas() => Game_Manager.current.GetMainUI?.CloseCanvas();
 
     public void OpenCanvas(bool _open)
     {

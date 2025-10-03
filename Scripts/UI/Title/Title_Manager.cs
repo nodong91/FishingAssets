@@ -31,6 +31,19 @@ public class Title_Manager : MonoBehaviour
     bool continueEnable;
     public TMPro.TMP_Text volume;
 
+    public Light DayLight;
+    public Color nightColor;
+    [ColorUsage(true, true)]
+    public Color emissionColor;
+    public Material skyboxMatial;
+
+    [Header(" [ Ship ]")]
+    public Unit_Player player;
+    public Transform startPoint, endPoint;
+    public float speed = 0.1f;
+    public Material reflectionMaterial;
+    bool isMove = false;
+
     void Start()
     {
         volume.text = LoadingManager.current.volume;
@@ -51,11 +64,6 @@ public class Title_Manager : MonoBehaviour
         OnTitle();
         SetTime();
     }
-    public Light DayLight;
-    public Color nightColor;
-    [ColorUsage(true, true)]
-    public Color emissionColor;
-    public Material skyboxMatial;
 
     void SetTime()
     {
@@ -77,7 +85,7 @@ public class Title_Manager : MonoBehaviour
         }
     }
 
-    public bool TryOptionFile()
+    bool TryOptionFile()
     {
         string filePath = Application.dataPath + "/Save/" + "SaveContinue" + ".json";
         FileInfo fileInfo = new FileInfo(filePath);
@@ -93,7 +101,7 @@ public class Title_Manager : MonoBehaviour
         exitText.text = Singleton_Data.INSTANCE.GetLanguage(_exit);
     }
 
-    public void OnTitle()
+    void OnTitle()
     {
         TextSetting();
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
@@ -146,7 +154,7 @@ public class Title_Manager : MonoBehaviour
     }
 
     private UI_Popup instNewGamePopup;
-    public UI_Popup GetUIPopup
+    UI_Popup GetUIPopup
     {
         get
         {
@@ -217,12 +225,6 @@ public class Title_Manager : MonoBehaviour
         LoadingManager.current.GoExit();
     }
 
-    [Header(" [ Ship ]")]
-    public Unit_Player player;
-    public Transform startPoint, endPoint;
-    public float speed = 0.1f;
-    public Material reflectionMaterial;
-    bool isMove = false;
     IEnumerator SetManager()
     {
         Camera_Manager.current.SetCameraManager();
@@ -269,7 +271,7 @@ public class Title_Manager : MonoBehaviour
     }
 
     private Unit_Player instPlayer;
-    public Unit_Player GetPlayer
+    Unit_Player GetPlayer
     {
         get
         {

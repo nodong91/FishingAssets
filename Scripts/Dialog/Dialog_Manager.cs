@@ -102,7 +102,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     void InputButton(SelectStruct.SelectType _selectType)
     {
         Debug.LogWarning($"선택지 버튼 : {_selectType}");
-
+        OpenCanvas(false);
     }
 
     Dialog_SelectButton GetSelectButton()

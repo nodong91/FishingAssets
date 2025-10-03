@@ -10,6 +10,7 @@ using static UI_Inventory_Slot;
 public class UI_Inventory : MonoBehaviour
 {
     public SlotType currentType;
+    public Custom_Button closeButton;
 
     public UI_MyBox myBox;
     public UI_Shop shop;
@@ -32,10 +33,9 @@ public class UI_Inventory : MonoBehaviour
     ItemClass selectItemClass;
     ItemClass originItemClass;
 
-    int slotSize = 40;
+    const int slotSize = 40;
     ResultStruct resultItem;
 
-    float GetMoney => Game_Manager.current.GetMainUI.TryMoney;
     public string addFishTest;
 
     void Update()// 아이템 추가 테스트
@@ -64,6 +64,7 @@ public class UI_Inventory : MonoBehaviour
 
     public void SetStart()
     {
+        closeButton.SetButton(CloseCanvas);
         myBox.SetSlotSize = slotSize;
         shop.SetSlotSize = slotSize;
         myBox.SetStart();
@@ -71,6 +72,8 @@ public class UI_Inventory : MonoBehaviour
 
         SetInfomation(null);// 인포메이션 제거
     }
+
+    public void CloseCanvas() => Game_Manager.current.GetMainUI?.CloseCanvas();
 
     //===========================================================================================================================
     // 열기
