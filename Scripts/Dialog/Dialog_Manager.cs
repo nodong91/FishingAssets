@@ -55,13 +55,16 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
         DialogStart(_npc.dataDialogs[0]);
         // 퀘스트가 있는지 확인
-        List<Data_Quest> checkQuests = Game_Manager.current.GetQuestUI.CheckNPC(_npc.npc_ID);
+        List<Data_Quest> checkQuest = Game_Manager.current.GetNews.TryQuestDialog(_npc.npc_ID);
         // 퀘스트가 있다면 선택지 버튼 생성
-        for (int i = 0; i < checkQuests.Count; i++)
+        for (int i = 0; i < checkQuest.Count; i++)
         {
-            Dialog_SelectButton button = SetSelectButton(checkQuests[i].selectStruct);
-            button.transform.SetAsFirstSibling();// 순서 변경
-            button.questData = checkQuests[i];
+            if (dataNPC.npc_ID == checkQuest[i].npc_ID)
+            {
+                Dialog_SelectButton button = SetSelectButton(checkQuest[i].selectStruct);
+                button.transform.SetAsFirstSibling();// 순서 변경
+                button.questData = checkQuest[i];
+            }
         }
         OpenCanvas(true);// 대화 시작
     }

@@ -2,14 +2,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_NewsDisplay : MonoBehaviour
+public class UI_NewsInfomation : MonoBehaviour
 {
     public TMP_Text titleText;
     public TMP_Text npcText;
     public TMP_Text descriptionText;
     public TMP_Text deadLineText;
     public GridLayoutGroup resultParent;
-    //public
 
     public void SetDisplay(Data_Quest _quest)
     {

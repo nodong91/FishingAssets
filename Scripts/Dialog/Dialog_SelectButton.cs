@@ -85,10 +85,9 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
             {
                 Debug.Log($"Quest selected: {questData.title}");
 
-                Game_Manager.current.GetQuestUI.ComplateQuest(questData);
+                Game_Manager.current.GetNews.ComplateQuest(questData);// 퀘스트 완료 체크
                 Game_Manager.current.GetInventory.SetResult(questData.resultData);// 퀘스트 완료 후 결과 아이템 설정
-                Game_Manager.current.GetInventory.RemoveQuestItem();
-
+                Game_Manager.current.GetInventory.RemoveQuestItem();// 퀘스트 아이템 인벤토리에서 제거
                 Game_Manager.current.GetDialog.DialogStart(questData.successDialogData);// 퀘스트 성공 대화 시작
             }
             else

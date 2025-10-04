@@ -59,10 +59,14 @@ public class Option_Manager : MonoBehaviour
             Game_Manager.current.GetMainUI?.CloseCanvas();
         }
     }
-
+    bool open;
     public void OpenCanvas(bool _open)
     {
-        if (_open == false)
+        if (open == _open)
+            return;
+
+        open = _open;
+        if (_open == false)// ´ÝÈú ¶§
             StaticOpenCanvas.deleEndOpen += EndOpenCanvas;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
         Camera_Manager.current?.CameraFocus(_open);

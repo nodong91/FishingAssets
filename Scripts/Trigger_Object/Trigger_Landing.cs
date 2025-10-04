@@ -45,7 +45,6 @@ public class Trigger_Landing : Trigger_Setting
     void SetLandingAction()
     {
         player = Game_Manager.current.GetPlayer;
-        CheckQuest();
 
         if (setLanding != null)
             StopCoroutine(setLanding);
@@ -70,15 +69,6 @@ public class Trigger_Landing : Trigger_Setting
             player.transform.rotation = Quaternion.Lerp(prevRotation, triggerSetting.transform.rotation, normalize);
             yield return null;
         }
-    }
-
-    public void CheckQuest()
-    {
-        // NPC 누가 퀘스트를 가지고 있는지 확인
-        // 대화에 표시를 해야하기 때문
-        //List<Data_Quest> myQuestList = Game_Manager.current.GetNews.myQuestList;
-        Debug.LogError("NPC 누가 퀘스트를 가지고 있는지 확인");
-
     }
 
     private void SetLandingUI()

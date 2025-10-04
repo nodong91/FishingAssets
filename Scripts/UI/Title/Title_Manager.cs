@@ -46,6 +46,7 @@ public class Title_Manager : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(SetManager());
         volume.text = LoadingManager.current.volume;
 
         continueEnable = TryOptionFile();
@@ -60,7 +61,6 @@ public class Title_Manager : MonoBehaviour
         originalSize = selectMask.sizeDelta;
         ActionExit(null);
 
-        StartCoroutine(SetManager());
         OnTitle();
         SetTime();
     }
@@ -107,12 +107,6 @@ public class Title_Manager : MonoBehaviour
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
     }
 
-    //bool FindFolder()
-    //{
-    //    string filePath = Application.dataPath + "/Save/";
-    //    return Directory.Exists(filePath);
-    //}
-
     void ActionEnter(Custom_Button _button)
     {
         Singleton_Audio.INSTANCE.Audio_FX(soundName);
@@ -142,12 +136,12 @@ public class Title_Manager : MonoBehaviour
 
     void ContinueButton()
     {
-        //StopAllCoroutines();
-        StartGame();
+        StartGame();//ContinueButton
     }
 
     void StartGame()
     {
+        //StopAllCoroutines();
         isMove = false;
         Option_Manager.current.OpenCanvas(false);
         LoadingManager.current.GoMain();
@@ -177,7 +171,7 @@ public class Title_Manager : MonoBehaviour
         }
         else
         {
-            StartGame();
+            StartGame();//NewStartButton
         }
     }
 
@@ -203,7 +197,7 @@ public class Title_Manager : MonoBehaviour
         Option_Manager.current.LoadOption();// 可记 单捞磐 府悸
         yield return null;
 
-        StartGame();
+        StartGame();//RemoveSaveFile
     }
 
     void CreditButton()
@@ -259,7 +253,7 @@ public class Title_Manager : MonoBehaviour
                 reflectionMaterial.SetVector(shipPosition, GetPlayer.transform.position);
             }
             GetPlayer.gameObject.SetActive(false);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.0f);
 
             GetPlayer.transform.position = startPoint.position;
         }

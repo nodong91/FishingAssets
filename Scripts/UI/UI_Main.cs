@@ -19,7 +19,6 @@ public class UI_Main : MonoBehaviour
     public UI_Status statusUI;
     public Custom_Button inventoryButton;
     public Custom_Button fishGuideButton;
-    public Custom_Button questButton;
     public Custom_Button optionButton;
 
     public CanvasGroup fadeScreen;
@@ -40,7 +39,6 @@ public class UI_Main : MonoBehaviour
 
         inventoryButton.SetButton(InventoryButton);
         fishGuideButton.SetButton(FishGuideButton);
-        questButton.SetButton(QuestButton);
         optionButton.SetButton(OptionButton);
         //backButton.SetButton(BackButton);
 
@@ -73,7 +71,6 @@ public class UI_Main : MonoBehaviour
                 break;
             case MenuState.Quest:
                 menuState &= ~MenuState.Quest;
-                Game_Manager.current.GetQuestUI.OpenCanvas(false);
                 break;
             case MenuState.Option:
                 menuState &= ~MenuState.Option;
@@ -106,13 +103,6 @@ public class UI_Main : MonoBehaviour
         OpenCanvas(false);
         menuState |= MenuState.Fishing;// 넣기
         Game_Manager.current.GetFishGuide.OpenCanvas(true);
-    }
-
-    void QuestButton()
-    {
-        OpenCanvas(false);
-        menuState |= MenuState.Quest;// 넣기
-        Game_Manager.current.GetQuestUI.OpenCanvas(true);
     }
 
     void OptionButton()

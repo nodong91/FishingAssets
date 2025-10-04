@@ -23,7 +23,6 @@ public class Game_Manager : MonoBehaviour
     private string oceanSound = "Env_0001";
     public Fishing_Manager fishingAction;
 
-    public UI_QuestManager questManager;
     public Energy_Manager energyManager;
     public Gamble_Lottery lottery;
     public Tutorial_Manager tutorial;
@@ -60,7 +59,6 @@ public class Game_Manager : MonoBehaviour
         yield return null;
 
         GetMainUI.SetStart();
-        GetQuestUI.SetStart();
         GetSkill.SetStart();
         GetDialog.SetStart();
         AddStatus();// 추가 스테이트 세팅
@@ -277,19 +275,6 @@ public class Game_Manager : MonoBehaviour
                 instSkill = Instantiate(skillManager, transform);
             }
             return instSkill;
-        }
-    }
-
-    private UI_QuestManager instQuest;
-    public UI_QuestManager GetQuestUI
-    {
-        get
-        {
-            if (instQuest == null)
-            {
-                instQuest = Instantiate(questManager, transform);
-            }
-            return instQuest;
         }
     }
 
