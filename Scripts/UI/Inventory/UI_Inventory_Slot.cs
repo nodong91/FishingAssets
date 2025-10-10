@@ -81,8 +81,6 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     public void SetStart(int _x, int _y)
     {
         slotNum = new Vector2Int(_x, _y);
-        //m_Text.text = _x + "/" + _y;
-        //gameObject.name = m_Text.text;
         CheckOff();
 
         destroy = false;

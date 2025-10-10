@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -33,7 +34,7 @@ public class Game_Manager : MonoBehaviour
 
     public Light dayLight;
     public Color dayColor, nightColor;
-    [ColorUsage(true,true)]
+    [ColorUsage(true, true)]
     public Color emissionColor;
     public Material skyboxMatial;
 
@@ -78,8 +79,6 @@ public class Game_Manager : MonoBehaviour
         bool fullHealth = GetPlayer.FullHealth;// 스탯 적용 하기 전 풀피 체크
         currentStatus.SettingStatus(defaultStatusData.defaultStatus);// 디폴트 스탯 적용
         currentStatus.AddStatus(GetAddStatus);// 추가 스탯 적용
-
-        Debug.LogWarning($"AddStatus 시 풀피 체크 : {fullHealth} 인벤토리 - {currentStatus.maxBoxSize}");
         GetInventory.myBox.AddInventory(currentStatus.maxBoxSize);// 인벤토리 사이즈 적용
         GetPlayer.SetStatus(fullHealth);// 플레이어에 스탯 적용
     }
@@ -320,6 +319,10 @@ public class Game_Manager : MonoBehaviour
 
 
 
+    //====================================================================================================================
+    // 풀스크린 렌더러 피쳐 관련
+    //====================================================================================================================
+
     public int featureIndex = 2;
     public Material fullscreenMaterial;
     public FullScreenPassRendererFeature fullScreenRendererFeature;
@@ -344,5 +347,89 @@ public class Game_Manager : MonoBehaviour
             fullScreenRendererFeature.passMaterial = fullscreenMaterial;
             fullScreenRendererFeature.injectionPoint = injectionPoint;
         }
+    }
+
+    //====================================================================================================================
+    // 퀘스트 관련
+    //====================================================================================================================
+
+    [System.Serializable]
+    public class QuestItem
+    {
+        public Vector2Int slotNum;
+        public Data_Quest[] quests;
+        public QuestItem(Vector2Int _slotNum, Data_Quest[] _quests)
+        {
+            slotNum = _slotNum;
+            quests = _quests;
+        }
+    }
+    public List<QuestItem> questItems = new List<QuestItem>();
+    Dictionary<Vector2Int, Data_Quest[]> questSlots = new Dictionary<Vector2Int, Data_Quest[]>();// 아이템 위치
+    Dictionary<string, List<Data_Quest>> npcQuest = new Dictionary<string, List<Data_Quest>>();// 완료 확인용
+    public Data_Quest[] testDatas;
+
+    public void BuyNews(Vector2Int _slotNum)// 신문 구매시 퀘스트 세팅
+    {
+        Data_Quest[] temp = new Data_Quest[3]
+        {
+            testDatas[0],
+            testDatas[1],
+            testDatas[2]
+        };
+        questSlots[_slotNum] = temp;
+        questItems.Add(new QuestItem(_slotNum, temp));
+    }
+
+    public List<QuestItem> TryNews()// 신문 퀘스트 리스팅
+    {
+        List<QuestItem> questItems = new List<QuestItem>();
+        //foreach (var item in questNews)
+        //{
+        //    if (item.Value.Count == 0)
+        //        continue;
+        //    Vector2Int slotNum = item.Key.slotNum;
+        //    Data_Quest[] quests = item.Value.ToArray();
+        //    questItems.Add(new QuestItem(slotNum, quests));
+        //}
+        return questItems;
+    }
+
+    public void AddNews(UI_Inventory_Slot _slot)
+    {
+        //if (questNews.ContainsKey(_slot) == false)
+        //    questNews[_slot] = new List<Data_Quest>();
+        //questNews[_slot].Add(_slot.itemClass.item);
+    }
+
+    public void RemoveNews(UI_Inventory_Slot _slot)
+    {
+        //if (questNews.ContainsKey(_slot) == true)
+        //    questNews.Remove(_slot);
+    }
+
+    public void AddQuest(Data_Quest _quest)// 퀘스트 추가
+    {
+        Debug.LogError("신문 퀘스트 세팅");
+        string npcID = _quest.npc_ID;
+        if (npcQuest.ContainsKey(npcID) == false)
+            npcQuest[npcID] = new List<Data_Quest>();
+        npcQuest[npcID].Add(_quest);
+    }
+
+    public List<Data_Quest> TryQuestDialog(string _npcID)// NPC 퀘스트 리스팅
+    {
+        if (npcQuest.ContainsKey(_npcID) == false)
+            return null;
+
+        List<Data_Quest> quests = npcQuest[_npcID];
+        return quests;
+    }
+
+    public void ComplateQuest(Data_Quest _quest)// 완료 퀘스트 리스팅
+    {
+        string npcID = _quest.npc_ID;
+        List<Data_Quest> quests = npcQuest[npcID];
+        quests.Remove(_quest);
     }
 }

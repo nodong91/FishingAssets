@@ -42,7 +42,7 @@ public class UI_Inventory : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            Game_Manager.current.GetMainUI.MoveMoney(1000f);
+            Game_Manager.current.GetMainUI.MoveMoney(1000f);// 아이템 추가 테스트
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -60,6 +60,13 @@ public class UI_Inventory : MonoBehaviour
             SetIconImage(fishStruct.itemStruct);
             AddItem(fishStruct.itemStruct);
         }
+    }
+
+    public void AddItem(ItemStruct _itemStruct)
+    {
+        ItemClass itemClass = myBox.SetItemClass(_itemStruct);// 테스트 아이템 추가
+        selectItemClass = itemClass;
+        DragSlot();// 아이템 추가
     }
 
     public void SetStart()
@@ -161,7 +168,7 @@ public class UI_Inventory : MonoBehaviour
     }
 
     //===========================================================================================================================
-    // 
+    // 아이템 이동
     //===========================================================================================================================
 
     public void SetResult(ResultStruct _resultItem)
@@ -170,40 +177,28 @@ public class UI_Inventory : MonoBehaviour
         resultItem = _resultItem;
     }
 
-    public void AddItem(ItemStruct _itemStruct)
+    void SellItem(ItemStruct _item)
     {
-        ItemClass itemClass = new ItemClass
-        {
-            item = _itemStruct,
-            angle = 0,
-            shape = _itemStruct.shape,
-            acquisition = Game_Manager.current.GetTimeUI.day,
-        };
-        selectItemClass = itemClass;
-        DragSlot();// 아이템 추가
-    }
-
-    void SellItem(string _id)
-    {
-        ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_id);
-        float addPrice = item.price * Game_Manager.current.currentStatus.FishPrice;// 퍼센트 만큼 
-        float price = Mathf.Round(item.price + addPrice);// 스킬 스탯 추가
-        Debug.LogWarning($"Sell Item: {item.name} for {item.price} or {price}");
+        float addPrice = _item.price * Game_Manager.current.currentStatus.FishPrice * 0.01f;// 퍼센트 만큼 비싸게 판매 
+        float price = Mathf.Round(_item.price + addPrice);// 스킬 스탯 추가
         Game_Manager.current.GetMainUI.MoveMoney(price);
+        Debug.LogWarning($"아이템 판매: {_item.name} for {_item.price} + {addPrice} = {price}");
+        if (_item.itemType == ItemStruct.ItemType.Quest)
+        {
+            Game_Manager.current.RemoveNews(selectSlot);
+        }
     }
 
-    bool BuyItem(string _id)// 구매
+    void BuyItem(ItemStruct _item)
     {
-        ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_id);
-        if (Game_Manager.current.CheckMoney(item.price) == false)
-            return false;
-
-        if (myBox.AddItem(item) == true)// 살 공간이 있으면 슬롯세팅
+        float addPrice = _item.price * Game_Manager.current.currentStatus.FishPrice * 0.01f;// 퍼센트 만큼 싸게 구매 
+        float price = -_item.price;
+        Game_Manager.current.GetMainUI.MoveMoney(price);
+        Debug.LogWarning($"아이템 구매 : {_item.name} for {_item.price} + {addPrice} = {price}");
+        if (_item.itemType == ItemStruct.ItemType.Quest)
         {
-            float price = -item.price;
-            Game_Manager.current.GetMainUI.MoveMoney(price);
+            Debug.LogWarning($"퀘스트 구매 : {_item.name}");
         }
-        return true;
     }
 
     void SetEmptySlot(UI_Inventory_Slot _slot)// 슬롯 비우기
@@ -217,7 +212,6 @@ public class UI_Inventory : MonoBehaviour
     //===========================================================================================================================
     public void OnPointerLeftClick(UI_Inventory_Slot _slot)
     {
-        Debug.LogWarning($"onDrag:{onDrag} onCheck:{onCheck}");
         // 아이템 체크
         if (onDrag == true)// 드래그 중일 때 드랍
         {
@@ -252,12 +246,17 @@ public class UI_Inventory : MonoBehaviour
                             OffDragReset();
                             return;
                         }
-                        float price = -selectItemClass.item.price;
-                        Game_Manager.current.GetMainUI.MoveMoney(price);
+                        // 퀘스트 구매
+                        if (selectItemClass.item.itemType == ItemStruct.ItemType.Quest)
+                        {
+                            Debug.LogWarning($"{enterSlotType}드래그로 구매");
+                            Game_Manager.current.BuyNews(enterSlot.slotNum);
+                        }
+                        BuyItem(selectItemClass.item);// 드래그 구매
                     }
                     else if (selectSlotType == SlotType.MyBox)// 판매
                     {
-                        SellItem(selectItemClass.item.id);// 드래그 판매
+                        SellItem(selectItemClass.item);// 드래그 판매
                         originItemClass = null;
                         OffDragReset();
                         return;
@@ -328,12 +327,13 @@ public class UI_Inventory : MonoBehaviour
                 case SlotType.Shipyard:
                     if (enterSlotType == SlotType.MyBox)// 내 인벤토리일때 판매
                     {
-                        SellItem(selectSlot.itemClass.item.id);// 우클릭 판매
+                        SellItem(selectSlot.itemClass.item);// 우클릭 판매
                     }
                     else// 구매
                     {
-                        if (BuyItem(selectSlot.itemClass.item.id) == false)
-                            return;
+                        ItemStruct item = selectSlot.itemClass.item;
+                        if (Game_Manager.current.CheckMoney(item.price) == true && myBox.AddItem(item) == true)// 클릭 구매
+                            BuyItem(selectSlot.itemClass.item);// 클릭 구매
                     }
                     SetEmptySlot(selectSlot);// 슬롯 비우기
                     break;

@@ -16,7 +16,7 @@ public class Audio_Manager : MonoBehaviour
     bool onSet;
     Dictionary<Data_Manager.AudioStruct, int> tryAudioStructToIndex = new Dictionary<Data_Manager.AudioStruct, int>();
 
-    const string soundName = "Fx_0001";
+    const string soundName = "FX_0001";
     //===========================================================================================================================
     public void SetStart()
     {

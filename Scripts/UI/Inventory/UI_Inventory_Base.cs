@@ -264,11 +264,21 @@ public class UI_Inventory_Base : MonoBehaviour
         UI_Inventory_Slot slot = GetEmptySlot(_item);// 아이템 넣을 수 있는 칸 찾기
         if (slot == null)
         {
-            // 넣을만한 빈 슬롯 없음
             Debug.LogWarning("넣을만한 빈 슬롯 없음");
             return false;
         }
+        if (slotType == SlotType.MyBox && _item.itemType == ItemStruct.ItemType.Quest)
+        {
+            Debug.LogWarning($"{slotType}넣을만한 빈 슬롯 없음");
+            Game_Manager.current.BuyNews(slot.slotNum);
+        }
+        ItemClass itemClass = SetItemClass(_item);// 구매할 경우 새로운 클라스 캡슐화
+        SetSlot(slot, itemClass);
+        return true;
+    }
 
+    public ItemClass SetItemClass(ItemStruct _item)
+    {
         ItemClass itemClass = new ItemClass
         {
             item = _item,
@@ -276,8 +286,7 @@ public class UI_Inventory_Base : MonoBehaviour
             shape = _item.shape,
             acquisition = Game_Manager.current.GetTimeUI.day,
         };
-        SetSlot(slot, itemClass);
-        return true;
+        return itemClass;
     }
 
     //===========================================================================================================================
@@ -381,11 +390,8 @@ public class UI_Inventory_Base : MonoBehaviour
     [System.Serializable]
     public class SaveItemClass
     {
-        public string id;
-        public float angle;
         public Vector2Int slotNum;
-        public Vector2Int[] shape;
-        public int acquisition;
+        public ItemClass item;
     }
     Static_JsonManager.InventoryData saveInventoryData;
     public Static_JsonManager.InventoryData GetSaveInventoryData { get { return saveInventoryData; } }
@@ -398,9 +404,7 @@ public class UI_Inventory_Base : MonoBehaviour
             SaveItemClass dictCheck = new SaveItemClass
             {
                 slotNum = child.Key,
-                id = child.Value.item.id,
-                angle = child.Value.angle,
-                shape = child.Value.shape,
+                item = child.Value,
             };
             saveItems.Add(dictCheck);
         }
@@ -437,16 +441,9 @@ public class UI_Inventory_Base : MonoBehaviour
         for (int i = 0; i < _data.itemClass.Count; i++)
         {
             // 새로운 클라스 캡슐화
-            ItemClass itemClass = new ItemClass
-            {
-                item = Singleton_Data.INSTANCE.GetItemStruct(_data.itemClass[i].id),
-                angle = _data.itemClass[i].angle,
-                shape = _data.itemClass[i].shape,
-                acquisition = _data.itemClass[i].acquisition,
-            };
             Vector2Int slotNum = _data.itemClass[i].slotNum;
             UI_Inventory_Slot slot = allSlots[slotNum.x, slotNum.y];
-            SetSlot(slot, itemClass);
+            SetSlot(slot, _data.itemClass[i].item);
         }
     }
 

@@ -64,7 +64,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         if (_id != null)
         {
             audioSource.gameObject.SetActive(true);
-            audioSource.name = $"BGM_{_id}";
+            audioSource.name = _id;
             Debug.Log($"{audioSource.name}");
             audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
             audioSource.mute = masterMute == true ? true : bgmMute;
@@ -125,7 +125,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 
         AudioSource audioSource = TryAudioSource();
         audioSource.gameObject.SetActive(true);
-        audioSource.name = $"Fx_{_id}";
+        audioSource.name = _id;
         Debug.Log($"{audioSource.name}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
         audioSource.mute = masterMute == true ? true : fxMute;
@@ -145,7 +145,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 
         AudioSource audioSource = TryAudioSource();
         audioSource.gameObject.SetActive(true);
-        audioSource.name = $"Dialog_{_id}";
+        audioSource.name = _id;
         Debug.Log($"{audioSource}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
         audioSource.mute = masterMute == true ? true : fxMute;
@@ -193,7 +193,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 
         AudioSource audioSource = TryAudioSource();
         audioSource.gameObject.SetActive(true);
-        audioSource.name = $"Environment_{_id}";
+        audioSource.name = _id;
         Debug.LogWarning($"πË∞Ê¿Ω : {_id}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
         audioSource.mute = masterMute == true ? true : envMute;

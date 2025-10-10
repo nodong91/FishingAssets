@@ -206,12 +206,11 @@ public class UI_Shop : UI_Inventory_Base
 
     void SetFixedItem()// 상점 고정 아이템 세팅
     {
-        //string[] setID = shopItem[currentIndex].fixedID;
         string[] setID = npc.fixedID;
         for (int i = 0; i < setID.Length; i++)
         {
             ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(setID[i]);
-            if (AddItem(item) == false)
+            if (AddItem(item) == false)// 상점 고정 아이템 세팅
             {
                 break;// 빈칸이 없으면 그만
             }
@@ -229,7 +228,7 @@ public class UI_Shop : UI_Inventory_Base
         for (int i = 0; i < amount; i++)
         {
             ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(setID[i]);
-            if (AddItem(item) == false)
+            if (AddItem(item) == false)// 상점 랜덤 아이템 세팅
             {
                 break;// 빈칸이 없으면 그만
             }
@@ -238,14 +237,6 @@ public class UI_Shop : UI_Inventory_Base
 
     public void SetResultItem(ResultStruct _result)// 상점 고정 아이템 세팅
     {
-        //for (int i = 0; i < setID.Length; i++)
-        //{
-        //    ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(setID[i]);
-        //    if (AddItem(item) == false)
-        //    {
-        //        break;// 빈칸이 없으면 그만
-        //    }
-        //}
         StartCoroutine(DisplayResultItem(_result));
     }
 
@@ -259,7 +250,7 @@ public class UI_Shop : UI_Inventory_Base
         for (int i = 0; i < _result.itemID.Length; i++)
         {
             ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_result.itemID[i]);
-            if (AddItem(item) == false)
+            if (AddItem(item) == false)// 보상 아이템 세팅
             {
                 break;// 빈칸이 없으면 그만
             }
