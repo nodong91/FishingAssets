@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -379,42 +380,20 @@ public class Game_Manager : MonoBehaviour
         };
         questSlots[_slotNum] = temp;
         questItems.Add(new QuestItem(_slotNum, temp));
+
+        for (int i = 0; i < temp.Length; i++)
+        {
+            string npcID = temp[i].npc_ID;
+            if (npcQuest.ContainsKey(npcID) == false)
+                npcQuest[npcID] = new List<Data_Quest>();
+            npcQuest[npcID].Add(temp[i]);
+        }
+        Debug.LogError($"신문 퀘스트 세팅 : {npcQuest.Count}");
     }
 
-    public List<QuestItem> TryNews()// 신문 퀘스트 리스팅
+    void AddNews()
     {
-        List<QuestItem> questItems = new List<QuestItem>();
-        //foreach (var item in questNews)
-        //{
-        //    if (item.Value.Count == 0)
-        //        continue;
-        //    Vector2Int slotNum = item.Key.slotNum;
-        //    Data_Quest[] quests = item.Value.ToArray();
-        //    questItems.Add(new QuestItem(slotNum, quests));
-        //}
-        return questItems;
-    }
 
-    public void AddNews(UI_Inventory_Slot _slot)
-    {
-        //if (questNews.ContainsKey(_slot) == false)
-        //    questNews[_slot] = new List<Data_Quest>();
-        //questNews[_slot].Add(_slot.itemClass.item);
-    }
-
-    public void RemoveNews(UI_Inventory_Slot _slot)
-    {
-        //if (questNews.ContainsKey(_slot) == true)
-        //    questNews.Remove(_slot);
-    }
-
-    public void AddQuest(Data_Quest _quest)// 퀘스트 추가
-    {
-        Debug.LogError("신문 퀘스트 세팅");
-        string npcID = _quest.npc_ID;
-        if (npcQuest.ContainsKey(npcID) == false)
-            npcQuest[npcID] = new List<Data_Quest>();
-        npcQuest[npcID].Add(_quest);
     }
 
     public List<Data_Quest> TryQuestDialog(string _npcID)// NPC 퀘스트 리스팅

@@ -183,10 +183,6 @@ public class UI_Inventory : MonoBehaviour
         float price = Mathf.Round(_item.price + addPrice);// 스킬 스탯 추가
         Game_Manager.current.GetMainUI.MoveMoney(price);
         Debug.LogWarning($"아이템 판매: {_item.name} for {_item.price} + {addPrice} = {price}");
-        if (_item.itemType == ItemStruct.ItemType.Quest)
-        {
-            Game_Manager.current.RemoveNews(selectSlot);
-        }
     }
 
     void BuyItem(ItemStruct _item)
@@ -194,11 +190,7 @@ public class UI_Inventory : MonoBehaviour
         float addPrice = _item.price * Game_Manager.current.currentStatus.FishPrice * 0.01f;// 퍼센트 만큼 싸게 구매 
         float price = -_item.price;
         Game_Manager.current.GetMainUI.MoveMoney(price);
-        Debug.LogWarning($"아이템 구매 : {_item.name} for {_item.price} + {addPrice} = {price}");
-        if (_item.itemType == ItemStruct.ItemType.Quest)
-        {
-            Debug.LogWarning($"퀘스트 구매 : {_item.name}");
-        }
+        Debug.LogWarning($"아이템 구매: {_item.name} for {_item.price} + {addPrice} = {price}");
     }
 
     void SetEmptySlot(UI_Inventory_Slot _slot)// 슬롯 비우기
@@ -234,7 +226,7 @@ public class UI_Inventory : MonoBehaviour
                 // 현재 열린 타입이 상점류인 경우
                 if (currentType == SlotType.Shop || currentType == SlotType.Shipyard)
                 {
-                    if (enterSlotType == SlotType.MyBox)// 구매
+                    if (enterSlotType == SlotType.MyBox)// 드랍 구매
                     {
                         // 돈이 부족하면
                         if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == false)
@@ -246,12 +238,7 @@ public class UI_Inventory : MonoBehaviour
                             OffDragReset();
                             return;
                         }
-                        // 퀘스트 구매
-                        if (selectItemClass.item.itemType == ItemStruct.ItemType.Quest)
-                        {
-                            Debug.LogWarning($"{enterSlotType}드래그로 구매");
-                            Game_Manager.current.BuyNews(enterSlot.slotNum);
-                        }
+                        Debug.LogWarning($"드래그로 구매 : {selectItemClass.item.id}");
                         BuyItem(selectItemClass.item);// 드래그 구매
                     }
                     else if (selectSlotType == SlotType.MyBox)// 판매
@@ -332,8 +319,9 @@ public class UI_Inventory : MonoBehaviour
                     else// 구매
                     {
                         ItemStruct item = selectSlot.itemClass.item;
-                        if (Game_Manager.current.CheckMoney(item.price) == true && myBox.AddItem(item) == true)// 클릭 구매
-                            BuyItem(selectSlot.itemClass.item);// 클릭 구매
+                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.AddItem(item) == false)
+                            return;
+                        BuyItem(selectSlot.itemClass.item);// 클릭 구매
                     }
                     SetEmptySlot(selectSlot);// 슬롯 비우기
                     break;

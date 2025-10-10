@@ -195,6 +195,13 @@ public class UI_Inventory_Base : MonoBehaviour
 
             _slot.SetSlotImage = iconImage;// 슬롯에 이미지 세팅
             SetImage(iconImage, _itemClass.item);// 이미지 세팅
+
+            // 퀘스트 아이템 체크 내 인벤토리에 퀘스트 아이템이 들어오면
+            if (slotType == SlotType.MyBox && _itemClass.item.itemType == ItemStruct.ItemType.Quest)
+            {
+                Debug.LogWarning($"{slotType} 세팅");
+                Game_Manager.current.BuyNews(_slot.slotNum);
+            }
         }
         dictItemClass[_slot.slotNum] = _itemClass;
         SaveDictionary();
@@ -266,11 +273,6 @@ public class UI_Inventory_Base : MonoBehaviour
         {
             Debug.LogWarning("넣을만한 빈 슬롯 없음");
             return false;
-        }
-        if (slotType == SlotType.MyBox && _item.itemType == ItemStruct.ItemType.Quest)
-        {
-            Debug.LogWarning($"{slotType}넣을만한 빈 슬롯 없음");
-            Game_Manager.current.BuyNews(slot.slotNum);
         }
         ItemClass itemClass = SetItemClass(_item);// 구매할 경우 새로운 클라스 캡슐화
         SetSlot(slot, itemClass);

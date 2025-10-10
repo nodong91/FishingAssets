@@ -271,7 +271,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             yield return null;
 
             component.UpdateVertexData();
-            Debug.LogWarning("TextAction");
+            Debug.LogWarning("TextActing");
         }
     }
 

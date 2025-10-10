@@ -11,6 +11,7 @@ public class UI_Main : MonoBehaviour
         Fishing = 1 << 1,
         Quest = 1 << 2,
         Option = 1 << 3,
+        Shop = 1 << 4,
     }
     public MenuState menuState;
 
@@ -64,36 +65,33 @@ public class UI_Main : MonoBehaviour
                 menuState &= ~MenuState.Inventory;
                 Game_Manager.current.GetInventory.OpenInventory(false);
                 statusUI.OpenCanvas(false);
+                OpenCanvas(true);
                 break;
             case MenuState.Fishing:
                 menuState &= ~MenuState.Fishing;
                 Game_Manager.current.GetFishGuide.OpenCanvas(false);
+                OpenCanvas(true);
                 break;
             case MenuState.Quest:
                 menuState &= ~MenuState.Quest;
+                OpenCanvas(true);
                 break;
             case MenuState.Option:
                 menuState &= ~MenuState.Option;
                 Option_Manager.current.OpenCanvas(false);
+                OpenCanvas(true);
+                break;
+            case MenuState.Shop:
+                menuState &= ~MenuState.Shop;
+                Game_Manager.current.GetLanding.BackButton();
                 break;
         }
-        OpenCanvas(true);
     }
 
     void InventoryButton()
     {
         OpenCanvas(false);
-        //if ((menuState & MenuState.Inventory) == 0)
-        //{
         menuState |= MenuState.Inventory;// 넣기
-        //}
-        //else
-        //{
-        //    menuState &= ~MenuState.Inventory;
-        //}
-        //bool onInventory = (menuState & MenuState.Inventory) != 0;
-        //Game_Manager.current.GetInventory.OpenInventory(onInventory);
-        //statusUI.OpenCanvas(onInventory);
         statusUI.OpenCanvas(true);
         Game_Manager.current.GetInventory.OpenInventory(true);
     }
@@ -111,6 +109,12 @@ public class UI_Main : MonoBehaviour
         menuState |= MenuState.Option;// 넣기
         Option_Manager.current.OpenCanvas(true);
         Debug.LogWarning("Option Button Clicked");
+    }
+
+    public void OpenShop()
+    {
+        menuState |= MenuState.Shop;// 넣기
+        Game_Manager.current.GetLanding.OutDialog();// 대화 끝
     }
 
     public void OpenCanvas(bool _open)// 메인 유아이 캔버스

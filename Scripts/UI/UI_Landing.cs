@@ -37,8 +37,8 @@ public class UI_Landing : MonoBehaviour
     public Custom_Button shopButton;
     public Custom_Button shipyardButton;
     bool inlanding, onDialog;
-    public Custom_Button backButton;
-    private CanvasGroup backCanvas;
+    //public Custom_Button backButton;
+    //private CanvasGroup backCanvas;
     Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
 
     public void SetStart()
@@ -52,9 +52,8 @@ public class UI_Landing : MonoBehaviour
         shopButton.SetButton(ShopButton);
         shipyardButton.SetButton(ShipyardButton);
         storageButton.SetButton(StorageButton);
-        backButton.SetButton(BackButton);
-
-        backCanvas = backButton.GetComponent<CanvasGroup>();
+        //backButton.SetButton(BackButton);
+        //backCanvas = backButton.GetComponent<CanvasGroup>();
     }
 
     public void SetLanding(LandingStruct _landingData)
@@ -118,8 +117,8 @@ public class UI_Landing : MonoBehaviour
             normalize += Time.deltaTime * 3f;
             float alpha = (_open == true) ? normalize : 1f - normalize;
             OpenCanvasUI(canvasGroup, alpha);
-            if (inlanding == true)
-                OpenCanvasUI(backCanvas, 1f - alpha);
+            //if (inlanding == true)
+            //    OpenCanvasUI(backCanvas, 1f - alpha);
             yield return null;
         }
         if (inlanding == false)
@@ -183,6 +182,7 @@ public class UI_Landing : MonoBehaviour
 
     public void BackButton()// 뒤로 가기
     {
+        Debug.LogWarning(currentType);
         switch (currentType)
         {
             case LandingType.None:

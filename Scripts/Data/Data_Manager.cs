@@ -55,7 +55,6 @@ public class Data_Manager : Data_Parse
             {
                 SetAudioStruct(CSV_Data[i]);
             }
-
         }
     }
 
