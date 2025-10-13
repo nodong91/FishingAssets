@@ -67,6 +67,12 @@ public class Fishing_Canvas : MonoBehaviour
         return followPosition;
     }
 
+    public void SetFishIcon(float _x)
+    {
+        fishHP.handleRect.localScale = new Vector2(_x, 1f);
+        fishHP.handleRect.GetComponent<Image>().color = _x > 0f ? Color.white : Color.red;
+    }
+
     public void SetFishHP(float _hp)
     {
         fishHP.value = _hp;
@@ -87,7 +93,7 @@ public class Fishing_Canvas : MonoBehaviour
     //=========================================================================================================
 
     public RectTransform arrowParent;
-    public Image arrow;
+    public Image arrowImage;
     Queue<Image> arrowQueue = new Queue<Image>();
     private List<Image> arrowList = new List<Image>();
 
@@ -114,7 +120,7 @@ public class Fishing_Canvas : MonoBehaviour
 
     public void OnArrow(int _index, bool _enable)
     {
-        arrowList[_index].color = _enable == true ? Color.red : Color.white;
+        arrowList[_index].color = _enable == true ? Color.white : Color.gray;
     }
 
     public void InputFail()// 실패 시 전부 끄기
@@ -137,7 +143,7 @@ public class Fishing_Canvas : MonoBehaviour
     {
         if (arrowQueue.Count > 0)
             return arrowQueue.Dequeue();
-        Image inst = Instantiate(arrow, arrowParent);
+        Image inst = Instantiate(arrowImage, arrowParent);
         inst.material = Instantiate(inst.material);
         arrowList.Add(inst);
         return inst;

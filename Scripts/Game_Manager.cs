@@ -62,6 +62,7 @@ public class Game_Manager : MonoBehaviour
         GetMainUI.SetStart();
         GetSkill.SetStart();
         GetDialog.SetStart();
+        GetFishGuide.SetStart();
         AddStatus();// 추가 스테이트 세팅
     }
 
@@ -204,7 +205,6 @@ public class Game_Manager : MonoBehaviour
             if (instFishGuide == null)
             {
                 instFishGuide = Instantiate(fishGuide, transform);
-                instFishGuide.SetStart();
             }
             return instFishGuide;
         }

@@ -92,8 +92,8 @@
         },
         {
             "slotNum": {
-                "x": 3,
-                "y": 0
+                "x": 4,
+                "y": 1
             },
             "item": {
                 "item": {
@@ -118,11 +118,11 @@
                     "weight": 1.600000023841858,
                     "price": 100.0
                 },
-                "angle": 0.0,
+                "angle": 90.0,
                 "shape": [
                     {
-                        "x": 1,
-                        "y": 0
+                        "x": 0,
+                        "y": -1
                     }
                 ],
                 "acquisition": 2
@@ -131,17 +131,75 @@
         {
             "slotNum": {
                 "x": 1,
-                "y": 1
+                "y": 2
             },
             "item": {
                 "item": {
-                    "id": "Fs_1003",
-                    "name": "LFs_1003_00",
+                    "id": "Fs_1009",
+                    "name": "LFs_1009_00",
                     "itemType": 0,
-                    "explanation": "LFs_1003_01",
-                    "icon": "Fs_1003_Flounder",
+                    "explanation": "LFs_1009_01",
+                    "icon": "Fs_1009_Bluespotted Stingray",
                     "itemClass": 4,
                     "shape": [
+                        {
+                            "x": 0,
+                            "y": -1
+                        },
+                        {
+                            "x": 1,
+                            "y": -1
+                        },
+                        {
+                            "x": 1,
+                            "y": 0
+                        }
+                    ],
+                    "iconSize": {
+                        "x": 2.0,
+                        "y": 2.0,
+                        "z": 0.25,
+                        "w": 0.25
+                    },
+                    "weight": 5.0,
+                    "price": 500.0
+                },
+                "angle": 0.0,
+                "shape": [
+                    {
+                        "x": 0,
+                        "y": -1
+                    },
+                    {
+                        "x": 1,
+                        "y": -1
+                    },
+                    {
+                        "x": 1,
+                        "y": 0
+                    }
+                ],
+                "acquisition": 3
+            }
+        },
+        {
+            "slotNum": {
+                "x": 4,
+                "y": 3
+            },
+            "item": {
+                "item": {
+                    "id": "Fs_1010",
+                    "name": "LFs_1010_00",
+                    "itemType": 0,
+                    "explanation": "LFs_1010_01",
+                    "icon": "Fs_1010_Giant Moray",
+                    "itemClass": 4,
+                    "shape": [
+                        {
+                            "x": -1,
+                            "y": 0
+                        },
                         {
                             "x": 1,
                             "y": 0
@@ -156,76 +214,34 @@
                         }
                     ],
                     "iconSize": {
-                        "x": 2.0,
+                        "x": 3.0,
                         "y": 2.0,
-                        "z": 0.25,
+                        "z": 0.5,
                         "w": 0.75
                     },
-                    "weight": 0.4000000059604645,
-                    "price": 250.0
+                    "weight": 5.0,
+                    "price": 500.0
                 },
-                "angle": 0.0,
+                "angle": 270.0,
                 "shape": [
                     {
-                        "x": 1,
-                        "y": 0
+                        "x": 0,
+                        "y": -1
                     },
                     {
                         "x": 0,
                         "y": 1
                     },
                     {
-                        "x": 1,
-                        "y": 1
-                    }
-                ],
-                "acquisition": 2
-            }
-        },
-        {
-            "slotNum": {
-                "x": 1,
-                "y": 3
-            },
-            "item": {
-                "item": {
-                    "id": "Fs_1004",
-                    "name": "LFs_1004_00",
-                    "itemType": 0,
-                    "explanation": "LFs_1004_01",
-                    "icon": "Fs_1004_Mullet",
-                    "itemClass": 4,
-                    "shape": [
-                        {
-                            "x": -1,
-                            "y": 0
-                        },
-                        {
-                            "x": 1,
-                            "y": 0
-                        }
-                    ],
-                    "iconSize": {
-                        "x": 3.0,
-                        "y": 1.0,
-                        "z": 0.5,
-                        "w": 0.5
-                    },
-                    "weight": 0.800000011920929,
-                    "price": 250.0
-                },
-                "angle": 0.0,
-                "shape": [
-                    {
                         "x": -1,
                         "y": 0
                     },
                     {
-                        "x": 1,
-                        "y": 0
+                        "x": -1,
+                        "y": 1
                     }
                 ],
-                "acquisition": 2
+                "acquisition": 3
             }
         },
         {
@@ -258,16 +274,44 @@
         },
         {
             "slotNum": {
-                "x": 1,
-                "y": 4
+                "x": 0,
+                "y": 2
             },
             "item": {
                 "item": {
-                    "id": "Fs_1004",
-                    "name": "LFs_1004_00",
+                    "id": "Fs_1001",
+                    "name": "LFs_1001_00",
                     "itemType": 0,
-                    "explanation": "LFs_1004_01",
-                    "icon": "Fs_1004_Mullet",
+                    "explanation": "LFs_1001_01",
+                    "icon": "Fs_1001_Anchovy",
+                    "itemClass": 4,
+                    "shape": [],
+                    "iconSize": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 0.5,
+                        "w": 0.5
+                    },
+                    "weight": 0.20000000298023225,
+                    "price": 100.0
+                },
+                "angle": 0.0,
+                "shape": [],
+                "acquisition": 3
+            }
+        },
+        {
+            "slotNum": {
+                "x": 3,
+                "y": 1
+            },
+            "item": {
+                "item": {
+                    "id": "Fs_1008",
+                    "name": "LFs_1008_00",
+                    "itemType": 0,
+                    "explanation": "LFs_1008_01",
+                    "icon": "Fs_1008_CongerEel",
                     "itemClass": 4,
                     "shape": [
                         {
@@ -285,21 +329,21 @@
                         "z": 0.5,
                         "w": 0.5
                     },
-                    "weight": 0.800000011920929,
-                    "price": 250.0
+                    "weight": 5.0,
+                    "price": 500.0
                 },
-                "angle": 0.0,
+                "angle": 90.0,
                 "shape": [
                     {
-                        "x": -1,
-                        "y": 0
+                        "x": 0,
+                        "y": 1
                     },
                     {
-                        "x": 1,
-                        "y": 0
+                        "x": 0,
+                        "y": -1
                     }
                 ],
-                "acquisition": 1
+                "acquisition": 2
             }
         }
     ]
