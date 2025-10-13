@@ -12,6 +12,7 @@ public class UI_Main : MonoBehaviour
         Quest = 1 << 2,
         Option = 1 << 3,
         Shop = 1 << 4,
+        FishGuide = 1 << 5,
     }
     public MenuState menuState;
 
@@ -59,6 +60,7 @@ public class UI_Main : MonoBehaviour
         if (menuState == 0)
             return;
 
+        Game_Manager.current.OutOfControll(false);
         switch (menuState)
         {
             case MenuState.Inventory:
@@ -67,23 +69,33 @@ public class UI_Main : MonoBehaviour
                 statusUI.OpenCanvas(false);
                 OpenCanvas(true);
                 break;
+
             case MenuState.Fishing:
                 menuState &= ~MenuState.Fishing;
-                Game_Manager.current.GetFishGuide.OpenCanvas(false);
-                OpenCanvas(true);
+                Game_Manager.current.GetInventory.CloseShop();// 상점 닫기
+                Game_Manager.current.GetFishing.FishingOver();
                 break;
+
             case MenuState.Quest:
                 menuState &= ~MenuState.Quest;
                 OpenCanvas(true);
                 break;
+
             case MenuState.Option:
                 menuState &= ~MenuState.Option;
                 Option_Manager.current.OpenCanvas(false);
                 OpenCanvas(true);
                 break;
+
             case MenuState.Shop:
                 menuState &= ~MenuState.Shop;
                 Game_Manager.current.GetLanding.BackButton();
+                break;
+
+            case MenuState.FishGuide:
+                menuState &= ~MenuState.FishGuide;
+                Game_Manager.current.GetFishGuide.OpenCanvas(false);
+                OpenCanvas(true);
                 break;
         }
     }
@@ -94,20 +106,23 @@ public class UI_Main : MonoBehaviour
         menuState |= MenuState.Inventory;// 넣기
         statusUI.OpenCanvas(true);
         Game_Manager.current.GetInventory.OpenInventory(true);
+        Game_Manager.current.OutOfControll(true);
     }
 
     void FishGuideButton()
     {
         OpenCanvas(false);
-        menuState |= MenuState.Fishing;// 넣기
+        menuState |= MenuState.FishGuide;// 넣기
         Game_Manager.current.GetFishGuide.OpenCanvas(true);
+        Game_Manager.current.OutOfControll(true);
     }
 
-    void OptionButton()
+    public void OptionButton()
     {
         OpenCanvas(false);
         menuState |= MenuState.Option;// 넣기
         Option_Manager.current.OpenCanvas(true);
+        Game_Manager.current.OutOfControll(true);
         Debug.LogWarning("Option Button Clicked");
     }
 
@@ -115,6 +130,12 @@ public class UI_Main : MonoBehaviour
     {
         menuState |= MenuState.Shop;// 넣기
         Game_Manager.current.GetLanding.OutDialog();// 대화 끝
+    }
+
+    public void FishingGame()
+    {
+        menuState |= MenuState.Fishing;// 넣기
+        //OpenCanvas(false);
     }
 
     public void OpenCanvas(bool _open)// 메인 유아이 캔버스

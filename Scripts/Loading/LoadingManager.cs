@@ -5,13 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class LoadingManager : MonoBehaviour
 {
-    public bool open;
-    public string[] currentNames;
-    public string[] sceneNames;
+    private string[] currentNames;
+    private string[] sceneNames;
     List<AsyncOperation> asyncOperation;
     public RectTransform background;
     int complateIndex;
     public string volume;
+
+    const string Title = "Title";
+    const string GameManager = "GameManager";
+    const string Island_Main = "Island_Main";
 
     public static LoadingManager current;
 
@@ -26,18 +29,13 @@ public class LoadingManager : MonoBehaviour
 
     public void GoTitle()
     {
-        sceneNames = new string[1];
-        sceneNames[0] = "Title";
-
+        sceneNames = new string[1] { Title };
         OpenLoading();
     }
 
     public void GoMain()
     {
-        sceneNames = new string[2];
-        sceneNames[0] = "SampleScene";
-        sceneNames[1] = "Island_Main";
-
+        sceneNames = new string[2] { GameManager, Island_Main };
         OpenLoading();
     }
 
@@ -87,11 +85,9 @@ public class LoadingManager : MonoBehaviour
 
     IEnumerator OpenScreen(bool _open)
     {
-        open = _open;
-
-        float prevHight = open == true ? -(Screen.height + 100) : 0f;
-        float targetHight = open == true ? 0f : Screen.height + 100;
-        float targetAlpha = open == true ? 1f : 0f;
+        float prevHight = _open == true ? -(Screen.height + 100) : 0f;
+        float targetHight = _open == true ? 0f : Screen.height + 100;
+        float targetAlpha = _open == true ? 1f : 0f;
         float normalize = 0f;
         while (normalize < 1f)
         {
@@ -130,6 +126,11 @@ public class LoadingManager : MonoBehaviour
 
     IEnumerator UnloadScene()
     {
+        if (currentNames == null || currentNames.Length == 0)
+        {
+            yield break;
+        }
+
         for (int i = 0; i < currentNames.Length; i++)
         {
             var sceneName = SceneManager.GetSceneByName(currentNames[i]);

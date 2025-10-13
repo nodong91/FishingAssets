@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class Camera_Manager : MonoBehaviour
 {
     public CinemachineCamera cinemachineCamera;
-    public CinemachineVolumeSettings volumeSettings;
+     CinemachineVolumeSettings volumeSettings;
     public Camera UICamera;
     public GameObject focusTarget;
     public GameObject GetFocusTarget
@@ -55,6 +55,7 @@ public class Camera_Manager : MonoBehaviour
             brain = Camera.main.gameObject.AddComponent<CinemachineBrain>();
 
         delegateInputScroll = InputScroll;
+        volumeSettings = cinemachineCamera.GetComponent<CinemachineVolumeSettings>();
         orbitalFollow = cinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
         cinemachineBasicMultiChannelPerlin = cinemachineCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
         rotationComposer = cinemachineCamera.GetComponent<CinemachineRotationComposer>();

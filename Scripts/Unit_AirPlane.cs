@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class Unit_AirPlane : MonoBehaviour
 {
@@ -12,7 +11,7 @@ public class Unit_AirPlane : MonoBehaviour
 
     void Start()
     {
-
+        manager.SetCameraManager();
     }
 
     void Update()

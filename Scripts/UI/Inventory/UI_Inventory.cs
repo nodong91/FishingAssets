@@ -458,7 +458,7 @@ public class UI_Inventory : MonoBehaviour
 
     void SetIconImage(ItemStruct _itemStruct)
     {
-        iconImage.sprite = _itemStruct.icon;
+        iconImage.sprite = Singleton_Data.INSTANCE.Dict_Sprite[_itemStruct.icon];
         iconImage.rectTransform.sizeDelta = new Vector2(_itemStruct.iconSize.x, _itemStruct.iconSize.y) * slotSize;
         iconImage.rectTransform.pivot = new Vector2(_itemStruct.iconSize.z, _itemStruct.iconSize.w);
     }

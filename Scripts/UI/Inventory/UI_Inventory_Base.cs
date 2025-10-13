@@ -77,8 +77,8 @@ public class UI_Inventory_Base : MonoBehaviour
     void EndOpenCanvas()
     {
         StaticOpenCanvas.deleEndOpen -= EndOpenCanvas;
-        Debug.LogError($"{gameObject.name} : {dictItemClass.Count} ({saveData})");
         Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// √¢¥›»˙ ∂ß ¿˙¿Â
+        Debug.LogError($"¿˙¿Â ({gameObject.name}) : {dictItemClass.Count} ({saveData})");
     }
 
     public void EmptyInventoryAllSlot()
@@ -222,7 +222,7 @@ public class UI_Inventory_Base : MonoBehaviour
     {
         Vector2 size = new Vector2(_itemStruct.iconSize.x, _itemStruct.iconSize.y);
         Vector2 pivot = new Vector2(_itemStruct.iconSize.z, _itemStruct.iconSize.w);
-        _image.sprite = _itemStruct.icon;
+        _image.sprite = Singleton_Data.INSTANCE.Dict_Sprite[_itemStruct.icon];
         _image.rectTransform.sizeDelta = size * slotSize;
         _image.rectTransform.pivot = pivot;
     }

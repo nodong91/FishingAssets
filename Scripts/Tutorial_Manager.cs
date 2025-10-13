@@ -1,10 +1,13 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static Tutorial_Manager.TutorialStruct;
 
 public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
 {
     public CanvasGroup canvasGroup;
+    public TMPro.TMP_Text commentText;
     [System.Serializable]
     public class TutorialStruct
     {
@@ -14,15 +17,24 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
         {
             public Vector2 position;
             public Vector2 size;
+            public string comment;
+            public Vector2 commentPosition;
+            public int commentSize;
         }
         public TutorialSet[] tutorialSet;
     }
-    public TutorialStruct tutorialStruct;
-    public int currentTutorial;
+    public TutorialStruct[] testTutorialStruct;
+    public TutorialStruct currentTutorial;
+    public int currentIndex, currentSetIndex;
     public RectTransform boxRect;
     public bool acting;
     Coroutine ingOpenCanvas;
     public AnimationCurve animationCurveX, animationCurveY;
+
+    public void SetStart()
+    {
+        LoadTutorial();
+    }
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -31,10 +43,21 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
         CurrentAction();
     }
 
-    public void TutorialPause()
+    public void TutorialPause(int _index)
     {
+        currentIndex = _index;
+        currentTutorial = testTutorialStruct[_index];
+        Debug.LogWarning($"TutorialPause Index : {_index}, completed : {currentTutorial.completed}");
+        if (currentTutorial.completed == true)
+        {
+            canvasGroup.gameObject.SetActive(false);
+            return;
+        }
+
+        Debug.LogWarning($"TutorialPause");
+        // 튜토리얼
         Time.timeScale = 0f;
-        currentTutorial = 0;
+        currentSetIndex = 0;
         OpenCanvas(1f);
     }
 
@@ -47,6 +70,8 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
 
     IEnumerator ING_OpenCanvas(float _targetAlpha)
     {
+        if (_targetAlpha > 0)
+            canvasGroup.gameObject.SetActive(true);
         acting = true;
         boxRect.sizeDelta = Vector2.zero;
 
@@ -60,7 +85,16 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
         }
         acting = false;
         if (_targetAlpha > 0)// 열림일때
-            CurrentAction();
+            CurrentAction();// 액션 시작
+        else
+            canvasGroup.gameObject.SetActive(false);
+    }
+
+    void SetComment(TutorialSet _tutorialSet)
+    {
+        commentText.text = _tutorialSet.comment;
+        commentText.fontSize = _tutorialSet.commentSize;
+        commentText.rectTransform.anchoredPosition = _tutorialSet.commentPosition;
     }
 
     void CanvasGroupAlpha(float _alpha)
@@ -72,27 +106,30 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
 
     void CurrentAction()
     {
-        if (currentTutorial < tutorialStruct.tutorialSet.Length)
+        if (currentSetIndex < currentTutorial.tutorialSet.Length)
         {
             TutorialAction();
-            currentTutorial++;
+            currentSetIndex++;
             return;
         }
         // 완료
         Debug.LogWarning("튜토리얼 완료");
         Time.timeScale = 1f;
         OpenCanvas(0f);
+        SaveTutorial();
     }
 
     void TutorialAction()
     {
         if (ingOpenCanvas != null)
             StopCoroutine(ingOpenCanvas);
-        ingOpenCanvas = StartCoroutine(ING_TutorialAction(tutorialStruct.tutorialSet[currentTutorial]));
+        ingOpenCanvas = StartCoroutine(ING_TutorialAction(currentTutorial.tutorialSet[currentSetIndex]));
     }
 
-    IEnumerator ING_TutorialAction(TutorialStruct.TutorialSet _tutorialSet)
+    IEnumerator ING_TutorialAction(TutorialSet _tutorialSet)
     {
+        SetComment(currentTutorial.tutorialSet[currentSetIndex]);
+
         acting = true;
         boxRect.anchoredPosition = _tutorialSet.position;
         yield return null;
@@ -110,5 +147,34 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
             yield return null;
         }
         acting = false;
+    }
+
+    const string tutorialKey = "CompletedTutorial";
+    public List<int> completedTutorial;
+    public void SaveTutorial()
+    {
+        currentTutorial.completed = true;
+        if (completedTutorial == null)
+            completedTutorial = new List<int>();
+        completedTutorial.Add(currentIndex);
+        Static_JsonManager.SaveTutorialData(tutorialKey, completedTutorial);
+    }
+
+    public void LoadTutorial()
+    {
+        if (Static_JsonManager.TryLoadTutorialData(tutorialKey, out List<int> _completedTutorial))
+        {
+            completedTutorial = _completedTutorial;
+        }
+        else
+        {
+            completedTutorial = new List<int>();
+        }
+
+        for (int i = 0; i < completedTutorial.Count; i++)
+        {
+            int index = completedTutorial[i];
+            testTutorialStruct[index].completed = true;
+        }
     }
 }

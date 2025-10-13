@@ -152,6 +152,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a3256453e5024934c8c1c3ac8cbef905, type: 3}
   - {fileID: 21300000, guid: 4ee6acf09e0bf2a4380100c3695c1eb0, type: 3}
   - {fileID: 21300000, guid: d92c1a8c68e2e3b419b527831ba3de39, type: 3}
+  - {fileID: 21300000, guid: 0ea3bb71c8a0d984fa90e6d18b428aa1, type: 3}
+  - {fileID: 21300000, guid: 2a2b10cfff043804ba7b71d92b9109f5, type: 3}
+  - {fileID: 21300000, guid: dc773b147003bbe4f98dc0dd91e11343, type: 3}
   - {fileID: 21300000, guid: 1504eadf43f165847a0748f0ebcaa2f0, type: 3}
   - {fileID: 21300000, guid: 3f2d52b221af50948884eb1dfa6ac296, type: 3}
   - {fileID: 21300000, guid: 2011a555946603a4ea4be361f9060b39, type: 3}
@@ -233,7 +236,7 @@ MonoBehaviour:
       name: LUs_1001_00
       itemType: 1
       explanation: LUs_1001_01
-      icon: {fileID: 21300000, guid: 74bcf5d71029aff45be52d3ed15d24ec, type: 3}
+      icon: fuel
       itemClass: 4
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
@@ -246,7 +249,7 @@ MonoBehaviour:
       name: LUs_1002_00
       itemType: 2
       explanation: LUs_1002_01
-      icon: {fileID: 21300000, guid: f39749dc5c6fa2f4eabb3bcd8d997373, type: 3}
+      icon: hammer
       itemClass: 0
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
@@ -259,7 +262,7 @@ MonoBehaviour:
       name: LUs_2001_00
       itemType: 0
       explanation: LUs_2001_01
-      icon: {fileID: 21300000, guid: 1f5cadf8d35e8db4680bb2be070296dd, type: 3}
+      icon: fishinghook
       itemClass: 3
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
@@ -272,7 +275,7 @@ MonoBehaviour:
       name: LUs_3001_00
       itemType: 4
       explanation: LUs_3001_01
-      icon: {fileID: 21300000, guid: b8dc588068be4db419bb46792dc7db96, type: 3}
+      icon: market_bookmark_1
       itemClass: 3
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
@@ -285,7 +288,7 @@ MonoBehaviour:
       name: LUs_3002_00
       itemType: 3
       explanation: LUs_3002_01
-      icon: {fileID: 21300000, guid: f37ea9fe9dd3bac419fa6c827317052d, type: 3}
+      icon: elephant_key
       itemClass: 4
       shape:
       - {x: 0, y: 1}
@@ -300,12 +303,12 @@ MonoBehaviour:
       name: LFs_1001_00
       itemType: 0
       explanation: LFs_1001_01
-      icon: {fileID: 21300000, guid: 31566fc518d4bae4bb844f5b468100d2, type: 3}
+      icon: Fs_1001_Anchovy
       itemClass: 4
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 0.2
-      price: 250
+      price: 100
     areaType: 1
     fishDayType: 1
     size: {x: 30, y: 50}
@@ -324,13 +327,13 @@ MonoBehaviour:
       name: LFs_1002_00
       itemType: 0
       explanation: LFs_1002_01
-      icon: {fileID: 21300000, guid: a3256453e5024934c8c1c3ac8cbef905, type: 3}
+      icon: Fs_1002_Sea Bass
       itemClass: 4
       shape:
       - {x: 1, y: 0}
       iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
       weight: 0.6
-      price: 300
+      price: 150
     areaType: 1
     fishDayType: 1
     size: {x: 50, y: 100}
@@ -349,7 +352,7 @@ MonoBehaviour:
       name: LFs_1003_00
       itemType: 0
       explanation: LFs_1003_01
-      icon: {fileID: 21300000, guid: 4ee6acf09e0bf2a4380100c3695c1eb0, type: 3}
+      icon: Fs_1003_Flounder
       itemClass: 4
       shape:
       - {x: 1, y: 0}
@@ -357,7 +360,7 @@ MonoBehaviour:
       - {x: 1, y: 1}
       iconSize: {x: 2, y: 2, z: 0.25, w: 0.75}
       weight: 0.4
-      price: 350
+      price: 250
     areaType: 1
     fishDayType: 1
     size: {x: 30, y: 70}
@@ -376,14 +379,14 @@ MonoBehaviour:
       name: LFs_1004_00
       itemType: 0
       explanation: LFs_1004_01
-      icon: {fileID: 21300000, guid: d92c1a8c68e2e3b419b527831ba3de39, type: 3}
+      icon: Fs_1004_Mullet
       itemClass: 4
       shape:
       - {x: -1, y: 0}
       - {x: 1, y: 0}
       iconSize: {x: 3, y: 1, z: 0.5, w: 0.5}
       weight: 0.8
-      price: 400
+      price: 250
     areaType: 1
     fishDayType: 2
     size: {x: 45, y: 90}
@@ -396,20 +399,68 @@ MonoBehaviour:
     fishGroggyTime: 2
     fishDefenseCount: 4
     fishTurnDelay: {x: 1, y: 2}
+  - id: Fs_1005
+    itemStruct:
+      id: Fs_1005
+      name: LFs_1005_00
+      itemType: 0
+      explanation: LFs_1005_01
+      icon: Fs_1005_BlueTang
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.6
+      price: 100
+    areaType: 1
+    fishDayType: 1
+    size: {x: 20, y: 30}
+    fishHealth: 10
+    fishPower: 1
+    fishSpeed: 1
+    fishCoolTime: 0
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 0.3, y: 1.5}
+  - id: Fs_1006
+    itemStruct:
+      id: Fs_1006
+      name: LFs_1006_00
+      itemType: 0
+      explanation: LFs_1006_01
+      icon: Fs_1006_Clownfish
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.6
+      price: 100
+    areaType: 1
+    fishDayType: 1
+    size: {x: 20, y: 30}
+    fishHealth: 10
+    fishPower: 1
+    fishSpeed: 1
+    fishCoolTime: 0
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 0.3, y: 1.5}
   - id: Fs_2001
     itemStruct:
       id: Fs_2001
       name: LFs_2001_00
       itemType: 0
       explanation: LFs_2001_01
-      icon: {fileID: 21300000, guid: 1504eadf43f165847a0748f0ebcaa2f0, type: 3}
+      icon: Fs_2001_Octopus
       itemClass: 3
       shape:
       - {x: 1, y: 0}
       - {x: 0, y: -1}
       iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
       weight: 1
-      price: 450
+      price: 350
     areaType: 1
     fishDayType: 1
     size: {x: 150, y: 250}
@@ -428,7 +479,7 @@ MonoBehaviour:
       name: LFs_2002_00
       itemType: 0
       explanation: LFs_2002_01
-      icon: {fileID: 21300000, guid: 3f2d52b221af50948884eb1dfa6ac296, type: 3}
+      icon: Fs_2002_Amberjack
       itemClass: 3
       shape:
       - {x: -1, y: 0}
@@ -457,7 +508,7 @@ MonoBehaviour:
       name: LFs_2003_00
       itemType: 0
       explanation: LFs_2003_01
-      icon: {fileID: 21300000, guid: 2011a555946603a4ea4be361f9060b39, type: 3}
+      icon: Fs_2003_Ocean Sunfish
       itemClass: 3
       shape:
       - {x: -1, y: 0}
@@ -469,7 +520,7 @@ MonoBehaviour:
       - {x: 0, y: -1}
       iconSize: {x: 3, y: 4, z: 0.5, w: 0.625}
       weight: 2
-      price: 550
+      price: 650
     areaType: 1
     fishDayType: 2
     size: {x: 150, y: 250}
@@ -488,7 +539,7 @@ MonoBehaviour:
       name: LFs_2004_00
       itemType: 0
       explanation: LFs_2004_01
-      icon: {fileID: 21300000, guid: 171ef96ea98f069438ff920433a203aa, type: 3}
+      icon: Fs_2004_Cutlassfish
       itemClass: 3
       shape:
       - {x: 1, y: 0}
@@ -497,7 +548,7 @@ MonoBehaviour:
       - {x: 1, y: -1}
       iconSize: {x: 3, y: 2, z: 0.5, w: 0.25}
       weight: 2
-      price: 600
+      price: 500
     areaType: 1
     fishDayType: 1
     size: {x: 200, y: 400}
@@ -516,7 +567,7 @@ MonoBehaviour:
       name: LFs_2005_00
       itemType: 0
       explanation: LFs_2005_01
-      icon: {fileID: 21300000, guid: 40e1c507445cd3b42bcaa79647087f9d, type: 3}
+      icon: Fs_2005_Swordfish
       itemClass: 3
       shape:
       - {x: -2, y: 0}
@@ -528,7 +579,7 @@ MonoBehaviour:
       - {x: 2, y: -1}
       iconSize: {x: 5, y: 2, z: 0.5, w: 0.25}
       weight: 2.4
-      price: 650
+      price: 750
     areaType: 1
     fishDayType: 1
     size: {x: 250, y: 500}
@@ -547,7 +598,7 @@ MonoBehaviour:
       name: LFs_3001_00
       itemType: 0
       explanation: LFs_3001_01
-      icon: {fileID: 21300000, guid: b1fd348226f086d48ab896279ac917c3, type: 3}
+      icon: Fs_3001_Giant Squid
       itemClass: 2
       shape:
       - {x: -1, y: 0}
@@ -562,7 +613,7 @@ MonoBehaviour:
       - {x: 0, y: -2}
       iconSize: {x: 3, y: 5, z: 0.5, w: 0.5}
       weight: 5
-      price: 700
+      price: 800
     areaType: 1
     fishDayType: 2
     size: {x: 500, y: 1000}
@@ -575,6 +626,31 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 6
     fishTurnDelay: {x: 0.3, y: 0.9}
+  - id: Fs_1007
+    itemStruct:
+      id: Fs_1007
+      name: LFs_1007_00
+      itemType: 0
+      explanation: LFs_1007_01
+      icon: Fs_1007_Mackerel
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 1.6
+      price: 100
+    areaType: 1
+    fishDayType: 1
+    size: {x: 20, y: 30}
+    fishHealth: 10
+    fishPower: 1
+    fishSpeed: 1
+    fishCoolTime: 0
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 0.3, y: 1.5}
   languageStruct:
   - id: LUs_1001_00
     english: Small Oil Tank
@@ -769,6 +845,52 @@ MonoBehaviour:
       \uAC00\uC9C4 \uAC83\uC73C\uB85C \uC54C\uB824\uC838 \uC788\uC73C\uBA70 \uC2EC\uD574\uC5D0
       \uC11C\uC2DD\uD558\uB294 \uC2E0\uBE44\uB85C\uC6B4 \uCD08\uB300\uD615 \uB450\uC871\uB958\uC785\uB2C8\uB2E4."
     japanese: "\u30C0\u30A4\u30AA\u30A6\u30A4\u30AB\u306F\u4F53\u9577\u304C13\u30E1\u30FC\u30C8\u30EB\u4EE5\u4E0A\u306B\u9054\u3057\u5730\u7403\u4E0A\u3067\u6700\u5927\u306E\u76EE\u3092\u6301\u3064\u3053\u3068\u3067\u77E5\u3089\u308C\u308B\u6DF1\u6D77\u306B\u751F\u606F\u3059\u308B\u795E\u79D8\u7684\u306A\u8D85\u5927\u578B\u306E\u982D\u8DB3\u985E\u3067\u3059\u3002"
+    chinese: 
+  - id: LFs_1005_00
+    english: Blue Tang
+    korean: "\uBE14\uB8E8\uD0F1"
+    japanese: "\u30CA\u30F3\u30E8\u30A6\u30CF\u30AE"
+    chinese: 
+  - id: LFs_1005_01
+    english: A vibrant tropical fish known for its striking cobalt blue body and
+      yellow caudal fin it hides a sharp spine on its caudal peduncle and is popular
+      as an aquarium fish
+    korean: "\uB208\uBD80\uC2E0 \uCF54\uBC1C\uD2B8\uBE14\uB8E8 \uBAB8\uACFC \uB178\uB780
+      \uAF2C\uB9AC \uC9C0\uB290\uB7EC\uBBF8\uB97C \uAC00\uC9C4 \uD654\uB824\uD55C
+      \uC5F4\uB300\uC5B4\uB85C \uAF2C\uB9AC \uBBF8\uBCD1\uBD80\uC5D0 \uB0A0\uCE74\uB85C\uC6B4
+      \uAC00\uC2DC\uB97C \uC228\uAE30\uACE0 \uC788\uB294 \uAC83\uC774 \uD2B9\uC9D5\uC785\uB2C8\uB2E4."
+    japanese: "\u9BAE\u3084\u304B\u306A\u30B3\u30D0\u30EB\u30C8\u30D6\u30EB\u30FC\u306E\u4F53\u3068\u9EC4\u8272\u306E\u5C3E\u3073\u308C\u3092\u6301\u3064\u83EF\u3084\u304B\u306A\u71B1\u5E2F\u9B5A\u3067\u5C3E\u67C4\u90E8\u306B\u92ED\u3044\u68D8\u3092\u96A0\u3057\u6301\u3064\u306E\u304C\u7279\u5FB4\u3067\u3059"
+    chinese: 
+  - id: LFs_1006_00
+    english: Clownfish
+    korean: "\uD770\uB3D9\uAC00\uB9AC"
+    japanese: https://blog.naver.com/nagikorea/221377151111?viewType=pc
+    chinese: 
+  - id: LFs_1006_01
+    english: A tropical fish with an orange body and white stripes it coexists with
+      sea anemones using their stinging tentacles for protection and it has the unique
+      trait where the largest male turns into a female if the current female dies
+    korean: "\uC8FC\uD669\uC0C9 \uBAB8\uC5D0 \uD770\uC0C9 \uC904\uBB34\uB2AC\uAC00
+      \uC788\uB294 \uC5F4\uB300\uC5B4\uB85C \uB9D0\uBBF8\uC798\uC758 \uB3C5\uCE68\uC73C\uB85C\uBD80\uD130
+      \uBCF4\uD638\uBC1B\uC73C\uBA70 \uACF5\uC0DD\uD558\uACE0 \uC554\uCEF7\uC774
+      \uC8FD\uC73C\uBA74 \uAC00\uC7A5 \uD070 \uC218\uCEF7\uC774 \uC554\uCEF7\uC73C\uB85C
+      \uC131\uC804\uD658\uD558\uB294 \uB3C5\uD2B9\uD55C \uD2B9\uC9D5\uC744 \uAC00\uC9D1\uB2C8\uB2E4"
+    japanese: "\u30AA\u30EC\u30F3\u30B8\u8272\u306E\u4F53\u306B\u767D\u3044\u7E1E\u6A21\u69D8\u3092\u6301\u3064\u71B1\u5E2F\u9B5A\u3067\u30A4\u30BD\u30AE\u30F3\u30C1\u30E3\u30AF\u306E\u6BD2\u91DD\u304B\u3089\u5B88\u3089\u308C\u306A\u304C\u3089\u5171\u751F\u3057\u30E1\u30B9\u304C\u6B7B\u306C\u3068\u4E00\u756A\u5927\u304D\u306A\u30AA\u30B9\u304C\u30E1\u30B9\u306B\u6027\u8EE2\u63DB\u3059\u308B\u3068\u3044\u3046\u30E6\u30CB\u30FC\u30AF\u306A\u7279\u5FB4\u3092\u6301\u3061\u307E\u3059"
+    chinese: 
+  - id: LFs_1007_00
+    english: Mackerel
+    korean: "\uACE0\uB4F1\uC5B4"
+    japanese: "\u30B5\u30D0"
+    chinese: 
+  - id: LFs_1007_01
+    english: A representative blue-backed fish that is rich in DHA and EPA and is
+      a migratory species that travels in large schools moving north and south depending
+      on the season and water temperature.
+    korean: "\uB4F1\uD478\uB978 \uC0DD\uC120\uC758 \uB300\uD45C \uC8FC\uC790\uB85C
+      DHA\uC640 EPA\uAC00 \uD48D\uBD80\uD558\uBA70 \uACC4\uC808\uACFC \uC218\uC628\uC5D0
+      \uB530\uB77C \uB0A8\uBD81\uC73C\uB85C \uB300\uADDC\uBAA8 \uBB34\uB9AC\uB97C
+      \uC9C0\uC5B4 \uD68C\uC720\uD558\uB294 \uC5B4\uC885\uC785\uB2C8\uB2E4."
+    japanese: "\u9752\u80CC\u306E\u9B5A\u306E\u4EE3\u8868\u683C\u3067DHA\u3084EPA\u304C\u8C4A\u5BCC\u5B63\u7BC0\u3084\u6C34\u6E29\u306B\u3088\u3063\u3066\u5357\u5317\u306B\u5927\u898F\u6A21\u306A\u7FA4\u308C\u3092\u306A\u3057\u3066\u56DE\u904A\u3059\u308B\u9B5A\u7A2E\u3067\u3059."
     chinese: 
   - id: LMn_0001
     english: Continue

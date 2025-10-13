@@ -113,7 +113,7 @@ public class Data_Manager : Data_Parse
             id = _elements[0].Trim(),
             name = _elements[1],
             explanation = _elements[2],
-            icon = FindSprite(_elements[3]),
+            icon = _elements[3],
             itemClass = (ItemStruct.ItemClass)System.Enum.Parse(typeof(ItemStruct.ItemClass), _elements[4]),
             shape = tempShape,
             iconSize = TryIconSize(tempShape),
@@ -352,7 +352,7 @@ public class Data_Manager : Data_Parse
         public ItemType itemType;
         [TextArea]
         public string explanation;// Ό³Έν
-        public Sprite icon;
+        public string icon;
         public enum ItemClass
         {
             Legendary,
@@ -456,7 +456,7 @@ public class Data_Manager : Data_Parse
         {
             BGM = 0,
             FX = 1,
-            Environment=2,
+            Environment = 2,
         }
         public AudioType type;
     }

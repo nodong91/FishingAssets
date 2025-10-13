@@ -87,64 +87,37 @@ public class Static_JsonManager
         File.Delete(Application.dataPath + "/Save/" + fileName + ".json");
     }
 
-    ////======================================================================================
-    //// 카드 정보 관련
-    ////======================================================================================
-    //// 저장
-    //public static void SaveCardData(string fileName, List<int> jsonCards)
-    //{
-    //    string filePath = Application.dataPath + "/Save/Save_Card/";
-    //    // 폴더 없으면 생성
-    //    FindFolder(filePath);
+    //======================================================================================
+    // 튜토리얼 관련
+    //======================================================================================
+    public static void SaveTutorialData(string fileName, List<int> _data)
+    {
+         string filePath = Application.dataPath + "/Save/";
+        // 폴더 생성
+        FindFolder(filePath);
 
-    //    string toJson = JsonHelper.ToJson(jsonCards, prettyPrint: true);
-    //    File.WriteAllText(filePath + fileName + ".json", toJson);
-    //}
+        string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
+        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        File.WriteAllText(filePath + fileName + ".json", toJson);
+    }
 
-    //// 불러오기
-    //public static bool TryLoadCardData(string fileName, out List<int> jsonCards)
-    //{
-    //    string filePath = Application.dataPath + "/Save/Save_Card/";
-    //    string path = filePath + fileName + ".json";
-    //    FileInfo fileInfo = new FileInfo(path);
+    public static bool TryLoadTutorialData(string fileName, out List<int> data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        string path = filePath + fileName + ".json";
+        FileInfo fileInfo = new FileInfo(path);
 
-    //    if (fileInfo.Exists == true)
-    //    {
-    //        string fromJson = File.ReadAllText(path);
-    //        jsonCards = JsonHelper.FromJson<int>(fromJson);
-    //        return true;
-    //    }
-    //    jsonCards = default;
-    //    return false;
-    //}
-    //public static void SaveSkillData(string fileName, List<SkillStatus> _data)
-    //{
-    //    string filePath = Application.dataPath + "/SaveData/";
-    //    // 폴더 생성
-    //    FindFolder(filePath);
+        if (fileInfo.Exists == true)
+        {
+            string fromJson = File.ReadAllText(path);
+            //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
+            data = JsonHelper.FromJson<int>(fromJson);
+            return true;
+        }
 
-    //    string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
-    //    //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
-    //    File.WriteAllText(filePath + fileName + ".json", toJson);
-    //}
-
-    //public static bool TryLoadSkillData(string fileName, out List<SkillStatus> data)
-    //{
-    //    string filePath = Application.dataPath + "/SaveData/";
-    //    string path = filePath + fileName + ".json";
-    //    FileInfo fileInfo = new FileInfo(path);
-
-    //    if (fileInfo.Exists == true)
-    //    {
-    //        string fromJson = File.ReadAllText(path);
-    //        //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
-    //        data = JsonHelper.FromJson<SkillStatus>(fromJson);
-    //        return true;
-    //    }
-
-    //    data = default;
-    //    return false;
-    //}
+        data = default;
+        return false;
+    }
 
     public static void SaveEnableSkillData(string fileName, List<Vector2Int> _data)
     {

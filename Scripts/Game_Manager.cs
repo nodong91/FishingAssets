@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -129,11 +128,12 @@ public class Game_Manager : MonoBehaviour
 
     public void StartFishing(AreaType _areaType)
     {
-        // 낚시가 처음인지 확인
         // 공격하는 물고기가 처음인지 확인
-        GetTutorial.TutorialPause();
+        Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
+        GetTutorial.TutorialPause(0);
         GetFishing.SetFishing(_areaType);
     }
+
     //====================================================================================================================
     // 매니저 가져오기
     //====================================================================================================================
@@ -313,6 +313,7 @@ public class Game_Manager : MonoBehaviour
             if (instTutorial == null)
             {
                 instTutorial = Instantiate(tutorial, transform);
+                instTutorial.SetStart();
             }
             return instTutorial;
         }

@@ -177,6 +177,8 @@ public class UI_Landing : MonoBehaviour
         currentType = LandingType.Storage;
         onDialog = false;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
+
+        Game_Manager.current.GetMainUI.OpenShop();// 창고
         Game_Manager.current.GetInventory.OpenStorage(true);
     }
 

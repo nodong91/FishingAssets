@@ -26,8 +26,9 @@ public class Controll_Manager : MonoBehaviour
 
     void Key_Esc(bool _input)
     {
-        if (_input==false)
-            Option_Manager.current.OpenCanvas(true);
+        if (_input == false)
+            Game_Manager.current?.GetMainUI?.OptionButton();
+
         Debug.Log("Key_Esc");
     }
 

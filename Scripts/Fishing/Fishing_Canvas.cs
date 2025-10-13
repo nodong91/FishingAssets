@@ -8,8 +8,8 @@ public class Fishing_Canvas : MonoBehaviour
     public Canvas canvas;
 
     public RectTransform fishUI;
-    public Image fishHP;
-    public Image fishSpell;
+    public Slider fishHP;
+    public Slider fishSpell;
 
     public TMP_Text countText;
 
@@ -21,9 +21,7 @@ public class Fishing_Canvas : MonoBehaviour
     {
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = Camera_Manager.current.UICamera;
-        fishHP.material = Instantiate(fishHP.material);
         fishUI.gameObject.SetActive(false);
-        fishSpell.material = Instantiate(fishSpell.material);
     }
 
     public void SetFishing()
@@ -31,8 +29,8 @@ public class Fishing_Canvas : MonoBehaviour
         OnStartButton(0);// ²ô±â
         outButton.gameObject.SetActive(false);
 
-        fishHP.material.SetFloat("_FillAmount", 1f);
-        fishSpell.material.SetFloat("_FillAmount", 0f);
+        fishHP.value = 1f;
+        fishSpell.value = 0f;
     }
 
     public void OnStartButton(int _count, string _areaType = "", string _dayType = "")
@@ -40,6 +38,7 @@ public class Fishing_Canvas : MonoBehaviour
         startButton.gameObject.SetActive(_count > 0);
         startTypeText.gameObject.SetActive(_count > 0);
         startTypeText.text = $"{_areaType}\n<size=15>{_dayType}\nCount : {_count}</size>";
+        outButton.gameObject.SetActive(true);
     }
 
     public void SetCount(int _index)
@@ -70,17 +69,16 @@ public class Fishing_Canvas : MonoBehaviour
 
     public void SetFishHP(float _hp)
     {
-        fishHP.material.SetFloat("_FillAmount", _hp);
+        fishHP.value = _hp;
     }
 
     public void SetFishSpell(float _spell)
     {
-        fishSpell.material.SetFloat("_FillAmount", _spell);
+        fishSpell.value = _spell;
     }
 
     public void FishingOver()
     {
-        outButton.gameObject.SetActive(true);
         fishUI.gameObject.SetActive(false);
     }
 

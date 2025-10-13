@@ -36,6 +36,7 @@ public class Fishing_Manager : MonoBehaviour
     FishStruct currentFish;
     RandomSize currentSize;
     public GameObject fishPrefab;
+
     private float fishHealth = 0f;
     private float fishSpeed = 0f;
     private float cooling;
@@ -49,7 +50,7 @@ public class Fishing_Manager : MonoBehaviour
     private Vector3 fishTargetPoint;
     private bool isFishing = false;
     private bool isCatching = false;
-    Coroutine fishAction; 
+    Coroutine fishAction;
 
     AreaType areaType;
     DayType dayType;
@@ -170,8 +171,9 @@ public class Fishing_Manager : MonoBehaviour
 
     void SetReady(bool _ready)// 준비
     {
+        Game_Manager.current.GetMainUI.timeUI.TimePause(true);// 타이머 정지
+
         fishingSet.SetActive(true);
-        Game_Manager.current.GetMainUI.timeUI.TimePause(true);// 시간 정지
         transform.position = Game_Manager.current.GetPlayer.transform.position;
 
         float rotateY = Camera.main.transform.rotation.eulerAngles.y;
@@ -180,17 +182,16 @@ public class Fishing_Manager : MonoBehaviour
 
         // 버튼 활성화
         fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());
+        Game_Manager.current.GetMainUI.OpenCanvas(false);// 낚시 시작 MainUI
 
-        Game_Manager.current.GetMainUI.OpenCanvas(false);
         Game_Manager.current.OutOfControll(true);
     }
 
-    public void FishingStartButton()// 시작 버튼
+    void FishingStartButton()// 시작 버튼
     {
         isFishing = true;
 
-        Option_Manager.current.SetThemeMusic(bgmBattle);// 전투 시작
-
+        Option_Manager.current.SetThemeMusic(bgmBattle);// 전투 시작 음악
         currentFish = fishQueue.Dequeue();// 물고기 정보
         currentSize = currentFish.GetRandom();
         fishingCanvas.SetFishing();
@@ -198,11 +199,11 @@ public class Fishing_Manager : MonoBehaviour
         SetCatch();// 낚시 영역 초기화
         SetFish();// 물고기 스탯 초기화
 
-        OutReward();// 보상 창이 열려있는 경우 스타트 버튼
+        //OutReward();// 보상 창이 열려있는 경우 스타트 버튼
         StartCoroutine(StartCount());
     }
 
-    IEnumerator StartCount()
+    IEnumerator StartCount()// 카운트
     {
         for (int i = 0; i < 3; i++)
         {
@@ -606,12 +607,16 @@ public class Fishing_Manager : MonoBehaviour
         fishingCanvas.OnArrowParent(false);
         fishingCanvas.SetFishSpell(0f);
 
-        // 버튼 활성화
-        fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());// 스타트 버튼 활성화
+        Game_Manager.current.GetMainUI.FishingGame();
         fishingCanvas.FishingOver();// 낚시 유아이 제거
-
         if (_success == true)// 낚시 성공
             SetReward();
+    }
+
+    public void FishingOver()
+    {
+        // 버튼 활성화
+        fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());// 스타트 버튼 활성화
     }
 
     public void SetReward()
@@ -627,8 +632,9 @@ public class Fishing_Manager : MonoBehaviour
         };
 
         Game_Manager.current.GetInventory.SetResult(fishResult);// 퀘스트 완료 후 결과 아이템 설정
-        Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
         Game_Manager.current.GetInventory.OpenResult();
+        Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
+        //OutReward();// 보상 창이 열려있는 경우 스타트 버튼
     }
 
     void OutReward()
