@@ -389,7 +389,7 @@ public class Game_Manager : MonoBehaviour
                 npcQuest[npcID] = new List<Data_Quest>();
             npcQuest[npcID].Add(temp[i]);
         }
-        Debug.LogError($"신문 퀘스트 세팅 : {npcQuest.Count}");
+        Debug.LogWarning($"신문 퀘스트 세팅 : {npcQuest.Count}");
     }
 
     void AddNews()

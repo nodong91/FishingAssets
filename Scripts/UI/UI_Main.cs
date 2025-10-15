@@ -78,7 +78,8 @@ public class UI_Main : MonoBehaviour
 
             case MenuState.Quest:
                 menuState &= ~MenuState.Quest;
-                OpenCanvas(true);
+                Game_Manager.current.GetInventory.CloseResult(true);//퀘스트 보상 닫기
+                //OpenCanvas(true);
                 break;
 
             case MenuState.Option:
@@ -136,6 +137,12 @@ public class UI_Main : MonoBehaviour
     {
         menuState |= MenuState.Fishing;// 넣기
         //OpenCanvas(false);
+    }
+
+    public void OpenQuestResult()
+    {
+        menuState |= MenuState.Quest;// 넣기
+        Game_Manager.current.GetInventory.OpenResult();
     }
 
     public void OpenCanvas(bool _open)// 메인 유아이 캔버스

@@ -10,7 +10,7 @@ using static UI_Inventory_Slot;
 public class UI_Inventory : MonoBehaviour
 {
     public SlotType currentType;
-    public Custom_Button closeButton;
+    public Custom_Button backButton;
 
     public UI_MyBox myBox;
     public UI_Shop shop;
@@ -71,7 +71,7 @@ public class UI_Inventory : MonoBehaviour
 
     public void SetStart()
     {
-        closeButton.SetButton(CloseCanvas);
+        backButton.SetButton(CloseCanvas);
         myBox.SetSlotSize = slotSize;
         shop.SetSlotSize = slotSize;
         myBox.SetStart();
@@ -154,7 +154,7 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void CloseResult()
+    public void CloseResult(bool _questReslut)
     {
         if (currentType == SlotType.Result)
         {
@@ -164,7 +164,15 @@ public class UI_Inventory : MonoBehaviour
 
             resultItem = default; // 퀘스트 결과 아이템 초기화
         }
-        Game_Manager.current.GetMainUI.OpenCanvas(true);
+
+        if (_questReslut == true)
+        {
+            Game_Manager.current.GetLanding.OpenLandingUI();
+        }
+        else
+        {
+            Game_Manager.current.GetMainUI.OpenCanvas(true);
+        }
     }
 
     //===========================================================================================================================
@@ -582,7 +590,7 @@ public class UI_Inventory : MonoBehaviour
     //===========================================================================================================================
 
     List<UI_Inventory_Slot> checkSlot = new List<UI_Inventory_Slot>();
-    public bool CheckQuestItem(string[] _needItems)
+    public bool CheckQuestItem(string[] _needItems)// 퀘스트 아이템이 있는지 확인
     {
         checkSlot.Clear();
         bool check = true;

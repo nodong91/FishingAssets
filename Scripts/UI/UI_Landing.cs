@@ -214,4 +214,9 @@ public class UI_Landing : MonoBehaviour
             Game_Manager.current.GetDialog.OutDialog();
         }
     }
+
+    public void OpenLandingUI()
+    {
+        SetLandingCanvas(true);// 랜드 UI 열기
+    }
 }

@@ -74,6 +74,12 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
                     Debug.LogWarning("Quest data is not set.");
                 }
                 break;
+            case SelectStruct.SelectType.Result:
+                // 퀘스트 결과 아이템 받기
+                Game_Manager.current.GetMainUI.OpenQuestResult();
+                Game_Manager.current.GetLanding.OutDialog();
+                break;
+
         }
     }
 

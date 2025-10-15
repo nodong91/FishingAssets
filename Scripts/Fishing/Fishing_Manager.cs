@@ -691,7 +691,7 @@ public class Fishing_Manager : MonoBehaviour
     void OutReward()
     {
         // º¸»ó ´Ý±â
-        Game_Manager.current.GetInventory.CloseResult();
+        Game_Manager.current.GetInventory.CloseResult(false);// ³¬½Ã º¸»ó Ã¢ ´Ý±â
     }
 
 

@@ -140,7 +140,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             if (currentDialog >= dataDialog.dialogStructs.Length)
             {
                 // 대화 끝
-                EndDialog();
+                EndDialog();// 스킵으로 끝
                 return;
             }
             // 다음 대화 진행
@@ -189,6 +189,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             dialogSelectButton[i].gameObject.SetActive(true);
         }
         typingCoroutine = StartCoroutine(SetSelectDialog());
+        OpenQuestResult();// 퀘스트 보상이 있으면 보상 인벤토리 열기
     }
 
     IEnumerator SetSelectDialog()// 선택지 버튼 열기
@@ -202,9 +203,12 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             rectParent.anchoredPosition = Vector3.Lerp(Vector3.up * 30f, Vector3.zero, normalize);
             yield return null;
         }
+    }
 
-        // 보상이 있으면 보상 인벤토리 열기
-        Game_Manager.current.GetInventory.OpenResult();
+    void OpenQuestResult()
+    {
+        //// 퀘스트 보상이 있으면 보상 인벤토리 열기
+        //Game_Manager.current.GetInventory.OpenResult();
     }
 
     void OpenShop()
@@ -393,7 +397,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         if (currentDialog >= dataDialog.dialogStructs.Length)
         {
             // 대화 끝
-            EndDialog();
+            EndDialog();// 자연스럽게 끝
         }
         else
         {
