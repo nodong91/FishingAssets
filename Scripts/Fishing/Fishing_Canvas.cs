@@ -17,6 +17,8 @@ public class Fishing_Canvas : MonoBehaviour
     public TMP_Text startTypeText;
     public Animator animator;
 
+    public Image testRect;
+
     public void SetStart()
     {
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -151,7 +153,7 @@ public class Fishing_Canvas : MonoBehaviour
 
     public Fishing_Damage fishingDamage;
     public Queue<Fishing_Damage> QueueDamage = new Queue<Fishing_Damage>();
-    public void SetDamage(float _damage, bool _cri)
+    public void SetDamage(float _damage, bool _cri)// µ¥¹ÌÁö ¶ç¿ì±â
     {
         Fishing_Damage inst = TryFishingDamage();
         inst.gameObject.SetActive(true);
@@ -172,5 +174,34 @@ public class Fishing_Canvas : MonoBehaviour
     {
         QueueDamage.Enqueue(_damage);
         _damage.gameObject.SetActive(false);
+    }
+
+
+
+    //=========================================================================================================
+    // ¶óÀÎ ÅÙ¼Ç
+    //=========================================================================================================
+
+
+    float maxTestSize = 120f;
+    public float testSize;
+    public float tentionSpeed = 0.1f;
+    [ColorUsage(true, true)]
+    public Color testColor01, testColor02;
+
+    public bool TryTention
+    {
+        get
+        {
+            return testSize > 0.9f;
+        }
+    }
+
+    public void LinTention(float _tention)
+    {
+        //testSize = Mathf.Lerp(testSize, _tention, Time.deltaTime * tentionSpeed);
+        testSize = _tention;
+        testRect.color = Color.Lerp(testColor01, testColor02, testSize);
+        testRect.rectTransform.sizeDelta = new Vector2(testSize * maxTestSize, testRect.rectTransform.sizeDelta.y);
     }
 }

@@ -131,7 +131,7 @@ public class Game_Manager : MonoBehaviour
     {
         // 공격하는 물고기가 처음인지 확인
         Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
-        GetTutorial.TutorialPause(0);
+        GetTutorial.StartTutorial("FirstFishing");
         GetFishing.SetFishing(_areaType);
     }
 

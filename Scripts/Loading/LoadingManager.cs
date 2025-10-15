@@ -15,6 +15,7 @@ public class LoadingManager : MonoBehaviour
     const string Title = "Title";
     const string GameManager = "GameManager";
     const string Island_Main = "Island_Main";
+    const string Test = "Test";
 
     public static LoadingManager current;
 
@@ -36,6 +37,12 @@ public class LoadingManager : MonoBehaviour
     public void GoMain()
     {
         sceneNames = new string[2] { GameManager, Island_Main };
+        OpenLoading();
+    }
+
+    public void GoTest()
+    {
+        sceneNames = new string[1] { Test };
         OpenLoading();
     }
 

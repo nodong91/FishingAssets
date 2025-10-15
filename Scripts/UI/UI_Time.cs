@@ -63,6 +63,11 @@ public class UI_Time : MonoBehaviour
     {
         while (paused == false)
         {
+            string minuteStr = ((int)minute * 10).ToString("D2");
+            string hourStr = hour.ToString("D2");
+            hourText.text = hourStr;
+            minuteText.text = minuteStr;
+            WeekPosition(day % 7);
             yield return new WaitForSeconds(timeSpeed);
 
             minute++;
@@ -76,12 +81,6 @@ public class UI_Time : MonoBehaviour
                     day++;
                 }
             }
-
-            string minuteStr = ((int)minute * 10).ToString("D2");
-            string hourStr = hour.ToString("D2");
-            hourText.text = hourStr;
-            minuteText.text = minuteStr;
-            WeekPosition(day % 7);
             yield return null;
 
             if (hour == 18 && lightMode == DayType.Day)

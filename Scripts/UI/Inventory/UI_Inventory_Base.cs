@@ -274,6 +274,7 @@ public class UI_Inventory_Base : MonoBehaviour
             Debug.LogWarning("넣을만한 빈 슬롯 없음");
             return false;
         }
+
         ItemClass itemClass = SetItemClass(_item);// 구매할 경우 새로운 클라스 캡슐화
         SetSlot(slot, itemClass);
         return true;

@@ -90,7 +90,7 @@ public class Static_JsonManager
     //======================================================================================
     // 튜토리얼 관련
     //======================================================================================
-    public static void SaveTutorialData(string fileName, List<int> _data)
+    public static void SaveTutorialData(string fileName, List<string> _data)
     {
          string filePath = Application.dataPath + "/Save/";
         // 폴더 생성
@@ -101,7 +101,7 @@ public class Static_JsonManager
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
-    public static bool TryLoadTutorialData(string fileName, out List<int> data)
+    public static bool TryLoadTutorialData(string fileName, out List<string> data)
     {
         string filePath = Application.dataPath + "/Save/";
         string path = filePath + fileName + ".json";
@@ -111,7 +111,7 @@ public class Static_JsonManager
         {
             string fromJson = File.ReadAllText(path);
             //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
-            data = JsonHelper.FromJson<int>(fromJson);
+            data = JsonHelper.FromJson<string>(fromJson);
             return true;
         }
 

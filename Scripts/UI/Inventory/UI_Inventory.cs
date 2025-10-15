@@ -223,47 +223,74 @@ public class UI_Inventory : MonoBehaviour
             {
                 if (selectSlot == null)
                     return;
-                // 현재 열린 타입이 상점류인 경우
-                if (currentType == SlotType.Shop || currentType == SlotType.Shipyard)
-                {
-                    if (enterSlotType == SlotType.MyBox)// 드랍 구매
-                    {
-                        // 돈이 부족하면
-                        if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == false)
-                        {
-                            UI_Inventory_Base tempSelect = GetInventory(selectSlotType);
-                            tempSelect.SetSlot(selectSlot, originItemClass);// 원래 위치로 돌리기
 
+                switch (currentType)
+                {
+                    // 현재 열린 타입이 상점류인 경우
+                    case SlotType.Shop:// 샵이 열려있을 때 드래그
+                    case SlotType.Shipyard:
+                        if (enterSlotType == SlotType.MyBox)// 드랍 구매
+                        {
+                            // 돈이 부족하거나 무게 초과
+                            if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == false
+                                || myBox.CheckWeight(selectItemClass.item.weight) == false)
+                            {
+                                MoveOriginalSlot();
+
+                                originItemClass = null;
+                                OffDragReset();
+                                return;
+                            }
+                            Debug.LogWarning($"드래그로 구매 : {selectItemClass.item.id}");
+                            BuyItem(selectItemClass.item);// 드래그 구매
+                        }
+                        else if (selectSlotType == SlotType.MyBox)// 판매
+                        {
+                            SellItem(selectItemClass.item);// 드래그 판매
                             originItemClass = null;
                             OffDragReset();
                             return;
                         }
-                        Debug.LogWarning($"드래그로 구매 : {selectItemClass.item.id}");
-                        BuyItem(selectItemClass.item);// 드래그 구매
-                    }
-                    else if (selectSlotType == SlotType.MyBox)// 판매
-                    {
-                        SellItem(selectItemClass.item);// 드래그 판매
-                        originItemClass = null;
-                        OffDragReset();
-                        return;
-                    }
+                        break;
+
+                    case SlotType.Storage:// 창고가 열려있을 때 우클릭
+                    case SlotType.Result:// 보상
+
+                        break;
+
+                    case SlotType.MyBox:
+
+                        break;
+
+                    default:
+                        break;
                 }
             }
+            // 내 인벤토리로 옮길 때 무게 초과
+            if (enterSlotType == SlotType.MyBox && myBox.CheckWeight(selectItemClass.item.weight) == false)// 드랍 구매
+            {
+                MoveOriginalSlot();
+            }
+
             // 다른 인벤토리로 이동
             UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
             tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
         }
         else// 놓을 수 없다면
         {
-            UI_Inventory_Base getInventory = GetInventory(selectSlotType);
-            getInventory.SetSlot(selectSlot, originItemClass);// 원래 위치로 돌리기
+            MoveOriginalSlot();
             Game_Manager.current.GetMainUI.SetWarnningText("놓을 수 없음");
-            Debug.LogWarning("놓을 수 없음");
         }
         originItemClass = null;
         OffDragReset();
     }
+
+    void MoveOriginalSlot()
+    {
+        UI_Inventory_Base getInventory = GetInventory(selectSlotType);
+        getInventory.SetSlot(selectSlot, originItemClass);// 원래 위치로 돌리기
+    }
+
 
     private void OffDrag(UI_Inventory_Slot _slot)// 픽업
     {
@@ -319,7 +346,7 @@ public class UI_Inventory : MonoBehaviour
                     else// 구매
                     {
                         ItemStruct item = selectSlot.itemClass.item;
-                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.AddItem(item) == false)
+                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.AddItem(item) == false || myBox.CheckWeight(selectItemClass.item.weight) == false)
                             return;
                         BuyItem(selectSlot.itemClass.item);// 클릭 구매
                     }
@@ -328,6 +355,9 @@ public class UI_Inventory : MonoBehaviour
 
                 case SlotType.Storage:// 창고가 열려있을 때 우클릭
                 case SlotType.Result:// 보상
+                    if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(selectItemClass.item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
+                        return;
+
                     UI_Inventory_Base getInventory = enterSlotType == SlotType.MyBox ? shop : myBox;
                     if (getInventory.AddItem(selectSlot.itemClass.item) == true)// 공간이 있으면 슬롯세팅
                     {

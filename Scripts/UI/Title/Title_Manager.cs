@@ -27,6 +27,7 @@ public class Title_Manager : MonoBehaviour
     [Header(" [ Buttons ]")]
     public Custom_Button continueButton;
     public Custom_Button newStartButton, creditButton, settingButton, exitButton;
+    public Custom_Button testButton;
     public TMPro.TMP_Text continueText, newStartText, creditText, settingText, exitText;
     bool continueEnable;
     public TMPro.TMP_Text volume;
@@ -57,12 +58,18 @@ public class Title_Manager : MonoBehaviour
         creditButton.SetButton(CreditButton, ActionEnter, ActionExit);
         settingButton.SetButton(SettingButton, ActionEnter, ActionExit);
         exitButton.SetButton(ExitButton, ActionEnter, ActionExit);
+        testButton.SetButton(TestScene, ActionEnter, ActionExit);
 
         originalSize = selectMask.sizeDelta;
         ActionExit(null);
 
         OnTitle();
         SetTime();
+    }
+
+    void TestScene()
+    {
+        LoadingManager.current.GoTest();
     }
 
     void SetTime()

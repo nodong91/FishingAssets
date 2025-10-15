@@ -64,7 +64,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
                 playerRotation = defaultRotate,
                 playerScale = Vector3.one,
 
-                timeSpeed = 0.1f,
+                timeSpeed = 15f,
                 minute = 30f,
                 hour = 7,
                 day = 0,

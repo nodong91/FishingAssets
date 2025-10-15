@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,32 +9,47 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
 {
     public CanvasGroup canvasGroup;
     public TMPro.TMP_Text commentText;
+
     [System.Serializable]
     public class TutorialStruct
     {
+        public string id;
         public bool completed;
         [System.Serializable]
         public struct TutorialSet
         {
-            public Vector2 position;
-            public Vector2 size;
             public string comment;
-            public Vector2 commentPosition;
             public int commentSize;
+            public Vector2 commentPosition;
+            public Vector2 boxPosition;
+            public Vector2 boxSize;
         }
         public TutorialSet[] tutorialSet;
     }
     public TutorialStruct[] testTutorialStruct;
     public TutorialStruct currentTutorial;
+    public string currentID;
     public int currentIndex, currentSetIndex;
     public RectTransform boxRect;
     public bool acting;
     Coroutine ingOpenCanvas;
     public AnimationCurve animationCurveX, animationCurveY;
 
+    Dictionary<string, TutorialStruct> dictTutorial = new Dictionary<string, TutorialStruct>();
+
     public void SetStart()
     {
         LoadTutorial();
+
+        dictTutorial = new Dictionary<string, TutorialStruct>();
+        for (int i = 0; i < testTutorialStruct.Length; i++)
+        {
+            if(completedTutorial.Contains(testTutorialStruct[i].id) == true)
+            {
+                testTutorialStruct[i].completed = true;
+            }
+            dictTutorial.Add(testTutorialStruct[i].id, testTutorialStruct[i]);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -43,18 +59,20 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
         CurrentAction();
     }
 
-    public void TutorialPause(int _index)
+    public void StartTutorial(string _id)
     {
-        currentIndex = _index;
-        currentTutorial = testTutorialStruct[_index];
-        Debug.LogWarning($"TutorialPause Index : {_index}, completed : {currentTutorial.completed}");
+        Debug.LogWarning($"TutorialPause : {_id}");
+        currentID = _id;
+        currentTutorial = dictTutorial[currentID];
+        //currentIndex = _index;
+        //currentTutorial = testTutorialStruct[_index];
+        //Debug.LogWarning($"TutorialPause Index : {_index}, completed : {currentTutorial.completed}");
         if (currentTutorial.completed == true)
         {
             canvasGroup.gameObject.SetActive(false);
             return;
         }
 
-        Debug.LogWarning($"TutorialPause");
         // Æ©Åä¸®¾ó
         Time.timeScale = 0f;
         currentSetIndex = 0;
@@ -131,7 +149,7 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
         SetComment(currentTutorial.tutorialSet[currentSetIndex]);
 
         acting = true;
-        boxRect.anchoredPosition = _tutorialSet.position;
+        boxRect.anchoredPosition = _tutorialSet.boxPosition;
         yield return null;
 
         float normalize = 0f;
@@ -140,8 +158,8 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
             normalize += Time.unscaledDeltaTime * 5f;
 
             float alpha = Mathf.Lerp(0f, 1f, normalize);
-            float curveX = animationCurveX.Evaluate(alpha) * _tutorialSet.size.x;
-            float curveY = animationCurveY.Evaluate(alpha) * _tutorialSet.size.y;
+            float curveX = animationCurveX.Evaluate(alpha) * _tutorialSet.boxSize.x;
+            float curveY = animationCurveY.Evaluate(alpha) * _tutorialSet.boxSize.y;
 
             boxRect.sizeDelta = new Vector2(curveX, curveY);
             yield return null;
@@ -150,31 +168,25 @@ public class Tutorial_Manager : MonoBehaviour, IPointerClickHandler
     }
 
     const string tutorialKey = "CompletedTutorial";
-    public List<int> completedTutorial;
+    public List<string> completedTutorial;
     public void SaveTutorial()
     {
         currentTutorial.completed = true;
         if (completedTutorial == null)
-            completedTutorial = new List<int>();
-        completedTutorial.Add(currentIndex);
+            completedTutorial = new List<string>();
+        completedTutorial.Add(currentID);
         Static_JsonManager.SaveTutorialData(tutorialKey, completedTutorial);
     }
 
     public void LoadTutorial()
     {
-        if (Static_JsonManager.TryLoadTutorialData(tutorialKey, out List<int> _completedTutorial))
+        if (Static_JsonManager.TryLoadTutorialData(tutorialKey, out List<string> _completedTutorial))
         {
             completedTutorial = _completedTutorial;
         }
         else
         {
-            completedTutorial = new List<int>();
-        }
-
-        for (int i = 0; i < completedTutorial.Count; i++)
-        {
-            int index = completedTutorial[i];
-            testTutorialStruct[index].completed = true;
+            completedTutorial = new List<string>();
         }
     }
 }
