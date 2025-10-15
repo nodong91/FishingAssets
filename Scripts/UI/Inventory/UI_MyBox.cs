@@ -44,6 +44,12 @@ public class UI_MyBox : UI_Inventory_Base
 
     public bool CheckWeight(float _weight)
     {
-        return currentWeight + _weight <= maxWeight;
+        bool check = currentWeight + _weight <= maxWeight;
+        if (check == false)
+        {
+            Game_Manager.current.GetMainUI.SetWarnningText("무게 초과");
+            return false;
+        }
+        return true;
     }
 }

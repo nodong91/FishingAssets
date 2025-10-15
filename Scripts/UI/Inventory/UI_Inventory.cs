@@ -224,6 +224,15 @@ public class UI_Inventory : MonoBehaviour
                 if (selectSlot == null)
                     return;
 
+                // 내 인벤토리로 옮길 때 무게 초과
+                if (enterSlotType == SlotType.MyBox && myBox.CheckWeight(selectItemClass.item.weight) == false)// 드랍 구매
+                {
+                    MoveOriginalSlot();
+                    originItemClass = null;
+                    OffDragReset();
+                    return;
+                }
+
                 switch (currentType)
                 {
                     // 현재 열린 타입이 상점류인 경우
@@ -231,12 +240,10 @@ public class UI_Inventory : MonoBehaviour
                     case SlotType.Shipyard:
                         if (enterSlotType == SlotType.MyBox)// 드랍 구매
                         {
-                            // 돈이 부족하거나 무게 초과
-                            if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == false
-                                || myBox.CheckWeight(selectItemClass.item.weight) == false)
+                            // 돈이 부족
+                            if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == false)
                             {
                                 MoveOriginalSlot();
-
                                 originItemClass = null;
                                 OffDragReset();
                                 return;
@@ -266,12 +273,6 @@ public class UI_Inventory : MonoBehaviour
                         break;
                 }
             }
-            // 내 인벤토리로 옮길 때 무게 초과
-            if (enterSlotType == SlotType.MyBox && myBox.CheckWeight(selectItemClass.item.weight) == false)// 드랍 구매
-            {
-                MoveOriginalSlot();
-            }
-
             // 다른 인벤토리로 이동
             UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
             tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
@@ -334,6 +335,7 @@ public class UI_Inventory : MonoBehaviour
         else if (_slot.empty == false)
         {
             selectSlot = _slot.GetLinkSlot;
+            ItemStruct item = selectSlot.itemClass.item;
             Debug.LogWarning($"{currentType} -> 오른 클릭 타입 : {enterSlotType}");
             switch (currentType)
             {
@@ -341,25 +343,29 @@ public class UI_Inventory : MonoBehaviour
                 case SlotType.Shipyard:
                     if (enterSlotType == SlotType.MyBox)// 내 인벤토리일때 판매
                     {
-                        SellItem(selectSlot.itemClass.item);// 우클릭 판매
+                        SellItem(item);// 우클릭 판매
                     }
                     else// 구매
                     {
-                        ItemStruct item = selectSlot.itemClass.item;
-                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.AddItem(item) == false || myBox.CheckWeight(selectItemClass.item.weight) == false)
+                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false)
                             return;
-                        BuyItem(selectSlot.itemClass.item);// 클릭 구매
+
+                        if (myBox.AddItem(item) == true)
+                        {
+                            Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.name)}");
+                            BuyItem(item);// 클릭 구매
+                        }
                     }
                     SetEmptySlot(selectSlot);// 슬롯 비우기
                     break;
 
                 case SlotType.Storage:// 창고가 열려있을 때 우클릭
                 case SlotType.Result:// 보상
-                    if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(selectItemClass.item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
+                    if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
                         return;
 
                     UI_Inventory_Base getInventory = enterSlotType == SlotType.MyBox ? shop : myBox;
-                    if (getInventory.AddItem(selectSlot.itemClass.item) == true)// 공간이 있으면 슬롯세팅
+                    if (getInventory.AddItem(item) == true)// 공간이 있으면 슬롯세팅
                     {
                         SetEmptySlot(selectSlot);// 슬롯 비우기
                     }
@@ -367,9 +373,6 @@ public class UI_Inventory : MonoBehaviour
 
                 case SlotType.MyBox:
                     ItemAction();// 사용하기
-                    break;
-
-                default:
                     break;
             }
         }
