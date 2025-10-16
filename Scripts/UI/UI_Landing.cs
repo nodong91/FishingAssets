@@ -12,7 +12,8 @@ public class UI_Landing : MonoBehaviour
         Shop,// 생선 가게
         Shipyard,// 조선소
         Storage,// 창고
-        Energy,// 휴식
+        Energy,// 주유소
+        Rest,// 휴식
         Count
     }
     public LandingType currentType = LandingType.None;
@@ -33,6 +34,7 @@ public class UI_Landing : MonoBehaviour
     [Header("Buttons")]
     public Custom_Button outButton;
     public Custom_Button restButton;
+    public Custom_Button fuelButton;
     public Custom_Button storageButton;
     public Custom_Button shopButton;
     public Custom_Button shipyardButton;
@@ -48,6 +50,7 @@ public class UI_Landing : MonoBehaviour
         canvas.worldCamera = Camera_Manager.current.UICamera;
 
         outButton.SetButton(OutButton);
+        fuelButton.SetButton(FuelButton);
         restButton.SetButton(RestButton);
         shopButton.SetButton(ShopButton);
         shipyardButton.SetButton(ShipyardButton);
@@ -146,12 +149,19 @@ public class UI_Landing : MonoBehaviour
         RemoveUI();
     }
 
-    void RestButton()// 휴식
+    void FuelButton()// 휴식
     {
         currentType = LandingType.Energy;
         onDialog = false;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
         Game_Manager.current.GetEnergyUI.OpenEnergy();
+    }
+
+    void RestButton()// 휴식
+    {
+        currentType = LandingType.Rest;
+        onDialog = false;
+        SetLandingCanvas(false);// 랜드 UI 제거
     }
 
     void ShopButton()

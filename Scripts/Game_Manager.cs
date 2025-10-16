@@ -26,6 +26,7 @@ public class Game_Manager : MonoBehaviour
 
     public Energy_Manager energyManager;
     public Gamble_Lottery lottery;
+    public Rest_Manager rest_Manager;
     public Tutorial_Manager tutorial;
 
     public Data_Status_Default defaultStatusData;
