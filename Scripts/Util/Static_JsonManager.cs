@@ -222,7 +222,7 @@ public class Static_JsonManager
         public string name;
         public int lastSetDay;
         public Vector2Int invenSize;
-        public List<UI_Inventory_Base.SaveItemClass> itemClass;
+        public List<UI_Inventory_Base.SaveItemClass> saveItems;
     }
 
     public static void SaveInventory(string fileName, InventoryData _data)

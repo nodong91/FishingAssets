@@ -136,6 +136,7 @@ public class UI_Main : MonoBehaviour
     public void FishingGame()
     {
         menuState |= MenuState.Fishing;// ³Ö±â
+        Game_Manager.current.GetInventory.OpenResult();
         //OpenCanvas(false);
     }
 
@@ -165,6 +166,7 @@ public class UI_Main : MonoBehaviour
     IEnumerator TextActing()
     {
         warnningText.alpha = 1f;
+        warnningText.material.SetFloat("_BurnAmount", 1f);
         yield return new WaitForSeconds(1f);
 
         float normalize = 0f;
@@ -172,6 +174,7 @@ public class UI_Main : MonoBehaviour
         {
             normalize += Time.deltaTime * 5f;
             warnningText.alpha = 1f - normalize;
+            warnningText.material.SetFloat("_BurnAmount", normalize);
             yield return null;
         }
     }

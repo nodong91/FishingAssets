@@ -177,7 +177,7 @@ public class Unit_Player : MonoBehaviour
 
     private void Update()
     {
-        SetOceanRenderer();
+        SetOceanRenderer();// 물 위에서 배의 움직임
     }
 
     void SetOceanRenderer()

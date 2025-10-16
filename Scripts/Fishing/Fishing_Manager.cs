@@ -186,8 +186,33 @@ public class Fishing_Manager : MonoBehaviour
         Game_Manager.current.OutOfControll(true);
     }
 
+    //===================================================================================================================
+    // 시작
+    //===================================================================================================================
+
     void FishingStartButton()// 시작 버튼
     {
+        string baitID = "";// 미끼
+        switch (areaType)
+        {
+            case AreaType.Shallow:
+                baitID = "Us_2001";// 미끼
+                break;
+            case AreaType.Oceanic:
+                baitID = "Us_2001";// 미끼
+                break;
+        }
+        if (Game_Manager.current.GetInventory.myBox.CheckItem(baitID, out UI_Inventory_Slot _slot) == true)// 미끼
+        {
+            Game_Manager.current.GetInventory.myBox.SlotEmpty(_slot);// 미끼 하나 제거
+        }
+        else
+        {
+            ItemStruct itemStruct = Singleton_Data.INSTANCE.Dict_Used[baitID].itemStruct;
+            Game_Manager.current.GetMainUI.SetWarnningText($"{Singleton_Data.INSTANCE.GetLanguage(itemStruct.name)}({baitID})가 필요합니다.");
+            return;
+        }
+
         isFishing = true;
 
         Option_Manager.current.SetThemeMusic(bgmBattle);// 전투 시작 음악
@@ -244,6 +269,7 @@ public class Fishing_Manager : MonoBehaviour
         tempText.text = fishState.ToString();
         if (fishAction != null)
             StopCoroutine(fishAction);
+
         switch (fishState)
         {
             case FishStateType.Idle:
@@ -643,7 +669,6 @@ public class Fishing_Manager : MonoBehaviour
         fishingCanvas.OnArrowParent(false);
         fishingCanvas.SetFishSpell(0f);
 
-        Game_Manager.current.GetMainUI.FishingGame();
         fishingCanvas.FishingOver();// 낚시 유아이 제거
         if (_success == true)// 낚시 성공
         {
@@ -684,7 +709,7 @@ public class Fishing_Manager : MonoBehaviour
         };
 
         Game_Manager.current.GetInventory.SetResult(fishResult);// 퀘스트 완료 후 결과 아이템 설정
-        Game_Manager.current.GetInventory.OpenResult();
+        Game_Manager.current.GetMainUI.FishingGame();
         Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
     }
 

@@ -34,7 +34,7 @@ public class UI_Inventory_Base : MonoBehaviour
     public RectTransform iconParent;
     public RectTransform infomationRect;
     Coroutine loadingItem;
-    Dictionary<Vector2Int, ItemClass> dictItemClass = new Dictionary<Vector2Int, ItemClass>();
+    Dictionary<Vector2Int, ItemInInventory> dictItem = new Dictionary<Vector2Int, ItemInInventory>();
 
     protected virtual void SetWeight(float _weight) { }
 
@@ -78,7 +78,7 @@ public class UI_Inventory_Base : MonoBehaviour
     {
         StaticOpenCanvas.deleEndOpen -= EndOpenCanvas;
         Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 창닫힐 때 저장
-        Debug.LogError($"저장 ({gameObject.name}) : {dictItemClass.Count} ({saveData})");
+        Debug.LogError($"저장 ({gameObject.name}) : {dictItem.Count} ({saveData})");
     }
 
     public void EmptyInventoryAllSlot()
@@ -151,14 +151,14 @@ public class UI_Inventory_Base : MonoBehaviour
 
     void SetEmptySlot(UI_Inventory_Slot _slot)// 비우기
     {
-        dictItemClass.Remove(_slot.slotNum);
+        dictItem.Remove(_slot.slotNum);
 
-        SetWeight(-_slot.itemClass.item.weight);// 무게 빼기
+        SetWeight(-_slot.itemInInventory.item.weight);// 무게 빼기
         iconQueue.Enqueue(_slot.GetSlotImage);// 이미지 풀에 넣기
         _slot.GetSlotImage.gameObject.SetActive(false);// 이미지 비활성화
 
         // 링크 슬롯 비우기
-        Vector2Int[] shape = _slot.itemClass.shape;
+        Vector2Int[] shape = _slot.itemInInventory.shape;
         if (shape != null)// 링크 슬롯 비우기
         {
             for (int i = 0; i < shape.Length; i++)
@@ -171,7 +171,7 @@ public class UI_Inventory_Base : MonoBehaviour
         _slot.SetEmpty();// 메인 슬롯 비우기
     }
 
-    public void SetSlot(UI_Inventory_Slot _slot, ItemClass _itemClass)
+    public void SetSlot(UI_Inventory_Slot _slot, ItemInInventory _itemClass)
     {
         _slot.SetBase(_itemClass);// 메인 슬롯
         if (_itemClass != null)// 비워져 있는지
@@ -203,7 +203,7 @@ public class UI_Inventory_Base : MonoBehaviour
                 Game_Manager.current.BuyNews(_slot.slotNum);
             }
         }
-        dictItemClass[_slot.slotNum] = _itemClass;
+        dictItem[_slot.slotNum] = _itemClass;
         SaveDictionary();
     }
 
@@ -275,14 +275,14 @@ public class UI_Inventory_Base : MonoBehaviour
             return false;
         }
 
-        ItemClass itemClass = SetItemClass(_item);// 구매할 경우 새로운 클라스 캡슐화
+        ItemInInventory itemClass = SetItemClass(_item);// 구매할 경우 새로운 클라스 캡슐화
         SetSlot(slot, itemClass);
         return true;
     }
 
-    public ItemClass SetItemClass(ItemStruct _item)
+    public ItemInInventory SetItemClass(ItemStruct _item)
     {
-        ItemClass itemClass = new ItemClass
+        ItemInInventory itemClass = new ItemInInventory
         {
             item = _item,
             angle = 0,
@@ -325,7 +325,7 @@ public class UI_Inventory_Base : MonoBehaviour
     // 체크
     //===========================================================================================================================
 
-    public bool SetCheck(UI_Inventory_Slot _slot, ItemClass _itemClass)
+    public bool SetCheck(UI_Inventory_Slot _slot, ItemInInventory _itemClass)
     {
         ClearCheckList();
 
@@ -368,9 +368,9 @@ public class UI_Inventory_Base : MonoBehaviour
     {
         foreach (var slot in allSlots)
         {
-            if (slot.itemClass?.item.id == _itemID)// 아이템 ID가 같은지
+            if (slot.itemInInventory?.item.id == _itemID)// 아이템 ID가 같은지
             {
-                _slot = slot;
+                _slot = slot.GetLinkSlot;
                 return true;
             }
         }
@@ -379,6 +379,20 @@ public class UI_Inventory_Base : MonoBehaviour
     }
 
 
+    //public bool TryCheckItem(string _itemID, out UI_Inventory_Slot _slot)
+    //{
+    //    foreach (var item in dictItem)
+    //    {
+    //        if (item.Value.item.id.Equals(_itemID))
+    //        {
+    //            Vector2Int slotNum = item.Key;
+    //            _slot = allSlots[slotNum.x, slotNum.y];
+    //            return true;
+    //        }
+    //    }
+    //    _slot = null;
+    //    return false;
+    //}
 
 
 
@@ -394,29 +408,29 @@ public class UI_Inventory_Base : MonoBehaviour
     public class SaveItemClass
     {
         public Vector2Int slotNum;
-        public ItemClass item;
+        public ItemInInventory item;
     }
     Static_JsonManager.InventoryData saveInventoryData;
     public Static_JsonManager.InventoryData GetSaveInventoryData { get { return saveInventoryData; } }
 
     void SaveDictionary()
     {
-        List<SaveItemClass> saveItems = new List<SaveItemClass>();
-        foreach (var child in dictItemClass)
+        List<SaveItemClass> setSaveItems = new List<SaveItemClass>();
+        foreach (var child in dictItem)
         {
             SaveItemClass dictCheck = new SaveItemClass
             {
                 slotNum = child.Key,
                 item = child.Value,
             };
-            saveItems.Add(dictCheck);
+            setSaveItems.Add(dictCheck);
         }
 
         saveInventoryData = new Static_JsonManager.InventoryData
         {
             lastSetDay = Game_Manager.current.GetTimeUI.day,
             invenSize = inventorySize,
-            itemClass = saveItems,
+            saveItems = setSaveItems,
         };
     }
 
@@ -433,7 +447,7 @@ public class UI_Inventory_Base : MonoBehaviour
             {
                 lastSetDay = -1,
                 invenSize = Game_Manager.current.defaultStatusData.defaultStatus.maxBoxSize,
-                itemClass = new List<SaveItemClass>(),
+                saveItems = new List<SaveItemClass>(),
             };
         }
     }
@@ -441,12 +455,12 @@ public class UI_Inventory_Base : MonoBehaviour
     void LoadItem(Static_JsonManager.InventoryData _data)
     {
         inventorySize = _data.invenSize;
-        for (int i = 0; i < _data.itemClass.Count; i++)
+        for (int i = 0; i < _data.saveItems.Count; i++)
         {
             // 새로운 클라스 캡슐화
-            Vector2Int slotNum = _data.itemClass[i].slotNum;
+            Vector2Int slotNum = _data.saveItems[i].slotNum;
             UI_Inventory_Slot slot = allSlots[slotNum.x, slotNum.y];
-            SetSlot(slot, _data.itemClass[i].item);
+            SetSlot(slot, _data.saveItems[i].item);
         }
     }
 

@@ -10,7 +10,6 @@ public class Trigger_Fish : MonoBehaviour
     void Start()
     {
         triggerSetting.deleTriggerAction = FishingStart;// 낚시 게임 스타트
-        //triggerSetting.GetIconSprite = fishStruct.itemStruct.icon;// 트리거 아이콘 설정
         triggerSetting.GetIconSprite = catchIcon;// 트리거 아이콘 설정
     }
 
@@ -21,7 +20,6 @@ public class Trigger_Fish : MonoBehaviour
 
     void FishingStart()
     {
-        //Game_Manager.current.GetFishing.SetFishingStart(areaType);
         Debug.LogWarning("낚시 시작");
         Game_Manager.current.StartFishing(areaType);
         triggerSetting.gameObject.SetActive(false);// 트리거 오브젝트 비활성화

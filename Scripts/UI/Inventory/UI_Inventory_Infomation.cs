@@ -17,7 +17,7 @@ public class UI_Inventory_Infomation : MonoBehaviour
             return;
         }
 
-        ItemStruct item = _slot.itemClass.item;
+        ItemStruct item = _slot.itemInInventory.item;
         nameText.text = Singleton_Data.INSTANCE.GetLanguage(item.name);
 
         float addPrice = 0f;

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 542660862164442577}
   - component: {fileID: 6295794202069055221}
-  - component: {fileID: 6425624509944780435}
   m_Layer: 0
   m_Name: Game_Manager
   m_TagString: Untagged
@@ -93,31 +92,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0aa9ee085b3cd794baf9774174de696a, type: 2}
   - {fileID: 11400000, guid: ebd0c8905fe0c77429f7cc63e33bc9e8, type: 2}
   - {fileID: 11400000, guid: 0a97142d240ec3f40a582c19aed18bb0, type: 2}
---- !u!114 &6425624509944780435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1031723816291780702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6aadd956069bf49b3362e7143b43c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  continueData:
-    playerPosition: {x: 0, y: 0, z: 0}
-    playerRotation: {x: 0, y: 0, z: 0, w: 0}
-    playerScale: {x: 0, y: 0, z: 0}
-    timeSpeed: 0
-    minute: 0
-    hour: 0
-    day: 0
-    weatherType: 0
-    health: 0
-    energy: 0
-    money: 0
-    destroySlot: []
 --- !u!1 &5351778369176117941
 GameObject:
   m_ObjectHideFlags: 0

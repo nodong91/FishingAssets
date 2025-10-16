@@ -25,16 +25,16 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     public delegate void Dele_Helper();
     public Dele_Helper dele_Exit;
 
-    public ItemClass itemClass;
+    public ItemInInventory itemInInventory;
     [System.Serializable]
-    public class ItemClass
+    public class ItemInInventory
     {
         public ItemStruct item;
         public float angle;
         public Vector2Int[] shape;
         public int acquisition;// 입수 날짜
 
-        public void SetItemClass(ItemClass _item)
+        public void SetSaveItem(ItemInInventory _item)
         {
             item = _item.item;
             angle = _item.angle;
@@ -87,29 +87,29 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
         destroyImage.gameObject.SetActive(false);
     }
 
-    void SetSlot(ItemClass _itemClass)
+    void SetSlot(ItemInInventory _item)
     {
-        empty = (_itemClass == null);
-        itemClass = _itemClass;
+        empty = (_item == null);
+        itemInInventory = _item;
         CheckOff();
     }
 
-    public void SetBase(ItemClass _itemClass)
+    public void SetBase(ItemInInventory _item)
     {
         linkSlot = this;
-        SetSlot(_itemClass);
+        SetSlot(_item);
     }
 
     public void SetLink(UI_Inventory_Slot _slot)
     {
         linkSlot = _slot;
-        SetSlot(_slot.itemClass);
+        SetSlot(_slot.itemInInventory);
     }
 
     public void SetEmpty()
     {
         linkSlot = null;
-        SetSlot(default);
+        SetSlot(null);
     }
 
     public bool CheckSlot()

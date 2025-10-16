@@ -30,8 +30,8 @@ public class UI_Inventory : MonoBehaviour
     public SlotType enterSlotType, selectSlotType;
     private UI_Inventory_Slot enterSlot, selectSlot;
 
-    ItemClass selectItemClass;
-    ItemClass originItemClass;
+    ItemInInventory selectItemClass;
+    ItemInInventory originItemClass;
 
     const int slotSize = 40;
     ResultStruct resultItem;
@@ -64,8 +64,8 @@ public class UI_Inventory : MonoBehaviour
 
     public void AddItem(ItemStruct _itemStruct)
     {
-        ItemClass itemClass = myBox.SetItemClass(_itemStruct);// 테스트 아이템 추가
-        selectItemClass = itemClass;
+        ItemInInventory item = myBox.SetItemClass(_itemStruct);// 테스트 아이템 추가
+        selectItemClass = item;
         DragSlot();// 아이템 추가
     }
 
@@ -320,7 +320,7 @@ public class UI_Inventory : MonoBehaviour
             onDrag = true;
             // 픽업
             selectSlot = _slot.GetLinkSlot;
-            selectItemClass = selectSlot.itemClass;
+            selectItemClass = selectSlot.itemInInventory;
             selectSlotType = enterSlotType;
 
             SetOriginItemClass();// 기존 위치 저장
@@ -343,7 +343,7 @@ public class UI_Inventory : MonoBehaviour
         else if (_slot.empty == false)
         {
             selectSlot = _slot.GetLinkSlot;
-            ItemStruct item = selectSlot.itemClass.item;
+            ItemStruct item = selectSlot.itemInInventory.item;
             Debug.LogWarning($"{currentType} -> 오른 클릭 타입 : {enterSlotType}");
             switch (currentType)
             {
@@ -389,14 +389,14 @@ public class UI_Inventory : MonoBehaviour
     void ItemAction()
     {
         // 아이템 사용
-        switch (selectSlot.itemClass.item.itemType)
+        switch (selectSlot.itemInInventory.item.itemType)
         {
             case ItemStruct.ItemType.Fish:
                 UseFish();
                 break;
 
             case ItemStruct.ItemType.Fuel:
-                UsedStruct usedStruct = Singleton_Data.INSTANCE.Dict_Used[selectSlot.itemClass.item.id];
+                UsedStruct usedStruct = Singleton_Data.INSTANCE.Dict_Used[selectSlot.itemInInventory.item.id];
                 Game_Manager.current.GetPlayer.AddEnergy(usedStruct.value);
                 Debug.LogWarning($"에너지 {usedStruct.value}만큼 회복");
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
@@ -516,8 +516,8 @@ public class UI_Inventory : MonoBehaviour
     void SetOriginItemClass()
     {
         if (originItemClass == null)// 기존 위치 저장
-            originItemClass = new ItemClass();
-        originItemClass.SetItemClass(selectItemClass);
+            originItemClass = new ItemInInventory();
+        originItemClass.SetSaveItem(selectItemClass);
     }
 
     UI_Inventory_Base GetInventory(SlotType _dragSlotType)
