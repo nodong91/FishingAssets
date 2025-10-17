@@ -1,7 +1,6 @@
 using System.Collections;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Rendering;
 using static Data_Manager;
 
 public class Title_Manager : MonoBehaviour
@@ -30,7 +29,6 @@ public class Title_Manager : MonoBehaviour
     public Custom_Button testButton;
     public TMPro.TMP_Text continueText, newStartText, creditText, settingText, exitText;
     bool continueEnable;
-    public TMPro.TMP_Text volume;
 
     public Light DayLight;
     public Color nightColor;
@@ -48,7 +46,6 @@ public class Title_Manager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SetManager());
-        volume.text = LoadingManager.current.volume;
 
         continueEnable = TryOptionFile();
         Debug.LogWarning($"Option_Manager : {continueEnable}");

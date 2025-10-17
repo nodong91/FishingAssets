@@ -6,7 +6,7 @@ public class UI_Inventory_Infomation : MonoBehaviour
     public CanvasGroup canvasGroup;
     public RectTransform rectTransform;
     public TMPro.TMP_Text nameText;
-    public TMPro.TMP_Text priceText, typeText;
+    public TMPro.TMP_Text weightText, priceText, classText;
 
     public void SetStart(UI_Inventory_Slot _slot)
     {
@@ -27,8 +27,28 @@ public class UI_Inventory_Infomation : MonoBehaviour
         float price = Mathf.Round(item.price + addPrice);// 스킬 스탯 추가
         Debug.LogWarning($"{Singleton_Data.INSTANCE.GetLanguage(item.name)} ({item.name}) :" +
             $" {item.price} + {Game_Manager.current.currentStatus.FishPrice} = {price}");
+        weightText.text = $"{item.weight}<size={weightText.fontSize * 0.5f}>kg</size>";
         priceText.text = price.ToString();
-        typeText.text = item.itemType.ToString();
+        string color = "";
+        switch (item.itemClass)
+        {
+            case ItemStruct.ItemClass.Common:
+                color = "FFFFFF";
+                break;
+            case ItemStruct.ItemClass.Uncommon:
+                color = "00FF29";
+                break;
+            case ItemStruct.ItemClass.Rare:
+                color = "005CFF";
+                break;
+            case ItemStruct.ItemClass.Epic:
+                color = "FF1300";
+                break;
+            case ItemStruct.ItemClass.Legendary:
+                color = "FFDD00";
+                break;
+        }
+        classText.text = $"<color=#{color}>{item.itemClass}</color>";
 
         if (Game_Manager.current.GetInventory.enterSlotType == UI_Inventory_Base.SlotType.MyBox)
         {

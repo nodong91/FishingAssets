@@ -103,6 +103,7 @@ public class UI_Shop : UI_Inventory_Base
     {
         inventoryID = "MyStorage";
         currentIndex = 0;
+        saveData = inventoryID + currentIndex;
         OpenCanvas(_open);
 
         layoutGroup.padding.top = 40;
@@ -135,12 +136,28 @@ public class UI_Shop : UI_Inventory_Base
         }
     }
 
+    public void SetGhoset(bool _open)
+    {
+        inventoryID = "GhostInventory";
+        currentIndex = 0;
+        saveData = inventoryID + currentIndex;
+        OpenCanvas(_open);
+
+        layoutGroup.padding.top = 15;
+        layoutGroup.padding.bottom = 15;
+
+        slotType = SlotType.Result;
+        toggleGroup.gameObject.SetActive(false);
+        fixGroup.gameObject.SetActive(false);
+    }
+
     //===========================================================================================================================
     // 상점 물건 배치
     //===========================================================================================================================
     int resetDay = -1;
     public int currentIndex = 0;
     public string inventoryID;
+
     void SetShopItem()
     {
         Debug.LogWarning($"상점 세팅 {npc?.npc_ID}");
@@ -161,13 +178,13 @@ public class UI_Shop : UI_Inventory_Base
                 else
                 {
                     // 저장된 내용 불러오기
-                    SetInventoryItem(saveData);
+                    SetInventoryItem(saveData);// Shop, Shipyard 세팅
                 }
                 break;
 
             case SlotType.Storage:
                 // 저장된 내용 불러오기
-                SetInventoryItem(saveData);
+                SetInventoryItem(saveData);// Storage 세팅
                 break;
 
             case SlotType.Result:

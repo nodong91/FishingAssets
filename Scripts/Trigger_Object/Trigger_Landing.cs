@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Trigger_Landing : Trigger_Setting
+public class Trigger_Landing : MonoBehaviour
 {
     public Sprite iconImage;
     Unit_Player player;
@@ -39,7 +39,7 @@ public class Trigger_Landing : Trigger_Setting
     private void Start()
     {
         triggerSetting.deleTriggerAction = SetLandingAction;// 섬 입장
-        triggerSetting.GetIconSprite = iconImage;
+        triggerSetting.GetIconSprite = iconImage;// 트리거 아이콘 설정
     }
 
     void SetLandingAction()

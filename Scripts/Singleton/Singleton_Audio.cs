@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 {
@@ -13,6 +12,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
     public float bgmVolume;
 
     public AudioSource fxSource;
+    public AudioSource loopFxSource;
     public bool fxMute;
     public float fxVolume;
 
@@ -136,6 +136,35 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 
         fxSource = audioSource;
         StartCoroutine(PlayFXAudio(audioSource));
+    }
+
+    public void Audio_LoopFX(string _id)
+    {
+        if (_id == null)
+            return;
+
+        AudioSource audioSource = TryAudioSource();
+        audioSource.gameObject.SetActive(true);
+        audioSource.name = _id;
+        Debug.Log($"{audioSource.name}");
+        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
+        audioSource.mute = masterMute == true ? true : fxMute;
+        audioSource.volume = fxVolume * masterVolume;
+        audioSource.loop = true;
+        audioSource.pitch = 1f;
+        audioSource.Play();
+
+        loopFxSource = audioSource;
+    }
+
+    public void Stop_LoopFX()
+    {
+        if (loopFxSource != null)
+        {
+            loopFxSource.Stop();
+            loopFxSource.gameObject.SetActive(false);
+            audioQueue.Enqueue(loopFxSource);
+        }
     }
 
     public void Audio_Dialog(string _id)

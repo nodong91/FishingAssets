@@ -215,7 +215,7 @@ public class Fishing_Manager : MonoBehaviour
 
         isFishing = true;
 
-        Option_Manager.current.SetThemeMusic(bgmBattle);// 전투 시작 음악
+        //Option_Manager.current.SetThemeMusic(bgmBattle);// 전투 시작 음악
         currentFish = fishQueue.Dequeue();// 물고기 정보
         currentSize = currentFish.GetRandom();
         fishingCanvas.SetFishing();
@@ -383,19 +383,27 @@ public class Fishing_Manager : MonoBehaviour
     //===================================================================================================================
     // 컨트롤
     //===================================================================================================================
-
+    const string FX_0005 = "FX_0005";
     bool catching;
     void TestControll()
     {
         if (Input.GetMouseButton(0))
         {
-            catching = true;
+            if (catching == false)
+            {
+                catching = true;
+                Singleton_Audio.INSTANCE.Audio_LoopFX(FX_0005);// 낚시 소리
+            }
             if (catchRadius > 0.1f)
                 catchRadius -= 1f * Time.deltaTime;
         }
         else if (catchRadius <= catchStatus.catchRadius)
         {
-            catching = false;
+            if (catching == true)
+            {
+                catching = false;
+                Singleton_Audio.INSTANCE.Stop_LoopFX();// 낚시 소리
+            }
             catchRadius += 1f * Time.deltaTime;
         }
         catchPrefab.transform.localScale = Vector3.one * catchRadius;
@@ -601,10 +609,11 @@ public class Fishing_Manager : MonoBehaviour
 
     IEnumerator Shaking()
     {
+        float shakeDuration = 1f / shakeValue;
         float normalize = 0f;
         while (normalize < 1f)
         {
-            normalize += Time.deltaTime * (1f / shakeTime);
+            normalize += Time.deltaTime * shakeDuration;
             float shakeAmount = Mathf.Lerp(shakeValue, 0f, normalize);
             cinemachineBasicMultiChannelPerlin.AmplitudeGain = shakeAmount;
             yield return null;
@@ -668,10 +677,12 @@ public class Fishing_Manager : MonoBehaviour
     //===================================================================================================================
     // 낚시 완료
     //===================================================================================================================
+    
     void FishingComplate(bool _success)// 낚시 완료
     {
         Debug.LogWarning($"FishingComplate : {_success}");
-        Option_Manager.current.SetThemeMusic(null);// 테마 음악 초기화
+        //Option_Manager.current.SetThemeMusic(null);// 테마 음악 초기화
+        Singleton_Audio.INSTANCE.Stop_LoopFX();// 낚시 소리 정지
 
         isFishing = false;
         StopAllCoroutines();
@@ -751,6 +762,8 @@ public class Fishing_Manager : MonoBehaviour
 
         fishingSet.SetActive(false);// 물고기, 낚시대 제거
         fishingCanvas.outButton.gameObject.SetActive(false);
+
+        cinemachineBasicMultiChannelPerlin.AmplitudeGain = 0f;
     }
 
 

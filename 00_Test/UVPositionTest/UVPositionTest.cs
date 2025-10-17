@@ -26,6 +26,61 @@ public class UVPositionTest : MonoBehaviour
         SetMesh();
     }
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Audio_LoopFX();
+            if (rotating != null)
+                StopCoroutine(rotating);
+            drawing = StartCoroutine(StartDrawing(true));
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            Stop_LoopFX();
+            if (drawing != null)
+                StopCoroutine(drawing);
+            CheckColor();
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (rotating != null)
+                StopCoroutine(rotating);
+            rotating = StartCoroutine(InputRotating(true));
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            if (rotating != null)
+                StopCoroutine(rotating);
+            rotating = StartCoroutine(InputRotating(false));
+            SetMesh();
+        }
+    }
+    public AudioClip reelClip;
+    public AudioSource reelSound;
+    public void Audio_LoopFX()
+    {
+        AudioSource audioSource = reelSound;
+        audioSource.gameObject.SetActive(true);
+        Debug.Log($"{audioSource.name}");
+        audioSource.clip = reelClip;
+        audioSource.loop = true;
+        audioSource.pitch = Random.Range(0.7f, 1.3f);
+        audioSource.Play();
+
+        reelSound = audioSource;
+    }
+
+    public void Stop_LoopFX()
+    {
+        if (reelSound != null)
+        {
+            reelSound.Stop();
+            reelSound.gameObject.SetActive(false);
+        }
+    }
+
     void ClearButton()
     {
         drawColor.a = 0f;
@@ -60,36 +115,6 @@ public class UVPositionTest : MonoBehaviour
             colors = mesh.colors;
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (rotating != null)
-                StopCoroutine(rotating);
-            drawing = StartCoroutine(StartDrawing(true));
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            if (drawing != null)
-                StopCoroutine(drawing);
-            CheckColor();
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (rotating != null)
-                StopCoroutine(rotating);
-            rotating = StartCoroutine(InputRotating(true));
-        }
-        else if (Input.GetMouseButtonUp(1))
-        {
-            if (rotating != null)
-                StopCoroutine(rotating);
-            rotating = StartCoroutine(InputRotating(false));
-            SetMesh();
-        }
-    }
-
     void CheckColor()
     {
         int compColor = 0;
@@ -102,7 +127,6 @@ public class UVPositionTest : MonoBehaviour
         }
         complete = (compColor / (float)colors.Length) * 100f;
     }
-
 
 
 

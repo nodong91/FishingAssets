@@ -147,8 +147,8 @@ public class UI_Inventory : MonoBehaviour
 
         if (currentType != SlotType.Result)
         {
-            ResultStruct result = resultItem;
             currentType = SlotType.Result;
+            ResultStruct result = resultItem;
             myBox.OpenCanvas(true);
             shop.SetResult(true, result);
         }
@@ -173,6 +173,25 @@ public class UI_Inventory : MonoBehaviour
         {
             Game_Manager.current.GetMainUI.OpenCanvas(true);
         }
+    }
+
+    public void OpenGhost(bool _open)
+    {
+        if (_open == true)
+        {
+            if (currentType != SlotType.Result)
+            {
+                currentType = SlotType.Result;
+                Game_Manager.current.GetMainUI.OpenCanvas(false);
+            }
+        }
+        else if (currentType == SlotType.Result)
+        {
+            currentType = SlotType.None;
+            Game_Manager.current.GetMainUI.OpenCanvas(true);
+        }
+        myBox.OpenCanvas(_open);
+        shop.SetGhoset(_open);
     }
 
     //===========================================================================================================================

@@ -10,7 +10,6 @@ public class LoadingManager : MonoBehaviour
     List<AsyncOperation> asyncOperation;
     public RectTransform background;
     int complateIndex;
-    public string volume;
 
     const string Title = "Title";
     const string GameManager = "GameManager";

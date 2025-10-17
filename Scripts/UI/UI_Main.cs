@@ -13,6 +13,7 @@ public class UI_Main : MonoBehaviour
         Option = 1 << 3,
         Shop = 1 << 4,
         FishGuide = 1 << 5,
+        Ghost = 1 << 6,
     }
     public MenuState menuState;
 
@@ -79,7 +80,6 @@ public class UI_Main : MonoBehaviour
             case MenuState.Quest:
                 menuState &= ~MenuState.Quest;
                 Game_Manager.current.GetInventory.CloseResult(true);//퀘스트 보상 닫기
-                //OpenCanvas(true);
                 break;
 
             case MenuState.Option:
@@ -97,6 +97,10 @@ public class UI_Main : MonoBehaviour
                 menuState &= ~MenuState.FishGuide;
                 Game_Manager.current.GetFishGuide.OpenCanvas(false);
                 OpenCanvas(true);
+                break;
+            case MenuState.Ghost:
+                menuState &= ~MenuState.Ghost;
+                Game_Manager.current.GetInventory.OpenGhost(false);//유령 보상 닫기
                 break;
         }
     }
@@ -136,14 +140,20 @@ public class UI_Main : MonoBehaviour
     public void FishingGame()
     {
         menuState |= MenuState.Fishing;// 넣기
-        Game_Manager.current.GetInventory.OpenResult();
+        Game_Manager.current.GetInventory.OpenResult();// 낚시 보상
         //OpenCanvas(false);
     }
 
     public void OpenQuestResult()
     {
         menuState |= MenuState.Quest;// 넣기
-        Game_Manager.current.GetInventory.OpenResult();
+        Game_Manager.current.GetInventory.OpenResult();// 퀘스트 보상
+    }
+
+    public void GhostResult()
+    {
+        menuState |= MenuState.Ghost;
+        Game_Manager.current.GetInventory.OpenGhost(true);// 퀘스트 보상
     }
 
     public void OpenCanvas(bool _open)// 메인 유아이 캔버스

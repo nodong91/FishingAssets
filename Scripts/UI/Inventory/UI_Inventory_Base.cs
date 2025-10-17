@@ -35,6 +35,7 @@ public class UI_Inventory_Base : MonoBehaviour
     public RectTransform infomationRect;
     Coroutine loadingItem;
     Dictionary<Vector2Int, ItemInInventory> dictItem = new Dictionary<Vector2Int, ItemInInventory>();
+    public Dictionary<Vector2Int, ItemInInventory> GetInventoryItems { get { return dictItem; } }
 
     protected virtual void SetWeight(float _weight) { }
 
@@ -50,20 +51,20 @@ public class UI_Inventory_Base : MonoBehaviour
 
         if (loadingItem != null)
             StopCoroutine(loadingItem);
-        loadingItem = StartCoroutine(SetLoadingItem());
+        loadingItem = StartCoroutine(SetLoadingItem(saveInventoryData));
     }
 
-    IEnumerator SetLoadingItem()
+    IEnumerator SetLoadingItem(Static_JsonManager.InventoryData _saveInventoryData)
     {
         EmptyInventoryAllSlot();
         LoadInventory();
-        while (saveInventoryData == null)
+        while (_saveInventoryData == null)
             yield return null;
 
-        SetInventorySlot(GetSaveInventoryData.invenSize);// 데이터 불러온 이후
+        SetInventorySlot(_saveInventoryData.invenSize);// 데이터 불러온 이후
         yield return null;
 
-        LoadItem(saveInventoryData);
+        LoadItem(_saveInventoryData);// 아이템 불러오기
         SetLoadDestroy();// 부서진 슬롯 세팅
     }
 
@@ -92,7 +93,6 @@ public class UI_Inventory_Base : MonoBehaviour
                 continue;
 
             UI_Inventory_Slot slot = item.GetLinkSlot;
-            //SlotEmpty(slot);
             SetEmptySlot(slot);
         }
     }
@@ -452,7 +452,7 @@ public class UI_Inventory_Base : MonoBehaviour
         }
     }
 
-    void LoadItem(Static_JsonManager.InventoryData _data)
+    public void LoadItem(Static_JsonManager.InventoryData _data)
     {
         inventorySize = _data.invenSize;
         for (int i = 0; i < _data.saveItems.Count; i++)
@@ -462,18 +462,8 @@ public class UI_Inventory_Base : MonoBehaviour
             UI_Inventory_Slot slot = allSlots[slotNum.x, slotNum.y];
             SetSlot(slot, _data.saveItems[i].item);
         }
+        Debug.LogError($"저장 데이터 갱신({saveData}) : {saveInventoryData.saveItems.Count} 아이템");
     }
-
-
-
-
-
-
-
-
-
-
-
 
     void SetLoadDestroy()
     {
