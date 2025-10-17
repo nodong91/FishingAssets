@@ -76,6 +76,8 @@ public class Title_Manager : MonoBehaviour
     {
         RenderSettings.skybox = Instantiate(skyboxMatial);
         Data_Continue data = Singleton_Continue.INSTANCE.LoadContinue();
+        if (data == null)
+            return;
         if (data != null && (data.hour < 5f || data.hour > 18f))
         {
             // นใ

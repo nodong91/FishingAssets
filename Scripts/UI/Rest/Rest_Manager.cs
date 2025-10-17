@@ -1,20 +1,29 @@
 using System.Collections;
 using UnityEngine;
+using static StaticOpenCanvas;
 
 public class Rest_Manager : MonoBehaviour
 {
+    public CanvasStruct[] canvasStructs;
+    public Rest_Drag restDrag;
     public Custom_Button restButton;
     public CanvasGroup canvasGroup;
-    public Rest_Drag restDrag;
-    public float Hour => restDrag.hour;
-    public float Minute => restDrag.minute;
+    public int Hour => restDrag.hour;
+    public int Minute => restDrag.minute;
 
-    void Start()
+    public void SetStart()
     {
-        restButton.SetButton(Rest);
+        restButton.SetButton(RestButton);
     }
 
-    void Rest()
+    public void OpenCanvas(bool _open)
+    {
+        restDrag.SetStart();
+        canvasGroup.gameObject.SetActive(_open);
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+    }
+
+    void RestButton()
     {
         StartCoroutine(SetRest());
     }
@@ -28,9 +37,9 @@ public class Rest_Manager : MonoBehaviour
             CanvasAlpha(normalize);
             yield return null;
         }
-        restDrag.check.color = Color.red;
         restDrag.gameObject.SetActive(false);
         Debug.LogWarning($"Rest Complete : {Hour} : {Minute}");
+        Game_Manager.current.GetTimeUI.SetTime(Hour, Minute);
         yield return new WaitForSeconds(1f);
 
         normalize = 0f;
@@ -40,6 +49,9 @@ public class Rest_Manager : MonoBehaviour
             CanvasAlpha(1f - normalize);
             yield return null;
         }
+        canvasGroup.gameObject.SetActive(false);
+        Singleton_Continue.INSTANCE.SaveContinue();// ÈÞ½Ä ÈÄ ÀúÀå
+        Game_Manager.current.GetLanding.SetLandingCanvas(true);
     }
 
     void CanvasAlpha(float _alpha)

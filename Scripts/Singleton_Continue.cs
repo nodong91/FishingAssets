@@ -9,8 +9,9 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
     //===========================================================================================================================
     // 저장 및 불러오기
     //===========================================================================================================================
-    public void SetContinue()
+    public void SaveContinue()
     {
+        Debug.LogError("Save Continue Data!!!");
         continueData = new Data_Continue
         {
             playerPosition = Game_Manager.current.GetPlayer.transform.position,
@@ -28,7 +29,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             money = Game_Manager.current.GetMainUI.TryMoney,
             destroySlot = Game_Manager.current.GetInventory.TryDestroySlot,
         };
-        SaveContinue();
+        Static_JsonManager.SaveCountinueData(saveData, continueData);
     }
 
     public void GetContinue()
@@ -42,18 +43,13 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
         Game_Manager.current.GetInventory.TryDestroySlot = continueData.destroySlot;// 부서진 슬롯
     }
 
-    void SaveContinue()
-    {
-        Static_JsonManager.SaveCountinueData(saveData, continueData);
-    }
-
     public Data_Continue LoadContinue()
     {
         if (Static_JsonManager.TryLoadCountinueData(saveData, out Data_Continue _data))
         {
             return _data;
         }
-        else
+        else if (Game_Manager.current != null)
         {
             Data_Status_Default defaultStatusData = Game_Manager.current.defaultStatusData;
             Vector3 defaultPosition = new Vector3(0.5f, 0.2f, 10.7f);
@@ -76,5 +72,6 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             };
             return data;
         }
+        return null;
     }
 }

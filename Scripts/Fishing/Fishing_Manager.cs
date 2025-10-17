@@ -291,45 +291,6 @@ public class Fishing_Manager : MonoBehaviour
                 break;
         }
     }
-
-    void TestControll()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            catchRadius += 1f * Time.deltaTime;
-        }
-
-        if (Input.GetMouseButton(1))
-        {
-            catchRadius -= 1f * Time.deltaTime;
-        }
-        catchPrefab.transform.localScale = Vector3.one * catchRadius;
-    }
-
-    void PlayingControll()
-    {
-        fishingCanvas.FollowUI(fishPrefab.transform.position);
-        if (fishState == FishStateType.Spelling)
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                CancelSkill(0);
-            }
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                CancelSkill(1);
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                CancelSkill(2);
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                CancelSkill(3);
-            }
-        }
-    }
-
     IEnumerator CatchMovement()
     {
         float cutTime = 0f;
@@ -393,11 +354,15 @@ public class Fishing_Manager : MonoBehaviour
     {
         if (isCatching == true)
         {
-            bool critical = Random.Range(0f, 1f) > 0.5f;
-            // 낚시대 힘만큼 데미지
-            float setDamage = critical ? catchStatus.catchPower + catchStatus.catchPower * 0.2f : catchStatus.catchPower;
-            float damage = setDamage / (currentFish.fishHealth + catchStatus.catchMaxHealth);
-            fishHealth -= damage * Time.deltaTime;
+            //bool critical = Random.Range(0f, 1f) > 0.5f;
+            //// 낚시대 힘만큼 데미지
+            //float setDamage = critical ? catchStatus.catchPower + catchStatus.catchPower * 0.2f : catchStatus.catchPower;
+            //float damage = setDamage / (currentFish.fishHealth + catchStatus.catchMaxHealth);
+            if (catching == true)
+            {
+                float damage = catchStatus.catchPower / (currentFish.fishHealth + catchStatus.catchMaxHealth);
+                fishHealth -= damage * Time.deltaTime;
+            }
             fishingCanvas.SetFishIcon(1f);
         }
         else
@@ -414,6 +379,52 @@ public class Fishing_Manager : MonoBehaviour
             FishingComplate(fishHealth <= 0f);// 낚시 성공 실패
         }
     }
+
+    //===================================================================================================================
+    // 컨트롤
+    //===================================================================================================================
+
+    bool catching;
+    void TestControll()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            catching = true;
+            if (catchRadius > 0.1f)
+                catchRadius -= 1f * Time.deltaTime;
+        }
+        else if (catchRadius <= catchStatus.catchRadius)
+        {
+            catching = false;
+            catchRadius += 1f * Time.deltaTime;
+        }
+        catchPrefab.transform.localScale = Vector3.one * catchRadius;
+    }
+
+    void PlayingControll()
+    {
+        fishingCanvas.FollowUI(fishPrefab.transform.position);
+        if (fishState == FishStateType.Spelling)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                CancelSkill(0);
+            }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                CancelSkill(1);
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                CancelSkill(2);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                CancelSkill(3);
+            }
+        }
+    }
+
 
     //===================================================================================================================
     // 물고기 상태
@@ -719,13 +730,14 @@ public class Fishing_Manager : MonoBehaviour
         Game_Manager.current.GetInventory.CloseResult(false);// 낚시 보상 창 닫기
     }
 
-
     //===================================================================================================================
     // 낚시 끝
     //===================================================================================================================
 
     void OutFishing()
     {
+        Singleton_Continue.INSTANCE.SaveContinue();// 낚시 종료 시 저장
+
         Game_Manager.current.GetMainUI.timeUI.TimePause(false);// 시간 정지 종료
         positionComposer.gameObject.SetActive(false);
 

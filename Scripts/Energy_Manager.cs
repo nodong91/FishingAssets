@@ -50,7 +50,7 @@ public class Energy_Manager : MonoBehaviour
         float energy = addEnergy * energyMaxAmount / 100f;
         Debug.LogWarning($"에너지 충전 {addEnergy}% , {energy}만큼 충전");
         Game_Manager.current.GetPlayer.AddEnergy(energy);
-        Game_Manager.current.GetMainUI.MoveMoney(buyPrice);
+        Game_Manager.current.GetMainUI.MoveMoney(-buyPrice);
 
         SetStartEnergy();
     }

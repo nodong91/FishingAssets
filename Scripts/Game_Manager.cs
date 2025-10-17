@@ -293,6 +293,20 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
+    private Rest_Manager instRest;
+    public Rest_Manager GetRestManager
+    {
+        get
+        {
+            if (instRest == null)
+            {
+                instRest = Instantiate(rest_Manager, transform);
+                instRest.SetStart();
+            }
+            return instRest;
+        }
+    }
+
     private Gamble_Lottery instLottery;
     public Gamble_Lottery GetLottery
     {

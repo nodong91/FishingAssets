@@ -255,7 +255,7 @@ public class UI_Main : MonoBehaviour
     {
         float prevMoney = moneyValue;
         moneyValue = moneyValue + _price;
-        Singleton_Continue.INSTANCE.SetContinue(); // 팔거나 사면 저장
+        Singleton_Continue.INSTANCE.SaveContinue(); // 팔거나 사면 저장
         yield return null;
 
         float normalize = 0f;

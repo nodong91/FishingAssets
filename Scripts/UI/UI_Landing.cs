@@ -105,7 +105,7 @@ public class UI_Landing : MonoBehaviour
         return null;
     }
 
-    void SetLandingCanvas(bool _open)
+    public void SetLandingCanvas(bool _open)
     {
         if (opening != null)
             StopCoroutine(opening);
@@ -125,7 +125,7 @@ public class UI_Landing : MonoBehaviour
             yield return null;
         }
         if (inlanding == false)
-            Singleton_Continue.INSTANCE.SetContinue();// 섬에서 나갈 때 저장
+            Singleton_Continue.INSTANCE.SaveContinue();// 섬에서 나갈 때 저장
     }
 
     void OpenCanvasUI(CanvasGroup _canvas, float _alpha)
@@ -162,6 +162,7 @@ public class UI_Landing : MonoBehaviour
         currentType = LandingType.Rest;
         onDialog = false;
         SetLandingCanvas(false);// 랜드 UI 제거
+        Game_Manager.current.GetRestManager.OpenCanvas(true);
     }
 
     void ShopButton()

@@ -35,6 +35,12 @@ public class UI_Time : MonoBehaviour
         minute = _data.minute;
         hour = _data.hour;
         day = _data.day;
+        SetSkyBox();
+        TimePause(false);
+    }
+
+    void SetSkyBox()
+    {
         if (hour >= 5f && hour < 18f)
         {
             // 낮
@@ -56,7 +62,6 @@ public class UI_Time : MonoBehaviour
             RenderSettings.skybox.SetFloat("_Amount", 1f);
         }
         Shader.SetGlobalColor("_EmissionColor", setEmissionColor);
-        TimePause(false);
     }
 
     IEnumerator TimeUpdate()
@@ -82,15 +87,19 @@ public class UI_Time : MonoBehaviour
                 }
             }
             yield return null;
+            DayChage();
+        }
+    }
 
-            if (hour == 18 && lightMode == DayType.Day)
-            {
-                StartCoroutine(DayChange(DayType.Night));
-            }
-            else if (hour == 5 && lightMode == DayType.Night)
-            {
-                StartCoroutine(DayChange(DayType.Day));
-            }
+    void DayChage()
+    {
+        if (hour == 18 && lightMode == DayType.Day)
+        {
+            StartCoroutine(DayChange(DayType.Night));
+        }
+        else if (hour == 5 && lightMode == DayType.Night)
+        {
+            StartCoroutine(DayChange(DayType.Day));
         }
     }
 
@@ -131,7 +140,7 @@ public class UI_Time : MonoBehaviour
 
     void WeekPosition(int _index)
     {
-        float targetX = Mathf.Lerp(-60f, 60f, _index / 6f);
+        //float targetX = Mathf.Lerp(-60f, 60f, _index / 6f);
         switch (_index)
         {
             case 0:
@@ -159,12 +168,31 @@ public class UI_Time : MonoBehaviour
                 break;
         }
     }
-
+    //==========================================================================================================
+    // 외부 컨트롤
+    //==========================================================================================================
     public void TimePause(bool _pause)
     {
         paused = _pause;
         if (timeUpdate != null)
             StopCoroutine(timeUpdate);
         timeUpdate = StartCoroutine(TimeUpdate());
+    }
+
+    public void SetTime( int _hour, float _minute)
+    {
+        hour += _hour;
+        minute += _minute;
+        if (hour > 24)
+        {
+            hour -= 24;
+            day++;
+        }
+        string minuteStr = ((int)minute * 10).ToString("D2");
+        string hourStr = hour.ToString("D2");
+        hourText.text = hourStr;
+        minuteText.text = minuteStr;
+        WeekPosition(day % 7);
+        SetSkyBox();
     }
 }
