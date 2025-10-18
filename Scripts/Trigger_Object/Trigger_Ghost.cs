@@ -30,8 +30,8 @@ public class Trigger_Ghost : Trigger_Setting
             lastSetDay = Game_Manager.current.GetTimeUI.day,
             invenSize = Game_Manager.current.GetInventory.myBox.inventorySize,
             saveItems = setSaveItems,
-        }; 
-        
+        };
+
         deleTriggerAction = GhostAction;
         GetIconSprite = iconImage;// 트리거 아이콘 설정
     }
@@ -40,7 +40,7 @@ public class Trigger_Ghost : Trigger_Setting
     {
         if (setResult == null)
             return;
-        //SetResult();
+
         StartCoroutine(SetItem());
         Debug.LogWarning("Ghost Action Triggered");
     }

@@ -272,9 +272,9 @@ public class Data_Manager : Data_Parse
         public float freshness;// 신선도 유지 - 꼭 필요한가??????  
 
         [Header(" [ Fish ]")]
-        public float LuckFish;// 희귀 물고기 확률
-        public int FishAmount;// 낚시 횟수 증가
-        public float FishPrice;// 판매 물고기 가격 증가
+        public float luckFish;// 희귀 물고기 확률
+        public int fishAmount;// 낚시 횟수 증가
+        public float fishPrice;// 판매 물고기 가격 증가
 
         public void SettingStatus(SetStatus _status)
         {
@@ -290,9 +290,9 @@ public class Data_Manager : Data_Parse
             maxBoxSize = _status.maxBoxSize;
             shipHealth = _status.shipHealth;
             freshness = _status.freshness;
-            LuckFish = _status.LuckFish;
-            FishAmount = _status.FishAmount;
-            FishPrice = _status.FishPrice;
+            luckFish = _status.luckFish;
+            fishAmount = _status.fishAmount;
+            fishPrice = _status.fishPrice;
         }
 
         public void AddStatus(SetStatus _status, int _remove = 1)
@@ -309,9 +309,9 @@ public class Data_Manager : Data_Parse
             maxBoxSize += _status.maxBoxSize * _remove;
             shipHealth += _status.shipHealth * _remove;
             freshness += _status.freshness * _remove;
-            LuckFish += _status.LuckFish * _remove;
-            FishAmount += _status.FishAmount * _remove;
-            FishPrice += _status.FishPrice * _remove;
+            luckFish += _status.luckFish * _remove;
+            fishAmount += _status.fishAmount * _remove;
+            fishPrice += _status.fishPrice * _remove;
         }
     }
 
@@ -319,6 +319,7 @@ public class Data_Manager : Data_Parse
     public class SkillStatus
     {
         public string name;
+        public Vector2Int map;
         [TextArea]
         public string description;
         public string addStatusString;

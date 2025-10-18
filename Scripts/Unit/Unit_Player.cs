@@ -24,11 +24,12 @@ public class Unit_Player : MonoBehaviour
     public float GetEnergy { get { return energy; } }
     public float GetMaxEnergy { get { return CurrentStatus.maxEnergy; } }
     public float efficient;// 에너지 효율
-    private Vector2 dirction;
+    private Vector2 dirction = Vector2.zero;
     // 물위에서 배의 움직임
     private float shipHight = -0.1f;
     private float waveSpeed = 2f;
     private float targetAngle = 10f;
+
     float runningTime;
     public GameObject playerObject;
     GameObject FocusTarget => Camera_Manager.current?.GetFocusTarget;
@@ -63,13 +64,12 @@ public class Unit_Player : MonoBehaviour
         if (continueData == null)
             return;
 
-        transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
-        Debug.LogWarning($"{continueData.playerPosition} : {continueData.playerRotation}");
-        transform.localScale = continueData.playerScale;
+        //transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
+        //Debug.LogWarning($"{continueData.playerPosition} : {continueData.playerRotation.eulerAngles}");
+        //transform.localScale = continueData.playerScale;
         health = continueData.health;
         energy = continueData.energy;
         StateMachine(State.Idle);
-
 
         if (FocusTarget == null)
             return;
@@ -85,7 +85,6 @@ public class Unit_Player : MonoBehaviour
     public void StateMachine(State _state)
     {
         state = _state;
-
         if (stateAction != null)
             StopCoroutine(stateAction);
 
@@ -135,7 +134,7 @@ public class Unit_Player : MonoBehaviour
             SetMoving();
             CheckClosestUnit();// 무브
 
-            energy -= CurrentStatus.efficient * Time.deltaTime;// 임시
+            energy -= CurrentStatus.efficient * Time.deltaTime;// 0에 가까울 수록 소비 안함
             SetEnergyUI();
             if (energy <= 0)// 에너지 없으면 파괴
             {
@@ -297,18 +296,17 @@ public class Unit_Player : MonoBehaviour
         Game_Manager.current.GetMainUI.SetFadeScreen(true);
         yield return new WaitForSeconds(0.5f);
 
-        Game_Manager.current.PlayerDestroy();// 플레이어 위치에 고스트 놓기
+        Game_Manager.current.PlayerDestroy();// 플레이어 위치에 고스트 놓고 인벤토리 비우기
         Debug.LogError("견인 되는 연출 필요 - 보험 회사 도착");
         // 견인 되는 연출 필요
         // 위치 변경
-        //Data_Continue continueData = SaveData_Continue.current.continueData;
-        Vector3 forwardDirection = continueData.playerRotation * Vector3.forward;
-        Vector3 backwardPosition = continueData.playerPosition - forwardDirection * 3f;
-        Vector3 targetPosition = continueData.playerPosition;
+        Transform landingPoint = Game_Manager.current.landingPoint;
+        Vector3 forwardDirection = landingPoint.rotation * Vector3.forward;
+        Vector3 backwardPosition = landingPoint.position - forwardDirection * 3f;
+        Vector3 targetPosition = landingPoint.position;
 
         // 마지막 위치로 이동
-        transform.SetPositionAndRotation(backwardPosition, continueData.playerRotation);
-        transform.localScale = continueData.playerScale;
+        transform.SetPositionAndRotation(backwardPosition, landingPoint.rotation);
 
         if (FocusTarget != null)
             FocusTarget.transform.position = transform.position;

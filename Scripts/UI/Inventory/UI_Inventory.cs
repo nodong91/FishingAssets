@@ -206,7 +206,7 @@ public class UI_Inventory : MonoBehaviour
 
     void SellItem(ItemStruct _item)
     {
-        float addPrice = _item.price * Game_Manager.current.currentStatus.FishPrice * 0.01f;// 퍼센트 만큼 비싸게 판매 
+        float addPrice = _item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 비싸게 판매 
         float price = Mathf.Round(_item.price + addPrice);// 스킬 스탯 추가
         Game_Manager.current.GetMainUI.MoveMoney(price);
         Debug.LogWarning($"아이템 판매: {_item.name} for {_item.price} + {addPrice} = {price}");
@@ -214,7 +214,7 @@ public class UI_Inventory : MonoBehaviour
 
     void BuyItem(ItemStruct _item)
     {
-        float addPrice = _item.price * Game_Manager.current.currentStatus.FishPrice * 0.01f;// 퍼센트 만큼 싸게 구매 
+        float addPrice = _item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 싸게 구매 
         float price = -_item.price;
         Game_Manager.current.GetMainUI.MoveMoney(price);
         Debug.LogWarning($"아이템 구매: {_item.name} for {_item.price} + {addPrice} = {price}");

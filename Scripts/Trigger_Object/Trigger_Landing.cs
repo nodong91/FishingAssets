@@ -40,6 +40,7 @@ public class Trigger_Landing : MonoBehaviour
     {
         triggerSetting.deleTriggerAction = SetLandingAction;// 섬 입장
         triggerSetting.GetIconSprite = iconImage;// 트리거 아이콘 설정
+        Game_Manager.current.landingPoint = landingStruct.landingSetting[0].landingPoint.transform;
     }
 
     void SetLandingAction()

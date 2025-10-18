@@ -133,7 +133,7 @@ public class Controll_Manager : MonoBehaviour
     {
         dirction = Vector2Int.zero;
         controllDirection = 0;
-        Game_Manager.current.PlayerMove();
+        //Game_Manager.current.PlayerMove();
     }
 
     public void InputMousetLeft(bool _input)

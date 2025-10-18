@@ -136,21 +136,21 @@ public class Data_Parse : MonoBehaviour
     // Parse
     //==================================================================================
 
-    public int Parse_Int(string _str)
+    public static int Parse_Int(string _str)
     {
         if (int.TryParse(_str, out int value))
             return value;
         return 0;
     }
 
-    public float Parse_Float(string _str)
+    public static float Parse_Float(string _str)
     {
         if (float.TryParse(_str, out float value))
             return value;
         return 0.0f;
     }
 
-    public Color HexToColor(string hex)
+    public static Color HexToColor(string hex)
     {
         ColorUtility.TryParseHtmlString(hex, out Color color);
         return color;
@@ -166,16 +166,16 @@ public class Data_Parse : MonoBehaviour
     //    return null;
     //}
 
-    public Sprite FindSprite(string _str)
-    {
-        for (int i = 0; i < sprites.Count; i++)
-        {
-            if (_str.Equals(sprites[i].name))
-                return sprites[i];
-        }
-        Debug.LogError("해당 파일이 없음");
-        return null;
-    }
+    //public Sprite FindSprite(string _str)
+    //{
+    //    for (int i = 0; i < sprites.Count; i++)
+    //    {
+    //        if (_str.Equals(sprites[i].name))
+    //            return sprites[i];
+    //    }
+    //    Debug.LogError("해당 파일이 없음");
+    //    return null;
+    //}
 
     public AudioClip Parse_AudioClip(string _str)
     {
@@ -194,28 +194,29 @@ public class Data_Parse : MonoBehaviour
             return new Vector2Int[0];
 
         //string temp = "-1;0/0;0/1;0/0;0";
-        string[] sub1strings = _str.Split('/');
-        Vector2Int[] vectorArray = new Vector2Int[sub1strings.Length];
-        for (int i = 0; i < sub1strings.Length; i++)
+        string[] substrings = _str.Split('/');
+        Vector2Int[] vectorArray = new Vector2Int[substrings.Length];
+        for (int i = 0; i < substrings.Length; i++)
         {
-            string[] sub2strings = sub1strings[i].Split(';');
-            int[] subInt = new int[sub2strings.Length];
-            if (subInt.Length < 2)
-            {
-                continue;
-            }
-            for (int j = 0; j < sub2strings.Length; j++)
-            {
-                int index = int.Parse(sub2strings[j]);
-                subInt[j] = index;
-            }
-            Vector2Int vector = new Vector2Int(subInt[0], subInt[1]);
+            //string[] sub2strings = sub1strings[i].Split(';');
+            //int[] subInt = new int[sub2strings.Length];
+            //if (subInt.Length < 2)
+            //{
+            //    continue;
+            //}
+            //for (int j = 0; j < sub2strings.Length; j++)
+            //{
+            //    int index = int.Parse(sub2strings[j]);
+            //    subInt[j] = index;
+            //}
+            //Vector2Int vector = new Vector2Int(subInt[0], subInt[1]);
+            Vector2Int vector = Parse_Vector2Int(substrings[i]);
             vectorArray[i] = vector;
         }
         return vectorArray;
     }
 
-    public Vector2Int Parse_Vector2Int(string _str)
+    public static Vector2Int Parse_Vector2Int(string _str)
     {
         if (_str.Length == 0)
             return default;

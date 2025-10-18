@@ -55,29 +55,21 @@ public class Game_Manager : MonoBehaviour
     {
         Singleton_Continue.INSTANCE.GetContinue();
         Camera_Manager.current.SetCameraManager();
-        yield return null;
+
+        while (landingPoint == null)
+            yield return null;
 
         SetRendererFeature();
         SetThemeMusic();
-        SetPlayer();
         yield return null;
 
+        GetPlayer.SetStart();
         GetMainUI.SetStart();
         GetSkill.SetStart();
         GetDialog.SetStart();
         GetFishGuide.SetStart();
         AddStatus();// 추가 스테이트 세팅
-
         OutOfControll(false);
-    }
-
-    void SetPlayer()
-    {
-        if (instPlayer == null)
-        {
-            instPlayer = Instantiate(player, transform);
-            GetPlayer.SetStart();
-        }
     }
 
     public void AddStatus()
@@ -138,12 +130,16 @@ public class Game_Manager : MonoBehaviour
     //====================================================================================================================
     // 매니저 가져오기
     //====================================================================================================================
-
+    public Transform landingPoint { get; set; }
     private Unit_Player instPlayer;
     public Unit_Player GetPlayer
     {
         get
         {
+            if (instPlayer == null)
+            {
+                instPlayer = Instantiate(player, landingPoint.position, landingPoint.rotation, transform);
+            }
             return instPlayer;
         }
     }
@@ -433,8 +429,10 @@ public class Game_Manager : MonoBehaviour
         Vector3 setPosition = GetPlayer.transform.position;
         if (instGhost == null)
             instGhost = Instantiate(ghostObject, setPosition, Quaternion.identity, transform);
+        instGhost.gameObject.SetActive(true);
         instGhost.SetResult();
 
         GetInventory.myBox.EmptyInventoryAllSlot();// 인벤토리 초기화
+        Debug.LogWarning($"고스트 오브젝트 : {ghostObject.name}");
     }
 }

@@ -113,7 +113,7 @@ namespace P01.Editor
             }
             skillTreeData.skillList = status;
             skillTreeData.startSlot = startSlot;
-            Debug.LogError($"{status.Count}개 저장");
+            Debug.LogWarning($"스킬 - {status.Count}개 저장");
             EditorUtility.SetDirty(skillTreeData);
         }
 
@@ -233,10 +233,11 @@ namespace P01.Editor
                 targetObject.ApplyModifiedProperties();
                 EditorGUILayout.EndScrollView();
 
-                // 예시로 버튼을 추가
-                if (GUILayout.Button("Close", GUILayout.Height(30f)))
+                if (GUILayout.Button("default", GUILayout.Height(30f)))
                 {
-                    Close();
+                    setStatus = default(SkillStatus);
+                    //EditorUtility.SetDirty(setStatus);
+                    //Close();
                 }
             }
         }

@@ -21,8 +21,8 @@ public class Editor_Skill_Manager : Editor
         Skill_Manager Inspector = target as Skill_Manager;
         if (GUILayout.Button("UpdateData", fontStyle, GUILayout.Height(30f)))
         {
-            Inspector.UpdateData();
-            EditorUtility.SetDirty(Inspector);
+            //Inspector.UpdateData();
+            //EditorUtility.SetDirty(Inspector);
         }
     }
 }

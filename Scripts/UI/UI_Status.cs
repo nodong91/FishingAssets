@@ -57,9 +57,9 @@ public class UI_Status : MonoBehaviour
         shipHealth.text = totalStatus.shipHealth.ToString();
         freshness.text = totalStatus.freshness.ToString();
 
-        LuckFish.text = totalStatus.LuckFish.ToString();
-        FishAmount.text = totalStatus.FishAmount.ToString();
-        FishPrice.text = totalStatus.FishPrice.ToString();
+        LuckFish.text = totalStatus.luckFish.ToString();
+        FishAmount.text = totalStatus.fishAmount.ToString();
+        FishPrice.text = totalStatus.fishPrice.ToString();
     }
 
     //public void OnPointerClick(PointerEventData eventData)
