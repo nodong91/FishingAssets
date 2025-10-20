@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 7cbcec83f87f0494b8216626e550d6a7, type: 3}
   - {fileID: 4900000, guid: d397816a5bebb97479fc19c3bfc030f1, type: 3}
   - {fileID: 4900000, guid: d38421496a31ec845823f5fb85a9e870, type: 3}
+  - {fileID: 4900000, guid: 32fe5a5b0689f414dae0db94418d5241, type: 3}
   - {fileID: 4900000, guid: 39e3880ffb30ab6439aeebe187ac45f7, type: 3}
   audioClip:
   - {fileID: 8300000, guid: 2a8c919394aa89d489709789ab148c31, type: 3}
@@ -794,6 +795,473 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
+  skillStruct:
+  - id: Sk_001_00
+    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 1"
+    description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    addStatusString: CatchRadius + 1
+    icon: ItemIcon01
+    price: 1
+    addStatus:
+      catchRadius: 0.1
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_001_01
+    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 2"
+    description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    addStatusString: CatchRadius + 1
+    icon: ItemIcon02
+    price: 1
+    addStatus:
+      catchRadius: 0.1
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_001_02
+    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 3"
+    description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    addStatusString: CatchRadius + 1
+    icon: ItemIcon03
+    price: 1
+    addStatus:
+      catchRadius: 0.1
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_001_03
+    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 4"
+    description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    addStatusString: CatchRadius + 1
+    icon: ItemIcon04
+    price: 1
+    addStatus:
+      catchRadius: 0.1
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_001_04
+    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 5"
+    description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    addStatusString: CatchRadius + 1
+    icon: ItemIcon05
+    price: 1
+    addStatus:
+      catchRadius: 0.1
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_001_05
+    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 6"
+    description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    addStatusString: CatchRadius + 1
+    icon: ItemIcon06
+    price: 1
+    addStatus:
+      catchRadius: 0.1
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_001_06
+    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 7"
+    description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    addStatusString: CatchRadius + 1
+    icon: ItemIcon07
+    price: 1
+    addStatus:
+      catchRadius: 0.1
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_001_07
+    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 8"
+    description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    addStatusString: CatchRadius + 1
+    icon: ItemIcon08
+    price: 1
+    addStatus:
+      catchRadius: 0.1
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_001_08
+    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 9"
+    description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    addStatusString: CatchRadius + 1
+    icon: ItemIcon09
+    price: 1
+    addStatus:
+      catchRadius: 0.1
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_001_09
+    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 10"
+    description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    addStatusString: CatchRadius + 1
+    icon: ItemIcon10
+    price: 1
+    addStatus:
+      catchRadius: 0.1
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_002_00
+    name: "\uAC15\uB825\uD55C \uC774\uB450\uADFC 1"
+    description: "\uBB3C\uACE0\uAE30\uC758 \uCCB4\uB825\uC744 \uBE60\uB974\uAC8C
+      \uBE7C\uC557\uB294\uB2E4."
+    addStatusString: CatchPower + 1
+    icon: ItemIcon11
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 1
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_003_00
+    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC"
+    description: "\uB09A\uC2DC\uC758 \uCEE8\uD2B8\uB864\uC774 \uBE68\uB77C\uC9C4\uB2E4."
+    addStatusString: CatchSpeed + 1
+    icon: ItemIcon12
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 1
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_004_00
+    name: "\uC2E0\uB4E4\uB9B0 \uCEE8\uD2B8\uB864"
+    description: "\uBC30\uC758 \uC18D\uB3C4\uAC00 \uBE68\uB77C\uC9C4\uB2E4."
+    addStatusString: ShipSpeed + 1
+    icon: ItemIcon13
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 1
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_005_00
+    name: "\uC695\uC2EC\uC7C1\uC774"
+    description: "\uC2E4\uC744 \uC218 \uC788\uB294 \uBB34\uAC8C\uAC00 \uB298\uC5B4\uB09C\uB2E4."
+    addStatusString: MaxWeight + 1
+    icon: ItemIcon14
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 1
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_006_00
+    name: "\uBC29\uB791\uC790"
+    description: "\uC5F0\uB8CC\uB97C \uB354 \uB9CE\uC774 \uB123\uC744 \uC218 \uC788\uB2E4."
+    addStatusString: MaxEnergy + 1
+    icon: ItemIcon15
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 1
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_007_00
+    name: "\uCE5C\uD658\uACBD"
+    description: "\uC5F0\uB8CC\uC758 \uD6A8\uC728\uC774 \uC88B\uC544\uC9C4\uB2E4."
+    addStatusString: MaxEfficient + 1
+    icon: ItemIcon16
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 1
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_008_00
+    name: "\uB354 \uB9CE\uC774!!"
+    description: "\uC778\uBCA4\uD1A0\uB9AC\uAC00 1\uC5F4 \uB298\uC5B4\uB09C\uB2E4."
+    addStatusString: MaxBoxSize + 1
+    icon: ItemIcon17
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 1, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_009_00
+    name: "\uB450\uAEBC\uC6B4 \uD53C\uBD80"
+    description: "\uC120\uBC15\uC774 \uCDA9\uACA9\uC5D0 \uAC15\uD574\uC9C4\uB2E4."
+    addStatusString: ShipHealth + 1
+    icon: ItemIcon18
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 1
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_010_00
+    name: "\uD589\uC6B4"
+    description: "\uC77C\uC815 \uD655\uB960\uB85C \uD76C\uADC0\uD55C \uBB3C\uACE0\uAE30\uAC00
+      \uB4F1\uC7A5\uD55C\uB2E4."
+    addStatusString: LockFish + 1
+    icon: ItemIcon19
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 1
+      fishAmount: 0
+      fishPrice: 0
+  - id: Sk_011_00
+    name: "\uC77C\uD0C0\uC30D\uD53C"
+    description: "\uC77C\uC815 \uD655\uB960\uB85C \uCD94\uAC00 \uBB3C\uACE0\uAE30\uB97C
+      \uB09A\uB294\uB2E4."
+    addStatusString: FishAmount + 1
+    icon: ItemIcon20
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 1
+      fishPrice: 0
+  - id: Sk_012_00
+    name: "\uB4B7\uD1B5\uC218"
+    description: "\uC0C1\uC810\uC5D0 \uBB3C\uACE0\uAE30\uB97C \uB354 \uBE44\uC2F8\uAC8C
+      \uD310\uB9E4"
+    addStatusString: FishPrice + 1
+    icon: ItemIcon21
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 1
   languageStruct:
   - id: LUs_1001_00
     english: Small Oil Tank

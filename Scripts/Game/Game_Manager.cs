@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using static Data_Manager;
+using static Trigger_Landing;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class Game_Manager : MonoBehaviour
     [ColorUsage(true, true)]
     public Color emissionColor;
     public Material skyboxMatial;
+    public Trigger_Landing currentLand { get; set; }
 
     public static Game_Manager current;
 
@@ -55,8 +57,7 @@ public class Game_Manager : MonoBehaviour
     {
         Singleton_Continue.INSTANCE.GetContinue();
         Camera_Manager.current.SetCameraManager();
-
-        while (landingPoint == null)
+        while (currentLand == null)
             yield return null;
 
         SetRendererFeature();
@@ -130,7 +131,7 @@ public class Game_Manager : MonoBehaviour
     //====================================================================================================================
     // 매니저 가져오기
     //====================================================================================================================
-    public Transform landingPoint { get; set; }
+
     private Unit_Player instPlayer;
     public Unit_Player GetPlayer
     {
@@ -138,6 +139,7 @@ public class Game_Manager : MonoBehaviour
         {
             if (instPlayer == null)
             {
+                Transform landingPoint = currentLand.landingStruct.landingSetting[0].landingPoint.transform;
                 instPlayer = Instantiate(player, landingPoint.position, landingPoint.rotation, transform);
             }
             return instPlayer;

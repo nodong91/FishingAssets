@@ -300,13 +300,14 @@ public class Unit_Player : MonoBehaviour
         Debug.LogError("견인 되는 연출 필요 - 보험 회사 도착");
         // 견인 되는 연출 필요
         // 위치 변경
-        Transform landingPoint = Game_Manager.current.landingPoint;
-        Vector3 forwardDirection = landingPoint.rotation * Vector3.forward;
-        Vector3 backwardPosition = landingPoint.position - forwardDirection * 3f;
-        Vector3 targetPosition = landingPoint.position;
+
+        GameObject landingPoint = Game_Manager.current.currentLand.landingStruct.landingSetting[0].landingPoint;
+        Vector3 forwardDirection = landingPoint.transform.rotation * Vector3.forward;
+        Vector3 backwardPosition = landingPoint.transform.position - forwardDirection * 3f;
+        Vector3 targetPosition = landingPoint.transform.position;
 
         // 마지막 위치로 이동
-        transform.SetPositionAndRotation(backwardPosition, landingPoint.rotation);
+        transform.SetPositionAndRotation(backwardPosition, landingPoint.transform.rotation);
 
         if (FocusTarget != null)
             FocusTarget.transform.position = transform.position;

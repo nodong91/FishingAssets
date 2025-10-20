@@ -5,95 +5,180 @@ using static Data_Manager;
 
 public class Skill_Tool : MonoBehaviour
 {
-    public GridLayoutGroup skillGridLayout, instSlotGrid;
-    public Data_SkillTree data_SkillTree;
-    public TextAsset csvData;
-    public Skill_Tool_Slot baseSlot;
-    Dictionary<Vector2Int, SkillStatus> dictSkills = new Dictionary<Vector2Int, SkillStatus>();
-    Dictionary<Vector2Int, Skill_Tool_Slot> dictSlots = new Dictionary<Vector2Int, Skill_Tool_Slot>();
+    public Data_SkillTree data_SkillTree;// 데이터 스크립트에이블
+    public GridLayoutGroup skillGridLayout, instSlotGrid;// 슬롯 부모
+    public TMPro.TMP_Text skillText, infoText;// 스킬 정보
+
+    public Skill_Tool_Slot baseSlot;// 슬롯
+    List<Skill_Tool_Slot> skillSlots = new List<Skill_Tool_Slot>();
+    Dictionary<string, Skill_Tool_Slot> dictSlots = new Dictionary<string, Skill_Tool_Slot>();
+    List<Skill_Tool_Slot> instSlots = new List<Skill_Tool_Slot>();
+    List<SkillStruct> skills = new List<SkillStruct>();
+
+    public Custom_Button openButton, closeButton;
+    public GameObject menuObject, skillInfo;
+    public Custom_Button saveButton, loadButton, resetButton;
+    Skill_Tool_Slot selectSlot, startSlot;
+    public Transform startMarker;
 
     void Start()
     {
-        SetFish(csvData);
+        openButton.SetButton(delegate { menuObject.SetActive(true); });
+        closeButton.SetButton(delegate { menuObject.SetActive(false); });
+
+        menuObject.SetActive(false);
+        skillInfo.SetActive(false);
+        savePopup.SetActive(false);
+
+        saveButton.SetButton(delegate { savePopup.SetActive(true); });
+        loadButton.SetButton(LoadData);
+        resetButton.SetButton(ResetData);
+
+        saveYes.SetButton(delegate { SavePopup(true); });
+        saveNo.SetButton(delegate { SavePopup(false); });
+
         skillGridLayout.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         skillGridLayout.constraintCount = data_SkillTree.skillMapSize.x;
 
-        for (int y = 0; y < data_SkillTree.skillMapSize.y; y++)
+        skillSlots = new List<Skill_Tool_Slot>();
+        dictSlots = new Dictionary<string, Skill_Tool_Slot>();
+        for (int y = 0; y < data_SkillTree.skillMapSize.y; y++)// 스킬 필드 세팅
         {
             for (int x = 0; x < data_SkillTree.skillMapSize.x; x++)
             {
                 Skill_Tool_Slot slot = Instantiate(baseSlot, skillGridLayout.transform);
-
-                SkillStatus temp = new SkillStatus();
+                slot.inst = false;
+                slot.clickHandler = ClickHandler;
                 Vector2Int map = new Vector2Int(x, y);
-                if (dictSkills.ContainsKey(map) == true)
-                {
-                    temp = dictSkills[map];
-                }
-                else
-                {
-                    temp = new SkillStatus();
-                }
+                slot.slotNum = map;
+                SkillStruct temp = new SkillStruct();
                 slot.SetSlot(temp);
+                skillSlots.Add(slot);
+                if (map == data_SkillTree.startSlot)
+                {
+                    startSlot = slot;
+                }
+            }
+        }
 
-                //skillList.Add(temp);
+        instSlots = new List<Skill_Tool_Slot>();
+        skills = new List<SkillStruct>();
+        foreach (var child in Singleton_Data.INSTANCE.Dict_Skill)// 인스턴트 스킬 세팅
+        {
+            Skill_Tool_Slot slot = Instantiate(baseSlot, instSlotGrid.transform);
+            slot.inst = true;
+            slot.clickHandler = ClickHandler;
+            slot.SetSlot(child.Value);
+            instSlots.Add(slot);
+            skills.Add(child.Value);
+            dictSlots[child.Key] = slot;
+        }
+
+        StartPosition(startSlot.transform.localPosition);// 스타트 포지션
+    }
+
+    void StartPosition(Vector3 _position)
+    {
+        startMarker.SetParent(startSlot.transform);
+        startMarker.localPosition = Vector3.zero;
+    }
+
+    void ClickHandler(Skill_Tool_Slot _slot)// 스킬 클릭 시
+    {
+        if (selectSlot == null)// 스킬 선택
+        {
+            if (string.IsNullOrEmpty(_slot.Status.id))
+                return;
+
+            SelectedSlot(_slot);
+            return;
+        }
+        else if (_slot != selectSlot)// 스킬 놓기
+        {
+            if (_slot.inst == true)
+            {
+                selectSlot.selected.SetActive(false);
+                SelectedSlot(_slot);
+                return;
+            }
+
+            SkillStruct status = _slot.Status;
+            _slot.SetSlot(selectSlot.Status);
+            selectSlot.SetSlot(status);
+        }
+        else// 같은 슬롯이면
+        {
+            selectSlot.SetSlot(selectSlot.Status);
+        }
+        selectSlot = null;
+        skillInfo.SetActive(false);
+    }
+
+    void SelectedSlot(Skill_Tool_Slot _slot)
+    {
+        selectSlot = _slot;
+        _slot.selected.SetActive(true);
+        skillInfo.SetActive(true);
+        skillText.text = _slot.Status.name;
+        infoText.text = _slot.Status.addStatusString;
+    }
+
+
+    void SaveData()
+    {
+        data_SkillTree.skillList.Clear();
+        foreach (var slot in skillSlots)
+        {
+            data_SkillTree.skillList.Add(slot.Status.id);
+        }
+
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(data_SkillTree);
+#endif
+    }
+
+    void LoadData()
+    {
+        for (int i = 0; i < data_SkillTree.skillList.Count; i++)
+        {
+            string id = data_SkillTree.skillList[i];
+            if (string.IsNullOrEmpty(id))
+                continue;
+            Debug.LogWarning(id);
+            if (Singleton_Data.INSTANCE.Dict_Skill.ContainsKey(id) == true)
+            {
+                SkillStruct skill = Singleton_Data.INSTANCE.Dict_Skill[data_SkillTree.skillList[i]];
+                skillSlots[i].SetSlot(skill);
+                if (skill.id != null && dictSlots.ContainsKey(skill.id) == true)
+                    dictSlots[skill.id].gameObject.SetActive(false);
             }
         }
     }
 
-    void SetFish(TextAsset _textAsset)
+    void ResetData()
     {
-        dictSkills = new Dictionary<Vector2Int, SkillStatus>();
-        string[] data = _textAsset.text.Split(new char[] { '\n' });
-        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
+        foreach (var slot in skillSlots)
         {
-            string[] elements = data[i].Split(new char[] { ',' });
-
-            SetStatus setAddStatus = new SetStatus
-            {
-                catchRadius = Data_Parse.Parse_Float(elements[6]),// 물고기를 잡는 범위
-                catchSpeed = Data_Parse.Parse_Float(elements[7]),// 낚시대가 물고기를 향해 이동하는 속도
-                catchPower = Data_Parse.Parse_Float(elements[8]),// 낚시대의 힘
-                catchMaxHealth = Data_Parse.Parse_Float(elements[9]),// 낚시대의 최대 체력
-                catchAttakSpeed = Data_Parse.Parse_Float(elements[10]),// 물고기를 공격하는 빈도
-
-                shipSpeed = Data_Parse.Parse_Float(elements[11]),// 배의 이동 속도
-                maxWeight = Data_Parse.Parse_Float(elements[12]),// 인벤토리 중량
-                maxEnergy = Data_Parse.Parse_Float(elements[13]),// 연료통 크기
-                efficient = Data_Parse.Parse_Float(elements[14]),// 에너지 효율
-
-                maxBoxSize = Data_Parse.Parse_Vector2Int(elements[15]),// 인벤토리 크기
-                shipHealth = Data_Parse.Parse_Int(elements[16]),// 배 체력
-                freshness = Data_Parse.Parse_Float(elements[17]),// 신선도 유지 - 꼭 필요한가??????  
-
-                luckFish = Data_Parse.Parse_Float(elements[18]),// 희귀 물고기 확률
-                fishAmount = Data_Parse.Parse_Int(elements[19]),// 낚시 횟수 증가
-                fishPrice = Data_Parse.Parse_Float(elements[20]),// 판매 물고기 가격 증가
-            };
-
-            SkillStatus tempData = new SkillStatus
-            {
-                name = elements[0],
-                map = Data_Parse.Parse_Vector2Int(elements[1]),
-                description = elements[2],
-                addStatusString = elements[3],
-                icon = elements[4],
-                price = int.Parse(elements[5]),
-                addStatus = setAddStatus,
-            };
-            //if (dictSkills.ContainsKey(tempData.map) == true)
-            //{
-            //    Debug.LogError($"같은 위치에 스킬이 존재함 : {dictSkills[tempData.map].name} -> {tempData.name}");
-            //    break;
-            //}
-            //else if (tempData.map.x >= data_SkillTree.skillMapSize.x || tempData.map.y >= data_SkillTree.skillMapSize.y)
-            //{
-            //    Debug.LogError($"위치 범위를 넘김 : {tempData.name}");
-            //}
-
-            Skill_Tool_Slot slot = Instantiate(baseSlot, instSlotGrid.transform);
-            slot.SetSlot(tempData);
-            dictSkills[tempData.map] = tempData;
+            slot.SetSlot(new SkillStruct());
         }
+
+        for (int i = 0; i < instSlots.Count; i++)
+        {
+            Skill_Tool_Slot slot = instSlots[i];
+            slot.SetSlot(skills[i]);
+            Debug.LogWarning(skills[i].id);
+        }
+    }
+
+    public Custom_Button saveYes, saveNo;
+    public GameObject savePopup;
+
+    void SavePopup(bool _yes)
+    {
+        if (_yes == true)
+        {
+            SaveData();
+        }
+        savePopup.SetActive(false);
     }
 }

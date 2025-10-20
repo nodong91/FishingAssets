@@ -8,6 +8,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     public Dictionary<string, Sprite> Dict_Sprite = new Dictionary<string, Sprite>();
     public Dictionary<string, FishStruct> Dict_Fish = new Dictionary<string, FishStruct>();
     public Dictionary<string, UsedStruct> Dict_Used = new Dictionary<string, UsedStruct>();
+    public Dictionary<string, SkillStruct> Dict_Skill = new Dictionary<string, SkillStruct>();
     public Dictionary<string, LanguageStruct> Dict_Language = new Dictionary<string, LanguageStruct>();
 
     public void SetDictionary_Used(List<UsedStruct> _data)
@@ -55,6 +56,23 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
             return Dict_Used[_id].itemStruct;
         }
         return default;
+    }
+
+    public void SetSkillStruct(List<SkillStruct> _data)
+    {
+        Dict_Skill = new Dictionary<string, SkillStruct>();
+        for (int i = 0; i < _data.Count; i++)
+        {
+            string id = _data[i].id;
+            if (Dict_Audio.ContainsKey(id) == true)
+            {
+                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
+            }
+            else
+            {
+                Dict_Skill[id] = _data[i];
+            }
+        }
     }
 
     public void SetDictionary_Audio(List<AudioStruct> _data)

@@ -89,6 +89,7 @@ public class Camera_Manager : MonoBehaviour
         orbitalFollow.VerticalAxis.Value = 30f;
         orbitalFollow.RadialAxis.Range = zoomLimit;
         orbitalFollow.RadialAxis.Value = (zoomLimit.x + zoomLimit.y) * 0.5f;
+        Rotate();
         //orbitalFollow.OrbitStyle = CinemachineOrbitalFollow.OrbitStyles.ThreeRing;
         //Cinemachine3OrbitRig.Settings newSetting = new Cinemachine3OrbitRig.Settings
         //{

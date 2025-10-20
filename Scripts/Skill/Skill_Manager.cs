@@ -46,7 +46,7 @@ public class Skill_Manager : MonoBehaviour
     public SetStatus addStatus;// 추가 스탯
     public List<Vector2Int> enableSlotLIst = new List<Vector2Int>();// 활성화된 슬롯 리스트
     public AnimationCurve openingCurve;
-    SkillStatus[,] statusStructs;
+    SkillStruct[,] statusStructs;
 
     public Skill_Infomation infomation;
     const string activeSkill = "FX_0003";
@@ -80,7 +80,7 @@ public class Skill_Manager : MonoBehaviour
     void LoadData()
     {
         skillMap = skillTreeData.skillMapSize;
-        statusStructs = new SkillStatus[skillMap.x, skillMap.y];
+        statusStructs = new SkillStruct[skillMap.x, skillMap.y];
 
         // 스킬 트리 불러오기
         int index = 0;
@@ -88,7 +88,16 @@ public class Skill_Manager : MonoBehaviour
         {
             for (int x = 0; x < skillMap.x; x++)
             {
-                statusStructs[x, y] = skillTreeData.skillList[index];
+                string id = skillTreeData.skillList[index];
+                if (string.IsNullOrEmpty(id))
+                {
+                    statusStructs[x, y] = new SkillStruct();
+                    statusStructs[x, y].addStatus = new SetStatus();
+                }
+                else
+                {
+                    statusStructs[x, y] = Singleton_Data.INSTANCE.Dict_Skill[skillTreeData.skillList[index]];
+                }
                 index++;
             }
         }
@@ -125,7 +134,7 @@ public class Skill_Manager : MonoBehaviour
                 inst.deleSlotAction = AddSlot;
                 inst.deleSlotPosition = infomation.SetPosition;
 
-                SkillStatus status = statusStructs[x, y];
+                SkillStruct status = statusStructs[x, y];
                 inst.Status = status;
                 inst.SetStart();
                 inst.SetNearBySlot(skillMap);   // 근처 슬롯 설정
@@ -166,7 +175,7 @@ public class Skill_Manager : MonoBehaviour
         grid.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
         grid.constraintCount = skillMap.x;
     }
-   
+
     void AddSlot(Vector2Int _addNode)// 스킬 활성화
     {
         enableSlotLIst.Add(_addNode);
@@ -185,6 +194,7 @@ public class Skill_Manager : MonoBehaviour
             near.SetHide(false, slot.transform.position);
         }
         // 스탯 추가
+        Debug.LogWarning(slot.Status);
         addStatus.AddStatus(slot.Status.addStatus);
         Game_Manager.current.AddStatus();
     }

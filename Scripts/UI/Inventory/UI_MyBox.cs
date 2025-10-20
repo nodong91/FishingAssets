@@ -14,6 +14,7 @@ public class UI_MyBox : UI_Inventory_Base
         slotType = SlotType.MyBox;
         saveData = "MyBag";
         removeBox.deleRemove = RemoveDragItem;
+        SetWeight(0f);
         base.SetStart();
         // 저장된 내용 불러오기
         SetInventoryItem(saveData);

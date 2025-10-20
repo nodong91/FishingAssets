@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb25e902fab610a44be0bab33e23d9fc, type: 3}
   m_Name: Data_SkillTree
   m_EditorClassIdentifier: 
-  csvData: {fileID: 4900000, guid: 7cbcec83f87f0494b8216626e550d6a7, type: 3}
+  csvData: {fileID: 0}
   skillMapSize: {x: 15, y: 10}
   startSlot: {x: 7, y: 4}
   skillList:
   - name: "\uD070 \uC5F0\uB8CC\uD1B5"
+    map: {x: 0, y: 0}
     description: "\uB354 \uB9CE\uC740 \uC5F0\uB8CC\uB97C \uC2E4\uC744\uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC5F0\uB8CC\uD1B5 +1"
     icon: category_gold
@@ -34,10 +35,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -55,10 +57,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -76,10 +79,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -97,10 +101,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -118,10 +123,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -139,10 +145,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -160,10 +167,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB55F\uBAA9"
+    map: {x: 0, y: 0}
     description: "\uD2B9\uBCC4\uB09C \uAC83\uC774 \uC5C6\uC9C0\uB9CC \uC5F0\uB8CC\uB97C
       \uC0AC\uC6A9\uD558\uC9C0 \uC54A\uB294\uB2E4."
     addStatusString: 
@@ -182,10 +190,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD658\uACBD \uBCF4\uD638"
+    map: {x: 0, y: 0}
     description: "\uC5F0\uB8CC\uC758 \uD6A8\uC728\uC744 \uB192\uC785\uB2C8\uB2E4."
     addStatusString: "\uC5F0\uB8CC \uD6A8\uC728 +1"
     icon: complete
@@ -203,10 +212,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC5D4\uC9C4"
+    map: {x: 0, y: 0}
     description: "\uC5D4\uC9C4\uC744 \uAC15\uD654 \uD569\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 \uC774\uB3D9 \uC18D\uB3C4 +1"
     icon: btn_back
@@ -224,10 +234,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -245,10 +256,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -266,10 +278,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -287,10 +300,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -308,10 +322,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC624\uB9AC\uBC30"
+    map: {x: 0, y: 0}
     description: "\uBB3C\uACE0\uAE30\uB4E4\uC5D0\uAC8C \uC870\uC2EC\uD788 \uB2E4\uAC00
       \uAC08 \uC218 \uC788\uB2E4."
     addStatusString: 
@@ -330,10 +345,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -351,10 +367,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -372,10 +389,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD1B5\uD1B5\uBC30"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC\uC5D0 \uD2B9\uD654\uB41C \uC120\uBC15"
     addStatusString: 
     icon: Fs_1003_Flounder
@@ -393,10 +411,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -414,10 +433,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB09A\uC2DC \uC601\uC5ED"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9D1\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uC601\uC5ED +1"
     icon: market_bookmark_1
@@ -435,10 +455,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -456,10 +477,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD070 \uC5F0\uB8CC\uD1B5"
+    map: {x: 0, y: 0}
     description: "\uB354 \uB9CE\uC740 \uC5F0\uB8CC\uB97C \uC2E4\uC744\uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC5F0\uB8CC\uD1B5 +1"
     icon: category_gold
@@ -477,10 +499,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD070 \uC5F0\uB8CC\uD1B5"
+    map: {x: 0, y: 0}
     description: "\uB354 \uB9CE\uC740 \uC5F0\uB8CC\uB97C \uC2E4\uC744\uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC5F0\uB8CC\uD1B5 +1"
     icon: category_gold
@@ -498,10 +521,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD658\uACBD \uBCF4\uD638"
+    map: {x: 0, y: 0}
     description: "\uC5F0\uB8CC\uC758 \uD6A8\uC728\uC744 \uB192\uC785\uB2C8\uB2E4."
     addStatusString: "\uC5F0\uB8CC \uD6A8\uC728 +1"
     icon: complete
@@ -519,10 +543,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC5D4\uC9C4"
+    map: {x: 0, y: 0}
     description: "\uC5D4\uC9C4\uC744 \uAC15\uD654 \uD569\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 \uC774\uB3D9 \uC18D\uB3C4 +1"
     icon: btn_back
@@ -540,10 +565,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC5D4\uC9C4"
+    map: {x: 0, y: 0}
     description: "\uC5D4\uC9C4\uC744 \uAC15\uD654 \uD569\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 \uC774\uB3D9 \uC18D\uB3C4 +1"
     icon: btn_back
@@ -561,10 +587,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC00\uBCBC\uC6B4 \uBC15\uC2A4"
+    map: {x: 0, y: 0}
     description: "\uB354 \uBB34\uAC70\uC6B4 \uBB3C\uAC74\uC744 \uC2E4\uC744\uC218
       \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC778\uBCA4\uD1A0\uB9AC \uC911\uB7C9 +1"
@@ -583,10 +610,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -604,10 +632,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -625,10 +654,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -646,10 +676,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -667,10 +698,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -688,10 +720,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBE60\uB978 \uC190\uB180\uB9BC 2"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC \uC6C0\uC9C1\uC784 \uC18D\uB3C4\uAC00 \uC57D\uAC04
       \uBE68\uB77C\uC9D1\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uC774\uB3D9 \uC18D\uB3C4 +1"
@@ -710,10 +743,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBE60\uB978 \uC190\uB180\uB9BC 2"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC \uC6C0\uC9C1\uC784 \uC18D\uB3C4\uAC00 \uC57D\uAC04
       \uBE68\uB77C\uC9D1\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uC774\uB3D9 \uC18D\uB3C4 +1"
@@ -732,10 +766,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBE60\uB978 \uC190\uB180\uB9BC 2"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC \uC6C0\uC9C1\uC784 \uC18D\uB3C4\uAC00 \uC57D\uAC04
       \uBE68\uB77C\uC9D1\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uC774\uB3D9 \uC18D\uB3C4 +1"
@@ -754,10 +789,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB09A\uC2DC \uC601\uC5ED"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9D1\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uC601\uC5ED +1"
     icon: market_bookmark_1
@@ -775,10 +811,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB09A\uC2DC \uC601\uC5ED"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9D1\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uC601\uC5ED +1"
     icon: market_bookmark_1
@@ -796,10 +833,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD070 \uC5F0\uB8CC\uD1B5"
+    map: {x: 0, y: 0}
     description: "\uB354 \uB9CE\uC740 \uC5F0\uB8CC\uB97C \uC2E4\uC744\uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC5F0\uB8CC\uD1B5 +1"
     icon: category_gold
@@ -817,10 +855,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD658\uACBD \uBCF4\uD638"
+    map: {x: 0, y: 0}
     description: "\uC5F0\uB8CC\uC758 \uD6A8\uC728\uC744 \uB192\uC785\uB2C8\uB2E4."
     addStatusString: "\uC5F0\uB8CC \uD6A8\uC728 +1"
     icon: complete
@@ -838,10 +877,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC5D4\uC9C4"
+    map: {x: 0, y: 0}
     description: "\uC5D4\uC9C4\uC744 \uAC15\uD654 \uD569\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 \uC774\uB3D9 \uC18D\uB3C4 +1"
     icon: btn_back
@@ -859,10 +899,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uCF8C\uC18D\uC120"
+    map: {x: 0, y: 0}
     description: "\uC791\uC9C0\uB9CC \uB9E4\uC6B0 \uBE60\uB978 \uBC30"
     addStatusString: 
     icon: Fs_1001_Anchovy
@@ -880,10 +921,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC00\uBCBC\uC6B4 \uBC15\uC2A4"
+    map: {x: 0, y: 0}
     description: "\uB354 \uBB34\uAC70\uC6B4 \uBB3C\uAC74\uC744 \uC2E4\uC744\uC218
       \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC778\uBCA4\uD1A0\uB9AC \uC911\uB7C9 +1"
@@ -902,10 +944,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -923,10 +966,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -944,10 +988,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -965,10 +1010,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -986,10 +1032,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1007,10 +1054,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBE60\uB978 \uC190\uB180\uB9BC 2"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC \uC6C0\uC9C1\uC784 \uC18D\uB3C4\uAC00 \uC57D\uAC04
       \uBE68\uB77C\uC9D1\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uC774\uB3D9 \uC18D\uB3C4 +1"
@@ -1029,10 +1077,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBE60\uB974\uAC8C \uAC10\uAE30 2"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC\uC904\uC744 \uBE60\uB974\uAC8C \uAC10\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uACF5\uACA9 \uC18D\uB3C4 +1"
     icon: icon_up
@@ -1050,10 +1099,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBE60\uB974\uAC8C \uAC10\uAE30 2"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC\uC904\uC744 \uBE60\uB974\uAC8C \uAC10\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uACF5\uACA9 \uC18D\uB3C4 +1"
     icon: icon_up
@@ -1071,10 +1121,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBE60\uB978 \uC190\uB180\uB9BC 2"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC \uC6C0\uC9C1\uC784 \uC18D\uB3C4\uAC00 \uC57D\uAC04
       \uBE68\uB77C\uC9D1\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uC774\uB3D9 \uC18D\uB3C4 +1"
@@ -1093,10 +1144,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB09A\uC2DC \uC601\uC5ED"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9D1\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uC601\uC5ED +1"
     icon: market_bookmark_1
@@ -1114,10 +1166,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD070 \uC5F0\uB8CC\uD1B5"
+    map: {x: 0, y: 0}
     description: "\uB354 \uB9CE\uC740 \uC5F0\uB8CC\uB97C \uC2E4\uC744\uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC5F0\uB8CC\uD1B5 +1"
     icon: category_gold
@@ -1135,10 +1188,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD658\uACBD \uBCF4\uD638"
+    map: {x: 0, y: 0}
     description: "\uC5F0\uB8CC\uC758 \uD6A8\uC728\uC744 \uB192\uC785\uB2C8\uB2E4."
     addStatusString: "\uC5F0\uB8CC \uD6A8\uC728 +1"
     icon: complete
@@ -1156,10 +1210,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC5D4\uC9C4"
+    map: {x: 0, y: 0}
     description: "\uC5D4\uC9C4\uC744 \uAC15\uD654 \uD569\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 \uC774\uB3D9 \uC18D\uB3C4 +1"
     icon: btn_back
@@ -1177,10 +1232,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC5D4\uC9C4"
+    map: {x: 0, y: 0}
     description: "\uC5D4\uC9C4\uC744 \uAC15\uD654 \uD569\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 \uC774\uB3D9 \uC18D\uB3C4 +1"
     icon: btn_back
@@ -1198,10 +1254,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC00\uBCBC\uC6B4 \uBC15\uC2A4"
+    map: {x: 0, y: 0}
     description: "\uB354 \uBB34\uAC70\uC6B4 \uBB3C\uAC74\uC744 \uC2E4\uC744\uC218
       \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC778\uBCA4\uD1A0\uB9AC \uC911\uB7C9 +1"
@@ -1220,10 +1277,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1241,10 +1299,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1262,10 +1321,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1283,10 +1343,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1304,10 +1365,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: "\uC61B\uB0A0\uC5D0\uB294 \uC0C1\uC120\uC73C\uB85C \uC0AC\uC6A9
       \uD588\uB2E4\uACE0 \uD55C\uB2E4."
     addStatusString: 
@@ -1326,10 +1388,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBE60\uB974\uAC8C \uAC10\uAE30 2"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC\uC904\uC744 \uBE60\uB974\uAC8C \uAC10\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uACF5\uACA9 \uC18D\uB3C4 +1"
     icon: icon_up
@@ -1347,10 +1410,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBE60\uB974\uAC8C \uAC10\uAE30 2"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC\uC904\uC744 \uBE60\uB974\uAC8C \uAC10\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uACF5\uACA9 \uC18D\uB3C4 +1"
     icon: icon_up
@@ -1368,10 +1432,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC544\uC774\uC5B8 \uB09A\uC2DC\uC904"
+    map: {x: 0, y: 0}
     description: "\uB450\uAEBC\uC6B4 \uB09A\uC2DC\uC904\uB85C \uAD50\uD658"
     addStatusString: "\uB09A\uC2DC HP +1"
     icon: reward_back
@@ -1389,10 +1454,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC544\uC774\uC5B8 \uB09A\uC2DC\uC904"
+    map: {x: 0, y: 0}
     description: "\uB450\uAEBC\uC6B4 \uB09A\uC2DC\uC904\uB85C \uAD50\uD658"
     addStatusString: "\uB09A\uC2DC HP +1"
     icon: reward_back
@@ -1410,10 +1476,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC544\uC774\uC5B8 \uB09A\uC2DC\uC904"
+    map: {x: 0, y: 0}
     description: "\uB450\uAEBC\uC6B4 \uB09A\uC2DC\uC904\uB85C \uAD50\uD658"
     addStatusString: "\uB09A\uC2DC HP +1"
     icon: reward_back
@@ -1431,10 +1498,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB09A\uC2DC \uC601\uC5ED"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9D1\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uC601\uC5ED +1"
     icon: market_bookmark_1
@@ -1452,10 +1520,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD658\uACBD \uBCF4\uD638"
+    map: {x: 0, y: 0}
     description: "\uC5F0\uB8CC\uC758 \uD6A8\uC728\uC744 \uB192\uC785\uB2C8\uB2E4."
     addStatusString: "\uC5F0\uB8CC \uD6A8\uC728 +1"
     icon: complete
@@ -1473,10 +1542,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB113\uC740 \uACF5\uAC04 1"
+    map: {x: 0, y: 0}
     description: "\uC778\uBCA4\uD1A0\uB9AC\uB97C 1\uC5F4 \uB113\uD799\uB2C8\uB2E4."
     addStatusString: "\uC778\uBCA4\uD1A0\uB9AC \uCD94\uAC00 +1\uC5F4"
     icon: Card
@@ -1494,10 +1564,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 1}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC00\uBCBC\uC6B4 \uBC15\uC2A4"
+    map: {x: 0, y: 0}
     description: "\uB354 \uBB34\uAC70\uC6B4 \uBB3C\uAC74\uC744 \uC2E4\uC744\uC218
       \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC778\uBCA4\uD1A0\uB9AC \uC911\uB7C9 +1"
@@ -1516,10 +1587,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC00\uBCBC\uC6B4 \uBC15\uC2A4"
+    map: {x: 0, y: 0}
     description: "\uB354 \uBB34\uAC70\uC6B4 \uBB3C\uAC74\uC744 \uC2E4\uC744\uC218
       \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC778\uBCA4\uD1A0\uB9AC \uC911\uB7C9 +1"
@@ -1538,10 +1610,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB450\uAEBC\uC6B4 \uC120\uBC15"
+    map: {x: 0, y: 0}
     description: "\uCDA9\uACA9\uC5D0 \uB354 \uC624\uB798 \uBC84\uD2F8 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 HP +1"
     icon: market_bookmark_2
@@ -1559,10 +1632,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 1
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1580,10 +1654,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1601,10 +1676,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1622,10 +1698,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: "\uC61B\uB0A0\uC5D0\uB294 \uC0C1\uC120\uC73C\uB85C \uC0AC\uC6A9
       \uD588\uB2E4\uACE0 \uD55C\uB2E4."
     addStatusString: 
@@ -1644,10 +1721,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBE60\uB974\uAC8C \uAC10\uAE30 2"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC\uC904\uC744 \uBE60\uB974\uAC8C \uAC10\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC \uACF5\uACA9 \uC18D\uB3C4 +1"
     icon: icon_up
@@ -1665,10 +1743,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC544\uC774\uC5B8 \uB09A\uC2DC\uC904"
+    map: {x: 0, y: 0}
     description: "\uB450\uAEBC\uC6B4 \uB09A\uC2DC\uC904\uB85C \uAD50\uD658"
     addStatusString: "\uB09A\uC2DC HP +1"
     icon: reward_back
@@ -1686,10 +1765,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC774\uB450\uADFC 1"
+    map: {x: 0, y: 0}
     description: "\uAC15\uD558\uAC8C \uB2F9\uAE30\uB294 \uD798"
     addStatusString: "\uB09A\uC2DC \uACF5\uACA9\uB825 +1"
     icon: cutscene_icon_2
@@ -1707,10 +1787,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1728,10 +1809,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC88B\uC740 \uB09A\uC2DC\uD130"
+    map: {x: 0, y: 0}
     description: "\uB09A\uC2DC\uD130\uC758 \uD69F\uC218\uAC00 1\uD68C \uC99D\uAC00\uD569\uB2C8\uB2E4."
     addStatusString: "\uB09A\uC2DC\uD130 \uD69F\uC218 +1"
     icon: main_icon_set
@@ -1749,10 +1831,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD589\uC6B4"
+    map: {x: 0, y: 0}
     description: "\uB354 \uBE44\uC2FC \uBB3C\uACE0\uAE30\uAC00 \uB098\uC62C \uC218
       \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uD589\uC6B4 +1"
@@ -1771,10 +1854,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 1
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC88B\uC740 \uC218\uC644"
+    map: {x: 0, y: 0}
     description: "\uBB3C\uACE0\uAE30\uB97C \uBE44\uC2F8\uAC8C \uD314 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC218\uC644 +1"
     icon: category_gold
@@ -1792,10 +1876,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 1
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC88B\uC740 \uC218\uC644"
+    map: {x: 0, y: 0}
     description: "\uBB3C\uACE0\uAE30\uB97C \uBE44\uC2F8\uAC8C \uD314 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC218\uC644 +1"
     icon: category_gold
@@ -1813,10 +1898,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 1
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB113\uC740 \uACF5\uAC04 1"
+    map: {x: 0, y: 0}
     description: "\uC778\uBCA4\uD1A0\uB9AC\uB97C 1\uC5F4 \uB113\uD799\uB2C8\uB2E4."
     addStatusString: "\uC778\uBCA4\uD1A0\uB9AC \uCD94\uAC00 +1\uC5F4"
     icon: Card
@@ -1834,10 +1920,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 1}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB450\uAEBC\uC6B4 \uC120\uBC15"
+    map: {x: 0, y: 0}
     description: "\uCDA9\uACA9\uC5D0 \uB354 \uC624\uB798 \uBC84\uD2F8 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 HP +1"
     icon: market_bookmark_2
@@ -1855,10 +1942,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 1
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB450\uAEBC\uC6B4 \uC120\uBC15"
+    map: {x: 0, y: 0}
     description: "\uCDA9\uACA9\uC5D0 \uB354 \uC624\uB798 \uBC84\uD2F8 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 HP +1"
     icon: market_bookmark_2
@@ -1876,10 +1964,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 1
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB450\uAEBC\uC6B4 \uC120\uBC15"
+    map: {x: 0, y: 0}
     description: "\uCDA9\uACA9\uC5D0 \uB354 \uC624\uB798 \uBC84\uD2F8 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 HP +1"
     icon: market_bookmark_2
@@ -1897,10 +1986,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 1
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1918,10 +2008,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -1939,10 +2030,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: "\uC61B\uB0A0\uC5D0\uB294 \uC0C1\uC120\uC73C\uB85C \uC0AC\uC6A9
       \uD588\uB2E4\uACE0 \uD55C\uB2E4."
     addStatusString: 
@@ -1961,10 +2053,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC544\uC774\uC5B8 \uB09A\uC2DC\uC904"
+    map: {x: 0, y: 0}
     description: "\uB450\uAEBC\uC6B4 \uB09A\uC2DC\uC904\uB85C \uAD50\uD658"
     addStatusString: "\uB09A\uC2DC HP +1"
     icon: reward_back
@@ -1982,10 +2075,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC774\uB450\uADFC 1"
+    map: {x: 0, y: 0}
     description: "\uAC15\uD558\uAC8C \uB2F9\uAE30\uB294 \uD798"
     addStatusString: "\uB09A\uC2DC \uACF5\uACA9\uB825 +1"
     icon: cutscene_icon_2
@@ -2003,10 +2097,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2024,10 +2119,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2045,10 +2141,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2066,10 +2163,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2087,10 +2185,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC88B\uC740 \uC218\uC644"
+    map: {x: 0, y: 0}
     description: "\uBB3C\uACE0\uAE30\uB97C \uBE44\uC2F8\uAC8C \uD314 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC218\uC644 +1"
     icon: category_gold
@@ -2108,10 +2207,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 1
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC88B\uC740 \uC218\uC644"
+    map: {x: 0, y: 0}
     description: "\uBB3C\uACE0\uAE30\uB97C \uBE44\uC2F8\uAC8C \uD314 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC218\uC644 +1"
     icon: category_gold
@@ -2129,10 +2229,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 1
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uC88B\uC740 \uC218\uC644"
+    map: {x: 0, y: 0}
     description: "\uBB3C\uACE0\uAE30\uB97C \uBE44\uC2F8\uAC8C \uD314 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC218\uC644 +1"
     icon: category_gold
@@ -2150,10 +2251,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 1
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB113\uC740 \uACF5\uAC04 1"
+    map: {x: 0, y: 0}
     description: "\uC778\uBCA4\uD1A0\uB9AC\uB97C 1\uC5F4 \uB113\uD799\uB2C8\uB2E4."
     addStatusString: "\uC778\uBCA4\uD1A0\uB9AC \uCD94\uAC00 +1\uC5F4"
     icon: Card
@@ -2171,10 +2273,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 1}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB450\uAEBC\uC6B4 \uC120\uBC15"
+    map: {x: 0, y: 0}
     description: "\uCDA9\uACA9\uC5D0 \uB354 \uC624\uB798 \uBC84\uD2F8 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
     addStatusString: "\uC120\uBC15 HP +1"
     icon: market_bookmark_2
@@ -2192,10 +2295,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 1
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2213,10 +2317,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2234,10 +2339,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2255,10 +2361,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2276,10 +2383,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC774\uB450\uADFC 1"
+    map: {x: 0, y: 0}
     description: "\uAC15\uD558\uAC8C \uB2F9\uAE30\uB294 \uD798"
     addStatusString: "\uB09A\uC2DC \uACF5\uACA9\uB825 +1"
     icon: cutscene_icon_2
@@ -2297,10 +2405,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2318,10 +2427,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2339,10 +2449,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2360,10 +2471,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2381,10 +2493,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2402,10 +2515,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2423,10 +2537,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2444,10 +2559,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2465,10 +2581,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2486,10 +2603,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB113\uC740 \uACF5\uAC04 1"
+    map: {x: 0, y: 0}
     description: "\uC778\uBCA4\uD1A0\uB9AC\uB97C 1\uC5F4 \uB113\uD799\uB2C8\uB2E4."
     addStatusString: "\uC778\uBCA4\uD1A0\uB9AC \uCD94\uAC00 +1\uC5F4"
     icon: Card
@@ -2507,10 +2625,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 1}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2528,10 +2647,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2549,10 +2669,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2570,10 +2691,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC774\uB450\uADFC 1"
+    map: {x: 0, y: 0}
     description: "\uAC15\uD558\uAC8C \uB2F9\uAE30\uB294 \uD798"
     addStatusString: "\uB09A\uC2DC \uACF5\uACA9\uB825 +1"
     icon: cutscene_icon_2
@@ -2591,10 +2713,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2612,10 +2735,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2633,10 +2757,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2654,10 +2779,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uD06C\uB8E8\uC988"
+    map: {x: 0, y: 0}
     description: "\uD638\uD654\uC2A4\uB7EC\uC6B4 \uC120\uBC15"
     addStatusString: 
     icon: Fs_2004_Cutlassfish
@@ -2675,10 +2801,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2696,10 +2823,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2717,10 +2845,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2738,10 +2867,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2759,10 +2889,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2780,10 +2911,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2801,10 +2933,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2822,10 +2955,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uB113\uC740 \uACF5\uAC04 1"
+    map: {x: 0, y: 0}
     description: "\uC778\uBCA4\uD1A0\uB9AC\uB97C 1\uC5F4 \uB113\uD799\uB2C8\uB2E4."
     addStatusString: "\uC778\uBCA4\uD1A0\uB9AC \uCD94\uAC00 +1\uC5F4"
     icon: Card
@@ -2843,10 +2977,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 1}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2864,10 +2999,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uAC15\uD55C \uC774\uB450\uADFC 1"
+    map: {x: 0, y: 0}
     description: "\uAC15\uD558\uAC8C \uB2F9\uAE30\uB294 \uD798"
     addStatusString: "\uB09A\uC2DC \uACF5\uACA9\uB825 +1"
     icon: cutscene_icon_2
@@ -2885,10 +3021,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2906,10 +3043,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2927,10 +3065,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2948,10 +3087,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2969,10 +3109,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -2990,10 +3131,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -3011,10 +3153,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -3032,10 +3175,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -3053,10 +3197,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -3074,10 +3219,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -3095,10 +3241,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -3116,10 +3263,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -3137,10 +3285,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: 
+    map: {x: 0, y: 0}
     description: 
     addStatusString: 
     icon: 
@@ -3158,10 +3307,11 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   - name: "\uBC94\uC120"
+    map: {x: 0, y: 0}
     description: "\uC61B\uB0A0\uC5D0\uB294 \uC0C1\uC120\uC73C\uB85C \uC0AC\uC6A9
       \uD588\uB2E4\uACE0 \uD55C\uB2E4."
     addStatusString: 
@@ -3180,6 +3330,6 @@ MonoBehaviour:
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
       freshness: 0
-      LuckFish: 0
-      FishAmount: 0
-      FishPrice: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0

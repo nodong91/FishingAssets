@@ -19,12 +19,12 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     Coroutine inputSlotCoroutine;
     public Image gageImage;
     public AnimationCurve OpeningCurve => Game_Manager.current.GetSkill.openingCurve;
-    public SkillStatus Status { get; set; }
+    public SkillStruct Status { get; set; }
 
     public delegate void DeleSlotAction(Vector2Int _grid);
     public DeleSlotAction deleSlotAction;
 
-    public delegate void DeleSlotPosition(SkillStatus _status, Vector3 _position = default);
+    public delegate void DeleSlotPosition(SkillStruct _status, Vector3 _position = default);
     public DeleSlotPosition deleSlotPosition;
 
     Dictionary<string, Sprite> sprites => Singleton_Data.INSTANCE.Dict_Sprite;
@@ -32,6 +32,8 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void SetStart()
     {
         gageImage.fillAmount = 0f;
+        if (Status == null)
+            return;
         if (Status.icon != null && sprites.ContainsKey(Status.icon))
         {
             iconImage.sprite = sprites[Status.icon];

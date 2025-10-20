@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class Trigger_Landing : MonoBehaviour
@@ -8,7 +9,7 @@ public class Trigger_Landing : MonoBehaviour
     Coroutine setLanding;
 
     public Trigger_Setting triggerSetting;
-    public GameObject cameraPosition;
+    public CinemachineVolumeSettings cameraPosition;
 
     [System.Serializable]
     public struct LandingSetting
@@ -40,7 +41,7 @@ public class Trigger_Landing : MonoBehaviour
     {
         triggerSetting.deleTriggerAction = SetLandingAction;// 섬 입장
         triggerSetting.GetIconSprite = iconImage;// 트리거 아이콘 설정
-        Game_Manager.current.landingPoint = landingStruct.landingSetting[0].landingPoint.transform;
+        Game_Manager.current.currentLand = this;
     }
 
     void SetLandingAction()
@@ -54,7 +55,7 @@ public class Trigger_Landing : MonoBehaviour
 
     IEnumerator SetLanding()
     {
-        cameraPosition.SetActive(true);
+        cameraPosition.gameObject.SetActive(true);
         SetLandingUI();
 
         Vector3 prevPosition = player.transform.position;
@@ -79,10 +80,15 @@ public class Trigger_Landing : MonoBehaviour
         Game_Manager.current.GetMainUI.OpenCanvas(false);
     }
 
+    public void DialogOutFouce(bool _on)
+    {
+        cameraPosition.FocusOffset = _on ? 0f : 10f;
+    }
+
     void OutLanding()
     {
         // 카메라 포커스 제거
-        cameraPosition.SetActive(false);
+        cameraPosition.gameObject.SetActive(false);
         Game_Manager.current.GetMainUI.OpenCanvas(true);
         Game_Manager.current.SetThemeMusic();
     }

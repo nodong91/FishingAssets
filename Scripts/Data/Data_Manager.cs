@@ -55,6 +55,10 @@ public class Data_Manager : Data_Parse
             {
                 SetAudioStruct(CSV_Data[i]);
             }
+            else if (csv_Type.Contains("Skill"))
+            {
+                ConvertSkill(CSV_Data[i]);
+            }
         }
     }
 
@@ -122,6 +126,51 @@ public class Data_Manager : Data_Parse
             itemType = (ItemStruct.ItemType)System.Enum.Parse(typeof(ItemStruct.ItemType), _elements[8]),
         };
         return tempItem;
+    }
+
+
+    void ConvertSkill(TextAsset _textAsset)
+    {
+        skillStruct .Clear();
+        string[] data = _textAsset.text.Split(new char[] { '\n' });
+        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
+        {
+            string[] elements = data[i].Split(new char[] { ',' });
+
+            SetStatus setAddStatus = new SetStatus
+            {
+                catchRadius = Parse_Float(elements[6]),// 물고기를 잡는 범위
+                catchSpeed = Parse_Float(elements[7]),// 낚시대가 물고기를 향해 이동하는 속도
+                catchPower = Parse_Float(elements[8]),// 낚시대의 힘
+                catchMaxHealth = Parse_Float(elements[9]),// 낚시대의 최대 체력
+                catchAttakSpeed = Parse_Float(elements[10]),// 물고기를 공격하는 빈도
+
+                shipSpeed = Parse_Float(elements[11]),// 배의 이동 속도
+                maxWeight = Parse_Float(elements[12]),// 인벤토리 중량
+                maxEnergy = Parse_Float(elements[13]),// 연료통 크기
+                efficient = Parse_Float(elements[14]),// 에너지 효율
+
+                maxBoxSize = Parse_Vector2Int(elements[15]),// 인벤토리 크기
+                shipHealth = Parse_Int(elements[16]),// 배 체력
+                freshness = Parse_Float(elements[17]),// 신선도 유지 - 꼭 필요한가??????  
+
+                luckFish = Parse_Float(elements[18]),// 희귀 물고기 확률
+                fishAmount = Parse_Int(elements[19]),// 낚시 횟수 증가
+                fishPrice = Parse_Float(elements[20]),// 판매 물고기 가격 증가
+            };
+
+            SkillStruct tempData = new SkillStruct
+            {
+                id = elements[0],
+                name = elements[1],
+                description = elements[2],
+                addStatusString = elements[3],
+                icon = elements[4],
+                price = int.Parse(elements[5]),
+                addStatus = setAddStatus,
+            };
+            skillStruct.Add(tempData);
+        }
     }
 
     void SetLanguageStruct(TextAsset _textAsset)
@@ -316,10 +365,10 @@ public class Data_Manager : Data_Parse
     }
 
     [System.Serializable]
-    public class SkillStatus
+    public class SkillStruct
     {
+        public string id;
         public string name;
-        public Vector2Int map;
         [TextArea]
         public string description;
         public string addStatusString;
@@ -469,6 +518,7 @@ public class Data_Manager : Data_Parse
     [Header(" [ Data ]")]
     public List<UsedStruct> usedStruct = new List<UsedStruct>();
     public List<FishStruct> fishStruct = new List<FishStruct>();
+    public List<SkillStruct> skillStruct = new List<SkillStruct>();
     public List<LanguageStruct> languageStruct = new List<LanguageStruct>();
     public List<AudioStruct> audioStruct = new List<AudioStruct>();
 
@@ -476,6 +526,7 @@ public class Data_Manager : Data_Parse
     {
         Singleton_Data.INSTANCE.SetDictionary_Fish(fishStruct);
         Singleton_Data.INSTANCE.SetDictionary_Used(usedStruct);
+        Singleton_Data.INSTANCE.SetSkillStruct(skillStruct);
         Singleton_Data.INSTANCE.SetDictionary_Language(languageStruct);
         Singleton_Data.INSTANCE.SetDictionary_Audio(audioStruct);
         Singleton_Data.INSTANCE.SetDictionary_Sprite(sprites);

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using static Trigger_Landing;
 
 public class UI_Landing : MonoBehaviour
@@ -155,6 +154,7 @@ public class UI_Landing : MonoBehaviour
         onDialog = false;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
         Game_Manager.current.GetEnergyUI.OpenEnergy();
+        Game_Manager.current.currentLand.DialogOutFouce(true);
     }
 
     void RestButton()// 휴식
@@ -163,6 +163,7 @@ public class UI_Landing : MonoBehaviour
         onDialog = false;
         SetLandingCanvas(false);// 랜드 UI 제거
         Game_Manager.current.GetRestManager.OpenCanvas(true);
+        Game_Manager.current.currentLand.DialogOutFouce(true);
     }
 
     void ShopButton()
@@ -172,6 +173,7 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(false);        // 샵 버튼 누르면 랜드 UI 제거
         Option_Manager.current.SetThemeMusic(landingData.shopNPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart(landingData.shopNPC);
+        Game_Manager.current.currentLand.DialogOutFouce(true);
     }
 
     void ShipyardButton()// 조선소
@@ -181,6 +183,7 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(false);        // 조선소 버튼 누르면 랜드 UI 제거
         Option_Manager.current.SetThemeMusic(landingData.shipyardNPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart(landingData.shipyardNPC);
+        Game_Manager.current.currentLand.DialogOutFouce(true);
     }
 
     void StorageButton()
@@ -191,6 +194,7 @@ public class UI_Landing : MonoBehaviour
 
         Game_Manager.current.GetMainUI.OpenShop();// 창고
         Game_Manager.current.GetInventory.OpenStorage(true);
+        Game_Manager.current.currentLand.DialogOutFouce(true);
     }
 
     public void BackButton()// 뒤로 가기
@@ -213,7 +217,11 @@ public class UI_Landing : MonoBehaviour
             case LandingType.Energy:
                 Game_Manager.current.GetEnergyUI.CloseEnergy();
                 break;
+            case LandingType.Rest:
+                Game_Manager.current.GetRestManager.OpenCanvas(false);
+                break;
         }
+        Game_Manager.current.currentLand.DialogOutFouce(false);
         SetLandingCanvas(true);// 랜드 UI 열기
     }
 
