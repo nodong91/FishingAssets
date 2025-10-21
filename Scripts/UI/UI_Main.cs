@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class UI_Main : MonoBehaviour
 {
@@ -188,10 +189,39 @@ public class UI_Main : MonoBehaviour
             yield return null;
         }
     }
-
+    Material healthMaterial, energyMaterial;
     public void SetEnergy(float _energy)
     {
         shipEnergy.value = _energy;
+        if (_energy < 0.5f)
+        {
+            lowEnergy = true;
+            if (energyMaterial == null)
+            {
+                Image energy = shipEnergy.fillRect.GetComponent<Image>();
+                energyMaterial = Instantiate(energy.material);
+                energy.material = energyMaterial;
+            }
+            StartCoroutine(LowEnergy(energyMaterial));
+        }
+        else if (lowEnergy == true)
+        {
+            lowEnergy = false;
+        }
+    }
+
+    bool lowEnergy = false;
+    IEnumerator LowEnergy(Material _material)
+    {
+        float normalize = 0f;
+        while (lowEnergy == true)
+        {
+            normalize += Time.deltaTime * 3f;
+            float alpha = Mathf.Sin(normalize);
+            _material.SetColor("_MainColor", Color.white * (alpha + 2f));
+            yield return null;
+        }
+        _material.SetColor("_MainColor", Color.white);
     }
 
     public void SetFadeScreen(bool _open)
@@ -218,12 +248,36 @@ public class UI_Main : MonoBehaviour
 
     public void SetHealthPoint(int _point)
     {
-        //float maxHealthPoint = Game_Manager.current.currentStatus.shipHealth;
-        //currentHealthImage.fillAmount = _point / maxHealthPoint;
-        //Debug.LogWarning($"SetHealthPoint : {_point} / {maxHealthPoint}");
-
         RectTransform rectTransform = currentHealthImage.rectTransform;
         rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
+
+        if (_point <= 1)
+        {
+            if (healthMaterial == null)
+            {
+                healthMaterial = Instantiate(currentHealthImage.material);
+                currentHealthImage.material = healthMaterial;
+            }
+            lowHP = true;
+            StartCoroutine(LowHP(healthMaterial));
+        }
+        else if (lowHP == true)
+        {
+            lowHP = false;
+        }
+    }
+    bool lowHP = false;
+    IEnumerator LowHP(Material _material)
+    {
+        float normalize = 0f;
+        while (lowHP == true)
+        {
+            normalize += Time.deltaTime * 3f;
+            float alpha = Mathf.Sin(normalize);
+            _material.SetColor("_MainColor", Color.white * (alpha + 2f));
+            yield return null;
+        }
+        _material.SetColor("_MainColor", Color.white);
     }
 
     public void SetMaxHealthPoint(int _point)
