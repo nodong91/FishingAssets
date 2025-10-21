@@ -6,7 +6,7 @@ using UnityEngine.Rendering.Universal;
 public class Camera_Manager : MonoBehaviour
 {
     public CinemachineCamera cinemachineCamera;
-     CinemachineVolumeSettings volumeSettings;
+    CinemachineVolumeSettings volumeSettings;
     public Camera UICamera;
     public GameObject focusTarget;
     public GameObject GetFocusTarget
@@ -61,8 +61,7 @@ public class Camera_Manager : MonoBehaviour
         rotationComposer = cinemachineCamera.GetComponent<CinemachineRotationComposer>();
         cinemachineCamera.Lens.FieldOfView = 45f;
 
-        SetUICamera();
-        SetDefault();
+        StartCoroutine(SetDefault());
     }
 
     public void SetOrbitalTitle()
@@ -83,22 +82,19 @@ public class Camera_Manager : MonoBehaviour
         }
     }
 
-    void SetDefault()
+    IEnumerator SetDefault()
     {
+        SetUICamera();
+
         orbitalFollow.HorizontalAxis.Value = 180f;
         orbitalFollow.VerticalAxis.Value = 30f;
         orbitalFollow.RadialAxis.Range = zoomLimit;
         orbitalFollow.RadialAxis.Value = (zoomLimit.x + zoomLimit.y) * 0.5f;
-        Rotate();
-        //orbitalFollow.OrbitStyle = CinemachineOrbitalFollow.OrbitStyles.ThreeRing;
-        //Cinemachine3OrbitRig.Settings newSetting = new Cinemachine3OrbitRig.Settings
-        //{
-        //    SplineCurvature = 0.5f,
-        //    Top = new Cinemachine3OrbitRig.Orbit { Height = 7, Radius = 2 },
-        //    Center = new Cinemachine3OrbitRig.Orbit { Height = 4f, Radius = 3 },
-        //    Bottom = new Cinemachine3OrbitRig.Orbit { Height = 1f, Radius = 2.5f }
-        //};
-        //orbitalFollow.Orbits = newSetting;
+        yield return null;
+
+        Vector3 camPos = cinemachineCamera.transform.position;
+        Vector3 offset = (focusTarget.transform.position - new Vector3(camPos.x, focusTarget.transform.position.y, camPos.z));
+        focusTarget.transform.rotation = Quaternion.LookRotation(offset, Vector3.up);
     }
 
     void AddOverlayCamera(Camera _overlay)
@@ -149,7 +145,7 @@ public class Camera_Manager : MonoBehaviour
         x = currentX + (currentInput.x - prevInput.x) * rotateSpeed;
         y = currentY + (prevInput.y - currentInput.y) * rotateSpeed;
 
-        Rotate();
+        Rotate();// 컨트롤 하고 있을 때
     }
 
     //void StopRotate()
@@ -173,7 +169,7 @@ public class Camera_Manager : MonoBehaviour
             yield return null;
 
             rotateDelegate?.Invoke();
-            Rotate();
+            Rotate();// 정지할때까지
         }
         Debug.Log("StopRotating 스톱!!");
     }
