@@ -139,7 +139,7 @@ public class Game_Manager : MonoBehaviour
         {
             if (instPlayer == null)
             {
-                Transform landingPoint = currentLand.landingStruct.landingSetting[0].landingPoint.transform;
+                Transform landingPoint = currentLand.landingPoint.transform;
                 instPlayer = Instantiate(player, landingPoint.position, landingPoint.rotation, transform);
             }
             return instPlayer;
@@ -424,17 +424,17 @@ public class Game_Manager : MonoBehaviour
     // 플레이어 파괴
     //====================================================================================================================
 
-    public Trigger_Ghost ghostObject;
-    Trigger_Ghost instGhost;
+    public Trigger_LostBox lostBox;
+    Trigger_LostBox instLostBox;
     public void PlayerDestroy()
     {
         Vector3 setPosition = GetPlayer.transform.position;
-        if (instGhost == null)
-            instGhost = Instantiate(ghostObject, setPosition, Quaternion.identity, transform);
-        instGhost.gameObject.SetActive(true);
-        instGhost.SetResult();
+        if (instLostBox == null)
+            instLostBox = Instantiate(lostBox, setPosition, Quaternion.identity, transform);
+        instLostBox.gameObject.SetActive(true);
+        instLostBox.SetResult();
 
         GetInventory.myBox.EmptyInventoryAllSlot();// 인벤토리 초기화
-        Debug.LogWarning($"고스트 오브젝트 : {ghostObject.name}");
+        Debug.LogWarning($"고스트 오브젝트 : {instLostBox.name}");
     }
 }

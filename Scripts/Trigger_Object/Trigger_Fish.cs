@@ -7,15 +7,11 @@ public class Trigger_Fish : MonoBehaviour
     public AreaType areaType;
     public Sprite catchIcon;
 
-    void Start()
-    {
-        triggerSetting.deleTriggerAction = FishingStart;// 낚시 게임 스타트
-        triggerSetting.GetIconSprite = catchIcon;// 트리거 아이콘 설정
-    }
-
     public void SetAreaType(AreaType _areaType)
     {
         areaType = _areaType;
+        triggerSetting.deleTriggerAction = FishingStart;// 낚시 게임 스타트
+        triggerSetting.GetIconSprite = catchIcon;// 트리거 아이콘 설정
     }
 
     void FishingStart()

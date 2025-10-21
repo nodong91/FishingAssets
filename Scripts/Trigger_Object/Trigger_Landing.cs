@@ -8,7 +8,7 @@ public class Trigger_Landing : MonoBehaviour
     Unit_Player player;
     Coroutine setLanding;
 
-    public Trigger_Setting triggerSetting;
+    public Trigger_Setting landingPoint;
     public CinemachineVolumeSettings cameraPosition;
 
     [System.Serializable]
@@ -39,8 +39,8 @@ public class Trigger_Landing : MonoBehaviour
 
     private void Start()
     {
-        triggerSetting.deleTriggerAction = SetLandingAction;// 섬 입장
-        triggerSetting.GetIconSprite = iconImage;// 트리거 아이콘 설정
+        landingPoint.deleTriggerAction = SetLandingAction;// 섬 입장
+        landingPoint.GetIconSprite = iconImage;// 트리거 아이콘 설정
         Game_Manager.current.currentLand = this;
     }
 
@@ -61,14 +61,14 @@ public class Trigger_Landing : MonoBehaviour
         Vector3 prevPosition = player.transform.position;
         Quaternion prevRotation = player.transform.rotation;
 
-        Vector3 targetPosition = new Vector3(triggerSetting.transform.position.x, player.transform.position.y, triggerSetting.transform.position.z);
+        Vector3 targetPosition = new Vector3(landingPoint.transform.position.x, player.transform.position.y, landingPoint.transform.position.z);
         float normalize = 0f;
         while (normalize < 1f)
         {
             normalize += Time.deltaTime * 0.5f;
 
             player.transform.position = Vector3.Lerp(prevPosition, targetPosition, normalize);
-            player.transform.rotation = Quaternion.Lerp(prevRotation, triggerSetting.transform.rotation, normalize);
+            player.transform.rotation = Quaternion.Lerp(prevRotation, landingPoint.transform.rotation, normalize);
             yield return null;
         }
     }

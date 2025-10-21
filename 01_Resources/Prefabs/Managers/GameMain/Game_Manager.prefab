@@ -77,15 +77,14 @@ MonoBehaviour:
     maxBoxSize: {x: 0, y: 0}
     shipHealth: 0
     freshness: 0
-    LuckFish: 0
-    FishAmount: 0
-    FishPrice: 0
+    luckFish: 0
+    fishAmount: 0
+    fishPrice: 0
   dayLight: {fileID: 5358195548150265986}
   dayColor: {r: 1, g: 1, b: 1, a: 0}
   nightColor: {r: 0.27058825, g: 0.44313726, b: 0.7647059, a: 0}
   emissionColor: {r: 8, g: 8, b: 8, a: 0}
   skyboxMatial: {fileID: 0}
-  ghostObject: {fileID: 198184465450009984, guid: 6558a2d44ac70b643afc01e78f76eec6, type: 3}
   featureIndex: 2
   fullscreenMaterial: {fileID: 0}
   fullScreenRendererFeature: {fileID: 0}
@@ -94,6 +93,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0aa9ee085b3cd794baf9774174de696a, type: 2}
   - {fileID: 11400000, guid: ebd0c8905fe0c77429f7cc63e33bc9e8, type: 2}
   - {fileID: 11400000, guid: 0a97142d240ec3f40a582c19aed18bb0, type: 2}
+  lostBox: {fileID: 5827619151117812075, guid: a378ce4019e777f49842e36180ce416c, type: 3}
 --- !u!1 &5351778369176117941
 GameObject:
   m_ObjectHideFlags: 0

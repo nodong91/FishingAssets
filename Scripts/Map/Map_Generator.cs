@@ -75,8 +75,13 @@ public class Map_Generator : MonoBehaviour
     public Node[,] nodeMap;
     private List<Node> allNodes;
     public int fishCount = 15;
+    public int boxCount = 15;
+
+    public GameObject safetyArea;
+    public float safetyRadius;
 
     public Trigger_Fish triggerFish;
+    public Trigger_RandomBox triggerRandomBox;
 
     public void UpdateData()
     {
@@ -98,6 +103,17 @@ public class Map_Generator : MonoBehaviour
             Trigger_Fish inst = Instantiate(triggerFish, transform);
             inst.SetAreaType(areaType);
             inst.transform.position = node.worldPosition;
+            inst.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+        }
+
+        for (int i = 0; i < boxCount; i++)
+        {
+            Data_Manager.AreaType areaType = Data_Manager.AreaType.Shallow;
+            Node node = GetTypeNode(areaType);// 임시 연안 노드 랜덤으로 가져오기
+            Trigger_RandomBox inst = Instantiate(triggerRandomBox, transform);
+            inst.SetAreaType(areaType);
+            inst.transform.position = node.worldPosition;
+            inst.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
         }
     }
 
@@ -119,7 +135,7 @@ public class Map_Generator : MonoBehaviour
                 Vector2Int grid = new Vector2Int(x, y);
 
                 Vector3 hitPoint = TryNodeHit(worldPoint + Vector3.up * 1000f);
-                nodeMap[x, y] = new Node(new Vector3(hitPoint.x, 0f, hitPoint.z), grid);
+                nodeMap[x, y] = new Node(worldPoint, grid);
                 Data_Manager.AreaType areaType = SetNodeType(hitPoint.y, nodeMap[x, y]);// 노드 타입 세팅
                 nodeMap[x, y].SetNodeType(areaType);
                 allNodes.Add(nodeMap[x, y]);
@@ -129,32 +145,31 @@ public class Map_Generator : MonoBehaviour
 
     Data_Manager.AreaType SetNodeType(float _hitPointY, Node _node)
     {
-        if (_hitPointY <= -4f)
-        {
-            hadalNodes.Add(_node);
-            return Data_Manager.AreaType.Hadal;
-        }
-        else if (_hitPointY <= -3f)
-        {
-            abyssalNodes.Add(_node);
-            return Data_Manager.AreaType.Abyssal;
-        }
-        else if (_hitPointY <= -2f)
-        {
-            oceanicNodes.Add(_node);
-            return Data_Manager.AreaType.Oceanic;
-        }
-        else if (_hitPointY <= -1f)
-        {
-            coastalNodes.Add(_node);
-            return Data_Manager.AreaType.Coastal;
-        }
-        else if (_hitPointY <= 0.1f)
+        float radius = (safetyArea.transform.position - _node.worldPosition).magnitude;
+        if (radius < safetyRadius)
+            return Data_Manager.AreaType.None;
+        else if (radius < (safetyRadius + 20f))
         {
             shallowNodes.Add(_node);
             return Data_Manager.AreaType.Shallow;
         }
-        return Data_Manager.AreaType.None;
+        else if (radius < (safetyRadius + 40f))
+        {
+            coastalNodes.Add(_node);
+            return Data_Manager.AreaType.Coastal;
+        }
+        else if (radius < (safetyRadius + 60f))
+        {
+            oceanicNodes.Add(_node);
+            return Data_Manager.AreaType.Oceanic;
+        }
+        else if (radius < (safetyRadius + 80f))
+        {
+            abyssalNodes.Add(_node);
+            return Data_Manager.AreaType.Abyssal;
+        }
+        hadalNodes.Add(_node);
+        return Data_Manager.AreaType.Hadal;
     }
 
     List<Node> shallowNodes = new List<Node>();
@@ -265,6 +280,8 @@ public class Map_Generator : MonoBehaviour
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, 1, worldSize.y));
+        Handles.color = Color.blue;
+        UnityEditor.Handles.DrawWireDisc(safetyArea.transform.position, Vector3.up, safetyRadius);
         if (nodeMap != null)
         {
             foreach (Node n in nodeMap)
