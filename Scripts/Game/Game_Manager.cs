@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using static Data_Manager;
-using static Trigger_Landing;
 
 public class Game_Manager : MonoBehaviour
 {

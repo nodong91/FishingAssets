@@ -12,14 +12,11 @@ public class UI_NewsInfomation : MonoBehaviour
 
     public void SetDisplay(Data_Quest _quest)
     {
+        Debug.LogWarning($"Quest 클릭: {_quest.title}");
         titleText.text = _quest.title;
         npcText.text = _quest.npc_ID;
         descriptionText.text = _quest.description;
         deadLineText.text = (_quest.deadLine > 0) ? "남은 시간 " + _quest.deadLine + "일" : null;
-        Debug.LogWarning($"Quest Display: {resultParent.name}");
-        Debug.LogWarning($"Quest Display: {_quest.title}");
-        Debug.LogWarning($"Quest Display: {_quest.resultData.inventorySize}");
-        Debug.LogWarning($"Quest Display: {_quest.resultData.itemID.Length}");
-        resultParent.gameObject.SetActive((_quest.resultData.itemID.Length > 0) == true);
+        resultParent.gameObject.SetActive((_quest.resultData.itemID?.Length > 0) == true);
     }
 }

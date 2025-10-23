@@ -241,6 +241,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 27321a3992d6f3244b4879c21782a6d0, type: 3}
   - {fileID: 21300000, guid: 2486abef87c4be14a8ba3475f3890ac1, type: 3}
   - {fileID: 21300000, guid: c64c3a07303adfe45be893d706edcbf9, type: 3}
+  - {fileID: 21300000, guid: 53be8e722b2f36c479f583c1dbf51e44, type: 3}
+  - {fileID: 21300000, guid: a1613ebdd777ca2499231f59e8c8ab6d, type: 3}
   - {fileID: 21300000, guid: 4c4f7efb4350fe643b296565c8962caf, type: 3}
   - {fileID: 21300000, guid: 4054301de71aa0d4a8d2e81e5413db8e, type: 3}
   - {fileID: 21300000, guid: b0819a1e2057b0f4b845877825382221, type: 3}
@@ -258,6 +260,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6a9bca9b68423474190089050fa81d3b, type: 3}
   - {fileID: 21300000, guid: 35e2c232f6f321c4cb1674e1ca108360, type: 3}
   - {fileID: 21300000, guid: c36afbcc404c5dd44876e672fc91fc8f, type: 3}
+  - {fileID: 21300000, guid: 70ba836b55e050144bf00a0bb6394577, type: 3}
+  - {fileID: 21300000, guid: 9b9fc62718c102b45b5cff89187125f2, type: 3}
+  - {fileID: 21300000, guid: 159a3a8c2d5046e4ab12fd708e3193bd, type: 3}
+  - {fileID: 21300000, guid: 32fbf008c0e25d5438a64dfb5e3d5ccb, type: 3}
+  - {fileID: 21300000, guid: f80597e7301134947be7f20e68be8544, type: 3}
+  - {fileID: 21300000, guid: f5cc7753155ae804daee081db1e53b6b, type: 3}
+  - {fileID: 21300000, guid: c2024d4cf65794c4d964d28f854ca681, type: 3}
+  - {fileID: 21300000, guid: e4923f5e9a0add64e9a07c8855a8ef27, type: 3}
+  - {fileID: 21300000, guid: 290d268bea73cf543b00a9d25b28a912, type: 3}
+  - {fileID: 21300000, guid: a8e53e36f39e9de47ab17373c2e3994d, type: 3}
+  - {fileID: 21300000, guid: da8ce0d988d5cd044bccac854542b82a, type: 3}
+  - {fileID: 21300000, guid: e9235be2bd3221d46a0a21bfd6b8a14e, type: 3}
   - {fileID: 21300000, guid: 18163c630a796e24a9777605d0dcd516, type: 3}
   - {fileID: 21300000, guid: 44eddae19a59b934685d35d27fb2888d, type: 3}
   - {fileID: 21300000, guid: efba2a4d5bbf24a4788d9dc8a9deeadc, type: 3}
@@ -285,6 +299,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 702dea19646826146b3ed5d0f1504726, type: 3}
   - {fileID: 21300000, guid: eee84b549a7997149b156c997313b9ec, type: 3}
   - {fileID: 21300000, guid: aad125c88a2b66d46b597542330f6cad, type: 3}
+  - {fileID: 21300000, guid: 6536987a09614904291c571e0dd962d4, type: 3}
   - {fileID: 21300000, guid: bfb8ef011768cbf41a455f6b54f8e75f, type: 3}
   - {fileID: 21300000, guid: 0a493811ebe437447bcf0b168ab28746, type: 3}
   - {fileID: 21300000, guid: f8e2f58c993be154e8b56447000f6947, type: 3}
@@ -798,7 +813,7 @@ MonoBehaviour:
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 1"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
-    icon: ItemIcon01
+    icon: Icon_Sk_001
     price: 1
     addStatus:
       catchRadius: 0.1
@@ -1019,7 +1034,7 @@ MonoBehaviour:
     description: "\uBB3C\uACE0\uAE30\uC758 \uCCB4\uB825\uC744 \uBE60\uB974\uAC8C
       \uBE7C\uC557\uB294\uB2E4."
     addStatusString: CatchPower + 1
-    icon: ItemIcon11
+    icon: Icon_Sk_002
     price: 1
     addStatus:
       catchRadius: 0
@@ -1041,7 +1056,7 @@ MonoBehaviour:
     name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC"
     description: "\uB09A\uC2DC\uC758 \uCEE8\uD2B8\uB864\uC774 \uBE68\uB77C\uC9C4\uB2E4."
     addStatusString: CatchSpeed + 1
-    icon: ItemIcon12
+    icon: Icon_Sk_003
     price: 1
     addStatus:
       catchRadius: 0
@@ -1063,7 +1078,7 @@ MonoBehaviour:
     name: "\uC2E0\uB4E4\uB9B0 \uCEE8\uD2B8\uB864"
     description: "\uBC30\uC758 \uC18D\uB3C4\uAC00 \uBE68\uB77C\uC9C4\uB2E4."
     addStatusString: ShipSpeed + 1
-    icon: ItemIcon13
+    icon: Icon_Sk_004
     price: 1
     addStatus:
       catchRadius: 0
@@ -1085,7 +1100,7 @@ MonoBehaviour:
     name: "\uC695\uC2EC\uC7C1\uC774"
     description: "\uC2E4\uC744 \uC218 \uC788\uB294 \uBB34\uAC8C\uAC00 \uB298\uC5B4\uB09C\uB2E4."
     addStatusString: MaxWeight + 1
-    icon: ItemIcon14
+    icon: Icon_Sk_005
     price: 1
     addStatus:
       catchRadius: 0
@@ -1107,7 +1122,7 @@ MonoBehaviour:
     name: "\uBC29\uB791\uC790"
     description: "\uC5F0\uB8CC\uB97C \uB354 \uB9CE\uC774 \uB123\uC744 \uC218 \uC788\uB2E4."
     addStatusString: MaxEnergy + 1
-    icon: ItemIcon15
+    icon: Icon_Sk_006
     price: 1
     addStatus:
       catchRadius: 0
@@ -1129,7 +1144,7 @@ MonoBehaviour:
     name: "\uCE5C\uD658\uACBD"
     description: "\uC5F0\uB8CC\uC758 \uD6A8\uC728\uC774 \uC88B\uC544\uC9C4\uB2E4."
     addStatusString: MaxEfficient + 1
-    icon: ItemIcon16
+    icon: Icon_Sk_007
     price: 1
     addStatus:
       catchRadius: 0
@@ -1151,7 +1166,7 @@ MonoBehaviour:
     name: "\uB354 \uB9CE\uC774!!"
     description: "\uC778\uBCA4\uD1A0\uB9AC\uAC00 1\uC5F4 \uB298\uC5B4\uB09C\uB2E4."
     addStatusString: MaxBoxSize + 1
-    icon: ItemIcon17
+    icon: Icon_Sk_008
     price: 1
     addStatus:
       catchRadius: 0
@@ -1173,7 +1188,7 @@ MonoBehaviour:
     name: "\uB450\uAEBC\uC6B4 \uD53C\uBD80"
     description: "\uC120\uBC15\uC774 \uCDA9\uACA9\uC5D0 \uAC15\uD574\uC9C4\uB2E4."
     addStatusString: ShipHealth + 1
-    icon: ItemIcon18
+    icon: Icon_Sk_009
     price: 1
     addStatus:
       catchRadius: 0
@@ -1196,7 +1211,7 @@ MonoBehaviour:
     description: "\uC77C\uC815 \uD655\uB960\uB85C \uD76C\uADC0\uD55C \uBB3C\uACE0\uAE30\uAC00
       \uB4F1\uC7A5\uD55C\uB2E4."
     addStatusString: LockFish + 1
-    icon: ItemIcon19
+    icon: Icon_Sk_010
     price: 1
     addStatus:
       catchRadius: 0
@@ -1219,7 +1234,7 @@ MonoBehaviour:
     description: "\uC77C\uC815 \uD655\uB960\uB85C \uCD94\uAC00 \uBB3C\uACE0\uAE30\uB97C
       \uB09A\uB294\uB2E4."
     addStatusString: FishAmount + 1
-    icon: ItemIcon20
+    icon: Icon_Sk_011
     price: 1
     addStatus:
       catchRadius: 0
@@ -1242,7 +1257,7 @@ MonoBehaviour:
     description: "\uC0C1\uC810\uC5D0 \uBB3C\uACE0\uAE30\uB97C \uB354 \uBE44\uC2F8\uAC8C
       \uD310\uB9E4"
     addStatusString: FishPrice + 1
-    icon: ItemIcon21
+    icon: Icon_Sk_012
     price: 1
     addStatus:
       catchRadius: 0
@@ -1260,6 +1275,29 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 1
+  - id: Sk_013_00
+    name: "\uCC3D\uACE0\uD655\uC7A5 \uB9CC\uB4E4\uAE4C"
+    description: "\uCC3D\uACE0\uB97C \uC0AC\uC6A9\uD558\uB824\uBA74 \uC544\uC774\uD15C\uC774
+      \uB9CE\uC544\uC57C"
+    addStatusString: aa
+    icon: Icon_Sk_001
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
   languageStruct:
   - id: LUs_1001_00
     english: Small Oil Tank

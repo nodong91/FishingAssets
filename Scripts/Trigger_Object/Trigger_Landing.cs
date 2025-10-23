@@ -20,6 +20,7 @@ public class Trigger_Landing : MonoBehaviour
             FishShop,// 생선 가게
             Event,
             Shipyard,// 조선소
+            Board,// 퀘스트 보드
             Count
         }
         public LandingType landingType;
@@ -80,7 +81,7 @@ public class Trigger_Landing : MonoBehaviour
         Game_Manager.current.GetMainUI.OpenCanvas(false);
     }
 
-    public void DialogOutFouce(bool _on)
+    public void CameraOutFouce(bool _on)
     {
         cameraPosition.FocusOffset = _on ? 0f : 10f;
     }

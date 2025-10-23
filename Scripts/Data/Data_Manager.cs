@@ -128,7 +128,6 @@ public class Data_Manager : Data_Parse
         return tempItem;
     }
 
-
     void ConvertSkill(TextAsset _textAsset)
     {
         skillStruct .Clear();
@@ -166,7 +165,7 @@ public class Data_Manager : Data_Parse
                 description = elements[2],
                 addStatusString = elements[3],
                 icon = elements[4],
-                price = int.Parse(elements[5]),
+                price = Parse_Int(elements[5]),
                 addStatus = setAddStatus,
             };
             skillStruct.Add(tempData);

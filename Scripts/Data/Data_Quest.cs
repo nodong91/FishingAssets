@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data_Quest", menuName = "Scriptable Objects/Data_Quest")]
 public class Data_Quest : ScriptableObject
 {
+    public string id;
     public string title;// 퀘스트 제목
     [TextArea]
     public string description;// 퀘스트 설명

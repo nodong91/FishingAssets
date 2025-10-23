@@ -17,7 +17,7 @@ public class UI_Shop : UI_Inventory_Base
     public VerticalLayoutGroup layoutGroup;
     public ToggleGroup toggleGroup;
     public GameObject fixGroup;
-    public Button fixButton, fixAllButton; 
+    public Custom_Button fixButton, fixAllButton; 
     public Custom_Button[] toggleButtons;
 
     public override void SetStart()
@@ -31,8 +31,8 @@ public class UI_Shop : UI_Inventory_Base
             toggleButtons[i].buttonImage.material.SetFloat("_FillAmount", 0f);
         }
         SetToggle(0);
-        fixButton.onClick.AddListener(FixButton);
-        fixAllButton.onClick.AddListener(FixAllButton);
+        fixButton.SetButton(FixButton);
+        fixAllButton.SetButton(FixAllButton);
     }
 
     void SetToggle(int _index)

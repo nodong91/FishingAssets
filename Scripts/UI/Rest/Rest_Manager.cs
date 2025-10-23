@@ -47,7 +47,7 @@ public class Rest_Manager : MonoBehaviour
         Game_Manager.current.GetTimeUI.SetTime(Hour, Minute);
 
         OpenCanvas(false);
-        Game_Manager.current.currentLand.DialogOutFouce(false);// 포커스 취소
+        Game_Manager.current.currentLand.CameraOutFouce(false);// 포커스 취소
         yield return new WaitForSeconds(1f);
 
         normalize = 0f;

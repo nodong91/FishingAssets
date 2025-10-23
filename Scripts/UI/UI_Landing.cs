@@ -13,6 +13,7 @@ public class UI_Landing : MonoBehaviour
         Storage,// 창고
         Energy,// 주유소
         Rest,// 휴식
+        Board,
         Count
     }
     public LandingType currentType = LandingType.None;
@@ -23,6 +24,7 @@ public class UI_Landing : MonoBehaviour
     public GameObject fishShopUI;
     public GameObject eventUI;
     public GameObject shipyardUI;
+    public GameObject boardUI;
 
     LandingStruct landingData;
     public LandingStruct GetLandingData { get { return landingData; } }
@@ -30,6 +32,7 @@ public class UI_Landing : MonoBehaviour
     public delegate void DeleOutLanding();
     public DeleOutLanding outLanding;
     Coroutine opening;
+
     [Header("Buttons")]
     public Custom_Button outButton;
     public Custom_Button restButton;
@@ -37,9 +40,9 @@ public class UI_Landing : MonoBehaviour
     public Custom_Button storageButton;
     public Custom_Button shopButton;
     public Custom_Button shipyardButton;
+    public Custom_Button boardButton;
     bool inlanding, onDialog;
-    //public Custom_Button backButton;
-    //private CanvasGroup backCanvas;
+
     Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
 
     public void SetStart()
@@ -54,6 +57,7 @@ public class UI_Landing : MonoBehaviour
         shopButton.SetButton(ShopButton);
         shipyardButton.SetButton(ShipyardButton);
         storageButton.SetButton(StorageButton);
+        boardButton.SetButton(BoardButton);
         //backButton.SetButton(BackButton);
         //backCanvas = backButton.GetComponent<CanvasGroup>();
     }
@@ -100,6 +104,9 @@ public class UI_Landing : MonoBehaviour
 
             case LandingSetting.LandingType.Shipyard:
                 return shipyardUI;
+
+            case LandingSetting.LandingType.Board:
+                return boardUI;
         }
         return null;
     }
@@ -154,7 +161,7 @@ public class UI_Landing : MonoBehaviour
         onDialog = false;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
         Game_Manager.current.GetEnergyUI.OpenEnergy();
-        Game_Manager.current.currentLand.DialogOutFouce(true);
+        Game_Manager.current.currentLand.CameraOutFouce(true);
     }
 
     void RestButton()// 휴식
@@ -163,7 +170,7 @@ public class UI_Landing : MonoBehaviour
         onDialog = false;
         SetLandingCanvas(false);// 랜드 UI 제거
         Game_Manager.current.GetRestManager.OpenCanvas(true);
-        Game_Manager.current.currentLand.DialogOutFouce(true);
+        Game_Manager.current.currentLand.CameraOutFouce(true);
     }
 
     void ShopButton()
@@ -173,7 +180,7 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(false);        // 샵 버튼 누르면 랜드 UI 제거
         Option_Manager.current.SetThemeMusic(landingData.shopNPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart(landingData.shopNPC);
-        Game_Manager.current.currentLand.DialogOutFouce(true);
+        Game_Manager.current.currentLand.CameraOutFouce(true);
     }
 
     void ShipyardButton()// 조선소
@@ -183,7 +190,7 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(false);        // 조선소 버튼 누르면 랜드 UI 제거
         Option_Manager.current.SetThemeMusic(landingData.shipyardNPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart(landingData.shipyardNPC);
-        Game_Manager.current.currentLand.DialogOutFouce(true);
+        Game_Manager.current.currentLand.CameraOutFouce(true);
     }
 
     void StorageButton()
@@ -194,7 +201,17 @@ public class UI_Landing : MonoBehaviour
 
         Game_Manager.current.GetMainUI.OpenShop();// 창고
         Game_Manager.current.GetInventory.OpenStorage(true);
-        Game_Manager.current.currentLand.DialogOutFouce(true);
+        Game_Manager.current.currentLand.CameraOutFouce(true);
+    }
+
+    void BoardButton()
+    {
+        currentType = LandingType.Board;
+        onDialog = false;
+        SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
+
+        Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
+        Game_Manager.current.currentLand.CameraOutFouce(true);
     }
 
     public void BackButton()// 뒤로 가기
@@ -220,8 +237,13 @@ public class UI_Landing : MonoBehaviour
             case LandingType.Rest:
                 Game_Manager.current.GetRestManager.OpenCanvas(false);
                 break;
+
+            case LandingType.Board:
+                //Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
+                Debug.LogWarning("보드 선택");
+                break;
         }
-        Game_Manager.current.currentLand.DialogOutFouce(false);
+        Game_Manager.current.currentLand.CameraOutFouce(false);
         SetLandingCanvas(true);// 랜드 UI 열기
     }
 

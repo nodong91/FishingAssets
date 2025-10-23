@@ -10,6 +10,7 @@ public class UI_NewsSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public delegate void DeleClick(Data_Quest _questData);
     public DeleClick deleClick;
+    public DeleClick deleMouseOver;
 
     public void SetQuest(Data_Quest _questData)
     {
@@ -35,11 +36,11 @@ public class UI_NewsSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        deleClick?.Invoke(questData);
+        deleMouseOver?.Invoke(questData);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        deleClick?.Invoke(null);
+        deleMouseOver?.Invoke(null);
     }
 }

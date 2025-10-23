@@ -31,8 +31,8 @@ public class Fishing_Canvas : MonoBehaviour
         OnStartButton(0);// ²ô±â
         outButton.gameObject.SetActive(false);
 
-        fishHP.value = 1f;
-        fishSpell.value = 0f;
+        SetFishHP(1f);
+        SetFishSpell(0f);
     }
 
     public void OnStartButton(int _count, string _areaType = "", string _dayType = "")
@@ -83,6 +83,7 @@ public class Fishing_Canvas : MonoBehaviour
     public void SetFishSpell(float _spell)
     {
         fishSpell.value = _spell;
+        fishSpell.gameObject.SetActive(_spell > 0);
     }
 
     public void FishingOver()

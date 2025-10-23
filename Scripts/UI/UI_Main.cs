@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.UI;
 using static UnityEngine.EventSystems.EventTrigger;
@@ -23,6 +24,7 @@ public class UI_Main : MonoBehaviour
     public UI_Status statusUI;
     public Custom_Button inventoryButton;
     public Custom_Button fishGuideButton;
+    public Custom_Button questButton;
     public Custom_Button optionButton;
 
     public CanvasGroup fadeScreen;
@@ -43,8 +45,8 @@ public class UI_Main : MonoBehaviour
 
         inventoryButton.SetButton(InventoryButton);
         fishGuideButton.SetButton(FishGuideButton);
+        questButton.SetButton(QuestButton);
         optionButton.SetButton(OptionButton);
-        //backButton.SetButton(BackButton);
 
         SetCameraCanvas();
         SetFadeScreen(false);
@@ -123,6 +125,14 @@ public class UI_Main : MonoBehaviour
         Game_Manager.current.OutOfControll(true);
     }
 
+    void QuestButton()
+    {
+        OpenCanvas(false);
+        menuState |= MenuState.Quest;// 넣기
+
+        Game_Manager.current.OutOfControll(true);
+    }
+
     public void OptionButton()
     {
         OpenCanvas(false);
@@ -189,40 +199,6 @@ public class UI_Main : MonoBehaviour
             yield return null;
         }
     }
-    Material healthMaterial, energyMaterial;
-    public void SetEnergy(float _energy)
-    {
-        shipEnergy.value = _energy;
-        if (_energy < 0.5f)
-        {
-            lowEnergy = true;
-            if (energyMaterial == null)
-            {
-                Image energy = shipEnergy.fillRect.GetComponent<Image>();
-                energyMaterial = Instantiate(energy.material);
-                energy.material = energyMaterial;
-            }
-            StartCoroutine(LowEnergy(energyMaterial));
-        }
-        else if (lowEnergy == true)
-        {
-            lowEnergy = false;
-        }
-    }
-
-    bool lowEnergy = false;
-    IEnumerator LowEnergy(Material _material)
-    {
-        float normalize = 0f;
-        while (lowEnergy == true)
-        {
-            normalize += Time.deltaTime * 3f;
-            float alpha = Mathf.Sin(normalize);
-            _material.SetColor("_MainColor", Color.white * (alpha + 2f));
-            yield return null;
-        }
-        _material.SetColor("_MainColor", Color.white);
-    }
 
     public void SetFadeScreen(bool _open)
     {
@@ -246,35 +222,45 @@ public class UI_Main : MonoBehaviour
         }
     }
 
-    public void SetHealthPoint(int _point)
-    {
-        RectTransform rectTransform = currentHealthImage.rectTransform;
-        rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
+    //===========================================================================================================================
+    // 상태 체크
+    //===========================================================================================================================
 
-        if (_point <= 1)
+    Material healthMaterial, energyMaterial;
+    bool lowEnergy = false;
+    bool lowHP = false;
+
+    public void SetEnergy(float _energy)
+    {
+        shipEnergy.value = _energy;
+        if (_energy < 0.5f)
         {
-            if (healthMaterial == null)
+            if (lowEnergy == false)
             {
-                healthMaterial = Instantiate(currentHealthImage.material);
-                currentHealthImage.material = healthMaterial;
+                lowEnergy = true;
+                if (energyMaterial == null)
+                {
+                    Image energy = shipEnergy.fillRect.GetComponent<Image>();
+                    energyMaterial = Instantiate(energy.material);
+                    energy.material = energyMaterial;
+                }
+                StartCoroutine(LowEnergy(energyMaterial));
             }
-            lowHP = true;
-            StartCoroutine(LowHP(healthMaterial));
         }
-        else if (lowHP == true)
+        else if (lowEnergy == true)
         {
-            lowHP = false;
+            lowEnergy = false;
         }
     }
-    bool lowHP = false;
-    IEnumerator LowHP(Material _material)
+
+    IEnumerator LowEnergy(Material _material)
     {
         float normalize = 0f;
-        while (lowHP == true)
+        while (lowEnergy == true)
         {
-            normalize += Time.deltaTime * 3f;
-            float alpha = Mathf.Sin(normalize);
-            _material.SetColor("_MainColor", Color.white * (alpha + 2f));
+            normalize += Time.deltaTime * 5f;
+            float alpha = (Mathf.Sin(normalize) + 1f) * 0.5f;// 0~1까지
+            _material.SetColor("_MainColor", Color.white * alpha * 3f);
             yield return null;
         }
         _material.SetColor("_MainColor", Color.white);
@@ -284,6 +270,42 @@ public class UI_Main : MonoBehaviour
     {
         RectTransform rectTransform = maxHealthImage.rectTransform;
         rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
+    }
+
+    public void SetHealthPoint(int _point)
+    {
+        RectTransform rectTransform = currentHealthImage.rectTransform;
+        rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
+        if (_point <= 1)
+        {
+            if (lowHP == false)
+            {
+                lowHP = true;
+                if (healthMaterial == null)
+                {
+                    healthMaterial = Instantiate(currentHealthImage.material);
+                    currentHealthImage.material = healthMaterial;
+                }
+                StartCoroutine(LowHP(healthMaterial));
+            }
+        }
+        else if (lowHP == true)
+        {
+            lowHP = false;
+        }
+    }
+
+    IEnumerator LowHP(Material _material)
+    {
+        float normalize = 0f;
+        while (lowHP == true)
+        {
+            normalize += Time.deltaTime * 5f;
+            float alpha = (Mathf.Sin(normalize) + 1f) * 0.5f;// 0~1까지
+            _material.SetColor("_MainColor", Color.white * alpha * 3f);
+            yield return null;
+        }
+        _material.SetColor("_MainColor", Color.white);
     }
 
     //===========================================================================================================================
