@@ -5,6 +5,13 @@ using UnityEngine.UI;
 
 public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public enum OverStyle
+    {
+        None = 0,
+        Scale = 1,
+
+    }
+    public OverStyle overStyle = OverStyle.Scale;
     public Image buttonImage;
     public Image GetButtonImage { get { return buttonImage; } }
     Action actionClick;
@@ -27,13 +34,31 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     {
         Cursor_Manager.current?.OnMouseOver();
         actionEnter?.Invoke(this);
-        transform.localScale = Vector3.one * 1.2f;
+        switch (overStyle)
+        {
+            case OverStyle.None:
+
+                break;
+
+            case OverStyle.Scale:
+                transform.localScale = Vector3.one * 1.2f;
+                break;
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         Cursor_Manager.current?.OnMouseExit();
         actionExit?.Invoke(this);
-        transform.localScale = Vector3.one;
+        switch (overStyle)
+        {
+            case OverStyle.None:
+
+                break;
+
+            case OverStyle.Scale:
+                transform.localScale = Vector3.one;
+                break;
+        }
     }
 }

@@ -16,6 +16,7 @@ public class UI_Main : MonoBehaviour
         Shop = 1 << 4,
         FishGuide = 1 << 5,
         Ghost = 1 << 6,
+        Result = 1 << 7,
     }
     public MenuState menuState;
 
@@ -82,7 +83,8 @@ public class UI_Main : MonoBehaviour
 
             case MenuState.Quest:
                 menuState &= ~MenuState.Quest;
-                Game_Manager.current.GetInventory.CloseResult(true);//Äù½ºÆ® º¸»ó ´Ý±â
+                Game_Manager.current.GetQuest.OpenCanvas(false);
+                OpenCanvas(true);
                 break;
 
             case MenuState.Option:
@@ -104,6 +106,11 @@ public class UI_Main : MonoBehaviour
             case MenuState.Ghost:
                 menuState &= ~MenuState.Ghost;
                 Game_Manager.current.GetInventory.OpenGhost(false);//À¯·É º¸»ó ´Ý±â
+                break;
+
+            case MenuState.Result:
+                menuState &= ~MenuState.Result;
+                Game_Manager.current.GetInventory.CloseResult(true);//Äù½ºÆ® º¸»ó ´Ý±â
                 break;
         }
     }
@@ -129,7 +136,7 @@ public class UI_Main : MonoBehaviour
     {
         OpenCanvas(false);
         menuState |= MenuState.Quest;// ³Ö±â
-
+        Game_Manager.current.GetQuest.OpenCanvas(true);
         Game_Manager.current.OutOfControll(true);
     }
 
@@ -157,7 +164,7 @@ public class UI_Main : MonoBehaviour
 
     public void OpenQuestResult()
     {
-        menuState |= MenuState.Quest;// ³Ö±â
+        menuState |= MenuState.Result;// ³Ö±â
         Game_Manager.current.GetInventory.OpenResult();// Äù½ºÆ® º¸»ó
     }
 

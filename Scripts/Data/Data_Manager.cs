@@ -249,7 +249,6 @@ public class Data_Manager : Data_Parse
         public int day;
         public UI_Time.WeatherType weatherType;
 
-        public int health;
         public float energy;
         public float money;
         public List<Vector2Int> destroySlot;

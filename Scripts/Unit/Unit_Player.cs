@@ -50,7 +50,7 @@ public class Unit_Player : MonoBehaviour
     {
         moveSpeed = CurrentStatus.shipSpeed;
 
-        health = (prevFullHealth == true) ? CurrentStatus.shipHealth : continueData.health;// 스탯 추가 하기  전 풀피 체크
+        health = (prevFullHealth == true) ? CurrentStatus.shipHealth : CurrentStatus.shipHealth - continueData.destroySlot.Count;// 스탯 추가 하기  전 풀피 체크
         Game_Manager.current.GetMainUI.SetMaxHealthPoint(CurrentStatus.shipHealth);
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
 
@@ -67,7 +67,7 @@ public class Unit_Player : MonoBehaviour
         //transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
         //Debug.LogWarning($"{continueData.playerPosition} : {continueData.playerRotation.eulerAngles}");
         //transform.localScale = continueData.playerScale;
-        health = continueData.health;
+        health = CurrentStatus.shipHealth - continueData.destroySlot.Count;
         energy = continueData.energy;
         StateMachine(State.Idle);
 
@@ -260,16 +260,16 @@ public class Unit_Player : MonoBehaviour
             StateMachine(State.Destroy);
     }
 
+    int destroyCount => Game_Manager.current.GetInventory.myBox.destroySlot.Count;
     public bool TakeDamage()
     {
-        Debug.LogWarning($"TakeDamage - {health}");
-        if (health > 0)
-        {
-            health--;
-            Singleton_Audio.INSTANCE.Audio_FX(clashSound);
-            Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
-            Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
-        }
+        Singleton_Audio.INSTANCE.Audio_FX(clashSound);
+        Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
+
+        health = CurrentStatus.shipHealth - destroyCount;
+        Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
+
+        Debug.LogWarning($"TakeDamage - {health} ({destroyCount})");
         return health <= 0;
     }
 

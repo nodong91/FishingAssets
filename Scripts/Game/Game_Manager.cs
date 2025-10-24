@@ -23,6 +23,7 @@ public class Game_Manager : MonoBehaviour
     public string themeMusic;
     private string oceanSound = "Env_0001";
     public Fishing_Manager fishingAction;
+    public UI_QuestManager questManager;
 
     public Energy_Manager energyManager;
     public Gamble_Lottery lottery;
@@ -68,6 +69,8 @@ public class Game_Manager : MonoBehaviour
         GetSkill.SetStart();
         GetDialog.SetStart();
         GetFishGuide.SetStart();
+        GetQuest.SetStart();
+
         AddStatus();// 추가 스테이트 세팅
         OutOfControll(false);
     }
@@ -138,8 +141,16 @@ public class Game_Manager : MonoBehaviour
         {
             if (instPlayer == null)
             {
-                Transform landingPoint = currentLand.landingPoint.transform;
-                instPlayer = Instantiate(player, landingPoint.position, landingPoint.rotation, transform);
+                Data_Continue continueData = Singleton_Continue.INSTANCE.continueData;
+                if (continueData != null)
+                {
+                    instPlayer = Instantiate(player, continueData.playerPosition, continueData.playerRotation, transform);
+                }
+                else
+                {
+                    Transform landingPoint = currentLand.landingPoint.transform;
+                    instPlayer = Instantiate(player, landingPoint.position, landingPoint.rotation, transform);
+                }
             }
             return instPlayer;
         }
@@ -232,6 +243,19 @@ public class Game_Manager : MonoBehaviour
                 instNews.SetStart();
             }
             return instNews;
+        }
+    }
+
+    private UI_QuestManager instQuest;
+    public UI_QuestManager GetQuest
+    {
+        get
+        {
+            if (instQuest == null)
+            {
+                instQuest = Instantiate(questManager, transform);
+            }
+            return instQuest;
         }
     }
 

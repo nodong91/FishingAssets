@@ -32,13 +32,6 @@ public class UI_NewsManager : MonoBehaviour
             questInfomation.SetDisplay(_questDatas);
         }
     }
-    Dictionary<string, Data_Quest> questList = new Dictionary<string, Data_Quest>();
-    void QuestClick(Data_Quest _questDatas)
-    {
-        if (questList.ContainsKey(_questDatas.id) == false)
-            questList[_questDatas.id] = _questDatas;
-        Debug.LogWarning(_questDatas.title);
-    }
 
     void DisplayNews()
     {
@@ -46,7 +39,7 @@ public class UI_NewsManager : MonoBehaviour
         {
             UI_NewsSlot slot = questSlots[i];
             slot.SetQuest(questDatas[i]);
-            slot.deleClick = QuestClick;
+            slot.deleClick = Game_Manager.current.GetQuest.AddQuestSlot;
             slot.deleMouseOver = QuestInfomation;
         }
     }

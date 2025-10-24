@@ -179,11 +179,11 @@ public class UI_Time : MonoBehaviour
         timeUpdate = StartCoroutine(TimeUpdate());
     }
 
-    public void SetTime( int _hour, float _minute)
+    public void SetTime(int _hour, float _minute)
     {
         hour += _hour;
         minute += _minute;
-        if (hour > 24)
+        if (hour >= 24)
         {
             hour -= 24;
             day++;

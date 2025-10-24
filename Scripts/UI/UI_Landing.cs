@@ -216,7 +216,7 @@ public class UI_Landing : MonoBehaviour
 
     public void BackButton()// 뒤로 가기
     {
-        Debug.LogWarning(currentType);
+        Debug.LogWarning("뒤로 가기 : " + currentType);
         switch (currentType)
         {
             case LandingType.None:

@@ -24,7 +24,6 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             day = Game_Manager.current.GetTimeUI.day,
             weatherType = Game_Manager.current.GetTimeUI.weatherType,
 
-            health = Game_Manager.current.GetPlayer.GetHealth,
             energy = Game_Manager.current.GetPlayer.GetEnergy,
             money = Game_Manager.current.GetMainUI.TryMoney,
             destroySlot = Game_Manager.current.GetInventory.TryDestroySlot,
@@ -51,6 +50,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
         }
         else if (Game_Manager.current != null)
         {
+            // 기본 세팅
             Data_Status_Default defaultStatusData = Game_Manager.current.defaultStatusData;
             Vector3 defaultPosition = new Vector3(0.5f, 0.2f, 10.7f);
             Quaternion defaultRotate = Quaternion.Euler(-0.15f, 103f, 0.02f);
@@ -66,9 +66,9 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
                 day = 0,
                 weatherType = UI_Time.WeatherType.Sun,
 
-                health = defaultStatusData.defaultStatus.shipHealth,
                 energy = defaultStatusData.defaultStatus.maxEnergy,
                 money = 1000f,
+                destroySlot = new System.Collections.Generic.List<Vector2Int>(),
             };
             return data;
         }
