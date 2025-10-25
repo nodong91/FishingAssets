@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static Data_Manager;
 
 public class UI_NewsInfomation : MonoBehaviour
 {
@@ -10,13 +11,13 @@ public class UI_NewsInfomation : MonoBehaviour
     public TMP_Text deadLineText;
     public GridLayoutGroup resultParent;
 
-    public void SetDisplay(Data_Quest _quest)
+    public void SetDisplay(QuestStruct _quest)
     {
-        Debug.LogWarning($"Quest 클릭: {_quest.title}");
-        titleText.text = _quest.title;
-        npcText.text = _quest.npc_ID;
+        Debug.LogWarning($"Quest 클릭: {_quest.name}");
+        titleText.text = _quest.name;
+        npcText.text = _quest.client;
         descriptionText.text = _quest.description;
         deadLineText.text = (_quest.deadLine > 0) ? "남은 시간 " + _quest.deadLine + "일" : null;
-        resultParent.gameObject.SetActive((_quest.resultData.itemID?.Length > 0) == true);
+        resultParent.gameObject.SetActive((_quest.result?.Length > 0) == true);
     }
 }

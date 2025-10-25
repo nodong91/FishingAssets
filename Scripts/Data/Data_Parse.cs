@@ -198,18 +198,6 @@ public class Data_Parse : MonoBehaviour
         Vector2Int[] vectorArray = new Vector2Int[substrings.Length];
         for (int i = 0; i < substrings.Length; i++)
         {
-            //string[] sub2strings = sub1strings[i].Split(';');
-            //int[] subInt = new int[sub2strings.Length];
-            //if (subInt.Length < 2)
-            //{
-            //    continue;
-            //}
-            //for (int j = 0; j < sub2strings.Length; j++)
-            //{
-            //    int index = int.Parse(sub2strings[j]);
-            //    subInt[j] = index;
-            //}
-            //Vector2Int vector = new Vector2Int(subInt[0], subInt[1]);
             Vector2Int vector = Parse_Vector2Int(substrings[i]);
             vectorArray[i] = vector;
         }
@@ -259,6 +247,16 @@ public class Data_Parse : MonoBehaviour
             subInt[i] = index;
         }
         return new Vector3(subInt[0], subInt[1], subInt[2]);
+    }
+
+    public string[] Parse_IDArray(string _str)
+    {
+        if (_str.Length == 0)
+            return new string[0];
+
+        //string temp = "-1;0/0;0/1;0/0;0";
+        string[] substrings = _str.Split('/');
+        return substrings;
     }
 #endif
 

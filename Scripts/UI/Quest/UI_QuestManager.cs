@@ -1,16 +1,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Data_Manager;
 
 public class UI_QuestManager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public GridLayoutGroup gridLayout;
-    public UI_QuestSlot questSlot;
-    Dictionary<string, UI_QuestSlot> dictQuest = new Dictionary<string, UI_QuestSlot>();
     public Custom_Button backButton;
+    public UI_QuestSlot questSlot;
 
-    public UI_QuestSlot selectSlot;
+    Queue<UI_QuestSlot> questQueue = new Queue<UI_QuestSlot>();
+    Dictionary<string, UI_QuestSlot> dictQuest = new Dictionary<string, UI_QuestSlot>();
+    public Dictionary<string, UI_QuestSlot> GetDictQuest { get { return dictQuest; } }
+
+    public TMPro.TMP_Text titleText;
+    public TMPro.TMP_Text npcText;
+    public TMPro.TMP_Text descriptionText;
+
+    private UI_QuestSlot selectSlot;
 
     public void SetStart()
     {
@@ -21,12 +29,14 @@ public class UI_QuestManager : MonoBehaviour
 
     void SetQuestSlot()
     {
-        slotList.Clear();
+        dictQuest.Clear();
+        LoadQuest();
         // 로드해서 슬롯 세팅
-        foreach (var child in dictQuest)
+        for (int i = 0; i < setQuest.currentQuest.Count; i++)
         {
-            //Data_Quest quest = child.Value;
-
+            string id = setQuest.currentQuest[i];
+            QuestStruct questStruct = Singleton_Data.INSTANCE.Dict_Quest[id];
+            SetSlot(questStruct);
         }
     }
 
@@ -34,12 +44,14 @@ public class UI_QuestManager : MonoBehaviour
     {
         Camera_Manager.current.CameraFocus(_open);
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
-
         if (_open == true)
         {
-            if (slotList == null || slotList.Count == 0)
+            if (setQuest.currentQuest == null || setQuest.currentQuest.Count == 0)
                 return;
-            slotList[0].SelectedSlot(true);
+
+            string id = setQuest.currentQuest[0];
+            if (dictQuest.ContainsKey(id))
+                dictQuest[id].SelectedSlot(true);
         }
     }
 
@@ -48,22 +60,21 @@ public class UI_QuestManager : MonoBehaviour
         Game_Manager.current.GetMainUI.CloseCanvas();
     }
 
-    public void AddQuestSlot(Data_Quest _questDatas)
+    public void AddQuestSlot(QuestStruct _questDatas)
     {
-        if (dictQuest.ContainsKey(_questDatas.id) == true)
+        if (dictQuest.Count >= 10)// 받을 수 있는 최대 한도
         {
+            Game_Manager.current.GetMainUI.SetWarnningText("더 이상 퀘스트를 받을 수 없음");
+            return;
+        }
 
-        }
-        else
+        if (dictQuest.ContainsKey(_questDatas.id) == false)
         {
-            // 슬롯 추가
-            UI_QuestSlot instSlot = TryQuestSlot();
-            instSlot.gameObject.SetActive(true);
-            instSlot.SetQuestSlot(_questDatas);
-            dictQuest[_questDatas.id] = instSlot;// 사전 등록
-            slotList.Add(instSlot);// 슬롯 리스트 등록
+            setQuest.currentQuest.Add(_questDatas.id);// 슬롯 리스트 등록
+            SetSlot(_questDatas);
         }
-        Debug.LogWarning($"{_questDatas.title} : {dictQuest.ContainsKey(_questDatas.id)} ({dictQuest.Count})");
+        SaveQuest();
+        Debug.LogWarning($"{_questDatas.name} : {dictQuest.ContainsKey(_questDatas.id)} ({dictQuest.Count})");
     }
 
     public void RemoveQuestSlot(Data_Quest _questDatas)
@@ -73,11 +84,18 @@ public class UI_QuestManager : MonoBehaviour
         findSlot.gameObject.SetActive(false);
         questQueue.Enqueue(findSlot);
         dictQuest.Remove(_questDatas.id);
+        setQuest.compQuest.Add(findSlot.questData.id);
     }
 
-    public TMPro.TMP_Text titleText;
-    public TMPro.TMP_Text npcText;
-    public TMPro.TMP_Text descriptionText;
+    void SetSlot(QuestStruct _questDatas)
+    {
+        // 슬롯 추가
+        UI_QuestSlot instSlot = TryQuestSlot();
+        instSlot.gameObject.SetActive(true);
+        instSlot.SetQuestSlot(_questDatas);
+        dictQuest[_questDatas.id] = instSlot;// 사전 등록
+    }
+
     void DisplayQuest(UI_QuestSlot _slot)
     {
         if (selectSlot != null)
@@ -85,13 +103,11 @@ public class UI_QuestManager : MonoBehaviour
             selectSlot.SelectedSlot(false);
         }
         selectSlot = _slot;
-        titleText.text = _slot.questData.title;
-        npcText.text = _slot.questData.npc_ID;
+        titleText.text = _slot.questData.name;
+        npcText.text = _slot.questData.client;
         descriptionText.text = _slot.questData.description;
     }
 
-    Queue<UI_QuestSlot> questQueue = new Queue<UI_QuestSlot>();
-    List<UI_QuestSlot> slotList = new List<UI_QuestSlot>();
     UI_QuestSlot TryQuestSlot()
     {
         if (questQueue.Count > 0)
@@ -100,5 +116,38 @@ public class UI_QuestManager : MonoBehaviour
         inst.SetStart();
         inst.slotClick = DisplayQuest;
         return inst;
+    }
+
+    //===================================================================================================
+    // 데이터 저장 앤 로드
+    //===================================================================================================
+    [System.Serializable]
+    public struct SetQuest
+    {
+        public List<string> currentQuest;
+        public List<string> compQuest;// 완료 퀘스트
+    }
+    public SetQuest setQuest;
+    const string questData = "SaveQuestData";
+
+    void SaveQuest()
+    {
+        Static_JsonManager.SaveQuestData(questData, setQuest);
+    }
+
+    void LoadQuest()
+    {
+        if (Static_JsonManager.TryLoadQuestData(questData, out SetQuest _data) == true)
+        {
+            setQuest = _data;
+        }
+        else
+        {
+            setQuest = new SetQuest
+            {
+                currentQuest = new List<string>(),
+                compQuest = new List<string>()
+            };
+        }
     }
 }

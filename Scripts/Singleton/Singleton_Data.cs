@@ -9,6 +9,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     public Dictionary<string, FishStruct> Dict_Fish = new Dictionary<string, FishStruct>();
     public Dictionary<string, UsedStruct> Dict_Used = new Dictionary<string, UsedStruct>();
     public Dictionary<string, SkillStruct> Dict_Skill = new Dictionary<string, SkillStruct>();
+    public Dictionary<string, QuestStruct> Dict_Quest = new Dictionary<string, QuestStruct>();
     public Dictionary<string, LanguageStruct> Dict_Language = new Dictionary<string, LanguageStruct>();
 
     public void SetDictionary_Used(List<UsedStruct> _data)
@@ -64,13 +65,30 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         for (int i = 0; i < _data.Count; i++)
         {
             string id = _data[i].id;
-            if (Dict_Audio.ContainsKey(id) == true)
+            if (Dict_Skill.ContainsKey(id) == true)
             {
                 Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
             }
             else
             {
                 Dict_Skill[id] = _data[i];
+            }
+        }
+    }
+
+    public void SetQuestStruct(List<QuestStruct> _data)
+    {
+        Dict_Quest = new Dictionary<string, QuestStruct>();
+        for (int i = 0; i < _data.Count; i++)
+        {
+            string id = _data[i].id;
+            if (Dict_Quest.ContainsKey(id) == true)
+            {
+                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
+            }
+            else
+            {
+                Dict_Quest[id] = _data[i];
             }
         }
     }

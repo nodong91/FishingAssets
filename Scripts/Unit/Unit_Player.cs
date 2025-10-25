@@ -18,7 +18,6 @@ public class Unit_Player : MonoBehaviour
     SetStatus CurrentStatus => Game_Manager.current.currentStatus;
     public float moveSpeed = 1f;
     public int health;
-    public int GetHealth { get { return health; } }
     public bool FullHealth { get { return health >= CurrentStatus?.shipHealth; } }
     public float energy;
     public float GetEnergy { get { return energy; } }

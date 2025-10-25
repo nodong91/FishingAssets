@@ -59,6 +59,10 @@ public class Data_Manager : Data_Parse
             {
                 ConvertSkill(CSV_Data[i]);
             }
+            else if (csv_Type.Contains("Quest"))
+            {
+                ConvertQuest(CSV_Data[i]);
+            }
         }
     }
 
@@ -130,7 +134,7 @@ public class Data_Manager : Data_Parse
 
     void ConvertSkill(TextAsset _textAsset)
     {
-        skillStruct .Clear();
+        skillStruct.Clear();
         string[] data = _textAsset.text.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
@@ -169,6 +173,28 @@ public class Data_Manager : Data_Parse
                 addStatus = setAddStatus,
             };
             skillStruct.Add(tempData);
+        }
+    }
+
+    void ConvertQuest(TextAsset _textAsset)
+    {
+        questStruct.Clear();
+        string[] data = _textAsset.text.Split(new char[] { '\n' });
+        for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
+        {
+            string[] elements = data[i].Split(new char[] { ',' });
+
+            QuestStruct tempData = new QuestStruct
+            {
+                id = elements[0],
+                name = elements[1],
+                description = elements[2],
+                client = elements[3],
+                deadLine = Parse_Int(elements[4]),
+                needItem = Parse_IDArray(elements[5]),
+                result = Parse_IDArray(elements[6]),
+            };
+            questStruct.Add(tempData);
         }
     }
 
@@ -376,6 +402,19 @@ public class Data_Manager : Data_Parse
     }
 
     [System.Serializable]
+    public class QuestStruct
+    {
+        public string id;
+        public string name;
+        [TextArea]
+        public string description;
+        public string client;
+        public int deadLine; // 가격 정보
+        public string[] needItem;
+        public string[] result;
+    }
+
+    [System.Serializable]
     public struct UsedStruct
     {
         [HideInInspector]
@@ -517,6 +556,7 @@ public class Data_Manager : Data_Parse
     public List<UsedStruct> usedStruct = new List<UsedStruct>();
     public List<FishStruct> fishStruct = new List<FishStruct>();
     public List<SkillStruct> skillStruct = new List<SkillStruct>();
+    public List<QuestStruct> questStruct = new List<QuestStruct>();
     public List<LanguageStruct> languageStruct = new List<LanguageStruct>();
     public List<AudioStruct> audioStruct = new List<AudioStruct>();
 
@@ -528,5 +568,6 @@ public class Data_Manager : Data_Parse
         Singleton_Data.INSTANCE.SetDictionary_Language(languageStruct);
         Singleton_Data.INSTANCE.SetDictionary_Audio(audioStruct);
         Singleton_Data.INSTANCE.SetDictionary_Sprite(sprites);
+        Singleton_Data.INSTANCE.SetQuestStruct(questStruct);
     }
 }

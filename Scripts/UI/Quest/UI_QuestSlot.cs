@@ -1,9 +1,10 @@
 using UnityEngine;
+using static Data_Manager;
 
 public class UI_QuestSlot : MonoBehaviour
 {
     public TMPro.TMP_Text slotTitle;
-    public Data_Quest questData;
+    public QuestStruct questData;
 
     public delegate void DeleSlotClick(UI_QuestSlot slot);
     public DeleSlotClick slotClick;
@@ -15,10 +16,10 @@ public class UI_QuestSlot : MonoBehaviour
         clickButton.SetButton(delegate { SelectedSlot(true); });
     }
 
-    public void SetQuestSlot(Data_Quest _questData)
+    public void SetQuestSlot(QuestStruct _questData)
     {
         questData = _questData;
-        slotTitle.text = _questData.title;
+        slotTitle.text = _questData.name;
         SelectedSlot(false);
     }
 

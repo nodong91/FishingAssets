@@ -1,21 +1,22 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static Data_Manager;
 
 public class UI_NewsSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    public Data_Quest questData;
+    public QuestStruct questData;
     public TMP_Text title;
     public TMP_Text description;
 
-    public delegate void DeleClick(Data_Quest _questData);
+    public delegate void DeleClick(QuestStruct _questData);
     public DeleClick deleClick;
     public DeleClick deleMouseOver;
 
-    public void SetQuest(Data_Quest _questData)
+    public void SetQuest(QuestStruct _questData)
     {
         questData = _questData;
-        title.text = questData.title;
+        title.text = questData.name;
         description.text = questData.description;
     }
 

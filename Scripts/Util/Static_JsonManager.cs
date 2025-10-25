@@ -92,7 +92,7 @@ public class Static_JsonManager
     //======================================================================================
     public static void SaveTutorialData(string fileName, List<string> _data)
     {
-         string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + "/Save/";
         // 폴더 생성
         FindFolder(filePath);
 
@@ -212,6 +212,40 @@ public class Static_JsonManager
         _data = default;
         return false;
     }
+
+    //======================================================================================
+    // 중간 세이브 데이터 관련
+    //======================================================================================
+
+    public static void SaveQuestData(string fileName, UI_QuestManager.SetQuest _data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        // 폴더 생성
+        FindFolder(filePath);
+
+        string toJson = JsonUtility.ToJson(_data, prettyPrint: true);
+        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        File.WriteAllText(filePath + fileName + ".json", toJson);
+    }
+
+    public static bool TryLoadQuestData(string fileName, out UI_QuestManager.SetQuest _data)
+    {
+        string filePath = Application.dataPath + "/Save/";
+        string path = filePath + fileName + ".json";
+        FileInfo fileInfo = new FileInfo(path);
+
+        if (fileInfo.Exists == true)
+        {
+            string fromJson = File.ReadAllText(path);
+            //fromJson = Static_AES.Program.Decrypt(fromJson, "SaveOptionData");      // 복화
+            _data = JsonUtility.FromJson<UI_QuestManager.SetQuest>(fromJson);
+            return true;
+        }
+
+        _data = default;
+        return false;
+    }
+
     //======================================================================================
     // 인벤토리 저장
     //======================================================================================

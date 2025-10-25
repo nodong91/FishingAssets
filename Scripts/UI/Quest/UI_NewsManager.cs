@@ -1,13 +1,15 @@
+using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Data_Manager;
 
 public class UI_NewsManager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public int newspaperDay;// 신문 구입 날짜 - 날짜형 퀘스트를 위해
 
-    public Data_Quest[] questDatas;
+    public string[] questDatas;
     public UI_NewsSlot[] questSlots;
     public CanvasGroup questCanvas, background;
     public Custom_Button closeButton;
@@ -15,8 +17,29 @@ public class UI_NewsManager : MonoBehaviour
     public UI_NewsInfomation questInfomation;
     Coroutine openCanvas;
 
+    Queue<string> questQueue = new Queue<string>();
+    void TestSetting()
+    {
+        if (questQueue.Count > 0)
+            return;
+
+        questQueue = new Queue<string>();
+        foreach (var child in Singleton_Data.INSTANCE.Dict_Quest)
+        {
+            if (Game_Manager.current.GetQuest.GetDictQuest.ContainsKey(child.Key) == false)
+                questQueue.Enqueue(child.Key);
+        }
+        questDatas = new string[3];
+        for (int i = 0; i < 3; i++)
+        {
+            questDatas[0] = questQueue.Dequeue();
+        }
+    }
+
     public void SetStart()
     {
+        TestSetting();
+
         questCanvas.gameObject.SetActive(false);
         background.gameObject.SetActive(false);
 
@@ -24,7 +47,7 @@ public class UI_NewsManager : MonoBehaviour
         QuestInfomation(null);// 정보창 닫기
     }
 
-    void QuestInfomation(Data_Quest _questDatas)
+    void QuestInfomation(QuestStruct _questDatas)
     {
         questInfomation.gameObject.SetActive(_questDatas != null);
         if (_questDatas != null)
@@ -38,7 +61,7 @@ public class UI_NewsManager : MonoBehaviour
         for (int i = 0; i < questDatas.Length; i++)
         {
             UI_NewsSlot slot = questSlots[i];
-            slot.SetQuest(questDatas[i]);
+            slot.SetQuest(Singleton_Data.INSTANCE.Dict_Quest[questDatas[i]]);
             slot.deleClick = Game_Manager.current.GetQuest.AddQuestSlot;
             slot.deleMouseOver = QuestInfomation;
         }
@@ -46,6 +69,7 @@ public class UI_NewsManager : MonoBehaviour
 
     public void OpenNewsPaper()
     {
+        // 신문 세팅
         DisplayNews();
         if (openCanvas != null)
             StopCoroutine(openCanvas);
