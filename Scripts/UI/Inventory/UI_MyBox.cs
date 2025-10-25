@@ -39,8 +39,7 @@ public class UI_MyBox : UI_Inventory_Base
         currentWeight += _weight;
         float sliderValue = currentWeight / maxWeight;
         weightSlider.value = sliderValue;
-        weightText.text = $"{Mathf.RoundToInt(currentWeight * 10f) * 0.1f}/{maxWeight}kg";
-        //Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;   // 내용물에 변경이 있으면 저장
+        weightText.text = $"{currentWeight.ToString("N1")}/{maxWeight}kg";
     }
 
     public bool CheckWeight(float _weight)

@@ -17,6 +17,7 @@ public class UI_Main : MonoBehaviour
         FishGuide = 1 << 5,
         Ghost = 1 << 6,
         Result = 1 << 7,
+        Submit = 1 << 8,
     }
     public MenuState menuState;
 
@@ -62,6 +63,7 @@ public class UI_Main : MonoBehaviour
 
     public void CloseCanvas()
     {
+        Debug.LogWarning($"Äµ¹ö½º ´Ý±â : {menuState}");
         if (menuState == 0)
             return;
 
@@ -111,6 +113,12 @@ public class UI_Main : MonoBehaviour
             case MenuState.Result:
                 menuState &= ~MenuState.Result;
                 Game_Manager.current.GetInventory.CloseResult(true);//Äù½ºÆ® º¸»ó ´Ý±â
+                break;
+
+            case MenuState.Submit:
+                menuState |= MenuState.Quest;// ³Ö±â
+                menuState &= ~MenuState.Submit;
+                Game_Manager.current.GetInventory.CloseSubMit();//Äù½ºÆ® º¸»ó ´Ý±â
                 break;
         }
     }
@@ -172,6 +180,13 @@ public class UI_Main : MonoBehaviour
     {
         menuState |= MenuState.Ghost;
         Game_Manager.current.GetInventory.OpenGhost(true);// Äù½ºÆ® º¸»ó
+    }
+
+    public void OpenSubmit()
+    {
+        menuState &= ~MenuState.Quest;
+        menuState |= MenuState.Submit;
+        Game_Manager.current.GetInventory.OpenSubmit();
     }
 
     public void OpenCanvas(bool _open)// ¸ÞÀÎ À¯¾ÆÀÌ Äµ¹ö½º

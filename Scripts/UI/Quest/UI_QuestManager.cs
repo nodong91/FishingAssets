@@ -7,8 +7,10 @@ public class UI_QuestManager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public GridLayoutGroup gridLayout;
-    public Custom_Button backButton;
+    public GameObject submitSet;
+    public Custom_Button backButton, submitButton;
     public UI_QuestSlot questSlot;
+    public CanvasGroup canvasGroup;
 
     Queue<UI_QuestSlot> questQueue = new Queue<UI_QuestSlot>();
     Dictionary<string, UI_QuestSlot> dictQuest = new Dictionary<string, UI_QuestSlot>();
@@ -18,11 +20,13 @@ public class UI_QuestManager : MonoBehaviour
     public TMPro.TMP_Text npcText;
     public TMPro.TMP_Text descriptionText;
 
-    private UI_QuestSlot selectSlot;
-
+    public UI_QuestSlot selectQuest;
+    public Custom_Button actionButton;
     public void SetStart()
     {
         backButton.SetButton(BackButton);
+        submitButton.SetButton(SubmitButton);
+        ActiveActionButton(false);
         SetQuestSlot();
         OpenCanvas(false);
     }
@@ -36,7 +40,7 @@ public class UI_QuestManager : MonoBehaviour
         {
             string id = setQuest.currentQuest[i];
             QuestStruct questStruct = Singleton_Data.INSTANCE.Dict_Quest[id];
-            SetSlot(questStruct);
+            SetQuestSlot(questStruct);
         }
     }
 
@@ -49,6 +53,7 @@ public class UI_QuestManager : MonoBehaviour
             if (setQuest.currentQuest == null || setQuest.currentQuest.Count == 0)
                 return;
 
+            ActiveActionButton(false);
             string id = setQuest.currentQuest[0];
             if (dictQuest.ContainsKey(id))
                 dictQuest[id].SelectedSlot(true);
@@ -58,6 +63,24 @@ public class UI_QuestManager : MonoBehaviour
     void BackButton()
     {
         Game_Manager.current.GetMainUI.CloseCanvas();
+    }
+
+    public void ActiveActionButton(bool _on)
+    {
+        actionButton.gameObject.SetActive(_on);
+    }
+
+    public void HideCanvas(bool _hide)
+    {
+        canvasGroup.alpha = _hide == true ? 0f : 1f;
+        canvasGroup.interactable = canvasGroup.alpha > 0;
+        canvasGroup.blocksRaycasts = canvasGroup.alpha > 0;
+    }
+
+    void SubmitButton()
+    {
+        Game_Manager.current.GetMainUI.OpenSubmit();
+        HideCanvas(true);
     }
 
     public void AddQuestSlot(QuestStruct _questDatas)
@@ -71,7 +94,7 @@ public class UI_QuestManager : MonoBehaviour
         if (dictQuest.ContainsKey(_questDatas.id) == false)
         {
             setQuest.currentQuest.Add(_questDatas.id);// 슬롯 리스트 등록
-            SetSlot(_questDatas);
+            SetQuestSlot(_questDatas);
         }
         SaveQuest();
         Debug.LogWarning($"{_questDatas.name} : {dictQuest.ContainsKey(_questDatas.id)} ({dictQuest.Count})");
@@ -87,7 +110,7 @@ public class UI_QuestManager : MonoBehaviour
         setQuest.compQuest.Add(findSlot.questData.id);
     }
 
-    void SetSlot(QuestStruct _questDatas)
+    void SetQuestSlot(QuestStruct _questDatas)
     {
         // 슬롯 추가
         UI_QuestSlot instSlot = TryQuestSlot();
@@ -98,11 +121,11 @@ public class UI_QuestManager : MonoBehaviour
 
     void DisplayQuest(UI_QuestSlot _slot)
     {
-        if (selectSlot != null)
+        if (selectQuest != null)
         {
-            selectSlot.SelectedSlot(false);
+            selectQuest.SelectedSlot(false);
         }
-        selectSlot = _slot;
+        selectQuest = _slot;
         titleText.text = _slot.questData.name;
         npcText.text = _slot.questData.client;
         descriptionText.text = _slot.questData.description;

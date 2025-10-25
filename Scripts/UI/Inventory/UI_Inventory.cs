@@ -30,13 +30,15 @@ public class UI_Inventory : MonoBehaviour
     public SlotType enterSlotType, selectSlotType;
     private UI_Inventory_Slot enterSlot, selectSlot;
 
-    ItemInInventory selectItemClass;
+    public ItemInInventory selectItemClass;
     ItemInInventory originItemClass;
 
     const int slotSize = 40;
     ResultStruct resultItem;
 
     public string addFishTest;
+
+    public void CloseCanvas() => Game_Manager.current.GetMainUI?.CloseCanvas();
 
     void Update()// 아이템 추가 테스트
     {
@@ -58,15 +60,10 @@ public class UI_Inventory : MonoBehaviour
             Debug.LogWarning($"{randomID} > {Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(randomID)}");
 
             SetIconImage(fishStruct.itemStruct);
-            AddItem(fishStruct.itemStruct);
+            ItemInInventory item = myBox.SetItemClass(fishStruct.itemStruct);// 테스트 아이템 추가
+            selectItemClass = item;
+            DragSlot();// 아이템 추가
         }
-    }
-
-    public void AddItem(ItemStruct _itemStruct)
-    {
-        ItemInInventory item = myBox.SetItemClass(_itemStruct);// 테스트 아이템 추가
-        selectItemClass = item;
-        DragSlot();// 아이템 추가
     }
 
     public void SetStart()
@@ -79,8 +76,6 @@ public class UI_Inventory : MonoBehaviour
 
         SetInfomation(null);// 인포메이션 제거
     }
-
-    public void CloseCanvas() => Game_Manager.current.GetMainUI?.CloseCanvas();
 
     //===========================================================================================================================
     // 열기
@@ -152,6 +147,24 @@ public class UI_Inventory : MonoBehaviour
             myBox.OpenCanvas(true);
             shop.SetResult(true, result);
         }
+    }
+
+    public void OpenSubmit()
+    {
+        if (currentType != SlotType.Submit)
+        {
+            currentType = SlotType.Submit;
+            myBox.OpenCanvas(true);
+            shop.OpenSubmit(true);
+        }
+    }
+
+    public void CloseSubMit()
+    {
+        currentType = SlotType.None;
+        myBox.OpenCanvas(false);
+        shop.OpenSubmit(false);
+        Game_Manager.current.GetQuest.HideCanvas(false);// 다시 열기
     }
 
     public void CloseResult(bool _questReslut)
@@ -234,20 +247,54 @@ public class UI_Inventory : MonoBehaviour
         // 아이템 체크
         if (onDrag == true)// 드래그 중일 때 드랍
         {
-            OnDrag();
+            DragEnd();
         }
         else// 드래그 중이 아닐 때
         {
-            OffDrag(_slot);
+            DragStart(_slot);
         }
     }
 
-    private void OnDrag()// 드랍
+    private void DragStart(UI_Inventory_Slot _slot)// 픽업
+    {
+        if (onRepair == true && _slot.destroy == true)// 수리 모드에서 파괴 슬롯 클릭
+        {
+            onRepair = false;
+            myBox.FixSlot(_slot);    // 하나씩 수리
+            if (selectSlot != null)// 선택된 슬롯이 있으면
+            {
+                SetEmptySlot(selectSlot);// 선택된 슬롯 비우기
+            }
+        }
+        else
+        {
+            if (_slot.empty == true)
+                return;
+
+            if (enterSlotType == SlotType.Submit && shop.CheckMy(_slot.slotNum) == false)// 내가 넣은거 아니라면
+            {
+                Debug.LogWarning("퀘스트 아이템이 필요");
+                return;
+            }
+            onDrag = true;
+            // 픽업
+            selectSlot = _slot.GetLinkSlot;
+            selectItemClass = selectSlot.itemInInventory;
+            selectSlotType = enterSlotType;
+
+            SetOriginItemClass();// 기존 위치 저장
+            SetEmptySlot(selectSlot);// 위치 비우기
+            DragSlot();// 드래그 시작
+        }
+    }
+
+    private void DragEnd()// 드랍
     {
         if (onCheck == true)// 놓을 수 있다.
         {
-            if (selectSlotType == enterSlotType || selectSlot == null)// 같은 슬롯이거나 선택된 슬롯이 없으면
-                return;
+            //Debug.LogWarning(""+ selectSlot);
+            //if (selectSlot == null)// 같은 슬롯이거나 선택된 슬롯이 없으면
+            //    return;
 
             // 내 인벤토리로 옮길 때 무게 초과
             if (enterSlotType == SlotType.MyBox && myBox.CheckWeight(selectItemClass.item.weight) == false)// 드랍 구매
@@ -268,11 +315,30 @@ public class UI_Inventory : MonoBehaviour
                     DragShipyard();
                     break;
 
-                case SlotType.Storage:// 창고가 열려있을 때 우클릭
-                case SlotType.Result:// 보상
-                case SlotType.MyBox:
+                case SlotType.Submit:
+                    QuestStruct questStruct = Game_Manager.current.GetQuest.selectQuest.questData;
+                    int index = System.Array.IndexOf(questStruct.needItem, selectItemClass.item.id);
+                    Debug.LogWarning($"{selectItemClass.item.id} = {index} 퀘스트 아이템 넣기");
+                    if (index < 0)
+                    {
+                        MoveOriginalSlot();
+                        originItemClass = null;
+                        OffDragReset();
+                        return;
+                    }
+
                     // 슬롯 교환
                     UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
+                    tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
+
+                    bool checkQuestItem = shop.CheckQuestItem(questStruct.needItem);// Submit 넣기
+                    Debug.LogWarning($"체크 : {checkQuestItem}");
+                    Game_Manager.current.GetQuest.ActiveActionButton(checkQuestItem);
+                    break;
+
+                default:
+                    // 슬롯 교환
+                    tempEnter = GetInventory(enterSlotType);
                     tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
                     break;
             }
@@ -358,34 +424,6 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    private void OffDrag(UI_Inventory_Slot _slot)// 픽업
-    {
-        if (onRepair == true && _slot.destroy == true)// 수리 모드에서 파괴 슬롯 클릭
-        {
-            onRepair = false;
-            myBox.FixSlot(_slot);    // 하나씩 수리
-            if (selectSlot != null)// 선택된 슬롯이 있으면
-            {
-                SetEmptySlot(selectSlot);// 선택된 슬롯 비우기
-            }
-        }
-        else
-        {
-            if (_slot.empty == true)
-                return;
-
-            onDrag = true;
-            // 픽업
-            selectSlot = _slot.GetLinkSlot;
-            selectItemClass = selectSlot.itemInInventory;
-            selectSlotType = enterSlotType;
-
-            SetOriginItemClass();// 기존 위치 저장
-            SetEmptySlot(selectSlot);// 위치 비우기
-            DragSlot();// 드래그 시작
-        }
-    }
-
     public void OnPointerRightClick(UI_Inventory_Slot _slot)// 우클릭 액션
     {
         if (onDrag == true)// 드래그 중일 때
@@ -445,20 +483,42 @@ public class UI_Inventory : MonoBehaviour
                     SetEmptySlot(selectSlot);// 슬롯 비우기
                     break;
 
-                case SlotType.Storage:// 창고가 열려있을 때 우클릭
-                case SlotType.Result:// 보상
+                case SlotType.MyBox:
+                    ItemAction();// 사용하기
+                    break;
+
+                case SlotType.Submit:
                     if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
                         return;
+
+                    QuestStruct questStruct = Game_Manager.current.GetQuest.selectQuest.questData;
+                    int index = System.Array.IndexOf(questStruct.needItem, item.id);
+                    Debug.LogWarning($"{item.id} = {index} 퀘스트 아이템 넣기");
+                    if (index < 0)
+                    {
+                        return;
+                    }
 
                     UI_Inventory_Base getInventory = enterSlotType == SlotType.MyBox ? shop : myBox;
                     if (getInventory.AddItem(item) == true)// 공간이 있으면 슬롯세팅
                     {
                         SetEmptySlot(selectSlot);// 슬롯 비우기
                     }
+
+                    bool checkQuestItem = shop.CheckQuestItem(questStruct.needItem);// Submit 넣기
+                    Debug.LogWarning($"체크 : {checkQuestItem}");
+                    Game_Manager.current.GetQuest.ActiveActionButton(checkQuestItem);
                     break;
 
-                case SlotType.MyBox:
-                    ItemAction();// 사용하기
+                default:
+                    if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
+                        return;
+
+                    getInventory = enterSlotType == SlotType.MyBox ? shop : myBox;
+                    if (getInventory.AddItem(item) == true)// 공간이 있으면 슬롯세팅
+                    {
+                        SetEmptySlot(selectSlot);// 슬롯 비우기
+                    }
                     break;
             }
         }
@@ -608,13 +668,9 @@ public class UI_Inventory : MonoBehaviour
             case SlotType.MyBox:
                 return myBox;
 
-            case SlotType.Shop:
-            case SlotType.Shipyard:
-            case SlotType.Storage:
-            case SlotType.Result:
+            default:
                 return shop;
         }
-        return null;
     }
 
     public void SetInfomation(UI_Inventory_Slot _slot)
@@ -667,29 +723,33 @@ public class UI_Inventory : MonoBehaviour
     // 가방 안에 아이템이 있는지 확인
     //===========================================================================================================================
 
-    List<UI_Inventory_Slot> checkSlot = new List<UI_Inventory_Slot>();
-    public bool CheckQuestItem(string[] _needItems)// 퀘스트 아이템이 있는지 확인
-    {
-        checkSlot.Clear();
-        bool check = true;
-        for (int i = 0; i < _needItems.Length; i++)
-        {
-            check = myBox.CheckItem(_needItems[i], out UI_Inventory_Slot _slot);
-            if (check == false)
-                return false;
-            checkSlot.Add(_slot.GetLinkSlot);
-        }
-        Debug.LogWarning("CheckQuestItem: " + checkSlot.Count + " items found.");
-        return check;
-    }
+    //List<Vector2Int> checkSlot = new List<Vector2Int>();
+    //public bool CheckQuestItem(string[] _needItems)// 퀘스트 아이템이 있는지 확인
+    //{
+    //    checkSlot.Clear();
+    //    for (int i = 0; i < _needItems.Length; i++)
+    //    {
+    //        UI_Inventory_Slot _slot = shop.CheckItem(_needItems[i], checkSlot);
+    //        if (_slot == null)// 하나라도 없으면 실패
+    //            return false;
 
-    public void RemoveQuestItem()
-    {
-        // 아이템이 모두 있는 경우
-        for (int i = 0; i < checkSlot.Count; i++)
-        {
-            UI_Inventory_Slot slot = checkSlot[i];
-            myBox.SlotEmpty(slot);// 해당 아이템을 비우기
-        }
-    }
+    //        Debug.LogWarning(_slot.slotNum);
+    //        if (checkSlot.Contains(_slot.slotNum) == false)// 같은게 없으면
+    //            checkSlot.Add(_slot.slotNum);
+
+    //        if (_needItems.Length == checkSlot.Count)// 개수가 채워지면 트루
+    //            return true;
+    //    }
+    //    return false;
+    //}
+
+    //public void RemoveQuestItem()
+    //{
+    //    // 아이템이 모두 있는 경우
+    //    for (int i = 0; i < checkSlot.Count; i++)
+    //    {
+    //        UI_Inventory_Slot slot = checkSlot[i];
+    //        myBox.SlotEmpty(slot);// 해당 아이템을 비우기
+    //    }
+    //}
 }

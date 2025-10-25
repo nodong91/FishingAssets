@@ -17,7 +17,7 @@ public class UI_Shop : UI_Inventory_Base
     public VerticalLayoutGroup layoutGroup;
     public ToggleGroup toggleGroup;
     public GameObject fixGroup;
-    public Custom_Button fixButton, fixAllButton; 
+    public Custom_Button fixButton, fixAllButton;
     public Custom_Button[] toggleButtons;
 
     public override void SetStart()
@@ -98,7 +98,7 @@ public class UI_Shop : UI_Inventory_Base
         if (_open)
             SetShopItem();// 열릴때 세팅
     }
- 
+
     public void SetStorage(bool _open)
     {
         inventoryID = "MyStorage";
@@ -151,6 +151,28 @@ public class UI_Shop : UI_Inventory_Base
         fixGroup.gameObject.SetActive(false);
     }
 
+    public void OpenSubmit(bool _open)
+    {
+        StartCoroutine(SettingInventory(new Vector2Int(7, 7)));
+        inventoryID = "OpenSubmit";
+        currentIndex = 0;
+        saveData = inventoryID;
+        OpenCanvas(_open);
+
+        layoutGroup.padding.top = 15;
+        layoutGroup.padding.bottom = 15;
+
+        slotType = SlotType.Submit;
+        toggleGroup.gameObject.SetActive(false);
+        fixGroup.gameObject.SetActive(false);
+    }
+    IEnumerator SettingInventory(Vector2Int _invenSize)
+    {
+        yield return null;
+        EmptyInventoryAllSlot();// 비우기
+        SetInventorySlot(_invenSize);// 인벤토리 세팅
+    }
+
     //===========================================================================================================================
     // 상점 물건 배치
     //===========================================================================================================================
@@ -188,6 +210,10 @@ public class UI_Shop : UI_Inventory_Base
                 break;
 
             case SlotType.Result:
+
+                break;
+
+            default:
 
                 break;
         }

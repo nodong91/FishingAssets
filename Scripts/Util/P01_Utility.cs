@@ -37,7 +37,7 @@ public class P01_Utility
     {
         Queue<T> tempQueue = new Queue<T>();
         System.Random prng = new System.Random(seed);
-        for (int i = 0; i < list.Count - 1; i++)
+        for (int i = 0; i < list.Count; i++)
         {
             int randomIndex = prng.Next(i, list.Count);
             T tempItem = list[randomIndex];

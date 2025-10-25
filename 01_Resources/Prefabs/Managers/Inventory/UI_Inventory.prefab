@@ -333,11 +333,11 @@ RectTransform:
   - {fileID: 4503656369603655195}
   m_Father: {fileID: 6468860929967548972}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.3}
-  m_AnchorMax: {x: 1, y: 0.3}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 1, y: 0}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &834360244898676748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2335,6 +2335,21 @@ MonoBehaviour:
   infomation: {fileID: 4991037844954802746}
   enterSlotType: 0
   selectSlotType: 0
+  selectItemClass:
+    item:
+      id: 
+      name: 
+      itemType: 0
+      explanation: 
+      icon: 
+      itemClass: 0
+      shape: []
+      iconSize: {x: 0, y: 0, z: 0, w: 0}
+      weight: 0
+      price: 0
+    angle: 0
+    shape: []
+    acquisition: 0
   addFishTest: Fs_1001
 --- !u!1 &5706095144403839679
 GameObject:
@@ -2449,11 +2464,11 @@ RectTransform:
   - {fileID: 1103730819953235397}
   m_Father: {fileID: 7672190310853383793}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.3}
-  m_AnchorMax: {x: 0, y: 0.3}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &3501675425658219151
 MonoBehaviour:
   m_ObjectHideFlags: 0

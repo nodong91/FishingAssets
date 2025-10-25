@@ -25,7 +25,7 @@ public class UI_Inventory_Infomation : MonoBehaviour
             addPrice = item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 
 
         float price = Mathf.Round(item.price + addPrice);// 스킬 스탯 추가
-        Debug.LogWarning($"{Singleton_Data.INSTANCE.GetLanguage(item.name)} ({item.name}) :" +
+        Debug.Log($"{Singleton_Data.INSTANCE.GetLanguage(item.name)} ({item.name}) :" +
             $" {item.price} + {Game_Manager.current.currentStatus.fishPrice} = {price}");
         weightText.text = $"{item.weight}<size={weightText.fontSize * 0.5f}>kg</size>";
         priceText.text = price.ToString();

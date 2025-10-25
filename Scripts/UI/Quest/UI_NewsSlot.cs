@@ -8,6 +8,7 @@ public class UI_NewsSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public QuestStruct questData;
     public TMP_Text title;
     public TMP_Text description;
+    public GameObject footImage;
 
     public delegate void DeleClick(QuestStruct _questData);
     public DeleClick deleClick;
@@ -18,6 +19,11 @@ public class UI_NewsSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         questData = _questData;
         title.text = questData.name;
         description.text = questData.description;
+    }
+
+    public void SetFootImage(bool _on)
+    {
+        footImage.SetActive(_on);
     }
 
     void AcceptButton()
@@ -33,6 +39,7 @@ public class UI_NewsSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public void OnPointerClick(PointerEventData eventData)
     {
         deleClick?.Invoke(questData);
+        SetFootImage(true);
     }
 
     public void OnPointerEnter(PointerEventData eventData)

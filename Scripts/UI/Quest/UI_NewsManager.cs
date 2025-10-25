@@ -22,18 +22,27 @@ public class UI_NewsManager : MonoBehaviour
     {
         if (questQueue.Count > 0)
             return;
-
-        questQueue = new Queue<string>();
-        foreach (var child in Singleton_Data.INSTANCE.Dict_Quest)
-        {
-            if (Game_Manager.current.GetQuest.GetDictQuest.ContainsKey(child.Key) == false)
-                questQueue.Enqueue(child.Key);
-        }
+        // 큐 세팅
+        questQueue = SetQueue();
         questDatas = new string[3];
         for (int i = 0; i < 3; i++)
         {
-            questDatas[0] = questQueue.Dequeue();
+            questDatas[i] = questQueue.Dequeue();
         }
+    }
+
+    Queue<string> SetQueue()
+    {
+        List<string> temp = new List<string>();
+        foreach (var child in Singleton_Data.INSTANCE.Dict_Quest)
+        {
+            //// 이미 받은 퀘스트는 나오지 않게
+            //if (Game_Manager.current.GetQuest.GetDictQuest.ContainsKey(child.Key) == false)
+            temp.Add(child.Key);
+        }
+        Queue<string> queue = P01_Utility.ShuffleQueue(temp, 0);// 리스트 섞기
+        Debug.LogWarning($"큐 세팅 : {temp.Count}, {queue.Count}");
+        return queue;
     }
 
     public void SetStart()
@@ -64,6 +73,8 @@ public class UI_NewsManager : MonoBehaviour
             slot.SetQuest(Singleton_Data.INSTANCE.Dict_Quest[questDatas[i]]);
             slot.deleClick = Game_Manager.current.GetQuest.AddQuestSlot;
             slot.deleMouseOver = QuestInfomation;
+            bool setImage = Game_Manager.current.GetQuest.GetDictQuest.ContainsKey(questDatas[i]);
+            slot.SetFootImage(setImage);
         }
     }
 

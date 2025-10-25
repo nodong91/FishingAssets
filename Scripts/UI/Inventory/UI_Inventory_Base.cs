@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -15,6 +16,7 @@ public class UI_Inventory_Base : MonoBehaviour
         Storage,
         Result,
         MyBox,
+        Submit,
     }
     public SlotType slotType = SlotType.None;
     public string saveData { get; set; }
@@ -364,17 +366,44 @@ public class UI_Inventory_Base : MonoBehaviour
         checkList.Clear();
     }
 
-    public bool CheckItem(string _itemID, out UI_Inventory_Slot _slot)
+    public UI_Inventory_Slot CheckItem(string _itemID)
     {
         foreach (var slot in allSlots)
         {
             if (slot.itemInInventory?.item.id == _itemID)// 아이템 ID가 같은지
             {
-                _slot = slot.GetLinkSlot;
-                return true;
+                return slot.GetLinkSlot;
             }
         }
-        _slot = null;
+        return null;
+    }
+
+    List<Vector2Int> checkSlot = new List<Vector2Int>();
+    public bool CheckMy(Vector2Int _slotNum)
+    {
+        return checkSlot.Contains(_slotNum);
+    }
+
+    public bool CheckQuestItem(string[] _needItems)// 퀘스트 아이템이 있는지 확인
+    {
+        checkSlot.Clear();
+        for (int i = 0; i < _needItems.Length; i++)
+        {
+            foreach (var slot in allSlots)
+            {
+                if (slot.itemInInventory?.item.id == _needItems[i])// 아이템 ID가 같은지
+                {
+                    if (checkSlot.Contains(slot.GetLinkSlot.slotNum) == false)
+                    {
+                        checkSlot.Add(slot.GetLinkSlot.slotNum);
+                        continue;
+                    }
+                }
+            }
+
+            if (_needItems.Length == checkSlot.Count)// 개수가 채워지면 트루
+                return true;
+        }
         return false;
     }
 

@@ -87,20 +87,21 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
     {
         if (questData != null)
         {
-            // 인벤토리 안에 해당 아이템이 있는지 확인
-            if (Game_Manager.current.GetInventory.CheckQuestItem(questData.needItems) == true)
-            {
-                Debug.Log($"Quest selected: {questData.title}");
+            Debug.Log($"Quest selected: {questData.title}");
+            //// 인벤토리 안에 해당 아이템이 있는지 확인
+            //if (Game_Manager.current.GetInventory.CheckQuestItem(questData.needItems) == true)// 대화
+            //{
+            //    Debug.Log($"Quest selected: {questData.title}");
 
-                Game_Manager.current.ComplateQuest(questData);// 퀘스트 완료 체크
-                Game_Manager.current.GetInventory.SetResult(questData.resultData);// 퀘스트 완료 후 결과 아이템 설정
-                Game_Manager.current.GetInventory.RemoveQuestItem();// 퀘스트 아이템 인벤토리에서 제거
-                Game_Manager.current.GetDialog.NpcDialog(questData.successDialogData);// 퀘스트 성공 대화 시작
-            }
-            else
-            {
-                Game_Manager.current.GetDialog.NpcDialog(questData.failDialogData);// 퀘스트 실패 대화 시작
-            }
+            //    Game_Manager.current.ComplateQuest(questData);// 퀘스트 완료 체크
+            //    Game_Manager.current.GetInventory.SetResult(questData.resultData);// 퀘스트 완료 후 결과 아이템 설정
+            //    //Game_Manager.current.GetInventory.RemoveQuestItem();// 퀘스트 아이템 인벤토리에서 제거
+            //    Game_Manager.current.GetDialog.NpcDialog(questData.successDialogData);// 퀘스트 성공 대화 시작
+            //}
+            //else
+            //{
+            //    Game_Manager.current.GetDialog.NpcDialog(questData.failDialogData);// 퀘스트 실패 대화 시작
+            //}
         }
         else
         {

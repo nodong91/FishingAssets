@@ -202,12 +202,14 @@ public class Fishing_Manager : MonoBehaviour
                 baitID = "Us_2001";// ¹Ì³¢
                 break;
         }
-        if (Game_Manager.current.GetInventory.myBox.CheckItem(baitID, out UI_Inventory_Slot _slot) == true)// ¹Ì³¢
+        UI_Inventory_Slot _slot = Game_Manager.current.GetInventory.myBox.CheckItem(baitID);
+        if (_slot != null)// ¹Ì³¢
         {
             Game_Manager.current.GetInventory.myBox.SlotEmpty(_slot);// ¹Ì³¢ ÇÏ³ª Á¦°Å
         }
         else
         {
+            // ¹Ì³¢°¡ ¾øÀ¸¸é
             ItemStruct itemStruct = Singleton_Data.INSTANCE.Dict_Used[baitID].itemStruct;
             Game_Manager.current.GetMainUI.SetWarnningText($"{Singleton_Data.INSTANCE.GetLanguage(itemStruct.name)}({baitID})°¡ ÇÊ¿äÇÕ´Ï´Ù.");
             return;
@@ -677,7 +679,7 @@ public class Fishing_Manager : MonoBehaviour
     //===================================================================================================================
     // ³¬½Ã ¿Ï·á
     //===================================================================================================================
-    
+
     void FishingComplate(bool _success)// ³¬½Ã ¿Ï·á
     {
         Debug.LogWarning($"FishingComplate : {_success}");
