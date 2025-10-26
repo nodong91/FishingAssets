@@ -163,26 +163,19 @@ public class Map_Generator : MonoBehaviour
             oceanicNodes.Add(_node);
             return Data_Manager.AreaType.Oceanic;
         }
-        else if (radius < (safetyRadius + 80f))
-        {
-            abyssalNodes.Add(_node);
-            return Data_Manager.AreaType.Abyssal;
-        }
-        hadalNodes.Add(_node);
-        return Data_Manager.AreaType.Hadal;
+        abyssalNodes.Add(_node);
+        return Data_Manager.AreaType.Abyssal;
     }
 
     List<Node> shallowNodes = new List<Node>();
     List<Node> coastalNodes = new List<Node>();
     List<Node> oceanicNodes = new List<Node>();
     List<Node> abyssalNodes = new List<Node>();
-    List<Node> hadalNodes = new List<Node>();
 
     Queue<Node> shallowQueue = new Queue<Node>();
     Queue<Node> coastalQueue = new Queue<Node>();
     Queue<Node> oceanicQueue = new Queue<Node>();
     Queue<Node> abyssalQueue = new Queue<Node>();
-    Queue<Node> hadalQueue = new Queue<Node>();
 
     public Node GetTypeNode(Data_Manager.AreaType _areaType)
     {
@@ -215,13 +208,6 @@ public class Map_Generator : MonoBehaviour
                     abyssalQueue = P01_Utility.ShuffleQueue(abyssalNodes, 0);
                 }
                 return abyssalQueue.Dequeue();
-
-            case Data_Manager.AreaType.Hadal:
-                if (hadalQueue.Count == 0)
-                {
-                    hadalQueue = P01_Utility.ShuffleQueue(hadalNodes, 0);
-                }
-                return hadalQueue.Dequeue();
         }
         return null;
     }
@@ -301,9 +287,6 @@ public class Map_Generator : MonoBehaviour
                         Gizmos.color = Color.blue;
                         break;
                     case Data_Manager.AreaType.Abyssal:
-                        Gizmos.color = Color.gray;
-                        break;
-                    case Data_Manager.AreaType.Hadal:
                         Gizmos.color = Color.black;
                         break;
                 }

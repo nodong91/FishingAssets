@@ -390,58 +390,58 @@ public class Game_Manager : MonoBehaviour
     // 퀘스트 관련
     //====================================================================================================================
 
-    [System.Serializable]
-    public class QuestItem
-    {
-        public Vector2Int slotNum;
-        public Data_Quest[] quests;
-        public QuestItem(Vector2Int _slotNum, Data_Quest[] _quests)
-        {
-            slotNum = _slotNum;
-            quests = _quests;
-        }
-    }
-    public List<QuestItem> questItems = new List<QuestItem>();
-    Dictionary<Vector2Int, Data_Quest[]> questSlots = new Dictionary<Vector2Int, Data_Quest[]>();// 아이템 위치
-    Dictionary<string, List<Data_Quest>> npcQuest = new Dictionary<string, List<Data_Quest>>();// 완료 확인용
-    public Data_Quest[] testDatas;
+    //[System.Serializable]
+    //public class QuestItem
+    //{
+    //    public Vector2Int slotNum;
+    //    public Data_Quest[] quests;
+    //    public QuestItem(Vector2Int _slotNum, Data_Quest[] _quests)
+    //    {
+    //        slotNum = _slotNum;
+    //        quests = _quests;
+    //    }
+    //}
+    //public List<QuestItem> questItems = new List<QuestItem>();
+    //Dictionary<Vector2Int, Data_Quest[]> questSlots = new Dictionary<Vector2Int, Data_Quest[]>();// 아이템 위치
+    //Dictionary<string, List<Data_Quest>> npcQuest = new Dictionary<string, List<Data_Quest>>();// 완료 확인용
+    //public Data_Quest[] testDatas;
 
-    public void BuyNews(Vector2Int _slotNum)// 신문 구매시 퀘스트 세팅
-    {
-        Data_Quest[] temp = new Data_Quest[3]
-        {
-            testDatas[0],
-            testDatas[1],
-            testDatas[2]
-        };
-        questSlots[_slotNum] = temp;
-        questItems.Add(new QuestItem(_slotNum, temp));
+    //public void BuyNews(Vector2Int _slotNum)// 신문 구매시 퀘스트 세팅
+    //{
+    //    Data_Quest[] temp = new Data_Quest[3]
+    //    {
+    //        testDatas[0],
+    //        testDatas[1],
+    //        testDatas[2]
+    //    };
+    //    questSlots[_slotNum] = temp;
+    //    questItems.Add(new QuestItem(_slotNum, temp));
 
-        for (int i = 0; i < temp.Length; i++)
-        {
-            string npcID = temp[i].npc_ID;
-            if (npcQuest.ContainsKey(npcID) == false)
-                npcQuest[npcID] = new List<Data_Quest>();
-            npcQuest[npcID].Add(temp[i]);
-        }
-        Debug.LogWarning($"신문 퀘스트 세팅 : {npcQuest.Count}");
-    }
+    //    for (int i = 0; i < temp.Length; i++)
+    //    {
+    //        string npcID = temp[i].npc_ID;
+    //        if (npcQuest.ContainsKey(npcID) == false)
+    //            npcQuest[npcID] = new List<Data_Quest>();
+    //        npcQuest[npcID].Add(temp[i]);
+    //    }
+    //    Debug.LogWarning($"신문 퀘스트 세팅 : {npcQuest.Count}");
+    //}
 
-    public List<Data_Quest> TryQuestDialog(string _npcID)// NPC 퀘스트 리스팅
-    {
-        if (npcQuest.ContainsKey(_npcID) == false)
-            return null;
+    //public List<Data_Quest> TryQuestDialog(string _npcID)// NPC 퀘스트 리스팅
+    //{
+    //    if (npcQuest.ContainsKey(_npcID) == false)
+    //        return null;
 
-        List<Data_Quest> quests = npcQuest[_npcID];
-        return quests;
-    }
+    //    List<Data_Quest> quests = npcQuest[_npcID];
+    //    return quests;
+    //}
 
-    public void ComplateQuest(Data_Quest _quest)// 완료 퀘스트 리스팅
-    {
-        string npcID = _quest.npc_ID;
-        List<Data_Quest> quests = npcQuest[npcID];
-        quests.Remove(_quest);
-    }
+    //public void ComplateQuest(Data_Quest _quest)// 완료 퀘스트 리스팅
+    //{
+    //    string npcID = _quest.npc_ID;
+    //    List<Data_Quest> quests = npcQuest[npcID];
+    //    quests.Remove(_quest);
+    //}
 
     //====================================================================================================================
     // 플레이어 파괴

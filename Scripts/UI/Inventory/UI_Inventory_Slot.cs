@@ -129,6 +129,12 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
         checkImage.gameObject.SetActive(empty == false);
     }
 
+    public void SetQuestSlot()
+    {
+        checkImage.color = Color.gray;
+        checkImage.gameObject.SetActive(true);
+    }
+
     public void DestroySlot()
     {
         destroy = true;

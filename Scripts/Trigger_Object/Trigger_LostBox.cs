@@ -12,7 +12,7 @@ public class Trigger_LostBox : Trigger_Setting
 
     public void SetResult()
     {
-        Dictionary<Vector2Int, ItemInInventory> dictItem = Game_Manager.current.GetInventory.myBox.GetInventoryItems;
+        Dictionary<Vector2Int, ItemInInventory> dictItem = Game_Manager.current.GetInventory.myBox.GetDictItems;
         List<SaveItemClass> setSaveItems = new List<SaveItemClass>();
         foreach (var child in dictItem)
         {

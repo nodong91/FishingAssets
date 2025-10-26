@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -153,7 +154,9 @@ public class UI_Shop : UI_Inventory_Base
 
     public void OpenSubmit(bool _open)
     {
-        StartCoroutine(SettingInventory(new Vector2Int(7, 7)));
+        QuestStruct _quest = Game_Manager.current.GetQuest.selectQuest.questData;
+        StartCoroutine(SettingInventory(new Vector2Int(7, 7), _quest.result));
+
         inventoryID = "OpenSubmit";
         currentIndex = 0;
         saveData = inventoryID;
@@ -166,11 +169,14 @@ public class UI_Shop : UI_Inventory_Base
         toggleGroup.gameObject.SetActive(false);
         fixGroup.gameObject.SetActive(false);
     }
-    IEnumerator SettingInventory(Vector2Int _invenSize)
+
+    IEnumerator SettingInventory(Vector2Int _invenSize, string[] _itemID)
     {
-        yield return null;
         EmptyInventoryAllSlot();// 비우기
         SetInventorySlot(_invenSize);// 인벤토리 세팅
+        yield return null;
+
+        SetQuestItems(_itemID);
     }
 
     //===========================================================================================================================

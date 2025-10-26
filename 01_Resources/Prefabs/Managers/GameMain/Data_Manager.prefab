@@ -302,6 +302,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: aec46ac2eed2e3f439b84ac30cd4a836, type: 3}
   - {fileID: 21300000, guid: 069c3f8e256e26740b330239e0862efb, type: 3}
   - {fileID: 21300000, guid: 665e365f3480ac441b4e10b35fbf265b, type: 3}
+  - {fileID: 21300000, guid: b31242cf3b5d9094585ede344db83672, type: 3}
   - {fileID: 21300000, guid: 1967c1c5bf9db3d4291ef13bcc441a79, type: 3}
   - {fileID: 21300000, guid: 5ab08f82ae81ffd4db23319ea80796a8, type: 3}
   - {fileID: 21300000, guid: 16eb603a10413134099099141b230bbf, type: 3}
@@ -1309,18 +1310,15 @@ MonoBehaviour:
       fishPrice: 0
   questStruct:
   - id: Qu_0001
-    name: "\uC5D8\uB9AC\uAC8C\uC774\uD130 \uAC00\uC544"
-    description: "\uB0B4\uAC00 \uB09A\uC740 \uC5ED\uB300\uAE09 \uC6D4\uCC99 \uBC30\uC2A4\uB97C
-      \uCC44\uAC14\uC5B4. \uC545\uC5B4\uB97C \uB2EE\uC740 \uBB3C\uACE0\uAE30\uC600\uC5B4!!
-      \uADF8\uB140\uC11D\uC744 \uC7A1\uC544\uC918. \uBCF5\uC218\uB97C \uD574\uC57C\uACA0\uC5B4!!"
-    client: "\uC606\uB3D9\uB124 \uAE40\uC528"
+    name: "\uCCAB \uB09A\uC2DC \uC131\uACF5"
+    description: "\uB09A\uC2DC\uAC00 \uCC98\uC74C\uC778\uAC00? \uC544\uBB34 \uBB3C\uACE0\uAE30\uB098
+      \uD55C\uB9C8\uB9AC \uC7A1\uC544\uC640 \uBD10. \uC2E4\uB825\uC740 \uAC80\uC99D
+      \uD574\uC57C \uACA0\uC9C0?"
+    client: "\uC0DD\uC120\uAC00\uAC8C \uBC15\uC528"
     deadLine: 3
-    needItem:
-    - Fs_1001
-    - Fs_1001
+    needItem: []
     result:
-    - Fs_1001
-    - "Fs_1001\r"
+    - Money_1000
   - id: Qu_0002
     name: "\uB0B4 \uC575\uBB34\uC0C8\uB97C \uCC3E\uC544\uC918."
     description: "\uB0B4 \uCE5C\uAD6C \uC870\uC9C0\uAC00 \uC7A0\uAE50 \uD55C \uB208\uD310
@@ -1334,7 +1332,7 @@ MonoBehaviour:
     - Fs_1001
     result:
     - Fs_1001
-    - "Fs_1001\r"
+    - Fs_1001
   - id: Qu_0003
     name: "\uC96C\uBE44\uC2A4 \uB2E4\uC774\uC5B4\uD2B8"
     description: "\uC131\uACF5\uC740 \uC5B8\uC81C\uB098\\n\uD55C\uBC88\uC5D0 \uBE60\uB974\uAC8C\\n\uD558\uB098\uC529
@@ -1343,6 +1341,28 @@ MonoBehaviour:
     deadLine: 0
     needItem: []
     result: []
+  - id: Qu_0004
+    name: "\uC5D8\uB9AC\uAC8C\uC774\uD130 \uAC00\uC544"
+    description: "\uB0B4\uAC00 \uB09A\uC740 \uC5ED\uB300\uAE09 \uC6D4\uCC99 \uBC30\uC2A4\uB97C
+      \uCC44\uAC14\uC5B4. \uC545\uC5B4\uB97C \uB2EE\uC740 \uBB3C\uACE0\uAE30\uC600\uC5B4!!
+      \uADF8\uB140\uC11D\uC744 \uC7A1\uC544\uC918. \uBCF5\uC218\uB97C \uD574\uC57C\uACA0\uC5B4!!"
+    client: "\uC606\uB3D9\uB124 \uAE40\uC528"
+    deadLine: 3
+    needItem:
+    - Fs_1001
+    result:
+    - Fs_1001
+    - Us_3002
+  - id: Qu_0005
+    name: sadfad
+    description: asdfadsf
+    client: "\uC606\uB3D9\uB124 \uAE40\uC528"
+    deadLine: 3
+    needItem:
+    - Fs_1001
+    result:
+    - Fs_1001
+    - Us_3002
   languageStruct:
   - id: LUs_1001_00
     english: Small Oil Tank

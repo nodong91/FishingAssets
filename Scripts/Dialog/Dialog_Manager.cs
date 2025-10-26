@@ -54,7 +54,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         NPC_Image.SetNativeSize();
 
         NpcDialog(_npc.dataDialogs[0]);
-        QuestDialog(_npc.npc_ID);
+        //QuestDialog(_npc.npc_ID);
         OpenCanvas(true);// 대화 시작
     }
 
@@ -82,24 +82,24 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         DialogAction();
     }
 
-    void QuestDialog(string _npcID)
-    {
-        // 퀘스트가 있는지 확인
-        List<Data_Quest> checkQuest = Game_Manager.current.TryQuestDialog(_npcID);
-        if (checkQuest == null || checkQuest.Count <= 0)
-            return;
+    //void QuestDialog(string _npcID)
+    //{
+    //    // 퀘스트가 있는지 확인
+    //    List<Data_Quest> checkQuest = Game_Manager.current.TryQuestDialog(_npcID);
+    //    if (checkQuest == null || checkQuest.Count <= 0)
+    //        return;
 
-        // 퀘스트가 있다면 선택지 버튼 생성
-        for (int i = 0; i < checkQuest.Count; i++)
-        {
-            if (dataNPC.npc_ID == checkQuest[i].npc_ID)
-            {
-                Dialog_SelectButton button = SetSelectButton(checkQuest[i].selectStruct);
-                button.transform.SetAsFirstSibling();// 순서 변경
-                button.questData = checkQuest[i];
-            }
-        }
-    }
+    //    // 퀘스트가 있다면 선택지 버튼 생성
+    //    for (int i = 0; i < checkQuest.Count; i++)
+    //    {
+    //        if (dataNPC.npc_ID == checkQuest[i].npc_ID)
+    //        {
+    //            Dialog_SelectButton button = SetSelectButton(checkQuest[i].selectStruct);
+    //            button.transform.SetAsFirstSibling();// 순서 변경
+    //            button.questData = checkQuest[i];
+    //        }
+    //    }
+    //}
 
     Dialog_SelectButton SetSelectButton(SelectStruct _selectStruct)
     {

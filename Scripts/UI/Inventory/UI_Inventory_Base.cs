@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -37,7 +36,7 @@ public class UI_Inventory_Base : MonoBehaviour
     public RectTransform infomationRect;
     Coroutine loadingItem;
     Dictionary<Vector2Int, ItemInInventory> dictItem = new Dictionary<Vector2Int, ItemInInventory>();
-    public Dictionary<Vector2Int, ItemInInventory> GetInventoryItems { get { return dictItem; } }
+    public Dictionary<Vector2Int, ItemInInventory> GetDictItems { get { return dictItem; } }
 
     protected virtual void SetWeight(float _weight) { }
 
@@ -99,7 +98,7 @@ public class UI_Inventory_Base : MonoBehaviour
         }
     }
 
-    public void SetInventorySlot(Vector2Int _size)
+    public void SetInventorySlot(Vector2Int _size)// 인벤토리 세팅
     {
         if (allSlots != null)
         {
@@ -198,15 +197,52 @@ public class UI_Inventory_Base : MonoBehaviour
             _slot.SetSlotImage = iconImage;// 슬롯에 이미지 세팅
             SetImage(iconImage, _itemClass.item);// 이미지 세팅
 
-            // 퀘스트 아이템 체크 내 인벤토리에 퀘스트 아이템이 들어오면
-            if (slotType == SlotType.MyBox && _itemClass.item.itemType == ItemStruct.ItemType.Quest)
-            {
-                Debug.LogWarning($"{slotType} 세팅");
-                Game_Manager.current.BuyNews(_slot.slotNum);
-            }
+            //// 퀘스트 아이템 체크 내 인벤토리에 퀘스트 아이템이 들어오면
+            //if (slotType == SlotType.MyBox && _itemClass.item.itemType == ItemStruct.ItemType.Quest)
+            //{
+            //    Debug.LogWarning($"{slotType} 세팅");
+            //    Game_Manager.current.BuyNews(_slot.slotNum);
+            //}
         }
         dictItem[_slot.slotNum] = _itemClass;
         SaveDictionary();
+    }
+
+    public void SetQuestSlot(UI_Inventory_Slot _slot, ItemInInventory _itemClass)
+    {
+        _slot.SetBase(_itemClass);// 메인 슬롯
+        _slot.SetQuestSlot();
+        if (_itemClass != null)// 비워져 있는지
+        {
+            // 링크 슬롯 세팅
+            Vector2Int[] shape = _itemClass.shape;
+            if (shape != null)
+            {
+                for (int i = 0; i < shape.Length; i++)
+                {
+                    int slotX = _slot.slotNum.x + shape[i].x;
+                    int slotY = _slot.slotNum.y + shape[i].y;
+                    allSlots[slotX, slotY].SetLink(_slot);
+                    allSlots[slotX, slotY].SetQuestSlot();
+                }
+            }
+            Image iconImage = IconPool();// 이미지 풀에서 가져오기
+            iconImage.gameObject.SetActive(true);
+            iconImage.transform.position = _slot.transform.position;
+            iconImage.transform.rotation = Quaternion.Euler(0f, 0f, _itemClass.angle);
+
+            iconImage.color = Color.gray;
+            iconImage.CrossFadeAlpha(0.5f, 0, false);
+
+            _slot.SetSlotImage = iconImage;// 슬롯에 이미지 세팅
+            SetImage(iconImage, _itemClass.item);// 이미지 세팅
+        }
+        dictItem[_slot.slotNum] = _itemClass;
+    }
+
+    void SetItemImage()
+    {
+
     }
 
     Image IconPool()
@@ -379,6 +415,8 @@ public class UI_Inventory_Base : MonoBehaviour
     }
 
     List<Vector2Int> checkSlot = new List<Vector2Int>();
+    List<Vector2Int> questResultSlot = new List<Vector2Int>();
+
     public bool CheckMy(Vector2Int _slotNum)
     {
         return checkSlot.Contains(_slotNum);
@@ -386,6 +424,21 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public bool CheckQuestItem(string[] _needItems)// 퀘스트 아이템이 있는지 확인
     {
+        //List<string> needList = new List<string>(_needItems);
+        //foreach (var child in allSlots)
+        //{
+        //    for (int i = 0; i < needList.Count; i++)
+        //    {
+        //        if (child.itemInInventory.item.id == needList[i])
+        //        {
+        //            needList.Remove(needList[i]);
+        //            continue;
+        //        }
+        //    }
+        //}
+        //Debug.LogWarning("없는 아이템 개수 : " + needList.Count);
+        //return needList.Count == 0;
+
         checkSlot.Clear();
         for (int i = 0; i < _needItems.Length; i++)
         {
@@ -393,9 +446,10 @@ public class UI_Inventory_Base : MonoBehaviour
             {
                 if (slot.itemInInventory?.item.id == _needItems[i])// 아이템 ID가 같은지
                 {
-                    if (checkSlot.Contains(slot.GetLinkSlot.slotNum) == false)
+                    Vector2Int slotNum = slot.GetLinkSlot.slotNum;// 체크에 이미 등록되거나 보상아이템이 아닌
+                    if (checkSlot.Contains(slotNum) == false && questResultSlot.Contains(slotNum) == false)
                     {
-                        checkSlot.Add(slot.GetLinkSlot.slotNum);
+                        checkSlot.Add(slotNum);
                         continue;
                     }
                 }
@@ -406,6 +460,82 @@ public class UI_Inventory_Base : MonoBehaviour
         }
         return false;
     }
+
+    public void SetQuestItems(string[] _itemID)// 퀘스트 보상 세팅
+    {
+        for (int i = 0; i < _itemID.Length; i++)
+        {
+            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_itemID[i]);
+            UI_Inventory_Slot slot = GetEmptySlot(item);// 아이템 넣을 수 있는 칸 찾기
+            if (slot == null)
+            {
+                Debug.LogWarning("넣을만한 빈 슬롯 없음");
+                break;
+            }
+
+            ItemInInventory itemClass = SetItemClass(item);// 구매할 경우 새로운 클라스 캡슐화
+            SetQuestSlot(slot, itemClass);
+            questResultSlot.Add(slot.slotNum);
+        }
+    }
+
+    public bool CheckAllSlot(string[] _needItem)
+    {
+        List<string> needList = new List<string>(_needItem);
+        foreach (var child in allSlots)
+        {
+            for (int i = 0; i < needList.Count; i++)
+            {
+                if (child.itemInInventory.item.id == needList[i])
+                {
+                    needList.Remove(needList[i]);
+                    continue;
+                }
+            }
+        }
+        Debug.LogWarning("없는 아이템 개수 : "+ needList.Count);
+        return needList.Count == 0;
+    }
+
+    public void QuestResultUnlock()
+    {
+        for (int i = 0; i < checkSlot.Count; i++)
+        {
+            SlotEmpty(allSlots[checkSlot[i].x, checkSlot[i].y]);
+            Debug.LogWarning(checkSlot);
+        }
+        checkSlot.Clear();
+        Game_Manager.current.GetInventory.currentType = SlotType.Storage;
+        slotType = SlotType.Storage;
+
+        for (int i = 0; i < questResultSlot.Count; i++)
+        {
+            UI_Inventory_Slot slot = allSlots[questResultSlot[i].x, questResultSlot[i].y];
+            slot.CheckOff();
+
+            // 링크 슬롯 세팅
+            Vector2Int[] shape = slot.itemInInventory.shape;
+            if (shape != null)
+            {
+                for (int j = 0; j < shape.Length; j++)
+                {
+                    int slotX = slot.slotNum.x + shape[j].x;
+                    int slotY = slot.slotNum.y + shape[j].y;
+                    //allSlots[slotX, slotY].SetLink(slot);
+                    allSlots[slotX, slotY].CheckOff();
+                }
+            }
+
+            Image iconImage = slot.GetSlotImage;
+            iconImage.color = Color.white;
+            iconImage.CrossFadeAlpha(1f, 0, false);
+
+            Debug.LogWarning("  퀘스트 완료");
+        }
+
+        Game_Manager.current.GetQuest.RemoveQuestSlot();
+    }
+
 
 
     //public bool TryCheckItem(string _itemID, out UI_Inventory_Slot _slot)

@@ -19,6 +19,8 @@ public class UI_QuestManager : MonoBehaviour
     public TMPro.TMP_Text titleText;
     public TMPro.TMP_Text npcText;
     public TMPro.TMP_Text descriptionText;
+    public TMPro.TMP_Text needText;
+    public TMPro.TMP_Text resultText;
 
     public UI_QuestSlot selectQuest;
     public Custom_Button actionButton;
@@ -26,6 +28,7 @@ public class UI_QuestManager : MonoBehaviour
     {
         backButton.SetButton(BackButton);
         submitButton.SetButton(SubmitButton);
+        actionButton.SetButton(ActionButton);
         ActiveActionButton(false);
         SetQuestSlot();
         OpenCanvas(false);
@@ -65,6 +68,12 @@ public class UI_QuestManager : MonoBehaviour
         Game_Manager.current.GetMainUI.CloseCanvas();
     }
 
+    void ActionButton()
+    {
+        Game_Manager.current.GetInventory.SetQuestResult();
+        ActiveActionButton(false);
+    }
+
     public void ActiveActionButton(bool _on)
     {
         actionButton.gameObject.SetActive(_on);
@@ -75,6 +84,15 @@ public class UI_QuestManager : MonoBehaviour
         canvasGroup.alpha = _hide == true ? 0f : 1f;
         canvasGroup.interactable = canvasGroup.alpha > 0;
         canvasGroup.blocksRaycasts = canvasGroup.alpha > 0;
+    }
+
+    public void SubmitBackButton()
+    {
+        HideCanvas(false);
+        // 퀘스트 첫번째 활성화
+        string id = setQuest.currentQuest[0];
+        if (dictQuest.ContainsKey(id))
+            dictQuest[id].SelectedSlot(true);
     }
 
     void SubmitButton()
@@ -100,14 +118,15 @@ public class UI_QuestManager : MonoBehaviour
         Debug.LogWarning($"{_questDatas.name} : {dictQuest.ContainsKey(_questDatas.id)} ({dictQuest.Count})");
     }
 
-    public void RemoveQuestSlot(Data_Quest _questDatas)
+    public void RemoveQuestSlot()
     {
         // 슬롯 제거
-        UI_QuestSlot findSlot = dictQuest[_questDatas.id];
+        UI_QuestSlot findSlot = selectQuest;
         findSlot.gameObject.SetActive(false);
         questQueue.Enqueue(findSlot);
-        dictQuest.Remove(_questDatas.id);
+        dictQuest.Remove(findSlot.questData.id);
         setQuest.compQuest.Add(findSlot.questData.id);
+        selectQuest = null;
     }
 
     void SetQuestSlot(QuestStruct _questDatas)
@@ -116,10 +135,11 @@ public class UI_QuestManager : MonoBehaviour
         UI_QuestSlot instSlot = TryQuestSlot();
         instSlot.gameObject.SetActive(true);
         instSlot.SetQuestSlot(_questDatas);
+
         dictQuest[_questDatas.id] = instSlot;// 사전 등록
     }
 
-    void DisplayQuest(UI_QuestSlot _slot)
+    void SelectQuest(UI_QuestSlot _slot)// 퀘스트 인포메이션 세팅
     {
         if (selectQuest != null)
         {
@@ -129,6 +149,28 @@ public class UI_QuestManager : MonoBehaviour
         titleText.text = _slot.questData.name;
         npcText.text = _slot.questData.client;
         descriptionText.text = _slot.questData.description;
+        // 필요한 아이템 출력
+        needText.text = "";
+        for (int i = 0; i < _slot.questData.needItem.Length; i++)
+        {
+            if (i > 0) needText.text += "\n";
+            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_slot.questData.needItem[i]);
+            needText.text += Singleton_Data.INSTANCE.GetLanguage(item.name);
+        }
+        // 보상 아이템 출력
+        resultText.text = "";
+        for (int i = 0; i < _slot.questData.result.Length; i++)
+        {
+            if (i > 0) resultText.text += "\n";
+            string key = Singleton_Data.INSTANCE.GetItemStruct(_slot.questData.result[i]).name;
+            resultText.text += Singleton_Data.INSTANCE.GetLanguage(key);
+        }
+
+        if (_slot.questData.needItem == null)
+            return;
+
+        bool active = Game_Manager.current.GetInventory.myBox.CheckAllSlot(_slot.questData.needItem);
+        submitSet.SetActive(active);// 버튼 활성화
     }
 
     UI_QuestSlot TryQuestSlot()
@@ -137,7 +179,7 @@ public class UI_QuestManager : MonoBehaviour
             return questQueue.Dequeue();
         UI_QuestSlot inst = Instantiate(questSlot, gridLayout.transform);
         inst.SetStart();
-        inst.slotClick = DisplayQuest;
+        inst.slotClick = SelectQuest;
         return inst;
     }
 

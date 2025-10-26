@@ -164,7 +164,8 @@ public class UI_Inventory : MonoBehaviour
         currentType = SlotType.None;
         myBox.OpenCanvas(false);
         shop.OpenSubmit(false);
-        Game_Manager.current.GetQuest.HideCanvas(false);// 다시 열기
+
+        Game_Manager.current.GetQuest.SubmitBackButton();// 다시 열기
     }
 
     public void CloseResult(bool _questReslut)
@@ -237,6 +238,11 @@ public class UI_Inventory : MonoBehaviour
     {
         UI_Inventory_Base getInventory = GetInventory(enterSlotType);
         getInventory.SlotEmpty(_slot);
+    }
+
+    public void SetQuestResult()
+    {
+        shop.QuestResultUnlock();
     }
 
     //===========================================================================================================================

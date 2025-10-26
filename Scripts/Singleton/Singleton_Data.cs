@@ -156,6 +156,9 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
 
     public string GetLanguage(string _id)
     {
+        if (_id == null)
+            return "";
+
         if (Dict_Language.ContainsKey(_id) == true)
         {
             string text = string.Empty;

@@ -192,7 +192,7 @@ public class Data_Manager : Data_Parse
                 client = elements[3],
                 deadLine = Parse_Int(elements[4]),
                 needItem = Parse_IDArray(elements[5]),
-                result = Parse_IDArray(elements[6]),
+                result = Parse_IDArray(elements[6].Trim()),
             };
             questStruct.Add(tempData);
         }
@@ -462,7 +462,6 @@ public class Data_Manager : Data_Parse
         Coastal = 2,
         Oceanic = 3,
         Abyssal = 4,
-        Hadal = 5,
     }
 
     public enum DayType
