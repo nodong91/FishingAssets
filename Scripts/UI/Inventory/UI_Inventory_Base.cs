@@ -424,21 +424,6 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public bool CheckQuestItem(string[] _needItems)// 퀘스트 아이템이 있는지 확인
     {
-        //List<string> needList = new List<string>(_needItems);
-        //foreach (var child in allSlots)
-        //{
-        //    for (int i = 0; i < needList.Count; i++)
-        //    {
-        //        if (child.itemInInventory.item.id == needList[i])
-        //        {
-        //            needList.Remove(needList[i]);
-        //            continue;
-        //        }
-        //    }
-        //}
-        //Debug.LogWarning("없는 아이템 개수 : " + needList.Count);
-        //return needList.Count == 0;
-
         checkSlot.Clear();
         for (int i = 0; i < _needItems.Length; i++)
         {
@@ -479,35 +464,36 @@ public class UI_Inventory_Base : MonoBehaviour
         }
     }
 
-    public bool CheckAllSlot(string[] _needItem)
+    public bool CheckAllSlot(string[] _needItem)// 가진 아이템 중에 퀘스트 아이템 찾기
     {
         List<string> needList = new List<string>(_needItem);
-        foreach (var child in allSlots)
+        foreach (var child in dictItem)
         {
             for (int i = 0; i < needList.Count; i++)
             {
-                if (child.itemInInventory.item.id == needList[i])
+                if (child.Value != null && child.Value.item.id == needList[i])
                 {
                     needList.Remove(needList[i]);
                     continue;
                 }
             }
         }
-        Debug.LogWarning("없는 아이템 개수 : "+ needList.Count);
+        Debug.LogWarning($"퀘스트 아이템 {_needItem.Length}개 중 {needList.Count}개가 모자람");
         return needList.Count == 0;
     }
 
-    public void QuestResultUnlock()
+    public void QuestResultUnlock()// 잠겨있는 퀘스트 보상 열기
     {
         for (int i = 0; i < checkSlot.Count; i++)
         {
+            // 넣은 아이템 제거
             SlotEmpty(allSlots[checkSlot[i].x, checkSlot[i].y]);
-            Debug.LogWarning(checkSlot);
         }
         checkSlot.Clear();
+        // 창고로 변경
         Game_Manager.current.GetInventory.currentType = SlotType.Storage;
         slotType = SlotType.Storage;
-
+        // 퀘스트 보상 열기
         for (int i = 0; i < questResultSlot.Count; i++)
         {
             UI_Inventory_Slot slot = allSlots[questResultSlot[i].x, questResultSlot[i].y];
@@ -521,19 +507,13 @@ public class UI_Inventory_Base : MonoBehaviour
                 {
                     int slotX = slot.slotNum.x + shape[j].x;
                     int slotY = slot.slotNum.y + shape[j].y;
-                    //allSlots[slotX, slotY].SetLink(slot);
                     allSlots[slotX, slotY].CheckOff();
                 }
             }
-
             Image iconImage = slot.GetSlotImage;
             iconImage.color = Color.white;
             iconImage.CrossFadeAlpha(1f, 0, false);
-
-            Debug.LogWarning("  퀘스트 완료");
         }
-
-        Game_Manager.current.GetQuest.RemoveQuestSlot();
     }
 
 

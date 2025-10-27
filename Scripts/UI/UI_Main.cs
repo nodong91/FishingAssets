@@ -67,11 +67,11 @@ public class UI_Main : MonoBehaviour
         if (menuState == 0)
             return;
 
-        Game_Manager.current.OutOfControll(false);
         switch (menuState)
         {
             case MenuState.Inventory:
                 menuState &= ~MenuState.Inventory;
+                Game_Manager.current.OutOfControll(false);
                 Game_Manager.current.GetInventory.OpenInventory(false);
                 statusUI.OpenCanvas(false);
                 OpenCanvas(true);
@@ -79,18 +79,21 @@ public class UI_Main : MonoBehaviour
 
             case MenuState.Fishing:
                 menuState &= ~MenuState.Fishing;
+                Game_Manager.current.OutOfControll(false);
                 Game_Manager.current.GetInventory.CloseShop();// »óÁ¡ ´Ý±â
                 Game_Manager.current.GetFishing.FishingOver();
                 break;
 
             case MenuState.Quest:
                 menuState &= ~MenuState.Quest;
+                Game_Manager.current.OutOfControll(false);
                 Game_Manager.current.GetQuest.OpenCanvas(false);
                 OpenCanvas(true);
                 break;
 
             case MenuState.Option:
                 menuState &= ~MenuState.Option;
+                Game_Manager.current.OutOfControll(false);
                 Option_Manager.current.OpenCanvas(false);
                 OpenCanvas(true);
                 break;
@@ -102,16 +105,19 @@ public class UI_Main : MonoBehaviour
 
             case MenuState.FishGuide:
                 menuState &= ~MenuState.FishGuide;
+                Game_Manager.current.OutOfControll(false);
                 Game_Manager.current.GetFishGuide.OpenCanvas(false);
                 OpenCanvas(true);
                 break;
             case MenuState.Ghost:
                 menuState &= ~MenuState.Ghost;
+                Game_Manager.current.OutOfControll(false);
                 Game_Manager.current.GetInventory.OpenGhost(false);//À¯·É º¸»ó ´Ý±â
                 break;
 
             case MenuState.Result:
                 menuState &= ~MenuState.Result;
+                Game_Manager.current.OutOfControll(false);
                 Game_Manager.current.GetInventory.CloseResult(true);//Äù½ºÆ® º¸»ó ´Ý±â
                 break;
 

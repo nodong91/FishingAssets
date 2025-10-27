@@ -154,9 +154,11 @@ public class UI_Shop : UI_Inventory_Base
 
     public void OpenSubmit(bool _open)
     {
-        QuestStruct _quest = Game_Manager.current.GetQuest.selectQuest.questData;
-        StartCoroutine(SettingInventory(new Vector2Int(7, 7), _quest.result));
-
+        if (_open == true)
+        {
+            QuestStruct _quest = Game_Manager.current.GetQuest.GetSelectQuest;
+            StartCoroutine(SettingInventory(new Vector2Int(7, 7), _quest.result));
+        }
         inventoryID = "OpenSubmit";
         currentIndex = 0;
         saveData = inventoryID;

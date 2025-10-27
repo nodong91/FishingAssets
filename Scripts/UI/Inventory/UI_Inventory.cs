@@ -322,7 +322,7 @@ public class UI_Inventory : MonoBehaviour
                     break;
 
                 case SlotType.Submit:
-                    QuestStruct questStruct = Game_Manager.current.GetQuest.selectQuest.questData;
+                    QuestStruct questStruct = Game_Manager.current.GetQuest.GetSelectQuest;
                     int index = System.Array.IndexOf(questStruct.needItem, selectItemClass.item.id);
                     Debug.LogWarning($"{selectItemClass.item.id} = {index} 퀘스트 아이템 넣기");
                     if (index < 0)
@@ -496,14 +496,26 @@ public class UI_Inventory : MonoBehaviour
                 case SlotType.Submit:
                     if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
                         return;
+                    
+                    if (enterSlotType == SlotType.Submit && shop.CheckMy(_slot.slotNum) == false)// 내가 넣은거 아니라면
+                    {
+                        Debug.LogWarning("퀘스트 아이템이 필요");
+                        return;
+                    }
 
-                    QuestStruct questStruct = Game_Manager.current.GetQuest.selectQuest.questData;
-                    int index = System.Array.IndexOf(questStruct.needItem, item.id);
-                    Debug.LogWarning($"{item.id} = {index} 퀘스트 아이템 넣기");
-                    if (index < 0)
+                    QuestStruct questStruct = Game_Manager.current.GetQuest.GetSelectQuest;
+                    Debug.LogWarning($"{item.id} 퀘스트 아이템 넣기");
+                    List<string> temp = new List<string>(questStruct.needItem);
+                    if (temp.Contains(item.id) == false)
                     {
                         return;
                     }
+                    //int index = System.Array.IndexOf(questStruct.needItem, item.id);
+                    //Debug.LogWarning($"{item.id} = {index} 퀘스트 아이템 넣기");
+                    //if (index < 0)
+                    //{
+                    //    return;
+                    //}
 
                     UI_Inventory_Base getInventory = enterSlotType == SlotType.MyBox ? shop : myBox;
                     if (getInventory.AddItem(item) == true)// 공간이 있으면 슬롯세팅
@@ -512,7 +524,7 @@ public class UI_Inventory : MonoBehaviour
                     }
 
                     bool checkQuestItem = shop.CheckQuestItem(questStruct.needItem);// Submit 넣기
-                    Debug.LogWarning($"체크 : {checkQuestItem}");
+                    Debug.LogWarning($"퀘스트 아이템 체크 : {checkQuestItem}");
                     Game_Manager.current.GetQuest.ActiveActionButton(checkQuestItem);
                     break;
 

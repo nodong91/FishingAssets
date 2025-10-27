@@ -4,7 +4,8 @@ using static Data_Manager;
 public class UI_QuestSlot : MonoBehaviour
 {
     public TMPro.TMP_Text slotTitle;
-    public QuestStruct questData;
+    private QuestStruct questData;
+    public QuestStruct GetQuestData { get { return questData; } }
 
     public delegate void DeleSlotClick(UI_QuestSlot slot);
     public DeleSlotClick slotClick;
