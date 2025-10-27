@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
+using static UI_QuestManager;
 
 public class UI_QuestManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class UI_QuestManager : MonoBehaviour
     public GridLayoutGroup gridLayout;
     public GameObject submitSet;
     public Custom_Button backButton, submitButton;
+    public Custom_Button actionButton;
     public UI_QuestSlot questSlot;
     public CanvasGroup canvasGroup;
 
@@ -21,9 +23,9 @@ public class UI_QuestManager : MonoBehaviour
     public TMPro.TMP_Text descriptionText;
     public TMPro.TMP_Text needText;
     public TMPro.TMP_Text resultText;
-
+    public GameObject notQuest;
     public UI_QuestSlot selectQuest;
-    public Custom_Button actionButton;
+    public QuestStruct GetSelectQuest => selectQuest.GetQuestData;
     public void SetStart()
     {
         backButton.SetButton(BackButton);
@@ -53,13 +55,26 @@ public class UI_QuestManager : MonoBehaviour
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
         if (_open == true)
         {
-            if (setQuest.currentQuest == null || setQuest.currentQuest.Count == 0)
-                return;
-
             ActiveActionButton(false);
-            string id = setQuest.currentQuest[0];
-            if (dictQuest.ContainsKey(id))
-                dictQuest[id].SelectedSlot(true);
+            OpenQuestBoard();
+        }
+    }
+
+    void OpenQuestBoard()
+    {
+        if (setQuest.currentQuest == null || setQuest.currentQuest.Count == 0)
+        {
+            // 정보 비우기
+            SelectQuest(null);
+            return;
+        }
+
+        // 첫번째 퀘스트 정보 열기
+        string id = setQuest.currentQuest[0];
+        Debug.LogError($"첫번째 퀘스트 정보 열기 ({dictQuest.ContainsKey(id)},{id} : {setQuest.currentQuest.Count})");
+        if (dictQuest.ContainsKey(id) == true)
+        {
+            dictQuest[id].SelectedSlot(true);
         }
     }
 
@@ -71,6 +86,7 @@ public class UI_QuestManager : MonoBehaviour
     void ActionButton()
     {
         Game_Manager.current.GetInventory.SetQuestResult();
+        RemoveQuestSlot(selectQuest);
         ActiveActionButton(false);
     }
 
@@ -89,10 +105,7 @@ public class UI_QuestManager : MonoBehaviour
     public void SubmitBackButton()
     {
         HideCanvas(false);
-        // 퀘스트 첫번째 활성화
-        string id = setQuest.currentQuest[0];
-        if (dictQuest.ContainsKey(id))
-            dictQuest[id].SelectedSlot(true);
+        OpenQuestBoard();
     }
 
     void SubmitButton()
@@ -118,15 +131,19 @@ public class UI_QuestManager : MonoBehaviour
         Debug.LogWarning($"{_questDatas.name} : {dictQuest.ContainsKey(_questDatas.id)} ({dictQuest.Count})");
     }
 
-    public void RemoveQuestSlot()
+    public void RemoveQuestSlot(UI_QuestSlot _selectSlot)
     {
         // 슬롯 제거
-        UI_QuestSlot findSlot = selectQuest;
-        findSlot.gameObject.SetActive(false);
-        questQueue.Enqueue(findSlot);
-        dictQuest.Remove(findSlot.questData.id);
-        setQuest.compQuest.Add(findSlot.questData.id);
+        questQueue.Enqueue(_selectSlot);
+
+        string id = _selectSlot.GetQuestData.id;
+        setQuest.compQuest.Add(id);
+        setQuest.currentQuest.Remove(id);
+        dictQuest.Remove(id);
+
+        _selectSlot.gameObject.SetActive(false);
         selectQuest = null;
+        Debug.LogError($"퀘스트 진행 완료 : {_selectSlot.GetQuestData.id}({dictQuest.Count})");
     }
 
     void SetQuestSlot(QuestStruct _questDatas)
@@ -141,35 +158,50 @@ public class UI_QuestManager : MonoBehaviour
 
     void SelectQuest(UI_QuestSlot _slot)// 퀘스트 인포메이션 세팅
     {
-        if (selectQuest != null)
+        if (selectQuest != null)// 기존 선택 표시 제거
         {
-            selectQuest.SelectedSlot(false);
+            selectQuest.SelectedSlot(false);// 선택 표시
+        }
+
+        notQuest.SetActive(_slot == null);
+        if (_slot == null)
+        {
+            // 퀘스트 없음
+            submitSet.SetActive(false);// 버튼 비활성화
+
+            titleText.text = "";
+            npcText.text = "";
+            descriptionText.text = "";
+            needText.text = "";
+            resultText.text = "";
+            return;
         }
         selectQuest = _slot;
-        titleText.text = _slot.questData.name;
-        npcText.text = _slot.questData.client;
-        descriptionText.text = _slot.questData.description;
+        titleText.text = GetSelectQuest.name;
+        npcText.text = GetSelectQuest.client;
+        descriptionText.text = GetSelectQuest.description;
+
         // 필요한 아이템 출력
         needText.text = "";
-        for (int i = 0; i < _slot.questData.needItem.Length; i++)
+        for (int i = 0; i < GetSelectQuest.needItem.Length; i++)
         {
             if (i > 0) needText.text += "\n";
-            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_slot.questData.needItem[i]);
+            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(GetSelectQuest.needItem[i]);
             needText.text += Singleton_Data.INSTANCE.GetLanguage(item.name);
         }
         // 보상 아이템 출력
         resultText.text = "";
-        for (int i = 0; i < _slot.questData.result.Length; i++)
+        for (int i = 0; i < GetSelectQuest.result.Length; i++)
         {
             if (i > 0) resultText.text += "\n";
-            string key = Singleton_Data.INSTANCE.GetItemStruct(_slot.questData.result[i]).name;
+            string key = Singleton_Data.INSTANCE.GetItemStruct(GetSelectQuest.result[i]).name;
             resultText.text += Singleton_Data.INSTANCE.GetLanguage(key);
         }
 
-        if (_slot.questData.needItem == null)
+        if (GetSelectQuest.needItem == null)
             return;
 
-        bool active = Game_Manager.current.GetInventory.myBox.CheckAllSlot(_slot.questData.needItem);
+        bool active = Game_Manager.current.GetInventory.myBox.CheckAllSlot(GetSelectQuest.needItem);
         submitSet.SetActive(active);// 버튼 활성화
     }
 

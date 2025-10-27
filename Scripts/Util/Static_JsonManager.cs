@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -261,8 +261,8 @@ public class Static_JsonManager
 
     public static void SaveInventory(string fileName, InventoryData _data)
     {
-        Debug.LogWarning($"저장 : {fileName} ({(fileName == null || fileName.Length == 0)})");
-        if (fileName == null || fileName.Length == 0)
+        Debug.LogError($"저장 : {fileName} ({_data.saveItems.Count})");
+        if (String.IsNullOrEmpty(fileName) )
             return;
 
         string filePath = Application.dataPath + "/Save/";
