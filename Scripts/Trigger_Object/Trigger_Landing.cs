@@ -18,7 +18,7 @@ public class Trigger_Landing : MonoBehaviour
         {
             LandingPoint,
             FishShop,// 생선 가게
-            Event,
+            DownTown,
             Shipyard,// 조선소
             Board,// 퀘스트 보드
             Count
@@ -35,6 +35,7 @@ public class Trigger_Landing : MonoBehaviour
 
         public Data_NPC shopNPC;
         public Data_NPC shipyardNPC;
+        public Data_NPC smugglerNPC;
     }
     public LandingStruct landingStruct;
 

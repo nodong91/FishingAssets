@@ -10,14 +10,14 @@ public class Title_Manager : MonoBehaviour
     public Option_Manager optionManager;
     public Credit_Rolling creditRolling;
     private Credit_Rolling instCreditRolling;
-    const string titleTheme = "BGM_0001";
-    const string soundName = "FX_0001";
+    const string titleTheme = "bgm_0001";
+    const string soundName = "fx_0001";
 
-    const string _continue = "LMn_0001";
-    const string _newStart = "LMn_0002";
-    const string _credit = "LMn_0003";
-    const string _setting = "LMn_0004";
-    const string _exit = "LMn_0005";
+    const string _continue = "continue";
+    const string _newStart = "newstart";
+    const string _credit = "credit";
+    const string _setting = "option";
+    const string _exit = "exit";
 
     public RectTransform selectMask;
     Coroutine enterCoroutine;

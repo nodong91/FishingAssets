@@ -1,6 +1,6 @@
 {
     "name": "",
-    "lastSetDay": 0,
+    "lastSetDay": 1,
     "invenSize": {
         "x": 5,
         "y": 5
@@ -8,17 +8,17 @@
     "saveItems": [
         {
             "slotNum": {
-                "x": 0,
+                "x": 3,
                 "y": 0
             },
             "item": {
                 "item": {
-                    "id": "Us_1001",
-                    "name": "LUs_1001_00",
-                    "itemType": 1,
-                    "explanation": "LUs_1001_01",
-                    "icon": "Item_Oilcan",
-                    "itemClass": 4,
+                    "id": "us_1002",
+                    "name": "repairkit",
+                    "itemType": 2,
+                    "explanation": "repairkit_01",
+                    "icon": "Item_RepairKit",
+                    "itemClass": 0,
                     "shape": [],
                     "iconSize": {
                         "x": 1.0,
@@ -26,40 +26,12 @@
                         "z": 0.5,
                         "w": 0.5
                     },
-                    "weight": 3.0,
-                    "price": 10.0
+                    "weight": 1.0,
+                    "price": 5.0
                 },
                 "angle": 0.0,
                 "shape": [],
-                "acquisition": 0
-            }
-        },
-        {
-            "slotNum": {
-                "x": 1,
-                "y": 0
-            },
-            "item": {
-                "item": {
-                    "id": "Us_1001",
-                    "name": "LUs_1001_00",
-                    "itemType": 1,
-                    "explanation": "LUs_1001_01",
-                    "icon": "Item_Oilcan",
-                    "itemClass": 4,
-                    "shape": [],
-                    "iconSize": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 0.5,
-                        "w": 0.5
-                    },
-                    "weight": 3.0,
-                    "price": 10.0
-                },
-                "angle": 0.0,
-                "shape": [],
-                "acquisition": 0
+                "acquisition": 1
             }
         },
         {
@@ -69,66 +41,10 @@
             },
             "item": {
                 "item": {
-                    "id": "Us_1001",
-                    "name": "LUs_1001_00",
-                    "itemType": 1,
-                    "explanation": "LUs_1001_01",
-                    "icon": "Item_Oilcan",
-                    "itemClass": 4,
-                    "shape": [],
-                    "iconSize": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 0.5,
-                        "w": 0.5
-                    },
-                    "weight": 3.0,
-                    "price": 10.0
-                },
-                "angle": 0.0,
-                "shape": [],
-                "acquisition": 0
-            }
-        },
-        {
-            "slotNum": {
-                "x": 3,
-                "y": 0
-            },
-            "item": {
-                "item": {
-                    "id": "Us_1001",
-                    "name": "LUs_1001_00",
-                    "itemType": 1,
-                    "explanation": "LUs_1001_01",
-                    "icon": "Item_Oilcan",
-                    "itemClass": 4,
-                    "shape": [],
-                    "iconSize": {
-                        "x": 1.0,
-                        "y": 1.0,
-                        "z": 0.5,
-                        "w": 0.5
-                    },
-                    "weight": 3.0,
-                    "price": 10.0
-                },
-                "angle": 0.0,
-                "shape": [],
-                "acquisition": 0
-            }
-        },
-        {
-            "slotNum": {
-                "x": 4,
-                "y": 0
-            },
-            "item": {
-                "item": {
-                    "id": "Us_1002",
-                    "name": "LUs_1002_00",
+                    "id": "us_1002",
+                    "name": "repairkit",
                     "itemType": 2,
-                    "explanation": "LUs_1002_01",
+                    "explanation": "repairkit_01",
                     "icon": "Item_RepairKit",
                     "itemClass": 0,
                     "shape": [],
@@ -143,22 +59,50 @@
                 },
                 "angle": 0.0,
                 "shape": [],
-                "acquisition": 0
+                "acquisition": 1
+            }
+        },
+        {
+            "slotNum": {
+                "x": 1,
+                "y": 0
+            },
+            "item": {
+                "item": {
+                    "id": "us_1001",
+                    "name": "smalloiltank",
+                    "itemType": 1,
+                    "explanation": "smalloiltank_01",
+                    "icon": "Item_Oilcan",
+                    "itemClass": 4,
+                    "shape": [],
+                    "iconSize": {
+                        "x": 1.0,
+                        "y": 1.0,
+                        "z": 0.5,
+                        "w": 0.5
+                    },
+                    "weight": 3.0,
+                    "price": 10.0
+                },
+                "angle": 0.0,
+                "shape": [],
+                "acquisition": 1
             }
         },
         {
             "slotNum": {
                 "x": 0,
-                "y": 1
+                "y": 0
             },
             "item": {
                 "item": {
-                    "id": "Us_1002",
-                    "name": "LUs_1002_00",
-                    "itemType": 2,
-                    "explanation": "LUs_1002_01",
-                    "icon": "Item_RepairKit",
-                    "itemClass": 0,
+                    "id": "us_1001",
+                    "name": "smalloiltank",
+                    "itemType": 1,
+                    "explanation": "smalloiltank_01",
+                    "icon": "Item_Oilcan",
+                    "itemClass": 4,
                     "shape": [],
                     "iconSize": {
                         "x": 1.0,
@@ -166,12 +110,12 @@
                         "z": 0.5,
                         "w": 0.5
                     },
-                    "weight": 1.0,
-                    "price": 5.0
+                    "weight": 3.0,
+                    "price": 10.0
                 },
                 "angle": 0.0,
                 "shape": [],
-                "acquisition": 0
+                "acquisition": 1
             }
         }
     ]

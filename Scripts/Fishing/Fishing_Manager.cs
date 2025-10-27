@@ -27,7 +27,7 @@ public class Fishing_Manager : MonoBehaviour
     public float shipSize = 1f;
 
     private const float fieldRadius = 5f;
-    const string bgmBattle = "BGM_0002";
+    const string bgmBattle = "bgm_0002";
 
     public GameObject catchPrefab;
     public Renderer catchRanderer;
@@ -385,7 +385,7 @@ public class Fishing_Manager : MonoBehaviour
     //===================================================================================================================
     // 牧飘费
     //===================================================================================================================
-    const string FX_0005 = "FX_0005";
+    const string fx_0005 = "fx_0005";
     bool catching;
     void TestControll()
     {
@@ -394,7 +394,7 @@ public class Fishing_Manager : MonoBehaviour
             if (catching == false)
             {
                 catching = true;
-                Singleton_Audio.INSTANCE.Audio_LoopFX(FX_0005);// 超矫 家府
+                Singleton_Audio.INSTANCE.Audio_LoopFX(fx_0005);// 超矫 家府
             }
             if (catchRadius > 0.1f)
                 catchRadius -= 1f * Time.deltaTime;
