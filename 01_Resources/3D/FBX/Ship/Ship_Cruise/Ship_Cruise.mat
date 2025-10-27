@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ship_Raft
+  m_Name: Ship_Cruise
   m_Shader: {fileID: -6465566751694194690, guid: a3091975a1bc04545bc26ebdff8b45e6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: bb47e4bb444a601459c13c9f7197efbb, type: 3}
+        m_Texture: {fileID: 2800000, guid: c791db14dba76f246bfe2082a61d3af5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EMISSION_COLOR_MAP:
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Emission_Map:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 76dd6383ac55ac54bae0c695360440cc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _METALNESS_MAP:
@@ -64,7 +64,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MRHMap:
-        m_Texture: {fileID: 2800000, guid: eaf2f82925597dc4eaeeedc972daf3ef, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9aec6b630b270a243a169bc573b5ec4d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
@@ -80,7 +80,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 4d734daa906bd274e8fdfdb187d2ee11, type: 3}
+        m_Texture: {fileID: 2800000, guid: a6da322200e59964997f4a34f1dbf678, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _REFLECTIONS_COLOR_MAP:
@@ -150,7 +150,7 @@ Material:
     - _Float: 0.38
     - _Float_1: 46.05
     - _Fog_Hight: -0.43
-    - _Fog_On: 0
+    - _Fog_On: 1
     - _Fog_Smooth: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -164,7 +164,7 @@ Material:
     - _MatCapBlend_MSO: 0
     - _MatCap_Channel: 0
     - _MatCap_Value: 1
-    - _Metallic: 1
+    - _Metallic: 0.898
     - _Mode: 0
     - _NoiseAmount: 1
     - _NoiseDistortion: 10
@@ -184,8 +184,8 @@ Material:
     - _ReceiveShadows: 1
     - _Rimlight_Smooth: 0.201
     - _Rimlight_Strangth: 0.208
-    - _Roughness: 0.5
-    - _Roughness_In_Lightmap: 1
+    - _Roughness: 0.631
+    - _Roughness_In_Lightmap: 0.845
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularChannel: 0
@@ -211,7 +211,7 @@ Material:
     - _DamageColor: {r: 9.560206, g: 2.215383, b: 0.3156674, a: 1}
     - _EMISSION_COLOR: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 1, g: 0.927336, b: 0.5518868, a: 1}
-    - _Fog_Color: {r: 0.7830189, g: 0.48384658, b: 0.6033285, a: 0.6313726}
+    - _Fog_Color: {r: 0, g: 0.7398896, b: 1, a: 0.6313726}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
     - _MatCap2_Color: {r: 1, g: 1, b: 1, a: 1}
     - _MatCap_Color: {r: 1, g: 1, b: 1, a: 0}
