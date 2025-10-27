@@ -100,6 +100,24 @@ public class UI_Shop : UI_Inventory_Base
             SetShopItem();// 열릴때 세팅
     }
 
+    public void SetSmuggler(bool _open, Data_NPC _npc)
+    {
+        npc = _npc;
+        inventoryID = _npc.npc_ID;
+        currentIndex = 0;
+        OpenCanvas(_open);
+
+        layoutGroup.padding.top = 15;
+        layoutGroup.padding.bottom = 40;
+
+        slotType = SlotType.Shipyard;// SetShipyard
+        toggleGroup.gameObject.SetActive(false);
+        fixGroup.gameObject.SetActive(true);
+
+        if (_open)
+            SetShopItem();// 열릴때 세팅
+    }
+
     public void SetStorage(bool _open)
     {
         inventoryID = "MyStorage";

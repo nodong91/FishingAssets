@@ -48,11 +48,11 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
 
     public ItemStruct GetItemStruct(string _id)
     {
-        if (_id.Contains("Fs"))
+        if (_id.Contains("fs"))
         {
             return Dict_Fish[_id].itemStruct;
         }
-        else if (_id.Contains("Us"))
+        else if (_id.Contains("us"))
         {
             return Dict_Used[_id].itemStruct;
         }

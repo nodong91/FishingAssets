@@ -22,7 +22,7 @@ public class Option_Manager : MonoBehaviour
     public TranslateLanguage translateLanguage;
     public Audio_Manager audioManager;
     public Quality_Manager qualityManager;
-    const string soundName = "FX_0001";
+    const string soundName = "fx_0001";
 
     public delegate void DeleCloseOption();
     public DeleCloseOption deleCloseOption;

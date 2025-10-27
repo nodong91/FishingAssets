@@ -71,6 +71,7 @@ public class Data_Dialog : ScriptableObject
             Quest = 4,
             Upgrade = 5,
             Result = 6,
+            OpenSmuggler = 7,
         }
         public SelectType selectType;
     }

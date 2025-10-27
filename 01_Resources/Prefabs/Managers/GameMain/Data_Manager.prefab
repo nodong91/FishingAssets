@@ -316,12 +316,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d9399fc038a87c34a921a9934a27174c, type: 3}
   - {fileID: 21300000, guid: 180286699b9334848ab614c817b837d5, type: 3}
   usedStruct:
-  - id: Us_1001
+  - id: us_1001
     itemStruct:
-      id: Us_1001
-      name: LUs_1001_00
+      id: us_1001
+      name: smalloiltank
       itemType: 1
-      explanation: LUs_1001_01
+      explanation: smalloiltank_01
       icon: Item_Oilcan
       itemClass: 4
       shape: []
@@ -329,12 +329,12 @@ MonoBehaviour:
       weight: 3
       price: 10
     value: 3
-  - id: Us_1002
+  - id: us_1002
     itemStruct:
-      id: Us_1002
-      name: LUs_1002_00
+      id: us_1002
+      name: repairkit
       itemType: 2
-      explanation: LUs_1002_01
+      explanation: repairkit_01
       icon: Item_RepairKit
       itemClass: 0
       shape: []
@@ -342,12 +342,12 @@ MonoBehaviour:
       weight: 1
       price: 5
     value: 0
-  - id: Us_2001
+  - id: us_2001
     itemStruct:
-      id: Us_2001
-      name: LUs_2001_00
+      id: us_2001
+      name: lugworm
       itemType: 0
-      explanation: LUs_2001_01
+      explanation: lugworm_01
       icon: Item_Bait_Worm
       itemClass: 3
       shape: []
@@ -355,12 +355,12 @@ MonoBehaviour:
       weight: 1
       price: 5
     value: 0
-  - id: Us_3001
+  - id: us_3001
     itemStruct:
-      id: Us_3001
-      name: LUs_3001_00
+      id: us_3001
+      name: lotterytoto
       itemType: 4
-      explanation: LUs_3001_01
+      explanation: lotterytoto_01
       icon: Item_Lottery
       itemClass: 3
       shape: []
@@ -368,12 +368,12 @@ MonoBehaviour:
       weight: 1
       price: 100
     value: 0
-  - id: Us_3002
+  - id: us_3002
     itemStruct:
-      id: Us_3002
-      name: LUs_3002_00
+      id: us_3002
+      name: badanews
       itemType: 3
-      explanation: LUs_3002_01
+      explanation: badanews_01
       icon: Item_Quest
       itemClass: 4
       shape:
@@ -382,13 +382,53 @@ MonoBehaviour:
       weight: 1
       price: 100
     value: 0
-  fishStruct:
-  - id: Fs_1001
+  - id: us_5001
     itemStruct:
-      id: Fs_1001
-      name: LFs_1001_00
+      id: us_5001
+      name: "\uC21C\uAC04\uC774\uB3D9"
+      itemType: 3
+      explanation: "\uB9C8\uC9C0\uB9C9 \uB3C4\uD06C\uB85C \uC774\uB3D9\uD55C\uB2E4."
+      icon: Item_Quest
+      itemClass: 2
+      shape:
+      - {x: 0, y: 1}
+      iconSize: {x: 1, y: 2, z: 0.5, w: 0.75}
+      weight: 1
+      price: 100
+    value: 0
+  - id: us_0001
+    itemStruct:
+      id: us_0001
+      name: brownmoneypouch
+      itemType: 3
+      explanation: brownmoneypouch_01
+      icon: Icon_Sk_012
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 100
+    value: 100
+  - id: us_0002
+    itemStruct:
+      id: us_0002
+      name: bluemoneypouch
+      itemType: 3
+      explanation: bluemoneypouch_01
+      icon: Icon_Sk_012
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 500
+    value: 500
+  fishStruct:
+  - id: fs_1001
+    itemStruct:
+      id: fs_1001
+      name: anchovy
       itemType: 0
-      explanation: LFs_1001_01
+      explanation: anchovy_01
       icon: Fs_1001_Anchovy
       itemClass: 4
       shape: []
@@ -407,12 +447,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-  - id: Fs_1002
+  - id: fs_1002
     itemStruct:
-      id: Fs_1002
-      name: LFs_1002_00
+      id: fs_1002
+      name: seabass
       itemType: 0
-      explanation: LFs_1002_01
+      explanation: seabass_01
       icon: Fs_1002_Sea Bass
       itemClass: 4
       shape:
@@ -432,12 +472,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.7, y: 1}
-  - id: Fs_1003
+  - id: fs_1003
     itemStruct:
-      id: Fs_1003
-      name: LFs_1003_00
+      id: fs_1003
+      name: flounder
       itemType: 0
-      explanation: LFs_1003_01
+      explanation: flounder_01
       icon: Fs_1003_Flounder
       itemClass: 4
       shape:
@@ -459,12 +499,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 5
     fishTurnDelay: {x: 0.7, y: 1}
-  - id: Fs_1004
+  - id: fs_1004
     itemStruct:
-      id: Fs_1004
-      name: LFs_1004_00
+      id: fs_1004
+      name: mullet
       itemType: 0
-      explanation: LFs_1004_01
+      explanation: mullet_01
       icon: Fs_1004_Mullet
       itemClass: 4
       shape:
@@ -485,12 +525,12 @@ MonoBehaviour:
     fishGroggyTime: 2
     fishDefenseCount: 4
     fishTurnDelay: {x: 1, y: 2}
-  - id: Fs_1005
+  - id: fs_1005
     itemStruct:
-      id: Fs_1005
-      name: LFs_1005_00
+      id: fs_1005
+      name: bluetang
       itemType: 0
-      explanation: LFs_1005_01
+      explanation: bluetang_01
       icon: Fs_1005_BlueTang
       itemClass: 4
       shape: []
@@ -509,12 +549,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-  - id: Fs_1006
+  - id: fs_1006
     itemStruct:
-      id: Fs_1006
-      name: LFs_1006_00
+      id: fs_1006
+      name: clownfish
       itemType: 0
-      explanation: LFs_1006_01
+      explanation: clownfish_01
       icon: Fs_1006_Clownfish
       itemClass: 4
       shape: []
@@ -533,12 +573,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-  - id: Fs_1007
+  - id: fs_1007
     itemStruct:
-      id: Fs_1007
-      name: LFs_1007_00
+      id: fs_1007
+      name: mackerel
       itemType: 0
-      explanation: LFs_1007_01
+      explanation: mackerel_01
       icon: Fs_1007_Mackerel
       itemClass: 4
       shape:
@@ -558,12 +598,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-  - id: Fs_1008
+  - id: fs_1008
     itemStruct:
-      id: Fs_1008
-      name: LFs_1008_00
+      id: fs_1008
+      name: congereel
       itemType: 0
-      explanation: LFs_1008_01
+      explanation: congereel_01
       icon: Fs_1008_CongerEel
       itemClass: 4
       shape:
@@ -584,12 +624,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-  - id: Fs_1009
+  - id: fs_1009
     itemStruct:
-      id: Fs_1009
-      name: LFs_1009_00
+      id: fs_1009
+      name: bluespottedstingray
       itemType: 0
-      explanation: LFs_1009_01
+      explanation: bluespottedstingray_01
       icon: Fs_1009_Bluespotted Stingray
       itemClass: 4
       shape:
@@ -611,12 +651,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-  - id: Fs_2001
+  - id: fs_2001
     itemStruct:
-      id: Fs_2001
-      name: LFs_2001_00
+      id: fs_2001
+      name: octopus
       itemType: 0
-      explanation: LFs_2001_01
+      explanation: octopus_01
       icon: Fs_2001_Octopus
       itemClass: 3
       shape:
@@ -637,12 +677,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 5
     fishTurnDelay: {x: 1, y: 2}
-  - id: Fs_2002
+  - id: fs_2002
     itemStruct:
-      id: Fs_2002
-      name: LFs_2002_00
+      id: fs_2002
+      name: amberjack
       itemType: 0
-      explanation: LFs_2002_01
+      explanation: amberjack_01
       icon: Fs_2002_Amberjack
       itemClass: 3
       shape:
@@ -666,12 +706,12 @@ MonoBehaviour:
     fishGroggyTime: 3
     fishDefenseCount: 6
     fishTurnDelay: {x: 1, y: 2}
-  - id: Fs_2003
+  - id: fs_2003
     itemStruct:
-      id: Fs_2003
-      name: LFs_2003_00
+      id: fs_2003
+      name: oceansunfish
       itemType: 0
-      explanation: LFs_2003_01
+      explanation: oceansunfish_01
       icon: Fs_2003_Ocean Sunfish
       itemClass: 3
       shape:
@@ -697,12 +737,12 @@ MonoBehaviour:
     fishGroggyTime: 3
     fishDefenseCount: 7
     fishTurnDelay: {x: 1.5, y: 1}
-  - id: Fs_2004
+  - id: fs_2004
     itemStruct:
-      id: Fs_2004
-      name: LFs_2004_00
+      id: fs_2004
+      name: cutlassfish
       itemType: 0
-      explanation: LFs_2004_01
+      explanation: cutlassfish_01
       icon: Fs_2004_Cutlassfish
       itemClass: 3
       shape:
@@ -725,12 +765,12 @@ MonoBehaviour:
     fishGroggyTime: 2
     fishDefenseCount: 5
     fishTurnDelay: {x: 1.5, y: 1}
-  - id: Fs_2005
+  - id: fs_2005
     itemStruct:
-      id: Fs_2005
-      name: LFs_2005_00
+      id: fs_2005
+      name: swordfish
       itemType: 0
-      explanation: LFs_2005_01
+      explanation: swordfish_01
       icon: Fs_2005_Swordfish
       itemClass: 3
       shape:
@@ -756,12 +796,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 5
     fishTurnDelay: {x: 1.5, y: 1}
-  - id: Fs_3001
+  - id: fs_3001
     itemStruct:
-      id: Fs_3001
-      name: LFs_3001_00
+      id: fs_3001
+      name: giansquid
       itemType: 0
-      explanation: LFs_3001_01
+      explanation: giansquid_01
       icon: Fs_3001_Giant Squid
       itemClass: 2
       shape:
@@ -790,12 +830,12 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 6
     fishTurnDelay: {x: 0.3, y: 0.9}
-  - id: Fs_1010
+  - id: fs_1010
     itemStruct:
-      id: Fs_1010
-      name: LFs_1010_00
+      id: fs_1010
+      name: giantmoray
       itemType: 0
-      explanation: LFs_1010_01
+      explanation: giantmoray_01
       icon: Fs_1010_Giant Moray
       itemClass: 4
       shape:
@@ -819,7 +859,7 @@ MonoBehaviour:
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
   skillStruct:
-  - id: Sk_001_00
+  - id: sk_001_00
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 1"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
@@ -841,7 +881,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_001_01
+  - id: sk_001_01
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 2"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
@@ -863,7 +903,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_001_02
+  - id: sk_001_02
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 3"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
@@ -885,7 +925,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_001_03
+  - id: sk_001_03
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 4"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
@@ -907,7 +947,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_001_04
+  - id: sk_001_04
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 5"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
@@ -929,7 +969,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_001_05
+  - id: sk_001_05
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 6"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
@@ -951,7 +991,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_001_06
+  - id: sk_001_06
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 7"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
@@ -973,7 +1013,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_001_07
+  - id: sk_001_07
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 8"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
@@ -995,7 +1035,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_001_08
+  - id: sk_001_08
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 9"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
@@ -1017,7 +1057,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_001_09
+  - id: sk_001_09
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 10"
     description: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
     addStatusString: CatchRadius + 1
@@ -1039,7 +1079,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_002_00
+  - id: sk_002_00
     name: "\uAC15\uB825\uD55C \uC774\uB450\uADFC 1"
     description: "\uBB3C\uACE0\uAE30\uC758 \uCCB4\uB825\uC744 \uBE60\uB974\uAC8C
       \uBE7C\uC557\uB294\uB2E4."
@@ -1062,7 +1102,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_003_00
+  - id: sk_003_00
     name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC"
     description: "\uB09A\uC2DC\uC758 \uCEE8\uD2B8\uB864\uC774 \uBE68\uB77C\uC9C4\uB2E4."
     addStatusString: CatchSpeed + 1
@@ -1084,7 +1124,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_004_00
+  - id: sk_004_00
     name: "\uC2E0\uB4E4\uB9B0 \uCEE8\uD2B8\uB864"
     description: "\uBC30\uC758 \uC18D\uB3C4\uAC00 \uBE68\uB77C\uC9C4\uB2E4."
     addStatusString: ShipSpeed + 1
@@ -1106,7 +1146,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_005_00
+  - id: sk_005_00
     name: "\uC695\uC2EC\uC7C1\uC774"
     description: "\uC2E4\uC744 \uC218 \uC788\uB294 \uBB34\uAC8C\uAC00 \uB298\uC5B4\uB09C\uB2E4."
     addStatusString: MaxWeight + 1
@@ -1128,7 +1168,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_006_00
+  - id: sk_006_00
     name: "\uBC29\uB791\uC790"
     description: "\uC5F0\uB8CC\uB97C \uB354 \uB9CE\uC774 \uB123\uC744 \uC218 \uC788\uB2E4."
     addStatusString: MaxEnergy + 1
@@ -1150,7 +1190,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_007_00
+  - id: sk_007_00
     name: "\uCE5C\uD658\uACBD"
     description: "\uC5F0\uB8CC\uC758 \uD6A8\uC728\uC774 \uC88B\uC544\uC9C4\uB2E4."
     addStatusString: MaxEfficient + 1
@@ -1172,7 +1212,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_008_00
+  - id: sk_008_00
     name: "\uB354 \uB9CE\uC774!!"
     description: "\uC778\uBCA4\uD1A0\uB9AC\uAC00 1\uC5F4 \uB298\uC5B4\uB09C\uB2E4."
     addStatusString: MaxBoxSize + 1
@@ -1194,7 +1234,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_009_00
+  - id: sk_009_00
     name: "\uB450\uAEBC\uC6B4 \uD53C\uBD80"
     description: "\uC120\uBC15\uC774 \uCDA9\uACA9\uC5D0 \uAC15\uD574\uC9C4\uB2E4."
     addStatusString: ShipHealth + 1
@@ -1216,7 +1256,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_010_00
+  - id: sk_010_00
     name: "\uD589\uC6B4"
     description: "\uC77C\uC815 \uD655\uB960\uB85C \uD76C\uADC0\uD55C \uBB3C\uACE0\uAE30\uAC00
       \uB4F1\uC7A5\uD55C\uB2E4."
@@ -1239,7 +1279,7 @@ MonoBehaviour:
       luckFish: 1
       fishAmount: 0
       fishPrice: 0
-  - id: Sk_011_00
+  - id: sk_011_00
     name: "\uC77C\uD0C0\uC30D\uD53C"
     description: "\uC77C\uC815 \uD655\uB960\uB85C \uCD94\uAC00 \uBB3C\uACE0\uAE30\uB97C
       \uB09A\uB294\uB2E4."
@@ -1262,7 +1302,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 1
       fishPrice: 0
-  - id: Sk_012_00
+  - id: sk_012_00
     name: "\uB4B7\uD1B5\uC218"
     description: "\uC0C1\uC810\uC5D0 \uBB3C\uACE0\uAE30\uB97C \uB354 \uBE44\uC2F8\uAC8C
       \uD310\uB9E4"
@@ -1285,7 +1325,7 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 1
-  - id: Sk_013_00
+  - id: sk_013_00
     name: "\uCC3D\uACE0\uD655\uC7A5??? \uB9CC\uB4E4\uAE4C?"
     description: "\uCC3D\uACE0\uB97C \uC0AC\uC6A9\uD558\uB824\uBA74 \uC544\uC774\uD15C\uC774
       \uB9CE\uC544\uC57C"
@@ -1309,7 +1349,7 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
   questStruct:
-  - id: Qu_0001
+  - id: qu_0001
     name: "\uCCAB \uB09A\uC2DC \uC131\uACF5"
     description: "\uB09A\uC2DC\uAC00 \uCC98\uC74C\uC778\uAC00? \uC544\uBB34 \uBB3C\uACE0\uAE30\uB098
       \uD55C\uB9C8\uB9AC \uC7A1\uC544\uC640 \uBD10. \uC2E4\uB825\uC740 \uAC80\uC99D
@@ -1318,8 +1358,8 @@ MonoBehaviour:
     deadLine: 3
     needItem: []
     result:
-    - Money_1000
-  - id: Qu_0002
+    - us_0001
+  - id: qu_0002
     name: "\uB0B4 \uC575\uBB34\uC0C8\uB97C \uCC3E\uC544\uC918."
     description: "\uB0B4 \uCE5C\uAD6C \uC870\uC9C0\uAC00 \uC7A0\uAE50 \uD55C \uB208\uD310
       \uC0AC\uC774\uC5D0 \uC0C8\uC7A5\uC5D0\uC11C \uB098\uAC00 \uBC84\uB838\uC5B4.
@@ -1328,12 +1368,12 @@ MonoBehaviour:
     client: "\uB4B7\uB3D9\uB124 \uC774\uC528"
     deadLine: 3
     needItem:
-    - Fs_1001
-    - Fs_1001
+    - fs_1001
+    - fs_1001
     result:
-    - Fs_1001
-    - Fs_1001
-  - id: Qu_0003
+    - fs_1001
+    - fs_1001
+  - id: qu_0003
     name: "\uC96C\uBE44\uC2A4 \uB2E4\uC774\uC5B4\uD2B8"
     description: "\uC131\uACF5\uC740 \uC5B8\uC81C\uB098\\n\uD55C\uBC88\uC5D0 \uBE60\uB974\uAC8C\\n\uD558\uB098\uC529
       \uBC14\uB974\uAC8C"
@@ -1341,7 +1381,7 @@ MonoBehaviour:
     deadLine: 0
     needItem: []
     result: []
-  - id: Qu_0004
+  - id: qu_0004
     name: "\uC5D8\uB9AC\uAC8C\uC774\uD130 \uAC00\uC544"
     description: "\uB0B4\uAC00 \uB09A\uC740 \uC5ED\uB300\uAE09 \uC6D4\uCC99 \uBC30\uC2A4\uB97C
       \uCC44\uAC14\uC5B4. \uC545\uC5B4\uB97C \uB2EE\uC740 \uBB3C\uACE0\uAE30\uC600\uC5B4!!
@@ -1349,102 +1389,122 @@ MonoBehaviour:
     client: "\uC606\uB3D9\uB124 \uAE40\uC528"
     deadLine: 3
     needItem:
-    - Fs_1001
+    - fs_1001
     result:
-    - Fs_1001
-    - Us_3002
-  - id: Qu_0005
+    - fs_1001
+    - us_3002
+  - id: qu_0005
     name: sadfad
     description: asdfadsf
     client: "\uC606\uB3D9\uB124 \uAE40\uC528"
     deadLine: 3
     needItem:
-    - Fs_1001
+    - fs_1001
     result:
-    - Fs_1001
-    - Us_3002
+    - fs_1001
+    - us_3002
   languageStruct:
-  - id: LUs_1001_00
+  - id: smalloiltank
     english: Small Oil Tank
     korean: "\uC791\uC740 \uC624\uC77C\uD1B5"
     japanese: "\u5C0F\u3055\u306A\u30AA\u30A4\u30EB\u7F36"
     chinese: 
-  - id: LUs_1001_01
+  - id: smalloiltank_01
     english: Oil Tank
     korean: "\uC5F0\uB8CC\uD1B5"
     japanese: "\u30AA\u30A4\u30EB\u7F36"
     chinese: 
-  - id: LUs_1002_00
+  - id: repairkit
     english: Repair Kit
     korean: "\uC218\uB9AC \uD0A4\uD2B8"
     japanese: "\u4FEE\u7406\u30AD\u30C3\u30C8"
     chinese: 
-  - id: LUs_1002_01
+  - id: repairkit_01
     english: A set to repair malfunctions
     korean: "\uACE0\uC7A5\uC744 \uC218\uB9AC\uD558\uB294 \uC138\uD2B8"
     japanese: "\u6545\u969C\u3092\u4FEE\u7406\u3059\u308B\u30BB\u30C3\u30C8"
     chinese: 
-  - id: LUs_2001_00
+  - id: lugworm
     english: lugworm
     korean: "\uAC2F\uC9C0\uB801\uC774"
     japanese: "\u30B4\u30AB\u30A4"
     chinese: 
-  - id: LUs_2001_01
+  - id: lugworm_01
     english: Live bait using lugworms
     korean: "\uAC2F\uC9C0\uB801\uC774\uB97C \uC774\uC6A9\uD55C \uC0DD\uBBF8\uB07C"
     japanese: "\u30B4\u30AB\u30A4\u3092\u4F7F\u3063\u305F\u751F\u990C"
     chinese: 
-  - id: LUs_3001_00
+  - id: lotterytoto
     english: Lottery ToTo
     korean: "\uB610\uB610\uBCF5\uAD8C"
     japanese: "\u30C8\u30C8\u5B9D\u304F\u3058"
     chinese: 
-  - id: LUs_3001_01
+  - id: lotterytoto_01
     english: Aim for a quick fortune.
     korean: "\uC77C\uD655\uCC9C\uAE08\uC744 \uB178\uB9AC\uC138\uC694."
     japanese: "\u4E00\u652B\u5343\u91D1\u3092\u72D9\u3063\u3066\u304F\u3060\u3055\u3044\u3002"
     chinese: 
-  - id: LUs_3002_00
+  - id: badanews
     english: Bada News
     korean: "\uBC14\uB2E4\uC77C\uBCF4"
     japanese: "\u30D0\u30C0\u65E5\u5831"
     chinese: 
-  - id: LUs_3002_01
+  - id: badanews_01
     english: news of the day
     korean: "\uC624\uB298\uC758 \uB274\uC2A4"
     japanese: "\u4ECA\u65E5\u306E\u30CB\u30E5\u30FC\u30B9"
     chinese: 
-  - id: LFs_1001_00
+  - id: brownmoneypouch
+    english: Brown Money Pouch
+    korean: 
+    japanese: 
+    chinese: 
+  - id: brownmoneypouch_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: bluemoneypouch
+    english: Blue Money Pouch
+    korean: 
+    japanese: 
+    chinese: 
+  - id: bluemoneypouch_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: anchovy
     english: Anchovy
     korean: "\uBA78\uCE58"
     japanese: "\u30AB\u30BF\u30AF\u30C1\u30A4\u30EF\u30B7"
     chinese: 
-  - id: LFs_1001_01
+  - id: anchovy_01
     english: The anchovy is a small schooling forage fish that is a vital link in
       the food chain and is commercially important for food and bait worldwide.
     korean: "\uBA78\uCE58\uB294 \uC804 \uC138\uACC4\uC801\uC73C\uB85C \uC2DD\uD488\uACFC
       \uBBF8\uB07C\uB85C \uC0C1\uC5C5\uC801 \uC911\uC694\uC131\uC774 \uD06C\uACE0
-      \uBA39\uC774\uC0AC\uC2AC\uC758 \uD575\uC2EC \uACE0\uB9AC \uC5ED\uD560\uC744
+      \uBA39\uC774 \uC0AC\uC2AC\uC758 \uD575\uC2EC \uACE0\uB9AC \uC5ED\uD560\uC744
       \uD558\uB294 \uC791\uC740 \uBB34\uB9AC \uC0DD\uD65C \uC5B4\uB958\uC785\uB2C8\uB2E4."
     japanese: "\u30AB\u30BF\u30AF\u30C1\u30A4\u30EF\u30B7\u306F\u5168\u4E16\u754C\u7684\u306B\u98DF\u54C1\u3068\u990C\u3067\u5546\u696D\u7684\u91CD\u8981\u6027\u304C\u5927\u304D\u304F\u3001\u98DF\u7269\u9023\u9396\u306E\u6838\u5FC3\u7684\u306A\u8F2A\u306E\u5F79\u5272\u3092\u3059\u308B\u5C0F\u3055\u306A\u7FA4\u308C\u751F\u6D3B\u9B5A\u985E\u3067\u3059\u3002"
     chinese: 
-  - id: LFs_1002_00
+  - id: seabass
     english: Sea Bass
     korean: "\uB18D\uC5B4"
     japanese: "\u3059\u305A\u304D"
     chinese: 
-  - id: LFs_1002_01
+  - id: seabass_01
     english: '"Sea Bass is a popular. high-value food fish found in temperate to
       tropical marine waters'
     korean: ' known for its mild'
     japanese: ' sweet flavor and firm'
     chinese: ' white flesh."'
-  - id: LFs_1003_00
+  - id: flounder
     english: Flounder
     korean: "\uAC00\uC790\uBBF8"
     japanese: https://ja.dict.naver.com/#/entry/jako/3c906203ba504262ad9f3888cc50002e
     chinese: 
-  - id: LFs_1003_01
+  - id: flounder_01
     english: It is a fish with a flat body and both eyes on one side which hides
       on sandy or muddy ocean floors.
     korean: "\uBAB8\uC774 \uB0A9\uC791\uD558\uACE0 \uB450 \uB208\uC774 \uD55C\uCABD\uC73C\uB85C
@@ -1452,12 +1512,12 @@ MonoBehaviour:
       \uC0AC\uB294 \uBB3C\uACE0\uAE30\uC785\uB2C8\uB2E4."
     japanese: "\u4F53\u304C\u5E73\u305F\u304F\u3001\u4E21\u76EE\u304C\u7247\u65B9\u306B\u96C6\u307E\u3063\u3066\u7802\u3084\u6CE5\u306E\u5E95\u306B\u96A0\u308C\u3066\u66AE\u3089\u3059\u9B5A\u3067\u3059\u3002"
     chinese: 
-  - id: LFs_1004_00
+  - id: mullet
     english: Mullet
     korean: "\uC22D\uC5B4"
     japanese: "\u30DC\u30E9"
     chinese: 
-  - id: LFs_1004_01
+  - id: mullet_01
     english: Mullet is an omnivorous migratory species that lives in warm seas and
       estuaries worldwide is known for its leaping ability and is popular as a food
       fish.
@@ -1467,12 +1527,12 @@ MonoBehaviour:
       \uC5B4\uC885\uC785\uB2C8\uB2E4."
     japanese: "\u4E16\u754C\u4E2D\u306E\u6696\u304B\u3044\u6D77\u3068\u6CB3\u53E3\u306B\u4F4F\u307F\u3001\u6C34\u306E\u4E0A\u306B\u3088\u304F\u98DB\u3073\u4E0A\u304C\u308A\u3001\u98DF\u7528\u3068\u3057\u3066\u4EBA\u6C17\u306E\u96D1\u98DF\u6027\u56DE\u904A\u9B5A\u7A2E\u3067\u3059\u3002"
     chinese: 
-  - id: LFs_2001_00
+  - id: octopus
     english: Octopus
     korean: "\uBB38\uC5B4"
     japanese: https://ja.dict.naver.com/#/entry/jako/7a1e2b3a809a4678be46e9aae196f756
     chinese: 
-  - id: LFs_2001_01
+  - id: octopus_01
     english: It is a mollusk with eight arms and three hearts that uses its superb
       intelligence and camouflage to avoid predators and hunt in the ocean.
     korean: "8\uAC1C\uC758 \uD314\uACFC 3\uAC1C\uC758 \uC2EC\uC7A5\uC744 \uAC00\uC84C\uC73C\uBA70
@@ -1480,12 +1540,12 @@ MonoBehaviour:
       \uD3EC\uC2DD\uC790\uB97C \uD53C\uD558\uACE0 \uC0AC\uB0E5\uD558\uB294 \uC5F0\uCCB4\uB3D9\uBB3C\uC785\uB2C8\uB2E4."
     japanese: "8\u3064\u306E\u8155\u30683\u3064\u306E\u5FC3\u81D3\u3092\u6301\u3061\u3001\u512A\u308C\u305F\u77E5\u80FD\u3068\u80C3\u8178\u8853\u3067\u6D77\u4E2D\u3067\u6355\u98DF\u8005\u3092\u907F\u3051\u3066\u72E9\u308A\u3092\u3059\u308B\u8EDF\u4F53\u52D5\u7269\u3067\u3059\u3002"
     chinese: 
-  - id: LFs_2002_00
+  - id: amberjack
     english: Amberjack
     korean: "\uBC29\uC5B4"
     japanese: "\u30D6\u30EA"
     chinese: 
-  - id: LFs_2002_01
+  - id: amberjack_01
     english: Amberjack is a powerful migratory predator known globally as a top sport
       fish and commercially valued especially for the large winter fish.
     korean: "\uC804 \uC138\uACC4 \uC628\uB300 \uBC0F \uC5F4\uB300 \uD574\uC5ED\uC5D0
@@ -1496,12 +1556,12 @@ MonoBehaviour:
       \uB192\uC2B5\uB2C8\uB2E4."
     japanese: "\u4E16\u754C\u4E2D\u306E\u6E29\u5E2F\u304A\u3088\u3073\u71B1\u5E2F\u6D77\u57DF\u306B\u751F\u606F\u3059\u308B\u5927\u578B\u6355\u98DF\u6027\u9B5A\u7A2E\u3067\u3001\u5F37\u3044\u529B\u304B\u3089\u91E3\u308A\u4EBA\u306B\u4EBA\u6C17\u304C\u9AD8\u304F\u3001\u97D3\u56FD\u3067\u306F\u51AC\u5834\u306E\u5927\u30D6\u30EA\u304C\u9AD8\u7D1A\u98DF\u6750\u3068\u3057\u3066\u4EBA\u6C17\u304C\u9AD8\u3044\u3067\u3059\u3002"
     chinese: 
-  - id: LFs_2003_00
+  - id: oceansunfish
     english: Ocean Sunfish
     korean: "\uAC1C\uBCF5\uCE58"
     japanese: "\u30DE\u30F3\u30DC\u30A6"
     chinese: 
-  - id: LFs_2003_01
+  - id: oceansunfish_01
     english: The Ocean Sunfish has a rudder-like clavus instead of a tail and basks
       on the surface or jumps to dislodge its many parasites.
     korean: "\uAC1C\uBCF5\uCE58\uB294 \uAF2C\uB9AC \uB300\uC2E0 \uD0A4\uC7A1\uC774
@@ -1512,12 +1572,12 @@ MonoBehaviour:
       \uBCF4\uC774\uB294 \uBB3C\uACE0\uAE30\uC785\uB2C8\uB2E4."
     japanese: "\u30DE\u30F3\u30DC\u30A6\u306F\u5C3E\u3073\u308C\u306E\u4EE3\u308F\u308A\u306B\u8235\u53D6\u308A\u306E\u5F79\u5272\u3092\u3059\u308B\u8235\u3073\u308C\uFF08\u30AF\u30E9\u30F4\u30B9\uFF09\u3092\u6301\u3061\u4F53\u5185\u306B\u5BC4\u751F\u3059\u308B\u6570\u591A\u304F\u306E\u5BC4\u751F\u866B\u3092\u99C6\u9664\u3059\u308B\u305F\u3081\u306B\u6C34\u9762\u3067\u65E5\u5149\u6D74\u3092\u3057\u305F\u308A\u30B8\u30E3\u30F3\u30D7\u3057\u305F\u308A\u3059\u308B\u7279\u7570\u306A\u884C\u52D5\u3092\u898B\u305B\u308B\u9B5A\u3067\u3059\u3002"
     chinese: 
-  - id: LFs_2004_00
+  - id: cutlassfish
     english: Cutlassfish
     korean: "\uAC08\uCE58"
     japanese: "\u592A\u5200\u9B5A"
     chinese: 
-  - id: LFs_2004_01
+  - id: cutlassfish_01
     english: The Cutlassfish is a popular edible fish with a long flat knife-like
       body a silvery-white sheen that is nocturnal and preys on other fish.
     korean: "\uAC08\uCE58\uB294 \uCE7C\uCC98\uB7FC \uAE38\uACE0 \uB0A9\uC791\uD55C
@@ -1526,12 +1586,12 @@ MonoBehaviour:
       \uC0AC\uB294 \uB300\uC911\uC801\uC778 \uC2DD\uC6A9 \uC5B4\uB958\uC785\uB2C8\uB2E4."
     japanese: "\u592A\u5200\u9B5A\u306F\u5200\u306E\u3088\u3046\u306B\u7D30\u9577\u304F\u5E73\u305F\u3044\u4F53\u306B\u9280\u767D\u8272\u306E\u5149\u6CA2\u304C\u3042\u308A\u591C\u9593\u306B\u6D3B\u52D5\u3057\u4ED6\u306E\u9B5A\u3092\u6355\u98DF\u3057\u3066\u751F\u304D\u308B\u5927\u8846\u7684\u306A\u98DF\u7528\u9B5A\u3067\u3059\u3002"
     chinese: 
-  - id: LFs_2005_00
+  - id: swordfish
     english: Swordfish
     korean: "\uD669\uC0C8\uCE58"
     japanese: "\u30E1\u30AB\u30B8\u30AD"
     chinese: 
-  - id: LFs_2005_01
+  - id: swordfish_01
     english: The Swordfish is a large marine fish characterized by a long flat sword-like
       bill and is one of the fastest oceanic predators inhabiting tropical and temperate
       seas worldwide.
@@ -1543,12 +1603,12 @@ MonoBehaviour:
     japanese: "\u30E1\u30AB\u30B8\u30AD\u306F\u5200\u306E\u3088\u3046\u306B\u7D30\u9577\u304F\u5E73\u305F\u3044\u543B
       (\u3075\u3093) \u3092\u7279\u5FB4\u3068\u3057\u6700\u3082\u901F\u3044\u6D77\u6D0B\u6355\u98DF\u8005\u306E\u4E00\u3064\u3067\u4E16\u754C\u4E2D\u306E\u71B1\u5E2F\u304A\u3088\u3073\u6E29\u5E2F\u306E\u6D77\u306B\u751F\u606F\u3059\u308B\u5927\u578B\u9B5A\u3067\u3059\u3002"
     chinese: 
-  - id: LFs_3001_00
+  - id: giantsquid
     english: Giant Squid
     korean: "\uB300\uC655 \uC624\uC9D5\uC5B4"
     japanese: "\u3060\u3044\u304A\u3046\u3044\u304B"
     chinese: 
-  - id: LFs_3001_01
+  - id: giantsquid_01
     english: The Giant Squid is an elusive colossal cephalopod inhabiting the deep
       sea growing over 40 feet (13 meters) long with the largest eyes in the animal
       kingdom.
@@ -1558,12 +1618,12 @@ MonoBehaviour:
       \uC11C\uC2DD\uD558\uB294 \uC2E0\uBE44\uB85C\uC6B4 \uCD08\uB300\uD615 \uB450\uC871\uB958\uC785\uB2C8\uB2E4."
     japanese: "\u30C0\u30A4\u30AA\u30A6\u30A4\u30AB\u306F\u4F53\u9577\u304C13\u30E1\u30FC\u30C8\u30EB\u4EE5\u4E0A\u306B\u9054\u3057\u5730\u7403\u4E0A\u3067\u6700\u5927\u306E\u76EE\u3092\u6301\u3064\u3053\u3068\u3067\u77E5\u3089\u308C\u308B\u6DF1\u6D77\u306B\u751F\u606F\u3059\u308B\u795E\u79D8\u7684\u306A\u8D85\u5927\u578B\u306E\u982D\u8DB3\u985E\u3067\u3059\u3002"
     chinese: 
-  - id: LFs_1005_00
+  - id: bluetang
     english: Blue Tang
     korean: "\uBE14\uB8E8\uD0F1"
     japanese: "\u30CA\u30F3\u30E8\u30A6\u30CF\u30AE"
     chinese: 
-  - id: LFs_1005_01
+  - id: bluetang_01
     english: A vibrant tropical fish known for its striking cobalt blue body and
       yellow caudal fin it hides a sharp spine on its caudal peduncle and is popular
       as an aquarium fish
@@ -1573,12 +1633,12 @@ MonoBehaviour:
       \uAC00\uC2DC\uB97C \uC228\uAE30\uACE0 \uC788\uB294 \uAC83\uC774 \uD2B9\uC9D5\uC785\uB2C8\uB2E4."
     japanese: "\u9BAE\u3084\u304B\u306A\u30B3\u30D0\u30EB\u30C8\u30D6\u30EB\u30FC\u306E\u4F53\u3068\u9EC4\u8272\u306E\u5C3E\u3073\u308C\u3092\u6301\u3064\u83EF\u3084\u304B\u306A\u71B1\u5E2F\u9B5A\u3067\u5C3E\u67C4\u90E8\u306B\u92ED\u3044\u68D8\u3092\u96A0\u3057\u6301\u3064\u306E\u304C\u7279\u5FB4\u3067\u3059"
     chinese: 
-  - id: LFs_1006_00
+  - id: clownfish
     english: Clownfish
     korean: "\uD770\uB3D9\uAC00\uB9AC"
     japanese: https://blog.naver.com/nagikorea/221377151111?viewType=pc
     chinese: 
-  - id: LFs_1006_01
+  - id: clownfish_01
     english: A tropical fish with an orange body and white stripes it coexists with
       sea anemones using their stinging tentacles for protection and it has the unique
       trait where the largest male turns into a female if the current female dies
@@ -1589,12 +1649,12 @@ MonoBehaviour:
       \uC131\uC804\uD658\uD558\uB294 \uB3C5\uD2B9\uD55C \uD2B9\uC9D5\uC744 \uAC00\uC9D1\uB2C8\uB2E4"
     japanese: "\u30AA\u30EC\u30F3\u30B8\u8272\u306E\u4F53\u306B\u767D\u3044\u7E1E\u6A21\u69D8\u3092\u6301\u3064\u71B1\u5E2F\u9B5A\u3067\u30A4\u30BD\u30AE\u30F3\u30C1\u30E3\u30AF\u306E\u6BD2\u91DD\u304B\u3089\u5B88\u3089\u308C\u306A\u304C\u3089\u5171\u751F\u3057\u30E1\u30B9\u304C\u6B7B\u306C\u3068\u4E00\u756A\u5927\u304D\u306A\u30AA\u30B9\u304C\u30E1\u30B9\u306B\u6027\u8EE2\u63DB\u3059\u308B\u3068\u3044\u3046\u30E6\u30CB\u30FC\u30AF\u306A\u7279\u5FB4\u3092\u6301\u3061\u307E\u3059"
     chinese: 
-  - id: LFs_1007_00
+  - id: mackerel
     english: Mackerel
     korean: "\uACE0\uB4F1\uC5B4"
     japanese: "\u30B5\u30D0"
     chinese: 
-  - id: LFs_1007_01
+  - id: mackerel_01
     english: A representative blue-backed fish that is rich in DHA and EPA and is
       a migratory species that travels in large schools moving north and south depending
       on the season and water temperature.
@@ -1604,12 +1664,12 @@ MonoBehaviour:
       \uC9C0\uC5B4 \uD68C\uC720\uD558\uB294 \uC5B4\uC885\uC785\uB2C8\uB2E4."
     japanese: "\u9752\u80CC\u306E\u9B5A\u306E\u4EE3\u8868\u683C\u3067DHA\u3084EPA\u304C\u8C4A\u5BCC\u5B63\u7BC0\u3084\u6C34\u6E29\u306B\u3088\u3063\u3066\u5357\u5317\u306B\u5927\u898F\u6A21\u306A\u7FA4\u308C\u3092\u306A\u3057\u3066\u56DE\u904A\u3059\u308B\u9B5A\u7A2E\u3067\u3059."
     chinese: 
-  - id: LFs_1008_00
+  - id: congereel
     english: CongerEel
     korean: "\uBD95\uC7A5\uC5B4"
     japanese: "\u30A2\u30CA\u30B4"
     chinese: 
-  - id: LFs_1008_01
+  - id: congereel_01
     english: Called the sea eel it is characterized by regular white spots along
       its lateral line on the body active at night and is a healthy food source rich
       in Vitamin A.
@@ -1619,12 +1679,12 @@ MonoBehaviour:
       \uBCF4\uC591\uC2DD\uC785\uB2C8\uB2E4."
     japanese: "\u6D77\u9C3B\u3068\u547C\u3070\u308C\u4F53\u5074\u306E\u5074\u7DDA\u6CBF\u3044\u306B\u767D\u3044\u70B9\u304C\u898F\u5247\u7684\u306B\u4E26\u3093\u3067\u304A\u308A\u591C\u9593\u306B\u6D3B\u52D5\u3057\u30D3\u30BF\u30DF\u30F3A\u304C\u8C4A\u5BCC\u306A\u6ECB\u990A\u98DF\u3067\u3059."
     chinese: 
-  - id: LFs_1009_00
+  - id: bluespottedstingray
     english: Bluespotted Stingray
     korean: "\uAF41\uC9C0\uAC00\uC624\uB9AC"
     japanese: "\u30E4\u30C3\u30B3\u30A8\u30A4"
     chinese: 
-  - id: LFs_1009_01
+  - id: bluespottedstingray_01
     english: Characterized by a yellow body with vivid blue spots the bluespotted
       ribbontail ray has a venomous sting on its tail and primarily inhabits coral
       reefs or shallow sandy bottoms in tropical and subtropical waters.
@@ -1634,12 +1694,12 @@ MonoBehaviour:
       \uC595\uC740 \uBAA8\uB798\uBC14\uB2E5\uC5D0 \uC8FC\uB85C \uC11C\uC2DD\uD569\uB2C8\uB2E4."
     japanese: "\u9EC4\u8272\u306E\u4F53\u306B\u9BAE\u3084\u304B\u306A\u9752\u3044\u70B9\u306E\u6A21\u69D8\u304C\u7279\u5FB4\u3067\u5C3E\u306B\u6BD2\u91DD\u3092\u6301\u3061\u71B1\u5E2F\u304A\u3088\u3073\u4E9C\u71B1\u5E2F\u6D77\u57DF\u306E\u30B5\u30F3\u30B4\u7901\u3084\u6D45\u3044\u7802\u5730\u306B\u4E3B\u306B\u751F\u606F\u3057\u3066\u3044\u307E\u3059."
     chinese: 
-  - id: LFs_1010_00
+  - id: giantmoray
     english: Giant Moray
     korean: "\uB300\uC655\uACF0\uCE58"
     japanese: "\u30A6\u30C4\u30DC"
     chinese: 
-  - id: LFs_1010_01
+  - id: giantmoray_01
     english: The largest moray eel in the world it grows over 3 meters long and is
       a top nocturnal predator in the coral reef ecosystem possessing a powerful
       jaw and sharp teeth.
@@ -1649,65 +1709,65 @@ MonoBehaviour:
       \uCD5C\uC0C1\uC704 \uC57C\uD589\uC131 \uD3EC\uC2DD\uC790\uC785\uB2C8\uB2E4."
     japanese: "\u4E16\u754C\u6700\u5927\u306E\u30A6\u30C4\u30DC\u3067\u4F53\u9577\u306F\u6700\u59273m\u3092\u8D85\u3048\u5F37\u529B\u306A\u984E\u3068\u92ED\u3044\u6B6F\u3092\u6301\u3064\u30B5\u30F3\u30B4\u7901\u751F\u614B\u7CFB\u306E\u591C\u884C\u6027\u306E\u9802\u70B9\u6355\u98DF\u8005\u3067\u3059."
     chinese: 
-  - id: LMn_0001
+  - id: continue
     english: Continue
     korean: "\uACC4\uC18D\uD558\uAE30"
     japanese: "\u3064\u3065\u304F"
     chinese: "\u7EE7\u7EED"
-  - id: LMn_0002
+  - id: newstart
     english: New Start
     korean: "\uC0C8\uB85C\uC2DC\uC791"
     japanese: "\u65B0\u305F\u306B\u30B9\u30BF\u30FC\u30C8"
     chinese: "\u65B0\u5EFA"
-  - id: LMn_0003
+  - id: credit
     english: Credit
     korean: "\uD06C\uB808\uB527"
     japanese: "\u30AF\u30EC\u30B8\u30C3\u30C8"
     chinese: "\u6F14\u804C\u5458\u8868"
-  - id: LMn_0004
+  - id: option
     english: Option
     korean: "\uC635\uC158"
     japanese: "\u30AA\u30D7\u30B7\u30E7\u30F3"
     chinese: "\u9009\u9879"
-  - id: LMn_0005
+  - id: exit
     english: Exit
     korean: "\uB098\uAC00\uAE30"
     japanese: "\u3067\u304B\u3051"
     chinese: "\u51FA\u53E3"
   audioStruct:
-  - id: BGM_0001
+  - id: bgm_0001
     clip: {fileID: 8300000, guid: 901bda1c05964594d8139e0d5620b017, type: 3}
     type: 0
-  - id: BGM_0002
+  - id: bgm_0002
     clip: {fileID: 8300000, guid: e26fa95f5d6eca247ab341fb6c0f9819, type: 3}
     type: 0
-  - id: BGM_0003
+  - id: bgm_0003
     clip: {fileID: 8300000, guid: 3fb1ff217cb57074ea4511081324fb84, type: 3}
     type: 0
-  - id: BGM_0004
+  - id: bgm_0004
     clip: {fileID: 8300000, guid: dfdfc8ccaeb6c2544bd9f67d14e67005, type: 3}
     type: 0
-  - id: BGM_0005
+  - id: bgm_0005
     clip: {fileID: 8300000, guid: 5468d18f8e633d04f9fbcd5c720d0ec3, type: 3}
     type: 0
-  - id: BGM_0006
+  - id: bgm_0006
     clip: {fileID: 8300000, guid: 5421a6dbd6a2f4544a1e517ab5f37e07, type: 3}
     type: 0
-  - id: FX_0001
+  - id: fx_0001
     clip: {fileID: 8300000, guid: 4e8e1b66c400ec844acb8b1a1ba5aea5, type: 3}
     type: 1
-  - id: FX_0002
+  - id: fx_0002
     clip: {fileID: 8300000, guid: 3c2d2a55f3927154b94935b3fb18720d, type: 3}
     type: 1
-  - id: FX_0003
+  - id: fx_0003
     clip: {fileID: 8300000, guid: ddfdc2703b01bee4ab04742772f2f691, type: 3}
     type: 1
-  - id: FX_0004
+  - id: fx_0004
     clip: {fileID: 8300000, guid: 30ef30bf28111964bac74ff40cd14be5, type: 3}
     type: 1
-  - id: FX_0005
+  - id: fx_0005
     clip: {fileID: 8300000, guid: 8d11ac562f8e8fc4c92b866a4976b80b, type: 3}
     type: 1
-  - id: Env_0001
+  - id: env_0001
     clip: {fileID: 8300000, guid: c94393ff33dcdf04db1b849441a29c1d, type: 3}
     type: 2

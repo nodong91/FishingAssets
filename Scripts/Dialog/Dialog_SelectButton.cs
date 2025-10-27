@@ -27,6 +27,7 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        LandingStruct getLandingData = Game_Manager.current.GetLanding.GetLandingData;
         clickAction?.Invoke(selectStruct.selectType);
         switch (selectStruct.selectType)
         {
@@ -36,21 +37,24 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
                 break;
             case SelectStruct.SelectType.OpenShop:
                 // 상점 열기
-                LandingStruct getLandingData = Game_Manager.current.GetLanding.GetLandingData;
                 Game_Manager.current.GetMainUI.OpenShop();// 상점창 열기
                 Game_Manager.current.GetInventory.OpenShop(getLandingData.shopNPC);
                 break;
             case SelectStruct.SelectType.OpenShipyard:
                 // 조선소 열기
-                getLandingData = Game_Manager.current.GetLanding.GetLandingData;
                 Game_Manager.current.GetMainUI.OpenShop();// 조선소도 상점창
                 Game_Manager.current.GetInventory.OpenShipyard(getLandingData.shipyardNPC);
+                break;
+
+            case SelectStruct.SelectType.OpenSmuggler:
+                // 밀수꾼 상점 열기
+                Game_Manager.current.GetMainUI.OpenShop();// 상점창
+                Game_Manager.current.GetInventory.OpenShop(getLandingData.smugglerNPC);
                 break;
 
             case SelectStruct.SelectType.Upgrade:
                 if (Game_Manager.current.GetPlayer.FullHealth == false)
                 {
-                    getLandingData = Game_Manager.current.GetLanding.GetLandingData;
                     Data_Dialog warnDialog = getLandingData.shipyardNPC.dataDialogs[1];
                     Game_Manager.current.GetDialog.NpcDialog(warnDialog);
                     Debug.LogWarning("체력이 가득 차지 않았으면 스킬창 못열게");

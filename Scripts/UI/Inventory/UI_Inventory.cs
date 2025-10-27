@@ -36,7 +36,7 @@ public class UI_Inventory : MonoBehaviour
     const int slotSize = 40;
     ResultStruct resultItem;
 
-    public string addFishTest;
+    public string addItemTest;
 
     public void CloseCanvas() => Game_Manager.current.GetMainUI?.CloseCanvas();
 
@@ -45,23 +45,28 @@ public class UI_Inventory : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             Game_Manager.current.GetMainUI.MoveMoney(1000f);// 아이템 추가 테스트
+            Debug.LogError("머니 치트");
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            string randomID = addFishTest;
-            if (Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(randomID) == false)
-                return;
+            Debug.LogError("아이템 치트");
+            string randomID = addItemTest;
+            //if (Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(randomID) == false)
+            //    return;
 
             onDrag = true;
-            selectSlotType = SlotType.MyBox;
-            FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[randomID];
-            FishStruct.RandomSize randomSize = fishStruct.GetRandom();
-            Debug.LogWarning($"{randomID} > {Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(randomID)}");
+            //selectSlotType = SlotType.MyBox;
+            //FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[randomID];
+            //FishStruct.RandomSize randomSize = fishStruct.GetRandom();
+            //Debug.LogWarning($"{randomID} > {Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(randomID)}");
 
-            SetIconImage(fishStruct.itemStruct);
-            ItemInInventory item = myBox.SetItemClass(fishStruct.itemStruct);// 테스트 아이템 추가
-            selectItemClass = item;
+            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(randomID);
+            if (item.id == null)
+                return;
+            ItemInInventory itemInInventory = myBox.SetItemClass(item);// 테스트 아이템 추가
+            SetIconImage(item);
+            selectItemClass = itemInInventory;
             DragSlot();// 아이템 추가
         }
     }
@@ -496,7 +501,7 @@ public class UI_Inventory : MonoBehaviour
                 case SlotType.Submit:
                     if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
                         return;
-                    
+
                     if (enterSlotType == SlotType.Submit && shop.CheckMy(_slot.slotNum) == false)// 내가 넣은거 아니라면
                     {
                         Debug.LogWarning("퀘스트 아이템이 필요");
