@@ -3,24 +3,21 @@ using UnityEngine.UI;
 
 public class UI_ChangeShip : MonoBehaviour
 {
-    public Unit_Player player;
-    public GameObject ship, ship2;
+    public Unit_Player Player => Game_Manager.current?.GetPlayer;
+    public Data_Ship[] ship;
     public UI_ChangeShip_Slot shipButton;
     public GridLayoutGroup shipParent;
-    public UI_ChangeShip_Slot selectShip;
 
     void Start()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < ship.Length; i++)
         {
 
             UI_ChangeShip_Slot inst = Instantiate(shipButton, shipParent.transform);
-            inst.name = (i % 2).ToString();
-            inst.nameText.text = (i % 2).ToString();
+            inst.shipObject = ship[i].shipObject;
+            inst.name = i.ToString();
+            inst.nameText.text = ship[i].name;
             inst.customButton.SetButton(delegate { ShipClick(inst); }, ShipEnter, ShipExit);
-
-            GameObject shipObject = (i % 2 == 0) ? ship : ship2;
-            inst.shipObject = shipObject;
         }
         shipParent.constraint = GridLayoutGroup.Constraint.FixedRowCount;
         shipParent.constraintCount = 1;
@@ -28,13 +25,16 @@ public class UI_ChangeShip : MonoBehaviour
 
     void ShipClick(UI_ChangeShip_Slot _slot)
     {
-        if (player.playerObject != null)
+        if (Player == null)
+            return;
+
+        if (Player.playerObject != null)
         {
             //player.playerObject.gameObject.SetActive(false);
-            Destroy(player.playerObject);
+            Destroy(Player.playerObject);
         }
-        GameObject inst = Instantiate(_slot.shipObject, player.transform);
-        player.playerObject = inst;
+        GameObject inst = Instantiate(_slot.shipObject, Player.transform);
+        Player.playerObject = inst;
         Debug.LogWarning($"{_slot.name} : {_slot.shipObject}");
     }
 

@@ -210,9 +210,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41d2739bc3c60e46973f412fdeb0f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ship:
+  - {fileID: 11400000, guid: ecc6c7b76b5ac0e4c8a72a41608b125f, type: 2}
+  - {fileID: 11400000, guid: e3e757ffa34f85b4d855273ea8b8e970, type: 2}
+  - {fileID: 11400000, guid: fa2c72c7e35eb664383c3e5f4cb4b18d, type: 2}
+  - {fileID: 11400000, guid: 779468a8fb356f94a96c44f5f768305f, type: 2}
   shipButton: {fileID: 2093371883105030295}
   shipParent: {fileID: 2861839111788021226}
-  selectShip: {fileID: 0}
 --- !u!1 &3979576010477592336
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 1937648372329999982}
   customButton: {fileID: 1997489297974805451}
+  shipObject: {fileID: 0}
 --- !u!1 &7737124897099035921
 GameObject:
   m_ObjectHideFlags: 0

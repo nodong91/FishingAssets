@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -30,7 +29,7 @@ public class Game_Manager : MonoBehaviour
     public Rest_Manager rest_Manager;
     public Tutorial_Manager tutorial;
 
-    public Data_Status_Default defaultStatusData;
+    public Data_Ship shipData;
     public SetStatus currentStatus;
     public SetStatus GetAddStatus => GetSkill.addStatus;
 
@@ -57,6 +56,7 @@ public class Game_Manager : MonoBehaviour
     {
         Singleton_Continue.INSTANCE.GetContinue();
         Camera_Manager.current.SetCameraManager();
+
         while (currentLand == null)
             yield return null;
 
@@ -64,7 +64,6 @@ public class Game_Manager : MonoBehaviour
         SetThemeMusic();
         yield return null;
 
-        GetPlayer.SetStart();
         GetMainUI.SetStart();
         GetSkill.SetStart();
         GetDialog.SetStart();
@@ -78,9 +77,12 @@ public class Game_Manager : MonoBehaviour
     public void AddStatus()
     {
         bool fullHealth = GetPlayer.FullHealth;// 스탯 적용 하기 전 풀피 체크
-        currentStatus.SettingStatus(defaultStatusData.defaultStatus);// 디폴트 스탯 적용
+        currentStatus.SettingStatus(shipData.status);// 디폴트 스탯 적용
         currentStatus.AddStatus(GetAddStatus);// 추가 스탯 적용
+
+        GetInventory.myBox.AddMaxWeight(currentStatus.maxWeight);// 인벤토리 무게 적용
         GetInventory.myBox.AddInventory(currentStatus.maxBoxSize);// 인벤토리 사이즈 적용
+
         GetPlayer.SetStatus(fullHealth);// 플레이어에 스탯 적용
     }
 
@@ -153,6 +155,7 @@ public class Game_Manager : MonoBehaviour
                     Transform landingPoint = currentLand.landingPoint.transform;
                     instPlayer = Instantiate(player, landingPoint.position, landingPoint.rotation, transform);
                 }
+                instPlayer.SetStart();
             }
             return instPlayer;
         }
@@ -202,6 +205,7 @@ public class Game_Manager : MonoBehaviour
             {
                 instInventory = Instantiate(inventory, transform);
                 instInventory.SetStart();
+                Debug.LogError("oijaodjoaijdoijaoijdojadiioja");
             }
             return instInventory;
         }

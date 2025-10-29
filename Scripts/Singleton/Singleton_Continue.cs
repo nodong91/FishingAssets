@@ -50,7 +50,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
         else if (Game_Manager.current != null)
         {
             // 기본 세팅
-            Data_Status_Default defaultStatusData = Game_Manager.current.defaultStatusData;
+            Data_Ship defaultStatusData = Game_Manager.current.shipData;
             Vector3 defaultPosition = new Vector3(0.5f, 0.2f, 10.7f);
             Quaternion defaultRotate = Quaternion.Euler(-0.15f, 103f, 0.02f);
             Data_Continue data = new Data_Continue
@@ -65,7 +65,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
                 day = 0,
                 weatherType = UI_Time.WeatherType.Sun,
 
-                energy = defaultStatusData.defaultStatus.maxEnergy,
+                energy = defaultStatusData.status.maxEnergy,
                 money = 1000f,
                 destroySlot = new System.Collections.Generic.List<Vector2Int>(),
             };

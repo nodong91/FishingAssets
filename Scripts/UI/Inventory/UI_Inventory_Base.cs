@@ -585,7 +585,7 @@ public class UI_Inventory_Base : MonoBehaviour
             saveInventoryData = new Static_JsonManager.InventoryData
             {
                 lastSetDay = -1,
-                invenSize = Game_Manager.current.defaultStatusData.defaultStatus.maxBoxSize,
+                invenSize = Game_Manager.current.shipData.status.maxBoxSize,
                 saveItems = new List<SaveItemClass>(),
             };
         }
