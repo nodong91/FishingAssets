@@ -10,5 +10,13 @@ public class Data_NPC : ScriptableObject
     public Data_Dialog[] dataDialogs;
 
     public Vector2Int invenSize;
-    public string[] fixedID, randomID;// 파는 물건
+    public string[] fixedID;// 파는 물건
+    [System.Serializable]
+    public struct RandomItemChance
+    {
+        public string itemID;
+        [Range(0f, 100f)]
+        public float chance;
+    }
+    public RandomItemChance[] randomID;
 }

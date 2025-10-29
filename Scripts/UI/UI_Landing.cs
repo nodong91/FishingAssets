@@ -34,7 +34,7 @@ public class UI_Landing : MonoBehaviour
     public DeleOutLanding outLanding;
     Coroutine opening;
 
-    [Header("Buttons")]
+    [Header(" [ Buttons ]")]
     public Custom_Button outButton;
     public Custom_Button restButton;
     public Custom_Button fuelButton;
@@ -62,8 +62,6 @@ public class UI_Landing : MonoBehaviour
         storageButton.SetButton(StorageButton);
         downTownButton.SetButton(DownTownButton);
         boardButton.SetButton(BoardButton);
-        //backButton.SetButton(BackButton);
-        //backCanvas = backButton.GetComponent<CanvasGroup>();
     }
 
     public void SetLanding(LandingStruct _landingData)
@@ -183,7 +181,7 @@ public class UI_Landing : MonoBehaviour
         onDialog = true;
         SetLandingCanvas(false);        // 샵 버튼 누르면 랜드 UI 제거
         Option_Manager.current.SetThemeMusic(landingData.shopNPC.themeMusic);
-        Game_Manager.current.GetDialog.DialogStart(landingData.shopNPC);
+        Game_Manager.current.GetDialog.DialogStart_NPC(landingData.shopNPC, 0);
         Game_Manager.current.currentLand.CameraOutFouce(true);
     }
 
@@ -193,29 +191,32 @@ public class UI_Landing : MonoBehaviour
         onDialog = true;
         SetLandingCanvas(false);        // 조선소 버튼 누르면 랜드 UI 제거
         Option_Manager.current.SetThemeMusic(landingData.shipyardNPC.themeMusic);
-        Game_Manager.current.GetDialog.DialogStart(landingData.shipyardNPC);
+        Game_Manager.current.GetDialog.DialogStart_NPC(landingData.shipyardNPC, 0);
         Game_Manager.current.currentLand.CameraOutFouce(true);
     }
     public CanvasGroup nothingBoard;
     int Hour => Game_Manager.current.GetMainUI.timeUI.hour;
     void DownTownButton()
     {
+        currentType = LandingType.DownTown;
         if (Hour >= 5f && Hour < 18f)
         {
             // 낮
-            onDialog = false;
-            StartCoroutine(OpenNothingBoard());
+            onDialog = true;
+            SetLandingCanvas(false);        // 랜드 UI 제거
+            Game_Manager.current.currentLand.CameraOutFouce(true);
+            //StartCoroutine(OpenNothingBoard());
+            Game_Manager.current.GetDialog.DialogStart_NPC(landingData.player, 0);
             Debug.LogWarning("이벤트 시간 : " + Hour);
         }
         else
         {
             // 밤
-            currentType = LandingType.DownTown;
             onDialog = true;
             SetLandingCanvas(false);        // 랜드 UI 제거
             Game_Manager.current.currentLand.CameraOutFouce(true);
             Option_Manager.current.SetThemeMusic(landingData.smugglerNPC.themeMusic);
-            Game_Manager.current.GetDialog.DialogStart(landingData.smugglerNPC);
+            Game_Manager.current.GetDialog.DialogStart_NPC(landingData.smugglerNPC, 0);
         }
     }
 

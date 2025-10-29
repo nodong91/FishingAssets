@@ -225,16 +225,15 @@ public class UI_QuestManager : MonoBehaviour
         public List<string> compQuest;// ¿Ï·á Äù½ºÆ®
     }
     public SetQuest setQuest;
-    const string questData = "SaveQuestData";
 
     void SaveQuest()
     {
-        Static_JsonManager.SaveQuestData(questData, setQuest);
+        Static_JsonManager.SaveQuestData(String_Save._quest, setQuest);
     }
 
     void LoadQuest()
     {
-        if (Static_JsonManager.TryLoadQuestData(questData, out SetQuest _data) == true)
+        if (Static_JsonManager.TryLoadQuestData(String_Save._quest, out SetQuest _data) == true)
         {
             setQuest = _data;
         }

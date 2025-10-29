@@ -371,6 +371,13 @@ public class UI_Inventory : MonoBehaviour
 
     void DragShop()
     {
+        if(enterSlotType == selectSlotType)// 같은 타입이면 그냥 이동
+        {
+            UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
+            tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
+            return;
+        }
+
         if (enterSlotType == SlotType.MyBox)// 드랍 구매
         {
             // 돈이 부족
@@ -450,7 +457,7 @@ public class UI_Inventory : MonoBehaviour
         {
             selectSlot = _slot.GetLinkSlot;
             ItemStruct item = selectSlot.itemInInventory.item;
-            Debug.LogWarning($"{currentType} -> 오른 클릭 타입 : {enterSlotType}");
+            Debug.LogWarning($"{currentType} -> 오른 클릭 타입 : {enterSlotType}, 아이템 타입 {item.itemType}");
             switch (currentType)
             {
                 case SlotType.Shop:// 샵이 열려있을 때 우클릭
@@ -568,7 +575,7 @@ public class UI_Inventory : MonoBehaviour
                 break;
 
             case ItemStruct.ItemType.Quest:
-                Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
+                //Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
                 break;
 
             case ItemStruct.ItemType.Lottery:// 복권

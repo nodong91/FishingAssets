@@ -10,14 +10,6 @@ public class Title_Manager : MonoBehaviour
     public Option_Manager optionManager;
     public Credit_Rolling creditRolling;
     private Credit_Rolling instCreditRolling;
-    const string titleTheme = "bgm_0001";
-    const string soundName = "fx_0001";
-
-    const string _continue = "continue";
-    const string _newStart = "newstart";
-    const string _credit = "credit";
-    const string _setting = "option";
-    const string _exit = "exit";
 
     public RectTransform selectMask;
     Coroutine enterCoroutine;
@@ -100,11 +92,11 @@ public class Title_Manager : MonoBehaviour
 
     void TextSetting()
     {
-        continueText.text = Singleton_Data.INSTANCE.GetLanguage(_continue);
-        newStartText.text = Singleton_Data.INSTANCE.GetLanguage(_newStart);
-        creditText.text = Singleton_Data.INSTANCE.GetLanguage(_credit);
-        settingText.text = Singleton_Data.INSTANCE.GetLanguage(_setting);
-        exitText.text = Singleton_Data.INSTANCE.GetLanguage(_exit);
+        continueText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title. _continue);
+        newStartText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._newStart);
+        creditText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._credit);
+        settingText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._setting);
+        exitText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._exit);
     }
 
     void OnTitle()
@@ -115,7 +107,7 @@ public class Title_Manager : MonoBehaviour
 
     void ActionEnter(Custom_Button _button)
     {
-        Singleton_Audio.INSTANCE.Audio_FX(soundName);
+        Singleton_Audio.INSTANCE.Audio_FX(String_Audio._buttonClick);
         selectMask.gameObject.SetActive(true);
         selectMask.position = _button.transform.position;
 
@@ -240,7 +232,7 @@ public class Title_Manager : MonoBehaviour
             LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
         yield return null;
 
-        Option_Manager.current.SetThemeMusic(titleTheme); // 테마 음악 설정
+        Option_Manager.current.SetThemeMusic(String_Audio._titleTheme); // 테마 음악 설정
         isMove = true;
         while (isMove == true)// Loop the movement
         {

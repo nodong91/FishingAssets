@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
+  m_Name: Data_Dialog_DownTown
+  m_EditorClassIdentifier: 
+  dialogStructs:
+  - contents: "\uC5B4\uB514\uB85C \uAC08\uAE4C?"
+    dialogTypes:
+    - id: "\uC5B4\uB514\uB85C"
+      dialogIndex: {x: 0, y: 3}
+      textSize: 20
+      typingSpeed: 0
+      textColor: 00FF00
+      actionType: 1
+      actionSpeed: 1.77
+      actionInterval: 4.08
+      actionAngle: {x: 1, y: 2}
+  selectStructs:
+  - selectDialog: Pub
+    selectType: 0
+    npcData: {fileID: 11400000, guid: 438593d79ed055d4b8b5a4112c02a68e, type: 2}
+  - selectDialog: Street
+    selectType: 0
+    npcData: {fileID: 11400000, guid: c7a49494ad2b04c48ad3b660120a072d, type: 2}
+  - selectDialog: Smuggler
+    selectType: 0
+    npcData: {fileID: 11400000, guid: a0d85159f1d78e8448ad8d81ae00afa1, type: 2}

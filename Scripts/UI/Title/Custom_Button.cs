@@ -9,11 +9,11 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     {
         None = 0,
         Scale = 1,
-
     }
     public OverStyle overStyle = OverStyle.Scale;
     public Image buttonImage;
     public Image GetButtonImage { get { return buttonImage; } }
+
     Action actionClick;
     Action<Custom_Button> actionEnter, actionExit;
 

@@ -4,7 +4,6 @@ using static Data_Manager;
 public class Singleton_Continue : MonoSingleton<Singleton_Continue>
 {
     public Data_Continue continueData;
-    const string saveData = "SaveContinue";
 
     //===========================================================================================================================
     // 저장 및 불러오기
@@ -28,7 +27,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             money = Game_Manager.current.GetMainUI.TryMoney,
             destroySlot = Game_Manager.current.GetInventory.TryDestroySlot,
         };
-        Static_JsonManager.SaveCountinueData(saveData, continueData);
+        Static_JsonManager.SaveCountinueData(String_Save._continue, continueData);
     }
 
     public void GetContinue()
@@ -44,7 +43,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
 
     public Data_Continue LoadContinue()
     {
-        if (Static_JsonManager.TryLoadCountinueData(saveData, out Data_Continue _data))
+        if (Static_JsonManager.TryLoadCountinueData(String_Save._continue, out Data_Continue _data))
         {
             return _data;
         }

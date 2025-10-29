@@ -16,7 +16,6 @@ public class Audio_Manager : MonoBehaviour
     bool onSet;
     Dictionary<Data_Manager.AudioStruct, int> tryAudioStructToIndex = new Dictionary<Data_Manager.AudioStruct, int>();
 
-    const string soundName = "fx_0001";
     //===========================================================================================================================
     public void SetStart()
     {
@@ -184,7 +183,7 @@ public class Audio_Manager : MonoBehaviour
 
     void SetFxPrev()
     {
-        Singleton_Audio.INSTANCE.Audio_FX(soundName);
+        Singleton_Audio.INSTANCE.Audio_FX(String_Audio._buttonClick);
     }
 
     public Sprite onArrow, offArrow;

@@ -8,7 +8,6 @@ public class Option_Manager : MonoBehaviour
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public Custom_Button closeButton;
     public Custom_Button goTitleButton, goExitButton;
-    const string saveData = "SaveOptionData";
     public Data_Option optionData;
 
     [System.Serializable]
@@ -22,7 +21,6 @@ public class Option_Manager : MonoBehaviour
     public TranslateLanguage translateLanguage;
     public Audio_Manager audioManager;
     public Quality_Manager qualityManager;
-    const string soundName = "fx_0001";
 
     public delegate void DeleCloseOption();
     public DeleCloseOption deleCloseOption;
@@ -102,7 +100,7 @@ public class Option_Manager : MonoBehaviour
 
     void EnterButton(Custom_Button _button)
     {
-        Singleton_Audio.INSTANCE.Audio_FX(soundName);
+        Singleton_Audio.INSTANCE.Audio_FX(String_Audio._buttonClick);
     }
 
     void InputToggle(int _index)
@@ -138,7 +136,7 @@ public class Option_Manager : MonoBehaviour
 
     public bool TryOptionFile()
     {
-        string filePath = Application.dataPath + "/Save/" + saveData + ".json";
+        string filePath = Application.dataPath + "/Save/" + String_Save._option + ".json";
         FileInfo fileInfo = new FileInfo(filePath);
         return fileInfo.Exists;
     }
@@ -171,12 +169,12 @@ public class Option_Manager : MonoBehaviour
             },
         };
         Debug.LogWarning("옵션 저장");
-        Static_JsonManager.SaveOptionData(saveData, optionData);
+        Static_JsonManager.SaveOptionData(String_Save._option, optionData);
     }
 
     public void LoadOption()
     {
-        if (Static_JsonManager.TryLoadOptionData(saveData, out Data_Option _data))
+        if (Static_JsonManager.TryLoadOptionData(String_Save._option, out Data_Option _data))
         {
             optionData = _data;
         }

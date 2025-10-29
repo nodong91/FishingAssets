@@ -49,8 +49,6 @@ public class Skill_Manager : MonoBehaviour
     SkillStruct[,] statusStructs;
 
     public Skill_Infomation infomation;
-    const string activeSkill = "fx_0003";
-    const string saveEnableData = "Skill_Enabled";// 활성화 된 스킬 저장
 
     public void SetStart()
     {
@@ -103,7 +101,7 @@ public class Skill_Manager : MonoBehaviour
         }
 
         // 활성화된 스킬 불러오기
-        if (Static_JsonManager.TryLoadEnableSkillData(saveEnableData, out List<Vector2Int> _enableSlotLIst))
+        if (Static_JsonManager.TryLoadEnableSkillData(String_Save._enableSkill, out List<Vector2Int> _enableSlotLIst))
         {
             enableSlotLIst = _enableSlotLIst;
         }
@@ -180,8 +178,8 @@ public class Skill_Manager : MonoBehaviour
     {
         enableSlotLIst.Add(_addNode);
         SetSlot(_addNode);
-        Singleton_Audio.INSTANCE.Audio_FX(activeSkill);
-        Static_JsonManager.SaveEnableSkillData(saveEnableData, enableSlotLIst);// 활성화 된 스킬 저장
+        Singleton_Audio.INSTANCE.Audio_FX(String_Audio._activeSkill);
+        Static_JsonManager.SaveEnableSkillData(String_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 저장
     }
 
     void SetSlot(Vector2Int _addNode)
@@ -217,6 +215,6 @@ public class Skill_Manager : MonoBehaviour
             Game_Manager.current.AddStatus();
         }
         enableSlotLIst.Clear();
-        Static_JsonManager.SaveEnableSkillData(saveEnableData, enableSlotLIst);// 활성화 된 스킬 저장
+        Static_JsonManager.SaveEnableSkillData(String_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 저장
     }
 }

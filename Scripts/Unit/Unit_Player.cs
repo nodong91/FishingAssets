@@ -23,7 +23,7 @@ public class Unit_Player : MonoBehaviour
     public float GetEnergy { get { return energy; } }
     public float GetMaxEnergy { get { return CurrentStatus.maxEnergy; } }
     public float efficient;// 에너지 효율
-    private Vector2 dirction = Vector2.zero;
+    private Vector2 dirction => Game_Manager.current.controllManager.dirction;
     // 물위에서 배의 움직임
     private float shipHight = -0.1f;
     private float waveSpeed = 2f;
@@ -40,8 +40,6 @@ public class Unit_Player : MonoBehaviour
 
     Quaternion prevAngle, setAngle;
     float randomTime, runningRandomTime;
-
-    const string clashSound = "FX_0004";
 
     public AnimationCurve rotateCurve;// 위아래 흔들릴 때 로테이션
 
@@ -80,7 +78,6 @@ public class Unit_Player : MonoBehaviour
     // 컨트롤
     //================================================================================================================================================
 
-
     public void StateMachine(State _state)
     {
         state = _state;
@@ -112,9 +109,9 @@ public class Unit_Player : MonoBehaviour
     // 이동
     //================================================================================================================================================
 
-    public void StateMove(Vector2 _dirction)
+    public void StateMove()
     {
-        dirction = _dirction;
+        //dirction = _dirction;
         if (state == State.Idle)
         {
             StateMachine(State.Move);
@@ -262,7 +259,7 @@ public class Unit_Player : MonoBehaviour
     int destroyCount => Game_Manager.current.GetInventory.myBox.destroySlot.Count;
     public bool TakeDamage()
     {
-        Singleton_Audio.INSTANCE.Audio_FX(clashSound);
+        Singleton_Audio.INSTANCE.Audio_FX(String_Audio._clash);
         Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
 
         health = CurrentStatus.shipHealth - destroyCount;
@@ -359,8 +356,15 @@ public class Unit_Player : MonoBehaviour
             Game_Manager.current.GetMainUI.SetWarnningText("배가 움직이지 않아.");
             return false;
         }
-        StateMachine(State.Idle);// 다시 대기 상태
         return true;
+    }
+
+    public void OutOfControll(bool _isOn)
+    {
+        if (_isOn == true)
+            StateMachine(State.None);
+        else
+            StateMachine(State.Idle);// 다시 대기 상태
     }
 
     //================================================================================================================================================

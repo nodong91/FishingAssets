@@ -103,13 +103,15 @@ public class Game_Manager : MonoBehaviour
     public void PlayerMove()
     {
         controllManager.SetDirection();
-        GetPlayer.StateMove(controllManager.dirction);
+        GetPlayer.StateMove();
     }
 
     public void OutOfControll(bool _isOn)
     {
         Singleton_Controller.INSTANCE.outOfControll = _isOn;
         controllManager.ResetControll();
+
+        GetPlayer.OutOfControll(_isOn);// 플레이어 못움직이게
     }
 
     public bool CheckMoney(float _price)

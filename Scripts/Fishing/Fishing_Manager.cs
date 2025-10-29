@@ -385,7 +385,7 @@ public class Fishing_Manager : MonoBehaviour
     //===================================================================================================================
     // 牧飘费
     //===================================================================================================================
-    const string fx_0005 = "fx_0005";
+  
     bool catching;
     void TestControll()
     {
@@ -394,7 +394,7 @@ public class Fishing_Manager : MonoBehaviour
             if (catching == false)
             {
                 catching = true;
-                Singleton_Audio.INSTANCE.Audio_LoopFX(fx_0005);// 超矫 家府
+                Singleton_Audio.INSTANCE.Audio_LoopFX(String_Audio._reeling);// 超矫 家府
             }
             if (catchRadius > 0.1f)
                 catchRadius -= 1f * Time.deltaTime;

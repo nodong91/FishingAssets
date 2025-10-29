@@ -68,12 +68,12 @@ public class Data_Dialog : ScriptableObject
             Out = 1,
             OpenShop = 2,
             OpenShipyard = 3,
-            Quest = 4,
+            OpenSmuggler = 4,
             Upgrade = 5,
             Result = 6,
-            OpenSmuggler = 7,
         }
         public SelectType selectType;
+        public Data_NPC npcData;
     }
     public SelectStruct[] selectStructs;
 

@@ -270,7 +270,7 @@ public class UI_Shop : UI_Inventory_Base
         yield return null;
 
         SetFixedItem();
-        //SetRandomItem();
+        SetRandomItem();
     }
 
     void SetFixedItem()// 상점 고정 아이템 세팅
@@ -288,15 +288,23 @@ public class UI_Shop : UI_Inventory_Base
 
     void SetRandomItem()// 상점 랜덤 아이템 세팅
     {
-        //List<string> setID = new List<string>(shopItem[currentIndex].randomID);
-        List<string> setID = new List<string>(npc.fixedID);
-        setID = P01_Utility.ShuffleList(setID, 0);
+        if (npc.randomID == null || npc.randomID.Length == 0)
+            return;
+        // 찬스 입력
+        float[] floats = new float[npc.randomID.Length];
+        for (int i = 0; i < npc.randomID.Length; i++)
+        {
+            floats[i] = npc.randomID[i].chance;
+        }
 
         // 아이템 반복 되지 않게 세팅
-        int amount = Random.Range(0, setID.Count);
+        int amount = Random.Range(10, 20);
         for (int i = 0; i < amount; i++)
         {
-            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(setID[i]);
+            int index = P01_Utility.Chance(floats);
+            string itemID = npc.randomID[index].itemID;
+            Debug.LogWarning($"{floats.Length}({index}):{itemID}");
+            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(itemID);
             if (AddItem(item) == false)// 상점 랜덤 아이템 세팅
             {
                 break;// 빈칸이 없으면 그만

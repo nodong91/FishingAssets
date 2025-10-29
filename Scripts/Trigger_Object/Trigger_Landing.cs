@@ -33,6 +33,7 @@ public class Trigger_Landing : MonoBehaviour
         public string landingID;
         public LandingSetting[] landingSetting;
 
+        public Data_NPC player;
         public Data_NPC shopNPC;
         public Data_NPC shipyardNPC;
         public Data_NPC smugglerNPC;
