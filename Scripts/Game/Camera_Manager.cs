@@ -234,8 +234,9 @@ public class Camera_Manager : MonoBehaviour
             yield return null;
         }
     }
-    float originalFOV = 10f;
-    public void CameraFocus(bool _on)
+
+    const float originalFOV = 10f;
+    public void CameraFocusOut(bool _on)
     {
         float targetFOV = _on == true ? 0f : originalFOV;
         volumeSettings.FocusOffset = targetFOV;

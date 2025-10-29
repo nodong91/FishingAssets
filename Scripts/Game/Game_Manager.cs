@@ -28,6 +28,7 @@ public class Game_Manager : MonoBehaviour
     public Gamble_Lottery lottery;
     public Rest_Manager rest_Manager;
     public Tutorial_Manager tutorial;
+    public UI_ChangeShip changeShip;
 
     public Data_Ship shipData;
     public SetStatus currentStatus;
@@ -54,8 +55,16 @@ public class Game_Manager : MonoBehaviour
 
     IEnumerator SetStart()
     {
-        Singleton_Continue.INSTANCE.GetContinue();
+        //Singleton_Continue.INSTANCE.GetContinue();
         Camera_Manager.current.SetCameraManager();
+
+        continueData = Singleton_Continue.INSTANCE.LoadContinue();
+        string shipID = continueData.shipData;
+        shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
+
+        Game_Manager.current.GetTimeUI.SetStart(continueData);// 시간
+        Game_Manager.current.GetMainUI.SetMoney(continueData.money);// 돈
+        Game_Manager.current.GetInventory.TryDestroySlot = continueData.destroySlot;// 부서진 슬롯
 
         while (currentLand == null)
             yield return null;
@@ -70,8 +79,15 @@ public class Game_Manager : MonoBehaviour
         GetFishGuide.SetStart();
         GetQuest.SetStart();
 
-        AddStatus();// 추가 스테이트 세팅
+        ChangeStatus(shipData);
         OutOfControll(false);
+    }
+
+    public void ChangeStatus(Data_Ship _shipData)
+    {
+        shipData = _shipData;
+        GetPlayer.SetShip(_shipData);
+        AddStatus();// 스테이트 세팅
     }
 
     public void AddStatus()
@@ -133,7 +149,8 @@ public class Game_Manager : MonoBehaviour
         GetTutorial.StartTutorial("FirstFishing");
         GetFishing.SetFishing(_areaType);
     }
-
+    Data_Continue continueData;
+    public Data_Continue GetContinue { get { return continueData; } }
     //====================================================================================================================
     // 매니저 가져오기
     //====================================================================================================================
@@ -145,10 +162,9 @@ public class Game_Manager : MonoBehaviour
         {
             if (instPlayer == null)
             {
-                Data_Continue continueData = Singleton_Continue.INSTANCE.continueData;
-                if (continueData != null)
+                if (GetContinue != null)
                 {
-                    instPlayer = Instantiate(player, continueData.playerPosition, continueData.playerRotation, transform);
+                    instPlayer = Instantiate(player, GetContinue.playerPosition, GetContinue.playerRotation, transform);
                 }
                 else
                 {
@@ -205,7 +221,6 @@ public class Game_Manager : MonoBehaviour
             {
                 instInventory = Instantiate(inventory, transform);
                 instInventory.SetStart();
-                Debug.LogError("oijaodjoaijdoijaoijdojadiioja");
             }
             return instInventory;
         }
@@ -360,7 +375,19 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-
+    private UI_ChangeShip instChangeShip;
+    public UI_ChangeShip GetChangeShip
+    {
+        get
+        {
+            if (instChangeShip == null)
+            {
+                instChangeShip = Instantiate(changeShip, transform);
+                instChangeShip.SetStart();
+            }
+            return instChangeShip;
+        }
+    }
 
     //====================================================================================================================
     // 풀스크린 렌더러 피쳐 관련
@@ -465,5 +492,13 @@ public class Game_Manager : MonoBehaviour
 
         GetInventory.myBox.EmptyInventoryAllSlot();// 인벤토리 초기화
         Debug.LogWarning($"고스트 오브젝트 : {instLostBox.name}");
+    }
+
+
+
+
+    public void FocusShip(bool _isOn)
+    {
+        currentLand.focusShip.gameObject.SetActive(_isOn);
     }
 }

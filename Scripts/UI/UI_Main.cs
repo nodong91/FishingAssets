@@ -42,7 +42,7 @@ public class UI_Main : MonoBehaviour
 
     public void SetStart()
     {
-        SetMoney(Singleton_Continue.INSTANCE.continueData.money);
+        SetMoney(Game_Manager.current.GetContinue.money);
         HealthSize = maxHealthImage.rectTransform.sizeDelta;
 
         inventoryButton.SetButton(InventoryButton);

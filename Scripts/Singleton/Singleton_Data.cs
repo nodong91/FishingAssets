@@ -10,6 +10,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     public Dictionary<string, UsedStruct> Dict_Used = new Dictionary<string, UsedStruct>();
     public Dictionary<string, SkillStruct> Dict_Skill = new Dictionary<string, SkillStruct>();
     public Dictionary<string, QuestStruct> Dict_Quest = new Dictionary<string, QuestStruct>();
+    public Dictionary<string, Data_Ship> Dict_Ship = new Dictionary<string, Data_Ship>();
     public Dictionary<string, LanguageStruct> Dict_Language = new Dictionary<string, LanguageStruct>();
 
     public void SetDictionary_Used(List<UsedStruct> _data)
@@ -123,6 +124,23 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
             else
             {
                 Dict_Sprite[id] = _data[i];
+            }
+        }
+    }
+
+    public void SetDictionary_ShipData(List<Data_Ship> _data)
+    {
+        Dict_Ship = new Dictionary<string, Data_Ship>();
+        for (int i = 0; i < _data.Count; i++)
+        {
+            string id = _data[i].id;
+            if (Dict_Ship.ContainsKey(id) == true)
+            {
+                Debug.LogError($"{id}와 같은 이름이 존재 합니다.");
+            }
+            else
+            {
+                Dict_Ship[id] = _data[i];
             }
         }
     }

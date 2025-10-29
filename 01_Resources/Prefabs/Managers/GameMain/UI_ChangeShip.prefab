@@ -210,6 +210,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41d2739bc3c60e46973f412fdeb0f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasStructs:
+  - direction: 1
+    rect: {fileID: 4195525520397717243}
+    canvasGroup: {fileID: 0}
+    targetPosition: {x: 0, y: 0}
+  - direction: 1
+    rect: {fileID: 4482038844862551782}
+    canvasGroup: {fileID: 0}
+    targetPosition: {x: 0, y: 0}
   ship:
   - {fileID: 11400000, guid: ecc6c7b76b5ac0e4c8a72a41608b125f, type: 2}
   - {fileID: 11400000, guid: e3e757ffa34f85b4d855273ea8b8e970, type: 2}
@@ -217,6 +226,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 779468a8fb356f94a96c44f5f768305f, type: 2}
   shipButton: {fileID: 2093371883105030295}
   shipParent: {fileID: 2861839111788021226}
+  backButton: {fileID: 121226622796947323}
 --- !u!1 &3979576010477592336
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +392,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4482038844862551782}
+  - {fileID: 4195525520397717243}
   m_Father: {fileID: 786454310853434477}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -601,13 +612,13 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6825174156640244861}
-  m_Father: {fileID: 786454310853434477}
+  m_Father: {fileID: 3292665912784207698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 500, y: 300}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 500, y: 150}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &7548399873133497584
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,7 +719,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4541600784327129233}
-  - {fileID: 4195525520397717243}
   - {fileID: 3292665912784207698}
   m_Father: {fileID: 6848651449223978780}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -837,7 +847,7 @@ MonoBehaviour:
   m_ChildAlignment: 3
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 200, y: 200}
+  m_CellSize: {x: 150, y: 150}
   m_Spacing: {x: 5, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
@@ -952,6 +962,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
+--- !u!114 &121226622796947323 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1979625204290247720, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
+  m_PrefabInstance: {fileID: 1934195271953056595}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0251791e9ec4f8545894db6359f1e33c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4482038844862551782 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}

@@ -5,5 +5,5 @@ public class UI_ChangeShip_Slot : MonoBehaviour
     public TMPro.TMP_Text nameText;
     public Custom_Button customButton;
 
-    public GameObject shipObject;
+    public Data_Ship shipData;
 }

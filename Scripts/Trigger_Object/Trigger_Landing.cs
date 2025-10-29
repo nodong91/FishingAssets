@@ -9,7 +9,7 @@ public class Trigger_Landing : MonoBehaviour
     Coroutine setLanding;
 
     public Trigger_Setting landingPoint;
-    public CinemachineVolumeSettings cameraPosition;
+    public CinemachineVolumeSettings cameraPosition, focusShip;
 
     [System.Serializable]
     public struct LandingSetting

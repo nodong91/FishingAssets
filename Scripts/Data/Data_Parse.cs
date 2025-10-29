@@ -13,8 +13,9 @@ public class Data_Parse : MonoBehaviour
     public virtual void DataSetting()
     {
         sprites = new List<Sprite>();
-        audioClip.Clear();
-        CSV_Data.Clear();
+        audioClip = new List<AudioClip>();
+        CSV_Data = new List<TextAsset>();
+        shipData = new List<Data_Ship>();
 
         if (ResourceFolders.Count == 0)
         {
@@ -91,10 +92,12 @@ public class Data_Parse : MonoBehaviour
         assets = AssetDatabase.FindAssets("t: ScriptableObject", paths);
         for (int i = 0; i < assets.Length; i++)
         {
-            //var data = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assets[i]), typeof(Data_ItemSet));
-            //Data_ItemSet temp = data as Data_ItemSet;
-            //defaultItem.Add(temp);
-            //EditorUtility.SetDirty(data);
+            var data = AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(assets[i]), typeof(Data_Ship));
+            Data_Ship temp = data as Data_Ship;
+            if (temp == null)
+                continue;
+            shipData.Add(temp);
+            EditorUtility.SetDirty(data);
         }
 
         assets = AssetDatabase.FindAssets("t: TextAsset", paths);// CSV
@@ -265,4 +268,5 @@ public class Data_Parse : MonoBehaviour
     public List<TextAsset> CSV_Data = new List<TextAsset>();
     public List<AudioClip> audioClip = new List<AudioClip>();
     public List<Sprite> sprites = new List<Sprite>();
+    public List<Data_Ship> shipData = new List<Data_Ship>();
 }

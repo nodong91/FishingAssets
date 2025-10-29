@@ -309,5 +309,6 @@ public class UI_Landing : MonoBehaviour
     public void OpenLandingUI()
     {
         SetLandingCanvas(true);// 랜드 UI 열기
+        Game_Manager.current.currentLand.CameraOutFouce(false);
     }
 }

@@ -60,14 +60,15 @@ public class Title_Manager : MonoBehaviour
     {
         LoadingManager.current.GoTest();
     }
-
+    Data_Continue continueData;
     void SetTime()
     {
         RenderSettings.skybox = Instantiate(skyboxMatial);
-        Data_Continue data = Singleton_Continue.INSTANCE.LoadContinue();
-        if (data == null)
+        continueData = Singleton_Continue.INSTANCE.LoadContinue();
+        if (continueData == null)
             return;
-        if (data != null && (data.hour < 5f || data.hour > 18f))
+
+        if (continueData != null && (continueData.hour < 5f || continueData.hour > 18f))
         {
             // 밤
             DayLight.color = nightColor;
@@ -92,7 +93,7 @@ public class Title_Manager : MonoBehaviour
 
     void TextSetting()
     {
-        continueText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title. _continue);
+        continueText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._continue);
         newStartText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._newStart);
         creditText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._credit);
         settingText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._setting);
@@ -232,7 +233,6 @@ public class Title_Manager : MonoBehaviour
             LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
         yield return null;
 
-        Option_Manager.current.SetThemeMusic(String_Audio._titleTheme); // 테마 음악 설정
         isMove = true;
         while (isMove == true)// Loop the movement
         {
@@ -260,6 +260,7 @@ public class Title_Manager : MonoBehaviour
     void LoadingComplate()
     {
         Debug.Log("LoadingComplate");
+        Option_Manager.current.SetThemeMusic(String_Audio._titleTheme); // 테마 음악 설정
     }
 
     private Unit_Player instPlayer;
@@ -270,6 +271,8 @@ public class Title_Manager : MonoBehaviour
             if (instPlayer == null)
             {
                 instPlayer = Instantiate(player, transform);
+                Data_Ship shipData = Singleton_Data.INSTANCE.Dict_Ship[continueData.shipData];
+                instPlayer.SetShip(shipData);
             }
             return instPlayer;
         }

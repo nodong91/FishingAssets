@@ -96,7 +96,7 @@ public class UI_Inventory : MonoBehaviour
         {
             currentType = SlotType.None;
         }
-        Camera_Manager.current.CameraFocus(_open);
+        Camera_Manager.current.CameraFocusOut(_open);
         myBox.OpenCanvas(_open);
     }
 
@@ -371,7 +371,7 @@ public class UI_Inventory : MonoBehaviour
 
     void DragShop()
     {
-        if(enterSlotType == selectSlotType)// 같은 타입이면 그냥 이동
+        if (enterSlotType == selectSlotType)// 같은 타입이면 그냥 이동
         {
             UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
             tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
@@ -457,7 +457,7 @@ public class UI_Inventory : MonoBehaviour
         {
             selectSlot = _slot.GetLinkSlot;
             ItemStruct item = selectSlot.itemInInventory.item;
-            Debug.LogWarning($"{currentType} -> 오른 클릭 타입 : {enterSlotType}, 아이템 타입 {item.itemType}");
+            Debug.Log($"{currentType} -> 오른 클릭 타입 : {enterSlotType}, 아이템 타입 {item.itemType}");
             switch (currentType)
             {
                 case SlotType.Shop:// 샵이 열려있을 때 우클릭
@@ -590,7 +590,7 @@ public class UI_Inventory : MonoBehaviour
 
     void UseFish()
     {
-        Debug.LogWarning("Fish");
+        Debug.LogWarning($"Fish : {selectSlot.itemInInventory.item.id}");
     }
 
     public void IndividualRepair()// 수리 모드

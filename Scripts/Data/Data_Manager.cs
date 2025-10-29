@@ -265,6 +265,7 @@ public class Data_Manager : Data_Parse
     [System.Serializable]
     public class Data_Continue
     {
+        public string shipData;
         public Vector3 playerPosition;
         public Quaternion playerRotation;
         public Vector3 playerScale;
@@ -567,6 +568,7 @@ public class Data_Manager : Data_Parse
         Singleton_Data.INSTANCE.SetDictionary_Language(languageStruct);
         Singleton_Data.INSTANCE.SetDictionary_Audio(audioStruct);
         Singleton_Data.INSTANCE.SetDictionary_Sprite(sprites);
+        Singleton_Data.INSTANCE.SetDictionary_ShipData(shipData);
         Singleton_Data.INSTANCE.SetQuestStruct(questStruct);
     }
 }

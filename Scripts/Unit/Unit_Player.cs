@@ -32,7 +32,7 @@ public class Unit_Player : MonoBehaviour
     float runningTime;
     public GameObject playerObject;
     GameObject FocusTarget => Camera_Manager.current?.GetFocusTarget;
-    Data_Continue continueData => Singleton_Continue.INSTANCE?.continueData;
+    Data_Continue continueData => Game_Manager.current.GetContinue;
     Coroutine stateAction;
 
     [SerializeField] private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
@@ -61,9 +61,6 @@ public class Unit_Player : MonoBehaviour
         if (continueData == null)
             return;
 
-        //transform.SetPositionAndRotation(continueData.playerPosition, continueData.playerRotation);
-        //Debug.LogWarning($"{continueData.playerPosition} : {continueData.playerRotation.eulerAngles}");
-        //transform.localScale = continueData.playerScale;
         health = CurrentStatus.shipHealth - continueData.destroySlot.Count;
         energy = continueData.energy;
         StateMachine(State.Idle);
@@ -72,6 +69,17 @@ public class Unit_Player : MonoBehaviour
             return;
 
         FocusTarget.transform.position = transform.position;
+    }
+
+    public void SetShip(Data_Ship _shipData)// 배 생성 및 변경
+    {
+        if (playerObject != null)
+        {
+            Destroy(playerObject);
+        }
+        GameObject inst = Instantiate(_shipData.shipObject, transform);
+        playerObject = inst;
+        Debug.LogWarning($"{_shipData.name} : {_shipData.shipObject}");
     }
 
     //================================================================================================================================================
@@ -184,6 +192,9 @@ public class Unit_Player : MonoBehaviour
 
     void SetOceanRenderer()
     {
+        if (playerObject == null)
+            return;
+
         runningTime += Time.deltaTime * waveSpeed;
 
         float moveHight = (Mathf.Sin(runningTime) + 1f) * 0.5f;// 위아래 움직임

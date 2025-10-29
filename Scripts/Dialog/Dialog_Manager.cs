@@ -143,6 +143,12 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 Game_Manager.current.GetMainUI.OpenQuestResult();
                 Game_Manager.current.GetLanding.OutDialog();
                 break;
+
+            case SelectStruct.SelectType.ChangeShip:
+                // ¹è º¯°æ
+                Game_Manager.current.GetChangeShip.OpenCanvas(true);
+                Game_Manager.current.GetLanding.OutDialog();
+                break;
         }
         OpenCanvas(false);
     }
