@@ -38,3 +38,12 @@ public class String_Skill
     public const string cruise = "sk_100_03";
     public const string sailShip = "sk_100_04";
 }
+
+public class String_NPC
+{
+    public const string _player = "you";
+    public const string _shop = "shop";
+    public const string _shipyard = "shipyard";
+    public const string _smuggler = "smuggler";
+    public const string _inn = "inn";
+}

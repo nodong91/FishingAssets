@@ -166,7 +166,6 @@ public class UI_Main : MonoBehaviour
     public void OpenShop()
     {
         menuState |= MenuState.Shop;// 넣기
-        Game_Manager.current.GetLanding.OutDialog();// 대화 끝
     }
 
     public void FishingGame()

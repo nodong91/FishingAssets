@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a61588e59261a31489495814643d4472, type: 3}
   m_Name: Data_NPC_Player
   m_EditorClassIdentifier: 
-  npc_ID: You
+  npc_ID: you
+  openTime: {x: -1, y: 25}
   texture: {fileID: 0}
   themeMusic: bgm_0006
   voice: fx_0001
   dataDialogs:
+  - {fileID: 11400000, guid: 79a485a10de83f2498375dc45912f52b, type: 2}
   - {fileID: 11400000, guid: a76eb03eae6c4864abd5c2711eaffa96, type: 2}
+  - {fileID: 11400000, guid: aa59b47df3ee5e241b58eb0df81db579, type: 2}
+  - {fileID: 11400000, guid: 8c1ccfcfc105a7d44b5e4d23e7083063, type: 2}
   invenSize: {x: 0, y: 0}
   fixedID: []
   randomID: []

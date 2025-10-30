@@ -24,12 +24,7 @@ public class Unit_Player : MonoBehaviour
     public float GetMaxEnergy { get { return CurrentStatus.maxEnergy; } }
     public float efficient;// 에너지 효율
     private Vector2 dirction => Game_Manager.current.controllManager.dirction;
-    // 물위에서 배의 움직임
-    private float shipHight = -0.1f;
-    private float waveSpeed = 2f;
-    private float targetAngle = 10f;
 
-    float runningTime;
     public GameObject playerObject;
     GameObject FocusTarget => Camera_Manager.current?.GetFocusTarget;
     Data_Continue continueData => Game_Manager.current.GetContinue;
@@ -38,10 +33,15 @@ public class Unit_Player : MonoBehaviour
     [SerializeField] private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
     private Trigger_Setting closestTarget;
 
-    Quaternion prevAngle, setAngle;
-    float randomTime, runningRandomTime;
+    //Quaternion prevAngle, setAngle;
+    //float randomTime, runningRandomTime;
+    //// 물위에서 배의 움직임
+    //private float shipHight = -0.1f;
+    //private float waveSpeed = 2f;
+    //private float targetAngle = 10f;
 
-    public AnimationCurve rotateCurve;// 위아래 흔들릴 때 로테이션
+    //float runningTime;
+    //public AnimationCurve rotateCurve;// 위아래 흔들릴 때 로테이션
 
     public void SetStart()
     {
@@ -84,6 +84,51 @@ public class Unit_Player : MonoBehaviour
         playerObject = inst;
         Debug.LogWarning($"{_shipData.name} : {_shipData.shipObject}");
     }
+
+    //================================================================================================================================================
+    // 업데이트
+    //================================================================================================================================================
+
+    //private void Update()
+    //{
+    //    //SetOceanRenderer();// 물 위에서 배의 움직임
+    //    //// 배 부분 물결 안생기게
+    //    //string shipPosition = "_ShipPosition";
+    //    //reflection_Manager.GetMaterial.SetVector(shipPosition, playerObject.transform.position);
+    //    //reflection_Manager.GetMaterial.SetFloat("_WaveSpeed", waveSpeed);
+    //}
+
+    //void SetOceanRenderer()
+    //{
+    //    if (playerObject == null)
+    //        return;
+
+    //    runningTime += Time.deltaTime * waveSpeed;
+
+    //    float moveHight = (Mathf.Sin(runningTime) + 1f) * 0.5f;// 위아래 움직임
+    //    Vector3 localPosition = Vector3.up * moveHight * shipHight;
+    //    playerObject.transform.localPosition = localPosition;
+
+    //    if (runningTime >= runningRandomTime)
+    //    {
+    //        randomTime = Random.Range(5f, 3f);
+    //        runningRandomTime = runningTime + randomTime;
+    //        prevAngle = playerObject.transform.localRotation;
+    //        setAngle = Quaternion.Euler(RandomAngle(targetAngle));
+    //    }
+
+    //    float curve = rotateCurve.Evaluate(1f - (runningRandomTime - runningTime) / randomTime);
+    //    playerObject.transform.localRotation = Quaternion.Slerp(prevAngle, setAngle, curve / randomTime);// 랜덤 회전
+
+    //}
+
+    //Vector3 RandomAngle(float _maxAngle)
+    //{
+    //    float x = Random.Range(-_maxAngle, _maxAngle);
+    //    float y = Random.Range(-_maxAngle, _maxAngle);
+    //    float z = Random.Range(-_maxAngle, _maxAngle);
+    //    return new Vector3(x, y, z);
+    //}
 
     //================================================================================================================================================
     // 컨트롤
@@ -185,49 +230,6 @@ public class Unit_Player : MonoBehaviour
         }
         Game_Manager.current.GetFollow.AddClosestTarget(closestTarget);
     }
-    //================================================================================================================================================
-
-
-    private void Update()
-    {
-        SetOceanRenderer();// 물 위에서 배의 움직임
-    }
-
-    void SetOceanRenderer()
-    {
-        if (playerObject == null)
-            return;
-
-        runningTime += Time.deltaTime * waveSpeed;
-
-        float moveHight = (Mathf.Sin(runningTime) + 1f) * 0.5f;// 위아래 움직임
-        Vector3 localPosition = Vector3.up * moveHight * shipHight;
-        playerObject.transform.localPosition = localPosition;
-
-        if (runningTime >= runningRandomTime)
-        {
-            randomTime = UnityEngine.Random.Range(5f, 3f);
-            runningRandomTime = runningTime + randomTime;
-            prevAngle = playerObject.transform.localRotation;
-            setAngle = Quaternion.Euler(RandomAngle(targetAngle));
-        }
-
-        float curve = rotateCurve.Evaluate(1f - (runningRandomTime - runningTime) / randomTime);
-        playerObject.transform.localRotation = Quaternion.Slerp(prevAngle, setAngle, curve / randomTime);// 랜덤 회전
-
-        //// 배 부분 물결 안생기게
-        //string shipPosition = "_ShipPosition";
-        //reflection_Manager.GetMaterial.SetVector(shipPosition, playerObject.transform.position);
-        //reflection_Manager.GetMaterial.SetFloat("_WaveSpeed", waveSpeed);
-    }
-
-    Vector3 RandomAngle(float _maxAngle)
-    {
-        float x = UnityEngine.Random.Range(-_maxAngle, _maxAngle);
-        float y = UnityEngine.Random.Range(-_maxAngle, _maxAngle);
-        float z = UnityEngine.Random.Range(-_maxAngle, _maxAngle);
-        return new Vector3(x, y, z);
-    }
 
     void SetMoving()
     {
@@ -311,7 +313,7 @@ public class Unit_Player : MonoBehaviour
         // 견인 되는 연출 필요
         // 위치 변경
 
-        GameObject landingPoint = Game_Manager.current.currentLand.landingStruct.landingSetting[0].landingPoint;
+        GameObject landingPoint = Game_Manager.current.currentLand.landingPoint.gameObject;
         Vector3 forwardDirection = landingPoint.transform.rotation * Vector3.forward;
         Vector3 backwardPosition = landingPoint.transform.position - forwardDirection * 3f;
         Vector3 targetPosition = landingPoint.transform.position;
@@ -389,7 +391,8 @@ public class Unit_Player : MonoBehaviour
     {
         if (other.TryGetComponent<Trigger_Setting>(out var fishing) == false)
             return;
-        triggerGameObject.Add(fishing);
+        if (triggerGameObject.Contains(fishing) == false)
+            triggerGameObject.Add(fishing);
     }
 
     private void OnTriggerExit(Collider other)

@@ -9,17 +9,17 @@ public class Data_Dialog_Editor : Editor
 {
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
         GUIStyle fontStyle = new GUIStyle(GUI.skin.button);
         fontStyle.fontSize = 15;
         fontStyle.normal.textColor = Color.yellow;
 
         Data_Dialog Inspector = target as Data_Dialog;
-        if (GUILayout.Button("Check Action String", fontStyle, GUILayout.Height(30f)))
+        if (GUILayout.Button("움직이는 글자 세팅", fontStyle, GUILayout.Height(30f)))
         {
             Inspector.UpdateData();
             EditorUtility.SetDirty(Inspector);
         }
+        base.OnInspectorGUI();
     }
 }
 #endif
@@ -65,16 +65,18 @@ public class Data_Dialog : ScriptableObject
         public enum SelectType
         {
             None = 0,
-            Out = 1,
-            OpenShop = 2,
-            OpenShipyard = 3,
-            OpenSmuggler = 4,
-            Upgrade = 5,
+            Out = 1,// 나가기
+            OpenShop = 2,// 생선 상점 열기
+            OpenShipyard = 3,// 조선소 상점 열기
+            OpenSmuggler = 4,// 밀수꾼 상점 열기
+            Upgrade = 5,// 스킬 업그레이드
             Result = 6,
-            Rest = 7,
+            Rest = 7,// 휴식 - 잠자기
+            NoticeBoard = 8,// 게시판 열기
         }
         public SelectType selectType;
         public Data_NPC npcData;
+        public int dialogIndex;
     }
     public SelectStruct[] selectStructs;
 

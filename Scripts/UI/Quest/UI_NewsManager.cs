@@ -93,9 +93,8 @@ public class UI_NewsManager : MonoBehaviour
         questCanvas.gameObject.SetActive(true);
         closeRect.gameObject.SetActive(true);
 
-        questCanvas.alpha = 1f;
-        questCanvas.interactable = true;
-        questCanvas.blocksRaycasts = true;
+        questCanvas.interactable = false;
+        questCanvas.blocksRaycasts = false;
 
         Vector2 prevClose = new Vector2(0, -closeRect.sizeDelta.y);
         Vector3 prevPoint = Input.mousePosition;
@@ -104,6 +103,7 @@ public class UI_NewsManager : MonoBehaviour
         {
             normalize += Time.deltaTime * 10f;
             float size = Mathf.Lerp(0f, 1f, normalize);
+            questCanvas.alpha = size;
             background.alpha = size;
             Vector3 actionPoint = Vector3.Lerp(prevPoint, background.transform.position, normalize);
             float rotate = Mathf.Lerp(45f, 0f, normalize);
@@ -112,6 +112,10 @@ public class UI_NewsManager : MonoBehaviour
             closeRect.anchoredPosition = Vector2.Lerp(prevClose, Vector2.zero, normalize);
             yield return null;
         }
+        yield return new WaitForSeconds(0.5f);
+
+        questCanvas.interactable = true;
+        questCanvas.blocksRaycasts = true;
     }
 
     void CloseButton()

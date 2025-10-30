@@ -26,19 +26,8 @@ public class Trigger_Landing : MonoBehaviour
         public LandingType landingType;
         public GameObject landingPoint;
     }
-
-    [System.Serializable]
-    public struct LandingStruct
-    {
-        public string landingID;
-        public LandingSetting[] landingSetting;
-
-        public Data_NPC player;
-        public Data_NPC shopNPC;
-        public Data_NPC shipyardNPC;
-        public Data_NPC smugglerNPC;
-    }
-    public LandingStruct landingStruct;
+    public string landingID;
+    public LandingSetting[] landingSetting;
 
     private void Start()
     {
@@ -78,7 +67,7 @@ public class Trigger_Landing : MonoBehaviour
 
     private void SetLandingUI()
     {
-        Game_Manager.current.GetLanding.SetLanding(landingStruct);
+        Game_Manager.current.GetLanding.SetLanding(landingSetting);
         Game_Manager.current.GetLanding.outLanding = OutLanding;
         Game_Manager.current.GetMainUI.OpenCanvas(false);
     }

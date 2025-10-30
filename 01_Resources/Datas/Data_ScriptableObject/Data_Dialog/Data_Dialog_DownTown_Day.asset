@@ -10,23 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
-  m_Name: Data_Dialog_Shipyard_SkillFail
+  m_Name: Data_Dialog_DownTown_Day
   m_EditorClassIdentifier: 
   dialogStructs:
-  - contents: "\uC77C\uB2E8 \uBC30\uBD80\uD130 \uACE0\uCE58\uACE0 \uC624\uAC8C...\uC774\uB300\uB85C
-      \uAC15\uD654 \uD558\uB2E4\uAC04 \uBAA8\uB450 \uBD80\uC11C\uC838 \uBC84\uB9B4\uAC70\uC57C."
+  - contents: "\uC5B4\uB514\uB85C \uAC08\uAE4C?"
     dialogTypes:
-    - id: "\uAC15\uD654"
-      dialogIndex: {x: 20, y: 22}
-      textSize: 30
+    - id: "\uC5B4\uB514\uB85C"
+      dialogIndex: {x: 0, y: 3}
+      textSize: 20
       typingSpeed: 0
-      textColor: FFFF00
+      textColor: 00FF00
       actionType: 1
-      actionSpeed: 20
-      actionInterval: 1
-      actionAngle: {x: 0, y: 5}
+      actionSpeed: 1.77
+      actionInterval: 4.08
+      actionAngle: {x: 1, y: 2}
   selectStructs:
-  - selectDialog: "\uB300\uD654 \uB9C8\uCE68"
-    selectType: 1
+  - selectDialog: Inn
+    selectType: 0
+    npcData: {fileID: 11400000, guid: f5051af63d2a58d4898565b06e66ba95, type: 2}
+    dialogIndex: 0
+  - selectDialog: "\uAC8C\uC2DC\uD310"
+    selectType: 8
     npcData: {fileID: 0}
     dialogIndex: 0

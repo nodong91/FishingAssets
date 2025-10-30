@@ -49,10 +49,21 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     public void DialogStart_NPC(Data_NPC _npc, int _dialogIndex)
     {
-        dataNPC = _npc;
-        dataDialog = _npc.dataDialogs[_dialogIndex];
-        nameText.text = _npc.npc_ID;
-        NPC_Image.texture = _npc.texture;
+        Debug.LogWarning($"{_npc.npc_ID} : 오픈 시간 아님");
+        int hour = Game_Manager.current.GetMainUI.timeUI.hour;
+        if (hour > _npc.openTime.x && hour < _npc.openTime.y)
+        {
+            dataNPC = _npc;
+            dataDialog = dataNPC.dataDialogs[_dialogIndex];
+        }
+        else
+        {
+            dataNPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
+            dataDialog = dataNPC.dataDialogs[3];
+        }
+        nameText.text = dataNPC.npc_ID;
+        NPC_Image.gameObject.SetActive(dataNPC.texture != null);
+        NPC_Image.texture = dataNPC.texture;
         NPC_Image.SetNativeSize();
 
         Dialog_Npc(dataDialog);
@@ -74,33 +85,48 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         currentDialog = 0;
         endDialog = false;
         selectCanvas.gameObject.SetActive(false);
+
         // 선택 버튼 생성
         for (int i = 0; i < dataDialog.selectStructs.Length; i++)
         {
-            Dialog_SelectButton button = SetSelectButton(dataDialog.selectStructs[i]);
+            Dialog_SelectButton button = GetSelectButton();
+            button.gameObject.SetActive(true);
+            button.SetStart(dataDialog.selectStructs[i], SelectedButton);
+            dialogSelectButton.Add(button);
+
             button.transform.SetAsLastSibling();// 순서 변경
         }
         DialogAction();
     }
 
-    Dialog_SelectButton SetSelectButton(SelectStruct _selectStruct)
+    public void AddNPC(Data_NPC _npc, int _dialogIndex)
     {
+        SelectStruct selectStruct = new SelectStruct
+        {
+            selectDialog = _npc.npc_ID,
+            selectType = SelectStruct.SelectType.None,
+            npcData = _npc,
+            dialogIndex = _dialogIndex,
+        };
+
         Dialog_SelectButton button = GetSelectButton();
         button.gameObject.SetActive(true);
-        button.SetStart(_selectStruct, InputButton);
+        button.SetStart(selectStruct, SelectedButton);
         dialogSelectButton.Add(button);
-        return button;
+
+        button.transform.SetAsLastSibling();// 순서 변경
     }
 
-    void InputButton(SelectStruct _selectStruct)
+    void SelectedButton(SelectStruct _selectStruct)
     {
+        OutDialog();
         if (_selectStruct.npcData != null)// 엔피씨데이터가 있으면 대화 시작
         {
-            DialogStart_NPC(_selectStruct.npcData, 0);
+            DialogStart_NPC(_selectStruct.npcData, _selectStruct.dialogIndex);
             return;
         }
 
-        LandingStruct getLandingData = Game_Manager.current.GetLanding.GetLandingData;
+        LandingSetting[] getLandingData = Game_Manager.current.GetLanding.GetLandingData;
         switch (_selectStruct.selectType)
         {
             case SelectStruct.SelectType.Out:
@@ -110,24 +136,28 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             case SelectStruct.SelectType.OpenShop:
                 // 상점 열기
                 Game_Manager.current.GetMainUI.OpenShop();// 상점창 열기
-                Game_Manager.current.GetInventory.OpenShop(getLandingData.shopNPC);
+                Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shop];
+                Game_Manager.current.GetInventory.OpenShop(data_NPC);
                 break;
             case SelectStruct.SelectType.OpenShipyard:
                 // 조선소 열기
                 Game_Manager.current.GetMainUI.OpenShop();// 조선소도 상점창
-                Game_Manager.current.GetInventory.OpenShipyard(getLandingData.shipyardNPC);
+                data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
+                Game_Manager.current.GetInventory.OpenShipyard(data_NPC);
                 break;
 
             case SelectStruct.SelectType.OpenSmuggler:
                 // 밀수꾼 상점 열기
                 Game_Manager.current.GetMainUI.OpenShop();// 상점창
-                Game_Manager.current.GetInventory.OpenShipyard(getLandingData.smugglerNPC);
+                data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._smuggler];
+                Game_Manager.current.GetInventory.OpenShipyard(data_NPC);
                 break;
 
             case SelectStruct.SelectType.Upgrade:
                 if (Game_Manager.current.GetPlayer.FullHealth == false)
                 {
-                    Data_Dialog warnDialog = getLandingData.shipyardNPC.dataDialogs[1];
+                    data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
+                    Data_Dialog warnDialog = data_NPC.dataDialogs[1];
                     Dialog_Npc(warnDialog);
                     Debug.LogWarning("체력이 가득 차지 않았으면 스킬창 못열게");
                     return;
@@ -135,18 +165,19 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 Debug.LogWarning("인벤토리 닫아야");
                 Game_Manager.current.GetInventory.CloseShop();
                 Game_Manager.current.GetSkill.OpenCanvas(true);
-                Game_Manager.current.GetLanding.OutDialog();
                 break;
 
             case SelectStruct.SelectType.Result:
                 // 퀘스트 결과 아이템 받기
                 Game_Manager.current.GetMainUI.OpenQuestResult();
-                Game_Manager.current.GetLanding.OutDialog();
                 break;
 
             case SelectStruct.SelectType.Rest:
                 Game_Manager.current.GetLanding.RestButton();
-                Game_Manager.current.GetLanding.OutDialog();
+                break;
+
+            case SelectStruct.SelectType.NoticeBoard:
+                Game_Manager.current.GetLanding.BoardButton();
                 break;
         }
         OpenCanvas(false);
@@ -263,6 +294,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     public void OutDialog()
     {
+        actionBool = false;
         StopAllCoroutines();
         OpenCanvas(false);// 대화 완료
     }
