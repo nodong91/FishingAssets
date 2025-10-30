@@ -39,6 +39,8 @@ public class UI_Landing : MonoBehaviour
     public Custom_Button restButton;
     public Custom_Button fuelButton;
     public Custom_Button storageButton;
+    public Custom_Button changeButton;
+
     public Custom_Button shopButton;
     public Custom_Button shipyardButton;
     public Custom_Button downTownButton;
@@ -60,6 +62,7 @@ public class UI_Landing : MonoBehaviour
         shopButton.SetButton(ShopButton);
         shipyardButton.SetButton(ShipyardButton);
         storageButton.SetButton(StorageButton);
+        changeButton.SetButton(ChangeButton);
         downTownButton.SetButton(DownTownButton);
         boardButton.SetButton(BoardButton);
     }
@@ -157,7 +160,7 @@ public class UI_Landing : MonoBehaviour
         RemoveUI();
     }
 
-    void FuelButton()// 휴식
+    void FuelButton()// 연료 채우기
     {
         currentType = LandingType.Energy;
         onDialog = false;
@@ -166,7 +169,7 @@ public class UI_Landing : MonoBehaviour
         Game_Manager.current.currentLand.CameraOutFouce(true);
     }
 
-    void RestButton()// 휴식
+    public void RestButton()// 휴식
     {
         currentType = LandingType.Rest;
         onDialog = false;
@@ -244,6 +247,13 @@ public class UI_Landing : MonoBehaviour
         Game_Manager.current.GetMainUI.OpenShop();// 창고
         Game_Manager.current.GetInventory.OpenStorage(true);
         Game_Manager.current.currentLand.CameraOutFouce(true);
+    }
+
+    void ChangeButton()
+    {
+        onDialog = false;
+        SetLandingCanvas(false);        // 랜드 UI 제거
+        Game_Manager.current.GetChangeShip.OpenCanvas(true);
     }
 
     void BoardButton()

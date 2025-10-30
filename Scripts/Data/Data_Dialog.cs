@@ -71,7 +71,7 @@ public class Data_Dialog : ScriptableObject
             OpenSmuggler = 4,
             Upgrade = 5,
             Result = 6,
-            ChangeShip = 7,
+            Rest = 7,
         }
         public SelectType selectType;
         public Data_NPC npcData;

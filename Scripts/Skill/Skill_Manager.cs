@@ -3,33 +3,11 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using static Data_Manager;
 
-
-#if UNITY_EDITOR
-using UnityEditor;
-[CustomEditor(typeof(Skill_Manager))]
-public class Editor_Skill_Manager : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        GUILayout.Space(10f);
-
-        GUIStyle fontStyle = new GUIStyle(GUI.skin.button);
-        fontStyle.fontSize = 15;
-        fontStyle.normal.textColor = Color.yellow;
-
-        Skill_Manager Inspector = target as Skill_Manager;
-        if (GUILayout.Button("UpdateData", fontStyle, GUILayout.Height(30f)))
-        {
-            //Inspector.UpdateData();
-            //EditorUtility.SetDirty(Inspector);
-        }
-    }
-}
-#endif
-
 public class Skill_Manager : MonoBehaviour
 {
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
+    public Custom_Button resetButton;// 스킬 초기화 버튼
+
     public Data_SkillTree skillTreeData;
     public Canvas canvas;
     public CanvasGroup canvasGroup;
@@ -61,17 +39,18 @@ public class Skill_Manager : MonoBehaviour
 
         OpenCanvas(false);
     }
-
     public void OpenCanvas(bool _open)
     {
-        canvasGroup.alpha = _open ? 1f : 0f;
-        canvasGroup.interactable = _open;
-        canvasGroup.blocksRaycasts = _open;
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+        //canvasGroup.alpha = _open ? 1f : 0f;
+        //canvasGroup.interactable = _open;
+        //canvasGroup.blocksRaycasts = _open;
     }
 
     void CloseCanvas()
     {
         OpenCanvas(false);
+        Static_JsonManager.SaveEnableSkillData(String_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 저장
         Game_Manager.current.GetLanding.BackButton();
     }
 
@@ -129,11 +108,11 @@ public class Skill_Manager : MonoBehaviour
                 inst.slotNode = new Vector2Int(x, y);
                 inst.name = inst.slotNode.ToString();
                 inst.SetHide(true);
-                inst.deleSlotAction = AddSlot;
+                inst.deleSlotAction = ActiveSkill;
                 inst.deleSlotPosition = infomation.SetPosition;
 
-                SkillStruct status = statusStructs[x, y];
-                inst.Status = status;
+                SkillStruct skill = statusStructs[x, y];
+                inst.Skill = skill;
                 inst.SetStart();
                 inst.SetNearBySlot(skillMap);   // 근처 슬롯 설정
 
@@ -174,12 +153,12 @@ public class Skill_Manager : MonoBehaviour
         grid.constraintCount = skillMap.x;
     }
 
-    void AddSlot(Vector2Int _addNode)// 스킬 활성화
+    void ActiveSkill(Vector2Int _addNode)// 스킬 활성화
     {
+        Debug.LogWarning("스킬 활성화");
         enableSlotLIst.Add(_addNode);
         SetSlot(_addNode);
         Singleton_Audio.INSTANCE.Audio_FX(String_Audio._activeSkill);
-        Static_JsonManager.SaveEnableSkillData(String_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 저장
     }
 
     void SetSlot(Vector2Int _addNode)
@@ -191,13 +170,55 @@ public class Skill_Manager : MonoBehaviour
             Skill_Slot near = allSlot[slot.nearbySlot[i].x, slot.nearbySlot[i].y];
             near.SetHide(false, slot.transform.position);
         }
-        // 스탯 추가
-        Debug.LogWarning(slot.Status);
-        addStatus.AddStatus(slot.Status.addStatus);
-        Game_Manager.current.AddStatus();
+        AddSkill(slot.Skill);
     }
 
-    public Custom_Button resetButton;// 스킬 초기화 버튼
+    void AddSkill(SkillStruct _skill)
+    {
+        switch (_skill.skillType)
+        {
+            case SkillStruct.SkillType.AddStatus:
+                // 스탯 추가
+                Debug.LogWarning(_skill.id);
+                addStatus.AddStatus(_skill.addStatus);
+                Game_Manager.current.AddStatus();
+                break;
+
+            case SkillStruct.SkillType.ShipUnlocked:
+                ShipUnlock(_skill.id);
+                break;
+        }
+    }
+
+    void ShipUnlock(string _id)
+    {
+        //Data_Ship data_Ship = null;
+        //switch (_id)
+        //{
+        //    case String_Skill.baseShip:
+        //        data_Ship = Singleton_Data.INSTANCE.Dict_Ship[String_Skill.baseShip];
+        //        break;
+
+        //    case String_Skill.speedBoat:
+        //        data_Ship = Singleton_Data.INSTANCE.Dict_Ship[String_Skill.speedBoat];
+        //        break;
+
+        //    case String_Skill.raft:
+        //        data_Ship = Singleton_Data.INSTANCE.Dict_Ship[String_Skill.raft];
+        //        break;
+
+        //    case String_Skill.cruise:
+        //        data_Ship = Singleton_Data.INSTANCE.Dict_Ship[String_Skill.cruise];
+        //        break;
+
+        //    case String_Skill.sailShip:
+        //        data_Ship = Singleton_Data.INSTANCE.Dict_Ship[String_Skill.sailShip];
+        //        break;
+        //}
+        Data_Ship data_Ship = Singleton_Data.INSTANCE.Dict_Ship[_id];
+        Debug.LogWarning($"{_id} : {data_Ship.shipName}");
+        Game_Manager.current.GetChangeShip.AddShip(data_Ship);
+    }
 
     void SkillReset()
     {
@@ -211,10 +232,10 @@ public class Skill_Manager : MonoBehaviour
                 near.ResetSlot();
             }
             // 스탯 제거
-            addStatus.AddStatus(slot.Status.addStatus, -1);
+            addStatus.AddStatus(slot.Skill.addStatus, -1);
             Game_Manager.current.AddStatus();
         }
         enableSlotLIst.Clear();
-        Static_JsonManager.SaveEnableSkillData(String_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 저장
+        Static_JsonManager.SaveEnableSkillData(String_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 리셋 저장
     }
 }

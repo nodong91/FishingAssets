@@ -142,24 +142,24 @@ public class Data_Manager : Data_Parse
 
             SetStatus setAddStatus = new SetStatus
             {
-                catchRadius = Parse_Float(elements[6]),// 물고기를 잡는 범위
-                catchSpeed = Parse_Float(elements[7]),// 낚시대가 물고기를 향해 이동하는 속도
-                catchPower = Parse_Float(elements[8]),// 낚시대의 힘
-                catchMaxHealth = Parse_Float(elements[9]),// 낚시대의 최대 체력
-                catchAttakSpeed = Parse_Float(elements[10]),// 물고기를 공격하는 빈도
+                catchRadius = Parse_Float(elements[7]),// 물고기를 잡는 범위
+                catchSpeed = Parse_Float(elements[8]),// 낚시대가 물고기를 향해 이동하는 속도
+                catchPower = Parse_Float(elements[9]),// 낚시대의 힘
+                catchMaxHealth = Parse_Float(elements[10]),// 낚시대의 최대 체력
+                catchAttakSpeed = Parse_Float(elements[11]),// 물고기를 공격하는 빈도
 
-                shipSpeed = Parse_Float(elements[11]),// 배의 이동 속도
-                maxWeight = Parse_Float(elements[12]),// 인벤토리 중량
-                maxEnergy = Parse_Float(elements[13]),// 연료통 크기
-                efficient = Parse_Float(elements[14]),// 에너지 효율
+                shipSpeed = Parse_Float(elements[12]),// 배의 이동 속도
+                maxWeight = Parse_Float(elements[13]),// 인벤토리 중량
+                maxEnergy = Parse_Float(elements[14]),// 연료통 크기
+                efficient = Parse_Float(elements[15]),// 에너지 효율
 
-                maxBoxSize = Parse_Vector2Int(elements[15]),// 인벤토리 크기
-                shipHealth = Parse_Int(elements[16]),// 배 체력
-                freshness = Parse_Float(elements[17]),// 신선도 유지 - 꼭 필요한가??????  
+                maxBoxSize = Parse_Vector2Int(elements[16]),// 인벤토리 크기
+                shipHealth = Parse_Int(elements[17]),// 배 체력
+                freshness = Parse_Float(elements[18]),// 신선도 유지 - 꼭 필요한가??????  
 
-                luckFish = Parse_Float(elements[18]),// 희귀 물고기 확률
-                fishAmount = Parse_Int(elements[19]),// 낚시 횟수 증가
-                fishPrice = Parse_Float(elements[20]),// 판매 물고기 가격 증가
+                luckFish = Parse_Float(elements[19]),// 희귀 물고기 확률
+                fishAmount = Parse_Int(elements[20]),// 낚시 횟수 증가
+                fishPrice = Parse_Float(elements[21]),// 판매 물고기 가격 증가
             };
 
             SkillStruct tempData = new SkillStruct
@@ -168,8 +168,9 @@ public class Data_Manager : Data_Parse
                 name = elements[1],
                 description = elements[2],
                 addStatusString = elements[3],
-                icon = elements[4],
-                price = Parse_Int(elements[5]),
+                skillType = (SkillStruct.SkillType)System.Enum.Parse(typeof(SkillStruct.SkillType), elements[4]),
+                icon = elements[5],
+                price = Parse_Int(elements[6]),
                 addStatus = setAddStatus,
             };
             skillStruct.Add(tempData);
@@ -397,6 +398,12 @@ public class Data_Manager : Data_Parse
         [TextArea]
         public string description;
         public string addStatusString;
+        public enum SkillType
+        {
+            AddStatus = 0,
+            ShipUnlocked = 1,
+        }
+        public SkillType skillType;
         public string icon;
         public int price; // 가격 정보
         public SetStatus addStatus;

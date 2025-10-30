@@ -32,6 +32,12 @@ public class UI_MyBox : UI_Inventory_Base
         if (inventorySize == _inventorySize)
             return;
         Debug.LogWarning($"인벤토리 사이즈 변경 {inventorySize} -> {_inventorySize}");
+        if (GetSaveInventoryData == null)
+        {
+            LoadInventory();
+        }
+        Debug.LogWarning($"인벤토리 사이즈 변경 {GetSaveInventoryData} -> {GetSaveInventoryData.invenSize}");
+
         GetSaveInventoryData.invenSize = _inventorySize;
         SetInventoryItem(saveData);
     }

@@ -19,7 +19,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     Coroutine inputSlotCoroutine;
     public Image gageImage;
     public AnimationCurve OpeningCurve => Game_Manager.current.GetSkill.openingCurve;
-    public SkillStruct Status { get; set; }
+    public SkillStruct Skill { get; set; }
 
     public delegate void DeleSlotAction(Vector2Int _grid);
     public DeleSlotAction deleSlotAction;
@@ -32,11 +32,11 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void SetStart()
     {
         gageImage.fillAmount = 0f;
-        if (Status == null)
+        if (Skill == null)
             return;
-        if (Status.icon != null && sprites.ContainsKey(Status.icon))
+        if (Skill.icon != null && sprites.ContainsKey(Skill.icon))
         {
-            iconImage.sprite = sprites[Status.icon];
+            iconImage.sprite = sprites[Skill.icon];
         }
     }
 
@@ -95,7 +95,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = Vector3.one * 1.1f;
-        deleSlotPosition?.Invoke(Status, transform.position);
+        deleSlotPosition?.Invoke(Skill, transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -109,7 +109,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (Game_Manager.current.CheckMoney(Status.price) == false)
+        if (Game_Manager.current.CheckMoney(Skill.price) == false)
             return;
 
         if (onSlot == false)
@@ -134,7 +134,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         gageImage.fillAmount = _enable == true ? 1f : 0f;
     }
 
-    IEnumerator OnSlot()
+    IEnumerator OnSlotAction()
     {
         float normalize = 0f;
         while (normalize < 1f)
@@ -155,12 +155,13 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             gageImage.fillAmount = Mathf.Lerp(0f, 1f, normalize);
             yield return null;
         }
+
         // 스킬 활성화
-        float price = -Status.price;
+        float price = -Skill.price;
         Game_Manager.current.GetMainUI.MoveMoney(price);// 돈 이동
 
         deleSlotAction?.Invoke(slotNode);
-        StartCoroutine(OnSlot());
+        StartCoroutine(OnSlotAction());// 슬롯 열기 액션
     }
 
     IEnumerator OpeningSlot(Vector3 _prev)// 슬롯 열리기

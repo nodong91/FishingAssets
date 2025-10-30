@@ -55,19 +55,14 @@ public class Game_Manager : MonoBehaviour
 
     IEnumerator SetStart()
     {
-        //Singleton_Continue.INSTANCE.GetContinue();
         Camera_Manager.current.SetCameraManager();
-
         continueData = Singleton_Continue.INSTANCE.LoadContinue();
-        string shipID = continueData.shipData;
-        shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
-
-        Game_Manager.current.GetTimeUI.SetStart(continueData);// 시간
-        Game_Manager.current.GetMainUI.SetMoney(continueData.money);// 돈
-        Game_Manager.current.GetInventory.TryDestroySlot = continueData.destroySlot;// 부서진 슬롯
 
         while (currentLand == null)
             yield return null;
+
+        GetTimeUI.SetStart(continueData);// 시간
+        GetMainUI.SetMoney(continueData.money);// 돈
 
         SetRendererFeature();
         SetThemeMusic();
@@ -78,9 +73,22 @@ public class Game_Manager : MonoBehaviour
         GetDialog.SetStart();
         GetFishGuide.SetStart();
         GetQuest.SetStart();
+        GetChangeShip.SetStart();
 
-        ChangeStatus(shipData);
-        OutOfControll(false);
+        string shipID = continueData.shipData;
+        if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID))
+        {
+            GetInventory.TryDestroySlot = continueData.destroySlot;// 부서진 슬롯
+
+            shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
+            ChangeStatus(shipData);
+            OutOfControll(false);
+        }
+        else
+        {
+            currentLand.SetLandingAction();
+            OutOfControll(true);
+        }
     }
 
     public void ChangeStatus(Data_Ship _shipData)
@@ -92,6 +100,9 @@ public class Game_Manager : MonoBehaviour
 
     public void AddStatus()
     {
+        if (shipData == null)
+            return;
+
         bool fullHealth = GetPlayer.FullHealth;// 스탯 적용 하기 전 풀피 체크
         currentStatus.SettingStatus(shipData.status);// 디폴트 스탯 적용
         currentStatus.AddStatus(GetAddStatus);// 추가 스탯 적용
@@ -383,7 +394,6 @@ public class Game_Manager : MonoBehaviour
             if (instChangeShip == null)
             {
                 instChangeShip = Instantiate(changeShip, transform);
-                instChangeShip.SetStart();
             }
             return instChangeShip;
         }

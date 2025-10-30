@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_ChangeShip : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
-    public Data_Ship[] ship;
+    public List<Data_Ship> shipList = new List<Data_Ship>();
     public UI_ChangeShip_Slot shipButton;
     public GridLayoutGroup shipParent;
 
@@ -13,14 +14,19 @@ public class UI_ChangeShip : MonoBehaviour
     public void SetStart()
     {
         backButton.SetButton(CloseCanvas);
-        for (int i = 0; i < ship.Length; i++)
-        {
-            UI_ChangeShip_Slot inst = Instantiate(shipButton, shipParent.transform);
-            inst.shipData = ship[i];
-            inst.name = i.ToString();
-            inst.nameText.text = ship[i].name;
-            inst.customButton.SetButton(delegate { ShipClick(inst); }, ShipEnter, ShipExit);
-        }
+        shipList.Clear();
+        OpenCanvas(false);
+    }
+
+    public void AddShip(Data_Ship _shipData)
+    {
+        shipList.Add(_shipData);
+
+        UI_ChangeShip_Slot inst = Instantiate(shipButton, shipParent.transform);
+        inst.shipData = _shipData;
+        inst.nameText.text = _shipData.name;
+        inst.customButton.SetButton(delegate { ShipClick(inst); }, ShipEnter, ShipExit);
+
         shipParent.constraint = GridLayoutGroup.Constraint.FixedRowCount;
         shipParent.constraintCount = 1;
     }

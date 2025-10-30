@@ -579,7 +579,7 @@ public class UI_Inventory_Base : MonoBehaviour
         {
             saveInventoryData = _data;
         }
-        else
+        else if (Game_Manager.current.shipData != null)
         {
             Debug.LogWarning(Game_Manager.current.shipData.id);
             saveInventoryData = new Static_JsonManager.InventoryData

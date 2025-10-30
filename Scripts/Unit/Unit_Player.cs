@@ -14,7 +14,7 @@ public class Unit_Player : MonoBehaviour
         Destroy
     }
     public State state = State.None;
-
+    public Rigidbody rb = null;
     SetStatus CurrentStatus => Game_Manager.current.currentStatus;
     public float moveSpeed = 1f;
     public int health;
@@ -43,21 +43,9 @@ public class Unit_Player : MonoBehaviour
 
     public AnimationCurve rotateCurve;// 위아래 흔들릴 때 로테이션
 
-    public void SetStatus(bool prevFullHealth)
-    {
-        moveSpeed = CurrentStatus.shipSpeed;
-
-        health = (prevFullHealth == true) ? CurrentStatus.shipHealth : CurrentStatus.shipHealth - continueData.destroySlot.Count;// 스탯 추가 하기  전 풀피 체크
-        Game_Manager.current.GetMainUI.SetMaxHealthPoint(CurrentStatus.shipHealth);
-        Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
-
-        energy = continueData.energy;
-        efficient = CurrentStatus.efficient;
-        SetEnergyUI();
-    }
-
     public void SetStart()
     {
+        rb.useGravity = false;
         if (continueData == null)
             return;
 
@@ -71,12 +59,27 @@ public class Unit_Player : MonoBehaviour
         FocusTarget.transform.position = transform.position;
     }
 
+    public void SetStatus(bool prevFullHealth)
+    {
+        moveSpeed = CurrentStatus.shipSpeed;
+
+        health = (prevFullHealth == true) ? CurrentStatus.shipHealth : CurrentStatus.shipHealth - continueData.destroySlot.Count;// 스탯 추가 하기  전 풀피 체크
+        Game_Manager.current.GetMainUI.SetMaxHealthPoint(CurrentStatus.shipHealth);
+        Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
+
+        energy = continueData.energy;
+        efficient = CurrentStatus.efficient;
+        SetEnergyUI();
+    }
+
     public void SetShip(Data_Ship _shipData)// 배 생성 및 변경
     {
         if (playerObject != null)
         {
             Destroy(playerObject);
         }
+        rb.useGravity = true;
+
         GameObject inst = Instantiate(_shipData.shipObject, transform);
         playerObject = inst;
         Debug.LogWarning($"{_shipData.name} : {_shipData.shipObject}");

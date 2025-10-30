@@ -10,7 +10,10 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
     //===========================================================================================================================
     public void SaveContinue()
     {
-        Debug.LogError("Save Continue Data!!!");
+        if (Game_Manager.current.shipData == null)
+            return;
+
+        Debug.LogError("저장 : 컨티뉴");
         Data_Continue continueData = new Data_Continue
         {
             shipData = Game_Manager.current.shipData.id,
@@ -38,11 +41,9 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             return _data;
         }
 
-        string shipID = "sh_0001";
-        Data_Ship defaultStatusData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
         Data_Continue continueData = new Data_Continue()
         {
-            shipData = shipID,
+            shipData = "",
 
             playerPosition = new Vector3(0.5f, 0.2f, 10.7f),// 초기 위치
             playerRotation = Quaternion.Euler(-0.15f, 103f, 0.02f),
@@ -54,7 +55,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             day = 0,
             weatherType = UI_Time.WeatherType.Sun,
 
-            energy = defaultStatusData.status.maxEnergy,
+            energy = 0,
             money = 1000f,
             destroySlot = new List<Vector2Int>(),
         };

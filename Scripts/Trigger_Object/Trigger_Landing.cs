@@ -47,7 +47,7 @@ public class Trigger_Landing : MonoBehaviour
         Game_Manager.current.currentLand = this;
     }
 
-    void SetLandingAction()
+    public void SetLandingAction()
     {
         player = Game_Manager.current.GetPlayer;
 

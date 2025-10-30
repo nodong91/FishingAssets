@@ -271,8 +271,11 @@ public class Title_Manager : MonoBehaviour
             if (instPlayer == null)
             {
                 instPlayer = Instantiate(player, transform);
-                Data_Ship shipData = Singleton_Data.INSTANCE.Dict_Ship[continueData.shipData];
-                instPlayer.SetShip(shipData);
+                if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(continueData.shipData))
+                {
+                    Data_Ship shipData = Singleton_Data.INSTANCE.Dict_Ship[continueData.shipData];
+                    instPlayer.SetShip(shipData);
+                }
             }
             return instPlayer;
         }

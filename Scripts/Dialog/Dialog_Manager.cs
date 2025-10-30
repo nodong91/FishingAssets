@@ -144,9 +144,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 Game_Manager.current.GetLanding.OutDialog();
                 break;
 
-            case SelectStruct.SelectType.ChangeShip:
-                // ¹è º¯°æ
-                Game_Manager.current.GetChangeShip.OpenCanvas(true);
+            case SelectStruct.SelectType.Rest:
+                Game_Manager.current.GetLanding.RestButton();
                 Game_Manager.current.GetLanding.OutDialog();
                 break;
         }
