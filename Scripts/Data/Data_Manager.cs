@@ -575,6 +575,7 @@ public class Data_Manager : Data_Parse
         Singleton_Data.INSTANCE.SetDictionary_Language(languageStruct);
         Singleton_Data.INSTANCE.SetDictionary_Audio(audioStruct);
         Singleton_Data.INSTANCE.SetDictionary_Sprite(sprites);
+        Singleton_Data.INSTANCE.SetDictionary_NPC(npcData);
         Singleton_Data.INSTANCE.SetDictionary_ShipData(shipData);
         Singleton_Data.INSTANCE.SetQuestStruct(questStruct);
     }

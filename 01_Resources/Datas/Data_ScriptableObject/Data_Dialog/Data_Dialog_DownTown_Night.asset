@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
-  m_Name: Data_Dialog_DownTown
+  m_Name: Data_Dialog_DownTown_Night
   m_EditorClassIdentifier: 
   dialogStructs:
   - contents: "\uC5B4\uB514\uB85C \uAC08\uAE4C?"
@@ -25,12 +25,11 @@ MonoBehaviour:
       actionInterval: 4.08
       actionAngle: {x: 1, y: 2}
   selectStructs:
-  - selectDialog: Pub
+  - selectDialog: Inn
     selectType: 0
-    npcData: {fileID: 11400000, guid: 438593d79ed055d4b8b5a4112c02a68e, type: 2}
+    npcData: {fileID: 11400000, guid: f5051af63d2a58d4898565b06e66ba95, type: 2}
+    dialogIndex: 0
   - selectDialog: Street
     selectType: 0
-    npcData: {fileID: 11400000, guid: c7a49494ad2b04c48ad3b660120a072d, type: 2}
-  - selectDialog: Smuggler
-    selectType: 0
-    npcData: {fileID: 11400000, guid: a0d85159f1d78e8448ad8d81ae00afa1, type: 2}
+    npcData: {fileID: 11400000, guid: dbc4c613338b891439089fca467ee807, type: 2}
+    dialogIndex: 2

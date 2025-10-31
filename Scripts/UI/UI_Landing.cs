@@ -27,8 +27,8 @@ public class UI_Landing : MonoBehaviour
     public GameObject downTownUI;
     public GameObject boardUI;
 
-    LandingStruct landingData;
-    public LandingStruct GetLandingData { get { return landingData; } }
+    LandingSetting[] landingData;
+    public LandingSetting[] GetLandingData { get { return landingData; } }
 
     public delegate void DeleOutLanding();
     public DeleOutLanding outLanding;
@@ -45,7 +45,7 @@ public class UI_Landing : MonoBehaviour
     public Custom_Button shipyardButton;
     public Custom_Button downTownButton;
     public Custom_Button boardButton;
-    bool inlanding, onDialog;
+    bool inlanding;
 
     Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
 
@@ -54,28 +54,28 @@ public class UI_Landing : MonoBehaviour
         canvasGroup.gameObject.SetActive(false);
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = Camera_Manager.current.UICamera;
-        nothingBoard.gameObject.SetActive(false);
 
         outButton.SetButton(OutButton);
         fuelButton.SetButton(FuelButton);
         restButton.SetButton(RestButton);
-        shopButton.SetButton(ShopButton);
-        shipyardButton.SetButton(ShipyardButton);
         storageButton.SetButton(StorageButton);
         changeButton.SetButton(ChangeButton);
+
+        shopButton.SetButton(ShopButton);
+        shipyardButton.SetButton(ShipyardButton);
         downTownButton.SetButton(DownTownButton);
         boardButton.SetButton(BoardButton);
     }
 
-    public void SetLanding(LandingStruct _landingData)
+    public void SetLanding(LandingSetting[] _landingData)
     {
         inlanding = true;
         // 어떤 섬인지 확인
         landingData = _landingData;// 개별 섬의 정보
-        for (int i = 0; i < _landingData.landingSetting.Length; i++)
+        for (int i = 0; i < _landingData.Length; i++)
         {
-            GameObject targetPoint = _landingData.landingSetting[i].landingPoint;
-            GameObject followUI = GetFollowUI(_landingData.landingSetting[i].landingType);
+            GameObject targetPoint = _landingData[i].landingPoint;
+            GameObject followUI = GetFollowUI(_landingData[i].landingType);
             dictLandingUI[targetPoint] = followUI;
             followUI.SetActive(true);
             Game_Manager.current.GetFollow.AddFollowUI(targetPoint, followUI);
@@ -86,9 +86,9 @@ public class UI_Landing : MonoBehaviour
 
     void RemoveUI()
     {
-        for (int i = 0; i < landingData.landingSetting.Length; i++)
+        for (int i = 0; i < landingData.Length; i++)
         {
-            GameObject targetPoint = landingData.landingSetting[i].landingPoint;
+            GameObject targetPoint = landingData[i].landingPoint;
             dictLandingUI[targetPoint].SetActive(false);
             Game_Manager.current.GetFollow.RemoveFollowUI(targetPoint);
         }
@@ -163,7 +163,6 @@ public class UI_Landing : MonoBehaviour
     void FuelButton()// 연료 채우기
     {
         currentType = LandingType.Energy;
-        onDialog = false;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
         Game_Manager.current.GetEnergyUI.OpenEnergy();
         Game_Manager.current.currentLand.CameraOutFouce(true);
@@ -172,76 +171,60 @@ public class UI_Landing : MonoBehaviour
     public void RestButton()// 휴식
     {
         currentType = LandingType.Rest;
-        onDialog = false;
-        SetLandingCanvas(false);// 랜드 UI 제거
+        //SetLandingCanvas(false);// 랜드 UI 제거
         Game_Manager.current.GetRestManager.OpenCanvas(true);
-        Game_Manager.current.currentLand.CameraOutFouce(true);
+        //Game_Manager.current.currentLand.CameraOutFouce(true);
     }
 
     void ShopButton()
     {
         currentType = LandingType.Shop;
-        onDialog = true;
         SetLandingCanvas(false);        // 샵 버튼 누르면 랜드 UI 제거
-        Option_Manager.current.SetThemeMusic(landingData.shopNPC.themeMusic);
-        Game_Manager.current.GetDialog.DialogStart_NPC(landingData.shopNPC, 0);
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shop];
+        Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);
+        Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);
         Game_Manager.current.currentLand.CameraOutFouce(true);
     }
 
     void ShipyardButton()// 조선소
     {
         currentType = LandingType.Shipyard;
-        onDialog = true;
         SetLandingCanvas(false);        // 조선소 버튼 누르면 랜드 UI 제거
-        Option_Manager.current.SetThemeMusic(landingData.shipyardNPC.themeMusic);
-        Game_Manager.current.GetDialog.DialogStart_NPC(landingData.shipyardNPC, 0);
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
+        Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);
+        Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);
         Game_Manager.current.currentLand.CameraOutFouce(true);
     }
-    public CanvasGroup nothingBoard;
-    int Hour => Game_Manager.current.GetMainUI.timeUI.hour;
+
+    Data_Manager.DayType lightMode => Game_Manager.current.GetMainUI.timeUI.lightMode;
     void DownTownButton()
     {
         currentType = LandingType.DownTown;
-        if (Hour >= 5f && Hour < 18f)
+        if (lightMode == Data_Manager.DayType.Day)
         {
             // 낮
-            onDialog = true;
             SetLandingCanvas(false);        // 랜드 UI 제거
             Game_Manager.current.currentLand.CameraOutFouce(true);
-            //StartCoroutine(OpenNothingBoard());
-            Game_Manager.current.GetDialog.DialogStart_NPC(landingData.player, 0);
-            Debug.LogWarning("이벤트 시간 : " + Hour);
+            Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);// 플레이어 대화
         }
-        else
+        else if (lightMode == Data_Manager.DayType.Night)
         {
             // 밤
-            onDialog = true;
             SetLandingCanvas(false);        // 랜드 UI 제거
             Game_Manager.current.currentLand.CameraOutFouce(true);
-            Option_Manager.current.SetThemeMusic(landingData.smugglerNPC.themeMusic);
-            Game_Manager.current.GetDialog.DialogStart_NPC(landingData.smugglerNPC, 0);
-        }
-    }
+            //Option_Manager.current.SetThemeMusic(landingData.smugglerNPC.themeMusic);
+            Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);// 플레이어 대화
 
-    IEnumerator OpenNothingBoard()
-    {
-        nothingBoard.gameObject.SetActive(true);
-        nothingBoard.alpha = 1.0f;
-        float normalize = 0;
-        while (normalize < 1f)
-        {
-            normalize += Time.deltaTime * 0.3f;
-            nothingBoard.alpha = Mathf.Clamp((1.0f - normalize) * 3f, 0f, 1f);
-            yield return null;
+            data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._smuggler];// 밀수꾼 추가
+            Game_Manager.current.GetDialog.AddNPC(data_NPC, 0);
         }
-        nothingBoard.gameObject.SetActive(false);
-        currentType = LandingType.None;
     }
 
     void StorageButton()
     {
         currentType = LandingType.Storage;
-        onDialog = false;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
 
         Game_Manager.current.GetMainUI.OpenShop();// 창고
@@ -251,15 +234,13 @@ public class UI_Landing : MonoBehaviour
 
     void ChangeButton()
     {
-        onDialog = false;
         SetLandingCanvas(false);        // 랜드 UI 제거
         Game_Manager.current.GetChangeShip.OpenCanvas(true);
     }
 
-    void BoardButton()
+    public void BoardButton()
     {
         currentType = LandingType.Board;
-        onDialog = false;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
 
         Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
@@ -277,7 +258,6 @@ public class UI_Landing : MonoBehaviour
 
             case LandingType.Shop:
             case LandingType.Shipyard:
-                OutDialog();// 대화창 닫기
                 Game_Manager.current.GetInventory.CloseShop();// 상점 닫기
                 Option_Manager.current.SetThemeMusic(null);
                 break;
@@ -303,17 +283,7 @@ public class UI_Landing : MonoBehaviour
                 Game_Manager.current.GetInventory.CloseShop();// 상점 닫기
                 break;
         }
-        Game_Manager.current.currentLand.CameraOutFouce(false);
-        SetLandingCanvas(true);// 랜드 UI 열기
-    }
-
-    public void OutDialog()
-    {
-        if (onDialog == true)
-        {
-            onDialog = false;
-            Game_Manager.current.GetDialog.OutDialog();
-        }
+        OpenLandingUI();
     }
 
     public void OpenLandingUI()
