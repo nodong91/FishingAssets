@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
+  m_Name: Data_Dialog_Tutorial_01
+  m_EditorClassIdentifier: 
+  dialogStructs:
+  - contents: "\uBC30\uAC00 \uD544\uC694\uD574."
+    dialogTypes:
+    - id: "\uBC30"
+      dialogIndex: {x: 0, y: 1}
+      textSize: 30
+      typingSpeed: 0.5
+      textColor: FFFF00
+      actionType: 2
+      actionSpeed: 10
+      actionInterval: 0
+      actionAngle: {x: 0, y: 5}
+  selectStructs:
+  - selectDialog: "\uBC30 \uAD6C\uC785"
+    selectType: 9
+    npcData: {fileID: 0}
+    dialogIndex: 0

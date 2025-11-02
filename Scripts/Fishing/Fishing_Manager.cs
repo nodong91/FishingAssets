@@ -243,7 +243,8 @@ public class Fishing_Manager : MonoBehaviour
         fishingCanvas.SetFishUI();
 
         Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
-        Game_Manager.current.GetTutorial.StartTutorial("HowToFishing");
+        Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
+        Game_Manager.current.GetTutorial.StartTutorial();
         yield return null;
 
         StartCoroutine(CatchMovement());
@@ -388,7 +389,7 @@ public class Fishing_Manager : MonoBehaviour
     //===================================================================================================================
     // 컨트롤
     //===================================================================================================================
-  
+
     bool catching;
     void TestControll()
     {

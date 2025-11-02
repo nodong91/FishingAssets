@@ -49,10 +49,11 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     public void DialogStart_NPC(Data_NPC _npc, int _dialogIndex)
     {
-        Debug.LogWarning($"{_npc.npc_ID} : 오픈 시간 아님");
         int hour = Game_Manager.current.GetMainUI.timeUI.hour;
-        if (hour > _npc.openTime.x && hour < _npc.openTime.y)
+        Debug.LogWarning($"{_npc.npc_ID} : 현재 시간({hour}) 오픈 시간({_npc.openTime.x}~{_npc.openTime.y})");
+        if (hour >= _npc.openTime.x && hour <= _npc.openTime.y)
         {
+            // 오픈
             dataNPC = _npc;
             dataDialog = dataNPC.dataDialogs[_dialogIndex];
         }
@@ -85,7 +86,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         currentDialog = 0;
         endDialog = false;
         selectCanvas.gameObject.SetActive(false);
-
         // 선택 버튼 생성
         for (int i = 0; i < dataDialog.selectStructs.Length; i++)
         {
@@ -111,22 +111,23 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
         Dialog_SelectButton button = GetSelectButton();
         button.gameObject.SetActive(true);
-        button.SetStart(selectStruct, SelectedButton);
+        button.SetStart(selectStruct, SelectedButton);// 엔피씨 대화 추가
         dialogSelectButton.Add(button);
 
         button.transform.SetAsLastSibling();// 순서 변경
     }
 
-    void SelectedButton(SelectStruct _selectStruct)
+    void SelectedButton(SelectStruct _selectStruct)// 선택 버튼 클릭
     {
-        OutDialog();
+        StopAllCoroutines();
+
+        actionBool = false;
         if (_selectStruct.npcData != null)// 엔피씨데이터가 있으면 대화 시작
         {
             DialogStart_NPC(_selectStruct.npcData, _selectStruct.dialogIndex);
             return;
         }
 
-        LandingSetting[] getLandingData = Game_Manager.current.GetLanding.GetLandingData;
         switch (_selectStruct.selectType)
         {
             case SelectStruct.SelectType.Out:
@@ -157,12 +158,12 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 if (Game_Manager.current.GetPlayer.FullHealth == false)
                 {
                     data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
+                    //DialogStart_NPC(data_NPC, 1);
                     Data_Dialog warnDialog = data_NPC.dataDialogs[1];
                     Dialog_Npc(warnDialog);
                     Debug.LogWarning("체력이 가득 차지 않았으면 스킬창 못열게");
                     return;
                 }
-                Debug.LogWarning("인벤토리 닫아야");
                 Game_Manager.current.GetInventory.CloseShop();
                 Game_Manager.current.GetSkill.OpenCanvas(true);
                 break;
@@ -179,7 +180,17 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             case SelectStruct.SelectType.NoticeBoard:
                 Game_Manager.current.GetLanding.BoardButton();
                 break;
+
+            case SelectStruct.SelectType.Tutorial:
+                Game_Manager.current.GetTutorial.StartTutorial();
+                break;
         }
+        OpenCanvas(false);
+    }
+
+    public void Tutorial_Upgrade()
+    {
+        Game_Manager.current.GetSkill.OpenCanvas(true);
         OpenCanvas(false);
     }
 
@@ -213,6 +224,10 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             // 다음 대화 진행
             StopAllCoroutines();
             typingCoroutine = StartCoroutine(StartDialog());
+        }
+        else if (endDialog == true)
+        {
+            Debug.LogWarning("eijfhoiajso;idfjoaijeoifj;oisdfnbaousdfh");
         }
     }
 
@@ -249,13 +264,15 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     void EndDialog()
     {
         endDialog = true;
-        // 메뉴 출력
-        for (int i = 0; i < dialogSelectButton.Count; i++)
+        if (dialogSelectButton.Count > 0)
         {
-            dialogSelectButton[i].gameObject.SetActive(true);
+            // 메뉴 출력
+            for (int i = 0; i < dialogSelectButton.Count; i++)
+            {
+                dialogSelectButton[i].gameObject.SetActive(true);
+            }
+            typingCoroutine = StartCoroutine(SetSelectDialog());
         }
-        typingCoroutine = StartCoroutine(SetSelectDialog());
-        OpenQuestResult();// 퀘스트 보상이 있으면 보상 인벤토리 열기
     }
 
     IEnumerator SetSelectDialog()// 선택지 버튼 열기
@@ -271,12 +288,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void OpenQuestResult()
-    {
-        //// 퀘스트 보상이 있으면 보상 인벤토리 열기
-        //Game_Manager.current.GetInventory.OpenResult();
-    }
-
     void OpenShop()
     {
 
@@ -290,13 +301,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     void OpenQuest()
     {
 
-    }
-
-    public void OutDialog()
-    {
-        actionBool = false;
-        StopAllCoroutines();
-        OpenCanvas(false);// 대화 완료
     }
 
     void StartActing()
@@ -466,11 +470,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         {
             // 대화 끝
             EndDialog();// 자연스럽게 끝
-        }
-        else
-        {
-            // 다음 대화 진행
-            //StartCoroutine(WaitingNext());
         }
     }
 

@@ -20,7 +20,6 @@ public class Game_Manager : MonoBehaviour
     public FishGuide fishGuide;
     public Skill_Manager skillManager;
     public string themeMusic;
-    private string oceanSound = "env_0001";
     public Fishing_Manager fishingAction;
     public UI_QuestManager questManager;
 
@@ -39,7 +38,8 @@ public class Game_Manager : MonoBehaviour
     [ColorUsage(true, true)]
     public Color emissionColor;
     public Material skyboxMatial;
-    public Trigger_Landing currentLand { get; set; }
+    public Trigger_Landing CurrentLand { get; set; }
+    public string addItemTest;
 
     public static Game_Manager current;
 
@@ -50,7 +50,31 @@ public class Game_Manager : MonoBehaviour
 
     void Start()
     {
+        if (LoadingManager.current != null)
+            LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
+
         StartCoroutine(SetStart());
+    }
+
+    void Update()// 아이템 추가 테스트
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            GetMainUI.MoveMoney(1000f);// 아이템 추가 테스트
+            Debug.LogError("머니 치트");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            GetInventory.AddPickUpItem(addItemTest);
+            Debug.LogError("아이템 치트");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            GetPlayer.TakeDamage();
+            Debug.LogError("충돌");
+        }
     }
 
     IEnumerator SetStart()
@@ -58,14 +82,13 @@ public class Game_Manager : MonoBehaviour
         Camera_Manager.current.SetCameraManager();
         continueData = Singleton_Continue.INSTANCE.LoadContinue();
 
-        while (currentLand == null)
+        while (CurrentLand == null)
             yield return null;
 
         GetTimeUI.SetStart(continueData);// 시간
         GetMainUI.SetMoney(continueData.money);// 돈
 
         SetRendererFeature();
-        SetThemeMusic();
         yield return null;
 
         GetMainUI.SetStart();
@@ -74,6 +97,11 @@ public class Game_Manager : MonoBehaviour
         GetFishGuide.SetStart();
         GetQuest.SetStart();
         GetChangeShip.SetStart();
+    }
+
+    void LoadingComplate()
+    {
+        SetThemeMusic();
 
         string shipID = continueData.shipData;
         if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID))
@@ -86,8 +114,16 @@ public class Game_Manager : MonoBehaviour
         }
         else
         {
-            currentLand.SetLandingAction();
+            CurrentLand.SetLandingAction();
             OutOfControll(true);
+        }
+
+        // 튜토리얼 시작
+        if (continueData.shipData == "")
+        {
+            Debug.LogWarning("배가 없으면 튜토리얼 시작");
+            // 배가 없으면 튜토리얼 시작
+            GetTutorial.SetTutorial(String_Tutorial._newGame);// 배구입 튜토리얼 세팅
         }
     }
 
@@ -116,7 +152,7 @@ public class Game_Manager : MonoBehaviour
     public void SetThemeMusic()
     {
         Option_Manager.current.SetThemeMusic(themeMusic);
-        Singleton_Audio.INSTANCE.Audio_Environment(oceanSound);
+        Singleton_Audio.INSTANCE.Audio_Environment(String_Audio._oceanSound);
     }
 
     public void InputLeftMouse(bool _input)
@@ -157,7 +193,8 @@ public class Game_Manager : MonoBehaviour
     {
         // 공격하는 물고기가 처음인지 확인
         Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
-        GetTutorial.StartTutorial("FirstFishing");
+        GetTutorial.SetTutorial(String_Tutorial._firstFishing);// 낚시 튜토리얼 세팅
+        GetTutorial.StartTutorial();// 낚시 튜토리얼 시작
         GetFishing.SetFishing(_areaType);
     }
     Data_Continue continueData;
@@ -179,7 +216,7 @@ public class Game_Manager : MonoBehaviour
                 }
                 else
                 {
-                    Transform landingPoint = currentLand.landingPoint.transform;
+                    Transform landingPoint = CurrentLand.landingPoint.transform;
                     instPlayer = Instantiate(player, landingPoint.position, landingPoint.rotation, transform);
                 }
                 instPlayer.SetStart();
@@ -509,6 +546,6 @@ public class Game_Manager : MonoBehaviour
 
     public void FocusShip(bool _isOn)
     {
-        currentLand.focusShip.gameObject.SetActive(_isOn);
+        CurrentLand.focusShip.gameObject.SetActive(_isOn);
     }
 }

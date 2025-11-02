@@ -160,12 +160,12 @@ public class UI_Landing : MonoBehaviour
         RemoveUI();
     }
 
-    void FuelButton()// 연료 채우기
+    public void FuelButton()// 연료 채우기
     {
         currentType = LandingType.Energy;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
         Game_Manager.current.GetEnergyUI.OpenEnergy();
-        Game_Manager.current.currentLand.CameraOutFouce(true);
+        Game_Manager.current.CurrentLand.CameraOutFouce(true);
     }
 
     public void RestButton()// 휴식
@@ -183,17 +183,17 @@ public class UI_Landing : MonoBehaviour
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shop];
         Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);
-        Game_Manager.current.currentLand.CameraOutFouce(true);
+        Game_Manager.current.CurrentLand.CameraOutFouce(true);
     }
 
-    void ShipyardButton()// 조선소
+    public void ShipyardButton()// 조선소
     {
         currentType = LandingType.Shipyard;
         SetLandingCanvas(false);        // 조선소 버튼 누르면 랜드 UI 제거
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
         Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);
         Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);
-        Game_Manager.current.currentLand.CameraOutFouce(true);
+        Game_Manager.current.CurrentLand.CameraOutFouce(true);
     }
 
     Data_Manager.DayType lightMode => Game_Manager.current.GetMainUI.timeUI.lightMode;
@@ -204,7 +204,7 @@ public class UI_Landing : MonoBehaviour
         {
             // 낮
             SetLandingCanvas(false);        // 랜드 UI 제거
-            Game_Manager.current.currentLand.CameraOutFouce(true);
+            Game_Manager.current.CurrentLand.CameraOutFouce(true);
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
             Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);// 플레이어 대화
         }
@@ -212,7 +212,7 @@ public class UI_Landing : MonoBehaviour
         {
             // 밤
             SetLandingCanvas(false);        // 랜드 UI 제거
-            Game_Manager.current.currentLand.CameraOutFouce(true);
+            Game_Manager.current.CurrentLand.CameraOutFouce(true);
             //Option_Manager.current.SetThemeMusic(landingData.smugglerNPC.themeMusic);
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
             Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);// 플레이어 대화
@@ -229,10 +229,10 @@ public class UI_Landing : MonoBehaviour
 
         Game_Manager.current.GetMainUI.OpenShop();// 창고
         Game_Manager.current.GetInventory.OpenStorage(true);
-        Game_Manager.current.currentLand.CameraOutFouce(true);
+        Game_Manager.current.CurrentLand.CameraOutFouce(true);
     }
 
-    void ChangeButton()
+    public void ChangeButton()
     {
         SetLandingCanvas(false);        // 랜드 UI 제거
         Game_Manager.current.GetChangeShip.OpenCanvas(true);
@@ -244,7 +244,7 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
 
         Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
-        Game_Manager.current.currentLand.CameraOutFouce(true);
+        Game_Manager.current.CurrentLand.CameraOutFouce(true);
     }
 
     public void BackButton()// 뒤로 가기
@@ -289,6 +289,6 @@ public class UI_Landing : MonoBehaviour
     public void OpenLandingUI()
     {
         SetLandingCanvas(true);// 랜드 UI 열기
-        Game_Manager.current.currentLand.CameraOutFouce(false);
+        Game_Manager.current.CurrentLand.CameraOutFouce(false);
     }
 }

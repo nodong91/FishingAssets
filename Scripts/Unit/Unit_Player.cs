@@ -313,7 +313,7 @@ public class Unit_Player : MonoBehaviour
         // 견인 되는 연출 필요
         // 위치 변경
 
-        GameObject landingPoint = Game_Manager.current.currentLand.landingPoint.gameObject;
+        GameObject landingPoint = Game_Manager.current.CurrentLand.landingPoint.gameObject;
         Vector3 forwardDirection = landingPoint.transform.rotation * Vector3.forward;
         Vector3 backwardPosition = landingPoint.transform.position - forwardDirection * 3f;
         Vector3 targetPosition = landingPoint.transform.position;

@@ -5,6 +5,7 @@ public class String_Audio
     public const string _activeSkill = "fx_0003";
     public const string _clash = "fx_0004";
     public const string _reeling = "fx_0005";
+    public const string _oceanSound = "env_0001";
 }
 
 public class String_Title
@@ -46,4 +47,12 @@ public class String_NPC
     public const string _shipyard = "shipyard";
     public const string _smuggler = "smuggler";
     public const string _inn = "inn";
+}
+
+public class String_Tutorial
+{
+    public const string _newGame = "NewGame";
+    public const string _fillFuel = "FillFuel";
+    public const string _firstFishing = "FirstFishing";
+    public const string _fishing = "HowToFishing";
 }

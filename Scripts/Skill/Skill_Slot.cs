@@ -155,7 +155,11 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
             gageImage.fillAmount = Mathf.Lerp(0f, 1f, normalize);
             yield return null;
         }
+        ActiveSlot();
+    }
 
+    public void ActiveSlot()
+    {
         // 스킬 활성화
         float price = -Skill.price;
         Game_Manager.current.GetMainUI.MoveMoney(price);// 돈 이동

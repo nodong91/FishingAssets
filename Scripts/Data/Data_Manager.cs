@@ -379,8 +379,11 @@ public class Data_Manager : Data_Parse
             catchAttakSpeed += _status.catchAttakSpeed * _remove;
             shipSpeed += _status.shipSpeed * _remove;
             maxWeight += _status.maxWeight * _remove;
-            maxEnergy += _status.maxEnergy * _remove;
+            if (maxEnergy > 0)// 최대 연료가 0보다 클때
+                maxEnergy += _status.maxEnergy * _remove;
             efficient += _status.efficient * _remove;
+            if (efficient < 0f)// 연료 효율이 0보다 작을 때
+                efficient = 0f;
             maxBoxSize += _status.maxBoxSize * _remove;
             shipHealth += _status.shipHealth * _remove;
             freshness += _status.freshness * _remove;

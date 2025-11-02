@@ -15,11 +15,14 @@ public class UI_ChangeShip : MonoBehaviour
     {
         backButton.SetButton(CloseCanvas);
         shipList.Clear();
-        OpenCanvas(false);
+        OpenCanvas(false);// 세팅 완료
     }
 
     public void AddShip(Data_Ship _shipData)
     {
+        if (shipList.Contains(_shipData) == true)
+            return;
+
         shipList.Add(_shipData);
 
         UI_ChangeShip_Slot inst = Instantiate(shipButton, shipParent.transform);
@@ -37,10 +40,16 @@ public class UI_ChangeShip : MonoBehaviour
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
 
-    void CloseCanvas()
+    public void CloseCanvas()
     {
         Game_Manager.current.GetLanding.OpenLandingUI();
         OpenCanvas(false);
+    }
+
+    public void SelectTutorialShip()
+    {
+        // 튜토리얼용 배선택
+        Game_Manager.current.ChangeStatus(shipList[0]);
     }
 
     void ShipClick(UI_ChangeShip_Slot _slot)// 배선택

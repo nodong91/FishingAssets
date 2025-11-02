@@ -20,7 +20,7 @@ public class Title_Manager : MonoBehaviour
     public Custom_Button newStartButton, creditButton, settingButton, exitButton;
     public Custom_Button testButton;
     public TMPro.TMP_Text continueText, newStartText, creditText, settingText, exitText;
-    bool continueEnable;
+    public bool continueEnable;
 
     public Light DayLight;
     public Color nightColor;
@@ -164,13 +164,13 @@ public class Title_Manager : MonoBehaviour
     {
         if (continueEnable == true)
         {
-            // 저장 파일 제거
+            // 저장 파일 제거 팝업
             GetUIPopup.buttonAction = NewGamePopup;
             GetUIPopup.OpenCanvas(true);
         }
         else
         {
-            StartGame();//NewStartButton
+            NewGamePopup(true);
         }
     }
 
@@ -186,17 +186,30 @@ public class Title_Manager : MonoBehaviour
     IEnumerator RemoveSaveFile()
     {
         string path = Application.dataPath + "/Save/";
+        FindFolder(path);
+
         string[] allFiles = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
         foreach (string file in allFiles)
         {
             File.Delete(file);
         }
         Directory.Delete(path, true);
+
         // 닫힐때 옵션이 저장이 되는데 창 데이터가 있어서 기존 내용이 저장됨
         Option_Manager.current.LoadOption();// 옵션 데이터 리셋
         yield return null;
 
         StartGame();//RemoveSaveFile
+    }
+
+    static void FindFolder(string folderName)
+    {
+        DirectoryInfo dirInfo = new DirectoryInfo(folderName);
+        if (dirInfo.Exists == false)
+        {
+            // 없으면 만들기
+            dirInfo.Create();
+        }
     }
 
     void CreditButton()
@@ -259,8 +272,8 @@ public class Title_Manager : MonoBehaviour
 
     void LoadingComplate()
     {
-        Debug.Log("LoadingComplate");
-        Option_Manager.current.SetThemeMusic(String_Audio._titleTheme); // 테마 음악 설정
+        Debug.Log("타이틀 로딩 완료");
+        Option_Manager.current.SetThemeMusic(String_Audio._titleTheme); // 테마 음악 시작
     }
 
     private Unit_Player instPlayer;

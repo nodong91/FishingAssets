@@ -65,7 +65,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         {
             audioSource.gameObject.SetActive(true);
             audioSource.name = _id;
-            Debug.Log($"{audioSource.name}");
+            Debug.Log($"Audio_BGM : {audioSource.name}");
             audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
             audioSource.mute = masterMute == true ? true : bgmMute;
             audioSource.volume = bgmVolume * masterVolume;

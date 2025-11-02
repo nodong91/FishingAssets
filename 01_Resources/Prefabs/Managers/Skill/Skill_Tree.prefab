@@ -17345,6 +17345,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cb524d992f8a249b08e893631b5f3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasStructs:
+  - direction: 4
+    rect: {fileID: 3776080578535239543}
+    canvasGroup: {fileID: 0}
+    targetPosition: {x: 0, y: 0}
+  - direction: 1
+    rect: {fileID: 8263468371815770339}
+    canvasGroup: {fileID: 0}
+    targetPosition: {x: 0, y: 0}
+  - direction: 2
+    rect: {fileID: 8542385108194127232}
+    canvasGroup: {fileID: 0}
+    targetPosition: {x: 0, y: 0}
+  resetButton: {fileID: 4420659119352713488}
   skillTreeData: {fileID: 11400000, guid: 75df6dfb30203e0449a2370a871faa06, type: 2}
   canvas: {fileID: 2816290300193962953}
   canvasGroup: {fileID: 8614830054163890972}
@@ -17423,20 +17437,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   infomation: {fileID: 5574148986536456977}
-  canvasStructs:
-  - direction: 4
-    rect: {fileID: 3776080578535239543}
-    canvasGroup: {fileID: 0}
-    targetPosition: {x: 0, y: 0}
-  - direction: 1
-    rect: {fileID: 8263468371815770339}
-    canvasGroup: {fileID: 0}
-    targetPosition: {x: 0, y: 0}
-  - direction: 2
-    rect: {fileID: 8542385108194127232}
-    canvasGroup: {fileID: 0}
-    targetPosition: {x: 0, y: 0}
-  resetButton: {fileID: 4420659119352713488}
 --- !u!1 &3652505573486321929
 GameObject:
   m_ObjectHideFlags: 0
@@ -36372,7 +36372,7 @@ GameObject:
   - component: {fileID: 6772063935330419942}
   - component: {fileID: 7650474139008995495}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36425,7 +36425,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 40bca8b83cbaf714d9f6fb77f4b629fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f00f1e0327a53844b86afb847ff0e550, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

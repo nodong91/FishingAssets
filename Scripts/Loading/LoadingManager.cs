@@ -97,7 +97,7 @@ public class LoadingManager : MonoBehaviour
         float normalize = 0f;
         while (normalize < 1f)
         {
-            normalize += Time.deltaTime * 1.5f;
+            normalize += Time.unscaledDeltaTime * 1.5f;
             float alpha = Mathf.Lerp(1f - targetAlpha, targetAlpha, normalize);
             float hight = Mathf.Lerp(prevHight, targetHight, normalize);
             background.anchoredPosition = new Vector2(0f, hight);

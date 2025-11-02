@@ -42,12 +42,9 @@ public class Skill_Manager : MonoBehaviour
     public void OpenCanvas(bool _open)
     {
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
-        //canvasGroup.alpha = _open ? 1f : 0f;
-        //canvasGroup.interactable = _open;
-        //canvasGroup.blocksRaycasts = _open;
     }
 
-    void CloseCanvas()
+    public void CloseCanvas()
     {
         OpenCanvas(false);
         Static_JsonManager.SaveEnableSkillData(String_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 저장
@@ -192,29 +189,6 @@ public class Skill_Manager : MonoBehaviour
 
     void ShipUnlock(string _id)
     {
-        //Data_Ship data_Ship = null;
-        //switch (_id)
-        //{
-        //    case String_Skill.baseShip:
-        //        data_Ship = Singleton_Data.INSTANCE.Dict_Ship[String_Skill.baseShip];
-        //        break;
-
-        //    case String_Skill.speedBoat:
-        //        data_Ship = Singleton_Data.INSTANCE.Dict_Ship[String_Skill.speedBoat];
-        //        break;
-
-        //    case String_Skill.raft:
-        //        data_Ship = Singleton_Data.INSTANCE.Dict_Ship[String_Skill.raft];
-        //        break;
-
-        //    case String_Skill.cruise:
-        //        data_Ship = Singleton_Data.INSTANCE.Dict_Ship[String_Skill.cruise];
-        //        break;
-
-        //    case String_Skill.sailShip:
-        //        data_Ship = Singleton_Data.INSTANCE.Dict_Ship[String_Skill.sailShip];
-        //        break;
-        //}
         Data_Ship data_Ship = Singleton_Data.INSTANCE.Dict_Ship[_id];
         Debug.LogWarning($"{_id} : {data_Ship.shipName}");
         Game_Manager.current.GetChangeShip.AddShip(data_Ship);

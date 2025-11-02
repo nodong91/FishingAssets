@@ -73,6 +73,7 @@ public class Data_Dialog : ScriptableObject
             Result = 6,
             Rest = 7,// 휴식 - 잠자기
             NoticeBoard = 8,// 게시판 열기
+            Tutorial = 9,// 튜토리얼 시작
         }
         public SelectType selectType;
         public Data_NPC npcData;
