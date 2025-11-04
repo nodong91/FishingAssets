@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static Data_Manager;
-using static UI_Time;
 
 public class Singleton_Continue : MonoSingleton<Singleton_Continue>
 {

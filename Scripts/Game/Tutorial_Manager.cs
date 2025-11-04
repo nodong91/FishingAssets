@@ -1,65 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Tutorial_Manager.TutorialStruct;
 
 public class Tutorial_Manager : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
     public TMPro.TMP_Text commentText;
 
-    [System.Serializable]
-    public class TutorialStruct
-    {
-        public string id;
-        public Data_NPC npc;
-        public int dialogIndex;
-        public float timeScale;
-        public bool completed;
-        [System.Serializable]
-        public struct TutorialSet
-        {
-            public string comment;
-            public int commentSize;
-            public Vector2 commentPosition;
-            public Vector2 boxPosition;
-            public Vector2 boxSize;
-        }
-        public TutorialSet[] tutorialSet;
-    }
-    public TutorialStruct[] testTutorialStruct;
-    public TutorialStruct currentTutorial;
+    public Data_Tutorial[] tutorialData;
+    public Data_Tutorial currentTutorial;
+
     public string currentID;
-    public int currentIndex, currentSetIndex;
+    public int currentIndex;
     public RectTransform boxRect;
     public bool acting;
     Coroutine ingOpenCanvas;
     public AnimationCurve animationCurveX, animationCurveY;
     public Custom_Button activeButton;
 
-    Dictionary<string, TutorialStruct> dictTutorial = new Dictionary<string, TutorialStruct>();
+    Dictionary<string, Data_Tutorial> dictTutorial = new Dictionary<string, Data_Tutorial>();
+    //Dictionary<string, bool> dictComp = new Dictionary<string, bool>();
 
     public void SetStart()
     {
         LoadTutorial();
-        dictTutorial = new Dictionary<string, TutorialStruct>();
-        for (int i = 0; i < testTutorialStruct.Length; i++)
+        dictTutorial = new Dictionary<string, Data_Tutorial>();
+        for (int i = 0; i < tutorialData.Length; i++)
         {
-            if (completedTutorial.Contains(testTutorialStruct[i].id) == true)
-            {
-                testTutorialStruct[i].completed = true;
-            }
-            dictTutorial.Add(testTutorialStruct[i].id, testTutorialStruct[i]);
+            dictTutorial.Add(tutorialData[i].id, tutorialData[i]);
         }
         canvasGroup.gameObject.SetActive(false);
     }
 
     public void SetTutorial(string _id)
     {
-        Debug.LogWarning($"TutorialPause : {_id}");
         currentID = _id;
         currentTutorial = dictTutorial[currentID];
-        if (currentTutorial.completed == true)
+        //Debug.LogWarning($"TutorialPause : {_id} ({dictComp[currentID]})");
+        if (completedTutorial.Contains(currentID) == true)
         {
 
         }
@@ -71,9 +49,12 @@ public class Tutorial_Manager : MonoBehaviour
 
     public void StartTutorial()
     {
+        // 섬입장
+        //Game_Manager.current.CurrentLand.SetLandingAction();
+        //Game_Manager.current.OutOfControll(true);
         // 튜토리얼
         Time.timeScale = currentTutorial.timeScale;
-        currentSetIndex = 0;
+        currentIndex = 0;
         OpenCanvas(1f);
     }
 
@@ -107,11 +88,12 @@ public class Tutorial_Manager : MonoBehaviour
             canvasGroup.gameObject.SetActive(false);
     }
 
-    void SetComment(TutorialSet _tutorialSet)
+    void SetComment(Data_Tutorial.TutorialComment _tutorialComment)
     {
-        commentText.text = _tutorialSet.comment;
-        commentText.fontSize = _tutorialSet.commentSize;
-        commentText.rectTransform.anchoredPosition = _tutorialSet.commentPosition;
+        commentText.gameObject.SetActive(true);
+        commentText.text = _tutorialComment.comment;
+        commentText.fontSize = _tutorialComment.commentSize;
+        commentText.rectTransform.anchoredPosition = _tutorialComment.commentPosition;
     }
 
     void CanvasGroupAlpha(float _alpha)
@@ -123,15 +105,14 @@ public class Tutorial_Manager : MonoBehaviour
 
     void CurrentAction()// 현재 튜토리얼 세팅
     {
-        if (currentSetIndex < currentTutorial.tutorialSet.Length)
+        if (currentIndex < currentTutorial.tutorialComment.Length)
         {
-            OnClickSetting(currentSetIndex);
             TutorialAction();
-            currentSetIndex++;
             return;
         }
         // 완료
         Debug.LogWarning("튜토리얼 완료");
+        Singleton_Continue.INSTANCE.SaveContinue();// 튜토리얼 종료
         Time.timeScale = 1f;
         OpenCanvas(0f);
         SaveTutorial();
@@ -141,15 +122,22 @@ public class Tutorial_Manager : MonoBehaviour
     {
         if (ingOpenCanvas != null)
             StopCoroutine(ingOpenCanvas);
-        ingOpenCanvas = StartCoroutine(ING_TutorialAction(currentTutorial.tutorialSet[currentSetIndex]));
+        ingOpenCanvas = StartCoroutine(ING_TutorialAction(currentTutorial.tutorialComment[currentIndex]));
     }
 
-    IEnumerator ING_TutorialAction(TutorialSet _tutorialSet)
+    IEnumerator ING_TutorialAction(Data_Tutorial.TutorialComment _tutorialComment)
     {
-        SetComment(currentTutorial.tutorialSet[currentSetIndex]);
+        int index = currentIndex;
+        boxRect.sizeDelta = new Vector2(0f, 0f);
+        commentText.gameObject.SetActive(false);
+        yield return new WaitForSeconds(_tutorialComment.intervalTime);
+
+        SetComment(currentTutorial.tutorialComment[index]);
+        OnClickSetting(index);
+        currentIndex++;
 
         acting = true;
-        boxRect.anchoredPosition = _tutorialSet.boxPosition;
+        boxRect.anchoredPosition = _tutorialComment.boxPosition;
         yield return null;
 
         float normalize = 0f;
@@ -158,8 +146,8 @@ public class Tutorial_Manager : MonoBehaviour
             normalize += Time.unscaledDeltaTime * 5f;
 
             float alpha = Mathf.Lerp(0f, 1f, normalize);
-            float curveX = animationCurveX.Evaluate(alpha) * _tutorialSet.boxSize.x;
-            float curveY = animationCurveY.Evaluate(alpha) * _tutorialSet.boxSize.y;
+            float curveX = animationCurveX.Evaluate(alpha) * _tutorialComment.boxSize.x;
+            float curveY = animationCurveY.Evaluate(alpha) * _tutorialComment.boxSize.y;
 
             boxRect.sizeDelta = new Vector2(curveX, curveY);
             yield return null;
@@ -188,7 +176,7 @@ public class Tutorial_Manager : MonoBehaviour
     // 튜토리얼 라인
     //=========================================================================================================
 
-    void OnClickSetting(int _index)
+    void OnClickSetting(int _index)// 액션 버튼
     {
         string cord = currentTutorial.id;
         if (acting == true)
@@ -201,6 +189,10 @@ public class Tutorial_Manager : MonoBehaviour
 
             case String_Tutorial._fillFuel:
                 activeButton.SetButton(delegate { FillFuel(_index); });// 액션 세팅
+                break;
+
+            default:
+                activeButton.SetButton(delegate { ActiveDefault(_index); });
                 break;
         }
     }
@@ -267,9 +259,14 @@ public class Tutorial_Manager : MonoBehaviour
                 Game_Manager.current.GetLanding.BackButton();
                 break;
         }
+        CurrentAction();
     }
 
-
+    void ActiveDefault(int _index)
+    {
+        CurrentAction();
+        Debug.LogWarning($"튜토리얼 : {currentIndex}");
+    }
 
 
 
@@ -296,16 +293,16 @@ public class Tutorial_Manager : MonoBehaviour
 
     const string tutorialKey = "CompletedTutorial";
     public List<string> completedTutorial;
-    public void SaveTutorial()
+    void SaveTutorial()
     {
-        currentTutorial.completed = true;
+        //currentTutorial.completed = true;
         if (completedTutorial == null)
             completedTutorial = new List<string>();
         completedTutorial.Add(currentID);
         Static_JsonManager.SaveTutorialData(tutorialKey, completedTutorial);
     }
 
-    public void LoadTutorial()
+    void LoadTutorial()
     {
         if (Static_JsonManager.TryLoadTutorialData(tutorialKey, out List<string> _completedTutorial))
         {

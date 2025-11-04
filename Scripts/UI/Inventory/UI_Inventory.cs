@@ -29,9 +29,7 @@ public class UI_Inventory : MonoBehaviour
 
     public SlotType enterSlotType, selectSlotType;
     private UI_Inventory_Slot enterSlot, selectSlot;
-
-    public ItemInInventory selectItemClass;
-    ItemInInventory originItemClass;
+    ItemInInventory selectItemClass, originItemClass;
 
     const int slotSize = 40;
     ResultStruct resultItem;
@@ -258,8 +256,10 @@ public class UI_Inventory : MonoBehaviour
             onDrag = true;
             // 픽업
             selectSlot = _slot.GetLinkSlot;
-            selectItemClass = selectSlot.itemInInventory;
             selectSlotType = enterSlotType;
+            selectItemClass = selectSlot.itemInInventory;
+            if(enterSlotType == SlotType.MyBox)
+                myBox.OnRemoveBox(true);
 
             SetOriginItemClass();// 기존 위치 저장
             SetEmptySlot(selectSlot);// 위치 비우기
@@ -284,7 +284,7 @@ public class UI_Inventory : MonoBehaviour
     {
         if (onCheck == true)// 놓을 수 있다.
         {
-            if (enterSlotType == selectSlotType)// 같은 타입이면 그냥 이동
+            if (enterSlotType == selectSlotType)// 같은 인벤토리 안이라면
             {
                 UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
                 tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
@@ -292,64 +292,101 @@ public class UI_Inventory : MonoBehaviour
                 OffDragReset();
                 return;
             }
-            else if (enterSlotType == SlotType.MyBox)// 드랍 구매
+            else // 같은 타입이 아닐 때
             {
-                if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == true // 돈이 충분하면
-                    && myBox.CheckWeight(selectItemClass.item.weight) == true)// 무게가 충분하면
-                {
-                    BuyItem(selectItemClass.item);// 드래그 구매
-                    UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
-                    tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
-                }
-                else
-                {
-                    // 원래 위치로 돌리기
-                    MoveOriginalSlot();
-                }
-            }
-            else if (selectSlotType == SlotType.MyBox)// 드랍 판매
-            {
-                Debug.LogWarning($"인벤토리 타입 : {currentType}");
+                // 현재 열린 타입
                 switch (currentType)
                 {
-                    // 현재 열린 타입이 상점류인 경우
                     case SlotType.Shop:// 샵이 열려있을 때 드래그
-                        if (selectItemClass.item.itemType == ItemStruct.ItemType.Fish)
-                        {
-                            SellItem(selectItemClass.item);// 생선만 드래그 판매
-                        }
-                        else
-                        {
-                            // 원래 위치로 돌리기
-                            MoveOriginalSlot();
-                        }
+                        DragShopType();
                         break;
 
                     case SlotType.Shipyard:
-                        if (selectItemClass.item.itemType != ItemStruct.ItemType.Fish)
-                        {
-                            SellItem(selectItemClass.item);// 생선이 아닌 것만 드래그 판매
-                        }
-                        else
-                        {
-                            // 원래 위치로 돌리기
-                            MoveOriginalSlot();
-                        }
+                        DragShipyardType();
                         break;
 
                     case SlotType.Submit:// 퀘스트 아이템 제출
-                        DragSubmit();
+                        DragSubmitType();
+                        break;
+
+                    default:
+                        UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
+                        tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
                         break;
                 }
             }
         }
-        else
+        else// 놓을 수 없다.
         {
             // 원래 위치로 돌리기
             MoveOriginalSlot();
         }
         originItemClass = null;
         OffDragReset();
+    }
+
+    void DragShopType()
+    {
+        if (enterSlotType == SlotType.MyBox)// 드랍 구매
+        {
+            DragBuy();
+        }
+        else if (selectSlotType == SlotType.MyBox)// 드랍 판매
+        {
+            if (selectItemClass.item.itemType == ItemStruct.ItemType.Fish)
+            {
+                SellItem(selectItemClass.item);// 생선만 드래그 판매
+            }
+            else
+            {
+                // 원래 위치로 돌리기
+                MoveOriginalSlot();
+            }
+        }
+    }
+
+    void DragShipyardType()
+    {
+        if (enterSlotType == SlotType.MyBox)// 드랍 구매
+        {
+            DragBuy();
+        }
+        else if (selectSlotType == SlotType.MyBox)// 드랍 판매
+        {
+            if (selectItemClass.item.itemType != ItemStruct.ItemType.Fish)
+            {
+                SellItem(selectItemClass.item);// 생선만 드래그 판매
+            }
+            else
+            {
+                // 원래 위치로 돌리기
+                MoveOriginalSlot();
+            }
+        }
+    }
+
+    void DragSubmitType()
+    {
+        if (selectSlotType == SlotType.MyBox)// 드랍 제출
+        {
+            DragSubmit();
+        }
+    }
+
+    void DragBuy()
+    {
+        if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == true // 돈이 충분하면
+            && myBox.CheckWeight(selectItemClass.item.weight) == true)// 무게가 충분하면
+        {
+            BuyItem(selectItemClass.item);// 드래그 구매
+            UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
+            tempEnter.SetSlot(enterSlot, selectItemClass);// 놓기
+        }
+        else
+        {
+            // 원래 위치로 돌리기
+            MoveOriginalSlot();
+        }
     }
 
     void MoveOriginalSlot()// 원래 위치로 돌리기
@@ -568,6 +605,7 @@ public class UI_Inventory : MonoBehaviour
         selectItemClass = null;
         selectSlotType = SlotType.None;
         CheckSlot(SlotType.None);// 체크 제거
+        myBox.OnRemoveBox(false);// 쓰레기통 제거
 
         onDrag = false;
     }

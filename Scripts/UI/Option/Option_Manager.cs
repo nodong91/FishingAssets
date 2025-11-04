@@ -112,14 +112,14 @@ public class Option_Manager : MonoBehaviour
     void GoTitle()
     {
         LoadingManager.current.GoTitle();
-        Singleton_Continue.INSTANCE.SaveContinue();
+        Singleton_Continue.INSTANCE.SaveContinue();// 타이틀로 나감
         Singleton_Audio.INSTANCE.Audio_Environment(null);
         OpenCanvas(false);
     }
 
     void GoExit()
     {
-        Singleton_Continue.INSTANCE.SaveContinue();
+        Singleton_Continue.INSTANCE.SaveContinue();// 게임 종료
         LoadingManager.current.GoExit();
     }
 

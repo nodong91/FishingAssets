@@ -19,7 +19,6 @@ public class Game_Manager : MonoBehaviour
     public UI_NewsManager newsUI;
     public FishGuide fishGuide;
     public Skill_Manager skillManager;
-    public string themeMusic;
     public Fishing_Manager fishingAction;
     public UI_QuestManager questManager;
 
@@ -27,6 +26,7 @@ public class Game_Manager : MonoBehaviour
     public Gamble_Lottery lottery;
     public Rest_Manager rest_Manager;
     public Tutorial_Manager tutorial;
+    public Tutorial_Manager1 tutorial1;
     public UI_ChangeShip changeShip;
 
     public Data_Ship shipData;
@@ -97,11 +97,6 @@ public class Game_Manager : MonoBehaviour
         GetFishGuide.SetStart();
         GetQuest.SetStart();
         GetChangeShip.SetStart();
-    }
-
-    void LoadingComplate()
-    {
-        SetThemeMusic();
 
         string shipID = continueData.shipData;
         if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID))
@@ -112,19 +107,20 @@ public class Game_Manager : MonoBehaviour
             ChangeStatus(shipData);
             OutOfControll(false);
         }
-        else
-        {
-            CurrentLand.SetLandingAction();
-            OutOfControll(true);
-        }
+    }
 
+    void LoadingComplate()
+    {
+        SetThemeMusic();
         // 튜토리얼 시작
         if (continueData.shipData == "")
         {
             Debug.LogWarning("배가 없으면 튜토리얼 시작");
             // 배가 없으면 튜토리얼 시작
             GetTutorial.SetTutorial(String_Tutorial._newGame);// 배구입 튜토리얼 세팅
+            return;
         }
+        GetPlayer.CheckClosestUnit();// 생성 시 가까운 오브젝트 찾기
     }
 
     public void ChangeStatus(Data_Ship _shipData)
@@ -151,7 +147,7 @@ public class Game_Manager : MonoBehaviour
 
     public void SetThemeMusic()
     {
-        Option_Manager.current.SetThemeMusic(themeMusic);
+        Option_Manager.current.SetThemeMusic(null);
         Singleton_Audio.INSTANCE.Audio_Environment(String_Audio._oceanSound);
     }
 
@@ -420,6 +416,20 @@ public class Game_Manager : MonoBehaviour
                 instTutorial.SetStart();
             }
             return instTutorial;
+        }
+    }
+
+    private Tutorial_Manager1 instTutorial1;
+    public Tutorial_Manager1 GetTutorial1
+    {
+        get
+        {
+            if (instTutorial1 == null)
+            {
+                instTutorial1 = Instantiate(tutorial1, transform);
+                //instTutorial1.SetStart();
+            }
+            return instTutorial1;
         }
     }
 

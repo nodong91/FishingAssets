@@ -134,7 +134,7 @@ public class Unit_Player : MonoBehaviour
     // 컨트롤
     //================================================================================================================================================
 
-    public void StateMachine(State _state)
+    void StateMachine(State _state)
     {
         state = _state;
         if (stateAction != null)
@@ -207,7 +207,7 @@ public class Unit_Player : MonoBehaviour
         Game_Manager.current.GetMainUI.SetEnergy(energy / CurrentStatus.maxEnergy);
     }
 
-    void CheckClosestUnit()// 아이템이나 채집 같은거 하기 위한 체크
+    public void CheckClosestUnit()// 아이템이나 채집 같은거 하기 위한 체크
     {
         if (triggerGameObject.Count == 0)
             return;
@@ -389,10 +389,10 @@ public class Unit_Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Trigger_Setting>(out var fishing) == false)
+        if (other.TryGetComponent<Trigger_Setting>(out var _trigger) == false)
             return;
-        if (triggerGameObject.Contains(fishing) == false)
-            triggerGameObject.Add(fishing);
+        if (triggerGameObject.Contains(_trigger) == false)
+            triggerGameObject.Add(_trigger);
     }
 
     private void OnTriggerExit(Collider other)
