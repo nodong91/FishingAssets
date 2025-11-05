@@ -200,7 +200,7 @@ public class Data_Parse : MonoBehaviour
 
     public Vector2Int[] Parse_Vector2IntArray(string _str)
     {
-        if (_str.Length == 0)
+        if (_str.Contains(";") == false)
             return new Vector2Int[0];
 
         //string temp = "-1;0/0;0/1;0/0;0";
