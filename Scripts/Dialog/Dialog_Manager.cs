@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Data_Dialog;
-using static Trigger_Landing;
 
 public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 {
@@ -117,9 +116,31 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         button.transform.SetAsLastSibling();// 순서 변경
     }
 
+    public void EventSelectButton(string _nameTag)
+    {
+        SelectStruct selectStruct = new SelectStruct
+        {
+            selectDialog = _nameTag,
+            selectType = SelectStruct.SelectType.Event,
+            npcData = null,
+            dialogIndex = 0,
+        };
+
+        Dialog_SelectButton button = GetSelectButton();
+        button.gameObject.SetActive(true);
+        button.SetStart(selectStruct, SelectedButton);// 엔피씨 대화 추가
+        dialogSelectButton.Add(button);
+
+        button.transform.SetAsLastSibling();// 순서 변경
+    }
+
+    //======================================================================================================
+    // 버튼 클릭
+    //======================================================================================================
+
     void SelectedButton(SelectStruct _selectStruct)// 선택 버튼 클릭
     {
-        StopAllCoroutines();
+        StopAllCoroutines();// 기존 움직이는 폰트가 있다면 정지
 
         actionBool = false;
         if (_selectStruct.npcData != null)// 엔피씨데이터가 있으면 대화 시작
@@ -183,6 +204,10 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
             case SelectStruct.SelectType.Tutorial:
                 Game_Manager.current.GetTutorial.StartTutorial();
+                break;
+
+            case SelectStruct.SelectType.Event:
+                Game_Manager.current.GetEvent.StartEvent();
                 break;
         }
         OpenCanvas(false);

@@ -73,6 +73,12 @@ public class Data_Manager : Data_Parse
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
             string[] elements = data[i].Split(new char[] { ',' });
+
+            if (elements[5].Trim().Length == 0)
+            {
+                Debug.LogWarning("아이템 쉐이프가 없음");
+                continue;
+            }
             ItemStruct tempItem = GetItemStruct(elements);
             FishStruct tempData = new FishStruct
             {

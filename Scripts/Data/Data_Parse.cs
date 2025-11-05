@@ -216,7 +216,7 @@ public class Data_Parse : MonoBehaviour
 
     public static Vector2Int Parse_Vector2Int(string _str)
     {
-        if (_str.Length == 0)
+        if (_str.Contains(";") == false)
             return default;
 
         string[] subStrings = _str.Split(';');
@@ -231,7 +231,7 @@ public class Data_Parse : MonoBehaviour
 
     public Vector2 Parse_Vector2(string _str)
     {
-        if (_str.Length == 0)
+        if (_str.Contains(";") == false)
             return default;
 
         string[] subStrings = _str.Split(';');
@@ -246,7 +246,7 @@ public class Data_Parse : MonoBehaviour
 
     public Vector3 Parse_Vector3(string _str)
     {
-        if (_str.Length == 0)
+        if (_str.Contains(";") == false)
             return default;
 
         string[] subStrings = _str.Split(';');

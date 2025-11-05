@@ -28,6 +28,7 @@ public class Game_Manager : MonoBehaviour
     public Tutorial_Manager tutorial;
     public Tutorial_Manager1 tutorial1;
     public UI_ChangeShip changeShip;
+    public Event_Manager event_Manager;
 
     public Data_Ship shipData;
     public SetStatus currentStatus;
@@ -443,6 +444,19 @@ public class Game_Manager : MonoBehaviour
                 instChangeShip = Instantiate(changeShip, transform);
             }
             return instChangeShip;
+        }
+    }
+
+    private Event_Manager instEvent;
+    public Event_Manager GetEvent
+    {
+        get
+        {
+            if (instEvent == null)
+            {
+                instEvent = Instantiate(event_Manager, transform);
+            }
+            return instEvent;
         }
     }
 

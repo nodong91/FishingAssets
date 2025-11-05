@@ -12,7 +12,7 @@ public class UI_Landing : MonoBehaviour
         Shipyard,// 조선소
         Storage,// 창고
         Energy,// 주유소
-        DownTown,
+        DownTown,// 다운타운
         Rest,// 휴식
         Board,
         Count
@@ -46,7 +46,7 @@ public class UI_Landing : MonoBehaviour
     public Custom_Button downTownButton;
     public Custom_Button boardButton;
     bool inlanding;
-
+    Data_Manager.DayType lightMode => Game_Manager.current.GetMainUI.timeUI.lightMode;
     Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
 
     public void SetStart()
@@ -196,7 +196,6 @@ public class UI_Landing : MonoBehaviour
         Game_Manager.current.CurrentLand.CameraOutFouce(true);
     }
 
-    Data_Manager.DayType lightMode => Game_Manager.current.GetMainUI.timeUI.lightMode;
     void DownTownButton()
     {
         currentType = LandingType.DownTown;
@@ -213,13 +212,20 @@ public class UI_Landing : MonoBehaviour
             // 밤
             SetLandingCanvas(false);        // 랜드 UI 제거
             Game_Manager.current.CurrentLand.CameraOutFouce(true);
-            //Option_Manager.current.SetThemeMusic(landingData.smugglerNPC.themeMusic);
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
             Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);// 플레이어 대화
 
             data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._smuggler];// 밀수꾼 추가
             Game_Manager.current.GetDialog.AddNPC(data_NPC, 0);
+
+            RandomEvent();
         }
+    }
+    public Data_Event randomEvent;
+    void RandomEvent()
+    {
+        string title = randomEvent.eventName;
+        Game_Manager.current.GetDialog.EventSelectButton(title);
     }
 
     void StorageButton()
