@@ -175,7 +175,7 @@ public class UI_Main : MonoBehaviour
         //OpenCanvas(false);
     }
 
-    public void OpenQuestResult()
+    public void OpenResult()
     {
         menuState |= MenuState.Result;// 넣기
         Game_Manager.current.GetInventory.OpenResult();// 퀘스트 보상

@@ -1,67 +1,95 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using static Data_Dialog;
 using static Data_Event;
+using static Data_Quest;
 
 public class Event_Manager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     bool _open = false;
     public Event_SelectButton selectButton;
-    public Data_Event eventData;
+    Data_Event eventData;
     public TMP_Text eventName;
     public TMP_Text eventDescription;
     public CanvasGroup gridCanvas;
     bool typing = false;
     float typingSpeed = 0.1f;
     float defaultTypingSpeed = 0.1f;
+    List<string> eventKeys = new List<string>();
 
     private void Start()
     {
-        StartEvent();
+        for (int i = 0; i < canvasStructs.Length; i++)
+        {
+            canvasStructs[i].rect.gameObject.SetActive(false);
+        }
+    }
+
+    void SetDictKey()
+    {
+        eventKeys.Clear();
+        foreach (var child in Singleton_Data.INSTANCE.Dict_Event)
+        {
+            eventKeys.Add(child.Key);
+        }
     }
 
     public void StartEvent()
     {
+        if(eventKeys == null || eventKeys.Count == 0)
+        {
+            SetDictKey();
+        }
+        string key = eventKeys[Random.Range(0, eventKeys.Count)];
+        Data_Event tempData = Singleton_Data.INSTANCE.Dict_Event[key];
+        SetEvent(tempData);
+        Debug.LogWarning(key);
+    }
+
+    public void SetEvent(Data_Event _evnet)
+    {
+        eventData = _evnet;
+        if (eventData as Data_Event_Select)
+        {
+            Data_Event_Select tempData = eventData as Data_Event_Select;
+            eventName.text = tempData.eventName;
+        }
         StartCoroutine(OpenEvent());
     }
 
     IEnumerator OpenEvent()
     {
-        eventName.text = eventData.eventName;
-        yield return StartCoroutine(StartDialog());
-        if (_open == false)
-        {
-            _open = true;
-            StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
-        }
-    }
-
-    IEnumerator StartDialog()
-    {
-        eventDescription.text = TryDialogString();
+        eventDescription.text = TryDialogString(eventData.eventDescription);
         eventDescription.ForceMeshUpdate(true);// 메쉬 재 생성 (리셋)
         eventDescription.alpha = 0f;// 모든 글자 숨김
         yield return null;
+
+        if (_open == false)// 열려 있지 않으면 열기
+        {
+            _open = true;
+            yield return StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
+        }
 
         StartCoroutine(Typing(eventData.eventDescription));
         StartCoroutine(TextAction(eventData.eventDescription));
         SetSelectButton();// 선택 버튼 세팅
     }
 
-    string TryDialogString()
+    string TryDialogString(DialogStruct _dialogStruct)
     {
-        string temp = eventData.eventDescription.contents;
-        int length = eventData.eventDescription.dialogTypes.Length - 1;
+        string temp = _dialogStruct.contents;
+        int length = _dialogStruct.dialogTypes.Length - 1;
         for (int i = length; i >= 0; i--)
         {
-            float size = eventData.eventDescription.dialogTypes[i].textSize;
-            string textColor = eventData.eventDescription.dialogTypes[i].textColor;
-            int x = eventData.eventDescription.dialogTypes[i].dialogIndex.x;
-            int y = eventData.eventDescription.dialogTypes[i].dialogIndex.y;
+            float size = _dialogStruct.dialogTypes[i].textSize;
+            string textColor = _dialogStruct.dialogTypes[i].textColor;
+            int x = _dialogStruct.dialogTypes[i].dialogIndex.x;
+            int y = _dialogStruct.dialogTypes[i].dialogIndex.y;
             temp = temp.Insert(y, "</size></color>");
             temp = temp.Insert(x, $"<color=#{textColor}><size={size}>");
         }
@@ -74,7 +102,7 @@ public class Event_Manager : MonoBehaviour
 
     IEnumerator Typing(DialogStruct _dialogStruct, string _voice = null)
     {
-        gridCanvas.alpha = 0.0f;
+        SetGridCanvas(0f);
         typing = true;
         int subIndex = 0;
         TMP_TextInfo textInfo = eventDescription.textInfo;
@@ -122,7 +150,14 @@ public class Event_Manager : MonoBehaviour
         yield return new WaitForSeconds(typingSpeed);
 
         typing = false;
-        gridCanvas.alpha = 1.0f;
+        SetGridCanvas(1f);
+    }
+
+    void SetGridCanvas(float _alpha)
+    {
+        gridCanvas.alpha = _alpha;
+        gridCanvas.interactable = _alpha > 0;
+        gridCanvas.blocksRaycasts = _alpha > 0;
     }
 
 
@@ -250,23 +285,15 @@ public class Event_Manager : MonoBehaviour
 
     void SetSelectButton()
     {
-        if (eventData.eventSelect == null || eventData.eventSelect.Length == 0)
+        if (eventData as Data_Event)
         {
-            EventSelect selectStruct = new EventSelect
-            {
-                selectDialog = "나가기",
-                selectEvent = null,
-            };
-            SetSelectButton(selectStruct);
-        }
-        else
-        {
-            for (int i = 0; i < eventData.eventSelect.Length; i++)
+            Data_Event tempData = eventData as Data_Event;
+            for (int i = 0; i < tempData.eventSelect.Length; i++)
             {
                 EventSelect selectStruct = new EventSelect
                 {
-                    selectDialog = eventData.eventSelect[i].selectDialog,
-                    selectEvent = eventData.eventSelect[i].selectEvent,
+                    selectDialog = tempData.eventSelect[i].selectDialog,
+                    selectEvent = tempData.eventSelect[i].selectEvent,
                 };
                 SetSelectButton(selectStruct);
             }
@@ -312,23 +339,36 @@ public class Event_Manager : MonoBehaviour
     {
         StopAllCoroutines();// 기존 움직이는 폰트가 있다면 정지
         RemoveSelectButton();
-        eventData = _eventSelect.selectEvent;
-        if (eventData == null)
+      
+        // 다음 대화 체크
+        Data_Event tempEvent = _eventSelect.GetEventData();
+        if (tempEvent == null)// 다음 대화가 없다면
         {
-            _open = false;
-            StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));
-        }
-        else
-        {
+            _open = false; 
+            // 기존 대화 보상이 있는지 확인
             if (eventData as Data_Event_Result)
             {
-                Debug.LogWarning("Data_Event_Result");
+                Data_Event_Result tempData = eventData as Data_Event_Result;
+                ResultStruct resultStruct = new ResultStruct
+                {
+                    inventorySize = new Vector2Int(5, 5),
+                    money = 0,
+                    itemID = tempData.itemRewards
+                };
+                Game_Manager.current.GetInventory.SetResult(resultStruct);
+                Game_Manager.current.GetMainUI.OpenResult();
+                Debug.LogWarning("이벤트 보상 - 인벤토리 열기");
             }
             else
             {
-                Debug.LogWarning("ieojhfoijaosi;djfoiajdsokfj");
+                Game_Manager.current.GetLanding.OpenLandingUI();
+                Debug.LogWarning("보상 대화가 아님");
             }
-            StartEvent();
+            StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 이벤트 창 닫기
+        }
+        else
+        {
+            SetEvent(tempEvent);
         }
     }
 }

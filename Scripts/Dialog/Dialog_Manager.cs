@@ -191,7 +191,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
             case SelectStruct.SelectType.Result:
                 // 퀘스트 결과 아이템 받기
-                Game_Manager.current.GetMainUI.OpenQuestResult();
+                Game_Manager.current.GetMainUI.OpenResult();
                 break;
 
             case SelectStruct.SelectType.Rest:
@@ -252,7 +252,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
         else if (endDialog == true)
         {
-            Debug.LogWarning("eijfhoiajso;idfjoaijeoifj;oisdfnbaousdfh");
+            Debug.LogWarning("대화 끝인 상태에서 클릭");
         }
     }
 

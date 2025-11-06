@@ -224,7 +224,7 @@ public class UI_Landing : MonoBehaviour
     public Data_Event randomEvent;
     void RandomEvent()
     {
-        string title = randomEvent.eventName;
+        string title = "랜덤 이벤트 테스트";
         Game_Manager.current.GetDialog.EventSelectButton(title);
     }
 

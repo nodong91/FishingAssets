@@ -119,25 +119,6 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void OpenSubmit()
-    {
-        if (currentType != SlotType.Submit)
-        {
-            currentType = SlotType.Submit;
-            myBox.OpenCanvas(true);
-            shop.OpenSubmit(true);
-        }
-    }
-
-    public void CloseSubMit()
-    {
-        currentType = SlotType.None;
-        myBox.OpenCanvas(false);
-        shop.OpenSubmit(false);
-
-        Game_Manager.current.GetQuest.SubmitBackButton();// 다시 열기
-    }
-
     public void CloseResult(bool _questReslut)
     {
         if (currentType == SlotType.Result)
@@ -157,6 +138,25 @@ public class UI_Inventory : MonoBehaviour
         {
             Game_Manager.current.GetMainUI.OpenCanvas(true);
         }
+    }
+
+    public void OpenSubmit()
+    {
+        if (currentType != SlotType.Submit)
+        {
+            currentType = SlotType.Submit;
+            myBox.OpenCanvas(true);
+            shop.OpenSubmit(true);
+        }
+    }
+
+    public void CloseSubMit()
+    {
+        currentType = SlotType.None;
+        myBox.OpenCanvas(false);
+        shop.OpenSubmit(false);
+
+        Game_Manager.current.GetQuest.SubmitBackButton();// 다시 열기
     }
 
     public void OpenGhost(bool _open)
@@ -213,6 +213,7 @@ public class UI_Inventory : MonoBehaviour
 
     public void SetQuestResult()
     {
+        // 아이템 채워 넣으면 열리게
         shop.QuestResultUnlock();
     }
 

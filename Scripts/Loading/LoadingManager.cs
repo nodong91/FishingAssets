@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,7 @@ public class LoadingManager : MonoBehaviour
     private string[] sceneNames;
     List<AsyncOperation> asyncOperation;
     public RectTransform background;
+    public Loading_Hint hint;
     int complateIndex;
 
     const string Title = "Title";
@@ -24,6 +26,7 @@ public class LoadingManager : MonoBehaviour
     }
     private void Start()
     {
+        hint.SetStart();
         GoTitle();
     }
 
@@ -62,6 +65,7 @@ public class LoadingManager : MonoBehaviour
 
     IEnumerator StartLoading()
     {
+        hint.SetHint();
         yield return StartCoroutine(OpenScreen(true));
         yield return StartCoroutine(UnloadScene());
 
@@ -74,34 +78,33 @@ public class LoadingManager : MonoBehaviour
         }
     }
 
-    IEnumerator OpenScene(List<AsyncOperation> _async)
-    {
-        complateIndex++;
-        if (complateIndex == _async.Count)
-        {
-            for (int i = 0; i < _async.Count; i++)
-            {
-                _async[i].allowSceneActivation = true;
-            }
-            yield return new WaitForSeconds(2.5f);// 완료 후 잠시 대기
-            yield return StartCoroutine(OpenScreen(false));
-            deleComplate?.Invoke();
-        }
-    }
-
+    public CanvasGroup alphaCanvas;
     IEnumerator OpenScreen(bool _open)
     {
-        float prevHight = _open == true ? -(Screen.height + 100) : 0f;
-        float targetHight = _open == true ? 0f : Screen.height + 100;
-        float targetAlpha = _open == true ? 1f : 0f;
+        float prevHight, targetHight, targetAlpha;
+        if (_open == true)
+        {
+            prevHight = -(Screen.height + 100);
+            targetHight = 0f;
+            targetAlpha = 1f;
+        }
+        else
+        {
+            prevHight = 0f;
+            targetHight = Screen.height + 100;
+            targetAlpha = 0f;
+        }
+
         float normalize = 0f;
         while (normalize < 1f)
         {
             normalize += Time.unscaledDeltaTime * 1.5f;
-            float alpha = Mathf.Lerp(1f - targetAlpha, targetAlpha, normalize);
             float hight = Mathf.Lerp(prevHight, targetHight, normalize);
             background.anchoredPosition = new Vector2(0f, hight);
+
+            float alpha = Mathf.Lerp(1f - targetAlpha, targetAlpha, normalize);
             background.gameObject.SetActive(alpha > 0);
+            alphaCanvas.alpha = alpha;
             yield return null;
         }
     }
@@ -123,14 +126,29 @@ public class LoadingManager : MonoBehaviour
 
         // 완료 체크
         yield return StartCoroutine(OpenScene(asyncOperation));
-
+        yield return new WaitForSeconds(2.5f);// 완료 후 잠시 대기
+        yield return StartCoroutine(OpenScreen(false));
+        deleComplate?.Invoke();
         currentNames = sceneNames;
+    }
+
+    IEnumerator OpenScene(List<AsyncOperation> _async)
+    {
+        complateIndex++;
+        if (complateIndex == _async.Count)// 완료 개수 체크
+        {
+            for (int i = 0; i < _async.Count; i++)
+            {
+                _async[i].allowSceneActivation = true;
+                yield return _async[i];
+            }
+        }
     }
 
     public delegate void DeleComplate();
     public DeleComplate deleComplate;
 
-    IEnumerator UnloadScene()
+    IEnumerator UnloadScene()// 기존 씬 제거
     {
         if (currentNames == null || currentNames.Length == 0)
         {

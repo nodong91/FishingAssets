@@ -12,6 +12,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     public Dictionary<string, QuestStruct> Dict_Quest = new Dictionary<string, QuestStruct>();
     public Dictionary<string, Data_NPC> Dict_NPC = new Dictionary<string, Data_NPC>();
     public Dictionary<string, Data_Ship> Dict_Ship = new Dictionary<string, Data_Ship>();
+    public Dictionary<string, Data_Event_Select> Dict_Event = new Dictionary<string, Data_Event_Select>();
     public Dictionary<string, LanguageStruct> Dict_Language = new Dictionary<string, LanguageStruct>();
 
     public void SetDictionary_Used(List<UsedStruct> _data)
@@ -91,6 +92,23 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
             else
             {
                 Dict_Quest[id] = _data[i];
+            }
+        }
+    }
+
+    public void SetEvnetStruct(List<Data_Event_Select> _data)
+    {
+        Dict_Event = new Dictionary<string, Data_Event_Select>();
+        for (int i = 0; i < _data.Count; i++)
+        {
+            string id = _data[i].name;
+            if (Dict_Event.ContainsKey(id) == true)
+            {
+                Debug.LogError($"({id})와 같은 이름이 존재 합니다.");
+            }
+            else
+            {
+                Dict_Event[id] = _data[i];
             }
         }
     }
@@ -192,6 +210,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
 
     public string GetLanguage(string _id)
     {
+        //Debug.LogWarning($"번역 : {languageType}");
         if (_id == null)
             return "";
 

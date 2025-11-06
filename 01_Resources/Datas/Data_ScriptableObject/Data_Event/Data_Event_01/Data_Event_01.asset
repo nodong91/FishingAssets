@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70ba73154ae12e74187a12fcca86e148, type: 3}
-  m_Name: Data_Event
+  m_Script: {fileID: 11500000, guid: 95919c93bd4d2b64c971e788a3a6b19a, type: 3}
+  m_Name: Data_Event_01
   m_EditorClassIdentifier: 
-  id: 
-  evnetType: 0
-  eventName: "\uC5B4\uB460 \uC18D \uB450 \uB208\uB3D9\uC790"
   eventDescription:
     contents: "\uB2F9\uC2E0\uC740 \uC5B4\uB450\uC6B4 \uACE8\uBAA9\uAE38\uC5D0\uC11C
       \uBC18\uC9DD\uC774\uB294 \uB450 \uB208\uC744 \uBCF4\uC558\uB2E4.\n\uB450 \uB208\uC740
@@ -40,9 +37,14 @@ MonoBehaviour:
       actionAngle: {x: 0, y: 5}
   eventSelect:
   - selectDialog: "\uD655\uC778\uD558\uAE30 \uC704\uD574 \uB4A4\uCAD2\uC544 \uAC04\uB2E4."
-    selectEvent: {fileID: 11400000, guid: 631016f8f525dc148adfb9a38c500afe, type: 2}
+    selectEvent:
+    - {fileID: 11400000, guid: f3d058b3cc376ec4bb07b4f3e736ba99, type: 2}
+    - {fileID: 11400000, guid: e95620d08a8bf4147b5df55857b71312, type: 2}
   - selectDialog: "\uBAA8\uB978\uCC99 \uB4A4\uB85C \uB3CC\uC544 \uB2E4\uB978 \uAE38\uB85C
       \uAC04\uB2E4."
-    selectEvent: {fileID: 11400000, guid: a4891aec7edbf854289a9a7663a4ecbf, type: 2}
+    selectEvent: []
   - selectDialog: "\uD070 \uC18C\uB9AC\uB85C \uC0C1\uD669\uC744 \uC54C\uB9B0\uB2E4."
-    selectEvent: {fileID: 11400000, guid: 631016f8f525dc148adfb9a38c500afe, type: 2}
+    selectEvent:
+    - {fileID: 11400000, guid: a4891aec7edbf854289a9a7663a4ecbf, type: 2}
+    - {fileID: 11400000, guid: d71ad0af00d118d41bba4056f80707a4, type: 2}
+  eventName: "\uC5B4\uB460 \uC18D\uC758 \uB208\uB3D9\uC790"

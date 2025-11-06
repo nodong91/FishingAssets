@@ -20,6 +20,11 @@ public class Data_Event_Editor : Editor
             EditorUtility.SetDirty(Inspector);
         }
         base.OnInspectorGUI();
+
+        fontStyle = new GUIStyle();
+        fontStyle.fontSize = 15;
+        fontStyle.normal.textColor = Color.yellow;
+        GUILayout.Label("Event Select - Select Event가 없으면 (나가기) 기능", fontStyle);
     }
 }
 #endif
@@ -27,14 +32,6 @@ public class Data_Event_Editor : Editor
 [CreateAssetMenu(fileName = "Data_Event", menuName = "Scriptable Objects/Data_Event")]
 public class Data_Event : ScriptableObject
 {
-    public string id;
-    public enum EventType
-    {
-        None = 0,
-        Reward = 1,
-    }
-    public EventType evnetType;
-    public string eventName;
     public DialogStruct eventDescription;
     public EventSelect[] eventSelect;
 
@@ -43,7 +40,14 @@ public class Data_Event : ScriptableObject
     {
         [TextArea]
         public string selectDialog;
-        public Data_Event selectEvent;
+        public Data_Event[] selectEvent;// 결과 종류
+        public Data_Event GetEventData()
+        {
+            // 선택 이벤트가 없는 경우 나가기
+            if (selectEvent == null || selectEvent.Length == 0)
+                return null;
+            return selectEvent[Random.Range(0, selectEvent.Length)];
+        }
     }
 
     public void UpdateData()
