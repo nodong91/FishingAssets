@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventDescription:
     contents: "\uB2F9\uC2E0\uC740 \uC5B4\uB450\uC6B4 \uACE8\uBAA9\uAE38\uC5D0\uC11C
-      \uBC18\uC9DD\uC774\uB294 \uB450 \uB208\uC744 \uBCF4\uC558\uB2E4.\n\uB450 \uB208\uC740
-      \uC778\uAE30\uCC99\uC744 \uB290\uB07C\uACE0 \uBC14\uB78C\uCC98\uB7FC \uB2EC\uC544\uB0AC\uB2E4."
+      \uBC18\uC9DD\uC774\uB294 {s0}\uC744 \uBCF4\uC558\uB2E4.\n{s1}\uC740 \uC778\uAE30\uCC99\uC744
+      \uB290\uB07C\uACE0 \uBC14\uB78C\uCC98\uB7FC \uB2EC\uC544\uB0AC\uB2E4."
     dialogTypes:
-    - id: "\uB450 \uB208"
+    - id: '{s0'
       dialogIndex: {x: 19, y: 22}
       textSize: 30
       typingSpeed: 0
@@ -26,7 +26,9 @@ MonoBehaviour:
       actionSpeed: 10
       actionInterval: 0.5
       actionAngle: {x: 0, y: 5}
-    - id: "\uB450 \uB208"
+    - id: '
+
+        {s'
       dialogIndex: {x: 29, y: 32}
       textSize: 30
       typingSpeed: 0

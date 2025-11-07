@@ -32,14 +32,13 @@ public class Tutorial_Manager : MonoBehaviour
         canvasGroup.gameObject.SetActive(false);
     }
 
-    public void SetTutorial(string _id)
+    public void SetTutorial(string _id)// 튜토리얼 세팅
     {
         currentID = _id;
         currentTutorial = dictTutorial[currentID];
-        //Debug.LogWarning($"TutorialPause : {_id} ({dictComp[currentID]})");
         if (completedTutorial.Contains(currentID) == true)
         {
-
+            // 완료 했음
         }
         else if (currentTutorial.npc != null)
         {
@@ -50,8 +49,8 @@ public class Tutorial_Manager : MonoBehaviour
     public void StartTutorial()
     {
         // 섬입장
-        //Game_Manager.current.CurrentLand.SetLandingAction();
-        //Game_Manager.current.OutOfControll(true);
+        Game_Manager.current.CurrentLand.SetLandingAction();
+        Game_Manager.current.OutOfControll(true);
         // 튜토리얼
         Time.timeScale = currentTutorial.timeScale;
         currentIndex = 0;

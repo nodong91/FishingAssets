@@ -221,7 +221,7 @@ public class UI_Landing : MonoBehaviour
             RandomEvent();
         }
     }
-    public Data_Event randomEvent;
+
     void RandomEvent()
     {
         string title = "랜덤 이벤트 테스트";

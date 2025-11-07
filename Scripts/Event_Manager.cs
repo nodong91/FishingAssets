@@ -1,9 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 using static Data_Dialog;
 using static Data_Event;
 using static Data_Quest;
@@ -90,7 +88,7 @@ public class Event_Manager : MonoBehaviour
             string textColor = _dialogStruct.dialogTypes[i].textColor;
             int x = _dialogStruct.dialogTypes[i].dialogIndex.x;
             int y = _dialogStruct.dialogTypes[i].dialogIndex.y;
-            temp = temp.Insert(y, "</size></color>");
+            temp = temp.Insert(y, "</size></color>");// ³¢¿ö ³Ö±â
             temp = temp.Insert(x, $"<color=#{textColor}><size={size}>");
         }
         return temp;
