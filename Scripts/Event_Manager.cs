@@ -344,17 +344,18 @@ public class Event_Manager : MonoBehaviour
         {
             _open = false; 
             // 기존 대화 보상이 있는지 확인
-            if (eventData as Data_Event_Result)
+            if (eventData as Data_Event_Result)// 보상 이벤트라면
             {
                 Data_Event_Result tempData = eventData as Data_Event_Result;
                 ResultStruct resultStruct = new ResultStruct
                 {
                     inventorySize = new Vector2Int(5, 5),
                     money = 0,
-                    itemID = tempData.itemRewards
+                    itemID = tempData.itemRewards// 보상 아이템
                 };
                 Game_Manager.current.GetInventory.SetResult(resultStruct);
-                Game_Manager.current.GetMainUI.OpenResult();
+                Game_Manager.current.GetInventory.OpenResult();// 대화 이벤트 보상
+                Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
                 Debug.LogWarning("이벤트 보상 - 인벤토리 열기");
             }
             else
@@ -368,5 +369,13 @@ public class Event_Manager : MonoBehaviour
         {
             SetEvent(tempEvent);
         }
+    }
+
+    void CloseButton()
+    {
+        Game_Manager.current.OutOfControll(false);
+        Game_Manager.current.GetInventory.CloseResult();//보상 닫기
+        Game_Manager.current.GetMainUI.OpenCanvas(true);
+        //Game_Manager.current.GetLanding.OpenLandingUI();// 섬 유아이 열기
     }
 }

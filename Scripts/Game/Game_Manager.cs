@@ -109,7 +109,7 @@ public class Game_Manager : MonoBehaviour
             OutOfControll(false);
         }
     }
-
+    
     void LoadingComplate()
     {
         SetThemeMusic();
@@ -118,7 +118,10 @@ public class Game_Manager : MonoBehaviour
         {
             Debug.LogWarning("배가 없으면 튜토리얼 시작");
             // 배가 없으면 튜토리얼 시작
-            GetTutorial.SetTutorial(String_Tutorial._newGame);// 배구입 튜토리얼 세팅
+            //GetTutorial.SetTutorial(String_Tutorial._newGame);// 배구입 튜토리얼 세팅
+            GetMainUI.OpenCanvas(false);
+            Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
+            GetDialog.DialogStart_NPC(npc, 4);
             return;
         }
         GetPlayer.CheckClosestUnit();// 생성 시 가까운 오브젝트 찾기
@@ -190,8 +193,8 @@ public class Game_Manager : MonoBehaviour
     {
         // 공격하는 물고기가 처음인지 확인
         Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
-        GetTutorial.SetTutorial(String_Tutorial._firstFishing);// 낚시 튜토리얼 세팅
-        GetTutorial.StartTutorial();// 낚시 튜토리얼 시작
+        //GetTutorial.SetTutorial(String_Tutorial._firstFishing);// 낚시 튜토리얼 세팅
+        //GetTutorial.StartTutorial();// 낚시 튜토리얼 시작
         GetFishing.SetFishing(_areaType);
     }
     Data_Continue continueData;
@@ -564,9 +567,6 @@ public class Game_Manager : MonoBehaviour
         GetInventory.myBox.EmptyInventoryAllSlot();// 인벤토리 초기화
         Debug.LogWarning($"고스트 오브젝트 : {instLostBox.name}");
     }
-
-
-
 
     public void FocusShip(bool _isOn)
     {

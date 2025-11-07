@@ -243,8 +243,8 @@ public class Fishing_Manager : MonoBehaviour
         fishingCanvas.SetFishUI();
 
         Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
-        Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
-        Game_Manager.current.GetTutorial.StartTutorial();
+        //Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
+        //Game_Manager.current.GetTutorial.StartTutorial();
         yield return null;
 
         StartCoroutine(CatchMovement());
@@ -737,14 +737,23 @@ public class Fishing_Manager : MonoBehaviour
         };
 
         Game_Manager.current.GetInventory.SetResult(fishResult);// 퀘스트 완료 후 결과 아이템 설정
-        Game_Manager.current.GetMainUI.FishingGame();
+        Game_Manager.current.GetInventory.OpenResult();// 낚시 보상
         Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
+        Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
+    }
+
+    void CloseButton()
+    {
+        Game_Manager.current.OutOfControll(false);
+        Game_Manager.current.GetInventory.CloseShop();// 상점 닫기
+        Game_Manager.current.GetFishing.FishingOver();
     }
 
     void OutReward()
     {
         // 보상 닫기
-        Game_Manager.current.GetInventory.CloseResult(false);// 낚시 보상 창 닫기
+        Game_Manager.current.GetInventory.CloseResult();// 낚시 보상 창 닫기
+        Game_Manager.current.GetMainUI.OpenCanvas(true);// 메인 유아이 다시 열기
     }
 
     //===================================================================================================================

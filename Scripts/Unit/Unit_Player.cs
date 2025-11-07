@@ -188,7 +188,7 @@ public class Unit_Player : MonoBehaviour
 
             energy -= CurrentStatus.efficient * Time.deltaTime;// 0에 가까울 수록 소비 안함
             SetEnergyUI();
-            if (energy <= 0)// 에너지 없으면 파괴
+            if (GetMaxEnergy > 0f && energy <= 0f)// 에너지 없으면 파괴
             {
                 StateMachine(State.Destroy);
             }
@@ -367,7 +367,7 @@ public class Unit_Player : MonoBehaviour
 
     public bool OutLandingCheck()// 섬에서 나갈 수 있는지 체크
     {
-        if (health <= 0 || energy <= 0)
+        if (health <= 0 || (GetMaxEnergy > 0 && energy <= 0))
         {
             Game_Manager.current.GetMainUI.SetWarnningText("배가 움직이지 않아.");
             return false;

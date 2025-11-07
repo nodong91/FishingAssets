@@ -50,8 +50,16 @@ public class Trigger_LostBox : Trigger_Setting
         Game_Manager.current.GetInventory.shop.SetInventorySlot(setResult.invenSize);// 데이터 불러온 이후
         yield return null;
 
-        Game_Manager.current.GetInventory.shop.LoadItem(setResult);
-        Game_Manager.current.GetMainUI.GhostResult();// 인벤토리 열기
+        Game_Manager.current.GetInventory.shop.LoadItem(setResult);// 상자 세팅
+        Game_Manager.current.GetInventory.OpenGhost(true);// 상자 열기
+        Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
+
         gameObject.SetActive(false);// 트리거 오브젝트 비활성화
+    }
+
+    void CloseButton()
+    {
+        Game_Manager.current.OutOfControll(false);
+        Game_Manager.current.GetInventory.OpenGhost(false);//유령 보상 닫기
     }
 }

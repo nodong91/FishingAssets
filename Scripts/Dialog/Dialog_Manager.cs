@@ -157,20 +157,23 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 break;
             case SelectStruct.SelectType.OpenShop:
                 // 상점 열기
-                Game_Manager.current.GetMainUI.OpenShop();// 상점창 열기
+                //Game_Manager.current.GetMainUI.OpenShop();// 상점창 열기
+                Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;
                 Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shop];
                 Game_Manager.current.GetInventory.OpenShop(data_NPC);
                 break;
             case SelectStruct.SelectType.OpenShipyard:
                 // 조선소 열기
-                Game_Manager.current.GetMainUI.OpenShop();// 조선소도 상점창
+                //Game_Manager.current.GetMainUI.OpenShop();// 조선소도 상점창
+                Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;
                 data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
                 Game_Manager.current.GetInventory.OpenShipyard(data_NPC);
                 break;
 
             case SelectStruct.SelectType.OpenSmuggler:
                 // 밀수꾼 상점 열기
-                Game_Manager.current.GetMainUI.OpenShop();// 상점창
+                //Game_Manager.current.GetMainUI.OpenShop();// 상점창
+                Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;
                 data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._smuggler];
                 Game_Manager.current.GetInventory.OpenShipyard(data_NPC);
                 break;
@@ -190,8 +193,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 break;
 
             case SelectStruct.SelectType.Result:
-                // 퀘스트 결과 아이템 받기
-                Game_Manager.current.GetMainUI.OpenResult();
+                //Game_Manager.current.GetMainUI.OpenResult();//퀘스트 결과 아이템 받기
                 break;
 
             case SelectStruct.SelectType.Rest:
@@ -203,7 +205,10 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 break;
 
             case SelectStruct.SelectType.Tutorial:
-                Game_Manager.current.GetTutorial.StartTutorial();
+                //Game_Manager.current.GetTutorial.StartTutorial();
+                // 섬입장
+                Game_Manager.current.CurrentLand.SetLandingAction();
+                Game_Manager.current.OutOfControll(true);
                 break;
 
             case SelectStruct.SelectType.Event:

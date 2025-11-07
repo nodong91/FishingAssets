@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,10 +7,8 @@ public class LoadingManager : MonoBehaviour
 {
     private string[] currentNames;
     private string[] sceneNames;
-    List<AsyncOperation> asyncOperation;
     public RectTransform background;
     public Loading_Hint hint;
-    int complateIndex;
 
     const string Title = "Title";
     const string GameManager = "GameManager";
@@ -69,13 +66,21 @@ public class LoadingManager : MonoBehaviour
         yield return StartCoroutine(OpenScreen(true));
         yield return StartCoroutine(UnloadScene());
 
-        complateIndex = 0;
-        asyncOperation = new List<AsyncOperation>();
         for (int i = 0; i < sceneNames.Length; i++)
         {
-            asyncOperation.Add(SceneManager.LoadSceneAsync(sceneNames[i], LoadSceneMode.Additive));
-            StartCoroutine(LoadingScene(i));
+            AsyncOperation _asyncOperation = SceneManager.LoadSceneAsync(sceneNames[i], LoadSceneMode.Additive);
+            while (_asyncOperation.progress < 0.9f)
+            {
+                yield return null;
+            }
+            _asyncOperation.allowSceneActivation = true;
         }
+
+        // 완료 체크
+        yield return new WaitForSeconds(2.5f);// 완료 후 잠시 대기
+        yield return StartCoroutine(OpenScreen(false));
+        deleComplate?.Invoke();
+        currentNames = sceneNames;
     }
 
     public CanvasGroup alphaCanvas;
@@ -106,42 +111,6 @@ public class LoadingManager : MonoBehaviour
             background.gameObject.SetActive(alpha > 0);
             alphaCanvas.alpha = alpha;
             yield return null;
-        }
-    }
-
-    IEnumerator LoadingScene(int _index)
-    {
-        asyncOperation[_index].allowSceneActivation = false;
-        //while (!async[_index].isDone)
-        bool loading = true;
-        while (loading == true)
-        {
-            if (asyncOperation[_index].progress == 0.9f)
-            {
-                loading = false;
-            }
-            yield return null;
-        }
-        Debug.Log(sceneNames[_index] + asyncOperation[_index].progress);
-
-        // 완료 체크
-        yield return StartCoroutine(OpenScene(asyncOperation));
-        yield return new WaitForSeconds(2.5f);// 완료 후 잠시 대기
-        yield return StartCoroutine(OpenScreen(false));
-        deleComplate?.Invoke();
-        currentNames = sceneNames;
-    }
-
-    IEnumerator OpenScene(List<AsyncOperation> _async)
-    {
-        complateIndex++;
-        if (complateIndex == _async.Count)// 완료 개수 체크
-        {
-            for (int i = 0; i < _async.Count; i++)
-            {
-                _async[i].allowSceneActivation = true;
-                yield return _async[i];
-            }
         }
     }
 

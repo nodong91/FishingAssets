@@ -119,7 +119,7 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void CloseResult(bool _questReslut)
+    public void CloseResult()
     {
         if (currentType == SlotType.Result)
         {
@@ -128,15 +128,6 @@ public class UI_Inventory : MonoBehaviour
             shop.SetResult(false);
 
             resultItem = default; // 퀘스트 결과 아이템 초기화
-        }
-
-        if (_questReslut == true)
-        {
-            Game_Manager.current.GetLanding.OpenLandingUI();
-        }
-        else
-        {
-            Game_Manager.current.GetMainUI.OpenCanvas(true);
         }
     }
 
@@ -259,7 +250,7 @@ public class UI_Inventory : MonoBehaviour
             selectSlot = _slot.GetLinkSlot;
             selectSlotType = enterSlotType;
             selectItemClass = selectSlot.itemInInventory;
-            if(enterSlotType == SlotType.MyBox)
+            if (enterSlotType == SlotType.MyBox)
                 myBox.OnRemoveBox(true);
 
             SetOriginItemClass();// 기존 위치 저장

@@ -61,10 +61,20 @@ public class UI_Landing : MonoBehaviour
         storageButton.SetButton(StorageButton);
         changeButton.SetButton(ChangeButton);
 
-        shopButton.SetButton(ShopButton);
-        shipyardButton.SetButton(ShipyardButton);
-        downTownButton.SetButton(DownTownButton);
-        boardButton.SetButton(BoardButton);
+        shopButton.SetButton(ShopButton, EnterButton, ExtiButton);
+        shipyardButton.SetButton(ShipyardButton, EnterButton, ExtiButton);
+        downTownButton.SetButton(DownTownButton, EnterButton, ExtiButton);
+        boardButton.SetButton(BoardButton, EnterButton, ExtiButton);
+    }
+
+    void EnterButton(Custom_Button _button)
+    {
+        _button.buttonImage.gameObject.SetActive(true);
+    }
+
+    void ExtiButton(Custom_Button _button)
+    {
+        _button.buttonImage.gameObject.SetActive(false);
     }
 
     public void SetLanding(LandingSetting[] _landingData)
@@ -192,8 +202,16 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(false);        // 조선소 버튼 누르면 랜드 UI 제거
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
         Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);
-        Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);
         Game_Manager.current.CurrentLand.CameraOutFouce(true);
+        if (Game_Manager.current.GetContinue.shipData == "")// 배가 없다면
+        {
+            // 튜토리얼 시작
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 2);
+        }
+        else
+        {
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);
+        }
     }
 
     void DownTownButton()
@@ -233,7 +251,8 @@ public class UI_Landing : MonoBehaviour
         currentType = LandingType.Storage;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
 
-        Game_Manager.current.GetMainUI.OpenShop();// 창고
+        Game_Manager.current.GetMainUI.dele_CloseButton = BackButton;
+        //Game_Manager.current.GetMainUI.OpenShop();// 창고
         Game_Manager.current.GetInventory.OpenStorage(true);
         Game_Manager.current.CurrentLand.CameraOutFouce(true);
     }

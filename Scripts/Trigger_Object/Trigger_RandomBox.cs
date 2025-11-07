@@ -1,10 +1,13 @@
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using static Data_Manager;
+using static Data_Quest;
 
 public class Trigger_RandomBox : Trigger_Setting
 {
     public AreaType areaType;
     public Sprite iconImage;
+    public string[] itemRewards;//  보상 아이템 ID들
 
     public void SetAreaType(AreaType _areaType)
     {
@@ -15,7 +18,22 @@ public class Trigger_RandomBox : Trigger_Setting
 
     void SetTrigger()
     {
-
+        ResultStruct resultStruct = new ResultStruct
+        {
+            inventorySize = new Vector2Int(5, 5),
+            money = 0,
+            itemID = itemRewards
+        };
+        Game_Manager.current.GetInventory.SetResult(resultStruct);// 결과 아이템 세팅
+        Game_Manager.current.GetInventory.OpenResult();// 상자 보상
+        Game_Manager.current.GetMainUI.OpenCanvas(false);// 메인 유아이 닫기
+        Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 인벤토리의 닫기 버튼 세팅
         gameObject.SetActive(false);// 트리거 오브젝트 비활성화
+    }
+
+    void CloseButton()
+    {
+        Game_Manager.current.GetInventory.CloseResult();
+        Game_Manager.current.GetMainUI.OpenCanvas(true);// 메인 유아이 닫기
     }
 }

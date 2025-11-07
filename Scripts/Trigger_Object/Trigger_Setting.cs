@@ -14,6 +14,7 @@ public class Trigger_Setting : MonoBehaviour
 
     public void TriggerAction()
     {
+        // 트리거 기능 활성화
         deleTriggerAction?.Invoke();
     }
 }

@@ -110,8 +110,14 @@ public class UI_QuestManager : MonoBehaviour
 
     void SubmitButton()
     {
-        Game_Manager.current.GetMainUI.OpenSubmit();
+        Game_Manager.current.GetInventory.OpenSubmit();
+        Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
         HideCanvas(true);
+    }
+
+    void CloseButton()
+    {
+        Game_Manager.current.GetInventory.CloseSubMit();//Äù½ºÆ® º¸»ó ´Ý±â
     }
 
     public void AddQuestSlot(QuestStruct _questDatas)

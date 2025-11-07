@@ -154,23 +154,6 @@ public class Tutorial_Manager : MonoBehaviour
         acting = false;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //=========================================================================================================
     // 튜토리얼 라인
     //=========================================================================================================
@@ -241,7 +224,6 @@ public class Tutorial_Manager : MonoBehaviour
 
     void FillFuel(int _index)
     {
-
         switch (_index)
         {
             case 0:
@@ -267,34 +249,14 @@ public class Tutorial_Manager : MonoBehaviour
         Debug.LogWarning($"튜토리얼 : {currentIndex}");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //=========================================================================================================
+    // 튜토리얼 저장
+    //=========================================================================================================
 
     const string tutorialKey = "CompletedTutorial";
     public List<string> completedTutorial;
     void SaveTutorial()
     {
-        //currentTutorial.completed = true;
         if (completedTutorial == null)
             completedTutorial = new List<string>();
         completedTutorial.Add(currentID);

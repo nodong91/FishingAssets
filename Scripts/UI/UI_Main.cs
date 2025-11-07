@@ -2,25 +2,11 @@ using System.Collections;
 using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.UI;
+using static UI_Main;
 using static UnityEngine.EventSystems.EventTrigger;
 
 public class UI_Main : MonoBehaviour
 {
-    [System.Flags]
-    public enum MenuState
-    {
-        Inventory = 1 << 0,
-        Fishing = 1 << 1,
-        Quest = 1 << 2,
-        Option = 1 << 3,
-        Shop = 1 << 4,
-        FishGuide = 1 << 5,
-        Ghost = 1 << 6,
-        Result = 1 << 7,
-        Submit = 1 << 8,
-    }
-    public MenuState menuState;
-
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public UI_Time timeUI;
     public UI_Status statusUI;
@@ -61,142 +47,87 @@ public class UI_Main : MonoBehaviour
         cameraCanvas.worldCamera = Camera_Manager.current.UICamera;
     }
 
-    public void CloseCanvas()
-    {
-        Debug.LogWarning($"캔버스 닫기 : {menuState}");
-        if (menuState == 0)
-            return;
-
-        switch (menuState)
-        {
-            case MenuState.Inventory:
-                menuState &= ~MenuState.Inventory;
-                Game_Manager.current.OutOfControll(false);
-                Game_Manager.current.GetInventory.OpenInventory(false);
-                statusUI.OpenCanvas(false);
-                OpenCanvas(true);
-                break;
-
-            case MenuState.Fishing:
-                menuState &= ~MenuState.Fishing;
-                Game_Manager.current.OutOfControll(false);
-                Game_Manager.current.GetInventory.CloseShop();// 상점 닫기
-                Game_Manager.current.GetFishing.FishingOver();
-                break;
-
-            case MenuState.Quest:
-                menuState &= ~MenuState.Quest;
-                Game_Manager.current.OutOfControll(false);
-                Game_Manager.current.GetQuest.OpenCanvas(false);
-                OpenCanvas(true);
-                break;
-
-            case MenuState.Option:
-                menuState &= ~MenuState.Option;
-                Game_Manager.current.OutOfControll(false);
-                Option_Manager.current.OpenCanvas(false);
-                OpenCanvas(true);
-                break;
-
-            case MenuState.Shop:
-                menuState &= ~MenuState.Shop;
-                Game_Manager.current.GetLanding.BackButton();
-                break;
-
-            case MenuState.FishGuide:
-                menuState &= ~MenuState.FishGuide;
-                Game_Manager.current.OutOfControll(false);
-                Game_Manager.current.GetFishGuide.OpenCanvas(false);
-                OpenCanvas(true);
-                break;
-            case MenuState.Ghost:
-                menuState &= ~MenuState.Ghost;
-                Game_Manager.current.OutOfControll(false);
-                Game_Manager.current.GetInventory.OpenGhost(false);//유령 보상 닫기
-                break;
-
-            case MenuState.Result:
-                menuState &= ~MenuState.Result;
-                Game_Manager.current.OutOfControll(false);
-                Game_Manager.current.GetInventory.CloseResult(true);//퀘스트 보상 닫기
-                break;
-
-            case MenuState.Submit:
-                menuState |= MenuState.Quest;// 넣기
-                menuState &= ~MenuState.Submit;
-                Game_Manager.current.GetInventory.CloseSubMit();//퀘스트 보상 닫기
-                break;
-        }
-    }
-
     void InventoryButton()
     {
         OpenCanvas(false);
-        menuState |= MenuState.Inventory;// 넣기
+        dele_CloseButton = CloseInventory;
         statusUI.OpenCanvas(true);
         Game_Manager.current.GetInventory.OpenInventory(true);
         Game_Manager.current.OutOfControll(true);
     }
 
+    void CloseInventory()
+    {
+        Game_Manager.current.OutOfControll(false);
+        Game_Manager.current.GetInventory.OpenInventory(false);
+        statusUI.OpenCanvas(false);
+        OpenCanvas(true);
+    }
+
     void FishGuideButton()
     {
         OpenCanvas(false);
-        menuState |= MenuState.FishGuide;// 넣기
+        dele_CloseButton = CloseFishGrude;
         Game_Manager.current.GetFishGuide.OpenCanvas(true);
         Game_Manager.current.OutOfControll(true);
+    }
+
+    void CloseFishGrude()
+    {
+        Game_Manager.current.OutOfControll(false);
+        Game_Manager.current.GetFishGuide.OpenCanvas(false);
+        OpenCanvas(true);
     }
 
     void QuestButton()
     {
         OpenCanvas(false);
-        menuState |= MenuState.Quest;// 넣기
+        dele_CloseButton = CloseQuest;
         Game_Manager.current.GetQuest.OpenCanvas(true);
         Game_Manager.current.OutOfControll(true);
+    }
+
+    void CloseQuest()
+    {
+        Game_Manager.current.OutOfControll(false);
+        Game_Manager.current.GetQuest.OpenCanvas(false);
+        OpenCanvas(true);
     }
 
     public void OptionButton()
     {
         OpenCanvas(false);
-        menuState |= MenuState.Option;// 넣기
+        dele_CloseButton = CloseOption;
         Option_Manager.current.OpenCanvas(true);
         Game_Manager.current.OutOfControll(true);
         Debug.LogWarning("Option Button Clicked");
     }
 
-    public void OpenShop()
+    void CloseOption()
     {
-        menuState |= MenuState.Shop;// 넣기
+        Game_Manager.current.OutOfControll(false);
+        Option_Manager.current.OpenCanvas(false);
+        OpenCanvas(true);
     }
 
-    public void FishingGame()
-    {
-        menuState |= MenuState.Fishing;// 넣기
-        Game_Manager.current.GetInventory.OpenResult();// 낚시 보상
-        //OpenCanvas(false);
-    }
-
-    public void OpenResult()
-    {
-        menuState |= MenuState.Result;// 넣기
-        Game_Manager.current.GetInventory.OpenResult();// 퀘스트 보상
-    }
-
-    public void GhostResult()
-    {
-        menuState |= MenuState.Ghost;
-        Game_Manager.current.GetInventory.OpenGhost(true);// 퀘스트 보상
-    }
-
-    public void OpenSubmit()
-    {
-        menuState &= ~MenuState.Quest;
-        menuState |= MenuState.Submit;
-        Game_Manager.current.GetInventory.OpenSubmit();
-    }
+    //===========================================================================================================================
+    // 열기
+    //===========================================================================================================================
 
     public void OpenCanvas(bool _open)// 메인 유아이 캔버스
     {
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+    }
+
+    //===========================================================================================================================
+    // 닫기
+    //===========================================================================================================================
+    public delegate void Dele_CloseButton();
+    public Dele_CloseButton dele_CloseButton;
+    public void CloseCanvas()
+    {
+        dele_CloseButton?.Invoke();
+        dele_CloseButton = null;
     }
 
     //===========================================================================================================================
