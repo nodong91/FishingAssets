@@ -87,10 +87,11 @@ public class Dialog_Test : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            if (typing == true)
-                typing = false;
-            else
-                SetDialog(textStruct);
+            //if (typing == true)
+            //    typing = false;
+            //else
+            //    SetDialog(textStruct);
+            SetFontStyle();
         }
     }
 
@@ -102,11 +103,10 @@ public class Dialog_Test : MonoBehaviour
         typingSpeed = defaultTypingSpeed;
         StartCoroutine(SetDialog());
     }
-    public float fontWeight = 300f;
+
     IEnumerator SetDialog()
     {
-
-        setText.text = $"<font-weight=\"{fontWeight}\">" + SetReplace(textStruct) + "</font-weight>";
+        setText.text = SetReplace(textStruct);
         setText.ForceMeshUpdate(true);// 메쉬 재 생성 (리셋)
         setText.alpha = 0f;// 모든 글자 숨김
         yield return null;
@@ -285,5 +285,11 @@ public class Dialog_Test : MonoBehaviour
             float y = Random.Range(-type.actionAngle.y, type.actionAngle.y);
             destinationVertices[index] = sourceVertices[index] + new Vector3(x, y, 0f);
         }
+    }
+    public TMP_Text testText;
+
+    void SetFontStyle()
+    {
+        testText.text = SetReplace(textStruct);
     }
 }
