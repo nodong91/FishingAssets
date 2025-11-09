@@ -52,6 +52,7 @@ MonoBehaviour:
   CSV_Data:
   - {fileID: 4900000, guid: 7cbcec83f87f0494b8216626e550d6a7, type: 3}
   - {fileID: 4900000, guid: d397816a5bebb97479fc19c3bfc030f1, type: 3}
+  - {fileID: 4900000, guid: 989a3c5718afb0c4d8ae362892320ede, type: 3}
   - {fileID: 4900000, guid: d38421496a31ec845823f5fb85a9e870, type: 3}
   - {fileID: 4900000, guid: 3251b9410aa77034293d9143ff30a253, type: 3}
   - {fileID: 4900000, guid: 32fe5a5b0689f414dae0db94418d5241, type: 3}
@@ -171,8 +172,27 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 17d3de059ef011840a267d89648ffb0b, type: 3}
   - {fileID: 21300000, guid: 06da9f834782b514c891529ab827f988, type: 3}
   - {fileID: 21300000, guid: d53c8e1e60f4e7740a96478ec9d4966c, type: 3}
+  - {fileID: 21300000, guid: 5e240018b73b42d4db5fc29dd8bc7b96, type: 3}
+  - {fileID: 21300000, guid: d95ff06879d15b143bf99c48cca9c0a1, type: 3}
+  - {fileID: 21300000, guid: 4151ed8767133264fa4f8c4c74dc0460, type: 3}
+  - {fileID: 21300000, guid: 8348b175d85481f40acc14d218f25311, type: 3}
+  - {fileID: 21300000, guid: 626b24766d400ee458696da2aa73a0f4, type: 3}
+  - {fileID: 21300000, guid: 6813bff3e1d7d73419d5cab4faacd21b, type: 3}
+  - {fileID: 21300000, guid: 84c84583b01ade04f9c422f2cbef9325, type: 3}
+  - {fileID: 21300000, guid: b25e256dfcba5b143beb78b710b798e5, type: 3}
+  - {fileID: 21300000, guid: 5297672fa23a92b44833361c1ea2a6f2, type: 3}
   - {fileID: 21300000, guid: db7a5bfd63ccb5d48a6f03e1c82a0750, type: 3}
   - {fileID: 21300000, guid: 9f50c883fff1c8d4d9e63ed8c099e42c, type: 3}
+  - {fileID: 21300000, guid: 21c77723b0fc13d43882778bcd53e1c3, type: 3}
+  - {fileID: 21300000, guid: 409666701818f1643993f552b42eb023, type: 3}
+  - {fileID: 21300000, guid: 8016c8e72b4808d4ca3064bdcf654745, type: 3}
+  - {fileID: 21300000, guid: 11ba9b3cb86c51344bff1eb439577339, type: 3}
+  - {fileID: 21300000, guid: f36b845eae6e2a94d8eee6da3fc5cfca, type: 3}
+  - {fileID: 21300000, guid: 0d7ee01d2b407e84ebb5e55f9516ea63, type: 3}
+  - {fileID: 21300000, guid: 4436de277d840ed449d334b6fe7051d8, type: 3}
+  - {fileID: 21300000, guid: d11c19a3f04dcb6499a50f0998fb8c14, type: 3}
+  - {fileID: 21300000, guid: cc5d09ccbad556c4682f9c77740ad6c3, type: 3}
+  - {fileID: 21300000, guid: a5b650a1bafa6ca499e4d3db533ecce5, type: 3}
   - {fileID: 21300000, guid: f4f1ab4e37ec3bf449352616d9f865f5, type: 3}
   - {fileID: 21300000, guid: 65776e47f1cb1aa45bfb2cf5f33a56c0, type: 3}
   - {fileID: 21300000, guid: 863a8bd4e34ee7846b8dbc30b3a500c4, type: 3}
@@ -218,6 +238,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: da8ce0d988d5cd044bccac854542b82a, type: 3}
   - {fileID: 21300000, guid: e9235be2bd3221d46a0a21bfd6b8a14e, type: 3}
   - {fileID: 21300000, guid: 1d87f99aa74a974419c1b8cfc484b9e2, type: 3}
+  - {fileID: 21300000, guid: 94b747fdc178d614f8943c95ca8bf9c9, type: 3}
   - {fileID: 21300000, guid: eee84b549a7997149b156c997313b9ec, type: 3}
   - {fileID: 21300000, guid: c3d41e842a69df74eb728933bb1af44c, type: 3}
   - {fileID: 21300000, guid: f68acefe2af6f1347b281d5592c89a97, type: 3}
@@ -2027,6 +2048,57 @@ MonoBehaviour:
     - fs_1001
     - us_3002
   languageStruct:
+  - id: ed_0001
+    english: Eyes in the darkness
+    korean: "\uC5B4\uB460 \uC18D\uC758 \uB208\uB3D9\uC790"
+    japanese: "\u6697\u95C7 \u306B\u3042\u308B \u773C"
+    chinese: "\u9ED1\u6697 \u4E2D\u7684 \u773C\u775B"
+  - id: ed_0001_a
+    english: You saw two gleaming {0} in a dark alley./n The pair of {1} sensed your
+      presence and bolted like the wind.
+    korean: "\uB2F9\uC2E0\uC740 \uC5B4\uB450\uC6B4 \uACE8\uBAA9\uAE38\uC5D0\uC11C/n
+      \uBC18\uC9DD\uC774\uB294 {0}\uC744 \uBCF4\uC558\uB2E4./n {1}\uC740 \uC778\uAE30\uCC99\uC744
+      \uB290\uB07C\uACE0 \uBC14\uB78C\uCC98\uB7FC \uB2EC\uC544\uB0AC\uB2E4."
+    japanese: "\u3042\u306A\u305F\u306F\u6697\u3044\u8DEF\u5730\u3067\u304D\u3089\u3081\u304F{0}\u3092\u898B\u305F\u3002/n\u305D\u306E{1}\u306F\u4EBA\u306E\u6C17\u914D\u3092\u611F\u3058\u3066/n\u98A8\u306E\u3088\u3046\u306B\u9003\u3052\u53BB\u3063\u305F\u3002"
+    chinese: "\u4F60\u5728\u4E00\u6761\u9ED1\u6697\u7684\u5DF7\u5B50\u91CC\u770B\u5230\u4E86\u4E24\u53EA\u95EA\u70C1\u7684{0}\u3002/n\u90A3\u53CC{1}\u5BDF\u89C9\u5230\u6709\u4EBA\u9760\u8FD1
+      \u4FBF\u50CF\u98CE\u4E00\u6837\u9003\u8D70\u4E86\u3002"
+  - id: ed_0001_b
+    english: eyes
+    korean: "\uB450 \uB208"
+    japanese: "\u4E21\u76EE"
+    chinese: "\u773C\u775B"
+  - id: ed_0001_c
+    english: I follow to check.
+    korean: "\uD655\uC778\uD558\uAE30 \uC704\uD574 \uB4A4\uCAD3\uC544 \uAC04\uB2E4."
+    japanese: "\u78BA\u8A8D \u306E\u305F\u3081\u306B \u8FFD\u3044\u304B\u3051\u308B
+      (\u304B\u304F\u306B\u3093 \u306E\u305F\u3081\u306B \u304A\u3044\u304B\u3051\u308B"
+    chinese: "\u6211 \u8DDF\u4E0A\u53BB \u786E\u8BA4"
+  - id: ed_0001_d
+    english: I pretend I didn't see anything turn around and take a different route
+    korean: "\uBAA8\uB978 \uCC99 \uB4A4\uB85C \uB3CC\uC544 \uB2E4\uB978 \uAE38\uB85C
+      \uAC04\uB2E4."
+    japanese: "\u77E5\u3089\u306C\u3075\u308A\u3092\u3057\u3066 \u5F8C\u308D\u3092\u5411\u304D
+      \u5225\u306E\u9053\u3078\u884C\u304F"
+    chinese: "\u88C5\u4F5C \u4E0D\u77E5\u9053 \u8F6C\u8FC7\u8EAB \u8D70 \u53E6\u4E00\u6761\u8DEF"
+  - id: ed_0001_e
+    english: I announce the situation loudly
+    korean: "\uD070 \uC18C\uB9AC\uB85C \uC0C1\uD669\uC744 \uC54C\uB9B0\uB2E4."
+    japanese: "\u5927\u58F0 \u3067 \u72B6\u6CC1 \u3092 \u77E5\u3089\u305B\u308B"
+    chinese: "\u5927\u58F0 \u5BA3\u5E03 \u60C5\u51B5"
+  - id: ed_0001_01_a
+    english: I lost what I was tracking but a heavy money bag was on the ground
+    korean: "\uCD94\uC801\uD588\uB358 \uC874\uC7AC\uB294 \uB193\uCCE4\uC9C0\uB9CC
+      \uBC14\uB2E5\uC5D0 \uBB35\uC9C1\uD55C \uB3C8 \uC8FC\uBA38\uB2C8\uAC00 \uB5A8\uC5B4\uC838
+      \uC788\uC5C8\uB2E4."
+    japanese: "\u8FFD\u3044\u304B\u3051\u3066\u3044\u305F \u8005 \u306F \u898B\u5931\u3063\u305F\u304C
+      \u5730\u9762 \u306B \u91CD\u3044 \u8CA1\u5E03 \u304C \u843D\u3061\u3066\u3044\u305F"
+    chinese: "\u867D\u7136 \u8FFD\u8E2A\u7684 \u5BF9\u8C61 \u8DD1\u4E86 \u4F46\u662F
+      \u5730\u4E0A \u5374 \u6709\u4E2A \u6C89\u91CD \u7684 \u94B1\u888B"
+  - id: ed_0001_01_b
+    english: take it
+    korean: "\uAC00\uC838\uAC04\uB2E4."
+    japanese: "\u6301\u3063\u3066\u884C\u304F"
+    chinese: "\u62FF\u8D70"
   - id: smalloiltank
     english: Small Oil Tank
     korean: "\uC791\uC740 \uC624\uC77C\uD1B5"

@@ -328,7 +328,7 @@ public class Fishing_Manager : MonoBehaviour
     void MoveCatch()
     {
         // 카메라 포커스 위치
-        focusTarget.position = Vector3.Lerp(fishPrefab.transform.position, shipPrefab.transform.position, 0.5f);// 카메라 포커스
+        focusTarget.position = Vector3.Lerp(catchPrefab.transform.position, shipPrefab.transform.position, 0.5f);// 카메라 포커스
 
         // 캐치 영역 안에 있는지 체크
         Vector2 fishPosition = new Vector2(fishPrefab.transform.position.x, fishPrefab.transform.position.z);

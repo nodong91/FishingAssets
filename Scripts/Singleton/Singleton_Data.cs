@@ -236,7 +236,10 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
                     break;
             }
             if (string.IsNullOrEmpty(text) == false)
+            {
+                text = text.Replace("/n", "\n");// ¶ç¾î¾²±â
                 return text;
+            }
         }
         return _id;
     }

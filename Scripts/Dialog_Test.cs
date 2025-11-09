@@ -1,97 +1,29 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using static Data_Dialog;
-using static Data_Manager;
-using static Singleton_Data;
 
 public class Dialog_Test : MonoBehaviour
 {
-    Dictionary<string, LanguageStruct> Dict_Language = new Dictionary<string, LanguageStruct>();
-    public LanguageType languageType = LanguageType.English;
-    [System.Serializable]
-    public struct TextStruct
-    {
-        [TextArea]
-        public string contents;
-
-        [System.Serializable]
-        public struct DialogType
-        {
-            public string replaceText;
-            public float textSize;
-            public float typingSpeed;
-            public string textColor;
-            [Header("Action")]
-            public ActionType actionType;
-            public float actionSpeed;
-            public float actionInterval;
-            public Vector2 actionAngle;
-        }
-        public DialogType[] dialogTypes;
-    }
-    public TextStruct textStruct;
-    public TMP_Text setText;
     public bool typing;
+    public Data_Event eventData;
+    TextStruct textStruct;
+    public TMP_Text setText;
 
     float defaultTypingSpeed = 0.1f;
     float typingSpeed = 0;
     Vector2Int[] dialogVector;
-    public LanguageStruct[] languageStructs;
 
-    private void Start()
-    {
-        Dict_Language = new Dictionary<string, LanguageStruct>();
-        for (int i = 0; i < languageStructs.Length; i++)
-        {
-            Dict_Language[languageStructs[i].id] = languageStructs[i];
-        }
-    }
-
-    public string GetLanguage(string _id)
-    {
-        if (Dict_Language.ContainsKey(_id) == true)
-        {
-            string text = string.Empty;
-            switch (languageType)
-            {
-                case LanguageType.English:
-                    text = Dict_Language[_id].english;
-                    break;
-
-                case LanguageType.Korean:
-                    text = Dict_Language[_id].korean;
-                    break;
-
-                case LanguageType.Japanese:
-                    text = Dict_Language[_id].japanese;
-                    break;
-
-                case LanguageType.Chinese:
-                    text = Dict_Language[_id].chinese;
-                    break;
-            }
-            if (string.IsNullOrEmpty(text) == false)
-                return text;
-        }
-        return _id;
-    }
-
-
-
-
-
+    public Event_SelectButton selectButton;
 
     private void Update()
     {
         if (Input.GetMouseButtonUp(0))
         {
-            //if (typing == true)
-            //    typing = false;
-            //else
-            //    SetDialog(textStruct);
-            SetFontStyle();
+            if (typing == true)
+                typing = false;
+            else
+                SetDialog(eventData.eventStruct);
         }
     }
 
@@ -117,13 +49,13 @@ public class Dialog_Test : MonoBehaviour
 
     string SetReplace(TextStruct _textStruct)
     {
-        string replace = GetLanguage(_textStruct.contents);// 번역
+        string replace = Singleton_Data.INSTANCE.GetLanguage(_textStruct.contents);// 번역
         replace = replace.Replace("/n", "\n");// 띄어쓰기
         dialogVector = new Vector2Int[_textStruct.dialogTypes.Length];
         for (int i = 0; i < _textStruct.dialogTypes.Length; i++)
         {
             string temp = "{" + i + "}";
-            string setReplace = GetLanguage(_textStruct.dialogTypes[i].replaceText);// 번역
+            string setReplace = Singleton_Data.INSTANCE.GetLanguage(_textStruct.dialogTypes[i].replaceText);// 번역
             int startIndex = replace.IndexOf(temp);
             dialogVector[i] = new Vector2Int(startIndex, startIndex + setReplace.Length);
             replace = replace.Replace(temp, setReplace);
@@ -285,11 +217,5 @@ public class Dialog_Test : MonoBehaviour
             float y = Random.Range(-type.actionAngle.y, type.actionAngle.y);
             destinationVertices[index] = sourceVertices[index] + new Vector3(x, y, 0f);
         }
-    }
-    public TMP_Text testText;
-
-    void SetFontStyle()
-    {
-        testText.text = SetReplace(textStruct);
     }
 }

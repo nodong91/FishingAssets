@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.UI;
-using static UI_Main;
-using static UnityEngine.EventSystems.EventTrigger;
+using static Data_Manager;
 
 public class UI_Main : MonoBehaviour
 {
@@ -22,6 +20,7 @@ public class UI_Main : MonoBehaviour
 
     [Header("[ Ship ]")]
     public Slider shipEnergy;
+    RectTransform shipEnergyRect;
     public Image currentHealthImage, maxHealthImage;
     Coroutine openFadeScreen;
     public Vector2 HealthSize;
@@ -36,13 +35,21 @@ public class UI_Main : MonoBehaviour
         questButton.SetButton(QuestButton);
         optionButton.SetButton(OptionButton);
 
-        SetCameraCanvas();
+        if (energyMaterial == null)
+        {
+            Image energy = shipEnergy.fillRect.GetComponent<Image>();
+            energyMaterial = Instantiate(energy.material);
+            energy.material = energyMaterial;
+            shipEnergyRect = shipEnergy.GetComponent<RectTransform>();
+        }
+
+        warnningText.alpha = 0f;
+        SetUICameraCanvas();
         SetFadeScreen(false);
     }
 
-    void SetCameraCanvas()
+    void SetUICameraCanvas()
     {
-        warnningText.alpha = 0f;
         cameraCanvas.renderMode = RenderMode.ScreenSpaceCamera;
         cameraCanvas.worldCamera = Camera_Manager.current.UICamera;
     }
@@ -188,26 +195,26 @@ public class UI_Main : MonoBehaviour
     bool lowEnergy = false;
     bool lowHP = false;
 
+    public void SetMaxEnergyPoint(float _energy)
+    {
+        shipEnergyRect.sizeDelta = new Vector2((1f + _energy) * 2f, shipEnergyRect.sizeDelta.y);
+    }
+
     public void SetEnergy(float _energy)
     {
         shipEnergy.value = _energy;
-        if (_energy < 0.5f)
+        if (_energy < 0.2f)
         {
-            if (lowEnergy == false)
+            if (lowEnergy == false)// 에너지   경고
             {
                 lowEnergy = true;
-                if (energyMaterial == null)
-                {
-                    Image energy = shipEnergy.fillRect.GetComponent<Image>();
-                    energyMaterial = Instantiate(energy.material);
-                    energy.material = energyMaterial;
-                }
                 StartCoroutine(LowEnergy(energyMaterial));
             }
         }
         else if (lowEnergy == true)
         {
             lowEnergy = false;
+            energyMaterial.SetColor("_MainColor", Color.white);
         }
     }
 
@@ -221,7 +228,6 @@ public class UI_Main : MonoBehaviour
             _material.SetColor("_MainColor", Color.white * alpha * 3f);
             yield return null;
         }
-        _material.SetColor("_MainColor", Color.white);
     }
 
     public void SetMaxHealthPoint(int _point)
@@ -234,6 +240,7 @@ public class UI_Main : MonoBehaviour
     {
         RectTransform rectTransform = currentHealthImage.rectTransform;
         rectTransform.sizeDelta = new Vector2(HealthSize.x * _point, HealthSize.y);
+
         if (_point <= 1)
         {
             if (lowHP == false)

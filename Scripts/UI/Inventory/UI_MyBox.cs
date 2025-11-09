@@ -54,7 +54,7 @@ public class UI_MyBox : UI_Inventory_Base
         float sliderValue = currentWeight / maxWeight;
         weightSlider.value = sliderValue;
         weightText.text = $"{currentWeight.ToString("N1")}/{maxWeight}kg";
-        Debug.LogWarning($"무게 {weightText.text}");
+        //Debug.LogWarning($"무게 {weightText.text}");
     }
 
     public bool CheckWeight(float _weight)

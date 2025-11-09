@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95919c93bd4d2b64c971e788a3a6b19a, type: 3}
   m_Name: Data_Event_03
   m_EditorClassIdentifier: 
-  eventDescription:
+  eventStruct:
     contents: "\uBD88\uAEBC\uC9C4 \uAE38\uC744 \uAC77\uB2E4\uAC00 \uB204\uAD70\uAC00\uAC00
       \uC783\uC5B4\uBC84\uB9B0 \uAE01\uC9C0 \uC54A\uC740 \uBCF5\uAD8C\uC744 \uBCF4\uC558\uB2E4."
     dialogTypes:
-    - id: " \uBCF5\uAD8C"
-      dialogIndex: {x: 26, y: 29}
+    - replaceText: " \uBCF5\uAD8C"
       textSize: 35
-      typingSpeed: 0.3
+      typingSpeed: 0
       textColor: FFFF00
       actionType: 0
       actionSpeed: 0

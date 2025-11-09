@@ -59,14 +59,16 @@ public class Unit_Player : MonoBehaviour
         FocusTarget.transform.position = transform.position;
     }
 
-    public void SetStatus(bool prevFullHealth)
+    public void SetStatus()
     {
         moveSpeed = CurrentStatus.shipSpeed;
 
-        health = (prevFullHealth == true) ? CurrentStatus.shipHealth : CurrentStatus.shipHealth - continueData.destroySlot.Count;// 스탯 추가 하기  전 풀피 체크
+        Game_Manager.current.GetMainUI.SetMaxEnergyPoint(CurrentStatus.maxEnergy);
+        Debug.LogWarning($"SetStatus - Energy : {energy}/{CurrentStatus.maxEnergy}");
+        health = (FullHealth == true) ? CurrentStatus.shipHealth : CurrentStatus.shipHealth - continueData.destroySlot.Count;// 스탯 추가 하기  전 풀피 체크
         Game_Manager.current.GetMainUI.SetMaxHealthPoint(CurrentStatus.shipHealth);
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
-
+        Debug.LogWarning($"SetStatus - Health : {health}/{CurrentStatus.shipHealth}");
         energy = continueData.energy;
         efficient = CurrentStatus.efficient;
         SetEnergyUI();

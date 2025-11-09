@@ -30,6 +30,13 @@ public class Data_Manager : Data_Parse
 #if UNITY_EDITOR
     public void UpdateData()
     {
+        languageStruct.Clear();
+        fishStruct.Clear();
+        usedStruct.Clear();
+        skillStruct.Clear();
+        questStruct.Clear();
+        audioStruct.Clear();
+
         DataSetting();
     }
 
@@ -49,6 +56,7 @@ public class Data_Manager : Data_Parse
             }
             else if (csv_Type.Contains("Language"))
             {
+                Debug.LogWarning(csv_Type);
                 SetLanguageStruct(CSV_Data[i]);
             }
             else if (csv_Type.Contains("Audio"))
@@ -68,7 +76,6 @@ public class Data_Manager : Data_Parse
 
     void SetFish(TextAsset _textAsset)
     {
-        fishStruct.Clear();
         string[] data = _textAsset.text.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
@@ -103,7 +110,6 @@ public class Data_Manager : Data_Parse
 
     void SetUsed(TextAsset _textAsset)
     {
-        usedStruct.Clear();
         string[] data = _textAsset.text.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
@@ -145,7 +151,6 @@ public class Data_Manager : Data_Parse
 
     void ConvertSkill(TextAsset _textAsset)
     {
-        skillStruct.Clear();
         string[] data = _textAsset.text.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
@@ -190,7 +195,6 @@ public class Data_Manager : Data_Parse
 
     void ConvertQuest(TextAsset _textAsset)
     {
-        questStruct.Clear();
         string[] data = _textAsset.text.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
@@ -212,7 +216,6 @@ public class Data_Manager : Data_Parse
 
     void SetLanguageStruct(TextAsset _textAsset)
     {
-        languageStruct.Clear();
         string[] data = _textAsset.text.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
@@ -231,7 +234,6 @@ public class Data_Manager : Data_Parse
 
     void SetAudioStruct(TextAsset _textAsset)
     {
-        audioStruct.Clear();
         string[] data = _textAsset.text.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {

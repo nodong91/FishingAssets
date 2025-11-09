@@ -27,6 +27,28 @@ public class Data_Dialog_Editor : Editor
 [CreateAssetMenu(fileName = "Data_Dialog", menuName = "Scriptable Objects/Data_Dialog")]
 public class Data_Dialog : ScriptableObject
 {
+    [System.Serializable]
+    public struct TextStruct
+    {
+        [TextArea]
+        public string contents;
+
+        [System.Serializable]
+        public struct DialogType
+        {
+            public string replaceText;
+            public float textSize;
+            public float typingSpeed;
+            public string textColor;
+            [Header("Action")]
+            public ActionType actionType;
+            public float actionSpeed;
+            public float actionInterval;
+            public Vector2 actionAngle;
+        }
+        public DialogType[] dialogTypes;
+    }
+
     public enum ActionType
     {
         None,

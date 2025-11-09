@@ -9,7 +9,7 @@ public class Event_SelectButton : Custom_Button
     public void SetStart(EventSelect _eventSelect, Action<EventSelect> _clickAction)
     {
         eventSelect = _eventSelect;
-        selectText.text = _eventSelect.selectDialog;
+        selectText.text = Singleton_Data.INSTANCE.GetLanguage(_eventSelect.selectDialog);
         clickAction = _clickAction;
         buttonImage.gameObject.SetActive(false);
         SetButton(ClickAction, EnterAction, ExitAction);

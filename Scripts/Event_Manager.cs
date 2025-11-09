@@ -18,13 +18,29 @@ public class Event_Manager : MonoBehaviour
     bool typing = false;
     float typingSpeed = 0.1f;
     float defaultTypingSpeed = 0.1f;
-    List<string> eventKeys = new List<string>();
+    public List<string> eventKeys = new List<string>();
+
+    Vector2Int[] dialogVector;
 
     private void Start()
     {
         for (int i = 0; i < canvasStructs.Length; i++)
         {
             canvasStructs[i].rect.gameObject.SetActive(false);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (typing == true)// 스킵
+                typing = false;
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            RemoveSelectButton();
+            StartEvent();
         }
     }
 
@@ -39,30 +55,36 @@ public class Event_Manager : MonoBehaviour
 
     public void StartEvent()
     {
-        if(eventKeys == null || eventKeys.Count == 0)
+        if (eventKeys == null || eventKeys.Count == 0)
         {
             SetDictKey();
         }
-        string key = eventKeys[Random.Range(0, eventKeys.Count)];
+        //string key = eventKeys[Random.Range(0, eventKeys.Count)];
+        string key = "Data_Event_0001";
         Data_Event tempData = Singleton_Data.INSTANCE.Dict_Event[key];
         SetEvent(tempData);
         Debug.LogWarning(key);
     }
 
-    public void SetEvent(Data_Event _evnet)
+    public void SetEvent(Data_Event _eventData)
     {
-        eventData = _evnet;
+        StopAllCoroutines();
+        SetGridCanvas(0f);
+
+        eventData = _eventData;
         if (eventData as Data_Event_Select)
         {
+            // 선택 이벤트라면 이름 세팅
             Data_Event_Select tempData = eventData as Data_Event_Select;
-            eventName.text = tempData.eventName;
+            eventName.text = Singleton_Data.INSTANCE.GetLanguage(tempData.eventName);
         }
-        StartCoroutine(OpenEvent());
+        typingSpeed = defaultTypingSpeed;
+        StartCoroutine(SetDialog());
     }
 
-    IEnumerator OpenEvent()
+    IEnumerator SetDialog()
     {
-        eventDescription.text = TryDialogString(eventData.eventDescription);
+        eventDescription.text = SetReplace(eventData.eventStruct);
         eventDescription.ForceMeshUpdate(true);// 메쉬 재 생성 (리셋)
         eventDescription.alpha = 0f;// 모든 글자 숨김
         yield return null;
@@ -72,51 +94,58 @@ public class Event_Manager : MonoBehaviour
             _open = true;
             yield return StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
         }
-
-        StartCoroutine(Typing(eventData.eventDescription));
-        StartCoroutine(TextAction(eventData.eventDescription));
+        TextStruct textStruct = eventData.eventStruct;
+        StartCoroutine(Typing(textStruct));
+        StartCoroutine(TextAction(textStruct));
         SetSelectButton();// 선택 버튼 세팅
     }
 
-    string TryDialogString(DialogStruct _dialogStruct)
+    string SetReplace(TextStruct _textStruct)
     {
-        string temp = _dialogStruct.contents;
-        int length = _dialogStruct.dialogTypes.Length - 1;
-        for (int i = length; i >= 0; i--)
+        string replace = Singleton_Data.INSTANCE.GetLanguage(_textStruct.contents);// 번역
+        dialogVector = new Vector2Int[_textStruct.dialogTypes.Length];
+        for (int i = 0; i < _textStruct.dialogTypes.Length; i++)
         {
-            float size = _dialogStruct.dialogTypes[i].textSize;
-            string textColor = _dialogStruct.dialogTypes[i].textColor;
-            int x = _dialogStruct.dialogTypes[i].dialogIndex.x;
-            int y = _dialogStruct.dialogTypes[i].dialogIndex.y;
-            temp = temp.Insert(y, "</size></color>");// 끼워 넣기
-            temp = temp.Insert(x, $"<color=#{textColor}><size={size}>");
+            string temp = "{" + i + "}";
+            string setReplace = Singleton_Data.INSTANCE.GetLanguage(_textStruct.dialogTypes[i].replaceText);// 번역
+            int startIndex = replace.IndexOf(temp);
+            dialogVector[i] = new Vector2Int(startIndex, startIndex + setReplace.Length);
+            replace = replace.Replace(temp, setReplace);
+            Debug.LogWarning($"{temp} {replace} (startReplace : {startIndex}) -1이면 바꿀 단어를 못찾아서 뒤에 에러터질꺼임");
         }
-        return temp;
+
+        // 색, 사이즈
+        int lastIndex = dialogVector.Length - 1;
+        for (int i = lastIndex; i >= 0; i--)
+        {
+            string textColor = _textStruct.dialogTypes[i].textColor;
+            float size = _textStruct.dialogTypes[i].textSize;
+            replace = replace.Insert(dialogVector[i].y, "</size></color>");// 끼워 넣기
+            replace = replace.Insert(dialogVector[i].x, $"<color=#{textColor}><size={size}>");
+        }
+        return replace;
     }
 
-    //=======================================================================================================
-    // 폰트 액션
-    //=======================================================================================================
-
-    IEnumerator Typing(DialogStruct _dialogStruct, string _voice = null)
+    IEnumerator Typing(TextStruct _textStruct, string _voice = null)
     {
-        SetGridCanvas(0f);
+        OpenSelectGroup(false);
+
         typing = true;
         int subIndex = 0;
         TMP_TextInfo textInfo = eventDescription.textInfo;
         for (int i = 0; i < textInfo.characterCount; i++)
         {
-            if (_dialogStruct.dialogTypes.Length > 0)
+            if (_textStruct.dialogTypes.Length > 0)
             {
-                float speed = _dialogStruct.dialogTypes[subIndex].typingSpeed;
-                if (i == _dialogStruct.dialogTypes[subIndex].dialogIndex.x)
+                float speed = _textStruct.dialogTypes[subIndex].typingSpeed;
+                if (i == dialogVector[subIndex].x)
                 {
                     if (speed > 0)// 타이핑 스피드가 0 이상이라면..
                         typingSpeed = speed;
                 }
-                else if (i == _dialogStruct.dialogTypes[subIndex].dialogIndex.y)
+                else if (i == dialogVector[subIndex].y)
                 {
-                    if (subIndex + 1 < _dialogStruct.dialogTypes.Length)
+                    if (subIndex + 1 < _textStruct.dialogTypes.Length)
                         subIndex++;
                     typingSpeed = defaultTypingSpeed;// 기본 속도
                 }
@@ -148,37 +177,28 @@ public class Event_Manager : MonoBehaviour
         yield return new WaitForSeconds(typingSpeed);
 
         typing = false;
-        SetGridCanvas(1f);
+        OpenSelectGroup(true);
     }
 
-    void SetGridCanvas(float _alpha)
-    {
-        gridCanvas.alpha = _alpha;
-        gridCanvas.interactable = _alpha > 0;
-        gridCanvas.blocksRaycasts = _alpha > 0;
-    }
-
-
-    IEnumerator TextAction(DialogStruct _dialogStruct)
+    IEnumerator TextAction(TextStruct _textStruct)
     {
         bool actionBool = true;
-        TMP_Text component = eventDescription;
-        TMP_MeshInfo[] cachedMeshInfo = component.textInfo.CopyMeshInfoVertexData();
+        TMP_MeshInfo[] cachedMeshInfo = eventDescription.textInfo.CopyMeshInfoVertexData();
         while (actionBool == true)
         {
-            for (int i = 0; i < _dialogStruct.dialogTypes.Length; i++)
+            for (int i = 0; i < _textStruct.dialogTypes.Length; i++)
             {
                 // x - 시작 포지션
                 // y - 끝 포지션
                 // z - 액션 타입
-                if (_dialogStruct.dialogTypes[i].actionType == ActionType.None)// 액션 타입이 None이 아니면
+                if (_textStruct.dialogTypes[i].actionType == ActionType.None)// 액션 타입이 None이 아니면
                     continue;
 
-                int x = _dialogStruct.dialogTypes[i].dialogIndex.x;
-                int y = _dialogStruct.dialogTypes[i].dialogIndex.y;
+                int x = dialogVector[i].x;
+                int y = dialogVector[i].y;
                 for (int c = x; c < y; c++)
                 {
-                    var charInfo = component.textInfo.characterInfo[c];
+                    var charInfo = eventDescription.textInfo.characterInfo[c];
                     if (charInfo.isVisible == false)
                         continue;
 
@@ -188,18 +208,18 @@ public class Event_Manager : MonoBehaviour
                     // 원래 정점정보
                     Vector3[] sourceVertices = cachedMeshInfo[materialIndex].vertices;
                     // 현재 정점 정보를 얻고 덮어쓰기
-                    Vector3[] destinationVertices = component.textInfo.meshInfo[materialIndex].vertices;
-                    SetActingText(_dialogStruct.dialogTypes[i], vertexIndex, sourceVertices, destinationVertices, c);
+                    Vector3[] destinationVertices = eventDescription.textInfo.meshInfo[materialIndex].vertices;
+                    SetActingText(_textStruct.dialogTypes[i], vertexIndex, sourceVertices, destinationVertices, c);
                 }
             }
             yield return null;
 
-            component.UpdateVertexData();
+            eventDescription.UpdateVertexData();
             Debug.LogWarning("TextActing");
         }
     }
 
-    void SetActingText(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void SetActingText(TextStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         switch (type.actionType)
         {
@@ -221,7 +241,7 @@ public class Event_Manager : MonoBehaviour
         }
     }
 
-    void TryAimationWave(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void TryAimationWave(TextStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         for (int v = 0; v < 4; v++)
         {
@@ -234,7 +254,7 @@ public class Event_Manager : MonoBehaviour
         }
     }
 
-    void TryAimationMove(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void TryAimationMove(TextStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         for (int v = 0; v < 4; v++)
         {
@@ -246,7 +266,7 @@ public class Event_Manager : MonoBehaviour
         }
     }
 
-    void TryAimationJitter(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void TryAimationJitter(TextStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         for (int v = 0; v < 4; v++)
         {
@@ -256,13 +276,6 @@ public class Event_Manager : MonoBehaviour
             destinationVertices[index] = sourceVertices[index] + new Vector3(x, y, 0f);
         }
     }
-
-
-
-
-
-
-
 
 
 
@@ -281,24 +294,57 @@ public class Event_Manager : MonoBehaviour
     public List<Event_SelectButton> dialogSelectButton = new List<Event_SelectButton>();
     private readonly Queue<Event_SelectButton> selectButtonQueue = new Queue<Event_SelectButton>();
 
+    void OpenSelectGroup(bool _open)
+    {
+        if (_open)
+        {
+            StartCoroutine(OpenCanvas());
+        }
+        else
+        {
+            gridCanvas.gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator OpenCanvas()
+    {
+        gridCanvas.gameObject.SetActive(true);
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime * 15f;
+            float alpha = normalize;
+            SetGridCanvas(alpha);
+            gridCanvas.transform.localPosition = Vector3.up * (1f - alpha) * 50f;
+            yield return null;
+        }
+    }
+
+    void SetGridCanvas(float _alpha)
+    {
+        gridCanvas.alpha = _alpha;
+        gridCanvas.interactable = _alpha > 0;
+        gridCanvas.blocksRaycasts = _alpha > 0;
+    }
+
     void SetSelectButton()
     {
         if (eventData as Data_Event)
         {
             Data_Event tempData = eventData as Data_Event;
-            for (int i = 0; i < tempData.eventSelect.Length; i++)
+            for (int i = 0; i < eventData.eventSelect.Length; i++)
             {
                 EventSelect selectStruct = new EventSelect
                 {
-                    selectDialog = tempData.eventSelect[i].selectDialog,
-                    selectEvent = tempData.eventSelect[i].selectEvent,
+                    selectDialog = eventData.eventSelect[i].selectDialog,
+                    selectEvent = eventData.eventSelect[i].selectEvent,
                 };
                 SetSelectButton(selectStruct);
             }
         }
     }
 
-    void SetSelectButton(EventSelect _selectStruct)
+    void SetSelectButton(EventSelect _selectStruct)// 버튼 세팅
     {
         Event_SelectButton button = GetSelectButton();
         button.gameObject.SetActive(true);
@@ -325,10 +371,6 @@ public class Event_Manager : MonoBehaviour
         dialogSelectButton.Clear();
     }
 
-
-
-
-
     //=======================================================================================================
     // 셀렉트 버튼 액션
     //=======================================================================================================
@@ -337,12 +379,12 @@ public class Event_Manager : MonoBehaviour
     {
         StopAllCoroutines();// 기존 움직이는 폰트가 있다면 정지
         RemoveSelectButton();
-      
+
         // 다음 대화 체크
         Data_Event tempEvent = _eventSelect.GetEventData();
         if (tempEvent == null)// 다음 대화가 없다면
         {
-            _open = false; 
+            _open = false;
             // 기존 대화 보상이 있는지 확인
             if (eventData as Data_Event_Result)// 보상 이벤트라면
             {
@@ -360,7 +402,7 @@ public class Event_Manager : MonoBehaviour
             }
             else
             {
-                Game_Manager.current.GetLanding.OpenLandingUI();
+                Game_Manager.current.GetLanding.OpenLandingUI();// 섬 유아이 열기
                 Debug.LogWarning("보상 대화가 아님");
             }
             StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 이벤트 창 닫기
@@ -376,6 +418,5 @@ public class Event_Manager : MonoBehaviour
         Game_Manager.current.OutOfControll(false);
         Game_Manager.current.GetInventory.CloseResult();//보상 닫기
         Game_Manager.current.GetMainUI.OpenCanvas(true);
-        //Game_Manager.current.GetLanding.OpenLandingUI();// 섬 유아이 열기
     }
 }

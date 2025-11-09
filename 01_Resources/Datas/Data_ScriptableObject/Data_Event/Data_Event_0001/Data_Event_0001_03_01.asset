@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 664a0e4f21d8dbf4aa1987074900a295, type: 3}
+  m_Name: Data_Event_0001_03_01
+  m_EditorClassIdentifier: 
+  eventStruct:
+    contents: "\uC544\uB2C8\uB77C\uACE0 \uB300\uB2F5\uD558\uB2C8 \uBC29\uAE0B \uC6C3\uC73C\uBA70\n\"{0}\uC774\uAD6C\uB9CC\"\n\uAC00\uBC29
+      \uC548\uC758 \uBB3C\uAC74\uC744 \uC9C4\uC5F4\uD55C\uB2E4."
+    dialogTypes:
+    - replaceText: "\uC190\uB2D8"
+      textSize: 35
+      typingSpeed: 0
+      textColor: FF0000
+      actionType: 0
+      actionSpeed: 0
+      actionInterval: 0
+      actionAngle: {x: 0, y: 0}
+  eventSelect:
+  - selectDialog: "\uBB3C\uAC74\uC744 \uB458\uB7EC \uBCF8\uB2E4."
+    selectEvent: []
+  - selectDialog: "\uAD00\uC2EC\uC5C6\uB2E4\uBA70 \uB3CC\uC544\uAC04\uB2E4."
+    selectEvent: []
+  resultType: 0
+  itemRewards:
+  - us_3001
