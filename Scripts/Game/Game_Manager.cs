@@ -76,6 +76,12 @@ public class Game_Manager : MonoBehaviour
             GetPlayer.TakeDamage();
             Debug.LogError("충돌");
         }
+
+        if (Input.GetKeyUp(KeyCode.Alpha4))
+        {
+            GetFishing.SetFishingTest(addItemTest);
+            Debug.LogError("물고기 치트");
+        }
     }
 
     IEnumerator SetStart()

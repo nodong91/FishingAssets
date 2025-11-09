@@ -75,6 +75,7 @@ public class Skill_Tool : MonoBehaviour
         }
 
         StartPosition(startSlot.transform.localPosition);// 스타트 포지션
+        LoadData();
     }
 
     void StartPosition(Vector3 _position)

@@ -230,8 +230,6 @@ public class Fishing_Manager : MonoBehaviour
         StartCoroutine(StartCount());
     }
 
-    public string fishID;
-
     IEnumerator StartCount()// 카운트
     {
         for (int i = 0; i < 3; i++)
@@ -805,4 +803,64 @@ public class Fishing_Manager : MonoBehaviour
         }
     }
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //===================================================================================================================
+    // 물고기 테스트
+    //===================================================================================================================
+
+    public void SetFishingTest(string _id)
+    {
+        int addSkillAmount = Game_Manager.current.currentStatus.fishAmount;// 낚시 스킬로 추가 횟수
+        int fishingAmount = 100 + addSkillAmount;// 낚시 횟수
+
+        // 물고기 세팅
+        fishQueue.Clear();
+        for (int i = 0; i < fishingAmount; i++)
+        {
+            if (Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(_id))
+            {
+                FishStruct testFish = Singleton_Data.INSTANCE.Dict_Fish[_id];
+                fishQueue.Enqueue(testFish);
+            }
+            else
+            {
+                Debug.LogError($"[Fishing_Manager] 해당 ID 물고기 없음 : {_id}");
+            }
+        }
+        SetReady(true);// 낚시 준비
+    }
 }
