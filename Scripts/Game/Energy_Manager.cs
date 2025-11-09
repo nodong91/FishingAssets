@@ -67,6 +67,6 @@ public class Energy_Manager : MonoBehaviour
         buyPrice = (int)(addEnergy * (EnergyMaxAmount / 100f * energyPrice));
         buyPrice = Mathf.Max(buyPrice, 0);
         energyPriceText.text = $"{buyPrice}원";
-        buyButton.gameObject.SetActive(buyPrice > 0);
+        buyButton.gameObject.SetActive(buyPrice > 0);// 충전량 있을때만 활성
     }
 }

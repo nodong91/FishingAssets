@@ -27,7 +27,6 @@ public class Fishing_Manager : MonoBehaviour
     public float shipSize = 1f;
 
     private const float fieldRadius = 5f;
-    const string bgmBattle = "bgm_0002";
 
     public GameObject catchPrefab;
     public Renderer catchRanderer;
@@ -195,28 +194,28 @@ public class Fishing_Manager : MonoBehaviour
         // 미끼가 있으면 버프
         // 없으면 확률상 가장 낮은 물고기가 거의 잡힘
         // 미끼의 등급별로 해당 등급의 물고기가 나올 확률 증가
-        string baitID = "";// 미끼
-        switch (areaType)
-        {
-            case AreaType.Shallow:
-                baitID = "us_2001";// 미끼
-                break;
-            case AreaType.Oceanic:
-                baitID = "us_2001";// 미끼
-                break;
-        }
-        UI_Inventory_Slot _slot = Game_Manager.current.GetInventory.myBox.CheckItem(baitID);
-        if (_slot != null)// 미끼
-        {
-            Game_Manager.current.GetInventory.myBox.SlotEmpty(_slot);// 미끼 하나 제거
-        }
-        else
-        {
-            // 미끼가 없으면
-            ItemStruct itemStruct = Singleton_Data.INSTANCE.Dict_Used[baitID].itemStruct;
-            Game_Manager.current.GetMainUI.SetWarnningText($"{Singleton_Data.INSTANCE.GetLanguage(itemStruct.name)}({baitID})가 필요합니다.");
-            return;
-        }
+        //string baitID = "";// 미끼
+        //switch (areaType)
+        //{
+        //    case AreaType.Shallow:
+        //        baitID = "us_2001";// 미끼
+        //        break;
+        //    case AreaType.Oceanic:
+        //        baitID = "us_2001";// 미끼
+        //        break;
+        //}
+        //UI_Inventory_Slot _slot = Game_Manager.current.GetInventory.myBox.CheckItem(baitID);
+        //if (_slot != null)// 미끼
+        //{
+        //    Game_Manager.current.GetInventory.myBox.SlotEmpty(_slot);// 미끼 하나 제거
+        //}
+        //else
+        //{
+        //    // 미끼가 없으면
+        //    ItemStruct itemStruct = Singleton_Data.INSTANCE.Dict_Used[baitID].itemStruct;
+        //    Game_Manager.current.GetMainUI.SetWarnningText($"{Singleton_Data.INSTANCE.GetLanguage(itemStruct.name)}({baitID})가 필요합니다.");
+        //    return;
+        //}
 
         isFishing = true;
 
@@ -230,6 +229,8 @@ public class Fishing_Manager : MonoBehaviour
         //OutReward();// 보상 창이 열려있는 경우 스타트 버튼
         StartCoroutine(StartCount());
     }
+
+    public string fishID;
 
     IEnumerator StartCount()// 카운트
     {
