@@ -269,16 +269,18 @@ public class UI_Shop : UI_Inventory_Base
         SetInventorySlot(npc.invenSize);// 인벤토리 세팅
         yield return null;
 
-        SetFixedItem();
-        SetRandomItem();
+        SetItem();
+        //SetRandomItem();
     }
 
-    void SetFixedItem()// 상점 고정 아이템 세팅
+    void SetItem()// 상점 아이템 세팅
     {
-        string[] setID = npc.fixedID;
+        string[] setID = new string[Random.Range(10, 20)];
         for (int i = 0; i < setID.Length; i++)
         {
-            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(setID[i]);
+            string itemID = npc.saleItemList.GetItemID().itemID;// 아이템 목록에서 아이템 ID 가져오기
+            setID[i] = itemID;
+            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(itemID);
             if (AddItem(item) == false)// 상점 고정 아이템 세팅
             {
                 break;// 빈칸이 없으면 그만
@@ -286,31 +288,31 @@ public class UI_Shop : UI_Inventory_Base
         }
     }
 
-    void SetRandomItem()// 상점 랜덤 아이템 세팅
-    {
-        if (npc.randomID == null || npc.randomID.Length == 0)
-            return;
-        // 찬스 입력
-        float[] floats = new float[npc.randomID.Length];
-        for (int i = 0; i < npc.randomID.Length; i++)
-        {
-            floats[i] = npc.randomID[i].chance;
-        }
+    //void SetRandomItem()// 상점 랜덤 아이템 세팅
+    //{
+    //    if (npc.randomID == null || npc.randomID.Length == 0)
+    //        return;
+    //    // 찬스 입력
+    //    float[] floats = new float[npc.randomID.Length];
+    //    for (int i = 0; i < npc.randomID.Length; i++)
+    //    {
+    //        floats[i] = npc.randomID[i].chance;
+    //    }
 
-        // 아이템 반복 되지 않게 세팅
-        int amount = Random.Range(10, 20);
-        for (int i = 0; i < amount; i++)
-        {
-            int index = P01_Utility.Chance(floats);
-            string itemID = npc.randomID[index].itemID;
-            Debug.LogWarning($"{floats.Length}({index}):{itemID}");
-            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(itemID);
-            if (AddItem(item) == false)// 상점 랜덤 아이템 세팅
-            {
-                break;// 빈칸이 없으면 그만
-            }
-        }
-    }
+    //    // 아이템 반복 되지 않게 세팅
+    //    int amount = Random.Range(10, 20);
+    //    for (int i = 0; i < amount; i++)
+    //    {
+    //        int index = P01_Utility.Chance(floats);
+    //        string itemID = npc.randomID[index].itemID;
+    //        Debug.LogWarning($"{floats.Length}({index}):{itemID}");
+    //        ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(itemID);
+    //        if (AddItem(item) == false)// 상점 랜덤 아이템 세팅
+    //        {
+    //            break;// 빈칸이 없으면 그만
+    //        }
+    //    }
+    //}
 
     public void SetResultItem(ResultStruct _result)// 상점 고정 아이템 세팅
     {

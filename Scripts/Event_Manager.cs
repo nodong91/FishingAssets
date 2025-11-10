@@ -37,11 +37,11 @@ public class Event_Manager : MonoBehaviour
             if (typing == true)// ½ºÅµ
                 typing = false;
         }
-        if (Input.GetMouseButtonUp(1))
-        {
-            RemoveSelectButton();
-            StartEvent();
-        }
+        //if (Input.GetMouseButtonUp(1))
+        //{
+        //    RemoveSelectButton();
+        //    StartEvent();
+        //}
     }
 
     void SetDictKey()

@@ -247,7 +247,8 @@ public class Fishing_Manager : MonoBehaviour
         yield return null;
 
         StartCoroutine(CatchMovement());
-        FishState(FishStateType.Idle);
+        if (fishHealth > 0)
+            FishState(FishStateType.Idle);
     }
 
     void SetFishing()
@@ -271,7 +272,6 @@ public class Fishing_Manager : MonoBehaviour
     void FishState(FishStateType _state)
     {
         fishState = _state;
-        tempText.text = fishState.ToString();
         if (fishAction != null)
             StopCoroutine(fishAction);
 
@@ -524,7 +524,6 @@ public class Fishing_Manager : MonoBehaviour
 
         FishState(FishStateType.Attack);
     }
-    public TMPro.TMP_Text tempText;
     IEnumerator FishAttack()// น฿ป็
     {
         //float skillSpeed = currentFish.fishSpeed * fieldRadius;
