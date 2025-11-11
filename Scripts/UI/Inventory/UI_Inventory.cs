@@ -184,7 +184,7 @@ public class UI_Inventory : MonoBehaviour
         float addPrice = _item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 비싸게 판매 
         float price = Mathf.Round(_item.price + addPrice);// 스킬 스탯 추가
         Game_Manager.current.GetMainUI.MoveMoney(price);
-        Debug.LogWarning($"아이템 판매: {_item.name} for {_item.price} + {addPrice} = {price}");
+        Debug.Log($"아이템 판매: {_item.name} for {_item.price} + {addPrice} = {price}");
     }
 
     void BuyItem(ItemStruct _item)
@@ -192,14 +192,14 @@ public class UI_Inventory : MonoBehaviour
         float addPrice = _item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 싸게 구매 
         float price = -_item.price;
         Game_Manager.current.GetMainUI.MoveMoney(price);
-        Debug.LogWarning($"아이템 구매: {_item.name} for {_item.price} + {addPrice} = {price}");
+        Debug.Log($"아이템 구매: {_item.name} for {_item.price} + {addPrice} = {price}");
     }
 
     void SetEmptySlot(UI_Inventory_Slot _slot)// 슬롯 비우기
     {
         UI_Inventory_Base getInventory = GetInventory(enterSlotType);
         getInventory.SlotEmpty(_slot);
-        Debug.LogWarning($"아이템 비우기: {_slot.slotNum}");
+        Debug.Log($"아이템 비우기: {_slot.slotNum}");
     }
 
     public void SetQuestResult()
@@ -524,17 +524,18 @@ public class UI_Inventory : MonoBehaviour
 
     void ItemAction()
     {
+        ItemStruct item = selectSlot.itemInInventory.item;
         // 아이템 사용
-        switch (selectSlot.itemInInventory.item.itemType)
+        switch (item.itemType)
         {
             case ItemStruct.ItemType.Fish:
                 UseFish();
                 break;
 
             case ItemStruct.ItemType.Fuel:
-                UsedStruct usedStruct = Singleton_Data.INSTANCE.Dict_Used[selectSlot.itemInInventory.item.id];
-                Game_Manager.current.GetPlayer.AddEnergy(usedStruct.value);
-                Debug.LogWarning($"에너지 {usedStruct.value}만큼 회복");
+                UsedStruct usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
+                Game_Manager.current.GetPlayer.AddEnergy(usedStruct.addFuel);
+                Debug.LogWarning($"에너지 {usedStruct.addFuel}만큼 회복");
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
 
@@ -542,8 +543,10 @@ public class UI_Inventory : MonoBehaviour
                 IndividualRepair();
                 break;
 
-            case ItemStruct.ItemType.Quest:
-                //Game_Manager.current.GetNews.OpenNewsPaper();// 신문 열기
+            case ItemStruct.ItemType.Buff:
+                usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
+                Game_Manager.current.AddBuff(usedStruct);
+                Debug.LogWarning($"버프 {usedStruct.itemClass} +{usedStruct.addClassPercent}");
                 break;
 
             case ItemStruct.ItemType.Lottery:// 복권

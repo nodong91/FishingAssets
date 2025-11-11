@@ -588,4 +588,39 @@ public class Game_Manager : MonoBehaviour
     {
         CurrentLand.focusShip.gameObject.SetActive(_isOn);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void AddBuff(UsedStruct usedStruct)
+    {
+        ItemStruct.ItemClass itemClass = usedStruct.itemClass;
+        float addClassPercent = usedStruct.addClassPercent;
+
+        //switch (itemClass)
+        //{
+        //    case ItemStruct.ItemClass.Food:
+        //        GetEnergyUI.AddEnergy(addClassPercent);
+        //        break;
+        //    case ItemStruct.ItemClass.Drink:
+        //        GetEnergyUI.AddHydration(addClassPercent);
+        //        break;
+        //}
+    }
+
+
 }

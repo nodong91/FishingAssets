@@ -36,6 +36,7 @@ public class Fishing_Manager : MonoBehaviour
     FishStruct currentFish;
     RandomSize currentSize;
     public GameObject fishPrefab;
+    Coroutine fishAction;
 
     private float fishHealth = 0f;
     private float fishSpeed = 0f;
@@ -46,15 +47,12 @@ public class Fishing_Manager : MonoBehaviour
     public Fishing_Canvas fishingCanvas;
 
     public Transform focusTarget;
-
     private Vector3 fishTargetPoint;
     private bool isFishing = false;
     private bool isCatching = false;
-    Coroutine fishAction;
 
     AreaType areaType;
     DayType dayType;
-    Queue<FishStruct> fishQueue = new Queue<FishStruct>();// 나올 물고기 묶음
     Dictionary<string, List<FishStruct>> dictFishStruct = new Dictionary<string, List<FishStruct>>();
 
     public void SetStart()
@@ -90,41 +88,50 @@ public class Fishing_Manager : MonoBehaviour
         areaType = _areaType;
         fishingCanvas.SetCount(0);// 카운트 제거
 
-        SetFishList();// 낚시터 세팅
+        // 물고기 시간, 영역 세팅
+        dayType = Game_Manager.current.GetMainUI.timeUI.lightMode;
+        SetFish();
         SetReady(true);// 낚시 준비
     }
+    //===================================================================================================================
+    // 물고기 세팅
+    //===================================================================================================================
 
-    void SetFishList()
+    Queue<string> fishQueue = new Queue<string>();
+    void SetFish()
     {
         int addSkillAmount = Game_Manager.current.currentStatus.fishAmount;// 낚시 스킬로 추가 횟수
         int fishingAmount = Random.Range(1, 5) + addSkillAmount;// 낚시 횟수
-        // 물고기 시간, 영역 세팅
-        dayType = Game_Manager.current.GetMainUI.timeUI.lightMode;
-        string cordType = areaType.ToString() + dayType.ToString();
-        // 물고기 세팅
+
         fishQueue.Clear();
-        while (fishingAmount > fishQueue.Count)
+        for (int i = 0; i < fishingAmount; i++)
         {
-            if (TryFishStruct(cordType, out FishStruct _fish) == true)
-            {
-                fishQueue.Enqueue(_fish);
-                Debug.LogWarning($"{_fish.id} : {dictFishStruct.Count}");
-            }
+            // 물고기 세팅
+            FishStruct fishStruct = GetFishStruct();
+            fishQueue.Enqueue(fishStruct.id);
         }
+        //// 물고기 세팅
+        //if (TryFishStruct(out FishStruct _fish) == true)
+        //{
+        //    fishQueue.Enqueue(_fish.id);
+        //    currentFish = _fish;// 물고기 정보
+        //    currentSize = currentFish.GetRandom();
+        //    Debug.LogWarning($"{_fish.id} : {dictFishStruct.Count}");
+        //}
     }
 
-    bool TryFishStruct(string _type, out FishStruct _fish)// 해당 타입 물고기 중 랜덤
+    FishStruct GetFishStruct()// 해당 타입 물고기 중 랜덤
     {
-        if (dictFishStruct.ContainsKey(_type))
+        string cordType = areaType.ToString() + dayType.ToString();
+        if (dictFishStruct.ContainsKey(cordType))
         {
-            List<FishStruct> fishList = dictFishStruct[_type];// 해당 타입 물고기 리스트
+            List<FishStruct> fishList = dictFishStruct[cordType];// 해당 타입 물고기 리스트
             FishStruct randomFish = FishingChance(fishList);
-            _fish = randomFish;
-            return true;
+            return randomFish;
         }
-        Debug.LogError($"[Fishing_Manager] 해당 타입 물고기 없음 : {_type}");
-        _fish = default;
-        return false;
+        Debug.LogError($"[Fishing_Manager] 해당 타입 물고기 없음 : {cordType}");
+        FishStruct defaultFish = Singleton_Data.INSTANCE.Dict_Fish["fs_1001"];// 기본 물고기
+        return defaultFish;
     }
 
     FishStruct FishingChance(List<FishStruct> _fishList)// 확률로 물고기 선택
@@ -152,11 +159,24 @@ public class Fishing_Manager : MonoBehaviour
         return _fishList[^1];
     }
 
+    [System.Serializable]
+    public struct AddClassProbability
+    {
+        public ItemStruct.ItemClass itemClass;
+        public float addProbability;
+    }
+    public AddClassProbability addClassProbability;// 미끼로 확률 증가 시키는 클래스별 확률
+
     float GetProbability(ItemStruct.ItemClass _class)// 물고기 클래스별 확률
     {
-        float skillIndex = Game_Manager.current.currentStatus.luckFish;
+        float addProbability = 0f;
+        if (addClassProbability.itemClass == _class)
+        {
+            addProbability = addClassProbability.addProbability;
+        }
+
         // 물고기 클래스별 확률
-        return _class switch
+        float classValue = _class switch
         {
             // 필요한 물고기가 안나올 확률????? - 낮은 클래스 물고기 안나올 수 있음
             // 미끼가 특정 클래스의 확률을 조정
@@ -167,11 +187,16 @@ public class Fishing_Manager : MonoBehaviour
             ItemStruct.ItemClass.Legendary => 0.01f,
             _ => 0f,
         };
+        return classValue + addProbability;
     }
+
+    //===================================================================================================================
+    // 준비
+    //===================================================================================================================
 
     void SetReady(bool _ready)// 준비
     {
-        Game_Manager.current.GetMainUI.timeUI.TimePause(true);// 타이머 정지
+        Game_Manager.current.GetMainUI.timeUI.TimePause(true);// 낚시 하는 동안 시간 정지
 
         fishingSet.SetActive(true);
         transform.position = Game_Manager.current.GetPlayer.transform.position;
@@ -192,43 +217,34 @@ public class Fishing_Manager : MonoBehaviour
 
     void FishingStartButton()// 시작 버튼
     {
-        // 미끼가 있으면 버프
-        // 없으면 확률상 가장 낮은 물고기가 거의 잡힘
-        // 미끼의 등급별로 해당 등급의 물고기가 나올 확률 증가
-        //string baitID = "";// 미끼
-        //switch (areaType)
-        //{
-        //    case AreaType.Shallow:
-        //        baitID = "us_2001";// 미끼
-        //        break;
-        //    case AreaType.Oceanic:
-        //        baitID = "us_2001";// 미끼
-        //        break;
-        //}
-        //UI_Inventory_Slot _slot = Game_Manager.current.GetInventory.myBox.CheckItem(baitID);
-        //if (_slot != null)// 미끼
-        //{
-        //    Game_Manager.current.GetInventory.myBox.SlotEmpty(_slot);// 미끼 하나 제거
-        //}
-        //else
-        //{
-        //    // 미끼가 없으면
-        //    ItemStruct itemStruct = Singleton_Data.INSTANCE.Dict_Used[baitID].itemStruct;
-        //    Game_Manager.current.GetMainUI.SetWarnningText($"{Singleton_Data.INSTANCE.GetLanguage(itemStruct.name)}({baitID})가 필요합니다.");
-        //    return;
-        //}
-
+        SetFish();
         isFishing = true;
 
+        string _id = fishQueue.Dequeue();
+        currentFish = Singleton_Data.INSTANCE.Dict_Fish[_id];
         //Option_Manager.current.SetThemeMusic(bgmBattle);// 전투 시작 음악
-        currentFish = fishQueue.Dequeue();// 물고기 정보
-        currentSize = currentFish.GetRandom();
         fishingCanvas.SetFishing();
 
         SetFishing();// 낚시 초기화
-
-        //OutReward();// 보상 창이 열려있는 경우 스타트 버튼
         StartCoroutine(StartCount());
+    }
+
+    void SetFishing()// 초기 세팅
+    {
+        catchStatus = Game_Manager.current.currentStatus;
+        cooling = Time.time + currentFish.fishCoolTime;
+
+        Vector3 randomPoint = Random.insideUnitSphere * fieldRadius;
+        fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
+        fishPrefab.transform.position = fishTargetPoint;
+
+        fishHealth = currentFish.fishHealth / (catchStatus.catchMaxHealth + currentFish.fishHealth);
+        fishingCanvas.SetFishHP(fishHealth);
+
+        catchPrefab.transform.position = fishPrefab.transform.position;
+        catchRadius = catchStatus.catchRadius;
+        catchPrefab.transform.localScale = Vector3.one * catchRadius;
+        Debug.LogWarning($"SetReady 게이지 : {currentFish.fishHealth} / ({catchStatus.catchMaxHealth} + {currentFish.fishHealth}) = {fishHealth}");
     }
 
     IEnumerator StartCount()// 카운트
@@ -252,51 +268,6 @@ public class Fishing_Manager : MonoBehaviour
             FishState(FishStateType.Idle);
     }
 
-    void SetFishing()
-    {
-        catchStatus = Game_Manager.current.currentStatus;
-        cooling = Time.time + currentFish.fishCoolTime;
-
-        Vector3 randomPoint = Random.insideUnitSphere * fieldRadius;
-        fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
-        fishPrefab.transform.position = fishTargetPoint;
-
-        fishHealth = currentFish.fishHealth / (catchStatus.catchMaxHealth + currentFish.fishHealth);
-        fishingCanvas.SetFishHP(fishHealth);
-
-        catchPrefab.transform.position = fishPrefab.transform.position;
-        catchRadius = catchStatus.catchRadius;
-        catchPrefab.transform.localScale = Vector3.one * catchRadius;
-        Debug.LogWarning($"SetReady 게이지 : {currentFish.fishHealth} / ({catchStatus.catchMaxHealth} + {currentFish.fishHealth}) = {fishHealth}");
-    }
-
-    void FishState(FishStateType _state)
-    {
-        fishState = _state;
-        if (fishAction != null)
-            StopCoroutine(fishAction);
-
-        switch (fishState)
-        {
-            case FishStateType.Idle:
-                IdleState();
-                break;
-            case FishStateType.Spelling:
-                // 시전중
-                fishAction = StartCoroutine(Spelling());
-                break;
-            case FishStateType.Attack:
-                // 공격
-                fishAction = StartCoroutine(FishAttack());
-                break;
-            case FishStateType.Dodge:
-                fishAction = StartCoroutine(FishDodge());
-                break;
-            case FishStateType.Moving:
-                fishAction = StartCoroutine(FishMoving());
-                break;
-        }
-    }
     IEnumerator CatchMovement()
     {
         float cutTime = 0f;
@@ -444,6 +415,34 @@ public class Fishing_Manager : MonoBehaviour
     // 물고기 상태
     //===================================================================================================================
 
+    void FishState(FishStateType _state)
+    {
+        fishState = _state;
+        if (fishAction != null)
+            StopCoroutine(fishAction);
+
+        switch (fishState)
+        {
+            case FishStateType.Idle:
+                IdleState();
+                break;
+            case FishStateType.Spelling:
+                // 시전중
+                fishAction = StartCoroutine(Spelling());
+                break;
+            case FishStateType.Attack:
+                // 공격
+                fishAction = StartCoroutine(FishAttack());
+                break;
+            case FishStateType.Dodge:
+                fishAction = StartCoroutine(FishDodge());
+                break;
+            case FishStateType.Moving:
+                fishAction = StartCoroutine(FishMoving());
+                break;
+        }
+    }
+
     void IdleState()
     {
         if (currentFish.fishCoolTime > 0f && cooling < Time.time)
@@ -552,7 +551,7 @@ public class Fishing_Manager : MonoBehaviour
         {
             // 파괴 됐을 때
             FishingComplate(false);
-            OutFishing();
+            OutFishing();// 파괴 되서       낚시 종료
 
             StartCoroutine(DestroyShip());// 배 부셔져서 낚시 실패
         }
@@ -708,7 +707,7 @@ public class Fishing_Manager : MonoBehaviour
     }
 
     public GameObject catchaText;
-    IEnumerator CatchaAction()
+    IEnumerator CatchaAction()// 낚시 성공 텍스트
     {
         catchaText.SetActive(true);
         yield return new WaitForSeconds(3f);
@@ -717,22 +716,33 @@ public class Fishing_Manager : MonoBehaviour
         SetReward();
     }
 
-    public void FishingOver()
-    {
-        // 버튼 활성화
-        fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());// 스타트 버튼 활성화
-    }
-
     public void SetReward()
     {
+        string[] itemIDs;
+
         ItemStruct fishItem = currentFish.itemStruct;
         float size = currentSize.size;
+        // 행운의 물고기 두마리 낚을 확률
+        float luckValue = Game_Manager.current.currentStatus.luckFish;
+        float randomValue = Random.Range(0f, 100f);
+        if (luckValue > randomValue)// 행운의 물고기 두마리 낚음
+        {
+            // 물고기 세팅
+            FishStruct bonusFish = GetFishStruct();
+            itemIDs = new string[2] { fishItem.id, bonusFish.id };
+            // 두마리 낚음
+            Debug.LogWarning("축하합니다! 행운의 물고기 두 마리를 낚았습니다!");
+        }
+        else// 일반 낚시
+        {
+            itemIDs = new string[1] { fishItem.id };
+        }
 
         ResultStruct fishResult = new ResultStruct
         {
             inventorySize = new Vector2Int(7, 7), // 인벤토리 크기
             money = 0, // 돈
-            itemID = new string[1] { fishItem.id }, // 아이템 ID
+            itemID = itemIDs, // 아이템 ID
         };
 
         Game_Manager.current.GetInventory.SetResult(fishResult);// 퀘스트 완료 후 결과 아이템 설정
@@ -741,25 +751,24 @@ public class Fishing_Manager : MonoBehaviour
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
     }
 
-    void CloseButton()
+    void CloseButton()// 인벤토리 닫기 버튼
     {
         Game_Manager.current.OutOfControll(false);
         Game_Manager.current.GetInventory.CloseShop();// 상점 닫기
-        Game_Manager.current.GetFishing.FishingOver();
+        FishingOver();// 낚시 종료
     }
 
-    void OutReward()
+    public void FishingOver()
     {
-        // 보상 닫기
-        Game_Manager.current.GetInventory.CloseResult();// 낚시 보상 창 닫기
-        Game_Manager.current.GetMainUI.OpenCanvas(true);// 메인 유아이 다시 열기
+        // 버튼 활성화
+        fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());// 스타트 버튼 활성화
     }
 
     //===================================================================================================================
     // 낚시 끝
     //===================================================================================================================
 
-    void OutFishing()
+    void OutFishing()// 낚시 나가기 버튼
     {
         Singleton_Continue.INSTANCE.SaveContinue();// 낚시 종료 시 저장
 
@@ -769,10 +778,11 @@ public class Fishing_Manager : MonoBehaviour
         // 스타트 버튼 비활성화
         fishingCanvas.OnStartButton(0);
 
-        Game_Manager.current.GetMainUI.OpenCanvas(true);
-        Game_Manager.current.OutOfControll(false);
+        Game_Manager.current.OutOfControll(false);// 컨트롤 복구
 
-        OutReward();// 아웃버튼
+        // 보상 닫기
+        Game_Manager.current.GetInventory.CloseResult();// 낚시 보상 창 닫기
+        Game_Manager.current.GetMainUI.OpenCanvas(true);// 메인 유아이 다시 열기
 
         fishingSet.SetActive(false);// 물고기, 낚시대 제거
         fishingCanvas.outButton.gameObject.SetActive(false);
@@ -846,21 +856,16 @@ public class Fishing_Manager : MonoBehaviour
     {
         int addSkillAmount = Game_Manager.current.currentStatus.fishAmount;// 낚시 스킬로 추가 횟수
         int fishingAmount = 100 + addSkillAmount;// 낚시 횟수
-
-        // 물고기 세팅
         fishQueue.Clear();
-        for (int i = 0; i < fishingAmount; i++)
+        // 물고기 세팅
+        if (Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(_id))
         {
-            if (Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(_id))
-            {
-                FishStruct testFish = Singleton_Data.INSTANCE.Dict_Fish[_id];
-                fishQueue.Enqueue(testFish);
-            }
-            else
-            {
-                Debug.LogError($"[Fishing_Manager] 해당 ID 물고기 없음 : {_id}");
-            }
+            fishQueue.Enqueue(_id);
         }
-        SetReady(true);// 낚시 준비
+        else
+        {
+            Debug.LogError($"[Fishing_Manager] 해당 ID 물고기 없음 : {_id}");
+        }
+        SetReady(true);// 테스트 낚시 준비
     }
 }

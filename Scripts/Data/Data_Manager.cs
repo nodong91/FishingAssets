@@ -124,7 +124,7 @@ public class Data_Manager : Data_Parse
             {
                 id = tempItem.id,
                 itemStruct = tempItem,
-                value = Parse_Float(elements[9])
+                addFuel = Parse_Float(elements[9])
             };
             usedStruct.Add(tempData);
         }
@@ -360,7 +360,7 @@ public class Data_Manager : Data_Parse
         public float freshness;// 신선도 유지 - 꼭 필요한가??????  
 
         [Header(" [ Fish ]")]
-        public float luckFish;// 희귀 물고기 확률
+        public float luckFish;// 낚시 성공 시 한마리 더 낚을 확률 (낚시 시작할 때 정해지고 두마리 중 등급이 높은 물고기가 기준)
         public int fishAmount;// 낚시 횟수 증가
         public float fishPrice;// 판매 물고기 가격 증가
 
@@ -444,7 +444,12 @@ public class Data_Manager : Data_Parse
         [HideInInspector]
         public string id;
         public ItemStruct itemStruct;
-        public float value;// 효과 수치
+        [Header(" [ AddClass]")]// Buff 일 때만 사용
+        public ItemStruct.ItemClass itemClass;// 아이템 등급
+        public float addClassPercent;// 등급 상승 확률
+
+        [Header(" [ Fuel]")]// Fuel 일 때만 사용
+        public float addFuel;// 효과 수치
     }
 
     [System.Serializable]
@@ -455,10 +460,10 @@ public class Data_Manager : Data_Parse
         public enum ItemType
         {
             Fish,
-            Fuel,
-            Repare,
-            Quest,
-            Lottery,
+            Buff,// 미끼
+            Fuel,// 연료
+            Repare,// 수리
+            Lottery,// 복권
         }
         public ItemType itemType;
         [TextArea]
