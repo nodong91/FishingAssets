@@ -82,6 +82,12 @@ public class Game_Manager : MonoBehaviour
             GetFishing.SetFishingTest(addItemTest);
             Debug.LogError("물고기 치트");
         }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            Singleton_Continue.INSTANCE.SaveContinue();// Space 시 저장
+            Debug.LogError("저장중");
+        }
     }
 
     IEnumerator SetStart()

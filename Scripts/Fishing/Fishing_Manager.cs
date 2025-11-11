@@ -98,6 +98,7 @@ public class Fishing_Manager : MonoBehaviour
     {
         int addSkillAmount = Game_Manager.current.currentStatus.fishAmount;// 낚시 스킬로 추가 횟수
         int fishingAmount = Random.Range(1, 5) + addSkillAmount;// 낚시 횟수
+        // 물고기 시간, 영역 세팅
         dayType = Game_Manager.current.GetMainUI.timeUI.lightMode;
         string cordType = areaType.ToString() + dayType.ToString();
         // 물고기 세팅
@@ -151,16 +152,16 @@ public class Fishing_Manager : MonoBehaviour
         return _fishList[^1];
     }
 
-    float GetProbability(ItemStruct.ItemClass _class)
+    float GetProbability(ItemStruct.ItemClass _class)// 물고기 클래스별 확률
     {
         float skillIndex = Game_Manager.current.currentStatus.luckFish;
         // 물고기 클래스별 확률
         return _class switch
         {
             // 필요한 물고기가 안나올 확률????? - 낮은 클래스 물고기 안나올 수 있음
-            // 미끼로 확률 조정하는게???
-            ItemStruct.ItemClass.Common => 0.6f + (1f - 0.6f) * 0.5f * skillIndex,
-            ItemStruct.ItemClass.Uncommon => 0.25f + (1f - 0.25f) * 0.5f * skillIndex,
+            // 미끼가 특정 클래스의 확률을 조정
+            ItemStruct.ItemClass.Common => 0.6f,
+            ItemStruct.ItemClass.Uncommon => 0.25f,
             ItemStruct.ItemClass.Rare => 0.1f,
             ItemStruct.ItemClass.Epic => 0.04f,
             ItemStruct.ItemClass.Legendary => 0.01f,

@@ -7,20 +7,20 @@ public class Data_ItemList : ScriptableObject
     public struct ItemIDStruct
     {
         public string itemID;
-        [Range(1, 100)]
-        public int chance;
+        [Range(0f, 100f)]
+        public float chance;
     }
     public ItemIDStruct[] itemIDs;
 
     public ItemIDStruct GetItemID()
     {
-        int totalChance = 0;
+        float totalChance = 0;
         foreach (var item in itemIDs)
         {
             totalChance += item.chance;
         }
-        int randomValue = Random.Range(1, totalChance + 1);
-        int cumulativeChance = 0;
+        float randomValue = Random.Range(1, totalChance + 1);
+        float cumulativeChance = 0;
         foreach (var item in itemIDs)
         {
             cumulativeChance += item.chance;
