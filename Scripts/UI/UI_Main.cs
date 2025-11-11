@@ -359,9 +359,13 @@ public class UI_Main : MonoBehaviour
     //===========================================================================================================================
 
     public UI_BuffSlot buffSlotPrefab;
-    public void SetBuffSlot(BuffStruct _buff)
+    public void AddBuffSlot(BuffStruct _buff)
     {
         buffSlotPrefab.SetBuffSlot(_buff);
+    }
+    public void RemoveBuffSlot(BuffStruct _buff)
+    {
+        
     }
 
     UI_BuffSlot TryBuffSlot()

@@ -525,6 +525,7 @@ public class UI_Inventory : MonoBehaviour
     void ItemAction()
     {
         ItemStruct item = selectSlot.itemInInventory.item;
+        Debug.LogWarning($"아이템 타입 : {item.itemType}");
         // 아이템 사용
         switch (item.itemType)
         {

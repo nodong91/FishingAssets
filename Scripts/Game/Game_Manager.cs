@@ -159,10 +159,10 @@ public class Game_Manager : MonoBehaviour
         bool fullHealth = GetPlayer.FullHealth;// 스탯 적용 하기 전 풀피 체크
         currentStatus.SettingStatus(shipData.status);// 디폴트 스탯 적용
         currentStatus.AddStatus(GetAddStatus);// 추가 스탯 적용
-        for (int i = 0; i < buffList.Count; i++)
-        {
-            currentStatus.AddStatus(buffList[i].addStatus);// 버프 스탯 적용
-        }
+        //for (int i = 0; i < buffList.Count; i++)
+        //{
+        //    currentStatus.AddStatus(buffList[i].addStatus);// 버프 스탯 적용
+        //}
 
         GetInventory.myBox.AddMaxWeight(currentStatus.maxWeight);// 인벤토리 무게 적용
         GetInventory.myBox.AddInventory(currentStatus.maxBoxSize);// 인벤토리 사이즈 적용
@@ -614,7 +614,7 @@ public class Game_Manager : MonoBehaviour
 
     public struct BuffStruct
     {
-        public Sprite iconSprite;
+        public string iconSprite;
         [Header(" [ 미끼 ]")]
         public ItemStruct.ItemClass itemClass;
         public float addClassPercent;
@@ -622,6 +622,7 @@ public class Game_Manager : MonoBehaviour
         [Header(" [ 스탯 ]")]
         public SetStatus addStatus;
         public float buffStartTime;
+        public float duration;
     }
     public List<BuffStruct> buffList = new List<BuffStruct>();
 
@@ -629,13 +630,15 @@ public class Game_Manager : MonoBehaviour
     {
         BuffStruct buff = new BuffStruct
         {
+            iconSprite = _usedStruct.itemStruct.icon,
             itemClass = _usedStruct.itemClass,
             addClassPercent = _usedStruct.addClassPercent,
             addStatus = _usedStruct.addStatus,
-            buffStartTime = Time.time
+            buffStartTime = Time.time,
+            duration = _usedStruct.buffDuration,
         };
-
         GetFishing.AddBuff(buff);
-        AddStatus();
+        GetMainUI.AddBuffSlot(buff);
+        //AddStatus();
     }
 }

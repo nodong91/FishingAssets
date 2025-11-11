@@ -449,6 +449,7 @@ public class Data_Manager : Data_Parse
         public ItemStruct.ItemClass itemClass;// 미끼 사용 시 해당 클래스 등장 확률
         public float addClassPercent;// 등장 상승 확률
         public SetStatus addStatus;// 효과 수치
+        public float buffDuration;// 효과 시간
 
         [Header(" [ Fuel]")]// Fuel 일 때만 사용
         public float addFuel;// 효과 수치
