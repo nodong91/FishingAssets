@@ -159,20 +159,20 @@ public class Fishing_Manager : MonoBehaviour
         return _fishList[^1];
     }
 
-    [System.Serializable]
-    public struct AddClassProbability
+    ItemStruct.ItemClass addItemClass;// ¹Ì³¢·Î È®·ü Áõ°¡ ½ÃÅ°´Â Å¬·¡½ºº° È®·ü
+    float addProbability;
+    public void AddBuff(Game_Manager.BuffStruct _buff)
     {
-        public ItemStruct.ItemClass itemClass;
-        public float addProbability;
+        addItemClass = _buff.itemClass;
+        addProbability = _buff.addClassPercent;
     }
-    public AddClassProbability addClassProbability;// ¹Ì³¢·Î È®·ü Áõ°¡ ½ÃÅ°´Â Å¬·¡½ºº° È®·ü
 
     float GetProbability(ItemStruct.ItemClass _class)// ¹°°í±â Å¬·¡½ºº° È®·ü
     {
-        float addProbability = 0f;
-        if (addClassProbability.itemClass == _class)
+        float addValue = 0f;
+        if (addItemClass == _class)
         {
-            addProbability = addClassProbability.addProbability;
+            addValue = addProbability;
         }
 
         // ¹°°í±â Å¬·¡½ºº° È®·ü
@@ -187,7 +187,7 @@ public class Fishing_Manager : MonoBehaviour
             ItemStruct.ItemClass.Legendary => 0.01f,
             _ => 0f,
         };
-        return classValue + addProbability;
+        return classValue + addValue;
     }
 
     //===================================================================================================================

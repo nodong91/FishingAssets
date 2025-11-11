@@ -444,9 +444,11 @@ public class Data_Manager : Data_Parse
         [HideInInspector]
         public string id;
         public ItemStruct itemStruct;
+
         [Header(" [ AddClass]")]// Buff 일 때만 사용
-        public ItemStruct.ItemClass itemClass;// 아이템 등급
-        public float addClassPercent;// 등급 상승 확률
+        public ItemStruct.ItemClass itemClass;// 미끼 사용 시 해당 클래스 등장 확률
+        public float addClassPercent;// 등장 상승 확률
+        public SetStatus addStatus;// 효과 수치
 
         [Header(" [ Fuel]")]// Fuel 일 때만 사용
         public float addFuel;// 효과 수치
@@ -464,6 +466,7 @@ public class Data_Manager : Data_Parse
             Fuel,// 연료
             Repare,// 수리
             Lottery,// 복권
+            Quest
         }
         public ItemType itemType;
         [TextArea]

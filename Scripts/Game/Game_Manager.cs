@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -158,6 +159,10 @@ public class Game_Manager : MonoBehaviour
         bool fullHealth = GetPlayer.FullHealth;// 스탯 적용 하기 전 풀피 체크
         currentStatus.SettingStatus(shipData.status);// 디폴트 스탯 적용
         currentStatus.AddStatus(GetAddStatus);// 추가 스탯 적용
+        for (int i = 0; i < buffList.Count; i++)
+        {
+            currentStatus.AddStatus(buffList[i].addStatus);// 버프 스탯 적용
+        }
 
         GetInventory.myBox.AddMaxWeight(currentStatus.maxWeight);// 인벤토리 무게 적용
         GetInventory.myBox.AddInventory(currentStatus.maxBoxSize);// 인벤토리 사이즈 적용
@@ -603,24 +608,34 @@ public class Game_Manager : MonoBehaviour
 
 
 
+    //====================================================================================================================
+    // 버프 관련
+    //====================================================================================================================
 
-
-
-    public void AddBuff(UsedStruct usedStruct)
+    public struct BuffStruct
     {
-        ItemStruct.ItemClass itemClass = usedStruct.itemClass;
-        float addClassPercent = usedStruct.addClassPercent;
+        public Sprite iconSprite;
+        [Header(" [ 미끼 ]")]
+        public ItemStruct.ItemClass itemClass;
+        public float addClassPercent;
 
-        //switch (itemClass)
-        //{
-        //    case ItemStruct.ItemClass.Food:
-        //        GetEnergyUI.AddEnergy(addClassPercent);
-        //        break;
-        //    case ItemStruct.ItemClass.Drink:
-        //        GetEnergyUI.AddHydration(addClassPercent);
-        //        break;
-        //}
+        [Header(" [ 스탯 ]")]
+        public SetStatus addStatus;
+        public float buffStartTime;
     }
+    public List<BuffStruct> buffList = new List<BuffStruct>();
 
+    public void AddBuff(UsedStruct _usedStruct)
+    {
+        BuffStruct buff = new BuffStruct
+        {
+            itemClass = _usedStruct.itemClass,
+            addClassPercent = _usedStruct.addClassPercent,
+            addStatus = _usedStruct.addStatus,
+            buffStartTime = Time.time
+        };
 
+        GetFishing.AddBuff(buff);
+        AddStatus();
+    }
 }

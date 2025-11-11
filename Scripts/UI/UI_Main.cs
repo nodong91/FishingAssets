@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
+using static Game_Manager;
 
 public class UI_Main : MonoBehaviour
 {
@@ -342,5 +343,29 @@ public class UI_Main : MonoBehaviour
             yield return null;
         }
         moneyRect.anchoredPosition = Vector2.zero;
+    }
+
+
+
+
+
+
+
+
+
+
+    //===========================================================================================================================
+    // น๖วม
+    //===========================================================================================================================
+
+    public UI_BuffSlot buffSlotPrefab;
+    public void SetBuffSlot(BuffStruct _buff)
+    {
+        buffSlotPrefab.SetBuffSlot(_buff);
+    }
+
+    UI_BuffSlot TryBuffSlot()
+    {
+        return null;
     }
 }
