@@ -614,6 +614,7 @@ public class Game_Manager : MonoBehaviour
 
     public struct BuffStruct
     {
+        public string id;
         public string iconSprite;
         [Header(" [ 미끼 ]")]
         public ItemStruct.ItemClass itemClass;
@@ -624,12 +625,14 @@ public class Game_Manager : MonoBehaviour
         public float buffStartTime;
         public float duration;
     }
-    public List<BuffStruct> buffList = new List<BuffStruct>();
+    public Dictionary<string, BuffStruct> dictBuff = new Dictionary<string, BuffStruct>();
+
 
     public void AddBuff(UsedStruct _usedStruct)
     {
         BuffStruct buff = new BuffStruct
         {
+            id = _usedStruct.itemStruct.id,
             iconSprite = _usedStruct.itemStruct.icon,
             itemClass = _usedStruct.itemClass,
             addClassPercent = _usedStruct.addClassPercent,
@@ -637,8 +640,27 @@ public class Game_Manager : MonoBehaviour
             buffStartTime = Time.time,
             duration = _usedStruct.buffDuration,
         };
-        GetFishing.AddBuff(buff);
         GetMainUI.AddBuffSlot(buff);
+        dictBuff[buff.id] = buff;
         //AddStatus();
     }
+
+    public Dictionary<ItemStruct.ItemClass, float> GetFishBuff()
+    {
+        Dictionary<ItemStruct.ItemClass, float> GetAddFishBuff = new Dictionary<ItemStruct.ItemClass, float>();
+        foreach (var child in dictBuff)
+        {
+            if (GetAddFishBuff.ContainsKey(child.Value.itemClass) == true)
+            {
+                GetAddFishBuff[child.Value.itemClass] += child.Value.addClassPercent;
+
+            }
+            else
+            {
+                GetAddFishBuff[child.Value.itemClass] = child.Value.addClassPercent;
+            }
+        }
+        return GetAddFishBuff;
+    }
+    // 커맨드가 점점 짧아져서 실력이 늘고 있다는 것을 암시하는 효과
 }

@@ -56,7 +56,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: d38421496a31ec845823f5fb85a9e870, type: 3}
   - {fileID: 4900000, guid: 3251b9410aa77034293d9143ff30a253, type: 3}
   - {fileID: 4900000, guid: 32fe5a5b0689f414dae0db94418d5241, type: 3}
-  - {fileID: 4900000, guid: 39e3880ffb30ab6439aeebe187ac45f7, type: 3}
+  - {fileID: 4900000, guid: 7448844fb9ed9f4488029203761c39b2, type: 3}
   audioClip:
   - {fileID: 8300000, guid: 2a8c919394aa89d489709789ab148c31, type: 3}
   - {fileID: 8300000, guid: 6c04344b73df8bc49b527bd516b1d452, type: 3}
@@ -320,46 +320,16 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-    addFuel: 3
-  - id: us_1002
-    itemStruct:
-      id: us_1002
-      name: repairkit
-      itemType: 3
-      explanation: repairkit_01
-      icon: Item_RepairKit
-      itemClass: 0
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
-      price: 5
-    itemClass: 0
-    addClassPercent: 0
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      freshness: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
+    buffDuration: 0
     addFuel: 0
   - id: us_2001
     itemStruct:
       id: us_2001
-      name: lugworm
-      itemType: 0
-      explanation: lugworm_01
-      icon: Item_Bait_Worm
-      itemClass: 3
+      name: repairkit
+      itemType: 3
+      explanation: repairkit_01
+      icon: Item_RepairKit
+      itemClass: 4
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
@@ -382,15 +352,48 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+    buffDuration: 0
     addFuel: 0
   - id: us_3001
     itemStruct:
       id: us_3001
+      name: lugworm
+      itemType: 1
+      explanation: lugworm_01
+      icon: Item_Bait_Worm
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 5
+    itemClass: 0
+    addClassPercent: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+    buffDuration: 0
+    addFuel: 0
+  - id: us_4001
+    itemStruct:
+      id: us_4001
       name: lotterytoto
       itemType: 4
       explanation: lotterytoto_01
       icon: Item_Lottery
-      itemClass: 3
+      itemClass: 4
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
@@ -413,10 +416,11 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+    buffDuration: 0
     addFuel: 0
-  - id: us_3002
+  - id: us_5001
     itemStruct:
-      id: us_3002
+      id: us_5001
       name: badanews
       itemType: 5
       explanation: badanews_01
@@ -445,15 +449,16 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+    buffDuration: 0
     addFuel: 0
-  - id: us_5001
+  - id: us_5002
     itemStruct:
-      id: us_5001
+      id: us_5002
       name: "\uC21C\uAC04\uC774\uB3D9"
       itemType: 5
       explanation: "\uB9C8\uC9C0\uB9C9 \uB3C4\uD06C\uB85C \uC774\uB3D9\uD55C\uB2E4."
       icon: Item_Quest
-      itemClass: 2
+      itemClass: 4
       shape:
       - {x: 0, y: 1}
       iconSize: {x: 1, y: 2, z: 0.5, w: 0.75}
@@ -477,10 +482,11 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+    buffDuration: 0
     addFuel: 0
-  - id: us_0001
+  - id: us_5003
     itemStruct:
-      id: us_0001
+      id: us_5003
       name: brownmoneypouch
       itemType: 5
       explanation: brownmoneypouch_01
@@ -508,15 +514,16 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-    addFuel: 100
-  - id: us_0002
+    buffDuration: 0
+    addFuel: 0
+  - id: us_5004
     itemStruct:
-      id: us_0002
+      id: us_5004
       name: bluemoneypouch
       itemType: 5
       explanation: bluemoneypouch_01
       icon: Icon_Sk_012
-      itemClass: 3
+      itemClass: 4
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
@@ -539,7 +546,41 @@ MonoBehaviour:
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
-    addFuel: 500
+    buffDuration: 0
+    addFuel: 0
+  - id: us_3002
+    itemStruct:
+      id: us_3002
+      name: lugworm
+      itemType: 1
+      explanation: lugworm_01
+      icon: fs_1002_mackerel
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 1
+      price: 5
+    itemClass: 0
+    addClassPercent: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      catchAttakSpeed: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      freshness: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+    buffDuration: 0
+    addFuel: 0
   fishStruct:
   - id: fs_1001
     itemStruct:

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -357,19 +358,40 @@ public class UI_Main : MonoBehaviour
     //===========================================================================================================================
     // 버프
     //===========================================================================================================================
-
+    [Header(" [ 버프 ]")]
+    public GridLayoutGroup buffGrid;
     public UI_BuffSlot buffSlotPrefab;
+    Dictionary<string, UI_BuffSlot> dictBuffSlots = new Dictionary<string, UI_BuffSlot>();
+    Queue<UI_BuffSlot> buffSlotPool = new Queue<UI_BuffSlot>();
+
     public void AddBuffSlot(BuffStruct _buff)
     {
-        buffSlotPrefab.SetBuffSlot(_buff);
+        if (dictBuffSlots.ContainsKey(_buff.id) == false)
+        {
+            dictBuffSlots[_buff.id] = TryBuffSlot();
+            dictBuffSlots[_buff.id].gameObject.SetActive(true);
+            dictBuffSlots[_buff.id].OnBuffEnd = RemoveBuffSlot;
+        }
+        dictBuffSlots[_buff.id].SetBuffSlot(_buff);
     }
+
     public void RemoveBuffSlot(BuffStruct _buff)
     {
-        
+        if (dictBuffSlots.ContainsKey(_buff.id) == false)
+            return;
+
+        buffSlotPool.Enqueue(dictBuffSlots[_buff.id]);
+        dictBuffSlots[_buff.id].gameObject.SetActive(false);
+        dictBuffSlots.Remove(_buff.id);
     }
 
     UI_BuffSlot TryBuffSlot()
     {
-        return null;
+        if (buffSlotPool.Count > 0)
+        {
+            return buffSlotPool.Dequeue();
+        }
+        UI_BuffSlot inst = Instantiate(buffSlotPrefab, buffGrid.transform);
+        return inst;
     }
 }

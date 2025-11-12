@@ -1,9 +1,10 @@
-ID,Name,Description,Icon,Item Class,Shape,Weight,Price,Item Type,Value
-us_1001,smalloiltank,smalloiltank_01,Item_Oilcan,Common,0,3,10,Fuel,3
-us_1002,repairkit,repairkit_01,Item_RepairKit,Legendary,0,1,5,Repare,0
-us_2001,lugworm,lugworm_01,Item_Bait_Worm,Uncommon,0,1,5,Fish,0
-us_3001,lotterytoto,lotterytoto_01,Item_Lottery,Uncommon,0,1,100,Lottery,0
-us_3002,badanews,badanews_01,Item_Quest,Common,0;1,1,100,Quest,0
-us_5001,순간이동,마지막 도크로 이동한다.,Item_Quest,Rare,0;1,1,100,Quest,0
-us_0001,brownmoneypouch,brownmoneypouch_01,Icon_Sk_012,Common,0,1,100,Quest,100
-us_0002,bluemoneypouch,bluemoneypouch_01,Icon_Sk_012,Uncommon,0,1,500,Quest,500
+ID,Name,Description,Icon,Item Class,Shape,Weight,Price,Item Type,Add Class,Add Class Per,Etc Value,Skill ID
+us_1001,smalloiltank,smalloiltank_01,Item_Oilcan,Common,-,3,10,Fuel,Legendary,0,3,-
+us_2001,repairkit,repairkit_01,Item_RepairKit,Common,-,1,5,Repare,Legendary,0,0,-
+us_3001,lugworm,lugworm_01,Item_Bait_Worm,Common,-,1,5,Buff,Legendary,1,0,-
+us_4001,lotterytoto,lotterytoto_01,Item_Lottery,Common,-,1,100,Lottery,Legendary,0,0,-
+us_5001,badanews,badanews_01,Item_Quest,Common,0;1,1,100,Etc,Legendary,0,0,-
+us_5002,순간이동,마지막 도크로 이동한다.,Item_Quest,Common,0;1,1,100,Etc,Legendary,0,0,-
+us_5003,brownmoneypouch,brownmoneypouch_01,Icon_Sk_012,Common,-,1,100,Etc,Legendary,0,100,-
+us_5004,bluemoneypouch,bluemoneypouch_01,Icon_Sk_012,Common,-,1,500,Etc,Legendary,0,500,-
+us_3002,lugworm,lugworm_01,fs_1002_mackerel,Common,1;0,1,5,Buff,Legendary,0,0,sk_002_00

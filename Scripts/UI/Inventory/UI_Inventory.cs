@@ -548,6 +548,7 @@ public class UI_Inventory : MonoBehaviour
                 usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
                 Game_Manager.current.AddBuff(usedStruct);
                 Debug.LogWarning($"버프 {usedStruct.itemClass} +{usedStruct.addClassPercent}");
+                SetEmptySlot(selectSlot);
                 break;
 
             case ItemStruct.ItemType.Lottery:// 복권

@@ -159,20 +159,19 @@ public class Fishing_Manager : MonoBehaviour
         return _fishList[^1];
     }
 
-    ItemStruct.ItemClass addItemClass;// ¹Ì³¢·Î È®·ü Áõ°¡ ½ÃÅ°´Â Å¬·¡½ºº° È®·ü
-    float addProbability;
-    public void AddBuff(Game_Manager.BuffStruct _buff)
-    {
-        addItemClass = _buff.itemClass;
-        addProbability = _buff.addClassPercent;
-    }
-
     float GetProbability(ItemStruct.ItemClass _class)// ¹°°í±â Å¬·¡½ºº° È®·ü
     {
+        Dictionary<ItemStruct.ItemClass, float> dictBuff = Game_Manager.current.GetFishBuff();// ¹Ì³¢·Î Ãß°¡ È®·ü
         float addValue = 0f;
-        if (addItemClass == _class)
+        foreach (var child in dictBuff)
         {
-            addValue = addProbability;
+            ItemStruct.ItemClass addItemClass = child.Key;
+            float addProbability = child.Value;
+            if (addItemClass == _class)
+            {
+                addValue += addProbability;
+                break;
+            }
         }
 
         // ¹°°í±â Å¬·¡½ºº° È®·ü
