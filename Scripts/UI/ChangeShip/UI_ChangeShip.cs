@@ -55,6 +55,7 @@ public class UI_ChangeShip : MonoBehaviour
     void ShipClick(UI_ChangeShip_Slot _slot)// 배선택
     {
         Game_Manager.current.ChangeStatus(_slot.shipData);
+        Singleton_Continue.INSTANCE.SaveContinue();// 배 변경 시 저장
     }
 
     void ShipEnter(Custom_Button _button)

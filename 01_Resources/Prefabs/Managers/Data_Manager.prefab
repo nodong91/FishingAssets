@@ -56,7 +56,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: d38421496a31ec845823f5fb85a9e870, type: 3}
   - {fileID: 4900000, guid: 3251b9410aa77034293d9143ff30a253, type: 3}
   - {fileID: 4900000, guid: 32fe5a5b0689f414dae0db94418d5241, type: 3}
-  - {fileID: 4900000, guid: 7448844fb9ed9f4488029203761c39b2, type: 3}
+  - {fileID: 4900000, guid: cd8f0818fae9079469f602843e16557d, type: 3}
   audioClip:
   - {fileID: 8300000, guid: 2a8c919394aa89d489709789ab148c31, type: 3}
   - {fileID: 8300000, guid: 6c04344b73df8bc49b527bd516b1d452, type: 3}
@@ -302,26 +302,11 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 3
       price: 10
-    itemClass: 0
+    addClass: 0
     addClassPercent: 0
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      freshness: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
     buffDuration: 0
-    addFuel: 0
+    etcValue: 3
+    skillID: "-\r"
   - id: us_2001
     itemStruct:
       id: us_2001
@@ -334,26 +319,11 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 5
-    itemClass: 0
+    addClass: 0
     addClassPercent: 0
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      freshness: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
     buffDuration: 0
-    addFuel: 0
+    etcValue: 0
+    skillID: "-\r"
   - id: us_3001
     itemStruct:
       id: us_3001
@@ -366,26 +336,11 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 5
-    itemClass: 0
-    addClassPercent: 0
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      freshness: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-    buffDuration: 0
-    addFuel: 0
+    addClass: 0
+    addClassPercent: 1
+    buffDuration: 100
+    etcValue: 0
+    skillID: "-\r"
   - id: us_4001
     itemStruct:
       id: us_4001
@@ -398,26 +353,11 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 100
-    itemClass: 0
+    addClass: 0
     addClassPercent: 0
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      freshness: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
     buffDuration: 0
-    addFuel: 0
+    etcValue: 0
+    skillID: "-\r"
   - id: us_5001
     itemStruct:
       id: us_5001
@@ -431,26 +371,11 @@ MonoBehaviour:
       iconSize: {x: 1, y: 2, z: 0.5, w: 0.75}
       weight: 1
       price: 100
-    itemClass: 0
+    addClass: 0
     addClassPercent: 0
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      freshness: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
     buffDuration: 0
-    addFuel: 0
+    etcValue: 0
+    skillID: "-\r"
   - id: us_5002
     itemStruct:
       id: us_5002
@@ -464,26 +389,11 @@ MonoBehaviour:
       iconSize: {x: 1, y: 2, z: 0.5, w: 0.75}
       weight: 1
       price: 100
-    itemClass: 0
+    addClass: 0
     addClassPercent: 0
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      freshness: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
     buffDuration: 0
-    addFuel: 0
+    etcValue: 0
+    skillID: "-\r"
   - id: us_5003
     itemStruct:
       id: us_5003
@@ -496,26 +406,11 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 100
-    itemClass: 0
+    addClass: 0
     addClassPercent: 0
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      freshness: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
     buffDuration: 0
-    addFuel: 0
+    etcValue: 100
+    skillID: "-\r"
   - id: us_5004
     itemStruct:
       id: us_5004
@@ -528,26 +423,11 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 500
-    itemClass: 0
+    addClass: 0
     addClassPercent: 0
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      freshness: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
     buffDuration: 0
-    addFuel: 0
+    etcValue: 500
+    skillID: "-\r"
   - id: us_3002
     itemStruct:
       id: us_3002
@@ -561,26 +441,11 @@ MonoBehaviour:
       iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
       weight: 1
       price: 5
-    itemClass: 0
+    addClass: 0
     addClassPercent: 0
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      freshness: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-    buffDuration: 0
-    addFuel: 0
+    buffDuration: 100
+    etcValue: 0
+    skillID: sk_002_00
   fishStruct:
   - id: fs_1001
     itemStruct:

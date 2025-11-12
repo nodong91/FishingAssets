@@ -53,7 +53,7 @@ public class Game_Manager : MonoBehaviour
     void Start()
     {
         if (LoadingManager.current != null)
-            LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료
+            LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료 딜리게이트 등록
 
         StartCoroutine(SetStart());
     }
@@ -113,17 +113,13 @@ public class Game_Manager : MonoBehaviour
         GetChangeShip.SetStart();
 
         string shipID = continueData.shipData;
-        if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID))
+        if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)
         {
+            shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
             GetInventory.TryDestroySlot = continueData.destroySlot;// 부서진 슬롯
 
-            shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
             ChangeStatus(shipData);
             OutOfControll(false);
-        }
-        else
-        {
-            Debug.LogWarning("배 데이터 없음");
         }
     }
 
@@ -131,14 +127,14 @@ public class Game_Manager : MonoBehaviour
     {
         SetThemeMusic();
         // 튜토리얼 시작
-        if (continueData.shipData == "")
+        if (shipData == null)
         {
             Debug.LogWarning("배가 없으면 튜토리얼 시작");
             // 배가 없으면 튜토리얼 시작
             //GetTutorial.SetTutorial(String_Tutorial._newGame);// 배구입 튜토리얼 세팅
             GetMainUI.OpenCanvas(false);
             Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            GetDialog.DialogStart_NPC(npc, 4);
+            GetDialog.DialogStart_NPC(npc, 4);// 튜토리얼 대화 시작
             return;
         }
         GetPlayer.CheckClosestUnit();// 생성 시 가까운 오브젝트 찾기
@@ -624,9 +620,29 @@ public class Game_Manager : MonoBehaviour
         public SetStatus addStatus;
         public float buffStartTime;
         public float duration;
+        [Header(" [ 기타 ]")]
+        public float etcValue;
+        public string skillID;
     }
     public Dictionary<string, BuffStruct> dictBuff = new Dictionary<string, BuffStruct>();
 
+    public void AddBuffFish(FishStruct _fishStruct)
+    {
+        // 물고기를 사용하여 버프 추가
+        BuffStruct buff = new BuffStruct
+        {
+            id = _fishStruct.itemStruct.itemType.ToString(),
+            iconSprite = _fishStruct.itemStruct.icon,
+            itemClass = _fishStruct.itemStruct.itemClass,// 미끼 효과 종류
+            addClassPercent = _fishStruct.itemStruct.weight,// 미끼 효과 퍼센트
+            buffStartTime = Time.time,
+            duration = _fishStruct.itemStruct.weight*100f,// 버프 지속 시간
+            //etcValue = _fishStruct.etcValue,
+            //skillID = _fishStruct.skillID
+        };
+        GetMainUI.AddBuffSlot(buff);
+        dictBuff[buff.id] = buff;
+    }
 
     public void AddBuff(UsedStruct _usedStruct)
     {
@@ -634,11 +650,12 @@ public class Game_Manager : MonoBehaviour
         {
             id = _usedStruct.itemStruct.id,
             iconSprite = _usedStruct.itemStruct.icon,
-            itemClass = _usedStruct.itemClass,
+            itemClass = _usedStruct.addClass,
             addClassPercent = _usedStruct.addClassPercent,
-            addStatus = _usedStruct.addStatus,
             buffStartTime = Time.time,
             duration = _usedStruct.buffDuration,
+            etcValue = _usedStruct.etcValue,
+            skillID = _usedStruct.skillID
         };
         GetMainUI.AddBuffSlot(buff);
         dictBuff[buff.id] = buff;

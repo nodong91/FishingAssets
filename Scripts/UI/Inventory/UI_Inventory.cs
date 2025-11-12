@@ -531,12 +531,17 @@ public class UI_Inventory : MonoBehaviour
         {
             case ItemStruct.ItemType.Fish:
                 UseFish();
+                // 물고기와 같은 등급의 물고기가 나올 확률 버프
+                // 등급은 같은 등급인데...버프 지속시간과 확률은 어디서 따올까?
+                FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[item.id];
+                Game_Manager.current.AddBuffFish(fishStruct);
+                SetEmptySlot(selectSlot);
                 break;
 
             case ItemStruct.ItemType.Fuel:
                 UsedStruct usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
-                Game_Manager.current.GetPlayer.AddEnergy(usedStruct.addFuel);
-                Debug.LogWarning($"에너지 {usedStruct.addFuel}만큼 회복");
+                Game_Manager.current.GetPlayer.AddEnergy(usedStruct.etcValue);
+                Debug.LogWarning($"에너지 {usedStruct.etcValue}만큼 회복");
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
 
@@ -547,7 +552,7 @@ public class UI_Inventory : MonoBehaviour
             case ItemStruct.ItemType.Buff:
                 usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
                 Game_Manager.current.AddBuff(usedStruct);
-                Debug.LogWarning($"버프 {usedStruct.itemClass} +{usedStruct.addClassPercent}");
+                Debug.LogWarning($"버프 {usedStruct.addClass} +{usedStruct.addClassPercent}");
                 SetEmptySlot(selectSlot);
                 break;
 

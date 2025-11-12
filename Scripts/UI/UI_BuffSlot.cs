@@ -19,13 +19,14 @@ public class UI_BuffSlot : MonoBehaviour
         iconImage.sprite = icon;
 
         iconImage.SetNativeSize();
-        float x = 40f/iconImage.rectTransform.sizeDelta.x ;
-        float y = iconImage.rectTransform.sizeDelta.y *x;
-        iconImage.rectTransform.sizeDelta = new Vector2(40f, y);
+        float iconWidth = 40f;
+        float x = iconWidth / iconImage.rectTransform.sizeDelta.x;
+        float y = iconImage.rectTransform.sizeDelta.y * x;
+        iconImage.rectTransform.sizeDelta = new Vector2(iconWidth, y);
 
-        //if (coolingCoroutine != null)
-        //    StopCoroutine(coolingCoroutine);
-        //coolingCoroutine = StartCoroutine(CoolingBuff());
+        if (coolingCoroutine != null)
+            StopCoroutine(coolingCoroutine);
+        coolingCoroutine = StartCoroutine(CoolingBuff());
     }
 
     IEnumerator CoolingBuff()

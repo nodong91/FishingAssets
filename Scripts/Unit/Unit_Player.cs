@@ -64,13 +64,12 @@ public class Unit_Player : MonoBehaviour
         moveSpeed = CurrentStatus.shipSpeed;
 
         Game_Manager.current.GetMainUI.SetMaxEnergyPoint(CurrentStatus.maxEnergy);
-        Debug.LogWarning($"SetStatus - Energy : {energy}/{CurrentStatus.maxEnergy}");
         health = (FullHealth == true) ? CurrentStatus.shipHealth : CurrentStatus.shipHealth - continueData.destroySlot.Count;// 스탯 추가 하기  전 풀피 체크
         Game_Manager.current.GetMainUI.SetMaxHealthPoint(CurrentStatus.shipHealth);
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
-        Debug.LogWarning($"SetStatus - Health : {health}/{CurrentStatus.shipHealth}");
         energy = continueData.energy;
         efficient = CurrentStatus.efficient;
+        Debug.LogWarning($"SetStatus - Energy : {energy}/{CurrentStatus.maxEnergy}, SetStatus - Health : {health}/{CurrentStatus.shipHealth}");
         SetEnergyUI();
     }
 
@@ -365,16 +364,6 @@ public class Unit_Player : MonoBehaviour
                 Game_Manager.current.GetFollow.AddClosestTarget(null);// 팔로우 유아이 제거
             }
         }
-    }
-
-    public bool OutLandingCheck()// 섬에서 나갈 수 있는지 체크
-    {
-        if (health <= 0 || (GetMaxEnergy > 0 && energy <= 0))
-        {
-            Game_Manager.current.GetMainUI.SetWarnningText("배가 움직이지 않아.");
-            return false;
-        }
-        return true;
     }
 
     public void OutOfControll(bool _isOn)

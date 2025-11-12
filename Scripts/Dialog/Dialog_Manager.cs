@@ -8,7 +8,7 @@ using static Data_Dialog;
 
 public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 {
-    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs; 
     Data_NPC dataNPC;
     Data_Dialog dataDialog;
     DialogStruct dialog;
@@ -45,7 +45,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
         OpenCanvas(false);// 시작 닫기
     }
-
+ 
     public void DialogStart_NPC(Data_NPC _npc, int _dialogIndex)
     {
         int hour = Game_Manager.current.GetMainUI.timeUI.hour;
@@ -146,6 +146,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         if (_selectStruct.npcData != null)// 엔피씨데이터가 있으면 대화 시작
         {
             DialogStart_NPC(_selectStruct.npcData, _selectStruct.dialogIndex);
+            Debug.LogWarning("엔피씨 대화 시작");
             return;
         }
 
@@ -231,7 +232,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         Dialog_SelectButton inst = Instantiate(selectButton, gridRect);
         return inst;
     }
-
+   
     void OpenCanvas(bool _open)
     {
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
@@ -257,7 +258,11 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
         else if (endDialog == true)
         {
-            Debug.LogWarning("대화 끝인 상태에서 클릭");
+            if (dataDialog.selectStructs.Length == 0)
+            {
+                OpenCanvas(false);
+            }
+            Debug.LogWarning($"{dataDialog.name} 대화 끝인 상태에서 클릭 : {dataDialog.selectStructs.Length}");
         }
     }
 

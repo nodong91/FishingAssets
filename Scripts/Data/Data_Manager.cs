@@ -113,7 +113,7 @@ public class Data_Manager : Data_Parse
         string[] data = _textAsset.text.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
-            string[] elements = data[i].Split(new char[] { ',' }); 
+            string[] elements = data[i].Split(new char[] { ',' });
             if (elements[5].Trim().Length == 0)
             {
                 Debug.LogWarning("아이템 쉐이프가 없음");
@@ -124,7 +124,11 @@ public class Data_Manager : Data_Parse
             {
                 id = tempItem.id,
                 itemStruct = tempItem,
-                addFuel = Parse_Float(elements[9])
+                addClass = (ItemStruct.ItemClass)System.Enum.Parse(typeof(ItemStruct.ItemClass), elements[9]),
+                addClassPercent = Parse_Float(elements[10]),
+                etcValue = Parse_Float(elements[11]),
+                buffDuration = Parse_Float(elements[12]),
+                skillID = elements[13],
             };
             usedStruct.Add(tempData);
         }
@@ -446,13 +450,14 @@ public class Data_Manager : Data_Parse
         public ItemStruct itemStruct;
 
         [Header(" [ AddClass]")]// Buff 일 때만 사용
-        public ItemStruct.ItemClass itemClass;// 미끼 사용 시 해당 클래스 등장 확률
+        public ItemStruct.ItemClass addClass;// 미끼 사용 시 해당 클래스 등장 확률
         public float addClassPercent;// 등장 상승 확률
-        public SetStatus addStatus;// 효과 수치
         public float buffDuration;// 효과 시간
 
-        [Header(" [ Fuel]")]// Fuel 일 때만 사용
-        public float addFuel;// 효과 수치
+        [Header(" [ Etc]")]
+        public float etcValue;// 효과 수치
+
+        public string skillID;// 스킬 아이디
     }
 
     [System.Serializable]

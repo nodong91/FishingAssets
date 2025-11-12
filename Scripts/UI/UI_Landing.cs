@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Trigger_Landing;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class UI_Landing : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class UI_Landing : MonoBehaviour
     public LandingType currentType = LandingType.None;
     public Canvas canvas;
     public CanvasGroup canvasGroup;
+    bool landUIOpen = false;
 
     public GameObject landingPointUI;
     public GameObject shopUI;
@@ -36,7 +38,6 @@ public class UI_Landing : MonoBehaviour
 
     [Header(" [ Buttons ]")]
     public Custom_Button outButton;
-    public Custom_Button restButton;
     public Custom_Button fuelButton;
     public Custom_Button storageButton;
     public Custom_Button changeButton;
@@ -57,7 +58,6 @@ public class UI_Landing : MonoBehaviour
 
         outButton.SetButton(OutButton);
         fuelButton.SetButton(FuelButton);
-        restButton.SetButton(RestButton);
         storageButton.SetButton(StorageButton);
         changeButton.SetButton(ChangeButton);
 
@@ -128,18 +128,23 @@ public class UI_Landing : MonoBehaviour
 
     public void SetLandingCanvas(bool _open)
     {
+        if (landUIOpen == _open)
+            return;
+        landUIOpen = _open;
+
         if (opening != null)
             StopCoroutine(opening);
-        opening = StartCoroutine(SetCanvasAlpha(_open));
+        opening = StartCoroutine(SetCanvasAlpha());
     }
 
-    IEnumerator SetCanvasAlpha(bool _open)
+    IEnumerator SetCanvasAlpha()
     {
+
         float normalize = 0f;
         while (normalize < 1f)
         {
             normalize += Time.deltaTime * 3f;
-            float alpha = (_open == true) ? normalize : 1f - normalize;
+            float alpha = (landUIOpen == true) ? normalize : 1f - normalize;
             OpenCanvasUI(canvasGroup, alpha);
             //if (inlanding == true)
             //    OpenCanvasUI(backCanvas, 1f - alpha);
@@ -155,9 +160,56 @@ public class UI_Landing : MonoBehaviour
         _canvas.gameObject.SetActive(_alpha > 0);
     }
 
+    bool CheckShip()
+    {
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
+        if (Game_Manager.current.shipData == null)
+        {
+            SetLandingCanvas(false);// 랜드 UI 제거
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 6);// 배가 없다는 대사
+            StaticOpenCanvas.deleEndOpen = EndDialog;
+            return false;
+        }
+        return true;
+    }
+
+    bool CheckEnergy()
+    {
+        Unit_Player player = Game_Manager.current.GetPlayer;
+        if (player.GetMaxEnergy > 0 && player.energy <= 0)
+        {
+            SetLandingCanvas(false);// 랜드 UI 제거
+            Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 7);// 연료가 필요하다는 대사
+            StaticOpenCanvas.deleEndOpen = EndDialog;
+            return false;
+        }
+        return true;
+    }
+
+    bool CheckFix()
+    {
+        Unit_Player player = Game_Manager.current.GetPlayer;
+        if (player.health <= 0)
+        {
+            SetLandingCanvas(false);// 랜드 UI 제거
+            Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 8);// 수리가 필요하다는 대사
+            StaticOpenCanvas.deleEndOpen = EndDialog;
+            return false;
+        }
+        return true;
+    }
+
+    void EndDialog()
+    {
+        StaticOpenCanvas.deleEndOpen = null;
+        SetLandingCanvas(true);
+    }
+
     void OutButton()
     {
-        if (Game_Manager.current.GetPlayer.OutLandingCheck() == false)// 플레이어가 나갈 수 있는지 체크
+        if (CheckShip() == false || CheckEnergy() == false || CheckFix() == false)
             return;
 
         currentType = LandingType.None;
@@ -172,6 +224,9 @@ public class UI_Landing : MonoBehaviour
 
     public void FuelButton()// 연료 채우기
     {
+        if (CheckShip() == false)
+            return;
+
         currentType = LandingType.Energy;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
         Game_Manager.current.GetEnergyUI.OpenEnergy();
@@ -181,13 +236,15 @@ public class UI_Landing : MonoBehaviour
     public void RestButton()// 휴식
     {
         currentType = LandingType.Rest;
-        //SetLandingCanvas(false);// 랜드 UI 제거
         Game_Manager.current.GetRestManager.OpenCanvas(true);
         //Game_Manager.current.currentLand.CameraOutFouce(true);
     }
 
     void ShopButton()
     {
+        if (CheckShip() == false)
+            return;
+
         currentType = LandingType.Shop;
         SetLandingCanvas(false);        // 샵 버튼 누르면 랜드 UI 제거
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shop];
@@ -203,7 +260,8 @@ public class UI_Landing : MonoBehaviour
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
         Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);
         Game_Manager.current.CurrentLand.CameraOutFouce(true);
-        if (Game_Manager.current.GetContinue.shipData == "")// 배가 없다면
+
+        if (Game_Manager.current.shipData == null)// 배가 없다면
         {
             // 튜토리얼 시작
             Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 2);
@@ -216,6 +274,9 @@ public class UI_Landing : MonoBehaviour
 
     void DownTownButton()
     {
+        if (CheckShip() == false)
+            return;
+
         currentType = LandingType.DownTown;
         if (lightMode == Data_Manager.DayType.Day)
         {
@@ -248,6 +309,9 @@ public class UI_Landing : MonoBehaviour
 
     void StorageButton()
     {
+        if (CheckShip() == false)
+            return;
+
         currentType = LandingType.Storage;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
 
@@ -265,6 +329,9 @@ public class UI_Landing : MonoBehaviour
 
     public void BoardButton()
     {
+        if (CheckShip() == false)
+            return;
+
         currentType = LandingType.Board;
         SetLandingCanvas(false);// 창고 누르면 랜드 UI 제거
 
