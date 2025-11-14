@@ -56,7 +56,6 @@ public class Data_Manager : Data_Parse
             }
             else if (csv_Type.Contains("Language"))
             {
-                Debug.LogWarning(csv_Type);
                 SetLanguageStruct(CSV_Data[i]);
             }
             else if (csv_Type.Contains("Audio"))
@@ -103,6 +102,8 @@ public class Data_Manager : Data_Parse
                 fishGroggyTime = Parse_Float(elements[18]),
                 fishDefenseCount = Parse_Int(elements[19]),
                 fishTurnDelay = Parse_Vector2(elements[20]),
+                addDuration = Parse_Float(elements[21]),
+                addValue = Parse_Float(elements[22]),
             };
             fishStruct.Add(tempData);
         }
@@ -124,11 +125,9 @@ public class Data_Manager : Data_Parse
             {
                 id = tempItem.id,
                 itemStruct = tempItem,
-                addClass = (ItemStruct.ItemClass)System.Enum.Parse(typeof(ItemStruct.ItemClass), elements[9]),
-                addClassPercent = Parse_Float(elements[10]),
-                etcValue = Parse_Float(elements[11]),
-                buffDuration = Parse_Float(elements[12]),
-                skillID = elements[13],
+                etcValue = Parse_Float(elements[9]),
+                buffDuration = Parse_Float(elements[10]),
+                skillID = elements[11],
             };
             usedStruct.Add(tempData);
         }
@@ -448,10 +447,6 @@ public class Data_Manager : Data_Parse
         [HideInInspector]
         public string id;
         public ItemStruct itemStruct;
-
-        [Header(" [ AddClass]")]// Buff 일 때만 사용
-        public ItemStruct.ItemClass addClass;// 미끼 사용 시 해당 클래스 등장 확률
-        public float addClassPercent;// 등장 상승 확률
         public float buffDuration;// 효과 시간
 
         [Header(" [ Etc]")]
@@ -529,6 +524,9 @@ public class Data_Manager : Data_Parse
         public float fishGroggyTime;// 방어 성공 시 그로기 시간
         public int fishDefenseCount;// 공격시 입력 개수
         public Vector2 fishTurnDelay;// 방향 바뀌는 딜레이 시간
+        [Header(" [ 버프 ]")]
+        public float addDuration;// 버프 시간
+        public float addValue;// 버프 수치
 
         [System.Serializable]
         public struct RandomSize

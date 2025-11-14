@@ -364,6 +364,17 @@ public class UI_Main : MonoBehaviour
     Dictionary<string, UI_BuffSlot> dictBuffSlots = new Dictionary<string, UI_BuffSlot>();
     Queue<UI_BuffSlot> buffSlotPool = new Queue<UI_BuffSlot>();
 
+    public void AddBuffSlot(FishBuffStruct _buff)
+    {
+        if (dictBuffSlots.ContainsKey(_buff.id) == false)
+        {
+            dictBuffSlots[_buff.id] = TryBuffSlot();
+            dictBuffSlots[_buff.id].gameObject.SetActive(true);
+            dictBuffSlots[_buff.id].OnBuffEnd = RemoveBuffSlot;
+        }
+        dictBuffSlots[_buff.id].SetBuffSlot(_buff);
+    }
+
     public void AddBuffSlot(BuffStruct _buff)
     {
         if (dictBuffSlots.ContainsKey(_buff.id) == false)
@@ -375,14 +386,21 @@ public class UI_Main : MonoBehaviour
         dictBuffSlots[_buff.id].SetBuffSlot(_buff);
     }
 
-    public void RemoveBuffSlot(BuffStruct _buff)
+    public void RemoveBuffSlot(UI_BuffSlot _slot)
     {
-        if (dictBuffSlots.ContainsKey(_buff.id) == false)
-            return;
+        buffSlotPool.Enqueue(_slot);
+        _slot.gameObject.SetActive(false);
+        if (_slot.buffType == UI_BuffSlot.BuffType.FishBuff)
+        {
+            Game_Manager.current.RemoveFishBuff();
+        }
+        else if (_slot.buffType == UI_BuffSlot.BuffType.GeneralBuff)
+        {
 
-        buffSlotPool.Enqueue(dictBuffSlots[_buff.id]);
-        dictBuffSlots[_buff.id].gameObject.SetActive(false);
-        dictBuffSlots.Remove(_buff.id);
+        }
+        if (dictBuffSlots.ContainsKey(_slot.buffID) == false)
+            return;
+        dictBuffSlots.Remove(_slot.buffID);
     }
 
     UI_BuffSlot TryBuffSlot()

@@ -164,17 +164,11 @@ public class Fishing_Manager : MonoBehaviour
         // 버프는 중복 적용 안됨
         // 버프는 배스탯 관련만??
         // 생선을 미끼로 사용?
-        Dictionary<ItemStruct.ItemClass, float> dictBuff = Game_Manager.current.GetFishBuff();// 미끼로 추가 확률
         float addValue = 0f;
-        foreach (var child in dictBuff)
+        Game_Manager.FishBuffStruct fishBuff = Game_Manager.current.GetFishBuff;// 낚시 버프
+        if (fishBuff != null && fishBuff.itemClass == _class)
         {
-            ItemStruct.ItemClass addItemClass = child.Key;
-            float addProbability = child.Value;
-            if (addItemClass == _class)
-            {
-                addValue += addProbability;
-                break;
-            }
+            addValue = fishBuff.addValue;
         }
 
         // 물고기 클래스별 확률

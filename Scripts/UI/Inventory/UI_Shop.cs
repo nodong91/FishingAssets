@@ -51,7 +51,7 @@ public class UI_Shop : UI_Inventory_Base
 
     void FixButton()
     {
-        Game_Manager.current.GetInventory.IndividualRepair();
+        Game_Manager.current.GetInventory.RepairMode(true);
     }
 
     void FixAllButton()

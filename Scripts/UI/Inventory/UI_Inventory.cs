@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -226,13 +227,17 @@ public class UI_Inventory : MonoBehaviour
 
     private void DragStart(UI_Inventory_Slot _slot)// 픽업
     {
-        if (onRepair == true && _slot.destroy == true)// 수리 모드에서 파괴 슬롯 클릭
+        if (onRepair == true)// 수리 모드에서 파괴 슬롯 클릭
         {
-            onRepair = false;
-            myBox.FixSlot(_slot);    // 하나씩 수리
-            if (selectSlot != null)// 선택된 슬롯이 있으면
+            RepairMode(false);
+            if (_slot.destroy == true)
             {
-                SetEmptySlot(selectSlot);// 선택된 슬롯 비우기
+                myBox.FixSlot(_slot);    // 하나씩 수리
+                if (selectSlot != null)// 선택된 슬롯이 있으면
+                {
+                    SetEmptySlot(selectSlot);// 선택된 슬롯 비우기
+                }
+                return;
             }
         }
         else
@@ -385,7 +390,7 @@ public class UI_Inventory : MonoBehaviour
     {
         UI_Inventory_Base getInventory = GetInventory(selectSlotType);
         getInventory.SetSlot(selectSlot, originItemClass);
-        Game_Manager.current.GetMainUI.SetWarnningText("놓을 수 없음");
+        Debug.LogWarning($"{selectItemClass.item.id} > 원래 위치로 돌리기");
     }
 
     void DragSubmit()
@@ -418,8 +423,7 @@ public class UI_Inventory : MonoBehaviour
         }
         else if (onRepair == true)// 수리 모드일 때
         {
-            onRepair = false;
-            Game_Manager.current.GetMainUI.SetWarnningText("수리 모드 취소");
+            RepairMode(false);
         }
         else if (_slot.empty == false)
         {
@@ -431,40 +435,34 @@ public class UI_Inventory : MonoBehaviour
                 case SlotType.Shop:// 샵이 열려있을 때 우클릭
                     if (enterSlotType == SlotType.MyBox)// 내 인벤토리일때 판매
                     {
-                        if (item.itemType != ItemStruct.ItemType.Fish)
+                        if (item.itemType != ItemStruct.ItemType.Fish)// 생선만 판매
                             return;
                         SellItem(item);// 우클릭 판매
                     }
                     else// 구매
                     {
-                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false)
+                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false || myBox.AddItem(item) == false)
                             return;
 
-                        if (myBox.AddItem(item) == true)
-                        {
-                            Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.name)}");
-                            BuyItem(item);// 클릭 구매
-                        }
+                        Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.name)}");
+                        BuyItem(item);// 클릭 구매
                     }
                     SetEmptySlot(selectSlot);// 슬롯 비우기
                     break;
                 case SlotType.Shipyard:
                     if (enterSlotType == SlotType.MyBox)// 내 인벤토리일때 판매
                     {
-                        if (item.itemType == ItemStruct.ItemType.Fish)
+                        if (item.itemType == ItemStruct.ItemType.Fish)// 생선은 판매 불가
                             return;
                         SellItem(item);// 우클릭 판매
                     }
                     else// 구매
                     {
-                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false)
+                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false || myBox.AddItem(item) == false)
                             return;
 
-                        if (myBox.AddItem(item) == true)
-                        {
-                            Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.name)}");
-                            BuyItem(item);// 클릭 구매
-                        }
+                        Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.name)}");
+                        BuyItem(item);// 클릭 구매
                     }
                     SetEmptySlot(selectSlot);// 슬롯 비우기
                     break;
@@ -534,7 +532,8 @@ public class UI_Inventory : MonoBehaviour
                 // 물고기와 같은 등급의 물고기가 나올 확률 버프
                 // 등급은 같은 등급인데...버프 지속시간과 확률은 어디서 따올까?
                 FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[item.id];
-                Game_Manager.current.AddBuffFish(fishStruct);
+                Game_Manager.current.AddBuff(fishStruct);
+                Debug.LogWarning($"버프 {fishStruct.itemStruct.itemClass} +{fishStruct.addValue}");
                 SetEmptySlot(selectSlot);
                 break;
 
@@ -546,22 +545,22 @@ public class UI_Inventory : MonoBehaviour
                 break;
 
             case ItemStruct.ItemType.Repare:
-                IndividualRepair();
+                RepairMode(true);// 수리 모드 켜기
                 break;
 
             case ItemStruct.ItemType.Buff:
                 usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
                 Game_Manager.current.AddBuff(usedStruct);
-                Debug.LogWarning($"버프 {usedStruct.addClass} +{usedStruct.addClassPercent}");
                 SetEmptySlot(selectSlot);
                 break;
 
             case ItemStruct.ItemType.Lottery:// 복권
-                // 사용한 복권인지는 어떻게 체크?
-                // 사용한 복권은 열지 못하게
-                // 사용한 복권이라면 팔때 당첨 금액을 주는 걸로
                 Game_Manager.current.GetLottery.OpenCanas();// 복권 열기
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
+                break;
+
+            case ItemStruct.ItemType.Etc:// 기타 아이템
+
                 break;
         }
     }
@@ -571,11 +570,19 @@ public class UI_Inventory : MonoBehaviour
         Debug.LogWarning($"Fish : {selectSlot.itemInInventory.item.id}");
     }
 
-    public void IndividualRepair()// 수리 모드
+    public void RepairMode(bool _repair)// 수리 모드
     {
-        onRepair = true;
-        // 하나씩 수리 모드
-        Game_Manager.current.GetMainUI.SetWarnningText("수리할 아이템을 선택하세요.");
+        if (onRepair == true)// 이미 수리 모드라면 끄기
+        {
+            onRepair = false;
+        }
+        else// 수리 모드를 켜든 끄든 상관없음
+        {
+            onRepair = _repair;
+        }
+        //// 하나씩 수리 모드
+        //Game_Manager.current.GetMainUI.SetWarnningText("수리할 아이템을 선택하세요.");
+        Cursor_Manager.current?.OnMouseRepair(_repair);
     }
 
     public void AllRepair()

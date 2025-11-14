@@ -72,10 +72,10 @@ public class Event_Manager : MonoBehaviour
         SetGridCanvas(0f);
 
         eventData = _eventData;
-        if (eventData as Data_Event_Select)
+        if (eventData as Data_Event_Start)
         {
             // 선택 이벤트라면 이름 세팅
-            Data_Event_Select tempData = eventData as Data_Event_Select;
+            Data_Event_Start tempData = eventData as Data_Event_Start;
             eventName.text = Singleton_Data.INSTANCE.GetLanguage(tempData.eventName);
         }
         typingSpeed = defaultTypingSpeed;

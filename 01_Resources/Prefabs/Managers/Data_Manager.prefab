@@ -51,12 +51,16 @@ MonoBehaviour:
   - {fileID: 102900000, guid: 3c039a14a3c6f6a4a9dff4c7be602e80, type: 3}
   CSV_Data:
   - {fileID: 4900000, guid: 7cbcec83f87f0494b8216626e550d6a7, type: 3}
-  - {fileID: 4900000, guid: feb7a9481c07f97459a1b0349b636a4f, type: 3}
+  - {fileID: 4900000, guid: 391df284b10630642a7a9528d4ef849e, type: 3}
+  - {fileID: 4900000, guid: a1049a51167854d4dae5a4431b20ccf1, type: 3}
+  - {fileID: 4900000, guid: f3c8ee76263be1a4f94012efc3f0bb34, type: 3}
   - {fileID: 4900000, guid: 989a3c5718afb0c4d8ae362892320ede, type: 3}
-  - {fileID: 4900000, guid: d38421496a31ec845823f5fb85a9e870, type: 3}
+  - {fileID: 4900000, guid: 9be814cb8d030474d91b7a8b92d583a3, type: 3}
+  - {fileID: 4900000, guid: 334cdf74cd1d00241ab9951f57722f17, type: 3}
+  - {fileID: 4900000, guid: e164579a5e49fcd408cd70fa27a1bb3a, type: 3}
   - {fileID: 4900000, guid: 3251b9410aa77034293d9143ff30a253, type: 3}
   - {fileID: 4900000, guid: 32fe5a5b0689f414dae0db94418d5241, type: 3}
-  - {fileID: 4900000, guid: cd8f0818fae9079469f602843e16557d, type: 3}
+  - {fileID: 4900000, guid: 96a16af2eb762a942b3c9e8cdbfb800c, type: 3}
   audioClip:
   - {fileID: 8300000, guid: 2a8c919394aa89d489709789ab148c31, type: 3}
   - {fileID: 8300000, guid: 6c04344b73df8bc49b527bd516b1d452, type: 3}
@@ -322,8 +326,6 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 3
       price: 10
-    addClass: 0
-    addClassPercent: 0
     buffDuration: 0
     etcValue: 3
     skillID: "-\r"
@@ -339,8 +341,6 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 5
-    addClass: 0
-    addClassPercent: 0
     buffDuration: 0
     etcValue: 0
     skillID: "-\r"
@@ -348,19 +348,33 @@ MonoBehaviour:
     itemStruct:
       id: us_3001
       name: lugworm
-      itemType: 1
+      itemType: 0
       explanation: lugworm_01
       icon: Item_Bait_Worm
-      itemClass: 4
+      itemClass: 3
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 5
-    addClass: 0
-    addClassPercent: 1
     buffDuration: 100
     etcValue: 0
     skillID: "-\r"
+  - id: us_3002
+    itemStruct:
+      id: us_3002
+      name: lugworm
+      itemType: 1
+      explanation: lugworm_01
+      icon: fs_1002_mackerel
+      itemClass: 1
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 1
+      price: 5
+    buffDuration: 100
+    etcValue: 0
+    skillID: "sk_002_00\r"
   - id: us_4001
     itemStruct:
       id: us_4001
@@ -373,8 +387,6 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 100
-    addClass: 0
-    addClassPercent: 0
     buffDuration: 0
     etcValue: 0
     skillID: "-\r"
@@ -391,8 +403,6 @@ MonoBehaviour:
       iconSize: {x: 1, y: 2, z: 0.5, w: 0.75}
       weight: 1
       price: 100
-    addClass: 0
-    addClassPercent: 0
     buffDuration: 0
     etcValue: 0
     skillID: "-\r"
@@ -409,8 +419,6 @@ MonoBehaviour:
       iconSize: {x: 1, y: 2, z: 0.5, w: 0.75}
       weight: 1
       price: 100
-    addClass: 0
-    addClassPercent: 0
     buffDuration: 0
     etcValue: 0
     skillID: "-\r"
@@ -426,8 +434,6 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 100
-    addClass: 0
-    addClassPercent: 0
     buffDuration: 0
     etcValue: 100
     skillID: "-\r"
@@ -443,29 +449,9 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 1
       price: 500
-    addClass: 0
-    addClassPercent: 0
     buffDuration: 0
     etcValue: 500
-    skillID: "-\r"
-  - id: us_3002
-    itemStruct:
-      id: us_3002
-      name: lugworm
-      itemType: 1
-      explanation: lugworm_01
-      icon: fs_1002_mackerel
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 1
-      price: 5
-    addClass: 0
-    addClassPercent: 0
-    buffDuration: 100
-    etcValue: 0
-    skillID: sk_002_00
+    skillID: '-'
   fishStruct:
   - id: fs_1001
     itemStruct:
@@ -491,6 +477,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
   - id: fs_1002
     itemStruct:
       id: fs_1002
@@ -516,6 +504,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
   - id: fs_1003
     itemStruct:
       id: fs_1003
@@ -540,6 +530,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0.6
   - id: fs_1004
     itemStruct:
       id: fs_1004
@@ -565,6 +557,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1005
     itemStruct:
       id: fs_1005
@@ -589,6 +583,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1006
     itemStruct:
       id: fs_1006
@@ -614,6 +610,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1007
     itemStruct:
       id: fs_1007
@@ -638,6 +636,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1008
     itemStruct:
       id: fs_1008
@@ -662,6 +662,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1009
     itemStruct:
       id: fs_1009
@@ -686,6 +688,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1010
     itemStruct:
       id: fs_1010
@@ -710,6 +714,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1011
     itemStruct:
       id: fs_1011
@@ -734,6 +740,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1012
     itemStruct:
       id: fs_1012
@@ -758,6 +766,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1013
     itemStruct:
       id: fs_1013
@@ -783,6 +793,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1014
     itemStruct:
       id: fs_1014
@@ -808,6 +820,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1101
     itemStruct:
       id: fs_1101
@@ -833,6 +847,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1102
     itemStruct:
       id: fs_1102
@@ -860,6 +876,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1103
     itemStruct:
       id: fs_1103
@@ -886,6 +904,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1104
     itemStruct:
       id: fs_1104
@@ -910,6 +930,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1105
     itemStruct:
       id: fs_1105
@@ -934,6 +956,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1201
     itemStruct:
       id: fs_1201
@@ -963,6 +987,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1202
     itemStruct:
       id: fs_1202
@@ -992,6 +1018,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_1301
     itemStruct:
       id: fs_1301
@@ -1020,6 +1048,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2001
     itemStruct:
       id: fs_2001
@@ -1045,6 +1075,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
   - id: fs_2002
     itemStruct:
       id: fs_2002
@@ -1072,6 +1104,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 5
     fishTurnDelay: {x: 0.7, y: 1}
+    addDuration: 150
+    addValue: 0.9
   - id: fs_2003
     itemStruct:
       id: fs_2003
@@ -1098,6 +1132,8 @@ MonoBehaviour:
     fishGroggyTime: 2
     fishDefenseCount: 4
     fishTurnDelay: {x: 1, y: 2}
+    addDuration: 200
+    addValue: 1.2
   - id: fs_2004
     itemStruct:
       id: fs_2004
@@ -1122,6 +1158,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.7, y: 1}
+    addDuration: 100
+    addValue: 0.6
   - id: fs_2005
     itemStruct:
       id: fs_2005
@@ -1146,6 +1184,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
   - id: fs_2006
     itemStruct:
       id: fs_2006
@@ -1173,6 +1213,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
   - id: fs_2007
     itemStruct:
       id: fs_2007
@@ -1200,6 +1242,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2008
     itemStruct:
       id: fs_2008
@@ -1229,6 +1273,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2009
     itemStruct:
       id: fs_2009
@@ -1254,6 +1300,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2010
     itemStruct:
       id: fs_2010
@@ -1278,6 +1326,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2011
     itemStruct:
       id: fs_2011
@@ -1303,6 +1353,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2012
     itemStruct:
       id: fs_2012
@@ -1328,6 +1380,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2013
     itemStruct:
       id: fs_2013
@@ -1353,6 +1407,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2014
     itemStruct:
       id: fs_2014
@@ -1382,6 +1438,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2015
     itemStruct:
       id: fs_2015
@@ -1407,6 +1465,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2016
     itemStruct:
       id: fs_2016
@@ -1433,6 +1493,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2101
     itemStruct:
       id: fs_2101
@@ -1459,6 +1521,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 5
     fishTurnDelay: {x: 1, y: 2}
+    addDuration: 250
+    addValue: 1.5
   - id: fs_2102
     itemStruct:
       id: fs_2102
@@ -1487,6 +1551,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
   - id: fs_2103
     itemStruct:
       id: fs_2103
@@ -1511,6 +1577,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2104
     itemStruct:
       id: fs_2104
@@ -1538,6 +1606,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2105
     itemStruct:
       id: fs_2105
@@ -1563,6 +1633,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2106
     itemStruct:
       id: fs_2106
@@ -1588,6 +1660,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2107
     itemStruct:
       id: fs_2107
@@ -1612,6 +1686,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2201
     itemStruct:
       id: fs_2201
@@ -1637,6 +1713,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2202
     itemStruct:
       id: fs_2202
@@ -1663,6 +1741,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2203
     itemStruct:
       id: fs_2203
@@ -1692,6 +1772,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2301
     itemStruct:
       id: fs_2301
@@ -1721,6 +1803,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_2401
     itemStruct:
       id: fs_2401
@@ -1753,6 +1837,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3001
     itemStruct:
       id: fs_3001
@@ -1777,6 +1863,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3002
     itemStruct:
       id: fs_3002
@@ -1801,6 +1889,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3003
     itemStruct:
       id: fs_3003
@@ -1827,6 +1917,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3004
     itemStruct:
       id: fs_3004
@@ -1852,6 +1944,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3005
     itemStruct:
       id: fs_3005
@@ -1876,6 +1970,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3006
     itemStruct:
       id: fs_3006
@@ -1901,6 +1997,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3007
     itemStruct:
       id: fs_3007
@@ -1927,6 +2025,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3101
     itemStruct:
       id: fs_3101
@@ -1953,6 +2053,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3102
     itemStruct:
       id: fs_3102
@@ -1982,6 +2084,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3103
     itemStruct:
       id: fs_3103
@@ -2008,6 +2112,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3104
     itemStruct:
       id: fs_3104
@@ -2035,6 +2141,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3105
     itemStruct:
       id: fs_3105
@@ -2065,6 +2173,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3106
     itemStruct:
       id: fs_3106
@@ -2092,6 +2202,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3107
     itemStruct:
       id: fs_3107
@@ -2118,6 +2230,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3108
     itemStruct:
       id: fs_3108
@@ -2147,6 +2261,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3109
     itemStruct:
       id: fs_3109
@@ -2176,6 +2292,8 @@ MonoBehaviour:
     fishGroggyTime: 3
     fishDefenseCount: 6
     fishTurnDelay: {x: 1, y: 2}
+    addDuration: 300
+    addValue: 1.8
   - id: fs_3201
     itemStruct:
       id: fs_3201
@@ -2207,6 +2325,8 @@ MonoBehaviour:
     fishGroggyTime: 2
     fishDefenseCount: 5
     fishTurnDelay: {x: 1.5, y: 1}
+    addDuration: 400
+    addValue: 2.4
   - id: fs_3202
     itemStruct:
       id: fs_3202
@@ -2235,6 +2355,8 @@ MonoBehaviour:
     fishGroggyTime: 3
     fishDefenseCount: 7
     fishTurnDelay: {x: 1.5, y: 1}
+    addDuration: 350
+    addValue: 2.1
   - id: fs_3203
     itemStruct:
       id: fs_3203
@@ -2266,6 +2388,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3204
     itemStruct:
       id: fs_3204
@@ -2295,6 +2419,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3205
     itemStruct:
       id: fs_3205
@@ -2324,6 +2450,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3301
     itemStruct:
       id: fs_3301
@@ -2355,6 +2483,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 5
     fishTurnDelay: {x: 1.5, y: 1}
+    addDuration: 450
+    addValue: 2.7
   - id: fs_3302
     itemStruct:
       id: fs_3302
@@ -2385,6 +2515,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_3401
     itemStruct:
       id: fs_3401
@@ -2409,6 +2541,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4101
     itemStruct:
       id: fs_4101
@@ -2434,6 +2568,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4102
     itemStruct:
       id: fs_4102
@@ -2461,6 +2597,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4103
     itemStruct:
       id: fs_4103
@@ -2489,6 +2627,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4104
     itemStruct:
       id: fs_4104
@@ -2514,6 +2654,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
   - id: fs_4105
     itemStruct:
       id: fs_4105
@@ -2538,6 +2680,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4106
     itemStruct:
       id: fs_4106
@@ -2570,6 +2714,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4201
     itemStruct:
       id: fs_4201
@@ -2597,6 +2743,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4202
     itemStruct:
       id: fs_4202
@@ -2625,6 +2773,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4203
     itemStruct:
       id: fs_4203
@@ -2649,6 +2799,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4204
     itemStruct:
       id: fs_4204
@@ -2679,6 +2831,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4205
     itemStruct:
       id: fs_4205
@@ -2704,6 +2858,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4301
     itemStruct:
       id: fs_4301
@@ -2738,6 +2894,8 @@ MonoBehaviour:
     fishGroggyTime: 1
     fishDefenseCount: 6
     fishTurnDelay: {x: 0.3, y: 0.9}
+    addDuration: 500
+    addValue: 3
   - id: fs_4302
     itemStruct:
       id: fs_4302
@@ -2765,6 +2923,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4303
     itemStruct:
       id: fs_4303
@@ -2789,6 +2949,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4304
     itemStruct:
       id: fs_4304
@@ -2821,6 +2983,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4305
     itemStruct:
       id: fs_4305
@@ -2849,6 +3013,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4306
     itemStruct:
       id: fs_4306
@@ -2876,6 +3042,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4401
     itemStruct:
       id: fs_4401
@@ -2903,6 +3071,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4402
     itemStruct:
       id: fs_4402
@@ -2931,6 +3101,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4403
     itemStruct:
       id: fs_4403
@@ -2962,6 +3134,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   - id: fs_4404
     itemStruct:
       id: fs_4404
@@ -2993,6 +3167,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
   skillStruct:
   - id: sk_001_00
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 1"
@@ -3726,6 +3902,31 @@ MonoBehaviour:
     - fs_1001
     - us_3002
   languageStruct:
+  - id: continue
+    english: Continue
+    korean: "\uACC4\uC18D\uD558\uAE30"
+    japanese: "\u3064\u3065\u304F"
+    chinese: "\u7EE7\u7EED"
+  - id: newstart
+    english: New Start
+    korean: "\uC0C8\uB85C\uC2DC\uC791"
+    japanese: "\u65B0\u305F\u306B\u30B9\u30BF\u30FC\u30C8"
+    chinese: "\u65B0\u7684\u5F00\u59CB"
+  - id: credit
+    english: Credit
+    korean: "\uD06C\uB808\uB527"
+    japanese: "\u30AF\u30EC\u30B8\u30C3\u30C8"
+    chinese: "\u521B\u9020\u8005"
+  - id: option
+    english: Option
+    korean: "\uC635\uC158"
+    japanese: "\u30AA\u30D7\u30B7\u30E7\u30F3"
+    chinese: "\u9009\u9879"
+  - id: exit
+    english: Exit
+    korean: "\uB098\uAC00\uAE30"
+    japanese: "\u3067\u304B\u3051"
+    chinese: "\u51FA\u53E3"
   - id: ed_0001
     english: Eyes in the darkness
     korean: "\uC5B4\uB460 \uC18D\uC758 \uB208\uB3D9\uC790"
@@ -3777,6 +3978,88 @@ MonoBehaviour:
     korean: "\uAC00\uC838\uAC04\uB2E4."
     japanese: "\u6301\u3063\u3066\u884C\u304F"
     chinese: "\u62FF\u8D70"
+  - id: ht_0001
+    english: 
+    korean: "\uBBF8\uB07C\uB294 \uB4F1\uAE09\uC774 \uB192\uC740 \uBB3C\uACE0\uAE30\uAC00
+      \uC7A1\uD790 \uAC00\uB2A5\uC131\uC744 \uB192\uD799\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0002
+    english: 
+    korean: "\uBBF8\uB07C\uB294 \uC0DD\uC120\uAC00\uAC8C\uC5D0\uC11C \uAD6C\uC785\uC774
+      \uAC00\uB2A5\uD569\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0003
+    english: 
+    korean: "\uBC24\uC5D0 \uB9C8\uC744\uC5D0 \uAC00\uBA74 \uC5B4\uB5A4 \uC77C\uC774
+      \uBC8C\uC5B4\uC9C8\uAE4C?"
+    japanese: 
+    chinese: 
+  - id: ht_0004
+    english: 
+    korean: "\uC870\uC120\uC18C\uC5D0\uC11C \uBC30\uB97C \uAC15\uD654 \uD560 \uC218
+      \uC788\uC2B5\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0005
+    english: 
+    korean: "\uBC30\uB97C \uAC15\uD654 \uD558\uB2E4\uBCF4\uBA74 \uB2E4\uB978 \uBC30\uB97C
+      \uAD6C\uC785\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0006
+    english: 
+    korean: "\uC870\uC120\uC18C\uC5D0\uC11C \uBC30\uB97C \uC218\uB9AC \uD560 \uC218
+      \uC788\uC2B5\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0007
+    english: 
+    korean: "\uC218\uB9AC\uD0B7\uC740 \uBC30\uB97C \uC218\uB9AC \uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0008
+    english: 
+    korean: "\uBA40\uB9AC \uAC08 \uB54C\uB294 \uC5F0\uB8CC\uD1B5\uC774 \uD544\uC218
+      \uC785\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0009
+    english: 
+    korean: "\uBC30\uAC00 \uC778\uC591 \uB410\uC744 \uB54C\uB294 \uC778\uBCA4\uD1A0\uB9AC
+      \uB0B4\uC758 \uBAA8\uB4E0 \uC544\uC774\uD15C\uC744 \uC783\uC5B4 \uBC84\uB9BD\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0010
+    english: 
+    korean: "\uC778\uC591\uC774 \uB418\uC5C8\uB2E4\uBA74 \uB2E4\uC2DC \uADF8 \uACF3\uC744
+      \uCC3E\uC544\uBCF4\uC138\uC694."
+    japanese: 
+    chinese: 
+  - id: ht_0011
+    english: 
+    korean: "\uB9C8\uC744\uC758 \uC5EC\uAD00\uC5D0\uC11C\uB294 \uC2DC\uAC04\uC744
+      \uBCF4\uB0BC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0012
+    english: 
+    korean: "\uB9C8\uC744\uC5D0\uC11C\uB294 \uAC00\uB054 \uBD88\uCCAD\uAC1D\uC774
+      \uB4F1\uC7A5\uD569\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0013
+    english: 
+    korean: "\uCDA9\uB3CC\uD558\uBA74 \uBC30\uAC00 \uBD80\uC11C\uC9D1\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
+  - id: ht_0014
+    english: 
+    korean: "\uBC30\uB97C \uBD80\uC220 \uC218 \uC788\uB294 \uBB3C\uACE0\uAE30\uB3C4
+      \uC874\uC7AC \uD558\uB294 \uAC83 \uAC19\uC2B5\uB2C8\uB2E4."
+    japanese: 
+    chinese: 
   - id: smalloiltank
     english: Small Oil Tank
     korean: "\uC791\uC740 \uC624\uC77C\uD1B5"
@@ -4081,113 +4364,6 @@ MonoBehaviour:
       \uC774\uBE68\uC744 \uAC00\uC9C4 \uC0B0\uD638\uCD08 \uC0DD\uD0DC\uACC4\uC758
       \uCD5C\uC0C1\uC704 \uC57C\uD589\uC131 \uD3EC\uC2DD\uC790\uC785\uB2C8\uB2E4."
     japanese: "\u4E16\u754C\u6700\u5927\u306E\u30A6\u30C4\u30DC\u3067\u4F53\u9577\u306F\u6700\u59273m\u3092\u8D85\u3048\u5F37\u529B\u306A\u984E\u3068\u92ED\u3044\u6B6F\u3092\u6301\u3064\u30B5\u30F3\u30B4\u7901\u751F\u614B\u7CFB\u306E\u591C\u884C\u6027\u306E\u9802\u70B9\u6355\u98DF\u8005\u3067\u3059."
-    chinese: 
-  - id: continue
-    english: Continue
-    korean: "\uACC4\uC18D\uD558\uAE30"
-    japanese: "\u3064\u3065\u304F"
-    chinese: "\u7EE7\u7EED"
-  - id: newstart
-    english: New Start
-    korean: "\uC0C8\uB85C\uC2DC\uC791"
-    japanese: "\u65B0\u305F\u306B\u30B9\u30BF\u30FC\u30C8"
-    chinese: "\u65B0\u7684\u5F00\u59CB"
-  - id: credit
-    english: Credit
-    korean: "\uD06C\uB808\uB527"
-    japanese: "\u30AF\u30EC\u30B8\u30C3\u30C8"
-    chinese: "\u521B\u9020\u8005"
-  - id: option
-    english: Option
-    korean: "\uC635\uC158"
-    japanese: "\u30AA\u30D7\u30B7\u30E7\u30F3"
-    chinese: "\u9009\u9879"
-  - id: exit
-    english: Exit
-    korean: "\uB098\uAC00\uAE30"
-    japanese: "\u3067\u304B\u3051"
-    chinese: "\u51FA\u53E3"
-  - id: ht_0001
-    english: 
-    korean: "\uBBF8\uB07C\uB294 \uB4F1\uAE09\uC774 \uB192\uC740 \uBB3C\uACE0\uAE30\uAC00
-      \uC7A1\uD790 \uAC00\uB2A5\uC131\uC744 \uB192\uD799\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0002
-    english: 
-    korean: "\uBBF8\uB07C\uB294 \uC0DD\uC120\uAC00\uAC8C\uC5D0\uC11C \uAD6C\uC785\uC774
-      \uAC00\uB2A5\uD569\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0003
-    english: 
-    korean: "\uBC24\uC5D0 \uB9C8\uC744\uC5D0 \uAC00\uBA74 \uC5B4\uB5A4 \uC77C\uC774
-      \uBC8C\uC5B4\uC9C8\uAE4C?"
-    japanese: 
-    chinese: 
-  - id: ht_0004
-    english: 
-    korean: "\uC870\uC120\uC18C\uC5D0\uC11C \uBC30\uB97C \uAC15\uD654 \uD560 \uC218
-      \uC788\uC2B5\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0005
-    english: 
-    korean: "\uBC30\uB97C \uAC15\uD654 \uD558\uB2E4\uBCF4\uBA74 \uB2E4\uB978 \uBC30\uB97C
-      \uAD6C\uC785\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0006
-    english: 
-    korean: "\uC870\uC120\uC18C\uC5D0\uC11C \uBC30\uB97C \uC218\uB9AC \uD560 \uC218
-      \uC788\uC2B5\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0007
-    english: 
-    korean: "\uC218\uB9AC\uD0B7\uC740 \uBC30\uB97C \uC218\uB9AC \uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0008
-    english: 
-    korean: "\uBA40\uB9AC \uAC08 \uB54C\uB294 \uC5F0\uB8CC\uD1B5\uC774 \uD544\uC218
-      \uC785\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0009
-    english: 
-    korean: "\uBC30\uAC00 \uC778\uC591 \uB410\uC744 \uB54C\uB294 \uC778\uBCA4\uD1A0\uB9AC
-      \uB0B4\uC758 \uBAA8\uB4E0 \uC544\uC774\uD15C\uC744 \uC783\uC5B4 \uBC84\uB9BD\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0010
-    english: 
-    korean: "\uC778\uC591\uC774 \uB418\uC5C8\uB2E4\uBA74 \uB2E4\uC2DC \uADF8 \uACF3\uC744
-      \uCC3E\uC544\uBCF4\uC138\uC694."
-    japanese: 
-    chinese: 
-  - id: ht_0011
-    english: 
-    korean: "\uB9C8\uC744\uC758 \uC5EC\uAD00\uC5D0\uC11C\uB294 \uC2DC\uAC04\uC744
-      \uBCF4\uB0BC \uC218 \uC788\uC2B5\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0012
-    english: 
-    korean: "\uB9C8\uC744\uC5D0\uC11C\uB294 \uAC00\uB054 \uBD88\uCCAD\uAC1D\uC774
-      \uB4F1\uC7A5\uD569\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0013
-    english: 
-    korean: "\uCDA9\uB3CC\uD558\uBA74 \uBC30\uAC00 \uBD80\uC11C\uC9D1\uB2C8\uB2E4."
-    japanese: 
-    chinese: 
-  - id: ht_0014
-    english: 
-    korean: "\uBC30\uB97C \uBD80\uC220 \uC218 \uC788\uB294 \uBB3C\uACE0\uAE30\uB3C4
-      \uC874\uC7AC \uD558\uB294 \uAC83 \uAC19\uC2B5\uB2C8\uB2E4."
-    japanese: 
     chinese: 
   audioStruct:
   - id: bgm_0001

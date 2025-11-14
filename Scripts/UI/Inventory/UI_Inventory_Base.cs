@@ -273,7 +273,7 @@ public class UI_Inventory_Base : MonoBehaviour
             {
                 bool empty = true;
                 UI_Inventory_Slot slot = allSlots[x, y];
-                if (slot.empty == false)
+                if (slot.empty == false || slot.destroy == true)
                 {
                     continue;
                 }
@@ -621,8 +621,7 @@ public class UI_Inventory_Base : MonoBehaviour
     {
         if (destroySlot == null)
             destroySlot = new List<Vector2Int>();
-        Debug.LogWarning(allSlots);
-        Debug.LogWarning(destroySlot);
+
         if (allSlots.Length > destroySlot.Count)
         {
             bool find = false;
@@ -635,7 +634,7 @@ public class UI_Inventory_Base : MonoBehaviour
                 {
                     find = true;
                     UI_Inventory_Slot linkSlot = allSlots[x, y].GetLinkSlot;
-                    if (linkSlot?.empty == false)
+                    if (linkSlot?.empty == false)// 아이템이 들어있으면 비우기
                     {
                         SlotEmpty(linkSlot);
                     }

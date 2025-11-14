@@ -12,7 +12,7 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
     public Dictionary<string, QuestStruct> Dict_Quest = new Dictionary<string, QuestStruct>();
     public Dictionary<string, Data_NPC> Dict_NPC = new Dictionary<string, Data_NPC>();
     public Dictionary<string, Data_Ship> Dict_Ship = new Dictionary<string, Data_Ship>();
-    public Dictionary<string, Data_Event_Select> Dict_Event = new Dictionary<string, Data_Event_Select>();
+    public Dictionary<string, Data_Event_Start> Dict_Event = new Dictionary<string, Data_Event_Start>();
     public Dictionary<string, LanguageStruct> Dict_Language = new Dictionary<string, LanguageStruct>();
 
     public void SetDictionary_Used(List<UsedStruct> _data)
@@ -96,9 +96,9 @@ public class Singleton_Data : MonoSingleton<Singleton_Data>
         }
     }
 
-    public void SetEvnetStruct(List<Data_Event_Select> _data)
+    public void SetEvnetStruct(List<Data_Event_Start> _data)
     {
-        Dict_Event = new Dictionary<string, Data_Event_Select>();
+        Dict_Event = new Dictionary<string, Data_Event_Start>();
         for (int i = 0; i < _data.Count; i++)
         {
             string id = _data[i].name;

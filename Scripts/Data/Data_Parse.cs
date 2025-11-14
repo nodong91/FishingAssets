@@ -17,7 +17,7 @@ public class Data_Parse : MonoBehaviour
         CSV_Data = new List<TextAsset>();
         npcData = new List<Data_NPC>();
         shipData = new List<Data_Ship>();
-        eventData = new List<Data_Event_Select>();
+        eventData = new List<Data_Event_Start>();
 
         if (ResourceFolders.Count == 0)
         {
@@ -105,9 +105,9 @@ public class Data_Parse : MonoBehaviour
                 Data_NPC temp = data as Data_NPC;
                 npcData.Add(temp);
             }
-            else if (data as Data_Event_Select)
+            else if (data as Data_Event_Start)
             {
-                Data_Event_Select temp = data as Data_Event_Select;
+                Data_Event_Start temp = data as Data_Event_Start;
                 eventData.Add(temp);
             }
             EditorUtility.SetDirty(data);
@@ -283,5 +283,5 @@ public class Data_Parse : MonoBehaviour
     public List<Sprite> sprites = new List<Sprite>();
     public List<Data_NPC> npcData = new List<Data_NPC>();
     public List<Data_Ship> shipData = new List<Data_Ship>();
-    public List<Data_Event_Select> eventData = new List<Data_Event_Select>();
+    public List<Data_Event_Start> eventData = new List<Data_Event_Start>();
 }

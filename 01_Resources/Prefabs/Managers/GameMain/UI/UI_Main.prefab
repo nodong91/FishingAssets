@@ -29,7 +29,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2748212064035531920}
-  - {fileID: 8268257541454880104}
+  - {fileID: 2505477255958238006}
   - {fileID: 2399234576609606366}
   - {fileID: 4352185289713023063}
   - {fileID: 6318966170794616197}
@@ -72,7 +72,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2505477255958238006}
   - {fileID: 4835031082849893943}
   m_Father: {fileID: 5348100873593814451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4942,17 +4941,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5355893953416198391}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 932026127170893149}
+  m_Children:
+  - {fileID: 8268257541454880104}
+  m_Father: {fileID: 4835031082849893943}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 170, y: 40}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6685501831304151513
 MonoBehaviour:
@@ -6150,12 +6150,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8703413468327214766}
-  m_Father: {fileID: 4835031082849893943}
+  m_Father: {fileID: 2505477255958238006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 170, y: 40}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7604081473134377272
 CanvasRenderer:
@@ -6246,8 +6246,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aefaf2b3057f74d4fa1f27f904a3e152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffID: 
   iconImage: {fileID: 2839906351770893806}
   coolTimeText: {fileID: 5509082438568883105}
+  buffStartTime: 0
+  buffDuration: 0
+  buffType: 0
 --- !u!1 &6928958125176361255
 GameObject:
   m_ObjectHideFlags: 0
