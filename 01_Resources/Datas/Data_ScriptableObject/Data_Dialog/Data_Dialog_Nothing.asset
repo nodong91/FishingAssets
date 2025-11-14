@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
   m_Name: Data_Dialog_Nothing
   m_EditorClassIdentifier: 
-  dialogStructs:
-  - contents: "\uC544\uBB34 \uAC83\uB3C4 \uC5C6\uB2E4."
+  textStruct:
+  - contents: "{0} \uAC83\uB3C4 \uC5C6\uB2E4."
     dialogTypes:
-    - id: "\uC544\uBB34"
-      dialogIndex: {x: 0, y: 2}
+    - replaceText: "\uC544\uBB34"
       textSize: 20
       typingSpeed: 0
       textColor: 00FF00

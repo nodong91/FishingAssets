@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
   m_Name: Data_Dialog_DownTown_Night
   m_EditorClassIdentifier: 
-  dialogStructs:
-  - contents: "\uC5B4\uB514\uB85C \uAC08\uAE4C?"
+  textStruct:
+  - contents: "{0} \uAC08\uAE4C?"
     dialogTypes:
-    - id: "\uC5B4\uB514\uB85C"
-      dialogIndex: {x: 0, y: 3}
+    - replaceText: "\uC5B4\uB514\uB85C"
       textSize: 20
       typingSpeed: 0
       textColor: 00FF00

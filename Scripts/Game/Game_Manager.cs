@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -8,10 +9,11 @@ using static Data_Manager;
 
 public class Game_Manager : MonoBehaviour
 {
+    public bool isGameOver = false;
     public Unit_Player player;
     public Controll_Manager controllManager;
 
-    [Header("[ UI ]")]
+    [Header("[ Managers ]")]
     public UI_Main mainUI;
     public Follow_Manager followManager;
     public UI_Inventory inventory;
@@ -31,17 +33,27 @@ public class Game_Manager : MonoBehaviour
     public UI_ChangeShip changeShip;
     public Event_Manager event_Manager;
 
-    public Data_Ship shipData;
-    public SetStatus currentStatus;
-    public SetStatus GetAddStatus => GetSkill.addStatus;
-
+    [Header(" [ 밤낮 ]")]
+    public Material skyboxMatial;
     public Light dayLight;
     public Color dayColor, nightColor;
     [ColorUsage(true, true)]
     public Color emissionColor;
-    public Material skyboxMatial;
     public Trigger_Landing CurrentLand { get; set; }
+    [Header(" [ 플레이어 파괴 ]")]
+    public Trigger_LostBox lostBox;
+    Trigger_LostBox instLostBox;
+
+    [Header(" [ 빈 오브젝트 ]")]
+    public Data_Ship shipData;
+    public SetStatus currentStatus;
     public string addItemTest;
+    public SetStatus GetAddStatus => GetSkill.addStatus;
+
+    [Header(" [ 이어하기 ]")]
+    public float loanTime = 0f;
+    Data_Continue continueData;
+    public Data_Continue GetContinue { get { return continueData; } }
 
     public static Game_Manager current;
 
@@ -198,6 +210,7 @@ public class Game_Manager : MonoBehaviour
 
     public bool CheckMoney(float _price)
     {
+        Debug.LogWarning($"돈 체크 : {GetMainUI.TryMoney} / {_price}");
         if (GetMainUI.TryMoney < _price)
         {
             GetMainUI.NoMoney();// 구매할 돈없음
@@ -214,8 +227,7 @@ public class Game_Manager : MonoBehaviour
         //GetTutorial.StartTutorial();// 낚시 튜토리얼 시작
         GetFishing.SetFishing(_areaType);
     }
-    Data_Continue continueData;
-    public Data_Continue GetContinue { get { return continueData; } }
+
     //====================================================================================================================
     // 매니저 가져오기
     //====================================================================================================================
@@ -483,7 +495,7 @@ public class Game_Manager : MonoBehaviour
     //====================================================================================================================
     // 풀스크린 렌더러 피쳐 관련
     //====================================================================================================================
-
+    [Header(" [ 풀스크린 ]")]
     public int featureIndex = 2;
     public Material fullscreenMaterial;
     public FullScreenPassRendererFeature fullScreenRendererFeature;
@@ -511,68 +523,9 @@ public class Game_Manager : MonoBehaviour
     }
 
     //====================================================================================================================
-    // 퀘스트 관련
-    //====================================================================================================================
-
-    //[System.Serializable]
-    //public class QuestItem
-    //{
-    //    public Vector2Int slotNum;
-    //    public Data_Quest[] quests;
-    //    public QuestItem(Vector2Int _slotNum, Data_Quest[] _quests)
-    //    {
-    //        slotNum = _slotNum;
-    //        quests = _quests;
-    //    }
-    //}
-    //public List<QuestItem> questItems = new List<QuestItem>();
-    //Dictionary<Vector2Int, Data_Quest[]> questSlots = new Dictionary<Vector2Int, Data_Quest[]>();// 아이템 위치
-    //Dictionary<string, List<Data_Quest>> npcQuest = new Dictionary<string, List<Data_Quest>>();// 완료 확인용
-    //public Data_Quest[] testDatas;
-
-    //public void BuyNews(Vector2Int _slotNum)// 신문 구매시 퀘스트 세팅
-    //{
-    //    Data_Quest[] temp = new Data_Quest[3]
-    //    {
-    //        testDatas[0],
-    //        testDatas[1],
-    //        testDatas[2]
-    //    };
-    //    questSlots[_slotNum] = temp;
-    //    questItems.Add(new QuestItem(_slotNum, temp));
-
-    //    for (int i = 0; i < temp.Length; i++)
-    //    {
-    //        string npcID = temp[i].npc_ID;
-    //        if (npcQuest.ContainsKey(npcID) == false)
-    //            npcQuest[npcID] = new List<Data_Quest>();
-    //        npcQuest[npcID].Add(temp[i]);
-    //    }
-    //    Debug.LogWarning($"신문 퀘스트 세팅 : {npcQuest.Count}");
-    //}
-
-    //public List<Data_Quest> TryQuestDialog(string _npcID)// NPC 퀘스트 리스팅
-    //{
-    //    if (npcQuest.ContainsKey(_npcID) == false)
-    //        return null;
-
-    //    List<Data_Quest> quests = npcQuest[_npcID];
-    //    return quests;
-    //}
-
-    //public void ComplateQuest(Data_Quest _quest)// 완료 퀘스트 리스팅
-    //{
-    //    string npcID = _quest.npc_ID;
-    //    List<Data_Quest> quests = npcQuest[npcID];
-    //    quests.Remove(_quest);
-    //}
-
-    //====================================================================================================================
     // 플레이어 파괴
     //====================================================================================================================
 
-    public Trigger_LostBox lostBox;
-    Trigger_LostBox instLostBox;
     public void PlayerDestroy()
     {
         Vector3 setPosition = GetPlayer.transform.position;
@@ -673,4 +626,51 @@ public class Game_Manager : MonoBehaviour
         //AddStatus();
     }
     // 커맨드가 점점 짧아져서 실력이 늘고 있다는 것을 암시하는 효과
+
+    //====================================================================================================================
+    // 게임 오버 관련
+    //====================================================================================================================
+
+    public void LoanStart()
+    {
+        GetMainUI.timeUI.StartLoanTimer();
+    }
+
+    public void GameOver()
+    {
+        Debug.LogWarning("대출금 상환 시간이 도래했습니다!\n모든 세이브 파일이 삭제됩니다.");
+        OutOfControll(true);
+        GetMainUI.OpenCanvas(false);
+
+        StartCoroutine(RemoveSaveFile());
+    }
+
+    IEnumerator RemoveSaveFile()// 모든 세이브 파일 삭제
+    {
+        string path = Application.dataPath + "/Save/";
+        FindFolder(path);
+
+        string[] allFiles = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
+        foreach (string file in allFiles)
+        {
+            Debug.LogWarning("Delete File : " + file);
+            if (file.Contains(String_Save._fishGuideData) == false)// 파일 이름 찾아서
+                File.Delete(file);// 물고기 도감데이터 빼고 삭제
+        }
+        Directory.Delete(path, true);
+
+        // 닫힐때 옵션이 저장이 되는데 창 데이터가 있어서 기존 내용이 저장됨
+        Option_Manager.current.LoadOption();// 옵션 데이터 리셋
+        yield return null;
+    }
+
+    static void FindFolder(string folderName)
+    {
+        DirectoryInfo dirInfo = new DirectoryInfo(folderName);
+        if (dirInfo.Exists == false)
+        {
+            // 없으면 만들기
+            dirInfo.Create();
+        }
+    }
 }

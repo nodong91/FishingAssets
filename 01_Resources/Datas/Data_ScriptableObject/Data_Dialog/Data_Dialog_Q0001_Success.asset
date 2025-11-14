@@ -12,12 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
   m_Name: Data_Dialog_Q0001_Success
   m_EditorClassIdentifier: 
-  dialogStructs:
-  - contents: "\uC624\uC624~~\uADF8 \uB140\uC11D\uC774\uC57C \uADF8\uB140\uC11D\uC744
-      \uC7A1\uC544 \uC654\uAD70!!! "
+  textStruct:
+  - contents: "{0}\uADF8 \uB140\uC11D\uC774\uC57C {1}\uC744 \uC7A1\uC544 \uC654\uAD70!!! "
     dialogTypes:
-    - id: "\uC624\uC624~~"
-      dialogIndex: {x: 0, y: 4}
+    - replaceText: "\uC624\uC624~~"
       textSize: 30
       typingSpeed: 0
       textColor: FFFF00
@@ -25,8 +23,7 @@ MonoBehaviour:
       actionSpeed: 20
       actionInterval: 1
       actionAngle: {x: 0, y: 5}
-    - id: " \uADF8\uB140\uC11D"
-      dialogIndex: {x: 10, y: 14}
+    - replaceText: " \uADF8\uB140\uC11D"
       textSize: 30
       typingSpeed: 0
       textColor: 00FFFF
@@ -37,17 +34,7 @@ MonoBehaviour:
   - contents: "\uACE0\uB9C8\uC6CC \uC774 \uB140\uC11D\uC740 \uB9DB\uC788\uB294 \uC800\uB141\uC2DD\uC0AC\uAC00
       \uB420\uAEBC\uC57C."
     dialogTypes:
-    - id: "\uACE0\uB9C8\uC6CC"
-      dialogIndex: {x: 0, y: 3}
-      textSize: 30
-      typingSpeed: 0
-      textColor: FF0000
-      actionType: 2
-      actionSpeed: 5
-      actionInterval: 0.71
-      actionAngle: {x: 0, y: 5}
-    - id: "\uB9DB\uC788\uB294 \uC800\uB141\uC2DD\uC0AC"
-      dialogIndex: {x: 10, y: 18}
+    - replaceText: "\uACE0\uB9C8\uC6CC"
       textSize: 20
       typingSpeed: 0
       textColor: 00FF00

@@ -12,12 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
   m_Name: Data_Dialog_Shipyard_SkillFail
   m_EditorClassIdentifier: 
-  dialogStructs:
+  textStruct:
   - contents: "\uC77C\uB2E8 \uBC30\uBD80\uD130 \uACE0\uCE58\uACE0 \uC624\uAC8C...\uC774\uB300\uB85C
-      \uAC15\uD654 \uD558\uB2E4\uAC04 \uBAA8\uB450 \uBD80\uC11C\uC838 \uBC84\uB9B4\uAC70\uC57C."
+      {0} \uD558\uB2E4\uAC04 \uBAA8\uB450 \uBD80\uC11C\uC838 \uBC84\uB9B4\uAC70\uC57C."
     dialogTypes:
-    - id: "\uAC15\uD654"
-      dialogIndex: {x: 20, y: 22}
+    - replaceText: "\uAC15\uD654"
       textSize: 30
       typingSpeed: 0
       textColor: FFFF00

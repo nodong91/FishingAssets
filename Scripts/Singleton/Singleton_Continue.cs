@@ -29,6 +29,8 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             energy = Game_Manager.current.GetPlayer.GetEnergy,
             money = Game_Manager.current.GetMainUI.TryMoney,
             destroySlot = Game_Manager.current.GetInventory.TryDestroySlot,
+
+            loanTime = Game_Manager.current.loanTime,
         };
         Static_JsonManager.SaveCountinueData(String_Save._continue, continueData);
     }
@@ -57,6 +59,8 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             energy = 0,
             money = 1000f,
             destroySlot = new List<Vector2Int>(),
+
+            loanTime = 0f,
         };
         // 기본 세팅
         return continueData;

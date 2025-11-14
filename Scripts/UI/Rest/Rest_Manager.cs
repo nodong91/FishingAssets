@@ -86,7 +86,7 @@ public class Rest_Manager : MonoBehaviour
             yield return null;
         }
         Debug.LogWarning($"Rest Complete : {hour} : {minute}");
-        Game_Manager.current.GetTimeUI.SetTime(hour, minute);// 시간 적용
+        Game_Manager.current.GetTimeUI.SetRestTime(hour, minute);// 시간 적용
 
         OpenCanvas(false);
         Game_Manager.current.CurrentLand.CameraOutFouce(false);// 포커스 취소

@@ -247,19 +247,19 @@ public class FishGuide : MonoBehaviour
     }
     public List<SaveFishClass> saveFishClass;
 
-    void SaveFishGuide()
+    void SaveFishGuide()// 생선 도감 저장
     {
         saveFishClass.Clear();
         foreach (var fish in dictFishClass)
         {
             saveFishClass.Add(fish.Value);
         }
-        Static_JsonManager.SaveFishGuideData("FishGuideData", saveFishClass);
+        Static_JsonManager.SaveFishGuideData(String_Save._fishGuideData, saveFishClass);
     }
 
     void LoadFishGuide()
     {
-        if (Static_JsonManager.TryLoadFishGuideData("FishGuideData", out List<SaveFishClass> _data))
+        if (Static_JsonManager.TryLoadFishGuideData(String_Save._fishGuideData, out List<SaveFishClass> _data))
         {
             for (int i = 0; i < _data.Count; i++)
             {

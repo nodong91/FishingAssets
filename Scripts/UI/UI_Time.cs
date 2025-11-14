@@ -85,6 +85,7 @@ public class UI_Time : MonoBehaviour
                     hour = 0;
                     day++;
                 }
+                CheckLoanTime();
             }
             yield return null;
             DayChage();
@@ -179,7 +180,7 @@ public class UI_Time : MonoBehaviour
         timeUpdate = StartCoroutine(TimeUpdate());
     }
 
-    public void SetTime(int _hour, float _minute)
+    public void SetRestTime(int _hour, float _minute)
     {
         hour += _hour;
         minute += _minute;
@@ -194,5 +195,25 @@ public class UI_Time : MonoBehaviour
         minuteText.text = minuteStr;
         WeekPosition(day % 7);
         SetSkyBox();
+    }
+
+
+    int loanTime = 0;
+    public void StartLoanTimer()
+    {
+        loanTime = 24;
+    }
+
+    void CheckLoanTime()
+    {
+        if (loanTime > 0)
+        {
+            loanTime--;
+            if (loanTime == 0)
+            {
+                // 게임 오버
+                Game_Manager.current.GameOver();
+            }
+        }
     }
 }

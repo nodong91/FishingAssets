@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,10 +9,10 @@ using static Data_Dialog;
 
 public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 {
-    public StaticOpenCanvas.CanvasStruct[] canvasStructs; 
+    public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     Data_NPC dataNPC;
     Data_Dialog dataDialog;
-    DialogStruct dialog;
+    //TextStruct dialog;
 
     const float defaultTypingSpeed = 0.1f;
     const int defaultSize = 15;
@@ -34,6 +35,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     private readonly Queue<Dialog_SelectButton> selectButtonQueue = new Queue<Dialog_SelectButton>();
     public RectTransform gridRect;
 
+    Vector2Int[] dialogVector;
     RectTransform rectParent;
 
     public void SetStart()
@@ -45,9 +47,10 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
         OpenCanvas(false);// 시작 닫기
     }
- 
+
     public void DialogStart_NPC(Data_NPC _npc, int _dialogIndex)
     {
+        bool isOpen = dataNPC == _npc;
         int hour = Game_Manager.current.GetMainUI.timeUI.hour;
         Debug.LogWarning($"{_npc.npc_ID} : 현재 시간({hour}) 오픈 시간({_npc.openTime.x}~{_npc.openTime.y})");
         if (hour >= _npc.openTime.x && hour <= _npc.openTime.y)
@@ -58,6 +61,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
         else
         {
+            // 열리지 않음 - 혼잣말
             dataNPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
             dataDialog = dataNPC.dataDialogs[3];
         }
@@ -67,7 +71,10 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         NPC_Image.SetNativeSize();
 
         Dialog_Npc(dataDialog);
-        OpenCanvas(true);// 대화 시작
+        if (isOpen == false)
+        {
+            OpenCanvas(true);// 대화 시작
+        }
     }
 
     public void Dialog_Npc(Data_Dialog _dialog)
@@ -232,9 +239,11 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         Dialog_SelectButton inst = Instantiate(selectButton, gridRect);
         return inst;
     }
-   
+
     void OpenCanvas(bool _open)
     {
+        if (_open == false)// 닫히면 엔피씨 데이터 초기화
+            dataNPC = null;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
 
@@ -242,11 +251,12 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     {
         if (typing == true)
         {
-            StartTyping(false);// 스킵
+            typing = false;
+            //StartTyping();// 스킵
         }
         else if (endDialog == false)
         {
-            if (currentDialog >= dataDialog.dialogStructs.Length)
+            if (currentDialog >= dataDialog.textStruct.Length)
             {
                 // 대화 끝
                 EndDialog();// 스킵으로 끝
@@ -268,33 +278,58 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     IEnumerator StartDialog()
     {
-        dialog = dataDialog.dialogStructs[currentDialog];
-        dialogText.text = TryDialogString();
+        TextStruct dialog = dataDialog.textStruct[currentDialog];
+        dialogText.text = SetReplace(dialog);
         dialogText.ForceMeshUpdate(true);// 메쉬 재 생성 (리셋)
         dialogText.alpha = 0f;// 모든 글자 숨김
         yield return null;
 
-        StartTyping(true);
-        StartActing();
+        typing = true;
+        StartTyping(dialog);
+        StartActing(dialog);
 
         currentDialog++;
     }
 
-    string TryDialogString()
+    string SetReplace(TextStruct _textStruct)
     {
-        string temp = dialog.contents;
-        int length = dialog.dialogTypes.Length - 1;
-        for (int i = length; i >= 0; i--)
+        string replace = Singleton_Data.INSTANCE.GetLanguage(_textStruct.contents);// 번역
+        dialogVector = new Vector2Int[_textStruct.dialogTypes.Length];
+        for (int i = 0; i < _textStruct.dialogTypes.Length; i++)
         {
-            float size = dialog.dialogTypes[i].textSize;
-            string textColor = dialog.dialogTypes[i].textColor;
-            int x = dialog.dialogTypes[i].dialogIndex.x;
-            int y = dialog.dialogTypes[i].dialogIndex.y;
-            temp = temp.Insert(y, "</size></color>");
-            temp = temp.Insert(x, $"<color=#{textColor}><size={size}>");
+            string temp = "{" + i + "}";
+            string setReplace = Singleton_Data.INSTANCE.GetLanguage(_textStruct.dialogTypes[i].replaceText);// 번역
+            int startIndex = replace.IndexOf(temp);
+            dialogVector[i] = new Vector2Int(startIndex, startIndex + setReplace.Length);
+            replace = replace.Replace(temp, setReplace);
+            Debug.LogWarning($"{temp} {replace} (startReplace : {startIndex}) -1이면 바꿀 단어를 못찾아서 뒤에 에러터질꺼임");
         }
-        return temp;
+
+        // 색, 사이즈
+        int lastIndex = dialogVector.Length - 1;
+        for (int i = lastIndex; i >= 0; i--)
+        {
+            string textColor = _textStruct.dialogTypes[i].textColor;
+            float size = _textStruct.dialogTypes[i].textSize;
+            replace = replace.Insert(dialogVector[i].y, "</size></color>");// 끼워 넣기
+            replace = replace.Insert(dialogVector[i].x, $"<color=#{textColor}><size={size}>");
+        }
+        return replace;
     }
+
+    //string TryDialogString()
+    //{
+    //    string temp = dialog.contents;
+    //    int length = dialog.dialogTypes.Length - 1;
+    //    for (int i = length; i >= 0; i--)
+    //    {
+    //        float size = dialog.dialogTypes[i].textSize;
+    //        string textColor = dialog.dialogTypes[i].textColor;
+    //        temp = temp.Insert(dialogVector[i].y, "</size></color>");
+    //        temp = temp.Insert(dialogVector[i].x, $"<color=#{textColor}><size={size}>");
+    //    }
+    //    return temp;
+    //}
 
     void EndDialog()
     {
@@ -338,14 +373,14 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     }
 
-    void StartActing()
+    void StartActing(TextStruct _dialogStruct)
     {
         if (actionCoroutine != null)
             StopCoroutine(actionCoroutine);
-        actionCoroutine = StartCoroutine(TextAction(dialog));
+        actionCoroutine = StartCoroutine(TextAction(_dialogStruct));
     }
 
-    IEnumerator TextAction(DialogStruct _dialogStruct)
+    IEnumerator TextAction(TextStruct _dialogStruct)
     {
         actionBool = true;
         TMP_Text component = dialogText;
@@ -360,8 +395,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 if (_dialogStruct.dialogTypes[i].actionType == ActionType.None)// 액션 타입이 None이 아니면
                     continue;
 
-                int x = _dialogStruct.dialogTypes[i].dialogIndex.x;
-                int y = _dialogStruct.dialogTypes[i].dialogIndex.y;
+                int x = dialogVector[i].x;
+                int y = dialogVector[i].y;
                 for (int c = x; c < y; c++)
                 {
                     var charInfo = component.textInfo.characterInfo[c];
@@ -388,7 +423,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     //===================================================================================================
     // 글자 움직임   
     //===================================================================================================
-    void SetActingText(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void SetActingText(TextStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         switch (type.actionType)
         {
@@ -410,7 +445,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void TryAimationWave(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void TryAimationWave(TextStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         for (int v = 0; v < 4; v++)
         {
@@ -423,7 +458,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void TryAimationMove(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void TryAimationMove(TextStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         for (int v = 0; v < 4; v++)
         {
@@ -435,7 +470,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void TryAimationJitter(DialogStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
+    void TryAimationJitter(TextStruct.DialogType type, int vertexIndex, Vector3[] sourceVertices, Vector3[] destinationVertices, int _index)
     {
         for (int v = 0; v < 4; v++)
         {
@@ -446,15 +481,14 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    void StartTyping(bool _typing)
+    void StartTyping(TextStruct _dialogStruct)
     {
-        typing = _typing;
         if (typingCoroutine != null)
             StopCoroutine(typingCoroutine);
-        typingCoroutine = StartCoroutine(Typing(dialog));
+        typingCoroutine = StartCoroutine(Typing(_dialogStruct));
     }
 
-    IEnumerator Typing(DialogStruct _dialogStruct)
+    IEnumerator Typing(TextStruct _dialogStruct)
     {
         int subIndex = 0;
         TMP_TextInfo textInfo = dialogText.textInfo;
@@ -463,12 +497,12 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             if (_dialogStruct.dialogTypes.Length > 0)
             {
                 float speed = _dialogStruct.dialogTypes[subIndex].typingSpeed;
-                if (i == _dialogStruct.dialogTypes[subIndex].dialogIndex.x)
+                if (i == dialogVector[subIndex].x)
                 {
                     if (speed > 0)// 타이핑 스피드가 0 이상이라면..
                         typingSpeed = speed;
                 }
-                else if (i == _dialogStruct.dialogTypes[subIndex].dialogIndex.y)
+                else if (i == dialogVector[subIndex].y)
                 {
                     if (subIndex + 1 < _dialogStruct.dialogTypes.Length)
                         subIndex++;
@@ -501,7 +535,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         yield return new WaitForSeconds(typingSpeed);
 
         typing = false;
-        if (currentDialog >= dataDialog.dialogStructs.Length)
+        if (currentDialog >= dataDialog.textStruct.Length)
         {
             // 대화 끝
             EndDialog();// 자연스럽게 끝

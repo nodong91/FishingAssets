@@ -23,6 +23,7 @@ public class String_Save
     public const string _enableSkill = "Skill_Enabled";// 활성화 된 스킬 저장
     public const string _option = "SaveOptionData";
     public const string _quest = "SaveQuestData";
+    public const string _fishGuideData = "FishGuideData";
 }
 
 public class String_Select

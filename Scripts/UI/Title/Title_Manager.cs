@@ -34,6 +34,7 @@ public class Title_Manager : MonoBehaviour
     public float speed = 0.1f;
     public Material reflectionMaterial;
     bool isMove = false;
+    Data_Continue continueData;
 
     void Start()
     {
@@ -60,7 +61,7 @@ public class Title_Manager : MonoBehaviour
     {
         LoadingManager.current.GoTest();
     }
-    Data_Continue continueData;
+
     void SetTime()
     {
         RenderSettings.skybox = Instantiate(skyboxMatial);
@@ -183,7 +184,7 @@ public class Title_Manager : MonoBehaviour
         }
     }
 
-    IEnumerator RemoveSaveFile()
+    IEnumerator RemoveSaveFile()// 모든 세이브 파일 삭제
     {
         string path = Application.dataPath + "/Save/";
         FindFolder(path);
@@ -191,6 +192,7 @@ public class Title_Manager : MonoBehaviour
         string[] allFiles = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
         foreach (string file in allFiles)
         {
+            Debug.LogWarning("Delete File : " + file);// 파일 이름 찾아서 물고기 도감데이터 빼고 삭제
             File.Delete(file);
         }
         Directory.Delete(path, true);

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Data_Manager;
 using static Game_Manager;
 
 public class UI_Main : MonoBehaviour
@@ -21,11 +20,16 @@ public class UI_Main : MonoBehaviour
     Coroutine textActing;
 
     [Header("[ Ship ]")]
-    public Slider shipEnergy;
-    RectTransform shipEnergyRect;
+    public Image shipEnergyMask;
+    public Image shipEnergy;
+    public RectTransform shipEnergyRect;
     public Image currentHealthImage, maxHealthImage;
     Coroutine openFadeScreen;
     public Vector2 HealthSize;
+
+    Material healthMaterial, energyMaterial;
+    bool lowEnergy = false;
+    bool lowHP = false;
 
     public void SetStart()
     {
@@ -39,10 +43,8 @@ public class UI_Main : MonoBehaviour
 
         if (energyMaterial == null)
         {
-            Image energy = shipEnergy.fillRect.GetComponent<Image>();
-            energyMaterial = Instantiate(energy.material);
-            energy.material = energyMaterial;
-            shipEnergyRect = shipEnergy.GetComponent<RectTransform>();
+            energyMaterial = Instantiate(shipEnergy.material);
+            shipEnergy.material = Instantiate(energyMaterial);
         }
 
         warnningText.alpha = 0f;
@@ -193,10 +195,6 @@ public class UI_Main : MonoBehaviour
     // 상태 체크
     //===========================================================================================================================
 
-    Material healthMaterial, energyMaterial;
-    bool lowEnergy = false;
-    bool lowHP = false;
-
     public void SetMaxEnergyPoint(float _energy)
     {
         shipEnergyRect.sizeDelta = new Vector2((1f + _energy) * 2f, shipEnergyRect.sizeDelta.y);
@@ -204,7 +202,7 @@ public class UI_Main : MonoBehaviour
 
     public void SetEnergy(float _energy)
     {
-        shipEnergy.value = _energy;
+        shipEnergyMask.fillAmount = _energy;
         if (_energy < 0.2f)
         {
             if (lowEnergy == false)// 에너지   경고
@@ -326,7 +324,6 @@ public class UI_Main : MonoBehaviour
     private Coroutine shakeUI;
     public void NoMoney()
     {
-        Debug.LogWarning("돈이 부족합니다.");
         if (shakeUI != null)
             StopCoroutine(shakeUI);
         shakeUI = StartCoroutine(ShakeUI());
