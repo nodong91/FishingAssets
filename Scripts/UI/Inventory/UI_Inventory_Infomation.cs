@@ -6,7 +6,7 @@ public class UI_Inventory_Infomation : MonoBehaviour
     public CanvasGroup canvasGroup;
     public RectTransform rectTransform;
     public TMPro.TMP_Text nameText;
-    public TMPro.TMP_Text weightText, priceText, classText;
+    public TMPro.TMP_Text weightText, priceText, classText, typeText;
 
     public void SetStart(UI_Inventory_Slot _slot)
     {
@@ -33,7 +33,7 @@ public class UI_Inventory_Infomation : MonoBehaviour
         switch (item.itemClass)
         {
             case ItemStruct.ItemClass.Common:
-                color = "FFFFFF";
+                color = "B3B3B3";
                 break;
             case ItemStruct.ItemClass.Uncommon:
                 color = "00FF29";
@@ -49,7 +49,25 @@ public class UI_Inventory_Infomation : MonoBehaviour
                 break;
         }
         classText.text = $"<color=#{color}>{item.itemClass}</color>";
-
+        switch (item.itemType)
+        {
+            case ItemStruct.ItemType.Fish:
+                color = "30AEEA";
+                break;
+            case ItemStruct.ItemType.Fuel:
+                color = "222222";
+                break;
+            case ItemStruct.ItemType.Buff:
+                color = "1DE02B";
+                break;
+            case ItemStruct.ItemType.Repare:
+                color = "FFC300";
+                break;
+            case ItemStruct.ItemType.Etc:
+                color = "B3B3B3";
+                break;
+        }
+        typeText.text = $"<color=#{color}>{item.itemType}</color>";
         if (Game_Manager.current.GetInventory.enterSlotType == UI_Inventory_Base.SlotType.MyBox)
         {
             rectTransform.pivot = new Vector2(1f, 0.5f);
