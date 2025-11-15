@@ -25,20 +25,13 @@ public class Trigger_RandomBox : Trigger_Setting
         itemRewards = new string[randomItemCount];
         for (int i = 0; i < randomItemCount; i++)
         {
-            itemRewards[i] = dataItemList.GetItemID().itemID;
+            itemRewards[i] = dataItemList.GetItemID();
         }
     }
 
     void SetTrigger()
     {
-        ResultStruct resultStruct = new ResultStruct
-        {
-            inventorySize = new Vector2Int(5, 5),
-            money = 0,
-            itemID = itemRewards
-        };
-        Game_Manager.current.GetInventory.SetResult(resultStruct);// 결과 아이템 세팅
-        Game_Manager.current.GetInventory.OpenResult();// 상자 보상
+        Game_Manager.current.GetInventory.SetResult(itemRewards);// 결과 아이템 세팅
         Game_Manager.current.GetMainUI.OpenCanvas(false);// 메인 유아이 닫기
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 인벤토리의 닫기 버튼 세팅
         gameObject.SetActive(false);// 트리거 오브젝트 비활성화

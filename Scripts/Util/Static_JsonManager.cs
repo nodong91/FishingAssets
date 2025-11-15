@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor.Overlays;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using static Data_Manager;
 
@@ -254,7 +257,6 @@ public class Static_JsonManager
     public class InventoryData
     {
         public string name;
-        public int lastSetDay;
         public Vector2Int invenSize;
         public List<UI_Inventory_Base.SaveItemClass> saveItems;
     }
@@ -297,7 +299,7 @@ public class Static_JsonManager
 
     public static void SaveFishGuideData(string fileName, List<FishGuide.SaveFishClass> _data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + "/SaveFish/";
         // 폴더 없으면 생성
         FindFolder(filePath);
 
@@ -307,7 +309,7 @@ public class Static_JsonManager
 
     public static bool TryLoadFishGuideData(string fileName, out List<FishGuide.SaveFishClass> _data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + "/SaveFish/";
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 
@@ -344,6 +346,43 @@ public class Static_JsonManager
     public class Wrapper<T>
     {
         public List<T> Items;
+    }
+
+    //======================================================================================
+    // 세이브 파일 전체 삭제
+    //======================================================================================
+
+    public static IEnumerator RemoveSaveFile()// 모든 세이브 파일 삭제
+    {
+        string path = Application.dataPath + "/Save/";
+        FileDelete(path);
+        yield return null;
+
+        // 닫힐때 옵션이 저장이 되는데 창 데이터가 있어서 기존 내용이 저장됨
+        Option_Manager.current.LoadOption();// 옵션 데이터 리셋
+    }
+
+    public static IEnumerator RemoveFishFile()// 모든 세이브 파일 삭제
+    {
+        string path = Application.dataPath + "/SaveFish/";
+        FileDelete(path);
+        yield return null;
+
+        // 닫힐때 옵션이 저장이 되는데 창 데이터가 있어서 기존 내용이 저장됨
+        Option_Manager.current.LoadOption();// 옵션 데이터 리셋
+    }
+
+    static void FileDelete(string _path)
+    {
+        FindFolder(_path);
+
+        string[] allFiles = Directory.GetFiles(_path, "*", SearchOption.AllDirectories);
+        foreach (string file in allFiles)
+        {
+            Debug.LogWarning("Delete File : " + file);// 파일 이름 찾아서 물고기 도감데이터 빼고 삭제
+            File.Delete(file);
+        }
+        Directory.Delete(_path, true);
     }
 }
 

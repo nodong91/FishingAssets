@@ -98,7 +98,8 @@ public class Game_Manager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            Singleton_Continue.INSTANCE.SaveContinue();// Space 시 저장
+            GameOver();
+            //Singleton_Continue.INSTANCE.SaveContinue();// Space 시 저장
             Debug.LogError("저장중");
         }
     }
@@ -631,7 +632,7 @@ public class Game_Manager : MonoBehaviour
     // 게임 오버 관련
     //====================================================================================================================
 
-    public void LoanStart()
+    public void LoanStart()// 대출금 상환 타이머 시작
     {
         GetMainUI.timeUI.StartLoanTimer();
     }
@@ -642,35 +643,6 @@ public class Game_Manager : MonoBehaviour
         OutOfControll(true);
         GetMainUI.OpenCanvas(false);
 
-        StartCoroutine(RemoveSaveFile());
-    }
-
-    IEnumerator RemoveSaveFile()// 모든 세이브 파일 삭제
-    {
-        string path = Application.dataPath + "/Save/";
-        FindFolder(path);
-
-        string[] allFiles = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
-        foreach (string file in allFiles)
-        {
-            Debug.LogWarning("Delete File : " + file);
-            if (file.Contains(String_Save._fishGuideData) == false)// 파일 이름 찾아서
-                File.Delete(file);// 물고기 도감데이터 빼고 삭제
-        }
-        Directory.Delete(path, true);
-
-        // 닫힐때 옵션이 저장이 되는데 창 데이터가 있어서 기존 내용이 저장됨
-        Option_Manager.current.LoadOption();// 옵션 데이터 리셋
-        yield return null;
-    }
-
-    static void FindFolder(string folderName)
-    {
-        DirectoryInfo dirInfo = new DirectoryInfo(folderName);
-        if (dirInfo.Exists == false)
-        {
-            // 없으면 만들기
-            dirInfo.Create();
-        }
+        StartCoroutine(Static_JsonManager.RemoveSaveFile());
     }
 }

@@ -88,19 +88,16 @@ public class Data_Dialog : ScriptableObject
         {
             None = 0,
             Out = 1,// 나가기
-            OpenShop = 2,// 생선 상점 열기
-            OpenShipyard = 3,// 조선소 상점 열기
-            OpenSmuggler = 4,// 밀수꾼 상점 열기
             Upgrade = 5,// 스킬 업그레이드
-            Result = 6,
-            Rest = 7,// 휴식 - 잠자기
-            NoticeBoard = 8,// 게시판 열기
-            Tutorial = 9,// 튜토리얼 시작
-            Event = 10,
+            Rest = 6,// 휴식 - 잠자기
+            NoticeBoard = 7,// 게시판 열기
+            Tutorial = 8,// 튜토리얼 시작
+            Event = 9,
         }
         public SelectType selectType;
         public Data_NPC npcData;
         public int dialogIndex;
+        public Data_ItemList shopItemList;
     }
     public SelectStruct[] selectStructs;
 

@@ -52,20 +52,22 @@ public class UI_Inventory_Base : MonoBehaviour
 
         if (loadingItem != null)
             StopCoroutine(loadingItem);
-        loadingItem = StartCoroutine(SetLoadingItem(saveInventoryData));
+        loadingItem = StartCoroutine(SetLoadingItem());
     }
 
-    IEnumerator SetLoadingItem(Static_JsonManager.InventoryData _saveInventoryData)
+    IEnumerator SetLoadingItem()
     {
+        saveInventoryData = null;
+
         EmptyInventoryAllSlot();
-        LoadInventory();
-        while (_saveInventoryData == null)
+        LoadInventory(); // saveInventoryData 불러오기
+        while (saveInventoryData == null)
             yield return null;
 
-        SetInventorySlot(_saveInventoryData.invenSize);// 데이터 불러온 이후
+        SetInventorySlot(saveInventoryData.invenSize);// 데이터 불러온 이후
         yield return null;
 
-        LoadItem(_saveInventoryData);// 아이템 불러오기
+        LoadItem(saveInventoryData);// 아이템 불러오기
         SetLoadDestroy();// 부서진 슬롯 세팅
     }
 
@@ -80,7 +82,6 @@ public class UI_Inventory_Base : MonoBehaviour
     {
         StaticOpenCanvas.deleEndOpen -= EndOpenCanvas;
         Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;// 창닫힐 때 저장
-        Debug.LogError($"저장 ({gameObject.name}) : {dictItem.Count} ({saveData})");
     }
 
     public void EmptyInventoryAllSlot()
@@ -567,7 +568,6 @@ public class UI_Inventory_Base : MonoBehaviour
 
         saveInventoryData = new Static_JsonManager.InventoryData
         {
-            lastSetDay = Game_Manager.current.GetTimeUI.day,
             invenSize = inventorySize,
             saveItems = setSaveItems,
         };
@@ -583,7 +583,6 @@ public class UI_Inventory_Base : MonoBehaviour
         {
             saveInventoryData = new Static_JsonManager.InventoryData
             {
-                lastSetDay = -1,
                 invenSize = Game_Manager.current.shipData.status.maxBoxSize,
                 saveItems = new List<SaveItemClass>(),
             };

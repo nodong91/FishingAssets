@@ -76,23 +76,23 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void OpenShop(Data_NPC _npc)
+    public void OpenShop(Data_ItemList _itemList)
     {
         if (currentType != SlotType.Shop)
         {
             currentType = SlotType.Shop;
             myBox.OpenCanvas(true);
-            shop.SetShop(true, _npc);
+            shop.SetShop(true, _itemList);
         }
     }
 
-    public void OpenShipyard(Data_NPC _npc)
+    public void OpenShipyard(Data_ItemList _itemList)
     {
         if (currentType != SlotType.Shipyard)
         {
             currentType = SlotType.Shipyard;
             myBox.OpenCanvas(true);
-            shop.SetShipyard(true, _npc);
+            shop.SetShipyard(true, _itemList);
         }
     }
 
@@ -174,10 +174,16 @@ public class UI_Inventory : MonoBehaviour
     // 아이템 이동
     //===========================================================================================================================
 
-    public void SetResult(ResultStruct _resultItem)
+    public void SetResult(string[] _itemID)
     {
+        ResultStruct resultStruct = new ResultStruct
+        {
+            inventorySize = new Vector2Int(5, 5),
+            itemID = _itemID// 보상 아이템
+        };
         // 퀘스트 결과 아이템 세팅
-        resultItem = _resultItem;
+        resultItem = resultStruct;
+        OpenResult();
     }
 
     void SellItem(ItemStruct _item)
@@ -556,6 +562,12 @@ public class UI_Inventory : MonoBehaviour
 
             case ItemStruct.ItemType.Lottery:// 복권
                 Game_Manager.current.GetLottery.OpenCanas();// 복권 열기
+                SetEmptySlot(selectSlot);// 사용한 아이템 비우기
+                break;
+
+            case ItemStruct.ItemType.Money:// 돈
+                usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
+                Game_Manager.current.GetMainUI.MoveMoney(usedStruct.etcValue);// 아이템 추가 테스트
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
 

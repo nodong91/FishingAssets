@@ -4,7 +4,7 @@ public class Cursor_Manager : MonoBehaviour
 {
     public enum Cursor_Type
     {
-        ORIGIN,
+        NORMAL,
         HAND,
         REPAIR
     }
@@ -35,7 +35,7 @@ public class Cursor_Manager : MonoBehaviour
     {
         if (type != Cursor_Type.REPAIR)
         {
-            type = Cursor_Type.ORIGIN;
+            type = Cursor_Type.NORMAL;
             Cursor.SetCursor(origin, new Vector2(0f, 0f), CursorMode.ForceSoftware);
         }
     }
@@ -49,7 +49,7 @@ public class Cursor_Manager : MonoBehaviour
         }
         else
         {
-            type = Cursor_Type.ORIGIN;
+            type = Cursor_Type.NORMAL;
             Cursor.SetCursor(origin, new Vector2(0f, 0f), CursorMode.ForceSoftware);
         }
     }

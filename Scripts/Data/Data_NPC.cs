@@ -10,7 +10,7 @@ public class Data_NPC : ScriptableObject
     public string voice;// NPC의 음성 파일 이름
     public Data_Dialog[] dataDialogs;
 
-    [Header(" [ 판매 물품 ]")]
-    public Vector2Int invenSize;
-    public Data_ItemList saleItemList;
+    //[Header(" [ 판매 물품 ]")]
+    //public Vector2Int invenSize;
+    //public Data_ItemList saleItemList;
 }

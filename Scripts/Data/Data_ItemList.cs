@@ -3,6 +3,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data_ItemList", menuName = "Scriptable Objects/Data_ItemList")]
 public class Data_ItemList : ScriptableObject
 {
+    public enum InventoryType
+    {
+        None,
+        Shop,
+        Shipyard,
+        Smuggler,
+        Loan,
+    }
+    public InventoryType inventoryType;
+
     [System.Serializable]
     public struct ItemIDStruct
     {
@@ -12,7 +22,7 @@ public class Data_ItemList : ScriptableObject
     }
     public ItemIDStruct[] itemIDs;
 
-    public ItemIDStruct GetItemID()
+    public string GetItemID()
     {
         float totalChance = 0;
         foreach (var item in itemIDs)
@@ -26,9 +36,33 @@ public class Data_ItemList : ScriptableObject
             cumulativeChance += item.chance;
             if (randomValue <= cumulativeChance)
             {
-                return item;
+                return item.itemID;
             }
         }
-        return itemIDs[0]; // Fallback, should not reach here
+        return itemIDs[0].itemID; // Fallback, should not reach here
     }
+    // È®·ü ±¸ÇÏ±â
+
+    //public string GetItemID()
+    //{
+    //    float total = 0;
+    //    foreach (var elem in itemIDs)
+    //    {
+    //        total += elem.chance;
+    //    }
+
+    //    float randomPoint = Random.value * total;
+    //    for (int i = 0; i < itemIDs.Length; i++)
+    //    {
+    //        if (randomPoint < itemIDs[i].chance)
+    //        {
+    //            return itemIDs[i].itemID;
+    //        }
+    //        else
+    //        {
+    //            randomPoint -= itemIDs[i].chance;
+    //        }
+    //    }
+    //    return itemIDs[^1].itemID;
+    //}
 }

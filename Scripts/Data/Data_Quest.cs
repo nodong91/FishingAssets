@@ -19,7 +19,6 @@ public class Data_Quest : ScriptableObject
     public struct ResultStruct
     {
         public Vector2Int inventorySize;// 퀘스트 완료 후 인벤토리 크기
-        public int money;// 퀘스트 완료 후 보상 금액
         public string[] itemID;// 퀘스트 완료 후 보상 아이템 ID들
     }
 }

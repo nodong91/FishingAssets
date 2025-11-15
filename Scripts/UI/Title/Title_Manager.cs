@@ -180,38 +180,16 @@ public class Title_Manager : MonoBehaviour
         Debug.Log("NewGamePopup : " + _action);
         if (_action == true)
         {
-            StartCoroutine(RemoveSaveFile());
+            StartCoroutine(SetNewGame());
         }
     }
 
-    IEnumerator RemoveSaveFile()// 모든 세이브 파일 삭제
+    IEnumerator SetNewGame()
     {
-        string path = Application.dataPath + "/Save/";
-        FindFolder(path);
-
-        string[] allFiles = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
-        foreach (string file in allFiles)
-        {
-            Debug.LogWarning("Delete File : " + file);// 파일 이름 찾아서 물고기 도감데이터 빼고 삭제
-            File.Delete(file);
-        }
-        Directory.Delete(path, true);
-
-        // 닫힐때 옵션이 저장이 되는데 창 데이터가 있어서 기존 내용이 저장됨
-        Option_Manager.current.LoadOption();// 옵션 데이터 리셋
-        yield return null;
-
+        yield return StartCoroutine(Static_JsonManager.RemoveSaveFile());
+        yield return StartCoroutine(Static_JsonManager.RemoveFishFile());
+        
         StartGame();//RemoveSaveFile
-    }
-
-    static void FindFolder(string folderName)
-    {
-        DirectoryInfo dirInfo = new DirectoryInfo(folderName);
-        if (dirInfo.Exists == false)
-        {
-            // 없으면 만들기
-            dirInfo.Create();
-        }
     }
 
     void CreditButton()

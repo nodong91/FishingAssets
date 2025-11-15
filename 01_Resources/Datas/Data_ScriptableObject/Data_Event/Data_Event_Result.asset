@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3602e3d2d7fa6d142ada9750aa865c76, type: 3}
-  m_Name: Data_ItemList_Shipyard
+  m_Script: {fileID: 11500000, guid: 664a0e4f21d8dbf4aa1987074900a295, type: 3}
+  m_Name: Data_Event_Result
   m_EditorClassIdentifier: 
-  inventoryType: 2
-  itemIDs:
-  - itemID: us_1001
-    chance: 1
-  - itemID: us_2001
-    chance: 1
+  eventStruct:
+    contents: 
+    dialogTypes: []
+  eventSelect: []
+  resultType: 0
+  itemRewards:
+  - 

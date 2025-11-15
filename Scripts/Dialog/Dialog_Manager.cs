@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -6,6 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Data_Dialog;
+using static Data_Quest;
 
 public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 {
@@ -157,39 +159,51 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             return;
         }
 
+        if (_selectStruct.shopItemList != null)
+        {
+            Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;// 상점이나 조선소 닫기시 섬 나가기 버튼으로 변경
+            switch (_selectStruct.shopItemList.inventoryType)
+            {
+                case Data_ItemList.InventoryType.None:
+                    FixItemSetting(_selectStruct.shopItemList);
+                    break;
+
+                case Data_ItemList.InventoryType.Shop:
+                    // 상점 열기
+                    Game_Manager.current.GetInventory.OpenShop(_selectStruct.shopItemList);
+                    break;
+
+                case Data_ItemList.InventoryType.Shipyard:
+                    // 조선소 열기
+                    Game_Manager.current.GetInventory.OpenShipyard(_selectStruct.shopItemList);
+                    break;
+
+                case Data_ItemList.InventoryType.Smuggler:
+                    // 밀수 열기
+                    Game_Manager.current.GetInventory.OpenShipyard(_selectStruct.shopItemList);
+                    break;
+
+                case Data_ItemList.InventoryType.Loan:
+                    // 대출 타이머 시작
+                    Game_Manager.current.LoanStart();
+                    FixItemSetting(_selectStruct.shopItemList);
+                    break;
+            }
+            OpenCanvas(false);
+            return;
+        }
+
         switch (_selectStruct.selectType)
         {
             case SelectStruct.SelectType.Out:
                 // 섬 나가기
                 Game_Manager.current.GetLanding.BackButton();
                 break;
-            case SelectStruct.SelectType.OpenShop:
-                // 상점 열기
-                //Game_Manager.current.GetMainUI.OpenShop();// 상점창 열기
-                Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;
-                Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shop];
-                Game_Manager.current.GetInventory.OpenShop(data_NPC);
-                break;
-            case SelectStruct.SelectType.OpenShipyard:
-                // 조선소 열기
-                //Game_Manager.current.GetMainUI.OpenShop();// 조선소도 상점창
-                Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;
-                data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
-                Game_Manager.current.GetInventory.OpenShipyard(data_NPC);
-                break;
-
-            case SelectStruct.SelectType.OpenSmuggler:
-                // 밀수꾼 상점 열기
-                //Game_Manager.current.GetMainUI.OpenShop();// 상점창
-                Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;
-                data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._smuggler];
-                Game_Manager.current.GetInventory.OpenShipyard(data_NPC);
-                break;
 
             case SelectStruct.SelectType.Upgrade:
                 if (Game_Manager.current.GetPlayer.FullHealth == false)
                 {
-                    data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
+                    Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
                     //DialogStart_NPC(data_NPC, 1);
                     Data_Dialog warnDialog = data_NPC.dataDialogs[1];
                     Dialog_Npc(warnDialog);
@@ -198,10 +212,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 }
                 Game_Manager.current.GetInventory.CloseShop();
                 Game_Manager.current.GetSkill.OpenCanvas(true);
-                break;
-
-            case SelectStruct.SelectType.Result:
-                //Game_Manager.current.GetMainUI.OpenResult();//퀘스트 결과 아이템 받기
                 break;
 
             case SelectStruct.SelectType.Rest:
@@ -213,7 +223,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 break;
 
             case SelectStruct.SelectType.Tutorial:
-                //Game_Manager.current.GetTutorial.StartTutorial();
                 // 섬입장
                 Game_Manager.current.CurrentLand.SetLandingAction();
                 Game_Manager.current.OutOfControll(true);
@@ -224,6 +233,21 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 break;
         }
         OpenCanvas(false);
+    }
+
+    void FixItemSetting(Data_ItemList _itemList)
+    {
+        // 고정 아이템
+        string[] itemID = new string[_itemList.itemIDs.Length];
+        for (int i = 0; i < itemID.Length; i++)
+        {
+            string itemString = _itemList.itemIDs[i].itemID;// 아이템 목록에서 아이템 ID 가져오기
+            itemID[i] = itemString;
+            Debug.LogWarning(itemString);
+        }
+
+        Game_Manager.current.GetInventory.SetResult(itemID);// 대화 보상
+        Debug.LogWarning("상점 열기");
     }
 
     public void Tutorial_Upgrade()
@@ -302,7 +326,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             int startIndex = replace.IndexOf(temp);
             dialogVector[i] = new Vector2Int(startIndex, startIndex + setReplace.Length);
             replace = replace.Replace(temp, setReplace);
-            Debug.LogWarning($"{temp} {replace} (startReplace : {startIndex}) -1이면 바꿀 단어를 못찾아서 뒤에 에러터질꺼임");
+            Debug.Log($"{temp} {replace} (startReplace : {startIndex}) -1이면 바꿀 단어를 못찾아서 뒤에 에러터질꺼임");
         }
 
         // 색, 사이즈

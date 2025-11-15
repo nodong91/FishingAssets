@@ -26,7 +26,6 @@ public class Trigger_LostBox : Trigger_Setting
 
         setResult = new InventoryData
         {
-            lastSetDay = Game_Manager.current.GetTimeUI.day,
             invenSize = Game_Manager.current.GetInventory.myBox.inventorySize,
             saveItems = setSaveItems,
         };

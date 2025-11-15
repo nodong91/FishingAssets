@@ -4,7 +4,6 @@ using Unity.Cinemachine;
 using UnityEngine;
 using static Data_Manager;
 using static Data_Manager.FishStruct;
-using static Data_Quest;
 
 public class Fishing_Manager : MonoBehaviour
 {
@@ -54,6 +53,7 @@ public class Fishing_Manager : MonoBehaviour
     AreaType areaType;
     DayType dayType;
     Dictionary<string, List<FishStruct>> dictFishStruct = new Dictionary<string, List<FishStruct>>();
+    public TMPro.TMP_Text debugText;
 
     public void SetStart()
     {
@@ -416,7 +416,7 @@ public class Fishing_Manager : MonoBehaviour
         fishState = _state;
         if (fishAction != null)
             StopCoroutine(fishAction);
-
+        debugText.text = $"Fish State : {fishState}";
         switch (fishState)
         {
             case FishStateType.Idle:
@@ -449,7 +449,8 @@ public class Fishing_Manager : MonoBehaviour
         else
         {
             fishTargetPoint = SetRandomPosition();
-            FishState(FishStateType.Moving);
+            if (currentFish.fishSpeed > 0)
+                FishState(FishStateType.Moving);
         }
     }
 
@@ -458,7 +459,6 @@ public class Fishing_Manager : MonoBehaviour
         float prevSpeed = fishSpeed;
         float distance = (fishTargetPoint - fishPrefab.transform.position).magnitude / fieldRadius;
         float randomSpeed = Random.Range(currentFish.fishSpeed * 0.3f, currentFish.fishSpeed);
-        //float randomSpeed = distance * currentFish.fishSpeed;
         float randomTime = Random.Range(currentFish.fishTurnDelay.x, currentFish.fishTurnDelay.y) * distance;
         float normalize = 0f;
         while (normalize < randomTime)
@@ -734,15 +734,7 @@ public class Fishing_Manager : MonoBehaviour
             itemIDs = new string[1] { fishItem.id };
         }
 
-        ResultStruct fishResult = new ResultStruct
-        {
-            inventorySize = new Vector2Int(7, 7), // 인벤토리 크기
-            money = 0, // 돈
-            itemID = itemIDs, // 아이템 ID
-        };
-
-        Game_Manager.current.GetInventory.SetResult(fishResult);// 퀘스트 완료 후 결과 아이템 설정
-        Game_Manager.current.GetInventory.OpenResult();// 낚시 보상
+        Game_Manager.current.GetInventory.SetResult(itemIDs);// 낚시 보상 아이템 설정
         Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
     }

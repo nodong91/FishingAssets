@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +28,10 @@ public class FishGuide : MonoBehaviour
     public Toggle[] toggles;
     public int currentIndex;
     Queue<FishStructGuide> instQueue = new Queue<FishStructGuide>();
+    public void CloseCanvas() => Game_Manager.current.GetMainUI?.CloseCanvas();
+    public UI_FishInfo fishInfo;
+    public Slider completeSlider;
+    public TMPro.TMP_Text completeText;
 
     public void SetStart()
     {
@@ -55,7 +58,6 @@ public class FishGuide : MonoBehaviour
         backButton.SetButton(CloseCanvas);
         OpenCanvas(false);
     }
-    public void CloseCanvas() => Game_Manager.current.GetMainUI?.CloseCanvas();
 
     public void OpenCanvas(bool _open)
     {
@@ -105,15 +107,11 @@ public class FishGuide : MonoBehaviour
         }
         SetCompleteSlider();// 슬라이더 표기
     }
-    public int alskdfjlakjdf;
+
     void CheckCard(UI_FishCard _card, Data_Manager.FishStruct _fish)
     {
         string id = _fish.itemStruct.id;
         bool onDict = dictFishClass.ContainsKey(id);// 도감을 못 만들었으면 까맣게
-        if (onDict)
-        {
-            alskdfjlakjdf++;
-        }
         SaveFishClass tempFish = onDict == true ? dictFishClass[id] : null;
         _card.SetCard(_fish, tempFish);
     }
@@ -219,16 +217,13 @@ public class FishGuide : MonoBehaviour
         fishInfo.SetStart(_card);
     }
 
-    public UI_FishInfo fishInfo;
-    public Slider completeSlider;
-    public TMPro.TMP_Text completeText;
     void SetCompleteSlider()// 슬라이트 표기
     {
         int currentCount = dictFishClass.Count;
         int allCount = allFishStruct.Count;
         completeSlider.value = (float)currentCount / allCount;
         float fontSize = completeText.fontSize - completeText.fontSize * 0.2f;
-        completeText.text = $"{completeSlider.value * 100f}<size={fontSize}>%</size>";
+        completeText.text = $"{(int)(completeSlider.value * 10000f) * 0.01f}<size={fontSize}>%</size>";
     }
 
     //===========================================================================================================================

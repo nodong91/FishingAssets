@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
-  m_Name: Data_Dialog_Nothing
+  m_Name: Data_Dialog_DownTown_Day
   m_EditorClassIdentifier: 
   textStruct:
-  - contents: "{0} \uAC83\uB3C4 \uC5C6\uB2E4."
+  - contents: "{0} \uAC08\uAE4C?"
     dialogTypes:
-    - replaceText: "\uC544\uBB34"
+    - replaceText: "\uC5B4\uB514\uB85C"
       textSize: 20
       typingSpeed: 0
       textColor: 00FF00
@@ -24,7 +24,18 @@ MonoBehaviour:
       actionInterval: 4.08
       actionAngle: {x: 1, y: 2}
   selectStructs:
-  - selectDialog: "\uB098\uAC00\uAE30"
+  - selectDialog: Inn
+    selectType: 0
+    npcData: {fileID: 11400000, guid: f5051af63d2a58d4898565b06e66ba95, type: 2}
+    dialogIndex: 0
+    shopItemList: {fileID: 0}
+  - selectDialog: "\uAC8C\uC2DC\uD310"
+    selectType: 7
+    npcData: {fileID: 0}
+    dialogIndex: 0
+    shopItemList: {fileID: 0}
+  - selectDialog: "\uB3CC\uC544\uAC04\uB2E4."
     selectType: 1
     npcData: {fileID: 0}
     dialogIndex: 0
+    shopItemList: {fileID: 0}

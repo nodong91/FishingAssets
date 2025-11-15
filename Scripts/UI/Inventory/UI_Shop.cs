@@ -1,6 +1,6 @@
-using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -14,7 +14,6 @@ public class UI_Shop : UI_Inventory_Base
     //===========================================================================================================================
 
     [Header("- Shop")]
-    private Data_NPC npc;
     public VerticalLayoutGroup layoutGroup;
     public ToggleGroup toggleGroup;
     public GameObject fixGroup;
@@ -45,8 +44,9 @@ public class UI_Shop : UI_Inventory_Base
         {
             Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;  // 토글 변경 시 저장
             currentIndex = _index;
+            Debug.LogWarning($"토글 변경 {currentIndex}");
         }
-        SetShopItem();
+        SetStorageItem();// SetToggle 토글 변경
     }
 
     void FixButton()
@@ -64,58 +64,102 @@ public class UI_Shop : UI_Inventory_Base
         base.OpenCanvas(_open);
     }
 
-    public void SetShop(bool _open, Data_NPC _npc)
+    public void SetShop(bool _open, Data_ItemList _itemList)
     {
-        npc = _npc;
-        inventoryID = _npc.npc_ID;
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shop];
+        inventoryID = data_NPC.npc_ID;
         currentIndex = 0;
-        OpenCanvas(_open);
-
-        layoutGroup.padding.top = 15;
-        layoutGroup.padding.bottom = 15;
-
-        slotType = SlotType.Shop;// SetShop
-        toggleGroup.gameObject.SetActive(false);
-        fixGroup.gameObject.SetActive(false);
-
+        saveData = inventoryID + currentIndex;
         if (_open)
-            SetShopItem();// 열릴때 세팅
+        {
+            itemList = _itemList;
+            OpenCanvas(true);
+
+            layoutGroup.padding.top = 15;
+            layoutGroup.padding.bottom = 15;
+
+            slotType = SlotType.Shop;// SetShop
+            toggleGroup.gameObject.SetActive(false);
+            fixGroup.gameObject.SetActive(false);
+            if (Game_Manager.current.GetMainUI.timeUI.shopReset == true)
+            {
+                Game_Manager.current.GetMainUI.timeUI.shopReset = false;
+                SetItemDisplay();// 상점 물건 리셋
+            }
+            else
+            {
+                // 저장된 내용 불러오기
+                SetInventoryItem(saveData);// Shop, Shipyard 세팅
+            }
+        }
+        else
+        {
+            OpenCanvas(false);
+        }
     }
 
-    public void SetShipyard(bool _open, Data_NPC _npc)
+    public void SetShipyard(bool _open, Data_ItemList _itemList)
     {
-        npc = _npc;
-        inventoryID = _npc.npc_ID;
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
+        inventoryID = data_NPC.npc_ID;
         currentIndex = 0;
-        OpenCanvas(_open);
-
-        layoutGroup.padding.top = 15;
-        layoutGroup.padding.bottom = 40;
-
-        slotType = SlotType.Shipyard;// SetShipyard
-        toggleGroup.gameObject.SetActive(false);
-        fixGroup.gameObject.SetActive(true);
-
+        saveData = inventoryID + currentIndex;
         if (_open)
-            SetShopItem();// 열릴때 세팅
+        {
+            itemList = _itemList;
+            OpenCanvas(true);
+
+            layoutGroup.padding.top = 15;
+            layoutGroup.padding.bottom = 40;
+
+            slotType = SlotType.Shipyard;// SetShipyard
+            toggleGroup.gameObject.SetActive(false);
+            fixGroup.gameObject.SetActive(true);
+            if (Game_Manager.current.GetMainUI.timeUI.shipyardReset == true)
+            {
+                Game_Manager.current.GetMainUI.timeUI.shipyardReset = false;
+                SetItemDisplay();// 상점 물건 리셋
+            }
+            else
+            {
+                // 저장된 내용 불러오기
+                SetInventoryItem(saveData);// Shop, Shipyard 세팅
+            }
+        }
+        else
+        {
+            OpenCanvas(false);
+        }
     }
 
-    public void SetSmuggler(bool _open, Data_NPC _npc)
+    public void SetSmuggler(bool _open, Data_ItemList _itemList)
     {
-        npc = _npc;
-        inventoryID = _npc.npc_ID;
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._smuggler];
+        inventoryID = data_NPC.npc_ID;
         currentIndex = 0;
-        OpenCanvas(_open);
-
-        layoutGroup.padding.top = 15;
-        layoutGroup.padding.bottom = 40;
-
-        slotType = SlotType.Shipyard;// SetShipyard
-        toggleGroup.gameObject.SetActive(false);
-        fixGroup.gameObject.SetActive(true);
-
+        saveData = inventoryID + currentIndex;
         if (_open)
-            SetShopItem();// 열릴때 세팅
+        {
+            itemList = _itemList;
+            OpenCanvas(_open);
+
+            layoutGroup.padding.top = 15;
+            layoutGroup.padding.bottom = 40;
+
+            slotType = SlotType.Shipyard;// SetShipyard
+            toggleGroup.gameObject.SetActive(false);
+            fixGroup.gameObject.SetActive(true);
+            if (Game_Manager.current.GetMainUI.timeUI.smugglerReset == true)
+            {
+                Game_Manager.current.GetMainUI.timeUI.smugglerReset = false;
+                SetItemDisplay();// 상점 물건 리셋
+            }
+            else
+            {
+                // 저장된 내용 불러오기
+                SetInventoryItem(saveData);// Shop, Shipyard 세팅
+            }
+        }
     }
 
     public void SetStorage(bool _open)
@@ -137,8 +181,9 @@ public class UI_Shop : UI_Inventory_Base
 
     public void SetResult(bool _open, ResultStruct _result = default)
     {
-        inventoryID = "QuestResult";
+        inventoryID = "Result";
         currentIndex = 0;
+        saveData = inventoryID + currentIndex;
         OpenCanvas(_open);
 
         layoutGroup.padding.top = 40;
@@ -150,7 +195,6 @@ public class UI_Shop : UI_Inventory_Base
 
         if (_open)
         {
-            SetShopItem();// 열릴때 세팅
             SetResultItem(_result);
         }
     }
@@ -202,60 +246,17 @@ public class UI_Shop : UI_Inventory_Base
     //===========================================================================================================================
     // 상점 물건 배치
     //===========================================================================================================================
-    int resetDay = -1;
+
     public int currentIndex = 0;
     public string inventoryID;
+    public Data_ItemList itemList;
+    Vector2Int invenSize = new Vector2Int(7, 7);
 
-    void SetShopItem()
+    void SetStorageItem()
     {
-        Debug.LogWarning($"상점 세팅 {npc?.npc_ID}");
         saveData = inventoryID + currentIndex;
-        LoadInventory();
-        switch (slotType)
-        {
-            case SlotType.None:
-
-                break;
-
-            case SlotType.Shop:
-            case SlotType.Shipyard:
-                if (CheckResetDay() == true)
-                {
-                    SetItemDisplay();// 상점 물건 리셋
-                }
-                else
-                {
-                    // 저장된 내용 불러오기
-                    SetInventoryItem(saveData);// Shop, Shipyard 세팅
-                }
-                break;
-
-            case SlotType.Storage:
-                // 저장된 내용 불러오기
-                SetInventoryItem(saveData);// Storage 세팅
-                break;
-
-            case SlotType.Result:
-
-                break;
-
-            default:
-
-                break;
-        }
-    }
-
-    bool CheckResetDay()// 상점 물건 리셋
-    {
-        int checkDay = Game_Manager.current.GetTimeUI.day;
-        resetDay = GetSaveInventoryData.lastSetDay;
-        Debug.LogWarning($"날짜 체크!!! : {resetDay} = {checkDay}");
-        if (resetDay != checkDay)
-        {
-            resetDay = checkDay;
-            return true;
-        }
-        return false;
+        // 저장된 내용 불러오기
+        SetInventoryItem(saveData);// Storage 세팅
     }
 
     void SetItemDisplay()
@@ -266,7 +267,7 @@ public class UI_Shop : UI_Inventory_Base
     IEnumerator DisplayItem()
     {
         EmptyInventoryAllSlot();// 비우기
-        SetInventorySlot(npc.invenSize);// 인벤토리 세팅
+        SetInventorySlot(invenSize);// 인벤토리 세팅
         yield return null;
 
         SetItem();
@@ -278,7 +279,7 @@ public class UI_Shop : UI_Inventory_Base
         int randomCount = Random.Range(10, 20);// 랜덤 아이템 개수
         for (int i = 0; i < randomCount; i++)
         {
-            string itemID = npc.saleItemList.GetItemID().itemID;// 아이템 목록에서 아이템 ID 가져오기
+            string itemID = itemList.GetItemID();// 아이템 목록에서 아이템 ID 가져오기
             setID.Add(itemID);
         }
         setID.Sort();// 정렬

@@ -469,6 +469,7 @@ public class Data_Manager : Data_Parse
             Fuel,// 연료
             Repare,// 수리
             Lottery,// 복권
+            Money,// 돈
             Etc
         }
         public ItemType itemType;
