@@ -30,7 +30,8 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             money = Game_Manager.current.GetMainUI.TryMoney,
             destroySlot = Game_Manager.current.GetInventory.TryDestroySlot,
 
-            loanTime = Game_Manager.current.loanTime,
+            loanActive = Game_Manager.current.GetMainUI.timeUI.loanActive,
+            loanTime = Game_Manager.current.GetMainUI.timeUI.loanTime,
         };
         Static_JsonManager.SaveCountinueData(String_Save._continue, continueData);
     }
@@ -60,7 +61,8 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             money = 1000f,
             destroySlot = new List<Vector2Int>(),
 
-            loanTime = 0f,
+            loanActive = false,
+            loanTime = 0,
         };
         // 기본 세팅
         return continueData;

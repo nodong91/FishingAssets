@@ -161,6 +161,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
         if (_selectStruct.shopItemList != null)
         {
+            Debug.LogWarning($"아이템 열기 : {_selectStruct.shopItemList.inventoryType}");
             Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;// 상점이나 조선소 닫기시 섬 나가기 버튼으로 변경
             switch (_selectStruct.shopItemList.inventoryType)
             {
@@ -245,7 +246,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             itemID[i] = itemString;
             Debug.LogWarning(itemString);
         }
-
         Game_Manager.current.GetInventory.SetResult(itemID);// 대화 보상
         Debug.LogWarning("상점 열기");
     }

@@ -567,7 +567,7 @@ public class UI_Inventory : MonoBehaviour
 
             case ItemStruct.ItemType.Money:// 돈
                 usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
-                Game_Manager.current.GetMainUI.MoveMoney(usedStruct.etcValue);// 아이템 추가 테스트
+                Game_Manager.current.GetMainUI.MoveMoney(usedStruct.etcValue);// 돈 추가 테스트
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
 
@@ -594,7 +594,7 @@ public class UI_Inventory : MonoBehaviour
         }
         //// 하나씩 수리 모드
         //Game_Manager.current.GetMainUI.SetWarnningText("수리할 아이템을 선택하세요.");
-        Cursor_Manager.current?.OnMouseRepair(_repair);
+        Cursor_Manager.current?.OnMouseRepair(_repair);// 커서 변경
     }
 
     public void AllRepair()

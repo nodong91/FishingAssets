@@ -35,6 +35,10 @@ public class UI_Time : MonoBehaviour
         minute = _data.minute;
         hour = _data.hour;
         day = _data.day;
+
+        loanActive = _data.loanActive;
+        loanTime = _data.loanTime;
+
         SetSkyBox();
         TimePause(false);
         SetResetTime();
@@ -198,33 +202,43 @@ public class UI_Time : MonoBehaviour
         WeekPosition(day % 7);
         SetSkyBox();
     }
+
     [Header(" [ 대출 ]")]
     public GameObject loanObject;
     public TMPro.TMP_Text loanText;
-    int loanTime = 0;
-    public void StartLoanTimer()
+
+    public bool loanActive = false;
+    public int loanTime = 0;
+
+    public void StartLoanTimer(bool _loanActive)
     {
-        loanObject.SetActive(true);
-        loanTime = 24;
+        loanActive = _loanActive;
+        loanObject.SetActive(_loanActive);
+        if (_loanActive == true)
+        {
+            loanTime = 24;
+            loanText.text = $"{loanTime}h";
+        }
     }
 
     void CheckLoanTime()
     {
-        if (loanTime > 0)
+        if (loanActive == true && loanTime > 0)
         {
             loanTime--;
-            loanText.text = $"Loan Due Time: {loanTime}h";
-            Debug.LogWarning(loanText.text);
-            if (loanTime == 0)
+            loanText.text = $"{loanTime}h";
+            if (loanTime <= 0)
             {
                 // 게임 오버
                 Game_Manager.current.GameOver();
             }
         }
     }
+
     public bool shopReset = false;
     public bool shipyardReset = false;
     public bool smugglerReset = false;
+
     void SetResetTime()
     {
         shopReset = true;

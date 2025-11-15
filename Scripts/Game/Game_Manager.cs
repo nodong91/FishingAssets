@@ -634,7 +634,14 @@ public class Game_Manager : MonoBehaviour
 
     public void LoanStart()// 대출금 상환 타이머 시작
     {
-        GetMainUI.timeUI.StartLoanTimer();
+        GetMainUI.timeUI.StartLoanTimer(true);
+        Debug.LogWarning(" 대출금 상환 타이머 시작.");
+    }
+
+    public void LoanEnd()// 대출금 상환 타이머 종료
+    {
+        GetMainUI.timeUI.StartLoanTimer(false);
+        Debug.LogWarning(" 대출금 상환 타이머 종료.");
     }
 
     public void GameOver()
