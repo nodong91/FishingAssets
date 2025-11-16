@@ -51,7 +51,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             playerRotation = Quaternion.Euler(-0.15f, 103f, 0.02f),
             playerScale = Vector3.one,
 
-            timeSpeed = 15f,
+            timeSpeed = 0.1f,
             minute = 3f,
             hour = 7,
             day = 0,

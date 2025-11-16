@@ -87,7 +87,7 @@ public class Static_JsonManager
 
     public static void RemoveFile(string fileName)
     {
-        File.Delete(Application.dataPath + "/Save/" + fileName + ".json");
+        File.Delete(Application.dataPath + String_Save._save + fileName + ".json");
     }
 
     //======================================================================================
@@ -95,7 +95,7 @@ public class Static_JsonManager
     //======================================================================================
     public static void SaveTutorialData(string fileName, List<string> _data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._saveDontDestroy;
         // 폴더 생성
         FindFolder(filePath);
 
@@ -106,7 +106,7 @@ public class Static_JsonManager
 
     public static bool TryLoadTutorialData(string fileName, out List<string> data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._saveDontDestroy;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 
@@ -124,7 +124,7 @@ public class Static_JsonManager
 
     public static void SaveEnableSkillData(string fileName, List<Vector2Int> _data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._save;
         // 폴더 생성
         FindFolder(filePath);
 
@@ -135,7 +135,7 @@ public class Static_JsonManager
 
     public static bool TryLoadEnableSkillData(string fileName, out List<Vector2Int> data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._save;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 
@@ -157,7 +157,7 @@ public class Static_JsonManager
 
     public static void SaveOptionData(string fileName, Data_Option option)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._saveDontDestroy;
         // 폴더 생성
         FindFolder(filePath);
 
@@ -168,7 +168,7 @@ public class Static_JsonManager
 
     public static bool TryLoadOptionData(string fileName, out Data_Option option)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._saveDontDestroy;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 
@@ -189,7 +189,7 @@ public class Static_JsonManager
 
     public static void SaveCountinueData(string fileName, Data_Continue _data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._save;
         // 폴더 생성
         FindFolder(filePath);
 
@@ -200,7 +200,7 @@ public class Static_JsonManager
 
     public static bool TryLoadCountinueData(string fileName, out Data_Continue _data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._save;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 
@@ -222,7 +222,7 @@ public class Static_JsonManager
 
     public static void SaveQuestData(string fileName, UI_QuestManager.SetQuest _data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._save;
         // 폴더 생성
         FindFolder(filePath);
 
@@ -233,7 +233,7 @@ public class Static_JsonManager
 
     public static bool TryLoadQuestData(string fileName, out UI_QuestManager.SetQuest _data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._save;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 
@@ -264,10 +264,10 @@ public class Static_JsonManager
     public static void SaveInventory(string fileName, InventoryData _data)
     {
         Debug.LogError($"저장 : {fileName} ({_data.saveItems.Count})");
-        if (String.IsNullOrEmpty(fileName) )
+        if (String.IsNullOrEmpty(fileName))
             return;
 
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._save;
         // 폴더 생성
         FindFolder(filePath);
 
@@ -278,7 +278,7 @@ public class Static_JsonManager
 
     public static bool TryLoadInventory(string fileName, out InventoryData _data)
     {
-        string filePath = Application.dataPath + "/Save/";
+        string filePath = Application.dataPath + String_Save._save;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 
@@ -299,7 +299,7 @@ public class Static_JsonManager
 
     public static void SaveFishGuideData(string fileName, List<FishGuide.SaveFishClass> _data)
     {
-        string filePath = Application.dataPath + "/SaveFish/";
+        string filePath = Application.dataPath + String_Save._saveDontDestroy;
         // 폴더 없으면 생성
         FindFolder(filePath);
 
@@ -309,7 +309,7 @@ public class Static_JsonManager
 
     public static bool TryLoadFishGuideData(string fileName, out List<FishGuide.SaveFishClass> _data)
     {
-        string filePath = Application.dataPath + "/SaveFish/";
+        string filePath = Application.dataPath + String_Save._saveDontDestroy;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 
@@ -354,7 +354,7 @@ public class Static_JsonManager
 
     public static IEnumerator RemoveSaveFile()// 모든 세이브 파일 삭제
     {
-        string path = Application.dataPath + "/Save/";
+        string path = Application.dataPath + String_Save._save;
         FileDelete(path);
         yield return null;
 
@@ -362,9 +362,9 @@ public class Static_JsonManager
         Option_Manager.current.LoadOption();// 옵션 데이터 리셋
     }
 
-    public static IEnumerator RemoveFishFile()// 모든 세이브 파일 삭제
+    public static IEnumerator RemoveDontDestroyFile()// 모든 세이브 파일 삭제
     {
-        string path = Application.dataPath + "/SaveFish/";
+        string path = Application.dataPath + String_Save._saveDontDestroy;
         FileDelete(path);
         yield return null;
 

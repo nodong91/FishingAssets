@@ -1,3 +1,15 @@
+public class String_Scene
+{
+    public const string _loading = "LoadingScene";
+    public const string _main = "MainScene";
+    public const string _select = "SelectScene";
+
+    public const string _title = "Title";
+    public const string _gameManager = "GameManager";
+    public const string _islandMain = "Island_Main";
+    public const string _test = "Test";
+}
+
 public class String_Audio
 {
     public const string _titleTheme = "bgm_0001";
@@ -19,6 +31,9 @@ public class String_Title
 
 public class String_Save
 {
+    public const string _save = "/SaveFish/";
+    public const string _saveDontDestroy = "/SaveDontDestroy/";
+
     public const string _continue = "SaveContinue";
     public const string _enableSkill = "Skill_Enabled";// 활성화 된 스킬 저장
     public const string _option = "SaveOptionData";
@@ -52,8 +67,9 @@ public class String_NPC
 
 public class String_Tutorial
 {
+    public const string _tutorialKey = "CompletedTutorial";
     public const string _newGame = "NewGame";
     public const string _fillFuel = "FillFuel";
     public const string _firstFishing = "FirstFishing";
-    public const string _fishing = "HowToFishing";
+    public const string _howToFishing = "HowToFishing";
 }

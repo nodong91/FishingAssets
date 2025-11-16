@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -98,7 +97,8 @@ public class Game_Manager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            GameOver();
+            LoanStart();
+            //GameOver();
             //Singleton_Continue.INSTANCE.SaveContinue();// Space 시 저장
             Debug.LogError("저장중");
         }
@@ -125,36 +125,55 @@ public class Game_Manager : MonoBehaviour
         GetQuest.SetStart();
         GetChangeShip.SetStart();
 
+        //if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)
+        //{
+        //    shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
+        //    GetInventory.TryDestroySlot = continueData.destroySlot;// 부서진 슬롯
+
+        //    ChangeStatus(shipData);
+        //    OutOfControll(false);
+        //}
+
         string shipID = continueData.shipData;
         if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)
         {
             shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
             GetInventory.TryDestroySlot = continueData.destroySlot;// 부서진 슬롯
-
             ChangeStatus(shipData);
-            OutOfControll(false);
         }
     }
 
     void LoadingComplate()
     {
         SetThemeMusic();
+        Debug.LogWarning(tutorial.IsTutorialCompleted(String_Tutorial._newGame));
         // 튜토리얼 시작
-        if (shipData == null)
+        if (tutorial.IsTutorialCompleted(String_Tutorial._newGame) == true)
         {
-            Debug.LogWarning("배가 없으면 튜토리얼 시작");
-            // 배가 없으면 튜토리얼 시작
-            //GetTutorial.SetTutorial(String_Tutorial._newGame);// 배구입 튜토리얼 세팅
+            // 튜토리얼 완료 했으면
+            OutOfControll(false);
+            GetPlayer.CheckClosestUnit();// 생성 시 가까운 오브젝트 찾기
+        }
+        else
+        {
             GetMainUI.OpenCanvas(false);
             Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
             GetDialog.DialogStart_NPC(npc, 4);// 튜토리얼 대화 시작
             return;
         }
-        GetPlayer.CheckClosestUnit();// 생성 시 가까운 오브젝트 찾기
+        //if (shipData == null)
+        //{
+       
+        //}
     }
 
     public void ChangeStatus(Data_Ship _shipData)
     {
+        if (tutorial.IsTutorialCompleted(String_Tutorial._newGame) == false)// 튜토리얼을 완료하지 않았다면 저장
+        {
+            tutorial.CompletedTutorial(String_Tutorial._newGame);
+        }
+
         shipData = _shipData;
         GetPlayer.SetShip(_shipData);
         AddStatus();// 스테이트 세팅
@@ -632,15 +651,15 @@ public class Game_Manager : MonoBehaviour
     // 게임 오버 관련
     //====================================================================================================================
 
-    public void LoanStart()// 대출금 상환 타이머 시작
+    public void LoanStart()
     {
-        GetMainUI.timeUI.StartLoanTimer(true);
+        GetMainUI.timeUI.StartLoanTimer(true);// 대출금 상환 타이머 시작
         Debug.LogWarning(" 대출금 상환 타이머 시작.");
     }
 
-    public void LoanEnd()// 대출금 상환 타이머 종료
+    public void LoanEnd()
     {
-        GetMainUI.timeUI.StartLoanTimer(false);
+        GetMainUI.timeUI.StartLoanTimer(false);// 대출금 상환 타이머 종료
         Debug.LogWarning(" 대출금 상환 타이머 종료.");
     }
 
@@ -650,6 +669,14 @@ public class Game_Manager : MonoBehaviour
         OutOfControll(true);
         GetMainUI.OpenCanvas(false);
 
-        StartCoroutine(Static_JsonManager.RemoveSaveFile());
+        StartCoroutine(SetGameOver());
+
+    }
+
+    IEnumerator SetGameOver()
+    {
+        yield return StartCoroutine(Static_JsonManager.RemoveSaveFile());// 파일 제거
+        isGameOver = true;
+        LoadingManager.current.GoMain();
     }
 }

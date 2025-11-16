@@ -4,6 +4,91 @@ using UnityEngine;
 
 public class Tutorial_Manager : MonoBehaviour
 {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public CanvasGroup canvasGroup;
     public TMPro.TMP_Text commentText;
 
@@ -253,19 +338,36 @@ public class Tutorial_Manager : MonoBehaviour
     // 튜토리얼 저장
     //=========================================================================================================
 
-    const string tutorialKey = "CompletedTutorial";
     public List<string> completedTutorial;
-    void SaveTutorial()
+
+    public static Tutorial_Manager current;
+
+    public void Awake()
+    {
+        current = this;
+    }
+
+    public bool IsTutorialCompleted(string _id)
+    {
+        return completedTutorial.Contains(_id);
+    }
+
+    public void CompletedTutorial(string _id)
     {
         if (completedTutorial == null)
             completedTutorial = new List<string>();
-        completedTutorial.Add(currentID);
-        Static_JsonManager.SaveTutorialData(tutorialKey, completedTutorial);
+        completedTutorial.Add(_id);
+        SaveTutorial();
     }
 
-    void LoadTutorial()
+    void SaveTutorial()
     {
-        if (Static_JsonManager.TryLoadTutorialData(tutorialKey, out List<string> _completedTutorial))
+        Static_JsonManager.SaveTutorialData(String_Tutorial._tutorialKey, completedTutorial);
+    }
+
+    public void LoadTutorial()
+    {
+        if (Static_JsonManager.TryLoadTutorialData(String_Tutorial._tutorialKey, out List<string> _completedTutorial))
         {
             completedTutorial = _completedTutorial;
         }

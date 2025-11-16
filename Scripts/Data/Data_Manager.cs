@@ -422,8 +422,9 @@ public class Data_Manager : Data_Parse
         public string addStatusString;
         public enum SkillType
         {
-            AddStatus = 0,
-            ShipUnlocked = 1,
+            AddStatus = 0,// 스탯 증가
+            ShipUnlocked = 1,// 배 잠금 해제
+            Etc = 2,// 기타
         }
         public SkillType skillType;
         public string icon;

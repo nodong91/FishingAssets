@@ -10,11 +10,6 @@ public class LoadingManager : MonoBehaviour
     public RectTransform background;
     public Loading_Hint hint;
 
-    const string Title = "Title";
-    const string GameManager = "GameManager";
-    const string Island_Main = "Island_Main";
-    const string Test = "Test";
-
     public static LoadingManager current;
 
     private void Awake()
@@ -29,19 +24,19 @@ public class LoadingManager : MonoBehaviour
 
     public void GoTitle()
     {
-        sceneNames = new string[1] { Title };
+        sceneNames = new string[1] { String_Scene._title };
         OpenLoading();
     }
 
     public void GoMain()
     {
-        sceneNames = new string[2] { GameManager, Island_Main };
+        sceneNames = new string[2] { String_Scene._gameManager, String_Scene._islandMain };
         OpenLoading();
     }
 
     public void GoTest()
     {
-        sceneNames = new string[1] { Test };
+        sceneNames = new string[1] { String_Scene._test };
         OpenLoading();
     }
 

@@ -91,8 +91,8 @@ public class UI_Time : MonoBehaviour
                     day++;
                     SetResetTime();
                 }
-                CheckLoanTime();
             }
+            CheckLoanTime();
             yield return null;
             DayChage();
         }
@@ -203,38 +203,45 @@ public class UI_Time : MonoBehaviour
         SetSkyBox();
     }
 
+    //==========================================================================================================
+    // 대출
+    //==========================================================================================================
+
     [Header(" [ 대출 ]")]
     public GameObject loanObject;
     public TMPro.TMP_Text loanText;
 
     public bool loanActive = false;
-    public int loanTime = 0;
+    public int loanTime;
 
     public void StartLoanTimer(bool _loanActive)
     {
         loanActive = _loanActive;
         loanObject.SetActive(_loanActive);
-        if (_loanActive == true)
-        {
-            loanTime = 24;
-            loanText.text = $"{loanTime}h";
-        }
+        loanTime = 0;
+        loanText.text = $"{24 - (loanTime / 6)}";
     }
 
     void CheckLoanTime()
     {
-        if (loanActive == true && loanTime > 0)
+        if (loanActive == true)
         {
-            loanTime--;
-            loanText.text = $"{loanTime}h";
-            if (loanTime <= 0)
+            loanTime++;
+            loanText.text = $"{24 - (loanTime / 6)}";
+            if (loanTime >= 144)// 10분 * 6 *24 = 1일 = 144
             {
                 // 게임 오버
                 Game_Manager.current.GameOver();
+                StopAllCoroutines();
             }
         }
     }
 
+    //==========================================================================================================
+    // 하루 초기화
+    //==========================================================================================================
+
+    [Header(" [ 하루 초기화 ]")]
     public bool shopReset = false;
     public bool shipyardReset = false;
     public bool smugglerReset = false;

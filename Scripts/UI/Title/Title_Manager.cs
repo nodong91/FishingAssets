@@ -41,7 +41,6 @@ public class Title_Manager : MonoBehaviour
         StartCoroutine(SetManager());
 
         continueEnable = TryOptionFile();
-        Debug.LogWarning($"Option_Manager : {continueEnable}");
         continueButton.gameObject.SetActive(continueEnable);
         continueButton.SetButton(ContinueButton, ActionEnter, ActionExit);
         newStartButton.SetButton(NewStartButton, ActionEnter, ActionExit);
@@ -49,6 +48,7 @@ public class Title_Manager : MonoBehaviour
         settingButton.SetButton(SettingButton, ActionEnter, ActionExit);
         exitButton.SetButton(ExitButton, ActionEnter, ActionExit);
         testButton.SetButton(TestScene, ActionEnter, ActionExit);
+        Debug.LogWarning($"Option_Manager : {continueEnable}");
 
         originalSize = selectMask.sizeDelta;
         ActionExit(null);
@@ -187,7 +187,7 @@ public class Title_Manager : MonoBehaviour
     IEnumerator SetNewGame()
     {
         yield return StartCoroutine(Static_JsonManager.RemoveSaveFile());
-        yield return StartCoroutine(Static_JsonManager.RemoveFishFile());
+        //yield return StartCoroutine(Static_JsonManager.RemoveDontDestroyFile());
         
         StartGame();//RemoveSaveFile
     }
