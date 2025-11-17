@@ -56,9 +56,8 @@ public class Event_Manager : MonoBehaviour
     public void StartEvent()
     {
         if (eventKeys == null || eventKeys.Count == 0)
-        {
             SetDictKey();
-        }
+
         //string key = eventKeys[Random.Range(0, eventKeys.Count)];
         string key = "Data_Event_0001";
         Data_Event tempData = Singleton_Data.INSTANCE.Dict_Event[key];

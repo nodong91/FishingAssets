@@ -26,8 +26,7 @@ public class UI_ChangeShip : MonoBehaviour
         shipList.Add(_shipData);
 
         UI_ChangeShip_Slot inst = Instantiate(shipButton, shipParent.transform);
-        inst.shipData = _shipData;
-        inst.nameText.text = _shipData.name;
+        inst.SetSlot(_shipData);
         inst.customButton.SetButton(delegate { ShipClick(inst); }, ShipEnter, ShipExit);
 
         shipParent.constraint = GridLayoutGroup.Constraint.FixedRowCount;
@@ -60,11 +59,11 @@ public class UI_ChangeShip : MonoBehaviour
 
     void ShipEnter(Custom_Button _button)
     {
-        _button.buttonImage.color = Color.gray;
+        _button.buttonImage.color = Color.white;
     }
 
     void ShipExit(Custom_Button _button)
     {
-        _button.buttonImage.color = Color.white;
+        _button.buttonImage.color = Color.gray;
     }
 }

@@ -90,8 +90,7 @@ public class Fishing_Manager : MonoBehaviour
 
         // 물고기 시간, 영역 세팅
         dayType = Game_Manager.current.GetMainUI.timeUI.lightMode;
-        SetFish();
-        SetReady(true);// 낚시 준비
+        SetFish();// 트리거 닿았을 때
     }
     //===================================================================================================================
     // 물고기 세팅
@@ -107,17 +106,10 @@ public class Fishing_Manager : MonoBehaviour
         for (int i = 0; i < fishingAmount; i++)
         {
             // 물고기 세팅
-            FishStruct fishStruct = GetFishStruct();
+            FishStruct fishStruct = GetFishStruct();// 낚시터 세팅
             fishQueue.Enqueue(fishStruct.id);
         }
-        //// 물고기 세팅
-        //if (TryFishStruct(out FishStruct _fish) == true)
-        //{
-        //    fishQueue.Enqueue(_fish.id);
-        //    currentFish = _fish;// 물고기 정보
-        //    currentSize = currentFish.GetRandom();
-        //    Debug.LogWarning($"{_fish.id} : {dictFishStruct.Count}");
-        //}
+        SetReady(true);// 낚시 준비
     }
 
     FishStruct GetFishStruct()// 해당 타입 물고기 중 랜덤
@@ -192,7 +184,7 @@ public class Fishing_Manager : MonoBehaviour
 
     void SetReady(bool _ready)// 준비
     {
-        Game_Manager.current.GetMainUI.timeUI.TimePause(true);// 낚시 하는 동안 시간 정지
+        Game_Manager.current.GetMainUI.timeUI.TimePause(true);// 낚시 하는 동안 타이머 정지
 
         fishingSet.SetActive(true);
         transform.position = Game_Manager.current.GetPlayer.transform.position;
@@ -202,9 +194,15 @@ public class Fishing_Manager : MonoBehaviour
         positionComposer.gameObject.SetActive(true);
 
         // 버튼 활성화
-        fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());
+        CheckFishQueue();
         Game_Manager.current.GetMainUI.OpenCanvas(false);// 낚시 시작 MainUI 제거
         Game_Manager.current.OutOfControll(true);
+    }
+
+    public void CheckFishQueue()
+    {
+        // 버튼 활성화
+        fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());// 스타트 버튼 활성화
     }
 
     //===================================================================================================================
@@ -213,15 +211,13 @@ public class Fishing_Manager : MonoBehaviour
 
     void FishingStartButton()// 시작 버튼
     {
-        SetFish();
         isFishing = true;
 
         string _id = fishQueue.Dequeue();
         currentFish = Singleton_Data.INSTANCE.Dict_Fish[_id];
         //Option_Manager.current.SetThemeMusic(bgmBattle);// 전투 시작 음악
         fishingCanvas.SetFishing();
-
-        SetFishing();// 낚시 초기화
+        Debug.LogWarning($"물고기 이름 : {_id}");
         StartCoroutine(StartCount());
     }
 
@@ -240,11 +236,13 @@ public class Fishing_Manager : MonoBehaviour
         catchPrefab.transform.position = fishPrefab.transform.position;
         catchRadius = catchStatus.catchRadius;
         catchPrefab.transform.localScale = Vector3.one * catchRadius;
-        Debug.LogWarning($"SetReady 게이지 : {currentFish.fishHealth} / ({catchStatus.catchMaxHealth} + {currentFish.fishHealth}) = {fishHealth}");
     }
 
     IEnumerator StartCount()// 카운트
     {
+        SetFishing();// 낚시 초기화
+        yield return null;
+
         for (int i = 0; i < 3; i++)
         {
             int index = 3 - i;
@@ -258,10 +256,8 @@ public class Fishing_Manager : MonoBehaviour
         //Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
         //Game_Manager.current.GetTutorial.StartTutorial();
         yield return null;
-
         StartCoroutine(CatchMovement());
-        if (fishHealth > 0)
-            FishState(FishStateType.Idle);
+        FishState(FishStateType.Idle);
     }
 
     IEnumerator CatchMovement()
@@ -414,13 +410,15 @@ public class Fishing_Manager : MonoBehaviour
     void FishState(FishStateType _state)
     {
         fishState = _state;
+
         if (fishAction != null)
             StopCoroutine(fishAction);
-        debugText.text = $"Fish State : {fishState}";
+        debugText.text = $"{currentFish.itemStruct.name} : {fishState}";
+
         switch (fishState)
         {
             case FishStateType.Idle:
-                IdleState();
+                fishAction = StartCoroutine(IdleState());
                 break;
             case FishStateType.Spelling:
                 // 시전중
@@ -439,19 +437,20 @@ public class Fishing_Manager : MonoBehaviour
         }
     }
 
-    void IdleState()
+    IEnumerator IdleState()
     {
         if (currentFish.fishCoolTime > 0f && cooling < Time.time)
         {
             // 쿨타임이 0인 경우 공격하지 않음
             FishState(FishStateType.Spelling);// 스킬 기술
         }
-        else
+        else// 이동 능력이 없으면 이동 스테이트에 들어갈 수 없음
+        if (currentFish.fishSpeed > 0 && currentFish.fishTurnDelay.x * currentFish.fishTurnDelay.y > 0)
         {
             fishTargetPoint = SetRandomPosition();
-            if (currentFish.fishSpeed > 0)
-                FishState(FishStateType.Moving);
+            FishState(FishStateType.Moving);
         }
+        yield return null;
     }
 
     IEnumerator FishMoving()
@@ -692,13 +691,13 @@ public class Fishing_Manager : MonoBehaviour
         fishingCanvas.SetFishSpell(0f);
 
         fishingCanvas.FishingOver();// 낚시 유아이 제거
-        if (_success == true)// 낚시 성공
+        if (_success == true)
         {
-            StartCoroutine(CatchaAction());
+            StartCoroutine(CatchaAction());// 낚시 성공
         }
         else
         {
-            FishingOver();
+            CheckFishQueue();// 낚시 실패
         }
     }
 
@@ -714,18 +713,20 @@ public class Fishing_Manager : MonoBehaviour
 
     public void SetReward()
     {
-        string[] itemIDs;
 
         ItemStruct fishItem = currentFish.itemStruct;
         float size = currentSize.size;
+        Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
         // 행운의 물고기 두마리 낚을 확률
         float luckValue = Game_Manager.current.currentStatus.luckFish;
         float randomValue = Random.Range(0f, 100f);
+        string[] itemIDs;
         if (luckValue > randomValue)// 행운의 물고기 두마리 낚음
         {
             // 물고기 세팅
-            FishStruct bonusFish = GetFishStruct();
+            FishStruct bonusFish = GetFishStruct();// 보너스 물고기
             itemIDs = new string[2] { fishItem.id, bonusFish.id };
+            Game_Manager.current.GetFishGuide.AddFishClass(bonusFish.id, bonusFish.GetRandom().size);// 생선 가이드에 추가
             // 두마리 낚음
             Debug.LogWarning("축하합니다! 행운의 물고기 두 마리를 낚았습니다!");
         }
@@ -735,7 +736,6 @@ public class Fishing_Manager : MonoBehaviour
         }
 
         Game_Manager.current.GetInventory.SetResult(itemIDs);// 낚시 보상 아이템 설정
-        Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
     }
 
@@ -743,13 +743,7 @@ public class Fishing_Manager : MonoBehaviour
     {
         Game_Manager.current.OutOfControll(false);
         Game_Manager.current.GetInventory.CloseShop();// 상점 닫기
-        FishingOver();// 낚시 종료
-    }
-
-    public void FishingOver()
-    {
-        // 버튼 활성화
-        fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());// 스타트 버튼 활성화
+        CheckFishQueue();// 낚시 종료
     }
 
     //===================================================================================================================
@@ -837,7 +831,7 @@ public class Fishing_Manager : MonoBehaviour
 
 
     //===================================================================================================================
-    // 물고기 테스트
+    // 물고기 치트 테스트
     //===================================================================================================================
 
     public void SetFishingTest(string _id)
@@ -845,14 +839,17 @@ public class Fishing_Manager : MonoBehaviour
         int addSkillAmount = Game_Manager.current.currentStatus.fishAmount;// 낚시 스킬로 추가 횟수
         int fishingAmount = 100 + addSkillAmount;// 낚시 횟수
         fishQueue.Clear();
-        // 물고기 세팅
-        if (Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(_id))
+        for (int i = 0; i < fishingAmount; i++)
         {
-            fishQueue.Enqueue(_id);
-        }
-        else
-        {
-            Debug.LogError($"[Fishing_Manager] 해당 ID 물고기 없음 : {_id}");
+            // 물고기 세팅
+            if (Singleton_Data.INSTANCE.Dict_Fish.ContainsKey(_id))
+            {
+                fishQueue.Enqueue(_id);
+            }
+            else
+            {
+                Debug.LogError($"[Fishing_Manager] 해당 ID 물고기 없음 : {_id}");
+            }
         }
         SetReady(true);// 테스트 낚시 준비
     }

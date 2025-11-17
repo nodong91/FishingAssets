@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Overlays;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -275,6 +274,7 @@ public class UI_Shop : UI_Inventory_Base
 
     void SetItem()// 상점 아이템 세팅
     {
+        Debug.LogWarning("상점 아이템 세팅");
         List<string> setID = new List<string>();
         int randomCount = Random.Range(10, 20);// 랜덤 아이템 개수
         for (int i = 0; i < randomCount; i++)

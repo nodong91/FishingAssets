@@ -31,6 +31,16 @@ public class Data_Dialog : ScriptableObject
     {
         [TextArea]
         public string contents;
+        public enum EmotionType
+        {
+            Normal = 0,
+            Happy = 1,
+            Angry = 2,
+            Sad = 3,
+            Surprised = 4,
+            Anxious = 5,//불안해하는
+        }
+        public EmotionType emotionType;
 
         [System.Serializable]
         public struct DialogType
@@ -91,8 +101,9 @@ public class Data_Dialog : ScriptableObject
             Upgrade = 5,// 스킬 업그레이드
             Rest = 6,// 휴식 - 잠자기
             NoticeBoard = 7,// 게시판 열기
-            Tutorial = 8,// 튜토리얼 시작
+            InLand = 8,// 튜토리얼 시작
             Event = 9,
+            GameOver = 10,
         }
         public SelectType selectType;
         public Data_NPC npcData;

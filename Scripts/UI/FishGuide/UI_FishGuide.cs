@@ -118,6 +118,7 @@ public class FishGuide : MonoBehaviour
 
     public void AddFishClass(string _id, float _size)
     {
+        StatsManager.current.CatchFish();// 업적 체크
         if (dictFishClass.ContainsKey(_id) == true)
         {
             SaveFishClass fish = dictFishClass[_id];

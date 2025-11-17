@@ -106,16 +106,16 @@ public class Tutorial_Manager : MonoBehaviour
     Dictionary<string, Data_Tutorial> dictTutorial = new Dictionary<string, Data_Tutorial>();
     //Dictionary<string, bool> dictComp = new Dictionary<string, bool>();
 
-    public void SetStart()
-    {
-        LoadTutorial();
-        dictTutorial = new Dictionary<string, Data_Tutorial>();
-        for (int i = 0; i < tutorialData.Length; i++)
-        {
-            dictTutorial.Add(tutorialData[i].id, tutorialData[i]);
-        }
-        canvasGroup.gameObject.SetActive(false);
-    }
+    //public void SetStart()
+    //{
+    //    LoadTutorial();
+    //    dictTutorial = new Dictionary<string, Data_Tutorial>();
+    //    for (int i = 0; i < tutorialData.Length; i++)
+    //    {
+    //        dictTutorial.Add(tutorialData[i].id, tutorialData[i]);
+    //    }
+    //    canvasGroup.gameObject.SetActive(false);
+    //}
 
     public void SetTutorial(string _id)// 튜토리얼 세팅
     {
@@ -340,15 +340,21 @@ public class Tutorial_Manager : MonoBehaviour
 
     public List<string> completedTutorial;
 
-    public static Tutorial_Manager current;
+    //public static Tutorial_Manager current;
 
-    public void Awake()
+    //public void Awake()
+    //{
+    //    current = this;
+    //}
+    public void SetStart()
     {
-        current = this;
+        LoadTutorial();
+        canvasGroup.gameObject.SetActive(false);
     }
 
     public bool IsTutorialCompleted(string _id)
     {
+        Debug.LogWarning($"Tutorial completed: {_id} {completedTutorial.Count}");
         return completedTutorial.Contains(_id);
     }
 

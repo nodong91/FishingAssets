@@ -62,7 +62,7 @@ public class Fishing_Canvas : MonoBehaviour
 
     Vector3 UIPosition(Vector3 _fishPoint)
     {
-        Debug.LogWarning("FollowUI Fishing!!!");
+        Debug.Log("FollowUI Fishing!!!");
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(_fishPoint);
         Camera UICamera = canvas.worldCamera;
         Vector3 followPosition = UICamera.ScreenToWorldPoint(screenPosition);

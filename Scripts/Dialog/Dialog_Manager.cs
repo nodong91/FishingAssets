@@ -68,9 +68,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             dataDialog = dataNPC.dataDialogs[3];
         }
         nameText.text = dataNPC.npc_ID;
-        NPC_Image.gameObject.SetActive(dataNPC.texture != null);
-        NPC_Image.texture = dataNPC.texture;
-        NPC_Image.SetNativeSize();
 
         Dialog_Npc(dataDialog);
         if (isOpen == false)
@@ -223,7 +220,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 Game_Manager.current.GetLanding.BoardButton();
                 break;
 
-            case SelectStruct.SelectType.Tutorial:
+            case SelectStruct.SelectType.InLand:
                 // 섬입장
                 Game_Manager.current.CurrentLand.SetLandingAction();
                 Game_Manager.current.OutOfControll(true);
@@ -232,8 +229,18 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             case SelectStruct.SelectType.Event:
                 Game_Manager.current.GetEvent.StartEvent();
                 break;
+
+            case SelectStruct.SelectType.GameOver:
+                StartCoroutine(SelectGameOver());
+                break;
         }
         OpenCanvas(false);
+    }
+
+    IEnumerator SelectGameOver()
+    {
+        yield return StartCoroutine(Static_JsonManager.RemoveSaveFile());// 파일 제거
+        LoadingManager.current.GoMain();// 다시 시작
     }
 
     void FixItemSetting(Data_ItemList _itemList)
@@ -306,6 +313,15 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         dialogText.text = SetReplace(dialog);
         dialogText.ForceMeshUpdate(true);// 메쉬 재 생성 (리셋)
         dialogText.alpha = 0f;// 모든 글자 숨김
+
+        int emotionType = (int)dialog.emotionType;
+        bool active = dataNPC.npcTextures.Length > emotionType && dataNPC.npcTextures[emotionType] != null;
+        NPC_Image.gameObject.SetActive(active);
+        if (active)
+        {
+            NPC_Image.texture = dataNPC.npcTextures[emotionType];
+            NPC_Image.SetNativeSize();
+        }
         yield return null;
 
         typing = true;
@@ -326,15 +342,19 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             int startIndex = replace.IndexOf(temp);
             dialogVector[i] = new Vector2Int(startIndex, startIndex + setReplace.Length);
             replace = replace.Replace(temp, setReplace);
-            Debug.Log($"{temp} {replace} (startReplace : {startIndex}) -1이면 바꿀 단어를 못찾아서 뒤에 에러터질꺼임");
         }
 
         // 색, 사이즈
         int lastIndex = dialogVector.Length - 1;
+        Debug.LogWarning($"{_textStruct.contents} : {dialogVector.Length}");
         for (int i = lastIndex; i >= 0; i--)
         {
             string textColor = _textStruct.dialogTypes[i].textColor;
             float size = _textStruct.dialogTypes[i].textSize;
+            if (dialogVector[i].x < 0)
+            {
+                Debug.LogError("교체할 단어 {" + i + "}가 없음");
+            }
             replace = replace.Insert(dialogVector[i].y, "</size></color>");// 끼워 넣기
             replace = replace.Insert(dialogVector[i].x, $"<color=#{textColor}><size={size}>");
         }

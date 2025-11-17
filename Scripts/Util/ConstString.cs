@@ -31,7 +31,7 @@ public class String_Title
 
 public class String_Save
 {
-    public const string _save = "/SaveFish/";
+    public const string _save = "/Save/";
     public const string _saveDontDestroy = "/SaveDontDestroy/";
 
     public const string _continue = "SaveContinue";

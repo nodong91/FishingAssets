@@ -8,7 +8,6 @@ using static Data_Manager;
 
 public class Game_Manager : MonoBehaviour
 {
-    public bool isGameOver = false;
     public Unit_Player player;
     public Controll_Manager controllManager;
 
@@ -97,10 +96,10 @@ public class Game_Manager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            LoanStart();
+            //StatsManager.current.CatchCount();
+            //LoanStart();
             //GameOver();
             //Singleton_Continue.INSTANCE.SaveContinue();// Space 시 저장
-            Debug.LogError("저장중");
         }
     }
 
@@ -146,13 +145,24 @@ public class Game_Manager : MonoBehaviour
     void LoadingComplate()
     {
         SetThemeMusic();
-        Debug.LogWarning(tutorial.IsTutorialCompleted(String_Tutorial._newGame));
+        bool isCompleted = GetTutorial.IsTutorialCompleted(String_Tutorial._newGame);
+        Debug.LogWarning(isCompleted);
         // 튜토리얼 시작
-        if (tutorial.IsTutorialCompleted(String_Tutorial._newGame) == true)
+        if (isCompleted == true)
         {
-            // 튜토리얼 완료 했으면
-            OutOfControll(false);
-            GetPlayer.CheckClosestUnit();// 생성 시 가까운 오브젝트 찾기
+            string shipID = continueData.shipData;
+            if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)// 배가 있다면
+            {
+                // 튜토리얼 완료 했으면
+                OutOfControll(false);
+                GetPlayer.CheckClosestUnit();// 생성 시 가까운 오브젝트 찾기
+            }
+            else
+            {
+                GetMainUI.OpenCanvas(false);
+                Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
+                GetDialog.DialogStart_NPC(npc, 5);// 튜토리얼 대화 시작
+            }
         }
         else
         {
@@ -163,15 +173,15 @@ public class Game_Manager : MonoBehaviour
         }
         //if (shipData == null)
         //{
-       
+
         //}
     }
 
-    public void ChangeStatus(Data_Ship _shipData)
+    public void ChangeStatus(Data_Ship _shipData)// 선박 변경
     {
-        if (tutorial.IsTutorialCompleted(String_Tutorial._newGame) == false)// 튜토리얼을 완료하지 않았다면 저장
+        if (GetTutorial.IsTutorialCompleted(String_Tutorial._newGame) == false)// 튜토리얼을 완료하지 않았다면 저장
         {
-            tutorial.CompletedTutorial(String_Tutorial._newGame);
+            GetTutorial.CompletedTutorial(String_Tutorial._newGame);
         }
 
         shipData = _shipData;
@@ -529,7 +539,7 @@ public class Game_Manager : MonoBehaviour
             return;
         var propertyInfo = pipeline.GetType().GetField("m_RendererDataList", BindingFlags.Instance | BindingFlags.NonPublic);
         scriptableRendererData = ((ScriptableRendererData[])propertyInfo.GetValue(pipeline))[0];
-        Debug.LogWarning($"scriptableRendererData : {scriptableRendererData.rendererFeatures.Count}");
+        Debug.LogWarning($"랜더피쳐 카운트 : {scriptableRendererData.rendererFeatures.Count}");
 
         fullScreenRendererFeature = (FullScreenPassRendererFeature)scriptableRendererData.rendererFeatures[featureIndex];
         //renderObject = (RenderObjects)scriptableRendererData.rendererFeatures[12];
@@ -669,14 +679,8 @@ public class Game_Manager : MonoBehaviour
         OutOfControll(true);
         GetMainUI.OpenCanvas(false);
 
-        StartCoroutine(SetGameOver());
+        Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._inn];
+        GetDialog.DialogStart_NPC(npc, 2);// 튜토리얼 대화 시작
 
-    }
-
-    IEnumerator SetGameOver()
-    {
-        yield return StartCoroutine(Static_JsonManager.RemoveSaveFile());// 파일 제거
-        isGameOver = true;
-        LoadingManager.current.GoMain();
     }
 }
