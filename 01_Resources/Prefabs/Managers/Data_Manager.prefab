@@ -394,7 +394,7 @@ MonoBehaviour:
     itemStruct:
       id: us_5001
       name: badanews
-      itemType: 5
+      itemType: 6
       explanation: badanews_01
       icon: Item_Quest
       itemClass: 4
@@ -410,7 +410,7 @@ MonoBehaviour:
     itemStruct:
       id: us_5002
       name: "\uC21C\uAC04\uC774\uB3D9"
-      itemType: 5
+      itemType: 6
       explanation: "\uB9C8\uC9C0\uB9C9 \uB3C4\uD06C\uB85C \uC774\uB3D9\uD55C\uB2E4."
       icon: Item_Quest
       itemClass: 4
@@ -426,7 +426,7 @@ MonoBehaviour:
     itemStruct:
       id: us_5003
       name: brownmoneypouch
-      itemType: 5
+      itemType: 6
       explanation: brownmoneypouch_01
       icon: Icon_Sk_012
       itemClass: 4
@@ -441,7 +441,7 @@ MonoBehaviour:
     itemStruct:
       id: us_5004
       name: bluemoneypouch
-      itemType: 5
+      itemType: 6
       explanation: bluemoneypouch_01
       icon: Icon_Sk_012
       itemClass: 4
@@ -523,7 +523,7 @@ MonoBehaviour:
     size: {x: 10, y: 50}
     fishHealth: 12
     fishPower: 2
-    fishSpeed: 0
+    fishSpeed: 1.2
     fishCoolTime: 0
     fishAttackSpeed: 1
     fishSpellTime: 0
@@ -549,8 +549,8 @@ MonoBehaviour:
     fishDayType: 1
     size: {x: 20, y: 40}
     fishHealth: 10
-    fishPower: 0
-    fishSpeed: 0
+    fishPower: 1
+    fishSpeed: 1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
@@ -558,7 +558,7 @@ MonoBehaviour:
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 50
-    addValue: 0
+    addValue: 0.3
   - id: fs_1005
     itemStruct:
       id: fs_1005
@@ -575,8 +575,8 @@ MonoBehaviour:
     fishDayType: 2
     size: {x: 10, y: 50}
     fishHealth: 12
-    fishPower: 0
-    fishSpeed: 0
+    fishPower: 1
+    fishSpeed: 1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
@@ -584,7 +584,7 @@ MonoBehaviour:
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 60
-    addValue: 0
+    addValue: 0.3
   - id: fs_1006
     itemStruct:
       id: fs_1006
@@ -628,8 +628,8 @@ MonoBehaviour:
     fishDayType: 1
     size: {x: 8, y: 30}
     fishHealth: 10
-    fishPower: 0
-    fishSpeed: 0
+    fishPower: 1
+    fishSpeed: 1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
@@ -637,7 +637,7 @@ MonoBehaviour:
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 50
-    addValue: 0
+    addValue: 0.3
   - id: fs_1008
     itemStruct:
       id: fs_1008
@@ -654,8 +654,8 @@ MonoBehaviour:
     fishDayType: 1
     size: {x: 7.5, y: 20}
     fishHealth: 11
-    fishPower: 0
-    fishSpeed: 0
+    fishPower: 1
+    fishSpeed: 1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
@@ -663,7 +663,7 @@ MonoBehaviour:
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 55
-    addValue: 0
+    addValue: 0.3
   - id: fs_1009
     itemStruct:
       id: fs_1009
@@ -680,8 +680,8 @@ MonoBehaviour:
     fishDayType: 1
     size: {x: 10.5, y: 30}
     fishHealth: 12
-    fishPower: 0
-    fishSpeed: 0
+    fishPower: 1
+    fishSpeed: 1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
@@ -689,7 +689,7 @@ MonoBehaviour:
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 60
-    addValue: 0
+    addValue: 0.3
   - id: fs_1010
     itemStruct:
       id: fs_1010
@@ -706,8 +706,8 @@ MonoBehaviour:
     fishDayType: 2
     size: {x: 5.2, y: 20}
     fishHealth: 12
-    fishPower: 0
-    fishSpeed: 0
+    fishPower: 1.1
+    fishSpeed: 1.1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
@@ -715,7 +715,7 @@ MonoBehaviour:
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 60
-    addValue: 0
+    addValue: 0.33
   - id: fs_1011
     itemStruct:
       id: fs_1011
@@ -732,8 +732,8 @@ MonoBehaviour:
     fishDayType: 1
     size: {x: 8, y: 20}
     fishHealth: 11
-    fishPower: 0
-    fishSpeed: 0
+    fishPower: 1.1
+    fishSpeed: 1.1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
@@ -741,7 +741,7 @@ MonoBehaviour:
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 55
-    addValue: 0
+    addValue: 0.33
   - id: fs_1012
     itemStruct:
       id: fs_1012
@@ -758,8 +758,8 @@ MonoBehaviour:
     fishDayType: 1
     size: {x: 2.5, y: 12}
     fishHealth: 8
-    fishPower: 0
-    fishSpeed: 0
+    fishPower: 1
+    fishSpeed: 1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
@@ -767,7 +767,7 @@ MonoBehaviour:
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 40
-    addValue: 0
+    addValue: 0.3
   - id: fs_1013
     itemStruct:
       id: fs_1013
@@ -858,7 +858,7 @@ MonoBehaviour:
       icon: fs_1102_lionfish
       itemClass: 3
       shape:
-      - {x: 1, y: -1}
+      - {x: 0, y: -1}
       - {x: 1, y: -1}
       - {x: 1, y: 0}
       iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
