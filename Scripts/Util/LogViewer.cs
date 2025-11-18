@@ -2,6 +2,8 @@ using System.IO;
 using UnityEngine;
 public class LogViewer : MonoBehaviour
 {
+    public bool isSave = false;
+
     [SerializeField]
     private bool isLog = true;
 
@@ -86,6 +88,8 @@ public class LogViewer : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        if (isSave == false)
+            return;
         // 로그 메세지를 텍스트 파일에 저장
         // 파일이 없다면 새롭게 생성
         FindFolder();

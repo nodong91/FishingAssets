@@ -240,6 +240,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     IEnumerator SelectGameOver()
     {
         yield return StartCoroutine(Static_JsonManager.RemoveSaveFile());// 파일 제거
+        StatsManager.current.GameOver();// 게임오버 체크
         LoadingManager.current.GoMain();// 다시 시작
     }
 

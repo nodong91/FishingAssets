@@ -186,7 +186,7 @@ public class Title_Manager : MonoBehaviour
 
     IEnumerator SetNewGame()
     {
-        yield return StartCoroutine(Static_JsonManager.RemoveSaveFile());
+        yield return StartCoroutine(Static_JsonManager.RemoveSaveFile());// 타이틀에서 새로 시작
         //yield return StartCoroutine(Static_JsonManager.RemoveDontDestroyFile());
         
         StartGame();//RemoveSaveFile

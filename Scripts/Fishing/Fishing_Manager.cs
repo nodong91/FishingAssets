@@ -713,10 +713,11 @@ public class Fishing_Manager : MonoBehaviour
 
     public void SetReward()
     {
-
-        ItemStruct fishItem = currentFish.itemStruct;
-        float size = currentSize.size;
-        Game_Manager.current.GetFishGuide.AddFishClass(fishItem.id, size);// 생선 가이드에 추가
+        if (currentFish.fishDayType == DayType.Night)
+        {
+            StatsManager.current.NightFishing();// 밤낚시 체크
+        }
+        Game_Manager.current.GetFishGuide.AddFishClass(currentFish.id, currentFish.GetRandom().size);// 생선 가이드에 추가
         // 행운의 물고기 두마리 낚을 확률
         float luckValue = Game_Manager.current.currentStatus.luckFish;
         float randomValue = Random.Range(0f, 100f);
@@ -725,14 +726,14 @@ public class Fishing_Manager : MonoBehaviour
         {
             // 물고기 세팅
             FishStruct bonusFish = GetFishStruct();// 보너스 물고기
-            itemIDs = new string[2] { fishItem.id, bonusFish.id };
+            itemIDs = new string[2] { currentFish.id, bonusFish.id };
             Game_Manager.current.GetFishGuide.AddFishClass(bonusFish.id, bonusFish.GetRandom().size);// 생선 가이드에 추가
             // 두마리 낚음
-            Debug.LogWarning("축하합니다! 행운의 물고기 두 마리를 낚았습니다!");
+            Game_Manager.current.GetMainUI.SetWarnningText("축하합니다! 행운의 물고기 두 마리를 낚았습니다!");
         }
         else// 일반 낚시
         {
-            itemIDs = new string[1] { fishItem.id };
+            itemIDs = new string[1] { currentFish.id };
         }
 
         Game_Manager.current.GetInventory.SetResult(itemIDs);// 낚시 보상 아이템 설정

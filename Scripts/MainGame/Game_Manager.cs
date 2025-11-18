@@ -681,6 +681,5 @@ public class Game_Manager : MonoBehaviour
 
         Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._inn];
         GetDialog.DialogStart_NPC(npc, 2);// 튜토리얼 대화 시작
-
     }
 }

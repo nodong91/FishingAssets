@@ -1,7 +1,5 @@
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using static Data_Manager;
-using static Data_Quest;
 
 public class Trigger_RandomBox : Trigger_Setting
 {
@@ -31,6 +29,7 @@ public class Trigger_RandomBox : Trigger_Setting
 
     void SetTrigger()
     {
+        StatsManager.current.CatchBox();// 박스 수집 체크
         Game_Manager.current.GetInventory.SetResult(itemRewards);// 결과 아이템 세팅
         Game_Manager.current.GetMainUI.OpenCanvas(false);// 메인 유아이 닫기
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 인벤토리의 닫기 버튼 세팅
