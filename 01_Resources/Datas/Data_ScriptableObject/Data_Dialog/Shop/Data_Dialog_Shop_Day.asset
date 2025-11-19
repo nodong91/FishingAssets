@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Data_Dialog_Shop_Day
   m_EditorClassIdentifier: 
   textStruct:
-  - contents: "{0} \uC0AC\uC138\uC694~\uC2E0\uC120\uD558\uACE0 {1}\uC774 \uC788\uC5B4\uC694."
+  - contents: di_1001
     emotionType: 0
     dialogTypes:
-    - replaceText: "\uC0DD\uC120"
+    - replaceText: di_1001_a
       textSize: 30
       typingSpeed: 0
       textColor: FFFF00
@@ -24,7 +24,7 @@ MonoBehaviour:
       actionSpeed: 20
       actionInterval: 1
       actionAngle: {x: 0, y: 5}
-    - replaceText: "\uB9DB\uC788\uB294 \uC0DD\uC120"
+    - replaceText: di_1001_b
       textSize: 30
       typingSpeed: 0
       textColor: 00FFFF
@@ -32,11 +32,11 @@ MonoBehaviour:
       actionSpeed: 0
       actionInterval: 0
       actionAngle: {x: -2, y: 2}
-  - contents: "\uBC18\uAC00\uC6CC\uC694. \uC2E0\uC120\uD55C \uC0DD\uC120 \uC0AC\uAC00\uC138\uC694."
+  - contents: di_1002
     emotionType: 1
     dialogTypes: []
   selectStructs:
-  - selectDialog: "\uBB3C\uAC74\uC744 \uBCF4\uACE0 \uC2F6\uC5B4"
+  - selectDialog: di_1001_c
     selectType: 0
     npcData: {fileID: 0}
     dialogIndex: 0
