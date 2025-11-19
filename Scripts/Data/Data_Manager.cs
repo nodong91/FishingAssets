@@ -88,7 +88,7 @@ public class Data_Manager : Data_Parse
             ItemStruct tempItem = GetItemStruct(elements);
             FishStruct tempData = new FishStruct
             {
-                id = tempItem.id,
+                id = tempItem.id.Trim(),
                 itemStruct = tempItem,
                 areaType = (AreaType)System.Enum.Parse(typeof(AreaType), elements[9]),
                 fishDayType = (DayType)System.Enum.Parse(typeof(DayType), elements[10]),
@@ -141,7 +141,7 @@ public class Data_Manager : Data_Parse
             id = _elements[0].Trim(),
             name = _elements[1],
             explanation = _elements[2],
-            icon = _elements[3],
+            icon = _elements[3].Trim(),
             itemClass = (ItemStruct.ItemClass)System.Enum.Parse(typeof(ItemStruct.ItemClass), _elements[4]),
             shape = tempShape,
             iconSize = TryIconSize(tempShape),

@@ -25,8 +25,13 @@ public class FishGuide : MonoBehaviour
     public UI_FishCard cardBase;
     public Custom_Button backButton;
 
-    public Toggle[] toggles;
+    public Custom_Button leftButton;
+    public Custom_Button rightButton;
+    public TMPro.TMP_Text pageText;
+
     public int currentIndex;
+    int maxIndex = 0;
+
     Queue<FishStructGuide> instQueue = new Queue<FishStructGuide>();
     public void CloseCanvas() => Game_Manager.current.GetMainUI?.CloseCanvas();
     public UI_FishInfo fishInfo;
@@ -44,15 +49,13 @@ public class FishGuide : MonoBehaviour
 
         foreach (var fish in Singleton_Data.INSTANCE.Dict_Fish)
         {
-            Data_Manager.FishStruct temp = fish.Value;
-            allFishStruct.Add(temp);
+            allFishStruct.Add(fish.Value);
         }
-        for (int i = 0; i < toggles.Length; i++)
-        {
-            int index = i;
-            toggles[index].onValueChanged.AddListener(delegate { SetToggle(index); });
-        }
-        toggles[0].isOn = true;
+        maxIndex = allFishStruct.Count / 12;
+
+        leftButton.SetButton(delegate { NextButton(-1); });
+        rightButton.SetButton(delegate { NextButton(1); });
+
         SetInstanceStruct();
 
         backButton.SetButton(CloseCanvas);
@@ -65,22 +68,29 @@ public class FishGuide : MonoBehaviour
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
         if (_open == true)
         {
-            toggles[0].isOn = true;
             currentIndex = 0;
+            pageText.text = (currentIndex + 1).ToString();
+            StartCoroutine(MoveChange(true));
+
             UI_FishCard tempCard = currentFishStruct.cards[0];
             SelectCard(tempCard);// 제일 앞 카드 정보 출력
-            //SetToggle(0);
         }
     }
 
-    void SetToggle(int _index)
+    void NextButton(int _index)
     {
-        if (toggles[_index].isOn == true && currentIndex != _index)
+        currentIndex += _index;
+        if (currentIndex > maxIndex)
         {
-            bool outBool = currentIndex > _index;
-            currentIndex = _index;
-            StartCoroutine(MoveChange(outBool));
+            currentIndex = 0;
         }
+        else if (currentIndex < 0)
+        {
+            currentIndex = maxIndex;
+        }
+        pageText.text = (currentIndex + 1).ToString();
+        bool outBool = _index > 0;
+        StartCoroutine(MoveChange(outBool));
     }
 
     void SetInstanceStruct()
