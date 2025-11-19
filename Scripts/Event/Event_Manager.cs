@@ -52,17 +52,16 @@ public class Event_Manager : MonoBehaviour
             eventKeys.Add(child.Key);
         }
     }
-
+    public string setEventKey = "Data_Event_0001";
     public void StartEvent()
     {
         if (eventKeys == null || eventKeys.Count == 0)
             SetDictKey();
 
         //string key = eventKeys[Random.Range(0, eventKeys.Count)];
-        string key = "Data_Event_0001";
-        Data_Event tempData = Singleton_Data.INSTANCE.Dict_Event[key];
-        SetEvent(tempData);
-        Debug.LogWarning(key);
+        Data_Event tempEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
+        SetEvent(tempEvent);
+        Debug.LogWarning(setEventKey);
     }
 
     public void SetEvent(Data_Event _eventData)
@@ -401,7 +400,7 @@ public class Event_Manager : MonoBehaviour
         }
         else
         {
-            SetEvent(tempEvent);
+            SetEvent(tempEvent);// 선택 버튼으로 활성화
         }
     }
 
