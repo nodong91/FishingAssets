@@ -46,17 +46,17 @@ public class Data_Manager : Data_Parse
         for (int i = 0; i < CSV_Data.Count; i++)
         {
             string csv_Type = CSV_Data[i].name;
-            if (csv_Type.Contains("Fish"))
+            if (csv_Type.Contains("Language"))
+            {
+                SetLanguageStruct(CSV_Data[i]);
+            }
+            else if (csv_Type.Contains("Fish"))
             {
                 SetFish(CSV_Data[i]);
             }
             else if (csv_Type.Contains("Used"))
             {
                 SetUsed(CSV_Data[i]);
-            }
-            else if (csv_Type.Contains("Language"))
-            {
-                SetLanguageStruct(CSV_Data[i]);
             }
             else if (csv_Type.Contains("Audio"))
             {
@@ -223,6 +223,8 @@ public class Data_Manager : Data_Parse
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
             string[] elements = data[i].Split(new char[] { ',' });
+            if (System.String.IsNullOrEmpty(elements[0]) == true)
+                continue;
             LanguageStruct tempData = new LanguageStruct
             {
                 id = elements[0].Trim(),

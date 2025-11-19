@@ -22,11 +22,11 @@ public class String_Audio
 
 public class String_Title
 {
-    public const string _continue = "continue";
-    public const string _newStart = "newstart";
-    public const string _credit = "credit";
-    public const string _setting = "option";
-    public const string _exit = "exit";
+    public const string _continue = "tt_0001";
+    public const string _newStart = "tt_0002";
+    public const string _credit = "tt_0003";
+    public const string _setting = "tt_0004";
+    public const string _exit = "tt_0005";
 }
 
 public class String_Save

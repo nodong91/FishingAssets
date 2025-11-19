@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -191,7 +190,7 @@ public class UI_Inventory : MonoBehaviour
         float addPrice = _item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 비싸게 판매 
         float price = Mathf.Round(_item.price + addPrice);// 스킬 스탯 추가
         Game_Manager.current.GetMainUI.MoveMoney(price);
-        Debug.Log($"아이템 판매: {_item.name} for {_item.price} + {addPrice} = {price}");
+        Debug.Log($"아이템 판매: {_item.id} for {_item.price} + {addPrice} = {price}");
     }
 
     void BuyItem(ItemStruct _item)
@@ -199,7 +198,7 @@ public class UI_Inventory : MonoBehaviour
         float addPrice = _item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 싸게 구매 
         float price = -_item.price;
         Game_Manager.current.GetMainUI.MoveMoney(price);
-        Debug.Log($"아이템 구매: {_item.name} for {_item.price} + {addPrice} = {price}");
+        Debug.Log($"아이템 구매: {_item.id} for {_item.price} + {addPrice} = {price}");
     }
 
     void SetEmptySlot(UI_Inventory_Slot _slot)// 슬롯 비우기
@@ -450,7 +449,7 @@ public class UI_Inventory : MonoBehaviour
                         if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false || myBox.AddItem(item) == false)
                             return;
 
-                        Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.name)}");
+                        Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.id)}");
                         BuyItem(item);// 클릭 구매
                     }
                     SetEmptySlot(selectSlot);// 슬롯 비우기
@@ -467,7 +466,7 @@ public class UI_Inventory : MonoBehaviour
                         if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false || myBox.AddItem(item) == false)
                             return;
 
-                        Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.name)}");
+                        Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.id)}");
                         BuyItem(item);// 클릭 구매
                     }
                     SetEmptySlot(selectSlot);// 슬롯 비우기

@@ -55,6 +55,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: a1049a51167854d4dae5a4431b20ccf1, type: 3}
   - {fileID: 4900000, guid: f3c8ee76263be1a4f94012efc3f0bb34, type: 3}
   - {fileID: 4900000, guid: 989a3c5718afb0c4d8ae362892320ede, type: 3}
+  - {fileID: 4900000, guid: 8f407b5cab911a645941909697f779ff, type: 3}
   - {fileID: 4900000, guid: 9be814cb8d030474d91b7a8b92d583a3, type: 3}
   - {fileID: 4900000, guid: 334cdf74cd1d00241ab9951f57722f17, type: 3}
   - {fileID: 4900000, guid: e164579a5e49fcd408cd70fa27a1bb3a, type: 3}
@@ -286,7 +287,7 @@ MonoBehaviour:
       id: us_1001
       name: smalloiltank
       itemType: 2
-      explanation: smalloiltank_01
+      explanation: us_1001_01
       icon: Item_Oilcan
       itemClass: 4
       shape: []
@@ -301,7 +302,7 @@ MonoBehaviour:
       id: us_2001
       name: repairkit
       itemType: 3
-      explanation: repairkit_01
+      explanation: us_2001_01
       icon: Item_RepairKit
       itemClass: 4
       shape: []
@@ -316,7 +317,7 @@ MonoBehaviour:
       id: us_3001
       name: lugworm
       itemType: 0
-      explanation: lugworm_01
+      explanation: us_3001_01
       icon: Item_Bait_Worm
       itemClass: 3
       shape: []
@@ -331,7 +332,7 @@ MonoBehaviour:
       id: us_3002
       name: lugworm
       itemType: 1
-      explanation: lugworm_01
+      explanation: us_3002_01
       icon: fs_1002_mackerel
       itemClass: 1
       shape:
@@ -347,7 +348,7 @@ MonoBehaviour:
       id: us_4001
       name: lotterytoto
       itemType: 4
-      explanation: lotterytoto_01
+      explanation: us_4001_01
       icon: Item_Lottery
       itemClass: 4
       shape: []
@@ -357,12 +358,12 @@ MonoBehaviour:
     buffDuration: 0
     etcValue: 0
     skillID: "-\r"
-  - id: us_5001
+  - id: us_6001
     itemStruct:
-      id: us_5001
+      id: us_6001
       name: badanews
       itemType: 6
-      explanation: badanews_01
+      explanation: us_6001_01
       icon: Item_Quest
       itemClass: 4
       shape:
@@ -373,12 +374,12 @@ MonoBehaviour:
     buffDuration: 0
     etcValue: 0
     skillID: "-\r"
-  - id: us_5002
+  - id: us_6002
     itemStruct:
-      id: us_5002
+      id: us_6002
       name: "\uC21C\uAC04\uC774\uB3D9"
       itemType: 6
-      explanation: "\uB9C8\uC9C0\uB9C9 \uB3C4\uD06C\uB85C \uC774\uB3D9\uD55C\uB2E4."
+      explanation: us_6002_01
       icon: Item_Quest
       itemClass: 4
       shape:
@@ -394,7 +395,7 @@ MonoBehaviour:
       id: us_5003
       name: brownmoneypouch
       itemType: 5
-      explanation: brownmoneypouch_01
+      explanation: us_5003_01
       icon: Icon_Sk_012
       itemClass: 4
       shape: []
@@ -409,7 +410,7 @@ MonoBehaviour:
       id: us_5004
       name: bluemoneypouch
       itemType: 5
-      explanation: bluemoneypouch_01
+      explanation: us_5004_01
       icon: Icon_Sk_012
       itemClass: 4
       shape: []
@@ -418,14 +419,14 @@ MonoBehaviour:
       price: 500
     buffDuration: 0
     etcValue: 500
-    skillID: '-'
+    skillID: "-\r"
   fishStruct:
   - id: fs_1001
     itemStruct:
       id: fs_1001
       name: anchovy
       itemType: 0
-      explanation: anchovy_01
+      explanation: fs_1001_01
       icon: fs_1001_anchovy
       itemClass: 4
       shape: []
@@ -451,7 +452,7 @@ MonoBehaviour:
       id: fs_1002
       name: mackerel
       itemType: 0
-      explanation: mackerel_01
+      explanation: fs_1002_01
       icon: fs_1002_mackerel
       itemClass: 4
       shape:
@@ -478,7 +479,7 @@ MonoBehaviour:
       id: fs_1003
       name: horsemackerel
       itemType: 0
-      explanation: horsemackerel_01
+      explanation: fs_1003_01
       icon: fs_1003_horsemackerel
       itemClass: 4
       shape: []
@@ -504,7 +505,7 @@ MonoBehaviour:
       id: fs_1004
       name: saury
       itemType: 0
-      explanation: saury_01
+      explanation: fs_1004_01
       icon: fs_1004_saury
       itemClass: 4
       shape:
@@ -531,7 +532,7 @@ MonoBehaviour:
       id: fs_1005
       name: seaurchin
       itemType: 0
-      explanation: seaurchin_01
+      explanation: fs_1005_01
       icon: fs_1005_seaurchin
       itemClass: 4
       shape: []
@@ -557,7 +558,7 @@ MonoBehaviour:
       id: fs_1006
       name: bigfinreefsquid
       itemType: 0
-      explanation: bigfinreefsquid_01
+      explanation: fs_1006_01
       icon: fs_1006_bigfinreefsquid
       itemClass: 4
       shape:
@@ -584,7 +585,7 @@ MonoBehaviour:
       id: fs_1007
       name: filefish
       itemType: 0
-      explanation: filefish_01
+      explanation: fs_1007_01
       icon: fs_1007_filefish
       itemClass: 4
       shape: []
@@ -610,7 +611,7 @@ MonoBehaviour:
       id: fs_1008
       name: yellowtang
       itemType: 0
-      explanation: yellowtang_01
+      explanation: fs_1008_01
       icon: fs_1008_yellowtang
       itemClass: 4
       shape: []
@@ -636,7 +637,7 @@ MonoBehaviour:
       id: fs_1009
       name: butterflyfish
       itemType: 0
-      explanation: butterflyfish_01
+      explanation: fs_1009_01
       icon: fs_1009_butterflyfish
       itemClass: 4
       shape: []
@@ -662,7 +663,7 @@ MonoBehaviour:
       id: fs_1010
       name: cleanerwrasse
       itemType: 0
-      explanation: cleanerwrasse_01
+      explanation: fs_1010_01
       icon: fs_1010_cleanerwrasse
       itemClass: 4
       shape: []
@@ -688,7 +689,7 @@ MonoBehaviour:
       id: fs_1011
       name: chromis
       itemType: 0
-      explanation: chromis_01
+      explanation: fs_1011_01
       icon: fs_1011_chromis
       itemClass: 4
       shape: []
@@ -714,7 +715,7 @@ MonoBehaviour:
       id: fs_1012
       name: pinkshrimp
       itemType: 0
-      explanation: pinkshrimp_01
+      explanation: fs_1012_01
       icon: fs_1012_pinkshrimp
       itemClass: 4
       shape: []
@@ -740,7 +741,7 @@ MonoBehaviour:
       id: fs_1013
       name: grubfish
       itemType: 0
-      explanation: grubfish_01
+      explanation: fs_1013_01
       icon: fs_1013_grubfish
       itemClass: 4
       shape:
@@ -767,7 +768,7 @@ MonoBehaviour:
       id: fs_1014
       name: marbledrockfish
       itemType: 0
-      explanation: marbledrockfish_01
+      explanation: fs_1014_01
       icon: fs_1014_marbledrockfish
       itemClass: 4
       shape:
@@ -794,7 +795,7 @@ MonoBehaviour:
       id: fs_1101
       name: bluestripedfangblenny
       itemType: 0
-      explanation: bluestripedfangblenny_01
+      explanation: fs_1101_01
       icon: fs_1101_bluestripedfangblenny
       itemClass: 3
       shape:
@@ -821,7 +822,7 @@ MonoBehaviour:
       id: fs_1102
       name: lionfish
       itemType: 0
-      explanation: lionfish_01
+      explanation: fs_1102_01
       icon: fs_1102_lionfish
       itemClass: 3
       shape:
@@ -850,7 +851,7 @@ MonoBehaviour:
       id: fs_1103
       name: pipefish
       itemType: 0
-      explanation: pipefish_01
+      explanation: fs_1103_01
       icon: fs_1103_pipefish
       itemClass: 3
       shape:
@@ -878,7 +879,7 @@ MonoBehaviour:
       id: fs_1104
       name: yellowtaildamselfish
       itemType: 0
-      explanation: yellowtaildamselfish_01
+      explanation: fs_1104_01
       icon: fs_1104_yellowtaildamselfish
       itemClass: 3
       shape: []
@@ -904,7 +905,7 @@ MonoBehaviour:
       id: fs_1105
       name: yellowboxfish
       itemType: 0
-      explanation: yellowboxfish_01
+      explanation: fs_1105_01
       icon: fs_1105_yellowboxfish
       itemClass: 3
       shape: []
@@ -930,7 +931,7 @@ MonoBehaviour:
       id: fs_1201
       name: rockbream
       itemType: 0
-      explanation: rockbream_01
+      explanation: fs_1201_01
       icon: fs_1201_rockbream
       itemClass: 2
       shape:
@@ -961,7 +962,7 @@ MonoBehaviour:
       id: fs_1202
       name: parrotfish
       itemType: 0
-      explanation: parrotfish_01
+      explanation: fs_1202_01
       icon: fs_1202_parrotfish
       itemClass: 2
       shape:
@@ -992,7 +993,7 @@ MonoBehaviour:
       id: fs_1301
       name: unicornfish
       itemType: 0
-      explanation: unicornfish_01
+      explanation: fs_1301_01
       icon: fs_1301_unicornfish
       itemClass: 1
       shape:
@@ -1022,7 +1023,7 @@ MonoBehaviour:
       id: fs_2001
       name: seabass
       itemType: 0
-      explanation: seabass_01
+      explanation: fs_2001_01
       icon: fs_2001_seabass
       itemClass: 4
       shape:
@@ -1049,7 +1050,7 @@ MonoBehaviour:
       id: fs_2002
       name: flounder
       itemType: 0
-      explanation: flounder_01
+      explanation: fs_2002_01
       icon: fs_2002_flounder
       itemClass: 4
       shape:
@@ -1078,7 +1079,7 @@ MonoBehaviour:
       id: fs_2003
       name: mullet
       itemType: 0
-      explanation: mullet_01
+      explanation: fs_2003_01
       icon: fs_2003_mullet
       itemClass: 4
       shape:
@@ -1106,7 +1107,7 @@ MonoBehaviour:
       id: fs_2004
       name: bluetang
       itemType: 0
-      explanation: bluetang_01
+      explanation: fs_2004_01
       icon: fs_2004_bluetang
       itemClass: 4
       shape: []
@@ -1132,7 +1133,7 @@ MonoBehaviour:
       id: fs_2005
       name: clownfish
       itemType: 0
-      explanation: clownfish_01
+      explanation: fs_2005_01
       icon: fs_2005_clownfish
       itemClass: 4
       shape: []
@@ -1158,7 +1159,7 @@ MonoBehaviour:
       id: fs_2006
       name: bluespottedstingray
       itemType: 0
-      explanation: bluespottedstingray_01
+      explanation: fs_2006_01
       icon: fs_2006_bluespottedstingray
       itemClass: 4
       shape:
@@ -1187,7 +1188,7 @@ MonoBehaviour:
       id: fs_2007
       name: spanishmackerel
       itemType: 0
-      explanation: spanishmackerel_01
+      explanation: fs_2007_01
       icon: fs_2007_spanishmackerel
       itemClass: 4
       shape:
@@ -1216,7 +1217,7 @@ MonoBehaviour:
       id: fs_2008
       name: redseabream
       itemType: 0
-      explanation: redseabream_01
+      explanation: fs_2008_01
       icon: fs_2008_redseabream
       itemClass: 4
       shape:
@@ -1247,7 +1248,7 @@ MonoBehaviour:
       id: fs_2009
       name: chickengrunt
       itemType: 0
-      explanation: chickengrunt_01
+      explanation: fs_2009_01
       icon: fs_2009_chickengrunt
       itemClass: 4
       shape:
@@ -1274,7 +1275,7 @@ MonoBehaviour:
       id: fs_2010
       name: sardine
       itemType: 0
-      explanation: sardine_01
+      explanation: fs_2010_01
       icon: fs_2010_sardine
       itemClass: 4
       shape: []
@@ -1300,7 +1301,7 @@ MonoBehaviour:
       id: fs_2011
       name: rockfish
       itemType: 0
-      explanation: rockfish_01
+      explanation: fs_2011_01
       icon: fs_2011_rockfish
       itemClass: 4
       shape:
@@ -1327,7 +1328,7 @@ MonoBehaviour:
       id: fs_2012
       name: cuttlefish
       itemType: 0
-      explanation: cuttlefish_01
+      explanation: fs_2012_01
       icon: fs_2012_cuttlefish
       itemClass: 4
       shape:
@@ -1354,7 +1355,7 @@ MonoBehaviour:
       id: fs_2013
       name: stripedeelcatfish
       itemType: 0
-      explanation: stripedeelcatfish_01
+      explanation: fs_2013_01
       icon: fs_2013_stripedeelcatfish
       itemClass: 4
       shape:
@@ -1381,7 +1382,7 @@ MonoBehaviour:
       id: fs_2014
       name: flatfish
       itemType: 0
-      explanation: flatfish_01
+      explanation: fs_2014_01
       icon: fs_2014_flatfish
       itemClass: 4
       shape:
@@ -1412,7 +1413,7 @@ MonoBehaviour:
       id: fs_2015
       name: obtusebarracuda
       itemType: 0
-      explanation: obtusebarracuda_01
+      explanation: fs_2015_01
       icon: fs_2015_obtusebarracuda
       itemClass: 4
       shape:
@@ -1439,7 +1440,7 @@ MonoBehaviour:
       id: fs_2016
       name: salmon
       itemType: 0
-      explanation: salmon_01
+      explanation: fs_2016_01
       icon: fs_2016_salmon
       itemClass: 4
       shape:
@@ -1467,7 +1468,7 @@ MonoBehaviour:
       id: fs_2101
       name: octopus
       itemType: 0
-      explanation: octopus_01
+      explanation: fs_2101_01
       icon: fs_2101_octopus
       itemClass: 3
       shape:
@@ -1495,7 +1496,7 @@ MonoBehaviour:
       id: fs_2102
       name: giantmoray
       itemType: 0
-      explanation: giantmoray_01
+      explanation: fs_2102_01
       icon: fs_2102_giantmoray
       itemClass: 3
       shape:
@@ -1525,7 +1526,7 @@ MonoBehaviour:
       id: fs_2103
       name: seahorse
       itemType: 0
-      explanation: seahorse_01
+      explanation: fs_2103_01
       icon: fs_2103_seahorse
       itemClass: 3
       shape: []
@@ -1551,7 +1552,7 @@ MonoBehaviour:
       id: fs_2104
       name: pufferfish
       itemType: 0
-      explanation: pufferfish_01
+      explanation: fs_2104_01
       icon: fs_2104_pufferfish
       itemClass: 3
       shape:
@@ -1580,7 +1581,7 @@ MonoBehaviour:
       id: fs_2105
       name: seahare
       itemType: 0
-      explanation: seahare_01
+      explanation: fs_2105_01
       icon: fs_2105_seahare
       itemClass: 3
       shape:
@@ -1607,7 +1608,7 @@ MonoBehaviour:
       id: fs_2106
       name: crab
       itemType: 0
-      explanation: crab_01
+      explanation: fs_2106_01
       icon: fs_2106_crab
       itemClass: 3
       shape:
@@ -1634,7 +1635,7 @@ MonoBehaviour:
       id: fs_2107
       name: seacucumber
       itemType: 0
-      explanation: seacucumber_01
+      explanation: fs_2107_01
       icon: fs_2107_seacucumber
       itemClass: 3
       shape: []
@@ -1660,7 +1661,7 @@ MonoBehaviour:
       id: fs_2201
       name: trigerfish
       itemType: 0
-      explanation: trigerfish_01
+      explanation: fs_2201_01
       icon: fs_2201_trigerfish
       itemClass: 2
       shape:
@@ -1687,7 +1688,7 @@ MonoBehaviour:
       id: fs_2202
       name: redspottedgrouper
       itemType: 0
-      explanation: redspottedgrouper_01
+      explanation: fs_2202_01
       icon: fs_2202_redspottedgrouper
       itemClass: 2
       shape:
@@ -1715,7 +1716,7 @@ MonoBehaviour:
       id: fs_2203
       name: napoleonwrasse
       itemType: 0
-      explanation: napoleonwrasse_01
+      explanation: fs_2203_01
       icon: fs_2203_napoleonwrasse
       itemClass: 2
       shape:
@@ -1746,7 +1747,7 @@ MonoBehaviour:
       id: fs_2301
       name: redtoothedtriggerfish
       itemType: 0
-      explanation: redtoothedtriggerfish_01
+      explanation: fs_2301_01
       icon: fs_2301_redtoothedtriggerfish
       itemClass: 1
       shape:
@@ -1777,7 +1778,7 @@ MonoBehaviour:
       id: fs_2401
       name: bluewingeel
       itemType: 0
-      explanation: bluewingeel_01
+      explanation: fs_2401_01
       icon: fs_2401_bluewingeel
       itemClass: 0
       shape:
@@ -1811,7 +1812,7 @@ MonoBehaviour:
       id: fs_3001
       name: northernwhiting
       itemType: 0
-      explanation: northernwhiting_01
+      explanation: fs_3001_01
       icon: fs_3001_northernwhiting
       itemClass: 4
       shape: []
@@ -1837,7 +1838,7 @@ MonoBehaviour:
       id: fs_3002
       name: butterfish
       itemType: 0
-      explanation: butterfish_01
+      explanation: fs_3002_01
       icon: fs_3002_butterfish
       itemClass: 4
       shape: []
@@ -1863,7 +1864,7 @@ MonoBehaviour:
       id: fs_3003
       name: bonitofish
       itemType: 0
-      explanation: bonitofish_01
+      explanation: fs_3003_01
       icon: fs_3003_bonitofish
       itemClass: 4
       shape:
@@ -1891,7 +1892,7 @@ MonoBehaviour:
       id: fs_3004
       name: bluecrab
       itemType: 0
-      explanation: bluecrab_01
+      explanation: fs_3004_01
       icon: fs_3004_bluecrab
       itemClass: 4
       shape:
@@ -1918,7 +1919,7 @@ MonoBehaviour:
       id: fs_3005
       name: moonjellyfish
       itemType: 0
-      explanation: moonjellyfish_01
+      explanation: fs_3005_01
       icon: fs_3005_moonjellyfish
       itemClass: 4
       shape: []
@@ -1944,7 +1945,7 @@ MonoBehaviour:
       id: fs_3006
       name: flyingfish
       itemType: 0
-      explanation: flyingfish_01
+      explanation: fs_3006_01
       icon: fs_3006_flyingfish
       itemClass: 4
       shape:
@@ -1971,7 +1972,7 @@ MonoBehaviour:
       id: fs_3007
       name: pacificcod
       itemType: 0
-      explanation: pacificcod_01
+      explanation: fs_3007_01
       icon: fs_3007_pacificcod
       itemClass: 4
       shape:
@@ -1999,7 +2000,7 @@ MonoBehaviour:
       id: fs_3101
       name: coraltrout
       itemType: 0
-      explanation: coraltrout_01
+      explanation: fs_3101_01
       icon: fs_3101_coraltrout
       itemClass: 3
       shape:
@@ -2027,7 +2028,7 @@ MonoBehaviour:
       id: fs_3102
       name: snowcrab
       itemType: 0
-      explanation: snowcrab_01
+      explanation: fs_3102_01
       icon: fs_3102_snowcrab
       itemClass: 3
       shape:
@@ -2058,7 +2059,7 @@ MonoBehaviour:
       id: fs_3103
       name: barramundi
       itemType: 0
-      explanation: barramundi_01
+      explanation: fs_3103_01
       icon: fs_3103_barramundi
       itemClass: 3
       shape:
@@ -2086,7 +2087,7 @@ MonoBehaviour:
       id: fs_3104
       name: wahoo
       itemType: 0
-      explanation: wahoo_01
+      explanation: fs_3104_01
       icon: fs_3104_wahoo
       itemClass: 3
       shape:
@@ -2115,7 +2116,7 @@ MonoBehaviour:
       id: fs_3105
       name: sawfish
       itemType: 0
-      explanation: sawfish_01
+      explanation: fs_3105_01
       icon: fs_3105_sawfish
       itemClass: 3
       shape:
@@ -2147,7 +2148,7 @@ MonoBehaviour:
       id: fs_3106
       name: longsnoutboarfish
       itemType: 0
-      explanation: longsnoutboarfish_01
+      explanation: fs_3106_01
       icon: fs_3106_longsnoutboarfish
       itemClass: 3
       shape:
@@ -2176,7 +2177,7 @@ MonoBehaviour:
       id: fs_3107
       name: blacktigershrimp
       itemType: 0
-      explanation: blacktigershrimp_01
+      explanation: fs_3107_01
       icon: fs_3107_blacktigershrimp
       itemClass: 3
       shape:
@@ -2204,7 +2205,7 @@ MonoBehaviour:
       id: fs_3108
       name: longtoothgrouper
       itemType: 0
-      explanation: longtoothgrouper_01
+      explanation: fs_3108_01
       icon: fs_3108_longtoothgrouper
       itemClass: 3
       shape:
@@ -2235,7 +2236,7 @@ MonoBehaviour:
       id: fs_3109
       name: amberjack
       itemType: 0
-      explanation: amberjack_01
+      explanation: fs_3109_01
       icon: fs_3109_amberjack
       itemClass: 3
       shape:
@@ -2266,7 +2267,7 @@ MonoBehaviour:
       id: fs_3201
       name: oceansunfish
       itemType: 0
-      explanation: oceansunfish_01
+      explanation: fs_3201_01
       icon: fs_3201_oceansunfish
       itemClass: 2
       shape:
@@ -2299,7 +2300,7 @@ MonoBehaviour:
       id: fs_3202
       name: cutlassfish
       itemType: 0
-      explanation: cutlassfish_01
+      explanation: fs_3202_01
       icon: fs_3202_cutlassfish
       itemClass: 2
       shape:
@@ -2329,7 +2330,7 @@ MonoBehaviour:
       id: fs_3203
       name: bluefintuna
       itemType: 0
-      explanation: bluefintuna_01
+      explanation: fs_3203_01
       icon: fs_3203_bluefintuna
       itemClass: 2
       shape:
@@ -2362,7 +2363,7 @@ MonoBehaviour:
       id: fs_3204
       name: sailfish
       itemType: 0
-      explanation: sailfish_01
+      explanation: fs_3204_01
       icon: fs_3204_sailfish
       itemClass: 2
       shape:
@@ -2393,7 +2394,7 @@ MonoBehaviour:
       id: fs_3205
       name: gianttrevally
       itemType: 0
-      explanation: gianttrevally_01
+      explanation: fs_3205_01
       icon: fs_3205_gianttrevally
       itemClass: 2
       shape:
@@ -2424,7 +2425,7 @@ MonoBehaviour:
       id: fs_3301
       name: swordfish
       itemType: 0
-      explanation: swordfish_01
+      explanation: fs_3301_01
       icon: fs_3301_swordfish
       itemClass: 1
       shape:
@@ -2457,7 +2458,7 @@ MonoBehaviour:
       id: fs_3302
       name: mantaray
       itemType: 0
-      explanation: mantaray_01
+      explanation: fs_3302_01
       icon: fs_3302_mantaray
       itemClass: 1
       shape:
@@ -2489,7 +2490,7 @@ MonoBehaviour:
       id: fs_3401
       name: goldhermitcrab
       itemType: 0
-      explanation: goldhermitcrab_01
+      explanation: fs_3401_01
       icon: fs_3401_goldhermitcrab
       itemClass: 0
       shape: []
@@ -2515,7 +2516,7 @@ MonoBehaviour:
       id: fs_4101
       name: pollack
       itemType: 0
-      explanation: pollack_01
+      explanation: fs_4101_01
       icon: fs_4101_pollack
       itemClass: 3
       shape:
@@ -2542,7 +2543,7 @@ MonoBehaviour:
       id: fs_4102
       name: johndory
       itemType: 0
-      explanation: johndory_01
+      explanation: fs_4102_01
       icon: fs_4102_johndory
       itemClass: 3
       shape:
@@ -2571,7 +2572,7 @@ MonoBehaviour:
       id: fs_4103
       name: pelicaneel
       itemType: 0
-      explanation: pelicaneel_01
+      explanation: fs_4103_01
       icon: fs_4103_pelicaneel
       itemClass: 3
       shape:
@@ -2601,7 +2602,7 @@ MonoBehaviour:
       id: fs_4104
       name: alfonsino
       itemType: 0
-      explanation: alfonsino_01
+      explanation: fs_4104_01
       icon: fs_4104_alfonsino
       itemClass: 3
       shape:
@@ -2628,7 +2629,7 @@ MonoBehaviour:
       id: fs_4105
       name: hagfish
       itemType: 0
-      explanation: hagfish_01
+      explanation: fs_4105_01
       icon: fs_4105_hagfish
       itemClass: 3
       shape: []
@@ -2654,7 +2655,7 @@ MonoBehaviour:
       id: fs_4106
       name: opahfish
       itemType: 0
-      explanation: opahfish_01
+      explanation: fs_4106_01
       icon: fs_4106_opahfish
       itemClass: 3
       shape:
@@ -2688,7 +2689,7 @@ MonoBehaviour:
       id: fs_4201
       name: footballfish
       itemType: 0
-      explanation: footballfish_01
+      explanation: fs_4201_01
       icon: fs_4201_footballfish
       itemClass: 2
       shape:
@@ -2717,7 +2718,7 @@ MonoBehaviour:
       id: fs_4202
       name: ghostshark
       itemType: 0
-      explanation: ghostshark_01
+      explanation: fs_4202_01
       icon: fs_4202_ghostshark
       itemClass: 2
       shape:
@@ -2747,7 +2748,7 @@ MonoBehaviour:
       id: fs_4203
       name: fangtooth
       itemType: 0
-      explanation: fangtooth_01
+      explanation: fs_4203_01
       icon: fs_4203_fangtooth
       itemClass: 2
       shape: []
@@ -2773,7 +2774,7 @@ MonoBehaviour:
       id: fs_4204
       name: oarfish
       itemType: 0
-      explanation: oarfish_01
+      explanation: fs_4204_01
       icon: fs_4204_oarfish
       itemClass: 2
       shape:
@@ -2805,7 +2806,7 @@ MonoBehaviour:
       id: fs_4205
       name: predatorytunicate
       itemType: 0
-      explanation: predatorytunicate_01
+      explanation: fs_4205_01
       icon: fs_4205_predatorytunicate
       itemClass: 2
       shape:
@@ -2832,7 +2833,7 @@ MonoBehaviour:
       id: fs_4301
       name: giantsquid
       itemType: 0
-      explanation: giantsquid_01
+      explanation: fs_4301_01
       icon: fs_4301_giantsquid
       itemClass: 1
       shape:
@@ -2868,7 +2869,7 @@ MonoBehaviour:
       id: fs_4302
       name: goblinshark
       itemType: 0
-      explanation: goblinshark_01
+      explanation: fs_4302_01
       icon: fs_4302_goblinshark
       itemClass: 1
       shape:
@@ -2897,7 +2898,7 @@ MonoBehaviour:
       id: fs_4303
       name: flapjackoctopus
       itemType: 0
-      explanation: flapjackoctopus_01
+      explanation: fs_4303_01
       icon: fs_4303_flapjackoctopus
       itemClass: 1
       shape: []
@@ -2923,7 +2924,7 @@ MonoBehaviour:
       id: fs_4304
       name: longnoselancetfish
       itemType: 0
-      explanation: longnoselancetfish_01
+      explanation: fs_4304_01
       icon: fs_4304_longnoselancetfish
       itemClass: 1
       shape:
@@ -2957,7 +2958,7 @@ MonoBehaviour:
       id: fs_4305
       name: jellynosefish
       itemType: 0
-      explanation: jellynosefish_01
+      explanation: fs_4305_01
       icon: fs_4305_jellynosefish
       itemClass: 1
       shape:
@@ -2987,7 +2988,7 @@ MonoBehaviour:
       id: fs_4306
       name: blobfish
       itemType: 0
-      explanation: blobfish_01
+      explanation: fs_4306_01
       icon: fs_4306_blobfish
       itemClass: 1
       shape:
@@ -3016,7 +3017,7 @@ MonoBehaviour:
       id: fs_4401
       name: abyssalsnake
       itemType: 0
-      explanation: abyssalsnake_01
+      explanation: fs_4401_01
       icon: fs_4401_abyssalsnake
       itemClass: 0
       shape:
@@ -3045,7 +3046,7 @@ MonoBehaviour:
       id: fs_4402
       name: drillfish
       itemType: 0
-      explanation: drillfish_01
+      explanation: fs_4402_01
       icon: fs_4402_drillfish
       itemClass: 0
       shape:
@@ -3075,7 +3076,7 @@ MonoBehaviour:
       id: fs_4403
       name: coraliumqueen
       itemType: 0
-      explanation: coraliumqueen_01
+      explanation: fs_4403_01
       icon: fs_4403_coraliumqueen
       itemClass: 0
       shape:
@@ -3108,7 +3109,7 @@ MonoBehaviour:
       id: fs_4404
       name: 'submarinegrouper '
       itemType: 0
-      explanation: submarinegrouper _01
+      explanation: fs_4404_01
       icon: fs_4404_submarinegrouper
       itemClass: 0
       shape:
@@ -3869,27 +3870,27 @@ MonoBehaviour:
     - fs_1001
     - us_3002
   languageStruct:
-  - id: continue
+  - id: tt_0001
     english: Continue
     korean: "\uACC4\uC18D\uD558\uAE30"
     japanese: "\u3064\u3065\u304F"
     chinese: "\u7EE7\u7EED"
-  - id: newstart
+  - id: tt_0002
     english: New Start
     korean: "\uC0C8\uB85C\uC2DC\uC791"
     japanese: "\u65B0\u305F\u306B\u30B9\u30BF\u30FC\u30C8"
     chinese: "\u65B0\u7684\u5F00\u59CB"
-  - id: credit
+  - id: tt_0003
     english: Credit
     korean: "\uD06C\uB808\uB527"
     japanese: "\u30AF\u30EC\u30B8\u30C3\u30C8"
     chinese: "\u521B\u9020\u8005"
-  - id: option
+  - id: tt_0004
     english: Option
     korean: "\uC635\uC158"
     japanese: "\u30AA\u30D7\u30B7\u30E7\u30F3"
     chinese: "\u9009\u9879"
-  - id: exit
+  - id: tt_0005
     english: Exit
     korean: "\uB098\uAC00\uAE30"
     japanese: "\u3067\u304B\u3051"
@@ -3945,6 +3946,1026 @@ MonoBehaviour:
     korean: "\uAC00\uC838\uAC04\uB2E4."
     japanese: "\u6301\u3063\u3066\u884C\u304F"
     chinese: "\u62FF\u8D70"
+  - id: fs_1001
+    english: Anchovy
+    korean: "\uBA78\uCE58"
+    japanese: "\u30AB\u30BF\u30AF\u30C1\u30A4\u30EF\u30B7"
+    chinese: 
+  - id: fs_1001_01
+    english: The anchovy is a small schooling forage fish that is a vital link in
+      the food chain and is commercially important for food and bait worldwide.
+    korean: "\uBA78\uCE58\uB294 \uC804 \uC138\uACC4\uC801\uC73C\uB85C \uC2DD\uD488\uACFC
+      \uBBF8\uB07C\uB85C \uC0C1\uC5C5\uC801 \uC911\uC694\uC131\uC774 \uD06C\uACE0
+      \uBA39\uC774 \uC0AC\uC2AC\uC758 \uD575\uC2EC \uACE0\uB9AC \uC5ED\uD560\uC744
+      \uD558\uB294 \uC791\uC740 \uBB34\uB9AC \uC0DD\uD65C \uC5B4\uB958\uC785\uB2C8\uB2E4."
+    japanese: "\u30AB\u30BF\u30AF\u30C1\u30A4\u30EF\u30B7\u306F\u5168\u4E16\u754C\u7684\u306B\u98DF\u54C1\u3068\u990C\u3067\u5546\u696D\u7684\u91CD\u8981\u6027\u304C\u5927\u304D\u304F\u3001\u98DF\u7269\u9023\u9396\u306E\u6838\u5FC3\u7684\u306A\u8F2A\u306E\u5F79\u5272\u3092\u3059\u308B\u5C0F\u3055\u306A\u7FA4\u308C\u751F\u6D3B\u9B5A\u985E\u3067\u3059\u3002"
+    chinese: 
+  - id: fs_1002
+    english: Mackerel
+    korean: "\uACE0\uB4F1\uC5B4"
+    japanese: "\u30B5\u30D0"
+    chinese: 
+  - id: fs_1002_01
+    english: A representative blue-backed fish that is rich in DHA and EPA and is
+      a migratory species that travels in large schools moving north and south depending
+      on the season and water temperature.
+    korean: "\uB4F1\uD478\uB978 \uC0DD\uC120\uC758 \uB300\uD45C \uC8FC\uC790\uB85C
+      DHA\uC640 EPA\uAC00 \uD48D\uBD80\uD558\uBA70 \uACC4\uC808\uACFC \uC218\uC628\uC5D0
+      \uB530\uB77C \uB0A8\uBD81\uC73C\uB85C \uB300\uADDC\uBAA8 \uBB34\uB9AC\uB97C
+      \uC9C0\uC5B4 \uD68C\uC720\uD558\uB294 \uC5B4\uC885\uC785\uB2C8\uB2E4."
+    japanese: "\u9752\u80CC\u306E\u9B5A\u306E\u4EE3\u8868\u683C\u3067DHA\u3084EPA\u304C\u8C4A\u5BCC\u5B63\u7BC0\u3084\u6C34\u6E29\u306B\u3088\u3063\u3066\u5357\u5317\u306B\u5927\u898F\u6A21\u306A\u7FA4\u308C\u3092\u306A\u3057\u3066\u56DE\u904A\u3059\u308B\u9B5A\u7A2E\u3067\u3059."
+    chinese: 
+  - id: fs_1003
+    english: horsemackerel
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1003_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1004
+    english: saury
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1004_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1005
+    english: seaurchin
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1005_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1006
+    english: bigfinreefsquid
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1006_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1007
+    english: filefish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1007_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1008
+    english: yellowtang
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1008_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1009
+    english: butterflyfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1009_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1010
+    english: cleanerwrasse
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1010_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1011
+    english: chromis
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1011_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1012
+    english: pinkshrimp
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1012_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1013
+    english: grubfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1013_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1014
+    english: marbledrockfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1014_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1101
+    english: bluestripedfangblenny
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1101_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1102
+    english: lionfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1102_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1103
+    english: pipefish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1103_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1104
+    english: yellowtaildamselfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1104_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1105
+    english: yellowboxfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1105_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1201
+    english: rockbream
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1201_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1202
+    english: parrotfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1202_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1301
+    english: unicornfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_1301_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2001
+    english: Sea Bass
+    korean: "\uB18D\uC5B4"
+    japanese: "\u3059\u305A\u304D"
+    chinese: 
+  - id: fs_2001_01
+    english: '"Sea Bass is a popular. high-value food fish found in temperate to
+      tropical marine waters'
+    korean: ' known for its mild'
+    japanese: ' sweet flavor and firm'
+    chinese: ' white flesh."'
+  - id: fs_2002
+    english: Flounder
+    korean: "\uAC00\uC790\uBBF8"
+    japanese: "\u304B\u308C\u3044"
+    chinese: 
+  - id: fs_2002_01
+    english: It is a fish with a flat body and both eyes on one side which hides
+      on sandy or muddy ocean floors.
+    korean: "\uBAB8\uC774 \uB0A9\uC791\uD558\uACE0 \uB450 \uB208\uC774 \uD55C\uCABD\uC73C\uB85C
+      \uBAB0\uB824 \uBAA8\uB798\uB098 \uC9C4\uD759 \uBC14\uB2E5\uC5D0 \uC228\uC5B4
+      \uC0AC\uB294 \uBB3C\uACE0\uAE30\uC785\uB2C8\uB2E4."
+    japanese: "\u4F53\u304C\u5E73\u305F\u304F\u3001\u4E21\u76EE\u304C\u7247\u65B9\u306B\u96C6\u307E\u3063\u3066\u7802\u3084\u6CE5\u306E\u5E95\u306B\u96A0\u308C\u3066\u66AE\u3089\u3059\u9B5A\u3067\u3059\u3002"
+    chinese: 
+  - id: fs_2003
+    english: Mullet
+    korean: "\uC22D\uC5B4"
+    japanese: "\u30DC\u30E9"
+    chinese: 
+  - id: fs_2003_01
+    english: Mullet is an omnivorous migratory species that lives in warm seas and
+      estuaries worldwide is known for its leaping ability and is popular as a food
+      fish.
+    korean: "\uC804 \uC138\uACC4\uC758 \uB530\uB73B\uD55C \uBC14\uB2E4\uC640 \uAC15
+      \uD558\uAD6C\uC5D0 \uC0B4\uBA70 \uBB3C \uC704\uB85C \uC798 \uB6F0\uC5B4\uC624\uB974\uACE0
+      \uC2DD\uC6A9\uC73C\uB85C \uC778\uAE30 \uC788\uB294 \uC7A1\uC2DD\uC131 \uD68C\uC720
+      \uC5B4\uC885\uC785\uB2C8\uB2E4."
+    japanese: "\u4E16\u754C\u4E2D\u306E\u6696\u304B\u3044\u6D77\u3068\u6CB3\u53E3\u306B\u4F4F\u307F\u3001\u6C34\u306E\u4E0A\u306B\u3088\u304F\u98DB\u3073\u4E0A\u304C\u308A\u3001\u98DF\u7528\u3068\u3057\u3066\u4EBA\u6C17\u306E\u96D1\u98DF\u6027\u56DE\u904A\u9B5A\u7A2E\u3067\u3059\u3002"
+    chinese: 
+  - id: fs_2004
+    english: Blue Tang
+    korean: "\uBE14\uB8E8\uD0F1"
+    japanese: "\u30CA\u30F3\u30E8\u30A6\u30CF\u30AE"
+    chinese: 
+  - id: fs_2004_01
+    english: A vibrant tropical fish known for its striking cobalt blue body and
+      yellow caudal fin it hides a sharp spine on its caudal peduncle and is popular
+      as an aquarium fish
+    korean: "\uB208\uBD80\uC2E0 \uCF54\uBC1C\uD2B8\uBE14\uB8E8 \uBAB8\uACFC \uB178\uB780
+      \uAF2C\uB9AC \uC9C0\uB290\uB7EC\uBBF8\uB97C \uAC00\uC9C4 \uD654\uB824\uD55C
+      \uC5F4\uB300\uC5B4\uB85C \uAF2C\uB9AC \uBBF8\uBCD1\uBD80\uC5D0 \uB0A0\uCE74\uB85C\uC6B4
+      \uAC00\uC2DC\uB97C \uC228\uAE30\uACE0 \uC788\uB294 \uAC83\uC774 \uD2B9\uC9D5\uC785\uB2C8\uB2E4."
+    japanese: "\u9BAE\u3084\u304B\u306A\u30B3\u30D0\u30EB\u30C8\u30D6\u30EB\u30FC\u306E\u4F53\u3068\u9EC4\u8272\u306E\u5C3E\u3073\u308C\u3092\u6301\u3064\u83EF\u3084\u304B\u306A\u71B1\u5E2F\u9B5A\u3067\u5C3E\u67C4\u90E8\u306B\u92ED\u3044\u68D8\u3092\u96A0\u3057\u6301\u3064\u306E\u304C\u7279\u5FB4\u3067\u3059"
+    chinese: 
+  - id: fs_2005
+    english: Clownfish
+    korean: "\uD770\uB3D9\uAC00\uB9AC"
+    japanese: "\u30AF\u30DE\u30CE\u30DF"
+    chinese: 
+  - id: fs_2005_01
+    english: A tropical fish with an orange body and white stripes it coexists with
+      sea anemones using their stinging tentacles for protection and it has the unique
+      trait where the largest male turns into a female if the current female dies
+    korean: "\uC8FC\uD669\uC0C9 \uBAB8\uC5D0 \uD770\uC0C9 \uC904\uBB34\uB2AC\uAC00
+      \uC788\uB294 \uC5F4\uB300\uC5B4\uB85C \uB9D0\uBBF8\uC798\uC758 \uB3C5\uCE68\uC73C\uB85C\uBD80\uD130
+      \uBCF4\uD638\uBC1B\uC73C\uBA70 \uACF5\uC0DD\uD558\uACE0 \uC554\uCEF7\uC774
+      \uC8FD\uC73C\uBA74 \uAC00\uC7A5 \uD070 \uC218\uCEF7\uC774 \uC554\uCEF7\uC73C\uB85C
+      \uC131\uC804\uD658\uD558\uB294 \uB3C5\uD2B9\uD55C \uD2B9\uC9D5\uC744 \uAC00\uC9D1\uB2C8\uB2E4"
+    japanese: "\u30AA\u30EC\u30F3\u30B8\u8272\u306E\u4F53\u306B\u767D\u3044\u7E1E\u6A21\u69D8\u3092\u6301\u3064\u71B1\u5E2F\u9B5A\u3067\u30A4\u30BD\u30AE\u30F3\u30C1\u30E3\u30AF\u306E\u6BD2\u91DD\u304B\u3089\u5B88\u3089\u308C\u306A\u304C\u3089\u5171\u751F\u3057\u30E1\u30B9\u304C\u6B7B\u306C\u3068\u4E00\u756A\u5927\u304D\u306A\u30AA\u30B9\u304C\u30E1\u30B9\u306B\u6027\u8EE2\u63DB\u3059\u308B\u3068\u3044\u3046\u30E6\u30CB\u30FC\u30AF\u306A\u7279\u5FB4\u3092\u6301\u3061\u307E\u3059"
+    chinese: 
+  - id: fs_2006
+    english: Bluespotted Stingray
+    korean: "\uAF41\uC9C0\uAC00\uC624\uB9AC"
+    japanese: "\u30E4\u30C3\u30B3\u30A8\u30A4"
+    chinese: 
+  - id: fs_2006_01
+    english: Characterized by a yellow body with vivid blue spots the bluespotted
+      ribbontail ray has a venomous sting on its tail and primarily inhabits coral
+      reefs or shallow sandy bottoms in tropical and subtropical waters.
+    korean: "\uB178\uB780\uC0C9 \uBAB8\uD1B5\uC5D0 \uC120\uBA85\uD55C \uD30C\uB780\uC0C9
+      \uC810 \uBB34\uB2AC\uAC00 \uD2B9\uC9D5\uC774\uBA70 \uAF2C\uB9AC\uC5D0 \uB3C5\uCE68\uC774
+      \uC788\uACE0 \uC5F4\uB300 \uBC0F \uC544\uC5F4\uB300 \uD574\uC5ED\uC758 \uC0B0\uD638\uCD08\uB098
+      \uC595\uC740 \uBAA8\uB798\uBC14\uB2E5\uC5D0 \uC8FC\uB85C \uC11C\uC2DD\uD569\uB2C8\uB2E4."
+    japanese: "\u9EC4\u8272\u306E\u4F53\u306B\u9BAE\u3084\u304B\u306A\u9752\u3044\u70B9\u306E\u6A21\u69D8\u304C\u7279\u5FB4\u3067\u5C3E\u306B\u6BD2\u91DD\u3092\u6301\u3061\u71B1\u5E2F\u304A\u3088\u3073\u4E9C\u71B1\u5E2F\u6D77\u57DF\u306E\u30B5\u30F3\u30B4\u7901\u3084\u6D45\u3044\u7802\u5730\u306B\u4E3B\u306B\u751F\u606F\u3057\u3066\u3044\u307E\u3059."
+    chinese: 
+  - id: fs_2007
+    english: spanishmackerel
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2007_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2008
+    english: redseabream
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2008_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2009
+    english: chickengrunt
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2009_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2010
+    english: sardine
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2010_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2011
+    english: rockfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2011_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2012
+    english: cuttlefish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2012_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2013
+    english: stripedeelcatfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2013_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2014
+    english: flatfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2014_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2015
+    english: obtusebarracuda
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2015_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2016
+    english: salmon
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2016_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2101
+    english: Octopus
+    korean: "\uBB38\uC5B4"
+    japanese: "\u305F\u3053"
+    chinese: 
+  - id: fs_2101_01
+    english: It is a mollusk with eight arms and three hearts that uses its superb
+      intelligence and camouflage to avoid predators and hunt in the ocean.
+    korean: "8\uAC1C\uC758 \uD314\uACFC 3\uAC1C\uC758 \uC2EC\uC7A5\uC744 \uAC00\uC84C\uC73C\uBA70
+      \uB6F0\uC5B4\uB09C \uC9C0\uB2A5\uACFC \uC704\uC7A5\uC220\uB85C \uBC14\uB2F7\uC18D\uC5D0\uC11C
+      \uD3EC\uC2DD\uC790\uB97C \uD53C\uD558\uACE0 \uC0AC\uB0E5\uD558\uB294 \uC5F0\uCCB4\uB3D9\uBB3C\uC785\uB2C8\uB2E4."
+    japanese: "8\u3064\u306E\u8155\u30683\u3064\u306E\u5FC3\u81D3\u3092\u6301\u3061\u3001\u512A\u308C\u305F\u77E5\u80FD\u3068\u80C3\u8178\u8853\u3067\u6D77\u4E2D\u3067\u6355\u98DF\u8005\u3092\u907F\u3051\u3066\u72E9\u308A\u3092\u3059\u308B\u8EDF\u4F53\u52D5\u7269\u3067\u3059\u3002"
+    chinese: 
+  - id: fs_2102
+    english: Giant Moray
+    korean: "\uB300\uC655\uACF0\uCE58"
+    japanese: "\u30A6\u30C4\u30DC"
+    chinese: 
+  - id: fs_2102_01
+    english: The largest moray eel in the world it grows over 3 meters long and is
+      a top nocturnal predator in the coral reef ecosystem possessing a powerful
+      jaw and sharp teeth.
+    korean: "\uC138\uACC4\uC5D0\uC11C \uAC00\uC7A5 \uD070 \uACF0\uCE58\uB85C \uBAB8\uAE38\uC774
+      \uCD5C\uB300 3m \uC774\uC0C1 \uAC15\uD55C \uD131\uACFC \uB0A0\uCE74\uB85C\uC6B4
+      \uC774\uBE68\uC744 \uAC00\uC9C4 \uC0B0\uD638\uCD08 \uC0DD\uD0DC\uACC4\uC758
+      \uCD5C\uC0C1\uC704 \uC57C\uD589\uC131 \uD3EC\uC2DD\uC790\uC785\uB2C8\uB2E4."
+    japanese: "\u4E16\u754C\u6700\u5927\u306E\u30A6\u30C4\u30DC\u3067\u4F53\u9577\u306F\u6700\u59273m\u3092\u8D85\u3048\u5F37\u529B\u306A\u984E\u3068\u92ED\u3044\u6B6F\u3092\u6301\u3064\u30B5\u30F3\u30B4\u7901\u751F\u614B\u7CFB\u306E\u591C\u884C\u6027\u306E\u9802\u70B9\u6355\u98DF\u8005\u3067\u3059."
+    chinese: 
+  - id: fs_2103
+    english: seahorse
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2103_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2104
+    english: pufferfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2104_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2105
+    english: seahare
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2105_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2106
+    english: crab
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2106_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2107
+    english: seacucumber
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2107_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2201
+    english: trigerfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2201_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2202
+    english: redspottedgrouper
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2202_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2203
+    english: napoleonwrasse
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2203_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2301
+    english: redtoothedtriggerfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2301_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2401
+    english: bluewingeel
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_2401_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3001
+    english: northernwhiting
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3001_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3002
+    english: butterfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3002_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3003
+    english: bonitofish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3003_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3004
+    english: bluecrab
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3004_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3005
+    english: moonjellyfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3005_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3006
+    english: flyingfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3006_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3007
+    english: pacificcod
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3007_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3101
+    english: coraltrout
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3101_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3102
+    english: snowcrab
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3102_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3103
+    english: barramundi
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3103_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3104
+    english: wahoo
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3104_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3105
+    english: sawfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3105_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3106
+    english: longsnoutboarfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3106_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3107
+    english: blacktigershrimp
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3107_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3108
+    english: longtoothgrouper
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3108_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3109
+    english: Amberjack
+    korean: "\uBC29\uC5B4"
+    japanese: "\u30D6\u30EA"
+    chinese: 
+  - id: fs_3109_01
+    english: Amberjack is a powerful migratory predator known globally as a top sport
+      fish and commercially valued especially for the large winter fish.
+    korean: "\uC804 \uC138\uACC4 \uC628\uB300 \uBC0F \uC5F4\uB300 \uD574\uC5ED\uC5D0
+      \uC11C\uC2DD\uD558\uB294 \uB300\uD615 \uD3EC\uC2DD\uC131 \uC5B4\uC885\uC73C\uB85C
+      \uAC15\uD55C \uD798 \uB54C\uBB38\uC5D0 \uB09A\uC2DC\uAFBC\uB4E4\uC5D0\uAC8C
+      \uC778\uAE30\uAC00 \uB9CE\uC73C\uBA70 \uD55C\uAD6D\uC5D0\uC11C\uB294 \uACA8\uC6B8\uCCA0
+      \uB300\uBC29\uC5B4\uAC00 \uACE0\uAE09 \uC2DD\uC7AC\uB8CC\uB85C \uC778\uAE30\uAC00
+      \uB192\uC2B5\uB2C8\uB2E4."
+    japanese: "\u4E16\u754C\u4E2D\u306E\u6E29\u5E2F\u304A\u3088\u3073\u71B1\u5E2F\u6D77\u57DF\u306B\u751F\u606F\u3059\u308B\u5927\u578B\u6355\u98DF\u6027\u9B5A\u7A2E\u3067\u3001\u5F37\u3044\u529B\u304B\u3089\u91E3\u308A\u4EBA\u306B\u4EBA\u6C17\u304C\u9AD8\u304F\u3001\u97D3\u56FD\u3067\u306F\u51AC\u5834\u306E\u5927\u30D6\u30EA\u304C\u9AD8\u7D1A\u98DF\u6750\u3068\u3057\u3066\u4EBA\u6C17\u304C\u9AD8\u3044\u3067\u3059\u3002"
+    chinese: 
+  - id: fs_3201
+    english: Ocean Sunfish
+    korean: "\uAC1C\uBCF5\uCE58"
+    japanese: "\u30DE\u30F3\u30DC\u30A6"
+    chinese: 
+  - id: fs_3201_01
+    english: The Ocean Sunfish has a rudder-like clavus instead of a tail and basks
+      on the surface or jumps to dislodge its many parasites.
+    korean: "\uAC1C\uBCF5\uCE58\uB294 \uAF2C\uB9AC \uB300\uC2E0 \uD0A4\uC7A1\uC774
+      \uC5ED\uD560\uC744 \uD558\uB294 \uD074\uB77C\uBD80\uC2A4\uB97C \uAC00\uC84C\uACE0
+      \uBAB8\uC5D0 \uAE30\uC0DD\uD558\uB294 \uC218\uB9CE\uC740 \uAE30\uC0DD\uCDA9\uC744
+      \uC5C6\uC560\uAE30 \uC704\uD574 \uC218\uBA74\uC5D0\uC11C \uC77C\uAD11\uC695\uC744
+      \uD558\uAC70\uB098 \uC810\uD504\uD558\uB294 \uD2B9\uC774\uD55C \uD589\uB3D9\uC744
+      \uBCF4\uC774\uB294 \uBB3C\uACE0\uAE30\uC785\uB2C8\uB2E4."
+    japanese: "\u30DE\u30F3\u30DC\u30A6\u306F\u5C3E\u3073\u308C\u306E\u4EE3\u308F\u308A\u306B\u8235\u53D6\u308A\u306E\u5F79\u5272\u3092\u3059\u308B\u8235\u3073\u308C\uFF08\u30AF\u30E9\u30F4\u30B9\uFF09\u3092\u6301\u3061\u4F53\u5185\u306B\u5BC4\u751F\u3059\u308B\u6570\u591A\u304F\u306E\u5BC4\u751F\u866B\u3092\u99C6\u9664\u3059\u308B\u305F\u3081\u306B\u6C34\u9762\u3067\u65E5\u5149\u6D74\u3092\u3057\u305F\u308A\u30B8\u30E3\u30F3\u30D7\u3057\u305F\u308A\u3059\u308B\u7279\u7570\u306A\u884C\u52D5\u3092\u898B\u305B\u308B\u9B5A\u3067\u3059\u3002"
+    chinese: 
+  - id: fs_3202
+    english: Cutlassfish
+    korean: "\uAC08\uCE58"
+    japanese: "\u592A\u5200\u9B5A"
+    chinese: 
+  - id: fs_3202_01
+    english: The Cutlassfish is a popular edible fish with a long flat knife-like
+      body a silvery-white sheen that is nocturnal and preys on other fish.
+    korean: "\uAC08\uCE58\uB294 \uCE7C\uCC98\uB7FC \uAE38\uACE0 \uB0A9\uC791\uD55C
+      \uBAB8\uC5D0 \uC740\uBC31\uC0C9 \uAD11\uD0DD\uC774 \uB098\uBA70 \uBC24\uC5D0
+      \uD65C\uB3D9\uD558\uACE0 \uB2E4\uB978 \uBB3C\uACE0\uAE30\uB97C \uC7A1\uC544\uBA39\uACE0
+      \uC0AC\uB294 \uB300\uC911\uC801\uC778 \uC2DD\uC6A9 \uC5B4\uB958\uC785\uB2C8\uB2E4."
+    japanese: "\u592A\u5200\u9B5A\u306F\u5200\u306E\u3088\u3046\u306B\u7D30\u9577\u304F\u5E73\u305F\u3044\u4F53\u306B\u9280\u767D\u8272\u306E\u5149\u6CA2\u304C\u3042\u308A\u591C\u9593\u306B\u6D3B\u52D5\u3057\u4ED6\u306E\u9B5A\u3092\u6355\u98DF\u3057\u3066\u751F\u304D\u308B\u5927\u8846\u7684\u306A\u98DF\u7528\u9B5A\u3067\u3059\u3002"
+    chinese: 
+  - id: fs_3203
+    english: bluefintuna
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3203_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3204
+    english: sailfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3204_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3205
+    english: gianttrevally
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3205_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3301
+    english: Swordfish
+    korean: "\uD669\uC0C8\uCE58"
+    japanese: "\u30E1\u30AB\u30B8\u30AD"
+    chinese: 
+  - id: fs_3301_01
+    english: The Swordfish is a large marine fish characterized by a long flat sword-like
+      bill and is one of the fastest oceanic predators inhabiting tropical and temperate
+      seas worldwide.
+    korean: "\uD669\uC0C8\uCE58\uB294 \uCE7C\uCC98\uB7FC \uAE38\uACE0 \uB0A9\uC791\uD55C
+      \uC8FC\uB465\uC774\uAC00 \uD2B9\uC9D5\uC774\uBA70 \uAC00\uC7A5 \uBE60\uB978
+      \uD574\uC591 \uD3EC\uC2DD\uC790 \uC911 \uD558\uB098\uB85C \uC804 \uC138\uACC4
+      \uC5F4\uB300\uC640 \uC628\uB300 \uBC14\uB2E4\uC5D0 \uC11C\uC2DD\uD558\uB294
+      \uB300\uD615 \uC5B4\uB958\uC785\uB2C8\uB2E4."
+    japanese: "\u30E1\u30AB\u30B8\u30AD\u306F\u5200\u306E\u3088\u3046\u306B\u7D30\u9577\u304F\u5E73\u305F\u3044\u543B
+      (\u3075\u3093) \u3092\u7279\u5FB4\u3068\u3057\u6700\u3082\u901F\u3044\u6D77\u6D0B\u6355\u98DF\u8005\u306E\u4E00\u3064\u3067\u4E16\u754C\u4E2D\u306E\u71B1\u5E2F\u304A\u3088\u3073\u6E29\u5E2F\u306E\u6D77\u306B\u751F\u606F\u3059\u308B\u5927\u578B\u9B5A\u3067\u3059\u3002"
+    chinese: 
+  - id: fs_3302
+    english: mantaray
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3302_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3401
+    english: goldhermitcrab
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_3401_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4101
+    english: pollack
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4101_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4102
+    english: johndory
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4102_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4103
+    english: pelicaneel
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4103_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4104
+    english: alfonsino
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4104_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4105
+    english: hagfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4105_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4106
+    english: opahfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4106_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4201
+    english: footballfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4201_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4202
+    english: ghostshark
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4202_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4203
+    english: fangtooth
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4203_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4204
+    english: oarfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4204_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4205
+    english: predatorytunicate
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4205_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4301
+    english: Giant Squid
+    korean: "\uB300\uC655 \uC624\uC9D5\uC5B4"
+    japanese: "\u3060\u3044\u304A\u3046\u3044\u304B"
+    chinese: 
+  - id: fs_4301_01
+    english: The Giant Squid is an elusive colossal cephalopod inhabiting the deep
+      sea growing over 40 feet (13 meters) long with the largest eyes in the animal
+      kingdom.
+    korean: "\uB300\uC655\uC624\uC9D5\uC5B4\uB294 \uAE38\uC774 13\uBBF8\uD130 \uC774\uC0C1\uC5D0
+      \uB2EC\uD558\uACE0 \uC9C0\uAD6C\uC0C1\uC5D0\uC11C \uAC00\uC7A5 \uD070 \uB208\uC744
+      \uAC00\uC9C4 \uAC83\uC73C\uB85C \uC54C\uB824\uC838 \uC788\uC73C\uBA70 \uC2EC\uD574\uC5D0
+      \uC11C\uC2DD\uD558\uB294 \uC2E0\uBE44\uB85C\uC6B4 \uCD08\uB300\uD615 \uB450\uC871\uB958\uC785\uB2C8\uB2E4."
+    japanese: "\u30C0\u30A4\u30AA\u30A6\u30A4\u30AB\u306F\u4F53\u9577\u304C13\u30E1\u30FC\u30C8\u30EB\u4EE5\u4E0A\u306B\u9054\u3057\u5730\u7403\u4E0A\u3067\u6700\u5927\u306E\u76EE\u3092\u6301\u3064\u3053\u3068\u3067\u77E5\u3089\u308C\u308B\u6DF1\u6D77\u306B\u751F\u606F\u3059\u308B\u795E\u79D8\u7684\u306A\u8D85\u5927\u578B\u306E\u982D\u8DB3\u985E\u3067\u3059\u3002"
+    chinese: 
+  - id: fs_4302
+    english: goblinshark
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4302_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4303
+    english: flapjackoctopus
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4303_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4304
+    english: longnoselancetfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4304_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4305
+    english: jellynosefish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4305_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4306
+    english: blobfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4306_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4401
+    english: abyssalsnake
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4401_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4402
+    english: drillfish
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4402_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4403
+    english: coraliumqueen
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4403_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4404
+    english: 'submarinegrouper '
+    korean: 
+    japanese: 
+    chinese: 
+  - id: fs_4404_01
+    english: 
+    korean: 
+    japanese: 
+    chinese: 
   - id: ht_0001
     english: The bait increases the chance of catching high-grade fish
     korean: "\uBBF8\uB07C\uB294 \uB4F1\uAE09\uC774 \uB192\uC740 \uBB3C\uACE0\uAE30\uAC00
@@ -4045,310 +5066,86 @@ MonoBehaviour:
       \u3088\u3046\u3060"
     chinese: "\u597D\u50CF \u4E5F \u5B58\u5728 \u7740 \u80FD \u7834\u574F \u8239\u53EA
       \u7684 \u9C7C"
-  - id: smalloiltank
+  - id: us_1001
     english: Small Oil Tank
     korean: "\uC791\uC740 \uC624\uC77C\uD1B5"
     japanese: "\u5C0F\u3055\u306A\u30AA\u30A4\u30EB\u7F36"
-    chinese: 
-  - id: smalloiltank_01
+    chinese: "\u5C0F\u578B \u6CB9\u7BB1"
+  - id: us_1001_01
     english: Oil Tank
     korean: "\uC5F0\uB8CC\uD1B5"
     japanese: "\u30AA\u30A4\u30EB\u7F36"
-    chinese: 
-  - id: repairkit
+    chinese: "\u6CB9\u7BB1"
+  - id: us_2001
     english: Repair Kit
     korean: "\uC218\uB9AC \uD0A4\uD2B8"
     japanese: "\u4FEE\u7406\u30AD\u30C3\u30C8"
-    chinese: 
-  - id: repairkit_01
+    chinese: "\u4FEE\u7406 \u5305"
+  - id: us_2001_01
     english: A set to repair malfunctions
     korean: "\uACE0\uC7A5\uC744 \uC218\uB9AC\uD558\uB294 \uC138\uD2B8"
     japanese: "\u6545\u969C\u3092\u4FEE\u7406\u3059\u308B\u30BB\u30C3\u30C8"
-    chinese: 
-  - id: lugworm
-    english: lugworm
-    korean: "\uAC2F\uC9C0\uB801\uC774"
-    japanese: "\u30B4\u30AB\u30A4"
-    chinese: 
-  - id: lugworm_01
-    english: Live bait using lugworms
-    korean: "\uAC2F\uC9C0\uB801\uC774\uB97C \uC774\uC6A9\uD55C \uC0DD\uBBF8\uB07C"
-    japanese: "\u30B4\u30AB\u30A4\u3092\u4F7F\u3063\u305F\u751F\u990C"
-    chinese: 
-  - id: lotterytoto
+    chinese: "\u4FEE\u590D \u635F\u574F \u7684 \u5957\u88C5"
+  - id: us_3001
+    english: Worm
+    korean: "\uC9C0\uB801\uC774"
+    japanese: "\u30DF\u30DF\u30BA"
+    chinese: "\u86AF\u8693"
+  - id: us_3001_01
+    english: Live worm bait
+    korean: "\uC9C0\uB801\uC774\uB97C \uC774\uC6A9\uD55C \uC0DD\uBBF8\uB07C"
+    japanese: "\u30DF\u30DF\u30BA \u3092 \u4F7F\u3063\u305F \u751F\u304D\u990C"
+    chinese: "\u7528 \u86AF\u8693 \u4F5C \u7684 \u6D3B \u9C7C\u9975"
+  - id: us_4001
     english: Lottery ToTo
     korean: "\uB610\uB610\uBCF5\uAD8C"
     japanese: "\u30C8\u30C8\u5B9D\u304F\u3058"
-    chinese: 
-  - id: lotterytoto_01
+    chinese: "\u91CD\u590D \u5F69\u7968"
+  - id: us_4001_01
     english: Aim for a quick fortune.
     korean: "\uC77C\uD655\uCC9C\uAE08\uC744 \uB178\uB9AC\uC138\uC694."
     japanese: "\u4E00\u652B\u5343\u91D1\u3092\u72D9\u3063\u3066\u304F\u3060\u3055\u3044\u3002"
-    chinese: 
-  - id: badanews
+    chinese: "\u7784\u51C6 \u4E00\u591C\u66B4\u5BCC"
+  - id: us_6001
     english: Bada News
     korean: "\uBC14\uB2E4\uC77C\uBCF4"
     japanese: "\u30D0\u30C0\u65E5\u5831"
-    chinese: 
-  - id: badanews_01
+    chinese: "\u5DF4\u8FBE \u65E5\u62A5"
+  - id: us_6001_01
     english: news of the day
     korean: "\uC624\uB298\uC758 \uB274\uC2A4"
     japanese: "\u4ECA\u65E5\u306E\u30CB\u30E5\u30FC\u30B9"
-    chinese: 
-  - id: brownmoneypouch
+    chinese: "\u5F53\u5929\u7684\u65B0\u95FB"
+  - id: us_5003
     english: Brown Money Pouch
-    korean: 
-    japanese: 
-    chinese: 
-  - id: brownmoneypouch_01
-    english: 
-    korean: 
-    japanese: 
-    chinese: 
-  - id: bluemoneypouch
+    korean: "\uAC08\uC0C9 \uB3C8\uC8FC\uBA38\uB2C8"
+    japanese: "\u8336\u8272 \u306E \u91D1\u888B"
+    chinese: "\u68D5\u8272 \u94B1\u888B"
+  - id: us_5003_01
+    english: A pouch containing a small amount of money
+    korean: "\uC57D\uAC04\uC758 \uB3C8\uC774 \uB4E4\uC5B4 \uC788\uB294 \uC8FC\uBA38\uB2C8"
+    japanese: "\u3044\u304F\u3089\u304B \u306E \u304A\u91D1 \u304C \u5165\u3063\u305F
+      \u888B"
+    chinese: "\u88C5\u6709 \u5C11\u91CF \u94B1 \u7684 \u888B\u5B50"
+  - id: us_5004
     english: Blue Money Pouch
-    korean: 
-    japanese: 
-    chinese: 
-  - id: bluemoneypouch_01
+    korean: "\uD30C\uB780 \uB3C8\uC8FC\uBA38\uB2C8"
+    japanese: "\u9752\u8272 \u306E \u91D1\u888B"
+    chinese: "\u84DD\u8272 \u94B1\u888B"
+  - id: us_5004_01
+    english: A pouch with money inside
+    korean: "\uB3C8\uC774 \uB4E4\uC5B4 \uC788\uB294 \uC8FC\uBA38\uB2C8"
+    japanese: "\u304A\u91D1 \u304C \u5165\u3063\u305F \u888B"
+    chinese: "\u88C5\u6709 \u94B1 \u7684 \u888B\u5B50"
+  - id: us_6002
     english: 
-    korean: 
+    korean: "\uC21C\uAC04\uC774\uB3D9"
     japanese: 
     chinese: 
-  - id: anchovy
-    english: Anchovy
-    korean: "\uBA78\uCE58"
-    japanese: "\u30AB\u30BF\u30AF\u30C1\u30A4\u30EF\u30B7"
-    chinese: 
-  - id: anchovy_01
-    english: The anchovy is a small schooling forage fish that is a vital link in
-      the food chain and is commercially important for food and bait worldwide.
-    korean: "\uBA78\uCE58\uB294 \uC804 \uC138\uACC4\uC801\uC73C\uB85C \uC2DD\uD488\uACFC
-      \uBBF8\uB07C\uB85C \uC0C1\uC5C5\uC801 \uC911\uC694\uC131\uC774 \uD06C\uACE0
-      \uBA39\uC774 \uC0AC\uC2AC\uC758 \uD575\uC2EC \uACE0\uB9AC \uC5ED\uD560\uC744
-      \uD558\uB294 \uC791\uC740 \uBB34\uB9AC \uC0DD\uD65C \uC5B4\uB958\uC785\uB2C8\uB2E4."
-    japanese: "\u30AB\u30BF\u30AF\u30C1\u30A4\u30EF\u30B7\u306F\u5168\u4E16\u754C\u7684\u306B\u98DF\u54C1\u3068\u990C\u3067\u5546\u696D\u7684\u91CD\u8981\u6027\u304C\u5927\u304D\u304F\u3001\u98DF\u7269\u9023\u9396\u306E\u6838\u5FC3\u7684\u306A\u8F2A\u306E\u5F79\u5272\u3092\u3059\u308B\u5C0F\u3055\u306A\u7FA4\u308C\u751F\u6D3B\u9B5A\u985E\u3067\u3059\u3002"
-    chinese: 
-  - id: seabass
-    english: Sea Bass
-    korean: "\uB18D\uC5B4"
-    japanese: "\u3059\u305A\u304D"
-    chinese: 
-  - id: seabass_01
-    english: '"Sea Bass is a popular. high-value food fish found in temperate to
-      tropical marine waters'
-    korean: ' known for its mild'
-    japanese: ' sweet flavor and firm'
-    chinese: ' white flesh."'
-  - id: flounder
-    english: Flounder
-    korean: "\uAC00\uC790\uBBF8"
-    japanese: "\u304B\u308C\u3044"
-    chinese: 
-  - id: flounder_01
-    english: It is a fish with a flat body and both eyes on one side which hides
-      on sandy or muddy ocean floors.
-    korean: "\uBAB8\uC774 \uB0A9\uC791\uD558\uACE0 \uB450 \uB208\uC774 \uD55C\uCABD\uC73C\uB85C
-      \uBAB0\uB824 \uBAA8\uB798\uB098 \uC9C4\uD759 \uBC14\uB2E5\uC5D0 \uC228\uC5B4
-      \uC0AC\uB294 \uBB3C\uACE0\uAE30\uC785\uB2C8\uB2E4."
-    japanese: "\u4F53\u304C\u5E73\u305F\u304F\u3001\u4E21\u76EE\u304C\u7247\u65B9\u306B\u96C6\u307E\u3063\u3066\u7802\u3084\u6CE5\u306E\u5E95\u306B\u96A0\u308C\u3066\u66AE\u3089\u3059\u9B5A\u3067\u3059\u3002"
-    chinese: 
-  - id: mullet
-    english: Mullet
-    korean: "\uC22D\uC5B4"
-    japanese: "\u30DC\u30E9"
-    chinese: 
-  - id: mullet_01
-    english: Mullet is an omnivorous migratory species that lives in warm seas and
-      estuaries worldwide is known for its leaping ability and is popular as a food
-      fish.
-    korean: "\uC804 \uC138\uACC4\uC758 \uB530\uB73B\uD55C \uBC14\uB2E4\uC640 \uAC15
-      \uD558\uAD6C\uC5D0 \uC0B4\uBA70 \uBB3C \uC704\uB85C \uC798 \uB6F0\uC5B4\uC624\uB974\uACE0
-      \uC2DD\uC6A9\uC73C\uB85C \uC778\uAE30 \uC788\uB294 \uC7A1\uC2DD\uC131 \uD68C\uC720
-      \uC5B4\uC885\uC785\uB2C8\uB2E4."
-    japanese: "\u4E16\u754C\u4E2D\u306E\u6696\u304B\u3044\u6D77\u3068\u6CB3\u53E3\u306B\u4F4F\u307F\u3001\u6C34\u306E\u4E0A\u306B\u3088\u304F\u98DB\u3073\u4E0A\u304C\u308A\u3001\u98DF\u7528\u3068\u3057\u3066\u4EBA\u6C17\u306E\u96D1\u98DF\u6027\u56DE\u904A\u9B5A\u7A2E\u3067\u3059\u3002"
-    chinese: 
-  - id: octopus
-    english: Octopus
-    korean: "\uBB38\uC5B4"
-    japanese: "\u305F\u3053"
-    chinese: 
-  - id: octopus_01
-    english: It is a mollusk with eight arms and three hearts that uses its superb
-      intelligence and camouflage to avoid predators and hunt in the ocean.
-    korean: "8\uAC1C\uC758 \uD314\uACFC 3\uAC1C\uC758 \uC2EC\uC7A5\uC744 \uAC00\uC84C\uC73C\uBA70
-      \uB6F0\uC5B4\uB09C \uC9C0\uB2A5\uACFC \uC704\uC7A5\uC220\uB85C \uBC14\uB2F7\uC18D\uC5D0\uC11C
-      \uD3EC\uC2DD\uC790\uB97C \uD53C\uD558\uACE0 \uC0AC\uB0E5\uD558\uB294 \uC5F0\uCCB4\uB3D9\uBB3C\uC785\uB2C8\uB2E4."
-    japanese: "8\u3064\u306E\u8155\u30683\u3064\u306E\u5FC3\u81D3\u3092\u6301\u3061\u3001\u512A\u308C\u305F\u77E5\u80FD\u3068\u80C3\u8178\u8853\u3067\u6D77\u4E2D\u3067\u6355\u98DF\u8005\u3092\u907F\u3051\u3066\u72E9\u308A\u3092\u3059\u308B\u8EDF\u4F53\u52D5\u7269\u3067\u3059\u3002"
-    chinese: 
-  - id: amberjack
-    english: Amberjack
-    korean: "\uBC29\uC5B4"
-    japanese: "\u30D6\u30EA"
-    chinese: 
-  - id: amberjack_01
-    english: Amberjack is a powerful migratory predator known globally as a top sport
-      fish and commercially valued especially for the large winter fish.
-    korean: "\uC804 \uC138\uACC4 \uC628\uB300 \uBC0F \uC5F4\uB300 \uD574\uC5ED\uC5D0
-      \uC11C\uC2DD\uD558\uB294 \uB300\uD615 \uD3EC\uC2DD\uC131 \uC5B4\uC885\uC73C\uB85C
-      \uAC15\uD55C \uD798 \uB54C\uBB38\uC5D0 \uB09A\uC2DC\uAFBC\uB4E4\uC5D0\uAC8C
-      \uC778\uAE30\uAC00 \uB9CE\uC73C\uBA70 \uD55C\uAD6D\uC5D0\uC11C\uB294 \uACA8\uC6B8\uCCA0
-      \uB300\uBC29\uC5B4\uAC00 \uACE0\uAE09 \uC2DD\uC7AC\uB8CC\uB85C \uC778\uAE30\uAC00
-      \uB192\uC2B5\uB2C8\uB2E4."
-    japanese: "\u4E16\u754C\u4E2D\u306E\u6E29\u5E2F\u304A\u3088\u3073\u71B1\u5E2F\u6D77\u57DF\u306B\u751F\u606F\u3059\u308B\u5927\u578B\u6355\u98DF\u6027\u9B5A\u7A2E\u3067\u3001\u5F37\u3044\u529B\u304B\u3089\u91E3\u308A\u4EBA\u306B\u4EBA\u6C17\u304C\u9AD8\u304F\u3001\u97D3\u56FD\u3067\u306F\u51AC\u5834\u306E\u5927\u30D6\u30EA\u304C\u9AD8\u7D1A\u98DF\u6750\u3068\u3057\u3066\u4EBA\u6C17\u304C\u9AD8\u3044\u3067\u3059\u3002"
-    chinese: 
-  - id: oceansunfish
-    english: Ocean Sunfish
-    korean: "\uAC1C\uBCF5\uCE58"
-    japanese: "\u30DE\u30F3\u30DC\u30A6"
-    chinese: 
-  - id: oceansunfish_01
-    english: The Ocean Sunfish has a rudder-like clavus instead of a tail and basks
-      on the surface or jumps to dislodge its many parasites.
-    korean: "\uAC1C\uBCF5\uCE58\uB294 \uAF2C\uB9AC \uB300\uC2E0 \uD0A4\uC7A1\uC774
-      \uC5ED\uD560\uC744 \uD558\uB294 \uD074\uB77C\uBD80\uC2A4\uB97C \uAC00\uC84C\uACE0
-      \uBAB8\uC5D0 \uAE30\uC0DD\uD558\uB294 \uC218\uB9CE\uC740 \uAE30\uC0DD\uCDA9\uC744
-      \uC5C6\uC560\uAE30 \uC704\uD574 \uC218\uBA74\uC5D0\uC11C \uC77C\uAD11\uC695\uC744
-      \uD558\uAC70\uB098 \uC810\uD504\uD558\uB294 \uD2B9\uC774\uD55C \uD589\uB3D9\uC744
-      \uBCF4\uC774\uB294 \uBB3C\uACE0\uAE30\uC785\uB2C8\uB2E4."
-    japanese: "\u30DE\u30F3\u30DC\u30A6\u306F\u5C3E\u3073\u308C\u306E\u4EE3\u308F\u308A\u306B\u8235\u53D6\u308A\u306E\u5F79\u5272\u3092\u3059\u308B\u8235\u3073\u308C\uFF08\u30AF\u30E9\u30F4\u30B9\uFF09\u3092\u6301\u3061\u4F53\u5185\u306B\u5BC4\u751F\u3059\u308B\u6570\u591A\u304F\u306E\u5BC4\u751F\u866B\u3092\u99C6\u9664\u3059\u308B\u305F\u3081\u306B\u6C34\u9762\u3067\u65E5\u5149\u6D74\u3092\u3057\u305F\u308A\u30B8\u30E3\u30F3\u30D7\u3057\u305F\u308A\u3059\u308B\u7279\u7570\u306A\u884C\u52D5\u3092\u898B\u305B\u308B\u9B5A\u3067\u3059\u3002"
-    chinese: 
-  - id: cutlassfish
-    english: Cutlassfish
-    korean: "\uAC08\uCE58"
-    japanese: "\u592A\u5200\u9B5A"
-    chinese: 
-  - id: cutlassfish_01
-    english: The Cutlassfish is a popular edible fish with a long flat knife-like
-      body a silvery-white sheen that is nocturnal and preys on other fish.
-    korean: "\uAC08\uCE58\uB294 \uCE7C\uCC98\uB7FC \uAE38\uACE0 \uB0A9\uC791\uD55C
-      \uBAB8\uC5D0 \uC740\uBC31\uC0C9 \uAD11\uD0DD\uC774 \uB098\uBA70 \uBC24\uC5D0
-      \uD65C\uB3D9\uD558\uACE0 \uB2E4\uB978 \uBB3C\uACE0\uAE30\uB97C \uC7A1\uC544\uBA39\uACE0
-      \uC0AC\uB294 \uB300\uC911\uC801\uC778 \uC2DD\uC6A9 \uC5B4\uB958\uC785\uB2C8\uB2E4."
-    japanese: "\u592A\u5200\u9B5A\u306F\u5200\u306E\u3088\u3046\u306B\u7D30\u9577\u304F\u5E73\u305F\u3044\u4F53\u306B\u9280\u767D\u8272\u306E\u5149\u6CA2\u304C\u3042\u308A\u591C\u9593\u306B\u6D3B\u52D5\u3057\u4ED6\u306E\u9B5A\u3092\u6355\u98DF\u3057\u3066\u751F\u304D\u308B\u5927\u8846\u7684\u306A\u98DF\u7528\u9B5A\u3067\u3059\u3002"
-    chinese: 
-  - id: swordfish
-    english: Swordfish
-    korean: "\uD669\uC0C8\uCE58"
-    japanese: "\u30E1\u30AB\u30B8\u30AD"
-    chinese: 
-  - id: swordfish_01
-    english: The Swordfish is a large marine fish characterized by a long flat sword-like
-      bill and is one of the fastest oceanic predators inhabiting tropical and temperate
-      seas worldwide.
-    korean: "\uD669\uC0C8\uCE58\uB294 \uCE7C\uCC98\uB7FC \uAE38\uACE0 \uB0A9\uC791\uD55C
-      \uC8FC\uB465\uC774\uAC00 \uD2B9\uC9D5\uC774\uBA70 \uAC00\uC7A5 \uBE60\uB978
-      \uD574\uC591 \uD3EC\uC2DD\uC790 \uC911 \uD558\uB098\uB85C \uC804 \uC138\uACC4
-      \uC5F4\uB300\uC640 \uC628\uB300 \uBC14\uB2E4\uC5D0 \uC11C\uC2DD\uD558\uB294
-      \uB300\uD615 \uC5B4\uB958\uC785\uB2C8\uB2E4."
-    japanese: "\u30E1\u30AB\u30B8\u30AD\u306F\u5200\u306E\u3088\u3046\u306B\u7D30\u9577\u304F\u5E73\u305F\u3044\u543B
-      (\u3075\u3093) \u3092\u7279\u5FB4\u3068\u3057\u6700\u3082\u901F\u3044\u6D77\u6D0B\u6355\u98DF\u8005\u306E\u4E00\u3064\u3067\u4E16\u754C\u4E2D\u306E\u71B1\u5E2F\u304A\u3088\u3073\u6E29\u5E2F\u306E\u6D77\u306B\u751F\u606F\u3059\u308B\u5927\u578B\u9B5A\u3067\u3059\u3002"
-    chinese: 
-  - id: giantsquid
-    english: Giant Squid
-    korean: "\uB300\uC655 \uC624\uC9D5\uC5B4"
-    japanese: "\u3060\u3044\u304A\u3046\u3044\u304B"
-    chinese: 
-  - id: giantsquid_01
-    english: The Giant Squid is an elusive colossal cephalopod inhabiting the deep
-      sea growing over 40 feet (13 meters) long with the largest eyes in the animal
-      kingdom.
-    korean: "\uB300\uC655\uC624\uC9D5\uC5B4\uB294 \uAE38\uC774 13\uBBF8\uD130 \uC774\uC0C1\uC5D0
-      \uB2EC\uD558\uACE0 \uC9C0\uAD6C\uC0C1\uC5D0\uC11C \uAC00\uC7A5 \uD070 \uB208\uC744
-      \uAC00\uC9C4 \uAC83\uC73C\uB85C \uC54C\uB824\uC838 \uC788\uC73C\uBA70 \uC2EC\uD574\uC5D0
-      \uC11C\uC2DD\uD558\uB294 \uC2E0\uBE44\uB85C\uC6B4 \uCD08\uB300\uD615 \uB450\uC871\uB958\uC785\uB2C8\uB2E4."
-    japanese: "\u30C0\u30A4\u30AA\u30A6\u30A4\u30AB\u306F\u4F53\u9577\u304C13\u30E1\u30FC\u30C8\u30EB\u4EE5\u4E0A\u306B\u9054\u3057\u5730\u7403\u4E0A\u3067\u6700\u5927\u306E\u76EE\u3092\u6301\u3064\u3053\u3068\u3067\u77E5\u3089\u308C\u308B\u6DF1\u6D77\u306B\u751F\u606F\u3059\u308B\u795E\u79D8\u7684\u306A\u8D85\u5927\u578B\u306E\u982D\u8DB3\u985E\u3067\u3059\u3002"
-    chinese: 
-  - id: bluetang
-    english: Blue Tang
-    korean: "\uBE14\uB8E8\uD0F1"
-    japanese: "\u30CA\u30F3\u30E8\u30A6\u30CF\u30AE"
-    chinese: 
-  - id: bluetang_01
-    english: A vibrant tropical fish known for its striking cobalt blue body and
-      yellow caudal fin it hides a sharp spine on its caudal peduncle and is popular
-      as an aquarium fish
-    korean: "\uB208\uBD80\uC2E0 \uCF54\uBC1C\uD2B8\uBE14\uB8E8 \uBAB8\uACFC \uB178\uB780
-      \uAF2C\uB9AC \uC9C0\uB290\uB7EC\uBBF8\uB97C \uAC00\uC9C4 \uD654\uB824\uD55C
-      \uC5F4\uB300\uC5B4\uB85C \uAF2C\uB9AC \uBBF8\uBCD1\uBD80\uC5D0 \uB0A0\uCE74\uB85C\uC6B4
-      \uAC00\uC2DC\uB97C \uC228\uAE30\uACE0 \uC788\uB294 \uAC83\uC774 \uD2B9\uC9D5\uC785\uB2C8\uB2E4."
-    japanese: "\u9BAE\u3084\u304B\u306A\u30B3\u30D0\u30EB\u30C8\u30D6\u30EB\u30FC\u306E\u4F53\u3068\u9EC4\u8272\u306E\u5C3E\u3073\u308C\u3092\u6301\u3064\u83EF\u3084\u304B\u306A\u71B1\u5E2F\u9B5A\u3067\u5C3E\u67C4\u90E8\u306B\u92ED\u3044\u68D8\u3092\u96A0\u3057\u6301\u3064\u306E\u304C\u7279\u5FB4\u3067\u3059"
-    chinese: 
-  - id: clownfish
-    english: Clownfish
-    korean: "\uD770\uB3D9\uAC00\uB9AC"
-    japanese: "\u30AF\u30DE\u30CE\u30DF"
-    chinese: 
-  - id: clownfish_01
-    english: A tropical fish with an orange body and white stripes it coexists with
-      sea anemones using their stinging tentacles for protection and it has the unique
-      trait where the largest male turns into a female if the current female dies
-    korean: "\uC8FC\uD669\uC0C9 \uBAB8\uC5D0 \uD770\uC0C9 \uC904\uBB34\uB2AC\uAC00
-      \uC788\uB294 \uC5F4\uB300\uC5B4\uB85C \uB9D0\uBBF8\uC798\uC758 \uB3C5\uCE68\uC73C\uB85C\uBD80\uD130
-      \uBCF4\uD638\uBC1B\uC73C\uBA70 \uACF5\uC0DD\uD558\uACE0 \uC554\uCEF7\uC774
-      \uC8FD\uC73C\uBA74 \uAC00\uC7A5 \uD070 \uC218\uCEF7\uC774 \uC554\uCEF7\uC73C\uB85C
-      \uC131\uC804\uD658\uD558\uB294 \uB3C5\uD2B9\uD55C \uD2B9\uC9D5\uC744 \uAC00\uC9D1\uB2C8\uB2E4"
-    japanese: "\u30AA\u30EC\u30F3\u30B8\u8272\u306E\u4F53\u306B\u767D\u3044\u7E1E\u6A21\u69D8\u3092\u6301\u3064\u71B1\u5E2F\u9B5A\u3067\u30A4\u30BD\u30AE\u30F3\u30C1\u30E3\u30AF\u306E\u6BD2\u91DD\u304B\u3089\u5B88\u3089\u308C\u306A\u304C\u3089\u5171\u751F\u3057\u30E1\u30B9\u304C\u6B7B\u306C\u3068\u4E00\u756A\u5927\u304D\u306A\u30AA\u30B9\u304C\u30E1\u30B9\u306B\u6027\u8EE2\u63DB\u3059\u308B\u3068\u3044\u3046\u30E6\u30CB\u30FC\u30AF\u306A\u7279\u5FB4\u3092\u6301\u3061\u307E\u3059"
-    chinese: 
-  - id: mackerel
-    english: Mackerel
-    korean: "\uACE0\uB4F1\uC5B4"
-    japanese: "\u30B5\u30D0"
-    chinese: 
-  - id: mackerel_01
-    english: A representative blue-backed fish that is rich in DHA and EPA and is
-      a migratory species that travels in large schools moving north and south depending
-      on the season and water temperature.
-    korean: "\uB4F1\uD478\uB978 \uC0DD\uC120\uC758 \uB300\uD45C \uC8FC\uC790\uB85C
-      DHA\uC640 EPA\uAC00 \uD48D\uBD80\uD558\uBA70 \uACC4\uC808\uACFC \uC218\uC628\uC5D0
-      \uB530\uB77C \uB0A8\uBD81\uC73C\uB85C \uB300\uADDC\uBAA8 \uBB34\uB9AC\uB97C
-      \uC9C0\uC5B4 \uD68C\uC720\uD558\uB294 \uC5B4\uC885\uC785\uB2C8\uB2E4."
-    japanese: "\u9752\u80CC\u306E\u9B5A\u306E\u4EE3\u8868\u683C\u3067DHA\u3084EPA\u304C\u8C4A\u5BCC\u5B63\u7BC0\u3084\u6C34\u6E29\u306B\u3088\u3063\u3066\u5357\u5317\u306B\u5927\u898F\u6A21\u306A\u7FA4\u308C\u3092\u306A\u3057\u3066\u56DE\u904A\u3059\u308B\u9B5A\u7A2E\u3067\u3059."
-    chinese: 
-  - id: congereel
-    english: CongerEel
-    korean: "\uBD95\uC7A5\uC5B4"
-    japanese: "\u30A2\u30CA\u30B4"
-    chinese: 
-  - id: congereel_01
-    english: Called the sea eel it is characterized by regular white spots along
-      its lateral line on the body active at night and is a healthy food source rich
-      in Vitamin A.
-    korean: "\uBC14\uB2F7\uC7A5\uC5B4\uB85C \uBD88\uB9AC\uBA70 \uBAB8\uD1B5 \uC606\uC904\uC744
-      \uB530\uB77C \uD770 \uC810\uC774 \uADDC\uCE59\uC801\uC73C\uB85C \uB098 \uC788\uACE0
-      \uC57C\uAC04\uC5D0 \uD65C\uB3D9\uD558\uBA70 \uBE44\uD0C0\uBBFC A\uAC00 \uD48D\uBD80\uD55C
-      \uBCF4\uC591\uC2DD\uC785\uB2C8\uB2E4."
-    japanese: "\u6D77\u9C3B\u3068\u547C\u3070\u308C\u4F53\u5074\u306E\u5074\u7DDA\u6CBF\u3044\u306B\u767D\u3044\u70B9\u304C\u898F\u5247\u7684\u306B\u4E26\u3093\u3067\u304A\u308A\u591C\u9593\u306B\u6D3B\u52D5\u3057\u30D3\u30BF\u30DF\u30F3A\u304C\u8C4A\u5BCC\u306A\u6ECB\u990A\u98DF\u3067\u3059."
-    chinese: 
-  - id: bluespottedstingray
-    english: Bluespotted Stingray
-    korean: "\uAF41\uC9C0\uAC00\uC624\uB9AC"
-    japanese: "\u30E4\u30C3\u30B3\u30A8\u30A4"
-    chinese: 
-  - id: bluespottedstingray_01
-    english: Characterized by a yellow body with vivid blue spots the bluespotted
-      ribbontail ray has a venomous sting on its tail and primarily inhabits coral
-      reefs or shallow sandy bottoms in tropical and subtropical waters.
-    korean: "\uB178\uB780\uC0C9 \uBAB8\uD1B5\uC5D0 \uC120\uBA85\uD55C \uD30C\uB780\uC0C9
-      \uC810 \uBB34\uB2AC\uAC00 \uD2B9\uC9D5\uC774\uBA70 \uAF2C\uB9AC\uC5D0 \uB3C5\uCE68\uC774
-      \uC788\uACE0 \uC5F4\uB300 \uBC0F \uC544\uC5F4\uB300 \uD574\uC5ED\uC758 \uC0B0\uD638\uCD08\uB098
-      \uC595\uC740 \uBAA8\uB798\uBC14\uB2E5\uC5D0 \uC8FC\uB85C \uC11C\uC2DD\uD569\uB2C8\uB2E4."
-    japanese: "\u9EC4\u8272\u306E\u4F53\u306B\u9BAE\u3084\u304B\u306A\u9752\u3044\u70B9\u306E\u6A21\u69D8\u304C\u7279\u5FB4\u3067\u5C3E\u306B\u6BD2\u91DD\u3092\u6301\u3061\u71B1\u5E2F\u304A\u3088\u3073\u4E9C\u71B1\u5E2F\u6D77\u57DF\u306E\u30B5\u30F3\u30B4\u7901\u3084\u6D45\u3044\u7802\u5730\u306B\u4E3B\u306B\u751F\u606F\u3057\u3066\u3044\u307E\u3059."
-    chinese: 
-  - id: giantmoray
-    english: Giant Moray
-    korean: "\uB300\uC655\uACF0\uCE58"
-    japanese: "\u30A6\u30C4\u30DC"
-    chinese: 
-  - id: giantmoray_01
-    english: The largest moray eel in the world it grows over 3 meters long and is
-      a top nocturnal predator in the coral reef ecosystem possessing a powerful
-      jaw and sharp teeth.
-    korean: "\uC138\uACC4\uC5D0\uC11C \uAC00\uC7A5 \uD070 \uACF0\uCE58\uB85C \uBAB8\uAE38\uC774
-      \uCD5C\uB300 3m \uC774\uC0C1 \uAC15\uD55C \uD131\uACFC \uB0A0\uCE74\uB85C\uC6B4
-      \uC774\uBE68\uC744 \uAC00\uC9C4 \uC0B0\uD638\uCD08 \uC0DD\uD0DC\uACC4\uC758
-      \uCD5C\uC0C1\uC704 \uC57C\uD589\uC131 \uD3EC\uC2DD\uC790\uC785\uB2C8\uB2E4."
-    japanese: "\u4E16\u754C\u6700\u5927\u306E\u30A6\u30C4\u30DC\u3067\u4F53\u9577\u306F\u6700\u59273m\u3092\u8D85\u3048\u5F37\u529B\u306A\u984E\u3068\u92ED\u3044\u6B6F\u3092\u6301\u3064\u30B5\u30F3\u30B4\u7901\u751F\u614B\u7CFB\u306E\u591C\u884C\u6027\u306E\u9802\u70B9\u6355\u98DF\u8005\u3067\u3059."
+  - id: us_6003_01
+    english: 
+    korean: "\uB9C8\uC744\uB85C \uB3CC\uC544\uAC04\uB2E4."
+    japanese: 
     chinese: 
   audioStruct:
   - id: bgm_0001
