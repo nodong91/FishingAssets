@@ -94,11 +94,11 @@ public class Title_Manager : MonoBehaviour
 
     void TextSetting()
     {
-        continueText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._continue);
-        newStartText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._newStart);
-        creditText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._credit);
-        settingText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._setting);
-        exitText.text = Singleton_Data.INSTANCE.GetLanguage(String_Title._exit);
+        continueText.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._continue);
+        newStartText.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._newStart);
+        creditText.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._credit);
+        settingText.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._setting);
+        exitText.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._exit);
     }
 
     void OnTitle()

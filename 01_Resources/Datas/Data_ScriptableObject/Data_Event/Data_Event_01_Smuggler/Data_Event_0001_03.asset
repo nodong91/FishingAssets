@@ -13,12 +13,10 @@ MonoBehaviour:
   m_Name: Data_Event_0001_03
   m_EditorClassIdentifier: 
   eventStruct:
-    contents: "\uB530\uB77C\uAC00\uBCF4\uB2C8 {0}\uC744 \uBA54\uACE0 \uC788\uB294
-      \uACE0\uC591\uC774\uAC00 \uAC00\uC05C \uC228\uC744 \uBAB0\uC544 \uC26C\uBA70
-      \uBB3C\uC5B4\uBCF8\uB2E4.\n\"\uB108 \uD639\uC2DC {1}\uC774\uC57C?\""
+    contents: ev_0001_03_a
     emotionType: 0
     dialogTypes:
-    - replaceText: "\uAC70\uB300\uD55C \uAC00\uBC29"
+    - replaceText: ev_0001_03_b
       textSize: 25
       typingSpeed: 0
       textColor: 9939FF
@@ -26,7 +24,7 @@ MonoBehaviour:
       actionSpeed: 6
       actionInterval: 10
       actionAngle: {x: 0, y: 3}
-    - replaceText: "\uACBD\uCC30"
+    - replaceText: ev_0001_03_c
       textSize: 35
       typingSpeed: 0
       textColor: 2D99FF
@@ -35,9 +33,9 @@ MonoBehaviour:
       actionInterval: 6
       actionAngle: {x: 1, y: 0}
   eventSelect:
-  - selectDialog: "\uAF3C\uC9DD\uB9C8! \uC6C0\uC9C1\uC774\uBA74 \uD560\uD038\uB2E4"
+  - selectDialog: ev_0001_03_d
     selectEvent:
     - {fileID: 11400000, guid: d2bdad829e54478449b420b502d0832a, type: 2}
-  - selectDialog: "\uC544\uB2C8\uC57C!"
+  - selectDialog: ev_0001_03_e
     selectEvent:
     - {fileID: 11400000, guid: 02953e2af4ebdee4eb9d850a8ada00d6, type: 2}

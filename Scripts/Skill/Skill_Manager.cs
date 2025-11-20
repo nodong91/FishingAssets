@@ -7,6 +7,7 @@ public class Skill_Manager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public Custom_Button resetButton;// 스킬 초기화 버튼
+    public TMPro.TMP_Text activeDescription;
 
     public Data_SkillTree skillTreeData;
     public Canvas canvas;
@@ -37,6 +38,7 @@ public class Skill_Manager : MonoBehaviour
         closeButton.SetButton(CloseCanvas);
         resetButton.SetButton(SkillReset);
 
+        activeDescription.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._activeSkill);
         OpenCanvas(false);
     }
     public void OpenCanvas(bool _open)

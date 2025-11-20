@@ -20,13 +20,14 @@ public class String_Audio
     public const string _oceanSound = "env_0001";
 }
 
-public class String_Title
+public class String_ETC
 {
-    public const string _continue = "tt_0001";
-    public const string _newStart = "tt_0002";
-    public const string _credit = "tt_0003";
-    public const string _setting = "tt_0004";
-    public const string _exit = "tt_0005";
+    public const string _continue = "etc_0001";
+    public const string _newStart = "etc_0002";
+    public const string _credit = "etc_0003";
+    public const string _setting = "etc_0004";
+    public const string _exit = "etc_0005";
+    public const string _activeSkill = "etc_0006";
 }
 
 public class String_Save
@@ -54,6 +55,7 @@ public class String_Skill
     public const string raft = "sk_100_02";
     public const string cruise = "sk_100_03";
     public const string sailShip = "sk_100_04";
+    
 }
 
 public class String_NPC

@@ -1,13 +1,10 @@
-using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static Data_Dialog;
-using static Data_Quest;
 
 public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 {
@@ -347,7 +344,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
         // 색, 사이즈
         int lastIndex = dialogVector.Length - 1;
-        Debug.LogWarning($"{_textStruct.contents} : {dialogVector.Length}");
+        Debug.LogWarning($"{replace}({_textStruct.contents}) : {dialogVector.Length}");
         for (int i = lastIndex; i >= 0; i--)
         {
             string textColor = _textStruct.dialogTypes[i].textColor;

@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Data_Dialog_Shipyard
   m_EditorClassIdentifier: 
   textStruct:
-  - contents: "{0}\uC774\uAC8C \uB204\uAD6C\uC57C, \uC624\uB298\uC740 \uBB34\uC2A8
-      \uC77C\uC774\uC9C0??"
+  - contents: di_2001
     emotionType: 1
     dialogTypes:
-    - replaceText: "\uC624~"
+    - replaceText: di_2001_a
       textSize: 30
       typingSpeed: 0
       textColor: FFFF00
@@ -26,12 +25,12 @@ MonoBehaviour:
       actionInterval: 5
       actionAngle: {x: 0, y: 5}
   selectStructs:
-  - selectDialog: "\uBB3C\uAC74\uC744 \uC0AC\uACE0 \uC2F6\uC5B4"
+  - selectDialog: di_2001_b
     selectType: 0
     npcData: {fileID: 0}
     dialogIndex: 0
     shopItemList: {fileID: 11400000, guid: 21577614227c2d14cb0ea51777012ce9, type: 2}
-  - selectDialog: "\uBC30\uB97C \uAC15\uD654\uD558\uACE0 \uC2F6\uC5B4."
+  - selectDialog: di_2001_c
     selectType: 5
     npcData: {fileID: 0}
     dialogIndex: 0
