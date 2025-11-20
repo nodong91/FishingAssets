@@ -9,15 +9,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 664a0e4f21d8dbf4aa1987074900a295, type: 3}
+  m_Script: {fileID: 11500000, guid: 70ba73154ae12e74187a12fcca86e148, type: 3}
   m_Name: Data_Event_0001_01
   m_EditorClassIdentifier: 
   eventStruct:
-    contents: ev_0001_01_a
+    contents: ev_0001_02_a
     emotionType: 0
-    dialogTypes: []
+    dialogTypes:
+    - replaceText: ev_0001_02_b
+      textSize: 35
+      typingSpeed: 0
+      textColor: FF0000
+      actionType: 0
+      actionSpeed: 0
+      actionInterval: 0
+      actionAngle: {x: 0, y: 0}
   eventSelect:
-  - selectDialog: ev_0001_01_b
+  - selectDialog: ev_0001_02_c
     selectEvent: []
-  itemRewards:
-  - us_5003
