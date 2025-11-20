@@ -14,9 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventStruct:
     contents: "\uC8FC\uC6B0\uB824\uB294 \uC21C\uAC04 \uB204\uAD70\uAC00\uAC00 \uC18C\uB9AC
-      \uCE5C\uB2E4.\n\"\uB3C4\uB451\uC774\uC57C!\""
+      \uCE5C\uB2E4.\n{0}"
     emotionType: 0
-    dialogTypes: []
+    dialogTypes:
+    - replaceText: "\"\uB3C4\uB451\uC774\uC57C!\""
+      textSize: 40
+      typingSpeed: 0
+      textColor: 
+      actionType: 2
+      actionSpeed: 10
+      actionInterval: 5
+      actionAngle: {x: 0, y: 10}
   eventSelect:
   - selectDialog: "\uC7AC\uBE68\uB9AC \uC790\uB9AC\uB97C \uBC97\uC5B4\uB09C\uB2E4."
     selectEvent: []
