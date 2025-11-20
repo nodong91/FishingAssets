@@ -213,8 +213,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 Game_Manager.current.GetLanding.RestButton();
                 break;
 
-            case SelectStruct.SelectType.NoticeBoard:
-                Game_Manager.current.GetLanding.BoardButton();
+            case SelectStruct.SelectType.Street:
+                //Game_Manager.current.GetLanding.BoardButton();
                 break;
 
             case SelectStruct.SelectType.InLand:
@@ -351,7 +351,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             float size = _textStruct.dialogTypes[i].textSize;
             if (dialogVector[i].x < 0)
             {
-                Debug.LogError("교체할 단어 {" + i + "}가 없음");
+                Debug.LogError(replace + " : 교체할 단어 {" + i + "}가 없음");
             }
             replace = replace.Insert(dialogVector[i].y, "</size></color>");// 끼워 넣기
             replace = replace.Insert(dialogVector[i].x, $"<color=#{textColor}><size={size}>");

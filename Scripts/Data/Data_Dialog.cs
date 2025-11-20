@@ -100,7 +100,7 @@ public class Data_Dialog : ScriptableObject
             Out = 1,// 나가기
             Upgrade = 5,// 스킬 업그레이드
             Rest = 6,// 휴식 - 잠자기
-            NoticeBoard = 7,// 게시판 열기
+            Street = 7,// 거리 열기
             InLand = 8,// 튜토리얼 시작
             Event = 9,
             GameOver = 10,

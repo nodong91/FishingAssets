@@ -10,11 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
-  m_Name: Data_Dialog_Tutorial_03
+  m_Name: Data_Dialog_0001
   m_EditorClassIdentifier: 
   textStruct:
-  - contents: "\uC77C\uB2E8 \uBC30\uAC00 \uD544\uC694\uD574. \uC870\uC120\uC18C\uB85C
-      \uAC00\uBCF4\uC790."
+  - contents: di_0001_a
     emotionType: 0
-    dialogTypes: []
-  selectStructs: []
+    dialogTypes:
+    - replaceText: di_0001_b
+      textSize: 30
+      typingSpeed: 0.5
+      textColor: FFFF00
+      actionType: 2
+      actionSpeed: 10
+      actionInterval: 10
+      actionAngle: {x: 0, y: 5}
+  selectStructs:
+  - selectDialog: di_0001_c
+    selectType: 8
+    npcData: {fileID: 0}
+    dialogIndex: 0
+    shopItemList: {fileID: 0}
