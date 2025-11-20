@@ -10,28 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
-  m_Name: Data_Dialog_Shipyard
+  m_Name: Data_Dialog_1001
   m_EditorClassIdentifier: 
   textStruct:
-  - contents: di_2001
-    emotionType: 1
+  - contents: di_1001_a
+    emotionType: 0
     dialogTypes:
-    - replaceText: di_2001_a
+    - replaceText: di_1001_b
       textSize: 30
       typingSpeed: 0
       textColor: FFFF00
-      actionType: 2
-      actionSpeed: 8
-      actionInterval: 5
+      actionType: 1
+      actionSpeed: 20
+      actionInterval: 1
       actionAngle: {x: 0, y: 5}
+    - replaceText: di_1001_c
+      textSize: 30
+      typingSpeed: 0
+      textColor: 00FFFF
+      actionType: 3
+      actionSpeed: 0
+      actionInterval: 0
+      actionAngle: {x: -2, y: 2}
+  - contents: di_1001_d
+    emotionType: 1
+    dialogTypes: []
   selectStructs:
-  - selectDialog: di_2001_b
+  - selectDialog: di_1001_e
     selectType: 0
     npcData: {fileID: 0}
     dialogIndex: 0
-    shopItemList: {fileID: 11400000, guid: 21577614227c2d14cb0ea51777012ce9, type: 2}
-  - selectDialog: di_2001_c
-    selectType: 5
-    npcData: {fileID: 0}
-    dialogIndex: 0
-    shopItemList: {fileID: 0}
+    shopItemList: {fileID: 11400000, guid: 2a19779eb9207634f9b944490c8f5aa1, type: 2}

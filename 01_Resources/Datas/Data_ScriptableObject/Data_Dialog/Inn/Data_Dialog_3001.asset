@@ -10,29 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
-  m_Name: Data_Dialog_Inn_Loan 01
+  m_Name: Data_Dialog_3001
   m_EditorClassIdentifier: 
   textStruct:
-  - contents: "\uACE0\uC591\uC774\uB294 \uB9D0\uC774\uC8E0....{0}\uC774 \uC788\uC5B4\uC57C
-      \uD574\uC694."
-    emotionType: 1
-    dialogTypes:
-    - replaceText: "\uC2E0\uC6A9"
-      textSize: 20
-      typingSpeed: 0
-      textColor: FF0000
-      actionType: 0
-      actionSpeed: 0
-      actionInterval: 0
-      actionAngle: {x: 0, y: 0}
+  - contents: di_3001_a
+    emotionType: 0
+    dialogTypes: []
+  - contents: di_3001_b
+    emotionType: 0
+    dialogTypes: []
   selectStructs:
-  - selectDialog: "....\uBBF8\uC548\uD574."
-    selectType: 10
+  - selectDialog: di_3001_c
+    selectType: 6
     npcData: {fileID: 0}
     dialogIndex: 0
     shopItemList: {fileID: 0}
-  - selectDialog: "\uC6C3\uAE30\uC9C0\uB9C8."
+  - selectDialog: di_3001_d
     selectType: 0
     npcData: {fileID: 11400000, guid: f5051af63d2a58d4898565b06e66ba95, type: 2}
-    dialogIndex: 3
+    dialogIndex: 1
     shopItemList: {fileID: 0}

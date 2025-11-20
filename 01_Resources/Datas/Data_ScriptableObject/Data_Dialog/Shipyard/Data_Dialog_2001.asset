@@ -10,23 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
-  m_Name: Data_Dialog_Q0001_Fail
+  m_Name: Data_Dialog_2001
   m_EditorClassIdentifier: 
   textStruct:
-  - contents: "{0}\uC740 \uC5B4\uB514 \uC788\uC9C0??"
-    emotionType: 0
+  - contents: di_2001_a
+    emotionType: 1
     dialogTypes:
-    - replaceText: "\uADF8 \uB140\uC11D"
+    - replaceText: di_2001_b
       textSize: 30
       typingSpeed: 0
       textColor: FFFF00
-      actionType: 1
-      actionSpeed: 20
-      actionInterval: 1
+      actionType: 2
+      actionSpeed: 8
+      actionInterval: 5
       actionAngle: {x: 0, y: 5}
   selectStructs:
-  - selectDialog: "\uBCF4\uC0C1 \uBC1B\uAE30"
-    selectType: 6
+  - selectDialog: di_2001_c
+    selectType: 0
+    npcData: {fileID: 0}
+    dialogIndex: 0
+    shopItemList: {fileID: 11400000, guid: 21577614227c2d14cb0ea51777012ce9, type: 2}
+  - selectDialog: di_2001_d
+    selectType: 5
     npcData: {fileID: 0}
     dialogIndex: 0
     shopItemList: {fileID: 0}
