@@ -107,7 +107,7 @@ public class Data_Dialog : ScriptableObject
         }
         public SelectType selectType;
         public Data_NPC npcData;
-        public int dialogIndex;
+        public string dialogID;
         public Data_ItemList shopItemList;
     }
     public SelectStruct[] selectStructs;

@@ -47,7 +47,7 @@ public class Energy_Manager : MonoBehaviour
         {
             Game_Manager.current.GetMainUI.SetWarnningText("에너지 충전 불가 :  잔액 부족");
             Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(npc, 9);
+            Game_Manager.current.GetDialog.DialogStart_NPC(npc, String_Dialog._0004);
             return;
         }
 

@@ -18,6 +18,7 @@ public class Data_Parse : MonoBehaviour
         npcData = new List<Data_NPC>();
         shipData = new List<Data_Ship>();
         eventData = new List<Data_Event_Start>();
+        dialogData = new List<Data_Dialog>();
 
         if (ResourceFolders.Count == 0)
         {
@@ -109,6 +110,11 @@ public class Data_Parse : MonoBehaviour
             {
                 Data_Event_Start temp = data as Data_Event_Start;
                 eventData.Add(temp);
+            }
+            else if (data as Data_Dialog)
+            {
+                Data_Dialog temp = data as Data_Dialog;
+                dialogData.Add(temp);
             }
             EditorUtility.SetDirty(data);
         }
@@ -284,4 +290,5 @@ public class Data_Parse : MonoBehaviour
     public List<Data_NPC> npcData = new List<Data_NPC>();
     public List<Data_Ship> shipData = new List<Data_Ship>();
     public List<Data_Event_Start> eventData = new List<Data_Event_Start>();
+    public List<Data_Dialog> dialogData = new List<Data_Dialog>();
 }

@@ -387,9 +387,22 @@ public class Event_Manager : MonoBehaviour
             if (eventData as Data_Event_Result)// 보상 이벤트라면
             {
                 Data_Event_Result tempData = eventData as Data_Event_Result;
-                Game_Manager.current.GetInventory.SetResult(tempData.itemRewards);// 대화 이벤트 보상
-                Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
-                Debug.LogWarning("이벤트 보상 - 인벤토리 열기");
+
+                if (tempData.npcData != null)
+                {
+                    Dialog_Manager dialogManager = Game_Manager.current.GetDialog;
+                    dialogManager.DialogStart_NPC(tempData.npcData, tempData.dialogID);// 대화 시작
+                    Debug.LogWarning("대화 열기");
+                }
+                else if (tempData.itemList != null)
+                {
+                    // 고정 아이템
+                    string[] itemID = tempData.itemList.GetFixArray();// 고정 아이템
+                    Game_Manager.current.GetInventory.SetResult(itemID);// 대화 이벤트 보상
+                    Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 창닫기 버튼 세팅
+                    Debug.LogWarning("이벤트 보상 - 인벤토리 열기");
+                }
+                Game_Manager.current.GetMainUI.MoveMoney(tempData.addMoney);// 돈추가
             }
             else
             {

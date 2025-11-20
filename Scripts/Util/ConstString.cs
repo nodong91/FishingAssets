@@ -55,7 +55,7 @@ public class String_Skill
     public const string raft = "sk_100_02";
     public const string cruise = "sk_100_03";
     public const string sailShip = "sk_100_04";
-    
+
 }
 
 public class String_NPC
@@ -74,4 +74,28 @@ public class String_Tutorial
     public const string _fillFuel = "FillFuel";
     public const string _firstFishing = "FirstFishing";
     public const string _howToFishing = "HowToFishing";
+}
+
+public class String_Dialog
+{
+    public const string _0001 = "Data_Dialog_0001";
+    public const string _0002 = "Data_Dialog_0002";
+    public const string _0003 = "Data_Dialog_0003";
+    public const string _0004 = "Data_Dialog_0004";
+    public const string _0005 = "Data_Dialog_0005";
+    public const string _0006 = "Data_Dialog_0006";
+    public const string _0007 = "Data_Dialog_0007";
+    public const string _0008 = "Data_Dialog_0008";
+
+    public const string _1001 = "Data_Dialog_1001";
+
+    public const string _2001 = "Data_Dialog_2001";
+    public const string _2002 = "Data_Dialog_2002";
+    public const string _2003 = "Data_Dialog_2003";
+
+    public const string _3001 = "Data_Dialog_3001";
+    public const string _3002 = "Data_Dialog_3002";
+    public const string _3003 = "Data_Dialog_3003";
+
+    public const string _4001 = "Data_Dialog_4001";
 }

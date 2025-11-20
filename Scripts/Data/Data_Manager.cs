@@ -614,5 +614,6 @@ public class Data_Manager : Data_Parse
         Singleton_Data.INSTANCE.SetDictionary_ShipData(shipData);
         Singleton_Data.INSTANCE.SetQuestStruct(questStruct);
         Singleton_Data.INSTANCE.SetEvnetStruct(eventData);
+        Singleton_Data.INSTANCE.SetDialogStruct(dialogData);
     }
 }

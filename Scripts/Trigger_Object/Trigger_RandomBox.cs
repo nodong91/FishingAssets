@@ -20,11 +20,8 @@ public class Trigger_RandomBox : Trigger_Setting
     void SetItem()
     {
         // 보상 아이템 세팅
-        itemRewards = new string[randomItemCount];
-        for (int i = 0; i < randomItemCount; i++)
-        {
-            itemRewards[i] = dataItemList.GetItemID();
-        }
+        randomItemCount = Random.Range(0, 3);
+        itemRewards = dataItemList.GetRandomItems(randomItemCount);
     }
 
     void SetTrigger()

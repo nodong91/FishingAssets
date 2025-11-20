@@ -22,7 +22,32 @@ public class Data_ItemList : ScriptableObject
     }
     public ItemIDStruct[] itemIDs;
 
-    public string GetItemID()
+    public string[] GetFixArray()
+    {
+        string[] items = new string[itemIDs.Length];
+        for (int i = 0; i < items.Length; i++)
+        {
+            string itemString = itemIDs[i].itemID;// 아이템 목록에서 아이템 ID 가져오기
+            items[i] = itemString;
+            Debug.LogWarning(itemString);
+        }
+        return items;
+    }
+
+    public string[] GetRandomItems(int _amount)
+    {
+        string[] items = new string[_amount];
+        for (int i = 0; i < items.Length; i++)
+        {
+            string itemString = GetItemID();// 랜덤 아이템
+            items[i] = itemString;
+            Debug.LogWarning(itemString);
+        }
+        return items;
+    }
+
+    // 랜덤 아이템
+    string GetItemID()
     {
         float totalChance = 0;
         foreach (var item in itemIDs)
@@ -41,28 +66,4 @@ public class Data_ItemList : ScriptableObject
         }
         return itemIDs[0].itemID; // Fallback, should not reach here
     }
-    // 확률 구하기
-
-    //public string GetItemID()
-    //{
-    //    float total = 0;
-    //    foreach (var elem in itemIDs)
-    //    {
-    //        total += elem.chance;
-    //    }
-
-    //    float randomPoint = Random.value * total;
-    //    for (int i = 0; i < itemIDs.Length; i++)
-    //    {
-    //        if (randomPoint < itemIDs[i].chance)
-    //        {
-    //            return itemIDs[i].itemID;
-    //        }
-    //        else
-    //        {
-    //            randomPoint -= itemIDs[i].chance;
-    //        }
-    //    }
-    //    return itemIDs[^1].itemID;
-    //}
 }

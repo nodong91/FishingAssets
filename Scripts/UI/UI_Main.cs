@@ -294,7 +294,7 @@ public class UI_Main : MonoBehaviour
 
     public void MoveMoney(float _price)
     {
-        if (moneyValue + _price < 0f)
+        if (_price == 0 || moneyValue + _price < 0f)
             return;
 
         if (movingMoney != null)

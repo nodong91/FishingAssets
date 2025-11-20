@@ -162,11 +162,11 @@ public class UI_Landing : MonoBehaviour
 
     bool CheckShip()
     {
-        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
         if (Game_Manager.current.shipData == null)
         {
             SetLandingCanvas(false);// 랜드 UI 제거
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 6);// 배가 없다는 대사
+            Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, String_Dialog._0003);// 배가 없다는 대사
             StaticOpenCanvas.deleEndOpen = EndDialog;
             return false;
         }
@@ -180,7 +180,7 @@ public class UI_Landing : MonoBehaviour
         {
             SetLandingCanvas(false);// 랜드 UI 제거
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 7);// 연료가 필요하다는 대사
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, String_Dialog._0004);// 연료가 필요하다는 대사
             StaticOpenCanvas.deleEndOpen = EndDialog;
             return false;
         }
@@ -194,7 +194,7 @@ public class UI_Landing : MonoBehaviour
         {
             SetLandingCanvas(false);// 랜드 UI 제거
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 8);// 수리가 필요하다는 대사
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, String_Dialog._0004);// 수리가 필요하다는 대사
             StaticOpenCanvas.deleEndOpen = EndDialog;
             return false;
         }
@@ -249,7 +249,7 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(false);        // 샵 버튼 누르면 랜드 UI 제거
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shop];
         Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);
-        Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);
+        Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, String_Dialog._1001);
         Game_Manager.current.CurrentLand.CameraOutFouce(true);
     }
 
@@ -264,11 +264,11 @@ public class UI_Landing : MonoBehaviour
         if (Game_Manager.current.shipData == null)// 배가 없다면
         {
             // 튜토리얼 시작
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 2);
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, String_Dialog._2003);
         }
         else
         {
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, String_Dialog._2001);
         }
     }
 
@@ -284,7 +284,7 @@ public class UI_Landing : MonoBehaviour
             SetLandingCanvas(false);        // 랜드 UI 제거
             Game_Manager.current.CurrentLand.CameraOutFouce(true);
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);// 플레이어 대화
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, String_Dialog._0008);// 플레이어 대화
         }
         else if (lightMode == Data_Manager.DayType.Night)
         {
@@ -292,10 +292,10 @@ public class UI_Landing : MonoBehaviour
             SetLandingCanvas(false);        // 랜드 UI 제거
             Game_Manager.current.CurrentLand.CameraOutFouce(true);
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, 0);// 플레이어 대화
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, String_Dialog._0008);// 플레이어 대화
 
             data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._smuggler];// 밀수꾼 추가
-            Game_Manager.current.GetDialog.AddNPC(data_NPC, 0);
+            Game_Manager.current.GetDialog.AddNPC(data_NPC, String_Dialog._4001);
 
             RandomEvent();
         }

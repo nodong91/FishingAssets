@@ -161,14 +161,14 @@ public class Game_Manager : MonoBehaviour
             {
                 GetMainUI.OpenCanvas(false);
                 Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-                GetDialog.DialogStart_NPC(npc, 5);// 튜토리얼 대화 시작
+                GetDialog.DialogStart_NPC(npc, String_Dialog._0001);// 튜토리얼 대화 시작
             }
         }
         else
         {
             GetMainUI.OpenCanvas(false);
             Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            GetDialog.DialogStart_NPC(npc, 4);// 튜토리얼 대화 시작
+            GetDialog.DialogStart_NPC(npc, String_Dialog._0002);// 튜토리얼 대화 시작
             return;
         }
         //if (shipData == null)
@@ -680,6 +680,6 @@ public class Game_Manager : MonoBehaviour
         GetMainUI.OpenCanvas(false);
 
         Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._inn];
-        GetDialog.DialogStart_NPC(npc, 2);// 튜토리얼 대화 시작
+        GetDialog.DialogStart_NPC(npc, String_Dialog._3003);// 튜토리얼 대화 시작
     }
 }

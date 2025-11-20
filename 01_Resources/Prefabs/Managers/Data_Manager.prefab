@@ -282,6 +282,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43652d91addcfd441b03ae88a7aef8c8, type: 2}
   - {fileID: 11400000, guid: bcd86a0ba45c3ab439a8d7ca3ed90afc, type: 2}
   - {fileID: 11400000, guid: ea43906049b62854ab8bbdb5d48573b4, type: 2}
+  - {fileID: 11400000, guid: 873fc08aa8a5a964c882eac53e229b2b, type: 2}
+  dialogData:
+  - {fileID: 11400000, guid: 6ead66df73ce1a3498548c08d202ba48, type: 2}
+  - {fileID: 11400000, guid: 0850ac1e805eb0f48ab32c1c83c32f4d, type: 2}
+  - {fileID: 11400000, guid: 3b12589a787cf9844be350a48f0d9b31, type: 2}
+  - {fileID: 11400000, guid: 23cbacc99b392004785d4de050afc050, type: 2}
+  - {fileID: 11400000, guid: cea078740f757734aa83e69f2c6cd749, type: 2}
+  - {fileID: 11400000, guid: 0e1cb839b61206c46ae5be5fc5e05e1c, type: 2}
+  - {fileID: 11400000, guid: 7107c347d59cfd7458f2ad79ddc77f59, type: 2}
+  - {fileID: 11400000, guid: 79a78c382fbb65443909fb417e3300c6, type: 2}
+  - {fileID: 11400000, guid: aa41718b13a9bab479e2ce2dc3fb7bf0, type: 2}
+  - {fileID: 11400000, guid: 8c1ccfcfc105a7d44b5e4d23e7083063, type: 2}
+  - {fileID: 11400000, guid: aa59b47df3ee5e241b58eb0df81db579, type: 2}
+  - {fileID: 11400000, guid: 79a485a10de83f2498375dc45912f52b, type: 2}
+  - {fileID: 11400000, guid: e77e4989d9445804fb6204a1a7e6a031, type: 2}
+  - {fileID: 11400000, guid: e9411cd5469df39418ccee7c1c3b1185, type: 2}
+  - {fileID: 11400000, guid: 8039351f4b05ad843af0731282191adb, type: 2}
+  - {fileID: 11400000, guid: 81f99dc11431cd5449d6ebe89235c197, type: 2}
+  - {fileID: 11400000, guid: 0f81386f343730c4fb92db4354f90662, type: 2}
   usedStruct:
   - id: us_1001
     itemStruct:
@@ -4224,12 +4243,6 @@ MonoBehaviour:
     korean: "\uAE38\uAC8C \uB20C\uB7EC \uD65C\uC131\uD654"
     japanese: "\u9577\u62BC\u3057 \u3067 \u6709\u52B9 \u5316"
     chinese: "\u957F\u6309 \u6FC0\u6D3B"
-  - id: ev_0001_01_a
-    english: I missed that one but something fell in the alley
-    korean: "\uADF8\uB140\uC11D\uC744 \uB193\uCCE4\uC9C0\uB9CC \uACE8\uBAA9\uAE38\uC5D0
-      \uBB54\uAC00 \uB5A8\uC5B4\uC838 \uC788\uC5C8\uB2E4."
-    japanese: "\u3042\u3044\u3064\u3092\u9003\u3057\u305F\u3051\u3069\u8DEF\u5730\u306B\u4F55\u304B\u304C\u843D\u3061\u3066\u305F"
-    chinese: "\u9519\u8FC7\u4E86\u90A3\u5BB6\u4F19\u4F46\u5DF7\u5B50\u91CC\u6709\u4E1C\u897F"
   - id: ev_0001_01_b
     english: Grab it
     korean: "\uAC00\uC838\uAC04\uB2E4."
@@ -4276,11 +4289,13 @@ MonoBehaviour:
     japanese: "\u8208\u5473\u304C\u306A\u3044"
     chinese: "\u4E0D\u611F\u5174\u8DA3"
   - id: ev_0001_03_02_a
-    english: It ran away faster than before and I lost it
+    english: It ran away faster than before./nA pouch was left on the path where
+      it vanished
     korean: "\uC544\uAE4C\uBCF4\uB2E4 \uB354 \uBE60\uB974\uAC8C \uB3C4\uB9DD\uCCD0
-      \uBC84\uB824\uC11C \uB193\uCCD0\uBC84\uB838\uB2E4."
-    japanese: "\u3055\u3063\u304D\u3088\u308A\u901F\u304F\u9003\u3052\u3089\u308C\u3066\u898B\u5931\u3063\u3061\u3083\u3063\u305F"
-    chinese: "\u6BD4\u521A\u624D\u8DD1\u5F97\u66F4\u5FEB\u6211\u6CA1\u6293\u4F4F"
+      \uBC84\uB824\uC11C \uB193\uCCD0\uBC84\uB838\uB2E4./n\uADF8\uB140\uC11D\uC774
+      \uC0AC\uB77C\uC9C4 \uAE38 \uC704\uC5D0 \uC8FC\uBA38\uB2C8\uAC00 \uB5A8\uC5B4\uC838\uC788\uC5C8\uB2E4."
+    japanese: "\u3055\u3063\u304D\u3088\u308A\u901F\u304F\u9003\u3052\u305F/n\u3042\u3044\u3064\u304C\u6D88\u3048\u305F\u9053\u306B\u888B\u304C\u843D\u3061\u3066\u3044\u305F"
+    chinese: "\u6BD4\u521A\u624D\u8DD1\u5F97\u66F4\u5FEB /n\u5B83\u6D88\u5931\u7684\u8DEF\u4E0A\u6709\u4E2A\u888B\u5B50"
   - id: ev_0001_03_02_b
     english: back
     korean: "\uB3CC\uC544\uAC04\uB2E4."

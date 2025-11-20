@@ -127,7 +127,7 @@ public class Tutorial_Manager : MonoBehaviour
         }
         else if (currentTutorial.npc != null)
         {
-            Game_Manager.current.GetDialog.DialogStart_NPC(currentTutorial.npc, currentTutorial.dialogIndex);
+            Game_Manager.current.GetDialog.DialogStart_NPC(currentTutorial.npc, currentTutorial.dialogID);
         }
     }
 

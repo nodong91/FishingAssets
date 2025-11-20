@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -275,18 +274,20 @@ public class UI_Shop : UI_Inventory_Base
     void SetItem()// 상점 아이템 세팅
     {
         Debug.LogWarning("상점 아이템 세팅");
-        List<string> setID = new List<string>();
+        //List<string> setID = new List<string>();
         int randomCount = Random.Range(10, 20);// 랜덤 아이템 개수
-        for (int i = 0; i < randomCount; i++)
-        {
-            string itemID = itemList.GetItemID();// 아이템 목록에서 아이템 ID 가져오기
-            setID.Add(itemID);
-        }
-        setID.Sort();// 정렬
+        string[] items = itemList.GetRandomItems(randomCount);
+        //for (int i = 0; i < randomCount; i++)
+        //{
+        //    string itemID = itemList.GetItemID();// 아이템 목록에서 아이템 ID 가져오기
+        //    setID.Add(itemID);
+        //}
+        System.Array.Sort(items);
+        //setID.Sort();// 정렬
         // 아이템 배치
-        for (int i = 0; i < setID.Count; i++)
+        for (int i = 0; i < items.Length; i++)
         {
-            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(setID[i]);
+            ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(items[i]);
             if (AddItem(item) == false)// 상점 고정 아이템 세팅
             {
                 break;// 빈칸이 없으면 그만

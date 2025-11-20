@@ -47,8 +47,9 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         OpenCanvas(false);// 시작 닫기
     }
 
-    public void DialogStart_NPC(Data_NPC _npc, int _dialogIndex)
+    public void DialogStart_NPC(Data_NPC _npc, string _dialogID)
     {
+        // 대화 넘버로 하지 말고 아이디로 해야 순서가 바뀌더라도 문제가 되지 않음
         bool isOpen = dataNPC == _npc;
         int hour = Game_Manager.current.GetMainUI.timeUI.hour;
         Debug.LogWarning($"{_npc.npc_ID} : 현재 시간({hour}) 오픈 시간({_npc.openTime.x}~{_npc.openTime.y})");
@@ -56,13 +57,14 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         {
             // 오픈
             dataNPC = _npc;
-            dataDialog = dataNPC.dataDialogs[_dialogIndex];
+            //dataDialog = dataNPC.dataDialogs[_dialogIndex];
+            dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
         }
         else
         {
-            // 열리지 않음 - 혼잣말
+            // 가게 열리지 않음 - 혼잣말
             dataNPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            dataDialog = dataNPC.dataDialogs[3];
+            dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[String_Dialog._0006];
         }
         nameText.text = dataNPC.npc_ID;
 
@@ -101,14 +103,14 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         DialogAction();
     }
 
-    public void AddNPC(Data_NPC _npc, int _dialogIndex)
+    public void AddNPC(Data_NPC _npc, string _dialogID)
     {
         SelectStruct selectStruct = new SelectStruct
         {
             selectDialog = _npc.npc_ID,
             selectType = SelectStruct.SelectType.None,
             npcData = _npc,
-            dialogIndex = _dialogIndex,
+            dialogID = _dialogID,
         };
 
         Dialog_SelectButton button = GetSelectButton();
@@ -126,7 +128,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             selectDialog = _nameTag,
             selectType = SelectStruct.SelectType.Event,
             npcData = null,
-            dialogIndex = 0,
+            dialogID = "",
         };
 
         Dialog_SelectButton button = GetSelectButton();
@@ -148,7 +150,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         actionBool = false;
         if (_selectStruct.npcData != null)// 엔피씨데이터가 있으면 대화 시작
         {
-            DialogStart_NPC(_selectStruct.npcData, _selectStruct.dialogIndex);
+            DialogStart_NPC(_selectStruct.npcData, _selectStruct.dialogID);
             Debug.LogWarning("엔피씨 대화 시작");
             return;
         }
@@ -200,7 +202,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 {
                     Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
                     //DialogStart_NPC(data_NPC, 1);
-                    Data_Dialog warnDialog = data_NPC.dataDialogs[1];
+                    Data_Dialog warnDialog = Singleton_Data.INSTANCE.Dict_Dialog[String_Dialog._2002];
                     Dialog_Npc(warnDialog);
                     Debug.LogWarning("체력이 가득 차지 않았으면 스킬창 못열게");
                     return;
@@ -244,14 +246,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     void FixItemSetting(Data_ItemList _itemList)
     {
         // 고정 아이템
-        string[] itemID = new string[_itemList.itemIDs.Length];
-        for (int i = 0; i < itemID.Length; i++)
-        {
-            string itemString = _itemList.itemIDs[i].itemID;// 아이템 목록에서 아이템 ID 가져오기
-            itemID[i] = itemString;
-            Debug.LogWarning(itemString);
-        }
-        Game_Manager.current.GetInventory.SetResult(itemID);// 대화 보상
+        string[] itemIDs = _itemList.GetFixArray();
+        Game_Manager.current.GetInventory.SetResult(itemIDs);// 대화 보상
         Debug.LogWarning("상점 열기");
     }
 

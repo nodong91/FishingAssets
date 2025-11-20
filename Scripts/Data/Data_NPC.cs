@@ -8,7 +8,6 @@ public class Data_NPC : ScriptableObject
     public Texture[] npcTextures;
     public string themeMusic; // NPC의 테마 음악 파일 이름   
     public string voice;// NPC의 음성 파일 이름
-    public Data_Dialog[] dataDialogs;
 
     //[Header(" [ 판매 물품 ]")]
     //public Vector2Int invenSize;

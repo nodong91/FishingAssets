@@ -5,7 +5,7 @@ public class Data_Tutorial : ScriptableObject
 {
     public string id;
     public Data_NPC npc;
-    public int dialogIndex;
+    public string dialogID;
     public float timeScale;
     
     [System.Serializable]
