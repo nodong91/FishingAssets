@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ba73154ae12e74187a12fcca86e148, type: 3}
+  m_Name: Data_Event_0003_02
+  m_EditorClassIdentifier: 
+  eventStruct:
+    contents: "{0}\uC774\uC796\uC544?!"
+    emotionType: 0
+    dialogTypes:
+    - replaceText: "\uBCF5\uAD8C"
+      textSize: 40
+      typingSpeed: 0
+      textColor: FFAB00
+      actionType: 1
+      actionSpeed: 2.5
+      actionInterval: 5
+      actionAngle: {x: 0, y: 5}
+  eventSelect:
+  - selectDialog: "\uC190\uC744 \uBED7\uB294\uB2E4"
+    selectEvent:
+    - {fileID: 11400000, guid: d9741f4393da39d49bfe326791c0998a, type: 2}
+  - selectDialog: "\uC8FC\uC778\uC774 \uC788\uC744\uAC70\uC57C"
+    selectEvent:
+    - {fileID: 11400000, guid: 5ae7e615e5059244f9266e0ff57878f3, type: 2}

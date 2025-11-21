@@ -10,16 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 664a0e4f21d8dbf4aa1987074900a295, type: 3}
-  m_Name: Data_Event_03_01
+  m_Name: Data_Event_0003_02_01
   m_EditorClassIdentifier: 
   eventStruct:
-    contents: "\uC8FC\uC778\uC774 \uC5C6\uB294 \uAC83 \uAC19\uB2E4."
+    contents: "\uAE01\uC9C0 \uC54A\uC740 \uC0C8 {0}\uC744 \uD68D\uB4DD\uD588\uB2E4"
     emotionType: 0
-    dialogTypes: []
+    dialogTypes:
+    - replaceText: "\uBCF5\uAD8C"
+      textSize: 40
+      typingSpeed: 0
+      textColor: 
+      actionType: 2
+      actionSpeed: 10
+      actionInterval: 5
+      actionAngle: {x: 0, y: 10}
   eventSelect:
-  - selectDialog: "\uAC00\uC838\uAC04\uB2E4."
+  - selectDialog: "\uAC00\uC838\uAC04\uB2E4"
     selectEvent: []
-  itemList: {fileID: 0}
+  itemList: {fileID: 11400000, guid: 498bda7da60f52349a4e916d7e804c1d, type: 2}
   npcData: {fileID: 0}
-  dialogID: 
+  dialogID: us_4001
   addMoney: 0
