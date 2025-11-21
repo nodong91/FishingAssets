@@ -13,7 +13,20 @@ MonoBehaviour:
   m_Name: Data_Event_0004_04
   m_EditorClassIdentifier: 
   eventStruct:
-    contents: 
+    contents: "`\uC790\uB124 {0}\uC5D0\uC11C \uB09A\uC2DC \uD574 \uBD24\uB098?`/n\r\n`\uB0B4
+      \uBC30\uB85C\uB294 \uADF8 \uADFC\uCC98\uB3C4 \uBABB\uAC00`/n\r\n`\uADF8\uACF3\uC5D0
+      \uAE30\uC0C1\uCC9C\uC678\uD55C \uBB3C\uACE0\uAE30\uAC00 \uB9CE\uB2E4\uB354\uAD70`/n\r\n`\uBA39\uC744
+      \uC218 \uC788\uC5B4?`"
     emotionType: 0
-    dialogTypes: []
-  eventSelect: []
+    dialogTypes:
+    - replaceText: "\uC2EC\uD574"
+      textSize: 30
+      typingSpeed: 0
+      textColor: 5C33DB
+      actionType: 1
+      actionSpeed: 10
+      actionInterval: 2
+      actionAngle: {x: 0, y: 4}
+  eventSelect:
+  - selectDialog: "\uB3CC\uC544\uAC04\uB2E4"
+    selectEvent: []
