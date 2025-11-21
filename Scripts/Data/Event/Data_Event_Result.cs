@@ -7,7 +7,7 @@ public class Data_Event_Result : Data_Event
     public Data_ItemList itemList;// 보상 아이템
     [Header(" [ 엔피씨 대화 ]")]
     public Data_NPC npcData;// 엔피씨
-    public string dialogID;// 엔피씨 대화 넘버
+    public Data_Dialog dialogData;// 엔피씨 대화 넘버
     [Header(" [ 돈 추가 ]")]
     public int addMoney;// 돈 추가
 }
