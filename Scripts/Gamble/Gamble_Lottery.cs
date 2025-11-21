@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Gamble_Lottery : MonoBehaviour
 {
+    public StaticOpenCanvas.CanvasStruct[] canvasStruct;
     public Canvas canvas;
     public Data_Lotto data;
 
@@ -26,7 +27,7 @@ public class Gamble_Lottery : MonoBehaviour
 
     Vector3 point;
 
-    public Custom_Button resetButton;
+    public Custom_Button closeButton;
     private List<Vector3> positionsList = new List<Vector3>();
     private List<LineRenderer> lineList = new List<LineRenderer>();
     private Queue<LineRenderer> lineQueue = new Queue<LineRenderer>();
@@ -41,7 +42,7 @@ public class Gamble_Lottery : MonoBehaviour
     void Start()
     {
         canvas.worldCamera = Camera_Manager.current.UICamera;
-        resetButton.SetButton(CloseButton);
+        closeButton.SetButton(CloseButton);
         maskTexture = new RenderTexture(Screen.width, Screen.height, 24);
         maskTexture.useMipMap = true;
         maskImage.texture = maskTexture;
@@ -218,14 +219,22 @@ public class Gamble_Lottery : MonoBehaviour
 
 
 
-
+    public bool isOpen;
 
     public GameObject target;
     public CanvasGroup canvasGroup;
     public void OpenCanas()
     {
         ResetButton();
-        StartCoroutine(OpenCanvas());
+        //StartCoroutine(OpenCanvas());
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStruct, true));
+    }
+    void CloseButton()
+    {
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStruct, false));
+        //if (openCanvas != null)
+        //    StopCoroutine(openCanvas);
+        //openCanvas = StartCoroutine(CloseCanvas());
     }
 
     IEnumerator OpenCanvas()
@@ -247,12 +256,6 @@ public class Gamble_Lottery : MonoBehaviour
         }
     }
     Coroutine openCanvas;
-    void CloseButton()
-    {
-        if (openCanvas != null)
-            StopCoroutine(openCanvas);
-        openCanvas = StartCoroutine(CloseCanvas());
-    }
 
     IEnumerator CloseCanvas()
     {

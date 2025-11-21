@@ -52,12 +52,27 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         // 대화 넘버로 하지 말고 아이디로 해야 순서가 바뀌더라도 문제가 되지 않음
         bool isOpen = dataNPC == _npc;
         int hour = Game_Manager.current.GetMainUI.timeUI.hour;
-        Debug.LogWarning($"{_npc.npc_ID} : 현재 시간({hour}) 오픈 시간({_npc.openTime.x}~{_npc.openTime.y})");
-        if (hour >= _npc.openTime.x && hour <= _npc.openTime.y)
+        Debug.LogWarning($"{_npc.npc_ID} : 오픈 시간({_npc.openType}) 현재 시간({Game_Manager.current.GetMainUI.timeUI.lightMode})");
+        bool isOpenNPC = false;
+        switch (_npc.openType)
+        {
+            case Data_Manager.DayType.Any:
+                isOpenNPC = true;
+                break;
+
+            case Data_Manager.DayType.Day:
+                isOpenNPC = (Game_Manager.current.GetMainUI.timeUI.lightMode == Data_Manager.DayType.Day);
+                break;
+
+            case Data_Manager.DayType.Night:
+                isOpenNPC = (Game_Manager.current.GetMainUI.timeUI.lightMode == Data_Manager.DayType.Night);
+                break;
+        }
+
+        if (isOpenNPC == true)
         {
             // 오픈
             dataNPC = _npc;
-            //dataDialog = dataNPC.dataDialogs[_dialogIndex];
             dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
         }
         else
@@ -110,7 +125,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             selectDialog = _npc.npc_ID,
             selectType = SelectStruct.SelectType.None,
             npcData = _npc,
-            dialogID = _dialogID,
+            dialogData = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID],
         };
 
         Dialog_SelectButton button = GetSelectButton();
@@ -128,7 +143,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             selectDialog = _nameTag,
             selectType = SelectStruct.SelectType.Event,
             npcData = null,
-            dialogID = "",
+            dialogData = default,
         };
 
         Dialog_SelectButton button = GetSelectButton();
@@ -150,40 +165,45 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         actionBool = false;
         if (_selectStruct.npcData != null)// 엔피씨데이터가 있으면 대화 시작
         {
-            DialogStart_NPC(_selectStruct.npcData, _selectStruct.dialogID);
+            DialogStart_NPC(_selectStruct.npcData, _selectStruct.dialogData.name);
             Debug.LogWarning("엔피씨 대화 시작");
             return;
         }
 
-        if (_selectStruct.shopItemList != null)
+        if (_selectStruct.itemList != null)
         {
-            Debug.LogWarning($"아이템 열기 : {_selectStruct.shopItemList.inventoryType}");
+            Debug.LogWarning($"아이템 열기 : {_selectStruct.itemList.inventoryType}");
             Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;// 상점이나 조선소 닫기시 섬 나가기 버튼으로 변경
-            switch (_selectStruct.shopItemList.inventoryType)
+            switch (_selectStruct.itemList.inventoryType)
             {
-                case Data_ItemList.InventoryType.None:
-                    FixItemSetting(_selectStruct.shopItemList);
+                case Data_ItemList.InventoryType.Fix:
+                    FixItemSetting(_selectStruct.itemList);// 일반 고정 아이템
+                    break;
+
+                case Data_ItemList.InventoryType.Random:
+                    RandomItemSetting(_selectStruct.itemList);
                     break;
 
                 case Data_ItemList.InventoryType.Shop:
                     // 상점 열기
-                    Game_Manager.current.GetInventory.OpenShop(_selectStruct.shopItemList);
+                    Game_Manager.current.GetInventory.OpenShop(_selectStruct.itemList);
                     break;
 
                 case Data_ItemList.InventoryType.Shipyard:
                     // 조선소 열기
-                    Game_Manager.current.GetInventory.OpenShipyard(_selectStruct.shopItemList);
+                    Game_Manager.current.GetInventory.OpenShipyard(_selectStruct.itemList);
                     break;
 
                 case Data_ItemList.InventoryType.Smuggler:
                     // 밀수 열기
-                    Game_Manager.current.GetInventory.OpenShipyard(_selectStruct.shopItemList);
+                    Game_Manager.current.GetInventory.OpenShipyard(_selectStruct.itemList);
                     break;
 
-                case Data_ItemList.InventoryType.Loan:
+                case Data_ItemList.InventoryType.Fix_Loan:
                     // 대출 타이머 시작
                     Game_Manager.current.LoanStart();
-                    FixItemSetting(_selectStruct.shopItemList);
+                    FixItemSetting(_selectStruct.itemList);// 대출
+                    Debug.LogWarning("대출 타이머 시작");
                     break;
             }
             OpenCanvas(false);
@@ -216,6 +236,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 break;
 
             case SelectStruct.SelectType.Street:
+                // 거리 입장 랜덤 이벤트
+                Game_Manager.current.GetEvent.StartEvent();
                 //Game_Manager.current.GetLanding.BoardButton();
                 break;
 
@@ -246,9 +268,16 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     void FixItemSetting(Data_ItemList _itemList)
     {
         // 고정 아이템
-        string[] itemIDs = _itemList.GetFixArray();
+        string[] itemIDs = _itemList.GetFixItems();
         Game_Manager.current.GetInventory.SetResult(itemIDs);// 대화 보상
-        Debug.LogWarning("상점 열기");
+    }
+
+    void RandomItemSetting(Data_ItemList _itemList)
+    {
+        // 랜덤 아이템
+        int amount = Random.Range(_itemList.itemAmount.x, _itemList.itemAmount.y);
+        string[] itemIDs = _itemList.GetRandomItems(amount);
+        Game_Manager.current.GetInventory.SetResult(itemIDs);// 대화 보상
     }
 
     public void Tutorial_Upgrade()
@@ -354,20 +383,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
         return replace;
     }
-
-    //string TryDialogString()
-    //{
-    //    string temp = dialog.contents;
-    //    int length = dialog.dialogTypes.Length - 1;
-    //    for (int i = length; i >= 0; i--)
-    //    {
-    //        float size = dialog.dialogTypes[i].textSize;
-    //        string textColor = dialog.dialogTypes[i].textColor;
-    //        temp = temp.Insert(dialogVector[i].y, "</size></color>");
-    //        temp = temp.Insert(dialogVector[i].x, $"<color=#{textColor}><size={size}>");
-    //    }
-    //    return temp;
-    //}
 
     void EndDialog()
     {
@@ -579,19 +594,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             EndDialog();// 자연스럽게 끝
         }
     }
-
-    //IEnumerator WaitingNext()
-    //{
-    //    dialogIndex++;
-
-    //    float normalize = 0f;
-    //    while (normalize < 1f && typing == false)
-    //    {
-    //        normalize += Time.deltaTime / 3f;
-    //        Debug.LogWarning("다음 문장 기다림");
-    //        yield return null;
-    //    }
-    //}
 
     public void OnPointerClick(PointerEventData eventData)
     {

@@ -278,27 +278,19 @@ public class UI_Landing : MonoBehaviour
             return;
 
         currentType = LandingType.DownTown;
-        if (lightMode == Data_Manager.DayType.Day)
-        {
-            // 낮
-            SetLandingCanvas(false);        // 랜드 UI 제거
-            Game_Manager.current.CurrentLand.CameraOutFouce(true);
-            Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._0008);// 플레이어 대화
-        }
-        else if (lightMode == Data_Manager.DayType.Night)
-        {
-            // 밤
-            SetLandingCanvas(false);        // 랜드 UI 제거
-            Game_Manager.current.CurrentLand.CameraOutFouce(true);
-            Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._0008);// 플레이어 대화
 
+        SetLandingCanvas(false);        // 랜드 UI 제거
+        Game_Manager.current.CurrentLand.CameraOutFouce(true);
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
+        Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._0008);// 플레이어 대화
+
+        if (lightMode == Data_Manager.DayType.Night)       // 밤
+        {
+            // 추가
             data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._smuggler];// 밀수꾼 추가
             Game_Manager.current.GetDialog.AddNPC(data_NPC, Const_Dialog._4001);
-
-            RandomEvent();
         }
+        RandomEvent();
     }
 
     void RandomEvent()
