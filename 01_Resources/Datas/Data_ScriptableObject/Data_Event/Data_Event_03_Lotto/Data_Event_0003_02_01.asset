@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Data_Event_0003_02_01
   m_EditorClassIdentifier: 
   eventStruct:
-    contents: "\uAE01\uC9C0 \uC54A\uC740 \uC0C8 {0}\uC744 \uD68D\uB4DD\uD588\uB2E4"
+    contents: ev_0003_02_a
     emotionType: 0
     dialogTypes:
-    - replaceText: "\uBCF5\uAD8C"
+    - replaceText: ev_0003_02_b
       textSize: 40
       typingSpeed: 0
-      textColor: 
-      actionType: 2
-      actionSpeed: 10
+      textColor: FFAB00
+      actionType: 1
+      actionSpeed: 2.5
       actionInterval: 5
-      actionAngle: {x: 0, y: 10}
+      actionAngle: {x: 0, y: 5}
   eventSelect:
-  - selectDialog: "\uAC00\uC838\uAC04\uB2E4"
+  - selectDialog: ev_0001_02_01_b
     selectEvent: []
   itemList: {fileID: 11400000, guid: 498bda7da60f52349a4e916d7e804c1d, type: 2}
   npcData: {fileID: 0}
