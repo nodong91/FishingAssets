@@ -219,7 +219,8 @@ public class Data_Manager : Data_Parse
 
     void SetLanguageStruct(TextAsset _textAsset)
     {
-        string[] data = _textAsset.text.Split(new char[] { '\n' });
+        string assetText = _textAsset.text.Replace('`','"');
+        string[] data = assetText.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
             string[] elements = data[i].Split(new char[] { ',' });
@@ -228,7 +229,7 @@ public class Data_Manager : Data_Parse
             LanguageStruct tempData = new LanguageStruct
             {
                 id = elements[0].Trim(),
-                english = elements[1],
+                english = elements[1].Trim(),
                 korean = elements[2],
                 japanese = elements[3],
                 chinese = elements[4],
