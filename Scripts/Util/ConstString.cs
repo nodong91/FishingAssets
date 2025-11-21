@@ -78,6 +78,7 @@ public class String_Tutorial
 
 public class String_Dialog
 {
+    // 플레이어
     public const string _0001 = "Data_Dialog_0001";
     public const string _0002 = "Data_Dialog_0002";
     public const string _0003 = "Data_Dialog_0003";
@@ -86,16 +87,16 @@ public class String_Dialog
     public const string _0006 = "Data_Dialog_0006";
     public const string _0007 = "Data_Dialog_0007";
     public const string _0008 = "Data_Dialog_0008";
-
+    // 생선장수
     public const string _1001 = "Data_Dialog_1001";
-
+    // 조선소
     public const string _2001 = "Data_Dialog_2001";
     public const string _2002 = "Data_Dialog_2002";
     public const string _2003 = "Data_Dialog_2003";
-
+    // 여관주인
     public const string _3001 = "Data_Dialog_3001";
     public const string _3002 = "Data_Dialog_3002";
     public const string _3003 = "Data_Dialog_3003";
-
+    // 밀수꾼
     public const string _4001 = "Data_Dialog_4001";
 }

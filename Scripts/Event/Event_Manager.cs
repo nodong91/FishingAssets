@@ -101,6 +101,7 @@ public class Event_Manager : MonoBehaviour
     string SetReplace(TextStruct _textStruct)
     {
         string replace = Singleton_Data.INSTANCE.GetLanguage(_textStruct.contents);// 번역
+        Debug.LogWarning($"{_textStruct.contents} ===== {replace}");
         dialogVector = new Vector2Int[_textStruct.dialogTypes.Length];
         for (int i = 0; i < _textStruct.dialogTypes.Length; i++)
         {
@@ -274,11 +275,6 @@ public class Event_Manager : MonoBehaviour
             destinationVertices[index] = sourceVertices[index] + new Vector3(x, y, 0f);
         }
     }
-
-
-
-
-
 
     //=======================================================================================================
     // 셀렉트 버튼 세팅
