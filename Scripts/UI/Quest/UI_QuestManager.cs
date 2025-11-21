@@ -234,12 +234,12 @@ public class UI_QuestManager : MonoBehaviour
 
     void SaveQuest()
     {
-        Static_JsonManager.SaveQuestData(String_Save._quest, setQuest);
+        Static_JsonManager.SaveQuestData(Const_Save._quest, setQuest);
     }
 
     void LoadQuest()
     {
-        if (Static_JsonManager.TryLoadQuestData(String_Save._quest, out SetQuest _data) == true)
+        if (Static_JsonManager.TryLoadQuestData(Const_Save._quest, out SetQuest _data) == true)
         {
             setQuest = _data;
         }

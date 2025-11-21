@@ -145,7 +145,7 @@ public class Game_Manager : MonoBehaviour
     void LoadingComplate()
     {
         SetThemeMusic();
-        bool isCompleted = GetTutorial.IsTutorialCompleted(String_Tutorial._newGame);
+        bool isCompleted = GetTutorial.IsTutorialCompleted(Const_Tutorial._newGame);
         Debug.LogWarning(isCompleted);
         // 튜토리얼 시작
         if (isCompleted == true)
@@ -160,15 +160,15 @@ public class Game_Manager : MonoBehaviour
             else
             {
                 GetMainUI.OpenCanvas(false);
-                Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-                GetDialog.DialogStart_NPC(npc, String_Dialog._0001);// 튜토리얼 대화 시작
+                Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
+                GetDialog.DialogStart_NPC(npc, Const_Dialog._0001);// 튜토리얼 대화 시작
             }
         }
         else
         {
             GetMainUI.OpenCanvas(false);
-            Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            GetDialog.DialogStart_NPC(npc, String_Dialog._0002);// 튜토리얼 대화 시작
+            Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
+            GetDialog.DialogStart_NPC(npc, Const_Dialog._0002);// 튜토리얼 대화 시작
             return;
         }
         //if (shipData == null)
@@ -179,9 +179,9 @@ public class Game_Manager : MonoBehaviour
 
     public void ChangeStatus(Data_Ship _shipData)// 선박 변경
     {
-        if (GetTutorial.IsTutorialCompleted(String_Tutorial._newGame) == false)// 튜토리얼을 완료하지 않았다면 저장
+        if (GetTutorial.IsTutorialCompleted(Const_Tutorial._newGame) == false)// 튜토리얼을 완료하지 않았다면 저장
         {
-            GetTutorial.CompletedTutorial(String_Tutorial._newGame);
+            GetTutorial.CompletedTutorial(Const_Tutorial._newGame);
         }
 
         shipData = _shipData;
@@ -211,7 +211,7 @@ public class Game_Manager : MonoBehaviour
     public void SetThemeMusic()
     {
         Option_Manager.current.SetThemeMusic(null);
-        Singleton_Audio.INSTANCE.Audio_Environment(String_Audio._oceanSound);
+        Singleton_Audio.INSTANCE.Audio_Environment(Const_Audio._oceanSound);
     }
 
     public void InputLeftMouse(bool _input)
@@ -679,7 +679,7 @@ public class Game_Manager : MonoBehaviour
         OutOfControll(true);
         GetMainUI.OpenCanvas(false);
 
-        Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._inn];
-        GetDialog.DialogStart_NPC(npc, String_Dialog._3003);// 튜토리얼 대화 시작
+        Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
+        GetDialog.DialogStart_NPC(npc, Const_Dialog._3003);// 튜토리얼 대화 시작
     }
 }

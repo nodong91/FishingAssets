@@ -17,11 +17,13 @@ public class Fishing_Manager : MonoBehaviour
         Moving,
     }
     public FishStateType fishState;
-    public GameObject fishingSet;
+
     [Header(" [ Camera ]")]
     public CinemachinePositionComposer positionComposer;
     public float defaultCameraDistance = 15f;
     [Header(" [ Object ]")]
+    public GameObject fishingSet;
+    public GameObject catchaText;
     public GameObject shipPrefab;
     public float shipSize = 1f;
 
@@ -186,7 +188,6 @@ public class Fishing_Manager : MonoBehaviour
     {
         Game_Manager.current.GetMainUI.timeUI.TimePause(true);// 낚시 하는 동안 타이머 정지
 
-        fishingSet.SetActive(true);
         transform.position = Game_Manager.current.GetPlayer.transform.position;
 
         float rotateY = Camera.main.transform.rotation.eulerAngles.y;
@@ -256,6 +257,7 @@ public class Fishing_Manager : MonoBehaviour
         //Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
         //Game_Manager.current.GetTutorial.StartTutorial();
         yield return null;
+        fishingSet.SetActive(true);
         StartCoroutine(CatchMovement());
         FishState(FishStateType.Idle);
     }
@@ -361,7 +363,7 @@ public class Fishing_Manager : MonoBehaviour
             if (catching == false)
             {
                 catching = true;
-                Singleton_Audio.INSTANCE.Audio_LoopFX(String_Audio._reeling);// 낚시 소리
+                Singleton_Audio.INSTANCE.Audio_LoopFX(Const_Audio._reeling);// 낚시 소리
             }
             if (catchRadius > 0.1f)
                 catchRadius -= 1f * Time.deltaTime;
@@ -679,6 +681,8 @@ public class Fishing_Manager : MonoBehaviour
 
     void FishingComplate(bool _success)// 낚시 완료
     {
+        fishingSet.SetActive(false);// 물고기, 낚시대 제거
+
         Debug.LogWarning($"FishingComplate : {_success}");
         //Option_Manager.current.SetThemeMusic(null);// 테마 음악 초기화
         Singleton_Audio.INSTANCE.Stop_LoopFX();// 낚시 소리 정지
@@ -701,7 +705,6 @@ public class Fishing_Manager : MonoBehaviour
         }
     }
 
-    public GameObject catchaText;
     IEnumerator CatchaAction()// 낚시 성공 텍스트
     {
         catchaText.SetActive(true);
@@ -767,7 +770,6 @@ public class Fishing_Manager : MonoBehaviour
         Game_Manager.current.GetInventory.CloseResult();// 낚시 보상 창 닫기
         Game_Manager.current.GetMainUI.OpenCanvas(true);// 메인 유아이 다시 열기
 
-        fishingSet.SetActive(false);// 물고기, 낚시대 제거
         fishingCanvas.outButton.gameObject.SetActive(false);
 
         cinemachineBasicMultiChannelPerlin.AmplitudeGain = 0f;

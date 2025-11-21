@@ -41,7 +41,6 @@ public class UI_Time : MonoBehaviour
 
         SetSkyBox();
         TimePause(false);
-        SetResetTime();
     }
 
     void SetSkyBox()
@@ -89,7 +88,6 @@ public class UI_Time : MonoBehaviour
                 {
                     hour = 0;
                     day++;
-                    SetResetTime();
                 }
             }
             CheckLoanTime();
@@ -106,6 +104,7 @@ public class UI_Time : MonoBehaviour
         }
         else if (hour == 5 && lightMode == DayType.Night)
         {
+            SetResetTime();// 낮이 되면 모든 데이터 리셋
             StartCoroutine(DayChange(DayType.Day));
         }
     }
@@ -186,7 +185,7 @@ public class UI_Time : MonoBehaviour
         timeUpdate = StartCoroutine(TimeUpdate());
     }
 
-    public void SetRestTime(int _hour, float _minute)
+    public void SetRestTime(int _hour, float _minute)// 시간 이동
     {
         hour += _hour;
         minute += _minute;

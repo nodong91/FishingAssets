@@ -24,19 +24,19 @@ public class LoadingManager : MonoBehaviour
 
     public void GoTitle()
     {
-        sceneNames = new string[1] { String_Scene._title };
+        sceneNames = new string[1] { Const_Scene._title };
         OpenLoading();
     }
 
     public void GoMain()
     {
-        sceneNames = new string[2] { String_Scene._gameManager, String_Scene._islandMain };
+        sceneNames = new string[2] { Const_Scene._gameManager, Const_Scene._islandMain };
         OpenLoading();
     }
 
     public void GoTest()
     {
-        sceneNames = new string[1] { String_Scene._test };
+        sceneNames = new string[1] { Const_Scene._test };
         OpenLoading();
     }
 

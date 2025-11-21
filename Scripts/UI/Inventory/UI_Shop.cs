@@ -64,7 +64,7 @@ public class UI_Shop : UI_Inventory_Base
 
     public void SetShop(bool _open, Data_ItemList _itemList)
     {
-        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shop];
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._shop];
         inventoryID = data_NPC.npc_ID;
         currentIndex = 0;
         saveData = inventoryID + currentIndex;
@@ -98,7 +98,7 @@ public class UI_Shop : UI_Inventory_Base
 
     public void SetShipyard(bool _open, Data_ItemList _itemList)
     {
-        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._shipyard];
         inventoryID = data_NPC.npc_ID;
         currentIndex = 0;
         saveData = inventoryID + currentIndex;
@@ -132,7 +132,7 @@ public class UI_Shop : UI_Inventory_Base
 
     public void SetSmuggler(bool _open, Data_ItemList _itemList)
     {
-        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._smuggler];
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._smuggler];
         inventoryID = data_NPC.npc_ID;
         currentIndex = 0;
         saveData = inventoryID + currentIndex;

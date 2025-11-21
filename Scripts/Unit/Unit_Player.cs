@@ -276,7 +276,7 @@ public class Unit_Player : MonoBehaviour
     int destroyCount => Game_Manager.current.GetInventory.myBox.destroySlot.Count;
     public bool TakeDamage()
     {
-        Singleton_Audio.INSTANCE.Audio_FX(String_Audio._clash);
+        Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._clash);
         Game_Manager.current.GetInventory.DistroySlot();// ·£´ý ½½·Ô ºÎ¼ö±â
 
         health = CurrentStatus.shipHealth - destroyCount;

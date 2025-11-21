@@ -183,7 +183,7 @@ public class Audio_Manager : MonoBehaviour
 
     void SetFxPrev()
     {
-        Singleton_Audio.INSTANCE.Audio_FX(String_Audio._buttonClick);
+        Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._buttonClick);
     }
 
     public Sprite onArrow, offArrow;

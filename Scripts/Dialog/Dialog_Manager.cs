@@ -63,8 +63,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         else
         {
             // 가게 열리지 않음 - 혼잣말
-            dataNPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[String_Dialog._0006];
+            dataNPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
+            dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[Const_Dialog._0006];
         }
         nameText.text = dataNPC.npc_ID;
 
@@ -200,9 +200,9 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             case SelectStruct.SelectType.Upgrade:
                 if (Game_Manager.current.GetPlayer.FullHealth == false)
                 {
-                    Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._shipyard];
+                    Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._shipyard];
                     //DialogStart_NPC(data_NPC, 1);
-                    Data_Dialog warnDialog = Singleton_Data.INSTANCE.Dict_Dialog[String_Dialog._2002];
+                    Data_Dialog warnDialog = Singleton_Data.INSTANCE.Dict_Dialog[Const_Dialog._2002];
                     Dialog_Npc(warnDialog);
                     Debug.LogWarning("체력이 가득 차지 않았으면 스킬창 못열게");
                     return;

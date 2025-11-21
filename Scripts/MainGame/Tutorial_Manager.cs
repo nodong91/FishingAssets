@@ -250,11 +250,11 @@ public class Tutorial_Manager : MonoBehaviour
             return;
         switch (cord)
         {
-            case String_Tutorial._newGame:
+            case Const_Tutorial._newGame:
                 activeButton.SetButton(delegate { OpenShipyard(_index); });// 咀记 技泼
                 break;
 
-            case String_Tutorial._fillFuel:
+            case Const_Tutorial._fillFuel:
                 activeButton.SetButton(delegate { FillFuel(_index); });// 咀记 技泼
                 break;
 
@@ -368,12 +368,12 @@ public class Tutorial_Manager : MonoBehaviour
 
     void SaveTutorial()
     {
-        Static_JsonManager.SaveTutorialData(String_Tutorial._tutorialKey, completedTutorial);
+        Static_JsonManager.SaveTutorialData(Const_Tutorial._tutorialKey, completedTutorial);
     }
 
     public void LoadTutorial()
     {
-        if (Static_JsonManager.TryLoadTutorialData(String_Tutorial._tutorialKey, out List<string> _completedTutorial))
+        if (Static_JsonManager.TryLoadTutorialData(Const_Tutorial._tutorialKey, out List<string> _completedTutorial))
         {
             completedTutorial = _completedTutorial;
         }

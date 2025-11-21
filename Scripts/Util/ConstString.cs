@@ -1,4 +1,4 @@
-public class String_Scene
+public class Const_Scene
 {
     public const string _loading = "LoadingScene";
     public const string _main = "MainScene";
@@ -10,7 +10,7 @@ public class String_Scene
     public const string _test = "Test";
 }
 
-public class String_Audio
+public class Const_Audio
 {
     public const string _titleTheme = "bgm_0001";
     public const string _buttonClick = "fx_0001";
@@ -20,7 +20,7 @@ public class String_Audio
     public const string _oceanSound = "env_0001";
 }
 
-public class String_ETC
+public class Const_ETC
 {
     public const string _continue = "etc_0001";
     public const string _newStart = "etc_0002";
@@ -30,7 +30,7 @@ public class String_ETC
     public const string _activeSkill = "etc_0006";
 }
 
-public class String_Save
+public class Const_Save
 {
     public const string _save = "/Save/";
     public const string _saveDontDestroy = "/SaveDontDestroy/";
@@ -42,13 +42,13 @@ public class String_Save
     public const string _fishGuideData = "FishGuideData";
 }
 
-public class String_Select
+public class Const_Select
 {
     public const string _smuggler = "Smuggler";
 
 }
 
-public class String_Skill
+public class Const_Skill
 {
     public const string baseShip = "sk_100_00";
     public const string speedBoat = "sk_100_01";
@@ -58,7 +58,7 @@ public class String_Skill
 
 }
 
-public class String_NPC
+public class Const_NPC
 {
     public const string _player = "you";
     public const string _shop = "shop";
@@ -67,7 +67,7 @@ public class String_NPC
     public const string _inn = "inn";
 }
 
-public class String_Tutorial
+public class Const_Tutorial
 {
     public const string _tutorialKey = "CompletedTutorial";
     public const string _newGame = "NewGame";
@@ -76,7 +76,7 @@ public class String_Tutorial
     public const string _howToFishing = "HowToFishing";
 }
 
-public class String_Dialog
+public class Const_Dialog
 {
     // 플레이어
     public const string _0001 = "Data_Dialog_0001";

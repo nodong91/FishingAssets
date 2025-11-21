@@ -46,8 +46,8 @@ public class Energy_Manager : MonoBehaviour
         if (Game_Manager.current.CheckMoney(buyPrice) == false)
         {
             Game_Manager.current.GetMainUI.SetWarnningText("에너지 충전 불가 :  잔액 부족");
-            Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[String_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(npc, String_Dialog._0004);
+            Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
+            Game_Manager.current.GetDialog.DialogStart_NPC(npc, Const_Dialog._0004);
             return;
         }
 

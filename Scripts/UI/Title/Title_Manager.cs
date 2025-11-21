@@ -94,11 +94,11 @@ public class Title_Manager : MonoBehaviour
 
     void TextSetting()
     {
-        continueText.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._continue);
-        newStartText.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._newStart);
-        creditText.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._credit);
-        settingText.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._setting);
-        exitText.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._exit);
+        continueText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._continue);
+        newStartText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._newStart);
+        creditText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._credit);
+        settingText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._setting);
+        exitText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._exit);
     }
 
     void OnTitle()
@@ -109,7 +109,7 @@ public class Title_Manager : MonoBehaviour
 
     void ActionEnter(Custom_Button _button)
     {
-        Singleton_Audio.INSTANCE.Audio_FX(String_Audio._buttonClick);
+        Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._buttonClick);
         selectMask.gameObject.SetActive(true);
         selectMask.position = _button.transform.position;
 
@@ -253,7 +253,7 @@ public class Title_Manager : MonoBehaviour
     void LoadingComplate()
     {
         Debug.Log("타이틀 로딩 완료");
-        Option_Manager.current.SetThemeMusic(String_Audio._titleTheme); // 테마 음악 시작
+        Option_Manager.current.SetThemeMusic(Const_Audio._titleTheme); // 테마 음악 시작
     }
 
     private Unit_Player instPlayer;

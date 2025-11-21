@@ -260,12 +260,12 @@ public class FishGuide : MonoBehaviour
         {
             saveFishClass.Add(fish.Value);
         }
-        Static_JsonManager.SaveFishGuideData(String_Save._fishGuideData, saveFishClass);
+        Static_JsonManager.SaveFishGuideData(Const_Save._fishGuideData, saveFishClass);
     }
 
     void LoadFishGuide()
     {
-        if (Static_JsonManager.TryLoadFishGuideData(String_Save._fishGuideData, out List<SaveFishClass> _data))
+        if (Static_JsonManager.TryLoadFishGuideData(Const_Save._fishGuideData, out List<SaveFishClass> _data))
         {
             for (int i = 0; i < _data.Count; i++)
             {

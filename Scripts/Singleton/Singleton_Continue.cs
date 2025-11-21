@@ -33,12 +33,12 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             loanActive = Game_Manager.current.GetMainUI.timeUI.loanActive,
             loanTime = Game_Manager.current.GetMainUI.timeUI.loanTime,
         };
-        Static_JsonManager.SaveCountinueData(String_Save._continue, continueData);
+        Static_JsonManager.SaveCountinueData(Const_Save._continue, continueData);
     }
 
     public Data_Continue LoadContinue()
     {
-        if (Static_JsonManager.TryLoadCountinueData(String_Save._continue, out Data_Continue _data))
+        if (Static_JsonManager.TryLoadCountinueData(Const_Save._continue, out Data_Continue _data))
         {
             return _data;
         }

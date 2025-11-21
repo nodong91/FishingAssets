@@ -38,7 +38,7 @@ public class Skill_Manager : MonoBehaviour
         closeButton.SetButton(CloseCanvas);
         resetButton.SetButton(SkillReset);
 
-        activeDescription.text = Singleton_Data.INSTANCE.GetLanguage(String_ETC._activeSkill);
+        activeDescription.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._activeSkill);
         OpenCanvas(false);
     }
     public void OpenCanvas(bool _open)
@@ -49,7 +49,7 @@ public class Skill_Manager : MonoBehaviour
     public void CloseCanvas()
     {
         OpenCanvas(false);
-        Static_JsonManager.SaveEnableSkillData(String_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 저장
+        Static_JsonManager.SaveEnableSkillData(Const_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 저장
         Game_Manager.current.GetLanding.BackButton();
     }
 
@@ -79,7 +79,7 @@ public class Skill_Manager : MonoBehaviour
         }
 
         // 활성화된 스킬 불러오기
-        if (Static_JsonManager.TryLoadEnableSkillData(String_Save._enableSkill, out List<Vector2Int> _enableSlotLIst))
+        if (Static_JsonManager.TryLoadEnableSkillData(Const_Save._enableSkill, out List<Vector2Int> _enableSlotLIst))
         {
             enableSlotLIst = _enableSlotLIst;
         }
@@ -157,7 +157,7 @@ public class Skill_Manager : MonoBehaviour
         Debug.LogWarning("스킬 활성화");
         enableSlotLIst.Add(_addNode);
         SetSlot(_addNode);
-        Singleton_Audio.INSTANCE.Audio_FX(String_Audio._activeSkill);
+        Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._activeSkill);
     }
 
     void SetSlot(Vector2Int _addNode)
@@ -212,6 +212,6 @@ public class Skill_Manager : MonoBehaviour
             Game_Manager.current.AddStatus();
         }
         enableSlotLIst.Clear();
-        Static_JsonManager.SaveEnableSkillData(String_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 리셋 저장
+        Static_JsonManager.SaveEnableSkillData(Const_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 리셋 저장
     }
 }
