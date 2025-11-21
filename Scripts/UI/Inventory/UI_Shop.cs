@@ -275,7 +275,7 @@ public class UI_Shop : UI_Inventory_Base
     {
         Debug.LogWarning("상점 아이템 세팅");
         //List<string> setID = new List<string>();
-        int randomCount = Random.Range(10, 20);// 랜덤 아이템 개수
+        int randomCount = Random.Range(itemList.itemAmount.x, itemList.itemAmount.y);// 랜덤 아이템 개수
         string[] items = itemList.GetRandomItems(randomCount);
         //for (int i = 0; i < randomCount; i++)
         //{

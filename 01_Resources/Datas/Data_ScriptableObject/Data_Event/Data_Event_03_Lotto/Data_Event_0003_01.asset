@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70ba73154ae12e74187a12fcca86e148, type: 3}
+  m_Script: {fileID: 11500000, guid: 664a0e4f21d8dbf4aa1987074900a295, type: 3}
   m_Name: Data_Event_0003_01
   m_EditorClassIdentifier: 
   eventStruct:
-    contents: "\uB204\uAD70\uAC00 \uB098\uB97C \uC4F0\uB808\uAE30\uB97C \uBC84\uB9B0
-      \uACE0\uC591\uC774 \uB77C\uACE0 \uC2E0\uACE0\uD558\uC5EC/n\uBC8C\uAE08 {0}
-      \uB97C \uB0B4\uACE0 \uB9D0\uC558\uB2E4..."
+    contents: ev_0003_01_a
     emotionType: 0
     dialogTypes:
-    - replaceText: 50G
+    - replaceText: ev_0003_01_b
       textSize: 35
       typingSpeed: 0
       textColor: DB0000
@@ -29,3 +27,7 @@ MonoBehaviour:
   eventSelect:
   - selectDialog: ev_0001_03_b
     selectEvent: []
+  itemList: {fileID: 0}
+  npcData: {fileID: 0}
+  dialogData: {fileID: 0}
+  addMoney: -50

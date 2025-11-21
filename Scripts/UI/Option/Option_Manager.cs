@@ -7,7 +7,7 @@ public class Option_Manager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public Custom_Button closeButton;
-    public Custom_Button goTitleButton, goExitButton;
+    public Custom_Button resetStatsButton, goTitleButton, goExitButton;
     public Data_Option optionData;
 
     [System.Serializable]
@@ -93,7 +93,7 @@ public class Option_Manager : MonoBehaviour
             screenStruct[i].toggle.onValueChanged.AddListener(delegate { InputToggle(index); });
             InputToggle(index);
         }
-
+        resetStatsButton.SetButton(ResetStatsButton, EnterButton);
         goTitleButton.SetButton(GoTitle, EnterButton);
         goExitButton.SetButton(GoExit, EnterButton);
     }
@@ -108,6 +108,10 @@ public class Option_Manager : MonoBehaviour
         screenStruct[_index].screenObject.gameObject.SetActive(screenStruct[_index].toggle.isOn);
     }
 
+    void ResetStatsButton()
+    {
+        StatsManager.current.ResetStats();
+    }
 
     void GoTitle()
     {

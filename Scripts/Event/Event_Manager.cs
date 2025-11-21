@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 using static Data_Dialog;
 using static Data_Event;
-using static Data_Quest;
 
 public class Event_Manager : MonoBehaviour
 {
+    public Data_Event testEvent;
+
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     bool _open = false;
     public Event_SelectButton selectButton;
@@ -28,6 +30,7 @@ public class Event_Manager : MonoBehaviour
         {
             canvasStructs[i].rect.gameObject.SetActive(false);
         }
+        SetDictKey();
     }
 
     private void Update()
@@ -37,11 +40,6 @@ public class Event_Manager : MonoBehaviour
             if (typing == true)// 스킵
                 typing = false;
         }
-        //if (Input.GetMouseButtonUp(1))
-        //{
-        //    RemoveSelectButton();
-        //    StartEvent();
-        //}
     }
 
     void SetDictKey()
@@ -52,21 +50,31 @@ public class Event_Manager : MonoBehaviour
             eventKeys.Add(child.Key);
         }
     }
-    public string setEventKey = "Data_Event_0001";
+
     public void StartEvent()
     {
         if (eventKeys == null || eventKeys.Count == 0)
             SetDictKey();
 
-        //string key = eventKeys[Random.Range(0, eventKeys.Count)];
-        Data_Event tempEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
-        SetEvent(tempEvent);
-        Debug.LogWarning(setEventKey);
+        Data_Event activeEvent;
+        if (testEvent != null)
+        {
+            activeEvent = testEvent;
+        }
+        else
+        {
+            //string setEventKey = "Data_Event_0001";
+            string setEventKey = eventKeys[Random.Range(0, eventKeys.Count)];
+            activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
+        }
+        SetEvent(activeEvent);
+        Debug.LogWarning(activeEvent);
     }
 
     public void SetEvent(Data_Event _eventData)
     {
         StopAllCoroutines();
+        RemoveSelectButton();
         SetGridCanvas(0f);
 
         eventData = _eventData;
@@ -372,7 +380,6 @@ public class Event_Manager : MonoBehaviour
     void SelectedButton(EventSelect _eventSelect)
     {
         StopAllCoroutines();// 기존 움직이는 폰트가 있다면 정지
-        RemoveSelectButton();
 
         // 다음 대화 체크
         Data_Event tempEvent = _eventSelect.GetEventData();
@@ -387,13 +394,13 @@ public class Event_Manager : MonoBehaviour
                 if (tempData.npcData != null)
                 {
                     Dialog_Manager dialogManager = Game_Manager.current.GetDialog;
-                    dialogManager.DialogStart_NPC(tempData.npcData, tempData.dialogID);// 대화 시작
+                    dialogManager.DialogStart_NPC(tempData.npcData, tempData.dialogData.name);// 대화 시작
                     Debug.LogWarning("대화 열기");
                 }
                 else if (tempData.itemList != null)
                 {
                     // 고정 아이템
-                    string[] itemID = tempData.itemList.GetFixArray();// 고정 아이템
+                    string[] itemID = tempData.itemList.GetFixItems();// 고정 아이템
                     Game_Manager.current.GetInventory.SetResult(itemID);// 대화 이벤트 보상
                     Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 창닫기 버튼 세팅
                     Debug.LogWarning("이벤트 보상 - 인벤토리 열기");
@@ -402,9 +409,9 @@ public class Event_Manager : MonoBehaviour
             }
             else
             {
-                Game_Manager.current.GetLanding.OpenLandingUI();// 섬 유아이 열기
                 Debug.LogWarning("보상 대화가 아님");
             }
+            Game_Manager.current.GetLanding.OpenLandingUI();// 섬 유아이 열기
             StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 이벤트 창 닫기
         }
         else
