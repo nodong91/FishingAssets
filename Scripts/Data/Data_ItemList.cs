@@ -5,11 +5,12 @@ public class Data_ItemList : ScriptableObject
 {
     public enum InventoryType
     {
-        None,
+        Fix,
+        Random,
         Shop,
         Shipyard,
         Smuggler,
-        Loan,
+        Fix_Loan,
     }
     public InventoryType inventoryType;
 
@@ -20,9 +21,10 @@ public class Data_ItemList : ScriptableObject
         [Range(0.1f, 100f)]
         public float chance;
     }
+    public Vector2Int itemAmount;
     public ItemIDStruct[] itemIDs;
 
-    public string[] GetFixArray()
+    public string[] GetFixItems()
     {
         string[] items = new string[itemIDs.Length];
         for (int i = 0; i < items.Length; i++)

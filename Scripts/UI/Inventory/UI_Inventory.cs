@@ -560,6 +560,7 @@ public class UI_Inventory : MonoBehaviour
                 break;
 
             case ItemStruct.ItemType.Lottery:// 복권
+                //Game_Manager.current.GetMainUI.CloseInventory();
                 Game_Manager.current.GetLottery.OpenCanas();// 복권 열기
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
