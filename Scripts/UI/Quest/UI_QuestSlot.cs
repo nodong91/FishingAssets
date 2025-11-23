@@ -20,7 +20,7 @@ public class UI_QuestSlot : MonoBehaviour
     public void SetQuestSlot(QuestStruct _questData)
     {
         questData = _questData;
-        slotTitle.text = _questData.name;
+        slotTitle.text = _questData.title;
         SelectedSlot(false);
     }
 

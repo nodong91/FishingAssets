@@ -5,15 +5,7 @@ using static Data_Manager;
 
 public class UI_Time : MonoBehaviour
 {
-    public TMPro.TMP_Text hourText, minuteText;
-    public TMPro.TMP_Text weekText;
-    Light DayLight => Game_Manager.current.dayLight;
-    Color DayColor => Game_Manager.current.dayColor;
-    Color NightColor => Game_Manager.current.nightColor;
-    Color setEmissionColor;
-    Color emissionColor => Game_Manager.current.emissionColor;
-    public Image dayIcon, nightIcon;
-    Coroutine timeUpdate;
+    public bool paused = false;
 
     public enum WeatherType
     {
@@ -27,7 +19,16 @@ public class UI_Time : MonoBehaviour
     public float minute = 0;
     public int hour = 0;
     public int day = 0;
-    public bool paused = false;
+
+    public TMPro.TMP_Text hourText, minuteText;
+    public TMPro.TMP_Text weekText;
+    Light DayLight => Game_Manager.current.dayLight;
+    Color DayColor => Game_Manager.current.dayColor;
+    Color NightColor => Game_Manager.current.nightColor;
+    Color setEmissionColor;
+    Color emissionColor => Game_Manager.current.emissionColor;
+    public Image dayIcon, nightIcon;
+    Coroutine timeUpdate;
 
     public void SetStart(Data_Continue _data)
     {
@@ -41,6 +42,9 @@ public class UI_Time : MonoBehaviour
 
         SetSkyBox();
         TimePause(false);
+
+        StartLoanTimer(false);// ¥Î√‚ ≈∏¿Ã∏”
+        SetResetTime();
     }
 
     void SetSkyBox()
@@ -111,7 +115,7 @@ public class UI_Time : MonoBehaviour
 
     IEnumerator DayChange(DayType _dayType)
     {
-        Debug.LogWarning($"π„≥∑ : {_dayType}");
+        Debug.Log($"π„≥∑ : {_dayType}");
         lightMode = _dayType;
         Color prevColor = DayLight.color;
         Color targetColor = lightMode == DayType.Day ? DayColor : NightColor;
@@ -146,7 +150,6 @@ public class UI_Time : MonoBehaviour
 
     void WeekPosition(int _index)
     {
-        //float targetX = Mathf.Lerp(-60f, 60f, _index / 6f);
         switch (_index)
         {
             case 0:
@@ -171,6 +174,7 @@ public class UI_Time : MonoBehaviour
                 weekText.text = "Sat";
                 break;
             default:
+                weekText.text = "Error";
                 break;
         }
     }
@@ -207,18 +211,13 @@ public class UI_Time : MonoBehaviour
     //==========================================================================================================
 
     [Header(" [ ¥Î√‚ ]")]
-    public GameObject loanObject;
-    public TMPro.TMP_Text loanText;
-
     public bool loanActive = false;
     public int loanTime;
 
     public void StartLoanTimer(bool _loanActive)
     {
         loanActive = _loanActive;
-        loanObject.SetActive(_loanActive);
         loanTime = 0;
-        loanText.text = $"{24 - (loanTime / 6)}";
     }
 
     void CheckLoanTime()
@@ -226,12 +225,12 @@ public class UI_Time : MonoBehaviour
         if (loanActive == true)
         {
             loanTime++;
-            loanText.text = $"{24 - (loanTime / 6)}";
             if (loanTime >= 144)// 10∫– * 6 *24 = 1¿œ = 144
             {
                 // ∞‘¿” ø¿πˆ
                 Game_Manager.current.GameOver();
-                StopAllCoroutines();
+                loanTime = 0;
+                //StopAllCoroutines();
             }
         }
     }

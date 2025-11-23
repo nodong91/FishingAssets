@@ -1,4 +1,3 @@
-using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -128,5 +127,56 @@ public class UI_NewsManager : MonoBehaviour
     {
         StaticOpenCanvas.deleEndOpen -= EndClose;
         Game_Manager.current.GetLanding.BackButton();
+    }
+
+
+
+
+
+
+
+
+
+
+
+    private void Start()
+    {
+        SetSlots();
+    }
+
+    public UI_NewsSlot baseSlot;
+    Queue<UI_NewsSlot> slotPool = new Queue<UI_NewsSlot>();
+    List<UI_NewsSlot> slotList = new List<UI_NewsSlot>();
+    public Transform slotParent;
+
+    void SetSlots()
+    {
+        // Å¥ ¼¼ÆÃ
+        questQueue = SetQueue();
+
+        int amount = 3;
+        for (int i = 0; i < amount; i++)
+        {
+            UI_NewsSlot inst = TryNewsSlot();
+            slotList.Add(inst);
+            inst.SetQuest(Singleton_Data.INSTANCE.Dict_Quest[questDatas[i]]);
+        }
+    }
+
+    UI_NewsSlot TryNewsSlot()
+    {
+        if (slotPool.Count > 0)
+        {
+            var slot = slotPool.Dequeue();
+            return slot;
+        }
+        UI_NewsSlot inst = Instantiate(baseSlot, slotParent);
+        inst.deleClick = SlotClick;
+        return inst;
+    }
+
+    void SlotClick(QuestStruct _questData)
+    {
+        QuestInfomation(_questData);
     }
 }

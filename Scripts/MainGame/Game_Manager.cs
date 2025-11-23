@@ -26,8 +26,6 @@ public class Game_Manager : MonoBehaviour
     public Energy_Manager energyManager;
     public Gamble_Lottery lottery;
     public Rest_Manager rest_Manager;
-    public Tutorial_Manager tutorial;
-    public Tutorial_Manager1 tutorial1;
     public UI_ChangeShip changeShip;
     public Event_Manager event_Manager;
 
@@ -145,8 +143,8 @@ public class Game_Manager : MonoBehaviour
     void LoadingComplate()
     {
         SetThemeMusic();
-        bool isCompleted = GetTutorial.IsTutorialCompleted(Const_Tutorial._newGame);
-        Debug.LogWarning(isCompleted);
+        bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._newGame);
+        Debug.LogWarning($"튜토리얼 완료? {Const_Tutorial._newGame} {isCompleted}");
         // 튜토리얼 시작
         if (isCompleted == true)
         {
@@ -179,11 +177,6 @@ public class Game_Manager : MonoBehaviour
 
     public void ChangeStatus(Data_Ship _shipData)// 선박 변경
     {
-        if (GetTutorial.IsTutorialCompleted(Const_Tutorial._newGame) == false)// 튜토리얼을 완료하지 않았다면 저장
-        {
-            GetTutorial.CompletedTutorial(Const_Tutorial._newGame);
-        }
-
         shipData = _shipData;
         GetPlayer.SetShip(_shipData);
         AddStatus();// 스테이트 세팅
@@ -240,7 +233,7 @@ public class Game_Manager : MonoBehaviour
 
     public bool CheckMoney(float _price)
     {
-        Debug.LogWarning($"돈 체크 : {GetMainUI.TryMoney} / {_price}");
+        Debug.Log($"돈 체크 : {GetMainUI.TryMoney} / {_price}");
         if (GetMainUI.TryMoney < _price)
         {
             GetMainUI.NoMoney();// 구매할 돈없음
@@ -468,34 +461,6 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-    private Tutorial_Manager instTutorial;
-    public Tutorial_Manager GetTutorial
-    {
-        get
-        {
-            if (instTutorial == null)
-            {
-                instTutorial = Instantiate(tutorial, transform);
-                instTutorial.SetStart();
-            }
-            return instTutorial;
-        }
-    }
-
-    private Tutorial_Manager1 instTutorial1;
-    public Tutorial_Manager1 GetTutorial1
-    {
-        get
-        {
-            if (instTutorial1 == null)
-            {
-                instTutorial1 = Instantiate(tutorial1, transform);
-                //instTutorial1.SetStart();
-            }
-            return instTutorial1;
-        }
-    }
-
     private UI_ChangeShip instChangeShip;
     public UI_ChangeShip GetChangeShip
     {
@@ -660,26 +625,51 @@ public class Game_Manager : MonoBehaviour
     //====================================================================================================================
     // 게임 오버 관련
     //====================================================================================================================
-
+    public float loanPrice = 0f;
+    public float loanInterest = 0f;
     public void LoanStart()
     {
         GetMainUI.timeUI.StartLoanTimer(true);// 대출금 상환 타이머 시작
+        loanPrice = 1000;
+        GetMainUI.SetLoanText(loanPrice);
         Debug.LogWarning(" 대출금 상환 타이머 시작.");
     }
 
     public void LoanEnd()
     {
-        GetMainUI.timeUI.StartLoanTimer(false);// 대출금 상환 타이머 종료
-        Debug.LogWarning(" 대출금 상환 타이머 종료.");
+        Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
+        if (CheckMoney(1000f) == true)
+        {
+            GetMainUI.timeUI.StartLoanTimer(false);// 대출금 상환 타이머 종료
+            GetMainUI.MoveMoney(-loanPrice);
+            loanPrice = 0;
+            GetMainUI.SetLoanText(loanPrice);
+            GetDialog.DialogStart_NPC(npc, Const_Dialog._3006);
+            Debug.LogWarning(" 대출금 상환 타이머 종료.");
+        }
+        else
+        {
+            GetDialog.DialogStart_NPC(npc, Const_Dialog._3007);
+            Debug.LogWarning(" 대출금 상환 실패.");
+        }
     }
 
     public void GameOver()
     {
-        Debug.LogWarning("대출금 상환 시간이 도래했습니다!\n모든 세이브 파일이 삭제됩니다.");
-        OutOfControll(true);
-        GetMainUI.OpenCanvas(false);
+        loanInterest += loanPrice * 0.1f;// 빌린 돈의 10%
+        if (loanInterest > loanPrice)
+        {
+            Debug.LogWarning("대출금 상환 시간이 도래했습니다!\n모든 세이브 파일이 삭제됩니다.");
+            OutOfControll(true);
+            GetMainUI.OpenCanvas(false);
 
-        Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
-        GetDialog.DialogStart_NPC(npc, Const_Dialog._3003);// 튜토리얼 대화 시작
+            Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
+            GetDialog.DialogStart_NPC(npc, Const_Dialog._3003);// 튜토리얼 대화 시작
+        }
+        else
+        {
+            int loanText = (int)(loanPrice + loanInterest);
+            GetMainUI.SetLoanText(loanText);
+        }
     }
 }

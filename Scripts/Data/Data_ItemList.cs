@@ -31,7 +31,6 @@ public class Data_ItemList : ScriptableObject
         {
             string itemString = itemIDs[i].itemID;// 아이템 목록에서 아이템 ID 가져오기
             items[i] = itemString;
-            Debug.LogWarning(itemString);
         }
         return items;
     }
@@ -43,7 +42,6 @@ public class Data_ItemList : ScriptableObject
         {
             string itemString = GetItemID();// 랜덤 아이템
             items[i] = itemString;
-            Debug.LogWarning(itemString);
         }
         return items;
     }

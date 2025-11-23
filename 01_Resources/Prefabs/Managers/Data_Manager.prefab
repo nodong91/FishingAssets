@@ -245,6 +245,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: efba2a4d5bbf24a4788d9dc8a9deeadc, type: 3}
   - {fileID: 21300000, guid: 6e94cad31948f5e4d85dfbe90fd9367c, type: 3}
   - {fileID: 21300000, guid: b01ae7b8cef0fc14888dd5e3ae9a7265, type: 3}
+  - {fileID: 21300000, guid: 1baacfee7acd4d84d9d889e310b6a9f3, type: 3}
   - {fileID: 21300000, guid: 7dfff1ca83eccfb4c8a0155b0b70f452, type: 3}
   - {fileID: 21300000, guid: 154eedd79976a024fbdb93ee6f4ea268, type: 3}
   - {fileID: 21300000, guid: a73091521303c5c4899dfadc6f7e3878, type: 3}
@@ -288,6 +289,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0850ac1e805eb0f48ab32c1c83c32f4d, type: 2}
   - {fileID: 11400000, guid: 3b12589a787cf9844be350a48f0d9b31, type: 2}
   - {fileID: 11400000, guid: 23cbacc99b392004785d4de050afc050, type: 2}
+  - {fileID: 11400000, guid: bee821959c0bdea479cda7509218bace, type: 2}
+  - {fileID: 11400000, guid: 547b5c239ec766145bc62f2b5817515e, type: 2}
+  - {fileID: 11400000, guid: 5e361271ef64e7046a481163d26c60a2, type: 2}
   - {fileID: 11400000, guid: cea078740f757734aa83e69f2c6cd749, type: 2}
   - {fileID: 11400000, guid: 0e1cb839b61206c46ae5be5fc5e05e1c, type: 2}
   - {fileID: 11400000, guid: 7107c347d59cfd7458f2ad79ddc77f59, type: 2}
@@ -296,6 +300,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8c1ccfcfc105a7d44b5e4d23e7083063, type: 2}
   - {fileID: 11400000, guid: aa59b47df3ee5e241b58eb0df81db579, type: 2}
   - {fileID: 11400000, guid: 79a485a10de83f2498375dc45912f52b, type: 2}
+  - {fileID: 11400000, guid: 84172fecb81a0004a85a0f66cc326775, type: 2}
   - {fileID: 11400000, guid: e77e4989d9445804fb6204a1a7e6a031, type: 2}
   - {fileID: 11400000, guid: e9411cd5469df39418ccee7c1c3b1185, type: 2}
   - {fileID: 11400000, guid: 8039351f4b05ad843af0731282191adb, type: 2}
@@ -3850,7 +3855,7 @@ MonoBehaviour:
       fishPrice: 0
   questStruct:
   - id: qu_0001
-    name: "\uCCAB \uB09A\uC2DC \uC131\uACF5"
+    title: "\uCCAB \uB09A\uC2DC \uC131\uACF5"
     description: "\uB09A\uC2DC\uAC00 \uCC98\uC74C\uC778\uAC00? \uC544\uBB34 \uBB3C\uACE0\uAE30\uB098
       \uD55C\uB9C8\uB9AC \uC7A1\uC544\uC640 \uBD10. \uC2E4\uB825\uC740 \uAC80\uC99D
       \uD574\uC57C \uACA0\uC9C0?"
@@ -3860,7 +3865,7 @@ MonoBehaviour:
     result:
     - us_0001
   - id: qu_0002
-    name: "\uB0B4 \uC575\uBB34\uC0C8\uB97C \uCC3E\uC544\uC918."
+    title: "\uB0B4 \uC575\uBB34\uC0C8\uB97C \uCC3E\uC544\uC918."
     description: "\uB0B4 \uCE5C\uAD6C \uC870\uC9C0\uAC00 \uC7A0\uAE50 \uD55C \uB208\uD310
       \uC0AC\uC774\uC5D0 \uC0C8\uC7A5\uC5D0\uC11C \uB098\uAC00 \uBC84\uB838\uC5B4.
       \uC774\uD6C4 \uB450\uBC88\uC9F8 \uC12C\uBC29\uD5A5\uC73C\uB85C \uB0A0\uC544\uAC14\uC5B4.
@@ -3874,7 +3879,7 @@ MonoBehaviour:
     - fs_1001
     - fs_1001
   - id: qu_0003
-    name: "\uC96C\uBE44\uC2A4 \uB2E4\uC774\uC5B4\uD2B8"
+    title: "\uC96C\uBE44\uC2A4 \uB2E4\uC774\uC5B4\uD2B8"
     description: "\uC131\uACF5\uC740 \uC5B8\uC81C\uB098\\n\uD55C\uBC88\uC5D0 \uBE60\uB974\uAC8C\\n\uD558\uB098\uC529
       \uBC14\uB974\uAC8C"
     client: "\uAD11\uACE0"
@@ -3882,7 +3887,7 @@ MonoBehaviour:
     needItem: []
     result: []
   - id: qu_0004
-    name: "\uC5D8\uB9AC\uAC8C\uC774\uD130 \uAC00\uC544"
+    title: "\uC5D8\uB9AC\uAC8C\uC774\uD130 \uAC00\uC544"
     description: "\uB0B4\uAC00 \uB09A\uC740 \uC5ED\uB300\uAE09 \uC6D4\uCC99 \uBC30\uC2A4\uB97C
       \uCC44\uAC14\uC5B4. \uC545\uC5B4\uB97C \uB2EE\uC740 \uBB3C\uACE0\uAE30\uC600\uC5B4!!
       \uADF8\uB140\uC11D\uC744 \uC7A1\uC544\uC918. \uBCF5\uC218\uB97C \uD574\uC57C\uACA0\uC5B4!!"
@@ -3894,7 +3899,7 @@ MonoBehaviour:
     - fs_1001
     - us_3002
   - id: qu_0005
-    name: sadfad
+    title: sadfad
     description: asdfadsf
     client: "\uC606\uB3D9\uB124 \uAE40\uC528"
     deadLine: 3

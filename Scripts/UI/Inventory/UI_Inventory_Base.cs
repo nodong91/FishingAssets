@@ -57,18 +57,21 @@ public class UI_Inventory_Base : MonoBehaviour
 
     IEnumerator SetLoadingItem()
     {
+        Debug.LogWarning($"SetLoadingItem-----------------------------{slotType} 세팅");
         saveInventoryData = null;
 
         EmptyInventoryAllSlot();
         LoadInventory(); // saveInventoryData 불러오기
-        while (saveInventoryData == null)
-            yield return null;
-
-        SetInventorySlot(saveInventoryData.invenSize);// 데이터 불러온 이후
         yield return null;
 
-        LoadItem(saveInventoryData);// 아이템 불러오기
-        SetLoadDestroy();// 부서진 슬롯 세팅
+        if (saveInventoryData != null)
+        {
+            SetInventorySlot(saveInventoryData.invenSize);// 데이터 불러온 이후
+            yield return null;
+
+            LoadItem(saveInventoryData);// 아이템 불러오기
+            SetLoadDestroy();// 부서진 슬롯 세팅
+        }
     }
 
     public virtual void OpenCanvas(bool _open)
@@ -175,6 +178,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public void SetSlot(UI_Inventory_Slot _slot, ItemInInventory _itemClass)
     {
+        Debug.LogWarning($"==========================================={slotType} 세팅");
         _slot.SetBase(_itemClass);// 메인 슬롯
         if (_itemClass != null)// 비워져 있는지
         {
@@ -190,7 +194,7 @@ public class UI_Inventory_Base : MonoBehaviour
                 }
             }
             SetWeight(_itemClass.item.weight);// 무게 세팅
-            Image iconImage = IconPool();// 이미지 풀에서 가져오기
+            Image iconImage = IconPool();// SetSlot 이미지 풀에서 가져오기
             iconImage.gameObject.SetActive(true);
             iconImage.transform.position = _slot.transform.position;
             iconImage.transform.rotation = Quaternion.Euler(0f, 0f, _itemClass.angle);
@@ -227,7 +231,7 @@ public class UI_Inventory_Base : MonoBehaviour
                     allSlots[slotX, slotY].SetQuestSlot();
                 }
             }
-            Image iconImage = IconPool();// 이미지 풀에서 가져오기
+            Image iconImage = IconPool();// SetQuestSlot 이미지 풀에서 가져오기
             iconImage.gameObject.SetActive(true);
             iconImage.transform.position = _slot.transform.position;
             iconImage.transform.rotation = Quaternion.Euler(0f, 0f, _itemClass.angle);
@@ -315,7 +319,7 @@ public class UI_Inventory_Base : MonoBehaviour
         }
 
         ItemInInventory itemClass = SetItemClass(_item);// 구매할 경우 새로운 클라스 캡슐화
-        SetSlot(slot, itemClass);
+        SetSlot(slot, itemClass);// AddItem
         return true;
     }
 
@@ -579,7 +583,7 @@ public class UI_Inventory_Base : MonoBehaviour
         {
             saveInventoryData = _data;
         }
-        else if (Game_Manager.current.shipData != null)
+        else if (Game_Manager.current.shipData != null)// 배가 없다면
         {
             saveInventoryData = new Static_JsonManager.InventoryData
             {
@@ -597,7 +601,7 @@ public class UI_Inventory_Base : MonoBehaviour
             // 새로운 클라스 캡슐화
             Vector2Int slotNum = _data.saveItems[i].slotNum;
             UI_Inventory_Slot slot = allSlots[slotNum.x, slotNum.y];
-            SetSlot(slot, _data.saveItems[i].item);
+            SetSlot(slot, _data.saveItems[i].item);// LoadItem
         }
         Debug.LogError($"저장 데이터 갱신({saveData}) : {saveInventoryData.saveItems.Count} 아이템");
     }

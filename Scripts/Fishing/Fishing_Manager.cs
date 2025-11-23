@@ -186,8 +186,6 @@ public class Fishing_Manager : MonoBehaviour
 
     void SetReady(bool _ready)// 준비
     {
-        Game_Manager.current.GetMainUI.timeUI.TimePause(true);// 낚시 하는 동안 타이머 정지
-
         transform.position = Game_Manager.current.GetPlayer.transform.position;
 
         float rotateY = Camera.main.transform.rotation.eulerAngles.y;
@@ -757,8 +755,6 @@ public class Fishing_Manager : MonoBehaviour
     void OutFishing()// 낚시 나가기 버튼
     {
         Singleton_Continue.INSTANCE.SaveContinue();// 낚시 종료 시 저장
-
-        Game_Manager.current.GetMainUI.timeUI.TimePause(false);// 시간 정지 종료
         positionComposer.gameObject.SetActive(false);
 
         // 스타트 버튼 비활성화

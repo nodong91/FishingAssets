@@ -6,6 +6,7 @@ public class UI_ChangeShip : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public List<Data_Ship> shipList = new List<Data_Ship>();
+    public int GetShipCount { get { return shipList.Count; } }
     public UI_ChangeShip_Slot shipButton;
     public GridLayoutGroup shipParent;
 

@@ -13,8 +13,8 @@ public class UI_NewsInfomation : MonoBehaviour
 
     public void SetDisplay(QuestStruct _quest)
     {
-        Debug.LogWarning($"Quest 클릭: {_quest.name}");
-        titleText.text = _quest.name;
+        Debug.LogWarning($"Quest 클릭: {_quest.title}");
+        titleText.text = _quest.title;
         npcText.text = _quest.client;
         descriptionText.text = _quest.description;
         deadLineText.text = (_quest.deadLine > 0) ? "남은 시간 " + _quest.deadLine + "일" : null;

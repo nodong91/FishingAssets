@@ -184,14 +184,16 @@ public class Unit_Player : MonoBehaviour
     {
         while (state == State.Move)
         {
-            SetMoving();
-            CheckClosestUnit();// 무브
-
-            energy -= CurrentStatus.efficient * Time.deltaTime;// 0에 가까울 수록 소비 안함
-            SetEnergyUI();
-            if (GetMaxEnergy > 0f && energy <= 0f)// 에너지 없으면 파괴
+            if(energy > 0f)// 에너지가 없으면 못 움직임
             {
-                StateMachine(State.Destroy);
+                SetMoving();
+                CheckClosestUnit();// 무브
+                energy -= CurrentStatus.efficient * Time.deltaTime;// 0에 가까울 수록 소비 안함
+                SetEnergyUI();
+                if (GetMaxEnergy > 0f && energy <= 0f)// 에너지 없으면 파괴
+                {
+                    StateMachine(State.Destroy);
+                }
             }
             yield return null;
         }

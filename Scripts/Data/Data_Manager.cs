@@ -206,7 +206,7 @@ public class Data_Manager : Data_Parse
             QuestStruct tempData = new QuestStruct
             {
                 id = elements[0],
-                name = elements[1],
+                title = elements[1],
                 description = elements[2],
                 client = elements[3],
                 deadLine = Parse_Int(elements[4]),
@@ -439,7 +439,7 @@ public class Data_Manager : Data_Parse
     public class QuestStruct
     {
         public string id;
-        public string name;
+        public string title;
         [TextArea]
         public string description;
         public string client;

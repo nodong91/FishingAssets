@@ -139,7 +139,6 @@ public class UI_Landing : MonoBehaviour
 
     IEnumerator SetCanvasAlpha()
     {
-
         float normalize = 0f;
         while (normalize < 1f)
         {
@@ -164,9 +163,16 @@ public class UI_Landing : MonoBehaviour
     {
         if (Game_Manager.current.shipData == null)
         {
-            SetLandingCanvas(false);// 랜드 UI 제거
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._0003);// 배가 없다는 대사
+            if (Game_Manager.current.GetChangeShip.GetShipCount > 0)
+            {
+                Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._0009);// 배가 없다는 대사
+            }
+            else
+            {
+                Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._0003);// 배가 없다는 대사
+            }
+            SetLandingCanvas(false);// 랜드 UI 제거
             StaticOpenCanvas.deleEndOpen = EndDialog;
             return false;
         }
@@ -217,8 +223,8 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(false);// 섬에서 나가기
 
         outLanding?.Invoke();
-        Game_Manager.current.OutOfControll(false);
         Game_Manager.current.GetInventory.CloseShop();
+        Game_Manager.current.OutOfControll(false);
         RemoveUI();
     }
 
@@ -290,13 +296,6 @@ public class UI_Landing : MonoBehaviour
             data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._smuggler];// 밀수꾼 추가
             Game_Manager.current.GetDialog.AddNPC(data_NPC, Const_Dialog._4001);
         }
-        RandomEvent();
-    }
-
-    void RandomEvent()
-    {
-        string title = "랜덤 이벤트 테스트";
-        Game_Manager.current.GetDialog.EventSelectButton(title);
     }
 
     void StorageButton()
@@ -315,6 +314,12 @@ public class UI_Landing : MonoBehaviour
 
     public void ChangeButton()
     {
+        if (Game_Manager.current.GetChangeShip.GetShipCount == 0)
+        {
+            CheckShip();
+            return;
+        }
+
         SetLandingCanvas(false);        // 랜드 UI 제거
         Game_Manager.current.GetChangeShip.OpenCanvas(true);
     }

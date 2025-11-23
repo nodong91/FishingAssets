@@ -154,7 +154,6 @@ public class Skill_Manager : MonoBehaviour
 
     void ActiveSkill(Vector2Int _addNode)// 스킬 활성화
     {
-        Debug.LogWarning("스킬 활성화");
         enableSlotLIst.Add(_addNode);
         SetSlot(_addNode);
         Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._activeSkill);

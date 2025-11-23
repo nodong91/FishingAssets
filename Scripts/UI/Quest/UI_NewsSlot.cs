@@ -17,7 +17,7 @@ public class UI_NewsSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     public void SetQuest(QuestStruct _questData)
     {
         questData = _questData;
-        title.text = questData.name;
+        title.text = questData.title;
         description.text = questData.description;
     }
 

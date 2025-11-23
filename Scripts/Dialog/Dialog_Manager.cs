@@ -74,27 +74,45 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             // 오픈
             dataNPC = _npc;
             dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
+            Dialog_Npc(dataDialog);
+            if (dataDialog.selectID == "AddLoan")
+            {
+                // 대출
+                if (Game_Manager.current.GetMainUI.timeUI.loanActive == false)
+                {
+                    // 돈 빌림
+                    Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
+                    AddNPC(data_NPC, Const_Dialog._3002);
+                }
+                else
+                {
+                    // 돈 갚음
+                    Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
+                    AddNPC(data_NPC, Const_Dialog._3005);
+                }
+            }
         }
         else
         {
             // 가게 열리지 않음 - 혼잣말
             dataNPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
             dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[Const_Dialog._0006];
+            Dialog_Npc(dataDialog);
         }
         nameText.text = dataNPC.npc_ID;
+        //Debug.LogWarning($"{_npc.npc_ID} : {dialogSelectButton.Count}");
 
-        Dialog_Npc(dataDialog);
         if (isOpen == false)
         {
             OpenCanvas(true);// 대화 시작
         }
     }
 
-    public void Dialog_Npc(Data_Dialog _dialog)
+    void Dialog_Npc(Data_Dialog _dialog)
     {
         dataDialog = _dialog;
 
-        // 기존 버튼 큐에 추가 및 제거
+        // 기존 버튼 큐 제거
         for (int i = 0; i < dialogSelectButton.Count; i++)
         {
             dialogSelectButton[i].gameObject.SetActive(false);
@@ -120,30 +138,13 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     public void AddNPC(Data_NPC _npc, string _dialogID)
     {
+        Data_Dialog setDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
         SelectStruct selectStruct = new SelectStruct
         {
-            selectDialog = _npc.npc_ID,
+            selectDialog = setDialog.selectID,
             selectType = SelectStruct.SelectType.None,
             npcData = _npc,
-            dialogData = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID],
-        };
-
-        Dialog_SelectButton button = GetSelectButton();
-        button.gameObject.SetActive(true);
-        button.SetStart(selectStruct, SelectedButton);// 엔피씨 대화 추가
-        dialogSelectButton.Add(button);
-
-        button.transform.SetAsLastSibling();// 순서 변경
-    }
-
-    public void EventSelectButton(string _nameTag)
-    {
-        SelectStruct selectStruct = new SelectStruct
-        {
-            selectDialog = _nameTag,
-            selectType = SelectStruct.SelectType.Event,
-            npcData = null,
-            dialogData = default,
+            dialogData = setDialog,
         };
 
         Dialog_SelectButton button = GetSelectButton();
@@ -166,13 +167,11 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         if (_selectStruct.npcData != null)// 엔피씨데이터가 있으면 대화 시작
         {
             DialogStart_NPC(_selectStruct.npcData, _selectStruct.dialogData.name);
-            Debug.LogWarning("엔피씨 대화 시작");
             return;
         }
 
         if (_selectStruct.itemList != null)
         {
-            Debug.LogWarning($"아이템 열기 : {_selectStruct.itemList.inventoryType}");
             Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;// 상점이나 조선소 닫기시 섬 나가기 버튼으로 변경
             switch (_selectStruct.itemList.inventoryType)
             {
@@ -212,7 +211,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
         switch (_selectStruct.selectType)
         {
-            case SelectStruct.SelectType.Out:
+            case SelectStruct.SelectType.None:
                 // 섬 나가기
                 Game_Manager.current.GetLanding.BackButton();
                 break;
@@ -247,9 +246,9 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 Game_Manager.current.OutOfControll(true);
                 break;
 
-            case SelectStruct.SelectType.Event:
-                Game_Manager.current.GetEvent.StartEvent();
-                break;
+            case SelectStruct.SelectType.Loan:
+                Game_Manager.current.LoanEnd();
+                return;
 
             case SelectStruct.SelectType.GameOver:
                 StartCoroutine(SelectGameOver());
@@ -369,10 +368,10 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
         // 색, 사이즈
         int lastIndex = dialogVector.Length - 1;
-        Debug.LogWarning($"{replace}({_textStruct.contents}) : {dialogVector.Length}");
+        //Debug.LogWarning($"{replace}({_textStruct.contents}) : {dialogVector.Length}");
         for (int i = lastIndex; i >= 0; i--)
         {
-            string textColor = _textStruct.dialogTypes[i].textColor;
+            string textColor = P01_Utility.ColorToHex(_textStruct.dialogTypes[i].textColor);
             float size = _textStruct.dialogTypes[i].textSize;
             if (dialogVector[i].x < 0)
             {

@@ -25,7 +25,7 @@ public class Data_Dialog : ScriptableObject
             public string replaceText;
             public float textSize;
             public float typingSpeed;
-            public string textColor;
+            public Color textColor;
             [Header("Action")]
             public ActionType actionType;
             public float actionSpeed;
@@ -34,6 +34,7 @@ public class Data_Dialog : ScriptableObject
         }
         public DialogType[] dialogTypes;
     }
+    public string selectID;
     public TextStruct[] textStruct;
 
     public enum ActionType
@@ -51,13 +52,12 @@ public class Data_Dialog : ScriptableObject
         public string selectDialog;
         public enum SelectType
         {
-            None = 0,
-            Out = 1,// 나가기
+            None = 0,// 나가기
             Upgrade = 5,// 스킬 업그레이드
             Rest = 6,// 휴식 - 잠자기
             Street = 7,// 거리 열기
             InLand = 8,// 튜토리얼 시작
-            Event = 9,
+            Loan = 9,// 돈 갚기
             GameOver = 10,
         }
         public SelectType selectType;

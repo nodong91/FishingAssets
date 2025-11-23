@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Game_Manager;
 
 public class UI_Main : MonoBehaviour
 {
@@ -128,6 +127,7 @@ public class UI_Main : MonoBehaviour
     public void OpenCanvas(bool _open)// 메인 유아이 캔버스
     {
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+        timeUI.TimePause(!_open);
     }
 
     //===========================================================================================================================
@@ -280,6 +280,10 @@ public class UI_Main : MonoBehaviour
     public TMPro.TMP_Text moneyText;
     Coroutine movingMoney;
     float moneyValue;
+    public RectTransform moneyRect;
+    private Coroutine shakeUI;
+    public TMPro.TMP_Text loanText;
+
     public float TryMoney
     {
         get { return moneyValue; }
@@ -320,8 +324,6 @@ public class UI_Main : MonoBehaviour
         moneyText.text = moneyValue.ToString();
     }
 
-    public RectTransform moneyRect;
-    private Coroutine shakeUI;
     public void NoMoney()
     {
         if (shakeUI != null)
@@ -343,14 +345,11 @@ public class UI_Main : MonoBehaviour
         moneyRect.anchoredPosition = Vector2.zero;
     }
 
-
-
-
-
-
-
-
-
+    public void SetLoanText(float _loan)
+    {
+        loanText.text = "-" + _loan.ToString();
+        loanText.gameObject.SetActive(_loan > 0);
+    }
 
     //===========================================================================================================================
     // 버프
@@ -361,7 +360,7 @@ public class UI_Main : MonoBehaviour
     Dictionary<string, UI_BuffSlot> dictBuffSlots = new Dictionary<string, UI_BuffSlot>();
     Queue<UI_BuffSlot> buffSlotPool = new Queue<UI_BuffSlot>();
 
-    public void AddBuffSlot(FishBuffStruct _buff)
+    public void AddBuffSlot(Game_Manager.FishBuffStruct _buff)
     {
         if (dictBuffSlots.ContainsKey(_buff.id) == false)
         {
@@ -372,7 +371,7 @@ public class UI_Main : MonoBehaviour
         dictBuffSlots[_buff.id].SetBuffSlot(_buff);
     }
 
-    public void AddBuffSlot(BuffStruct _buff)
+    public void AddBuffSlot(Game_Manager.BuffStruct _buff)
     {
         if (dictBuffSlots.ContainsKey(_buff.id) == false)
         {

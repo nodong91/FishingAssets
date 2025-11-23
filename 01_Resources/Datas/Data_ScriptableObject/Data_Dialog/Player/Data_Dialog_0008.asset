@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
   m_Name: Data_Dialog_0008
   m_EditorClassIdentifier: 
+  selectID: 
   textStruct:
   - contents: di_0008_a
     emotionType: 0
@@ -19,7 +20,7 @@ MonoBehaviour:
     - replaceText: di_0008_b
       textSize: 20
       typingSpeed: 0
-      textColor: 00FF00
+      textColor: {r: 0, g: 0.8207547, b: 0.0029344647, a: 0}
       actionType: 1
       actionSpeed: 1.77
       actionInterval: 4.08
@@ -27,16 +28,16 @@ MonoBehaviour:
   selectStructs:
   - selectDialog: di_0008_c
     selectType: 0
+    itemList: {fileID: 0}
     npcData: {fileID: 11400000, guid: f5051af63d2a58d4898565b06e66ba95, type: 2}
     dialogData: {fileID: 11400000, guid: 6ead66df73ce1a3498548c08d202ba48, type: 2}
-    shopItemList: {fileID: 0}
   - selectDialog: di_0008_d
     selectType: 7
+    itemList: {fileID: 0}
     npcData: {fileID: 0}
     dialogData: {fileID: 0}
-    shopItemList: {fileID: 0}
   - selectDialog: di_0008_e
-    selectType: 1
+    selectType: 0
+    itemList: {fileID: 0}
     npcData: {fileID: 0}
     dialogData: {fileID: 0}
-    shopItemList: {fileID: 0}

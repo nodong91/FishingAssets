@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
-using static UI_QuestManager;
 
 public class UI_QuestManager : MonoBehaviour
 {
@@ -134,7 +133,7 @@ public class UI_QuestManager : MonoBehaviour
             SetQuestSlot(_questDatas);
         }
         SaveQuest();
-        Debug.LogWarning($"{_questDatas.name} : {dictQuest.ContainsKey(_questDatas.id)} ({dictQuest.Count})");
+        Debug.LogWarning($"{_questDatas.title} : {dictQuest.ContainsKey(_questDatas.id)} ({dictQuest.Count})");
     }
 
     public void RemoveQuestSlot(UI_QuestSlot _selectSlot)
@@ -183,7 +182,7 @@ public class UI_QuestManager : MonoBehaviour
             return;
         }
         selectQuest = _slot;
-        titleText.text = GetSelectQuest.name;
+        titleText.text = GetSelectQuest.title;
         npcText.text = GetSelectQuest.client;
         descriptionText.text = GetSelectQuest.description;
 

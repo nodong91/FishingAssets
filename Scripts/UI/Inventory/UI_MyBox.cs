@@ -19,7 +19,7 @@ public class UI_MyBox : UI_Inventory_Base
 
         base.SetStart();
         // 저장된 내용 불러오기
-        SetInventoryItem(saveData);
+        SetInventoryItem(saveData);// 마이박스
     }
 
     public void AddMaxWeight(float _weight)
@@ -32,15 +32,14 @@ public class UI_MyBox : UI_Inventory_Base
     {
         if (inventorySize == _inventorySize)
             return;
-        Debug.LogWarning($"인벤토리 사이즈 변경 {inventorySize} -> {_inventorySize}");
+        //Debug.LogWarning($"인벤토리 사이즈 변경 {inventorySize} -> {_inventorySize}");
         if (GetSaveInventoryData == null)
         {
             LoadInventory();
         }
-        Debug.LogWarning($"인벤토리 사이즈 변경 {GetSaveInventoryData} -> {GetSaveInventoryData.invenSize}");
 
         GetSaveInventoryData.invenSize = _inventorySize;
-        SetInventoryItem(saveData);
+        SetInventoryItem(saveData);// 마이박스AddInventory
     }
 
     public override void OpenCanvas(bool _open)

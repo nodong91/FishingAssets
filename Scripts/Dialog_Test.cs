@@ -64,7 +64,7 @@ public class Dialog_Test : MonoBehaviour
         int lastIndex = dialogVector.Length - 1;
         for (int i = lastIndex; i >= 0; i--)
         {
-            string textColor = _textStruct.dialogTypes[i].textColor;
+            string textColor = P01_Utility.ColorToHex(_textStruct.dialogTypes[i].textColor);
             float size = _textStruct.dialogTypes[i].textSize;
             replace = replace.Insert(dialogVector[i].y, "</size></color>");// ³¢¿ö ³Ö±â
             replace = replace.Insert(dialogVector[i].x, $"<color=#{textColor}><size={size}>");

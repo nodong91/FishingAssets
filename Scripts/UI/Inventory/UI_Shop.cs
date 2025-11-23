@@ -13,21 +13,12 @@ public class UI_Shop : UI_Inventory_Base
 
     [Header("- Shop")]
     public VerticalLayoutGroup layoutGroup;
-    public ToggleGroup toggleGroup;
     public GameObject fixGroup;
     public Custom_Button fixButton, fixAllButton;
-    public Custom_Button[] toggleButtons;
 
     public override void SetStart()
     {
         base.SetStart();
-        for (int i = 0; i < toggleButtons.Length; i++)
-        {
-            int index = i;
-            toggleButtons[i].SetButton(delegate { SetToggle(index); });
-            toggleButtons[i].buttonImage.material = Instantiate(toggleButtons[i].buttonImage.material);
-            toggleButtons[i].buttonImage.material.SetFloat("_FillAmount", 0f);
-        }
         SetToggle(0);
         fixButton.SetButton(FixButton);
         fixAllButton.SetButton(FixAllButton);
@@ -35,9 +26,6 @@ public class UI_Shop : UI_Inventory_Base
 
     void SetToggle(int _index)
     {
-        toggleButtons[currentIndex].buttonImage.material.SetFloat("_FillAmount", 0f);
-        toggleButtons[_index].buttonImage.material.SetFloat("_FillAmount", 1f);
-
         if (currentIndex != _index)
         {
             Static_JsonManager.SaveInventory(saveData, GetSaveInventoryData); ;  // 토글 변경 시 저장
@@ -70,24 +58,22 @@ public class UI_Shop : UI_Inventory_Base
         saveData = inventoryID + currentIndex;
         if (_open)
         {
-            itemList = _itemList;
             OpenCanvas(true);
 
-            layoutGroup.padding.top = 15;
             layoutGroup.padding.bottom = 15;
 
             slotType = SlotType.Shop;// SetShop
-            toggleGroup.gameObject.SetActive(false);
             fixGroup.gameObject.SetActive(false);
+
             if (Game_Manager.current.GetMainUI.timeUI.shopReset == true)
             {
                 Game_Manager.current.GetMainUI.timeUI.shopReset = false;
-                SetItemDisplay();// 상점 물건 리셋
+                SetItemDisplay(_itemList);// 생선상점 물건 리셋
             }
             else
             {
                 // 저장된 내용 불러오기
-                SetInventoryItem(saveData);// Shop, Shipyard 세팅
+                SetInventoryItem(saveData);// Shop 세팅
             }
         }
         else
@@ -104,24 +90,21 @@ public class UI_Shop : UI_Inventory_Base
         saveData = inventoryID + currentIndex;
         if (_open)
         {
-            itemList = _itemList;
             OpenCanvas(true);
 
-            layoutGroup.padding.top = 15;
             layoutGroup.padding.bottom = 40;
 
             slotType = SlotType.Shipyard;// SetShipyard
-            toggleGroup.gameObject.SetActive(false);
             fixGroup.gameObject.SetActive(true);
             if (Game_Manager.current.GetMainUI.timeUI.shipyardReset == true)
             {
                 Game_Manager.current.GetMainUI.timeUI.shipyardReset = false;
-                SetItemDisplay();// 상점 물건 리셋
+                SetItemDisplay(_itemList);// 조선소 상점 물건 리셋
             }
             else
             {
                 // 저장된 내용 불러오기
-                SetInventoryItem(saveData);// Shop, Shipyard 세팅
+                SetInventoryItem(saveData);//  Shipyard 세팅
             }
         }
         else
@@ -138,24 +121,21 @@ public class UI_Shop : UI_Inventory_Base
         saveData = inventoryID + currentIndex;
         if (_open)
         {
-            itemList = _itemList;
             OpenCanvas(_open);
 
-            layoutGroup.padding.top = 15;
             layoutGroup.padding.bottom = 40;
 
             slotType = SlotType.Shipyard;// SetShipyard
-            toggleGroup.gameObject.SetActive(false);
             fixGroup.gameObject.SetActive(true);
             if (Game_Manager.current.GetMainUI.timeUI.smugglerReset == true)
             {
                 Game_Manager.current.GetMainUI.timeUI.smugglerReset = false;
-                SetItemDisplay();// 상점 물건 리셋
+                SetItemDisplay(_itemList);// 밀수꾼 상점 물건 리셋
             }
             else
             {
                 // 저장된 내용 불러오기
-                SetInventoryItem(saveData);// Shop, Shipyard 세팅
+                SetInventoryItem(saveData);// SetSmuggler 세팅
             }
         }
     }
@@ -167,11 +147,9 @@ public class UI_Shop : UI_Inventory_Base
         saveData = inventoryID + currentIndex;
         OpenCanvas(_open);
 
-        layoutGroup.padding.top = 40;
         layoutGroup.padding.bottom = 15;
 
         slotType = SlotType.Storage;
-        toggleGroup.gameObject.SetActive(true);
         fixGroup.gameObject.SetActive(false);
 
         SetToggle(currentIndex);
@@ -184,11 +162,9 @@ public class UI_Shop : UI_Inventory_Base
         saveData = inventoryID + currentIndex;
         OpenCanvas(_open);
 
-        layoutGroup.padding.top = 40;
         layoutGroup.padding.bottom = 15;
 
         slotType = SlotType.Result;
-        toggleGroup.gameObject.SetActive(false);
         fixGroup.gameObject.SetActive(false);
 
         if (_open)
@@ -204,11 +180,9 @@ public class UI_Shop : UI_Inventory_Base
         saveData = inventoryID + currentIndex;
         OpenCanvas(_open);
 
-        layoutGroup.padding.top = 15;
         layoutGroup.padding.bottom = 15;
 
         slotType = SlotType.Result;
-        toggleGroup.gameObject.SetActive(false);
         fixGroup.gameObject.SetActive(false);
     }
 
@@ -224,11 +198,9 @@ public class UI_Shop : UI_Inventory_Base
         saveData = inventoryID;
         OpenCanvas(_open);
 
-        layoutGroup.padding.top = 15;
         layoutGroup.padding.bottom = 15;
 
         slotType = SlotType.Submit;
-        toggleGroup.gameObject.SetActive(false);
         fixGroup.gameObject.SetActive(false);
     }
 
@@ -257,8 +229,10 @@ public class UI_Shop : UI_Inventory_Base
         SetInventoryItem(saveData);// Storage 세팅
     }
 
-    void SetItemDisplay()
+    void SetItemDisplay(Data_ItemList _itemList)
     {
+        itemList = _itemList;
+        Debug.LogWarning($"{itemList.inventoryType}");
         StartCoroutine(DisplayItem());
     }
 
@@ -273,17 +247,10 @@ public class UI_Shop : UI_Inventory_Base
 
     void SetItem()// 상점 아이템 세팅
     {
-        Debug.LogWarning("상점 아이템 세팅");
-        //List<string> setID = new List<string>();
         int randomCount = Random.Range(itemList.itemAmount.x, itemList.itemAmount.y);// 랜덤 아이템 개수
+        Debug.LogWarning($"상점 아이템 세팅 : {randomCount}");
         string[] items = itemList.GetRandomItems(randomCount);
-        //for (int i = 0; i < randomCount; i++)
-        //{
-        //    string itemID = itemList.GetItemID();// 아이템 목록에서 아이템 ID 가져오기
-        //    setID.Add(itemID);
-        //}
-        System.Array.Sort(items);
-        //setID.Sort();// 정렬
+        System.Array.Sort(items);// 아이템 정렬
         // 아이템 배치
         for (int i = 0; i < items.Length; i++)
         {
