@@ -102,6 +102,8 @@ public class Const_Dialog
     public const string _3005 = "Data_Dialog_3005";
     public const string _3006 = "Data_Dialog_3006";
     public const string _3007 = "Data_Dialog_3007";
+    public const string _3008 = "Data_Dialog_3008";
+    public const string _3009 = "Data_Dialog_3009";
     // ¹Ð¼ö²Û
     public const string _4001 = "Data_Dialog_4001";
 }

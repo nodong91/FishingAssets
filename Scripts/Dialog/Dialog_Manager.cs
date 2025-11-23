@@ -212,6 +212,10 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         switch (_selectStruct.selectType)
         {
             case SelectStruct.SelectType.None:
+         
+                break;
+
+            case SelectStruct.SelectType.Out:
                 // ¼¶ ³ª°¡±â
                 Game_Manager.current.GetLanding.BackButton();
                 break;

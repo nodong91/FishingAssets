@@ -635,7 +635,7 @@ public class Game_Manager : MonoBehaviour
         Debug.LogWarning(" 대출금 상환 타이머 시작.");
     }
 
-    public void LoanEnd()
+    public void LoanEnd()// 대출 상환
     {
         Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
         if (CheckMoney(1000f) == true)
@@ -644,32 +644,48 @@ public class Game_Manager : MonoBehaviour
             GetMainUI.MoveMoney(-loanPrice);
             loanPrice = 0;
             GetMainUI.SetLoanText(loanPrice);
-            GetDialog.DialogStart_NPC(npc, Const_Dialog._3006);
+            if (gameOver == true)
+            {
+                GetDialog.DialogStart_NPC(npc, Const_Dialog._3009);
+            }
+            else
+            {
+                GetDialog.DialogStart_NPC(npc, Const_Dialog._3006);
+            }
             Debug.LogWarning(" 대출금 상환 타이머 종료.");
         }
         else
         {
-            GetDialog.DialogStart_NPC(npc, Const_Dialog._3007);
-            Debug.LogWarning(" 대출금 상환 실패.");
+            // 상환 날짜가 다가왔는지 확인
+            if (gameOver == true)
+            {
+                GetDialog.DialogStart_NPC(npc, Const_Dialog._3008);// 돈이 모자란거 같아요 대화
+            }
+            else
+            {
+                GetDialog.DialogStart_NPC(npc, Const_Dialog._3007);// 돈이 모자란거 같아요 대화
+                Debug.LogWarning(" 대출금 상환 실패.");
+            }
         }
     }
-
+    bool gameOver = false;
     public void GameOver()
     {
-        loanInterest += loanPrice * 0.1f;// 빌린 돈의 10%
-        if (loanInterest > loanPrice)
-        {
-            Debug.LogWarning("대출금 상환 시간이 도래했습니다!\n모든 세이브 파일이 삭제됩니다.");
-            OutOfControll(true);
-            GetMainUI.OpenCanvas(false);
+        gameOver = true;
+        //loanInterest += loanPrice * 0.1f;// 빌린 돈의 10%
+        //if (loanInterest > loanPrice)
+        //{
+        Debug.LogWarning("대출금 상환 시간이 도래했습니다!\n모든 세이브 파일이 삭제됩니다.");
+        OutOfControll(true);
+        GetMainUI.OpenCanvas(false);
 
-            Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
-            GetDialog.DialogStart_NPC(npc, Const_Dialog._3003);// 튜토리얼 대화 시작
-        }
-        else
-        {
-            int loanText = (int)(loanPrice + loanInterest);
-            GetMainUI.SetLoanText(loanText);
-        }
+        Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
+        GetDialog.DialogStart_NPC(npc, Const_Dialog._3003);// 튜토리얼 대화 시작
+        //}
+        //else
+        //{
+        //    int loanText = (int)(loanPrice + loanInterest);
+        //    GetMainUI.SetLoanText(loanText);
+        //}
     }
 }

@@ -293,6 +293,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bee821959c0bdea479cda7509218bace, type: 2}
   - {fileID: 11400000, guid: 547b5c239ec766145bc62f2b5817515e, type: 2}
   - {fileID: 11400000, guid: 5e361271ef64e7046a481163d26c60a2, type: 2}
+  - {fileID: 11400000, guid: 8b44588db27c2b64fa9565fc01b4f0e2, type: 2}
   - {fileID: 11400000, guid: cea078740f757734aa83e69f2c6cd749, type: 2}
   - {fileID: 11400000, guid: 0e1cb839b61206c46ae5be5fc5e05e1c, type: 2}
   - {fileID: 11400000, guid: 7107c347d59cfd7458f2ad79ddc77f59, type: 2}
@@ -342,7 +343,7 @@ MonoBehaviour:
     itemStruct:
       id: us_3001
       name: lugworm
-      itemType: 0
+      itemType: 1
       explanation: us_3001_01
       icon: Item_Bait_Worm
       itemClass: 3
@@ -462,17 +463,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 0.5, y: 10}
-    fishHealth: 10
-    fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
+    fishHealth: 200
+    fishPower: 0.2
+    fishSpeed: 2
+    fishCoolTime: 1
     fishAttackSpeed: 1
-    fishSpellTime: 3
+    fishSpellTime: 10
     fishGroggyTime: 1
     fishDefenseCount: 4
-    fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 50
-    addValue: 0.3
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 1000
+    addValue: 0.06
   - id: fs_1002
     itemStruct:
       id: fs_1002
@@ -489,17 +490,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 20, y: 60}
-    fishHealth: 10
-    fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
+    fishHealth: 300
+    fishPower: 2
+    fishSpeed: 3
+    fishCoolTime: 1
     fishAttackSpeed: 1
-    fishSpellTime: 3
+    fishSpellTime: 10
     fishGroggyTime: 1
     fishDefenseCount: 4
-    fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 50
-    addValue: 0.3
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 1500
+    addValue: 0.6
   - id: fs_1003
     itemStruct:
       id: fs_1003
@@ -515,17 +516,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 10, y: 50}
-    fishHealth: 12
-    fishPower: 2
-    fishSpeed: 1.2
-    fishCoolTime: 0
+    fishHealth: 1200
+    fishPower: 0.6
+    fishSpeed: 2
+    fishCoolTime: 1
     fishAttackSpeed: 1
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishSpellTime: 10
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
-    addValue: 0.6
+    addDuration: 6000
+    addValue: 0.18
   - id: fs_1004
     itemStruct:
       id: fs_1004
@@ -542,16 +543,16 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 20, y: 40}
-    fishHealth: 10
+    fishHealth: 1000
     fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishSpeed: 17
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 50
+    addDuration: 5000
     addValue: 0.3
   - id: fs_1005
     itemStruct:
@@ -568,16 +569,16 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 10, y: 50}
-    fishHealth: 12
+    fishHealth: 1200
     fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishSpeed: 0.1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
+    addDuration: 6000
     addValue: 0.3
   - id: fs_1006
     itemStruct:
@@ -595,17 +596,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 15, y: 45}
-    fishHealth: 12
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1200
+    fishPower: 2
+    fishSpeed: 5
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
-    addValue: 0
+    addDuration: 6000
+    addValue: 0.6
   - id: fs_1007
     itemStruct:
       id: fs_1007
@@ -621,17 +622,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 8, y: 30}
-    fishHealth: 10
-    fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1000
+    fishPower: 0.8
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 50
-    addValue: 0.3
+    addDuration: 5000
+    addValue: 0.24
   - id: fs_1008
     itemStruct:
       id: fs_1008
@@ -647,17 +648,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 7.5, y: 20}
-    fishHealth: 11
-    fishPower: 1
+    fishHealth: 1100
+    fishPower: 1.5
     fishSpeed: 1
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 55
-    addValue: 0.3
+    addDuration: 5500
+    addValue: 0.45
   - id: fs_1009
     itemStruct:
       id: fs_1009
@@ -673,17 +674,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 10.5, y: 30}
-    fishHealth: 12
-    fishPower: 1
+    fishHealth: 1200
+    fishPower: 1.5
     fishSpeed: 1
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
-    addValue: 0.3
+    addDuration: 6000
+    addValue: 0.45
   - id: fs_1010
     itemStruct:
       id: fs_1010
@@ -699,17 +700,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 5.2, y: 20}
-    fishHealth: 12
-    fishPower: 1.1
-    fishSpeed: 1.1
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1200
+    fishPower: 2
+    fishSpeed: 0.3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
-    addValue: 0.33
+    addDuration: 6000
+    addValue: 0.6
   - id: fs_1011
     itemStruct:
       id: fs_1011
@@ -725,17 +726,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 8, y: 20}
-    fishHealth: 11
-    fishPower: 1.1
-    fishSpeed: 1.1
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1100
+    fishPower: 0.8
+    fishSpeed: 1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 55
-    addValue: 0.33
+    addDuration: 5500
+    addValue: 0.24
   - id: fs_1012
     itemStruct:
       id: fs_1012
@@ -751,17 +752,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 2.5, y: 12}
-    fishHealth: 8
-    fishPower: 1
+    fishHealth: 800
+    fishPower: 0.3
     fishSpeed: 1
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 40
-    addValue: 0.3
+    addDuration: 4000
+    addValue: 0.09
   - id: fs_1013
     itemStruct:
       id: fs_1013
@@ -778,17 +779,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 5.3, y: 20}
-    fishHealth: 13
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1300
+    fishPower: 1.5
+    fishSpeed: 0.5
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 65
-    addValue: 0
+    addDuration: 6500
+    addValue: 0.45
   - id: fs_1014
     itemStruct:
       id: fs_1014
@@ -805,17 +806,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 12, y: 30}
-    fishHealth: 15
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1500
+    fishPower: 2.5
+    fishSpeed: 0.5
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
-    addValue: 0
+    addDuration: 7500
+    addValue: 0.75
   - id: fs_1101
     itemStruct:
       id: fs_1101
@@ -832,17 +833,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 6.5, y: 15}
-    fishHealth: 11
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1100
+    fishPower: 2
+    fishSpeed: 1.8
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 55
-    addValue: 0
+    addDuration: 5500
+    addValue: 0.6
   - id: fs_1102
     itemStruct:
       id: fs_1102
@@ -861,17 +862,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 20, y: 40}
-    fishHealth: 20
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 2000
+    fishPower: 4.5
+    fishSpeed: 0.4
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 100
-    addValue: 0
+    addDuration: 10000
+    addValue: 1.35
   - id: fs_1103
     itemStruct:
       id: fs_1103
@@ -889,17 +890,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 25, y: 50}
-    fishHealth: 15
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1500
+    fishPower: 3.8
+    fishSpeed: 0.5
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
-    addValue: 0
+    addDuration: 7500
+    addValue: 1.14
   - id: fs_1104
     itemStruct:
       id: fs_1104
@@ -915,17 +916,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 4, y: 13}
-    fishHealth: 15
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1500
+    fishPower: 1.5
+    fishSpeed: 1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
-    addValue: 0
+    addDuration: 7500
+    addValue: 0.45
   - id: fs_1105
     itemStruct:
       id: fs_1105
@@ -941,17 +942,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 3.5, y: 25}
-    fishHealth: 18
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1800
+    fishPower: 1.2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 90
-    addValue: 0
+    addDuration: 9000
+    addValue: 0.36
   - id: fs_1201
     itemStruct:
       id: fs_1201
@@ -972,17 +973,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 30, y: 80}
-    fishHealth: 30
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3000
+    fishPower: 5
+    fishSpeed: 6
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 150
-    addValue: 0
+    addDuration: 15000
+    addValue: 1.5
   - id: fs_1202
     itemStruct:
       id: fs_1202
@@ -1003,17 +1004,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 45.5, y: 100}
-    fishHealth: 50
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 5000
+    fishPower: 7
+    fishSpeed: 1.3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 250
-    addValue: 0
+    addDuration: 25000
+    addValue: 2.1
   - id: fs_1301
     itemStruct:
       id: fs_1301
@@ -1033,17 +1034,17 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 15, y: 100}
-    fishHealth: 80
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 8000
+    fishPower: 5
+    fishSpeed: 10
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 400
-    addValue: 0
+    addDuration: 40000
+    addValue: 1.5
   - id: fs_2001
     itemStruct:
       id: fs_2001
@@ -1060,17 +1061,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 20, y: 80}
-    fishHealth: 10
-    fishPower: 1
-    fishSpeed: 1
+    fishHealth: 1000
+    fishPower: 0.6
+    fishSpeed: 10
     fishCoolTime: 0
     fishAttackSpeed: 1
     fishSpellTime: 3
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 50
-    addValue: 0.3
+    addDuration: 5000
+    addValue: 0.18
   - id: fs_2002
     itemStruct:
       id: fs_2002
@@ -1089,17 +1090,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 12, y: 50}
-    fishHealth: 30
-    fishPower: 3
-    fishSpeed: 2
+    fishHealth: 3000
+    fishPower: 0.4
+    fishSpeed: 4
     fishCoolTime: 10
     fishAttackSpeed: 1
     fishSpellTime: 3
     fishGroggyTime: 1
-    fishDefenseCount: 5
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0.7, y: 1}
-    addDuration: 150
-    addValue: 0.9
+    addDuration: 15000
+    addValue: 0.12
   - id: fs_2003
     itemStruct:
       id: fs_2003
@@ -1117,17 +1118,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 25, y: 45}
-    fishHealth: 35
-    fishPower: 4
-    fishSpeed: 2
+    fishHealth: 3500
+    fishPower: 0.8
+    fishSpeed: 9
     fishCoolTime: 12
-    fishAttackSpeed: 1.5
+    fishAttackSpeed: 1
     fishSpellTime: 3
-    fishGroggyTime: 2
+    fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 1, y: 2}
-    addDuration: 175
-    addValue: 1.2
+    addDuration: 17500
+    addValue: 0.24
   - id: fs_2004
     itemStruct:
       id: fs_2004
@@ -1143,17 +1144,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 12.5, y: 30}
-    fishHealth: 20
-    fishPower: 2
-    fishSpeed: 1
-    fishCoolTime: 0
+    fishHealth: 2000
+    fishPower: 0.6
+    fishSpeed: 2
+    fishCoolTime: 1
     fishAttackSpeed: 1
-    fishSpellTime: 2
+    fishSpellTime: 3
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.7, y: 1}
-    addDuration: 100
-    addValue: 0.6
+    addDuration: 10000
+    addValue: 0.18
   - id: fs_2005
     itemStruct:
       id: fs_2005
@@ -1169,17 +1170,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 8, y: 15}
-    fishHealth: 10
-    fishPower: 1
+    fishHealth: 1000
+    fishPower: 0.6
     fishSpeed: 1
-    fishCoolTime: 0
+    fishCoolTime: 1
     fishAttackSpeed: 1
     fishSpellTime: 3
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 50
-    addValue: 0.3
+    addDuration: 5000
+    addValue: 0.18
   - id: fs_2006
     itemStruct:
       id: fs_2006
@@ -1198,17 +1199,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 20, y: 60}
-    fishHealth: 10
-    fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
+    fishHealth: 1000
+    fishPower: 5
+    fishSpeed: 7
+    fishCoolTime: 1
     fishAttackSpeed: 1
     fishSpellTime: 3
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 50
-    addValue: 0.3
+    addDuration: 5000
+    addValue: 1.5
   - id: fs_2007
     itemStruct:
       id: fs_2007
@@ -1227,17 +1228,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 30, y: 100}
-    fishHealth: 35
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3500
+    fishPower: 3
+    fishSpeed: 15
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 175
-    addValue: 0
+    addDuration: 17500
+    addValue: 0.9
   - id: fs_2008
     itemStruct:
       id: fs_2008
@@ -1258,17 +1259,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 35.5, y: 110}
-    fishHealth: 45
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 4500
+    fishPower: 4
+    fishSpeed: 7
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 225
-    addValue: 0
+    addDuration: 22500
+    addValue: 1.2
   - id: fs_2009
     itemStruct:
       id: fs_2009
@@ -1285,17 +1286,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 15, y: 40}
-    fishHealth: 12
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1200
+    fishPower: 1
+    fishSpeed: 8
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
-    addValue: 0
+    addDuration: 6000
+    addValue: 0.3
   - id: fs_2010
     itemStruct:
       id: fs_2010
@@ -1311,17 +1312,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 15, y: 30}
-    fishHealth: 13
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1300
+    fishPower: 0.3
+    fishSpeed: 12
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 65
-    addValue: 0
+    addDuration: 6500
+    addValue: 0.09
   - id: fs_2011
     itemStruct:
       id: fs_2011
@@ -1338,17 +1339,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 25, y: 70}
-    fishHealth: 30
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3000
+    fishPower: 1
+    fishSpeed: 6
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 150
-    addValue: 0
+    addDuration: 15000
+    addValue: 0.3
   - id: fs_2012
     itemStruct:
       id: fs_2012
@@ -1365,17 +1366,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 15, y: 45}
-    fishHealth: 20
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 2000
+    fishPower: 0.8
+    fishSpeed: 7
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 100
-    addValue: 0
+    addDuration: 10000
+    addValue: 0.24
   - id: fs_2013
     itemStruct:
       id: fs_2013
@@ -1392,17 +1393,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 9.5, y: 30}
-    fishHealth: 10
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1000
+    fishPower: 0.4
+    fishSpeed: 0.6
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 50
-    addValue: 0
+    addDuration: 5000
+    addValue: 0.12
   - id: fs_2014
     itemStruct:
       id: fs_2014
@@ -1423,17 +1424,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 30, y: 90}
-    fishHealth: 30
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3000
+    fishPower: 3
+    fishSpeed: 5
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 150
-    addValue: 0
+    addDuration: 15000
+    addValue: 0.9
   - id: fs_2015
     itemStruct:
       id: fs_2015
@@ -1450,17 +1451,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 20, y: 50}
-    fishHealth: 23
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 2300
+    fishPower: 0.8
+    fishSpeed: 16
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 115
-    addValue: 0
+    addDuration: 11500
+    addValue: 0.24
   - id: fs_2016
     itemStruct:
       id: fs_2016
@@ -1478,17 +1479,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 50, y: 100}
-    fishHealth: 35
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3500
+    fishPower: 1
+    fishSpeed: 10
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 175
-    addValue: 0
+    addDuration: 17500
+    addValue: 0.3
   - id: fs_2101
     itemStruct:
       id: fs_2101
@@ -1506,17 +1507,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 150, y: 250}
-    fishHealth: 50
-    fishPower: 5
-    fishSpeed: 3
+    fishHealth: 5000
+    fishPower: 3
+    fishSpeed: 4
     fishCoolTime: 12
-    fishAttackSpeed: 1.5
+    fishAttackSpeed: 1
     fishSpellTime: 3
     fishGroggyTime: 1
-    fishDefenseCount: 5
+    fishDefenseCount: 4
     fishTurnDelay: {x: 1, y: 2}
-    addDuration: 250
-    addValue: 1.5
+    addDuration: 25000
+    addValue: 0.9
   - id: fs_2102
     itemStruct:
       id: fs_2102
@@ -1536,17 +1537,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 90, y: 100}
-    fishHealth: 50
-    fishPower: 1
-    fishSpeed: 1
+    fishHealth: 5000
+    fishPower: 5
+    fishSpeed: 5
     fishCoolTime: 0
     fishAttackSpeed: 1
     fishSpellTime: 3
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 250
-    addValue: 0.3
+    addDuration: 25000
+    addValue: 1.5
   - id: fs_2103
     itemStruct:
       id: fs_2103
@@ -1562,17 +1563,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 1.3, y: 12}
-    fishHealth: 8
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 800
+    fishPower: 0.5
+    fishSpeed: 1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 40
-    addValue: 0
+    addDuration: 4000
+    addValue: 0.15
   - id: fs_2104
     itemStruct:
       id: fs_2104
@@ -1591,17 +1592,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 0.5, y: 20}
-    fishHealth: 12
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1200
+    fishPower: 1.5
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
-    addValue: 0
+    addDuration: 6000
+    addValue: 0.45
   - id: fs_2105
     itemStruct:
       id: fs_2105
@@ -1618,17 +1619,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 1, y: 30}
-    fishHealth: 15
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1500
+    fishPower: 1
+    fishSpeed: 0.1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
-    addValue: 0
+    addDuration: 7500
+    addValue: 0.3
   - id: fs_2106
     itemStruct:
       id: fs_2106
@@ -1645,17 +1646,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 15, y: 25}
-    fishHealth: 12
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1200
+    fishPower: 1.2
+    fishSpeed: 1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
-    addValue: 0
+    addDuration: 6000
+    addValue: 0.36
   - id: fs_2107
     itemStruct:
       id: fs_2107
@@ -1671,17 +1672,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 10, y: 30}
-    fishHealth: 11
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1100
+    fishPower: 1
+    fishSpeed: 0.1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 55
-    addValue: 0
+    addDuration: 5500
+    addValue: 0.3
   - id: fs_2201
     itemStruct:
       id: fs_2201
@@ -1698,17 +1699,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 25, y: 50}
-    fishHealth: 20
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 2000
+    fishPower: 2
+    fishSpeed: 3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 100
-    addValue: 0
+    addDuration: 10000
+    addValue: 0.6
   - id: fs_2202
     itemStruct:
       id: fs_2202
@@ -1726,17 +1727,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 30, y: 60}
-    fishHealth: 37
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3700
+    fishPower: 3.5
+    fishSpeed: 7
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 185
-    addValue: 0
+    addDuration: 18500
+    addValue: 1.05
   - id: fs_2203
     itemStruct:
       id: fs_2203
@@ -1757,17 +1758,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 90, y: 230}
-    fishHealth: 65
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 6500
+    fishPower: 20
+    fishSpeed: 1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 325
-    addValue: 0
+    addDuration: 32500
+    addValue: 6
   - id: fs_2301
     itemStruct:
       id: fs_2301
@@ -1788,17 +1789,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 30, y: 100}
-    fishHealth: 60
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 6000
+    fishPower: 12
+    fishSpeed: 3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 300
-    addValue: 0
+    addDuration: 30000
+    addValue: 3.6
   - id: fs_2401
     itemStruct:
       id: fs_2401
@@ -1822,17 +1823,17 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 100, y: 250}
-    fishHealth: 75
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 7500
+    fishPower: 20
+    fishSpeed: 30
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 375
-    addValue: 0
+    addDuration: 37500
+    addValue: 6
   - id: fs_3001
     itemStruct:
       id: fs_3001
@@ -1848,17 +1849,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 12, y: 30}
-    fishHealth: 10
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1000
+    fishPower: 1
+    fishSpeed: 6
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 50
-    addValue: 0
+    addDuration: 5000
+    addValue: 0.3
   - id: fs_3002
     itemStruct:
       id: fs_3002
@@ -1874,17 +1875,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 15, y: 30}
-    fishHealth: 11
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1100
+    fishPower: 1.2
+    fishSpeed: 5
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 55
-    addValue: 0
+    addDuration: 5500
+    addValue: 0.36
   - id: fs_3003
     itemStruct:
       id: fs_3003
@@ -1902,17 +1903,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 90, y: 150}
-    fishHealth: 36
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3600
+    fishPower: 5
+    fishSpeed: 16
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 180
-    addValue: 0
+    addDuration: 18000
+    addValue: 1.5
   - id: fs_3004
     itemStruct:
       id: fs_3004
@@ -1929,17 +1930,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 7, y: 20}
-    fishHealth: 12
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1200
+    fishPower: 2
+    fishSpeed: 3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
-    addValue: 0
+    addDuration: 6000
+    addValue: 0.6
   - id: fs_3005
     itemStruct:
       id: fs_3005
@@ -1950,22 +1951,22 @@ MonoBehaviour:
       itemClass: 4
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0
+      weight: 1
       price: 220
     areaType: 3
     fishDayType: 2
     size: {x: 10, y: 50}
-    fishHealth: 15
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1500
+    fishPower: 1
+    fishSpeed: 0.3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
-    addValue: 0
+    addDuration: 7500
+    addValue: 0.3
   - id: fs_3006
     itemStruct:
       id: fs_3006
@@ -1982,17 +1983,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 25.5, y: 50}
-    fishHealth: 15
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1500
+    fishPower: 2.2
+    fishSpeed: 19
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
-    addValue: 0
+    addDuration: 7500
+    addValue: 0.66
   - id: fs_3007
     itemStruct:
       id: fs_3007
@@ -2010,17 +2011,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 90, y: 180}
-    fishHealth: 30
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3000
+    fishPower: 6
+    fishSpeed: 0.5
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 150
-    addValue: 0
+    addDuration: 15000
+    addValue: 1.8
   - id: fs_3101
     itemStruct:
       id: fs_3101
@@ -2038,17 +2039,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 55, y: 120}
-    fishHealth: 36
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3600
+    fishPower: 6.5
+    fishSpeed: 4
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 180
-    addValue: 0
+    addDuration: 18000
+    addValue: 1.95
   - id: fs_3102
     itemStruct:
       id: fs_3102
@@ -2069,17 +2070,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 70, y: 110}
-    fishHealth: 28
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 2800
+    fishPower: 5.5
+    fishSpeed: 1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 140
-    addValue: 0
+    addDuration: 14000
+    addValue: 1.65
   - id: fs_3103
     itemStruct:
       id: fs_3103
@@ -2097,17 +2098,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 100, y: 200}
-    fishHealth: 40
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 4000
+    fishPower: 5
+    fishSpeed: 11
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 200
-    addValue: 0
+    addDuration: 20000
+    addValue: 1.5
   - id: fs_3104
     itemStruct:
       id: fs_3104
@@ -2126,17 +2127,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 130, y: 240}
-    fishHealth: 55
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 5500
+    fishPower: 7
+    fishSpeed: 18
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 275
-    addValue: 0
+    addDuration: 27500
+    addValue: 2.1
   - id: fs_3105
     itemStruct:
       id: fs_3105
@@ -2158,17 +2159,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 250, y: 700}
-    fishHealth: 70
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 7000
+    fishPower: 6.5
+    fishSpeed: 5
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 350
-    addValue: 0
+    addDuration: 35000
+    addValue: 1.95
   - id: fs_3106
     itemStruct:
       id: fs_3106
@@ -2187,17 +2188,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 45, y: 75}
-    fishHealth: 67
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 6700
+    fishPower: 4
+    fishSpeed: 3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 335
-    addValue: 0
+    addDuration: 33500
+    addValue: 1.2
   - id: fs_3107
     itemStruct:
       id: fs_3107
@@ -2215,17 +2216,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 20, y: 45}
-    fishHealth: 25
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 2500
+    fishPower: 3
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 125
-    addValue: 0
+    addDuration: 12500
+    addValue: 0.9
   - id: fs_3108
     itemStruct:
       id: fs_3108
@@ -2246,17 +2247,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 95, y: 150}
-    fishHealth: 75
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 7500
+    fishPower: 6
+    fishSpeed: 6
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 375
-    addValue: 0
+    addDuration: 37500
+    addValue: 1.8
   - id: fs_3109
     itemStruct:
       id: fs_3109
@@ -2277,17 +2278,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 50, y: 150}
-    fishHealth: 60
-    fishPower: 6
-    fishSpeed: 3
+    fishHealth: 6000
+    fishPower: 1.5
+    fishSpeed: 13
     fishCoolTime: 12
-    fishAttackSpeed: 2
-    fishSpellTime: 4
-    fishGroggyTime: 3
-    fishDefenseCount: 6
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 1, y: 2}
-    addDuration: 300
-    addValue: 1.8
+    addDuration: 30000
+    addValue: 0.45
   - id: fs_3201
     itemStruct:
       id: fs_3201
@@ -2310,17 +2311,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 200, y: 400}
-    fishHealth: 75
-    fishPower: 8
-    fishSpeed: 4
+    fishHealth: 7500
+    fishPower: 10
+    fishSpeed: 2
     fishCoolTime: 14
-    fishAttackSpeed: 2
-    fishSpellTime: 2
-    fishGroggyTime: 2
-    fishDefenseCount: 5
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 1.5, y: 1}
-    addDuration: 375
-    addValue: 2.4
+    addDuration: 37500
+    addValue: 3
   - id: fs_3202
     itemStruct:
       id: fs_3202
@@ -2340,17 +2341,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 150, y: 250}
-    fishHealth: 70
-    fishPower: 7
-    fishSpeed: 3
+    fishHealth: 7000
+    fishPower: 3
+    fishSpeed: 9
     fishCoolTime: 14
-    fishAttackSpeed: 2
+    fishAttackSpeed: 1
     fishSpellTime: 3
-    fishGroggyTime: 3
-    fishDefenseCount: 7
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 1.5, y: 1}
-    addDuration: 350
-    addValue: 2.1
+    addDuration: 35000
+    addValue: 0.9
   - id: fs_3203
     itemStruct:
       id: fs_3203
@@ -2373,17 +2374,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 60, y: 500}
-    fishHealth: 85
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 8500
+    fishPower: 15
+    fishSpeed: 22
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 425
-    addValue: 0
+    addDuration: 42500
+    addValue: 4.5
   - id: fs_3204
     itemStruct:
       id: fs_3204
@@ -2404,17 +2405,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 180, y: 400}
-    fishHealth: 73
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 7300
+    fishPower: 8
+    fishSpeed: 35
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 365
-    addValue: 0
+    addDuration: 36500
+    addValue: 2.4
   - id: fs_3205
     itemStruct:
       id: fs_3205
@@ -2435,17 +2436,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 100, y: 180}
-    fishHealth: 78
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 7800
+    fishPower: 5
+    fishSpeed: 8
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 390
-    addValue: 0
+    addDuration: 39000
+    addValue: 1.5
   - id: fs_3301
     itemStruct:
       id: fs_3301
@@ -2468,17 +2469,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 250, y: 500}
-    fishHealth: 67
-    fishPower: 9
-    fishSpeed: 4
+    fishHealth: 6700
+    fishPower: 6.5
+    fishSpeed: 31
     fishCoolTime: 14
-    fishAttackSpeed: 3
-    fishSpellTime: 2
+    fishAttackSpeed: 1
+    fishSpellTime: 3
     fishGroggyTime: 1
-    fishDefenseCount: 5
+    fishDefenseCount: 4
     fishTurnDelay: {x: 1.5, y: 1}
-    addDuration: 335
-    addValue: 2.7
+    addDuration: 33500
+    addValue: 1.95
   - id: fs_3302
     itemStruct:
       id: fs_3302
@@ -2500,17 +2501,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 450, y: 800}
-    fishHealth: 95
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 9500
+    fishPower: 10.5
+    fishSpeed: 12
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 475
-    addValue: 0
+    addDuration: 47500
+    addValue: 3.15
   - id: fs_3401
     itemStruct:
       id: fs_3401
@@ -2526,17 +2527,17 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 10, y: 20}
-    fishHealth: 32
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3200
+    fishPower: 1
+    fishSpeed: 1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 160
-    addValue: 0
+    addDuration: 16000
+    addValue: 0.3
   - id: fs_4101
     itemStruct:
       id: fs_4101
@@ -2553,17 +2554,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 30, y: 90}
-    fishHealth: 32
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 3200
+    fishPower: 1.2
+    fishSpeed: 3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 160
-    addValue: 0
+    addDuration: 16000
+    addValue: 0.36
   - id: fs_4102
     itemStruct:
       id: fs_4102
@@ -2582,17 +2583,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 50, y: 80}
-    fishHealth: 28
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 2800
+    fishPower: 2.2
+    fishSpeed: 7
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 140
-    addValue: 0
+    addDuration: 14000
+    addValue: 0.66
   - id: fs_4103
     itemStruct:
       id: fs_4103
@@ -2612,17 +2613,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 50, y: 100}
-    fishHealth: 45
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 4500
+    fishPower: 3
+    fishSpeed: 0.3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 225
-    addValue: 0
+    addDuration: 22500
+    addValue: 0.9
   - id: fs_4104
     itemStruct:
       id: fs_4104
@@ -2639,17 +2640,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 90, y: 100}
-    fishHealth: 10
-    fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
+    fishHealth: 1000
+    fishPower: 2
+    fishSpeed: 6
+    fishCoolTime: 1
     fishAttackSpeed: 1
     fishSpellTime: 3
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 50
-    addValue: 0.3
+    addDuration: 5000
+    addValue: 0.6
   - id: fs_4105
     itemStruct:
       id: fs_4105
@@ -2665,17 +2666,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 35, y: 65}
-    fishHealth: 21
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 2100
+    fishPower: 0.5
+    fishSpeed: 1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 105
-    addValue: 0
+    addDuration: 10500
+    addValue: 0.15
   - id: fs_4106
     itemStruct:
       id: fs_4106
@@ -2699,17 +2700,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 120, y: 220}
-    fishHealth: 55
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 5500
+    fishPower: 5
+    fishSpeed: 3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 275
-    addValue: 0
+    addDuration: 27500
+    addValue: 1.5
   - id: fs_4201
     itemStruct:
       id: fs_4201
@@ -2728,17 +2729,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 4, y: 70}
-    fishHealth: 65
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 6500
+    fishPower: 6.5
+    fishSpeed: 0.5
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 325
-    addValue: 0
+    addDuration: 32500
+    addValue: 1.95
   - id: fs_4202
     itemStruct:
       id: fs_4202
@@ -2758,17 +2759,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 40, y: 80}
-    fishHealth: 80
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 8000
+    fishPower: 7.2
+    fishSpeed: 1.5
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 400
-    addValue: 0
+    addDuration: 40000
+    addValue: 2.16
   - id: fs_4203
     itemStruct:
       id: fs_4203
@@ -2784,17 +2785,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 12, y: 20}
-    fishHealth: 18
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1800
+    fishPower: 0.7
+    fishSpeed: 0.3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 90
-    addValue: 0
+    addDuration: 9000
+    addValue: 0.21
   - id: fs_4204
     itemStruct:
       id: fs_4204
@@ -2816,17 +2817,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 600, y: 1700}
-    fishHealth: 100
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 10000
+    fishPower: 10.7
+    fishSpeed: 0.7
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 500
-    addValue: 0
+    addDuration: 50000
+    addValue: 3.21
   - id: fs_4205
     itemStruct:
       id: fs_4205
@@ -2843,17 +2844,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 0.3, y: 9.5}
-    fishHealth: 15
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1500
+    fishPower: 0.3
+    fishSpeed: 0.1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
-    addValue: 0
+    addDuration: 7500
+    addValue: 0.09
   - id: fs_4301
     itemStruct:
       id: fs_4301
@@ -2879,17 +2880,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 500, y: 2000}
-    fishHealth: 100
-    fishPower: 10
-    fishSpeed: 5
+    fishHealth: 10000
+    fishPower: 5
+    fishSpeed: 2
     fishCoolTime: 18
-    fishAttackSpeed: 4
-    fishSpellTime: 2
+    fishAttackSpeed: 1
+    fishSpellTime: 3
     fishGroggyTime: 1
-    fishDefenseCount: 6
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0.3, y: 0.9}
-    addDuration: 500
-    addValue: 3
+    addDuration: 50000
+    addValue: 1.5
   - id: fs_4302
     itemStruct:
       id: fs_4302
@@ -2908,17 +2909,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 180, y: 720}
-    fishHealth: 120
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 12000
+    fishPower: 8.1
+    fishSpeed: 3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 600
-    addValue: 0
+    addDuration: 60000
+    addValue: 2.43
   - id: fs_4303
     itemStruct:
       id: fs_4303
@@ -2934,17 +2935,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 8, y: 20}
-    fishHealth: 15
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 1500
+    fishPower: 1.2
+    fishSpeed: 1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
-    addValue: 0
+    addDuration: 7500
+    addValue: 0.36
   - id: fs_4304
     itemStruct:
       id: fs_4304
@@ -2968,17 +2969,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 100, y: 250}
-    fishHealth: 65
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 6500
+    fishPower: 5.4
+    fishSpeed: 3
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 325
-    addValue: 0
+    addDuration: 32500
+    addValue: 1.62
   - id: fs_4305
     itemStruct:
       id: fs_4305
@@ -2998,17 +2999,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 35, y: 120}
-    fishHealth: 55
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 5500
+    fishPower: 2.4
+    fishSpeed: 14
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 275
-    addValue: 0
+    addDuration: 27500
+    addValue: 0.72
   - id: fs_4306
     itemStruct:
       id: fs_4306
@@ -3027,17 +3028,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 25, y: 50}
-    fishHealth: 20
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 2000
+    fishPower: 2.2
+    fishSpeed: 0.1
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 100
-    addValue: 0
+    addDuration: 10000
+    addValue: 0.66
   - id: fs_4401
     itemStruct:
       id: fs_4401
@@ -3056,17 +3057,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 60, y: 120}
-    fishHealth: 65
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 6500
+    fishPower: 3.2
+    fishSpeed: 6
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 325
-    addValue: 0
+    addDuration: 32500
+    addValue: 0.96
   - id: fs_4402
     itemStruct:
       id: fs_4402
@@ -3086,17 +3087,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 120, y: 230}
-    fishHealth: 115
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 11500
+    fishPower: 7.6
+    fishSpeed: 11
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 575
-    addValue: 0
+    addDuration: 57500
+    addValue: 2.28
   - id: fs_4403
     itemStruct:
       id: fs_4403
@@ -3119,17 +3120,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 80, y: 180}
-    fishHealth: 121
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 12100
+    fishPower: 6.5
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 605
-    addValue: 0
+    addDuration: 60500
+    addValue: 1.95
   - id: fs_4404
     itemStruct:
       id: fs_4404
@@ -3152,17 +3153,17 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 180, y: 300}
-    fishHealth: 155
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
+    fishHealth: 15500
+    fishPower: 11.5
+    fishSpeed: 24
+    fishCoolTime: 1
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 775
-    addValue: 0
+    addDuration: 77500
+    addValue: 3.45
   skillStruct:
   - id: sk_001_00
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 1"
@@ -4031,7 +4032,7 @@ MonoBehaviour:
     japanese: "\u75B2\u308C\u305F \u306E\u3067 \u5C11\u3057 \u4F11\u3093\u3067 \u304B\u3089
       \u5E30\u308A\u307E\u3059"
     chinese: "\u6709\u70B9 \u75B2\u5026 \u6240\u4EE5 \u6B47\u4F1A \u513F \u518D \u79BB\u5F00"
-  - id: di_3001_d
+  - id: di_3002_f
     english: Can I borrow some money
     korean: "\uB3C8\uC744 \uBE4C\uB9B4 \uC218 \uC788\uC744\uAE4C."
     japanese: "\u304A\u91D1 \u3092 \u501F\u308A\u308B \u3053\u3068 \u304C \u3067\u304D\u307E\u3059\u304B"

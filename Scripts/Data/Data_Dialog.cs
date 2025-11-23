@@ -52,7 +52,8 @@ public class Data_Dialog : ScriptableObject
         public string selectDialog;
         public enum SelectType
         {
-            None = 0,// 나가기
+            None = 0,// 닫기
+            Out = 1,// 섬으로 들어가기
             Upgrade = 5,// 스킬 업그레이드
             Rest = 6,// 휴식 - 잠자기
             Street = 7,// 거리 열기
