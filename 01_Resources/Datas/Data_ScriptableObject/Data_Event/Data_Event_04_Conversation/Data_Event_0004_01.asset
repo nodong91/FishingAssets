@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: Data_Event_0004_01
   m_EditorClassIdentifier: 
   eventStruct:
-    contents: "\uCDE8\uD55C \uB4EF \uD55C \uCEE4\uB2E4\uB780 \uACE0\uC591\uC774\uAC00
-      \uC77C\uC5B4\uB098\uB354\uB2C8/n{0}/n\uB77C\uBA70 \uB2E4\uAC00\uC628\uB2E4"
+    contents: ev_0004_01_a
     emotionType: 0
     dialogTypes:
-    - replaceText: "`\uBB34\uC2A8 \uC0C1\uAD00\uC774\uC57C?`"
+    - replaceText: ev_0004_01_b
       textSize: 35
       typingSpeed: 0
       textColor: {r: 1, g: 0, b: 0, a: 0}
@@ -26,9 +25,9 @@ MonoBehaviour:
       actionInterval: 20
       actionAngle: {x: 0, y: 5}
   eventSelect:
-  - selectDialog: "\uC2F8\uC6B0\uC790\uB294\uAC70\uC57C?"
+  - selectDialog: ev_0004_01_c
     selectEvent:
     - {fileID: 11400000, guid: bfcd3619c0a94ef4c997c0850fe7db7d, type: 2}
     - {fileID: 11400000, guid: 92aeb126bf5e72a4fb7d29964774b908, type: 2}
-  - selectDialog: "\uB3CC\uC544\uAC04\uB2E4"
+  - selectDialog: ev_0001_03_b
     selectEvent: []
