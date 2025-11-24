@@ -28,6 +28,11 @@ public class Const_ETC
     public const string _setting = "etc_0004";
     public const string _exit = "etc_0005";
     public const string _activeSkill = "etc_0006";
+
+    public const string _shipyard = "etc_0007";
+    public const string _fishshop = "etc_0008";
+    public const string _village = "etc_0009";
+    public const string _notice = "etc_0010";
 }
 
 public class Const_Save
