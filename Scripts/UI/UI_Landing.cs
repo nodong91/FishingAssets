@@ -47,6 +47,11 @@ public class UI_Landing : MonoBehaviour
     public Custom_Button downTownButton;
     public Custom_Button boardButton;
     bool inlanding;
+
+    public TMPro.TMP_Text fishshopInfo;
+    public TMPro.TMP_Text shipyardInfo;
+    public TMPro.TMP_Text villageInfo;
+    public TMPro.TMP_Text noticeInfo;
     Data_Manager.DayType lightMode => Game_Manager.current.GetMainUI.timeUI.lightMode;
     Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
 
@@ -65,6 +70,11 @@ public class UI_Landing : MonoBehaviour
         shipyardButton.SetButton(ShipyardButton, EnterButton, ExtiButton);
         downTownButton.SetButton(DownTownButton, EnterButton, ExtiButton);
         boardButton.SetButton(BoardButton, EnterButton, ExtiButton);
+
+        fishshopInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._fishshop);
+        shipyardInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._shipyard);
+        villageInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._village);
+        noticeInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._notice);
     }
 
     void EnterButton(Custom_Button _button)
