@@ -31,12 +31,34 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void SetStart()
     {
-        gageImage.fillAmount = 0f;
-        if (Skill == null)
+        if (Skill == null || System.String.IsNullOrEmpty(Skill.id) == true)
             return;
+        Debug.LogWarning(Skill.id);
+        int level = int.Parse(Skill.id.Substring(Skill.id.Length - 2, 2));
+        gageImage.color = SkillColor(level);
+        gageImage.fillAmount = 0f;
         if (Skill.icon != null && sprites.ContainsKey(Skill.icon))
         {
+            iconImage.gameObject.SetActive(true);
             iconImage.sprite = sprites[Skill.icon];
+        }
+    }
+
+    Color SkillColor(int _index)
+    {
+        switch (_index)
+        {
+            case 0: return P01_Utility.HexToColor("AAAAAA");
+            case 1: return P01_Utility.HexToColor("F7F7F7");
+            case 2: return P01_Utility.HexToColor("D6CE86");
+            case 3: return P01_Utility.HexToColor("AAD589");
+            case 4: return P01_Utility.HexToColor("7ACB8E");
+            case 5: return P01_Utility.HexToColor("80CECB");
+            case 6: return P01_Utility.HexToColor("92A1D7");
+            case 7: return P01_Utility.HexToColor("A690D1");
+            case 8: return P01_Utility.HexToColor("CD96C4");
+            case 9: return P01_Utility.HexToColor("C96D6D");
+            default: return Color.black;
         }
     }
 

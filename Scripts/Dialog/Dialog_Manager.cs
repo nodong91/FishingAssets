@@ -278,7 +278,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     void RandomItemSetting(Data_ItemList _itemList)
     {
         // 랜덤 아이템
-        int amount = Random.Range(_itemList.itemAmount.x, _itemList.itemAmount.y);
+        int amount = Random.Range(_itemList.randomAmount.x, _itemList.randomAmount.y);
         string[] itemIDs = _itemList.GetRandomItems(amount);
         Game_Manager.current.GetInventory.SetResult(itemIDs);// 대화 보상
     }

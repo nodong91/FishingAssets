@@ -35,7 +35,6 @@ public class Fishing_Manager : MonoBehaviour
     float catchRadius = 1f;// 지름이 클수록 데미지가 약해짐 (줄을 느슨하게)
 
     FishStruct currentFish;
-    RandomSize currentSize;
     public GameObject fishPrefab;
     Coroutine fishAction;
 
@@ -229,7 +228,7 @@ public class Fishing_Manager : MonoBehaviour
         fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
         fishPrefab.transform.position = fishTargetPoint;
 
-        fishHealth = currentFish.fishHealth / (catchStatus.catchMaxHealth + currentFish.fishHealth);
+        fishHealth = currentFish.fishHealth;
         fishingCanvas.SetFishHP(fishHealth);
 
         catchPrefab.transform.position = fishPrefab.transform.position;
@@ -329,7 +328,7 @@ public class Fishing_Manager : MonoBehaviour
             //float damage = setDamage / (currentFish.fishHealth + catchStatus.catchMaxHealth);
             if (catching == true)
             {
-                float damage = catchStatus.catchPower / (currentFish.fishHealth + catchStatus.catchMaxHealth);
+                float damage = catchStatus.catchPower;
                 fishHealth -= damage * Time.deltaTime;
             }
             fishingCanvas.SetFishIcon(1f);
@@ -337,7 +336,7 @@ public class Fishing_Manager : MonoBehaviour
         else
         {
             // 물고기 힘만큼 힐
-            float damage = currentFish.fishPower / (currentFish.fishHealth + catchStatus.catchMaxHealth);
+            float damage = currentFish.fishPower;
             fishHealth += damage * Time.deltaTime;
             fishingCanvas.SetFishIcon(-1f);
         }

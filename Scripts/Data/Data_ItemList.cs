@@ -21,7 +21,7 @@ public class Data_ItemList : ScriptableObject
         [Range(0.1f, 100f)]
         public float chance;
     }
-    public Vector2Int itemAmount;
+    public Vector2Int randomAmount;
     public ItemIDStruct[] itemIDs;
 
     public string[] GetFixItems()

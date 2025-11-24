@@ -247,7 +247,7 @@ public class UI_Shop : UI_Inventory_Base
 
     void SetItem()// 상점 아이템 세팅
     {
-        int randomCount = Random.Range(itemList.itemAmount.x, itemList.itemAmount.y);// 랜덤 아이템 개수
+        int randomCount = Random.Range(itemList.randomAmount.x, itemList.randomAmount.y);// 랜덤 아이템 개수
         Debug.LogWarning($"상점 아이템 세팅 : {randomCount}");
         string[] items = itemList.GetRandomItems(randomCount);
         System.Array.Sort(items);// 아이템 정렬
