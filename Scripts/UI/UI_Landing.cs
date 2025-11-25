@@ -54,6 +54,7 @@ public class UI_Landing : MonoBehaviour
     public TMPro.TMP_Text noticeInfo;
     Data_Manager.DayType lightMode => Game_Manager.current.GetMainUI.timeUI.lightMode;
     Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
+    Custom_Button currentButton = null;
 
     public void SetStart()
     {
@@ -66,24 +67,26 @@ public class UI_Landing : MonoBehaviour
         storageButton.SetButton(StorageButton);
         changeButton.SetButton(ChangeButton);
 
-        shopButton.SetButton(ShopButton, EnterButton, ExtiButton);
-        shipyardButton.SetButton(ShipyardButton, EnterButton, ExtiButton);
-        downTownButton.SetButton(DownTownButton, EnterButton, ExtiButton);
-        boardButton.SetButton(BoardButton, EnterButton, ExtiButton);
+        shopButton.SetButton(ShopButton, EnterButton, ExitButton);
+        shipyardButton.SetButton(ShipyardButton, EnterButton, ExitButton);
+        downTownButton.SetButton(DownTownButton, EnterButton, ExitButton);
+        boardButton.SetButton(BoardButton, EnterButton, ExitButton);
 
         fishshopInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._fishshop);
         shipyardInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._shipyard);
         villageInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._village);
         noticeInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._notice);
     }
-
+  
     void EnterButton(Custom_Button _button)
     {
+        currentButton = _button;
         _button.buttonImage.gameObject.SetActive(true);
     }
 
-    void ExtiButton(Custom_Button _button)
+    void ExitButton(Custom_Button _button)
     {
+        currentButton = null;
         _button.buttonImage.gameObject.SetActive(false);
     }
 
@@ -171,6 +174,7 @@ public class UI_Landing : MonoBehaviour
 
     bool CheckShip()
     {
+        ExitButton(currentButton);
         if (Game_Manager.current.shipData == null)
         {
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];

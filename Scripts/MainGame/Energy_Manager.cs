@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Energy_Manager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
+    public TMPro.TMP_Text titleText, buttonText;
     public TMPro.TMP_Text energyText, energyPriceText;
     public Slider energySlider;
     float EnergyMaxAmount => Game_Manager.current.GetPlayer.GetMaxEnergy;
@@ -15,6 +16,8 @@ public class Energy_Manager : MonoBehaviour
 
     public void SetStart()
     {
+        titleText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._dragToFuel);
+        buttonText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._fill);
         energySlider.onValueChanged.AddListener(SetEnergy);
         buyButton.SetButton(FillUpEnergy);
         backButton.SetButton(Game_Manager.current.GetLanding.BackButton);
@@ -70,7 +73,7 @@ public class Energy_Manager : MonoBehaviour
         // 1%당 비용  energyMaxAmount / energyPrice;
         buyPrice = (int)(addEnergy * (EnergyMaxAmount / 100f * energyPrice));
         buyPrice = Mathf.Max(buyPrice, 0);
-        energyPriceText.text = $"{buyPrice}원";
+        energyPriceText.text = $"{buyPrice}";
         buyButton.gameObject.SetActive(buyPrice > 0);// 충전량 있을때만 활성
     }
 }

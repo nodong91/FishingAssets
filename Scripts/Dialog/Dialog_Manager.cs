@@ -75,22 +75,41 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             dataNPC = _npc;
             dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
             Dialog_Npc(dataDialog);
-            if (dataDialog.selectID == "AddLoan")
+            if (dataDialog.selectID == "AddLoan")// 돈 빌리기
             {
-                // 대출
                 if (Game_Manager.current.GetMainUI.timeUI.loanActive == false)
                 {
-                    // 돈 빌림
-                    Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
-                    AddNPC(data_NPC, Const_Dialog._3002);
+
                 }
                 else
                 {
-                    // 돈 갚음
-                    Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
-                    AddNPC(data_NPC, Const_Dialog._3005);
+
                 }
             }
+            //if (dataDialog.selectID == "AddLoan")// 돈 빌리기
+            //{
+            //    // 대출
+            //    if (Game_Manager.current.GetMainUI.timeUI.loanActive == false)
+            //    {
+            //        // 돈 빌림
+            //        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
+            //        AddNPC(data_NPC, Const_Dialog._3002);
+            //    }
+            //    else
+            //    {
+            //        // 돈 갚음
+            //        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
+            //        AddNPC(data_NPC, Const_Dialog._3005);
+            //    }
+            //    SelectStruct selectStruct = new SelectStruct();
+            //    selectStruct.selectDialog = "불고기버거";
+            //    selectStruct.selectType = SelectStruct.SelectType.Out;
+
+            //    Dialog_SelectButton button = GetSelectButton();
+            //    button.gameObject.SetActive(true);
+            //    button.SetStart(selectStruct, SelectedButton);
+            //    dialogSelectButton.Add(button);
+            //}
         }
         else
         {
@@ -164,55 +183,46 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         StopAllCoroutines();// 기존 움직이는 폰트가 있다면 정지
 
         actionBool = false;
-        if (_selectStruct.npcData != null)// 엔피씨데이터가 있으면 대화 시작
+        if (_selectStruct.scriptableObject != null)
         {
-            DialogStart_NPC(_selectStruct.npcData, _selectStruct.dialogData.name);
-            return;
-        }
-
-        if (_selectStruct.itemList != null)
-        {
-            Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;// 상점이나 조선소 닫기시 섬 나가기 버튼으로 변경
-            switch (_selectStruct.itemList.inventoryType)
+            if (_selectStruct.scriptableObject as Data_Dialog)
             {
-                case Data_ItemList.InventoryType.Fix:
-                    FixItemSetting(_selectStruct.itemList);// 일반 고정 아이템
-                    break;
-
-                case Data_ItemList.InventoryType.Random:
-                    RandomItemSetting(_selectStruct.itemList);
-                    break;
-
-                case Data_ItemList.InventoryType.Shop:
-                    // 상점 열기
-                    Game_Manager.current.GetInventory.OpenShop(_selectStruct.itemList);
-                    break;
-
-                case Data_ItemList.InventoryType.Shipyard:
-                    // 조선소 열기
-                    Game_Manager.current.GetInventory.OpenShipyard(_selectStruct.itemList);
-                    break;
-
-                case Data_ItemList.InventoryType.Smuggler:
-                    // 밀수 열기
-                    Game_Manager.current.GetInventory.OpenShipyard(_selectStruct.itemList);
-                    break;
-
-                case Data_ItemList.InventoryType.Fix_Loan:
-                    // 대출 타이머 시작
-                    Game_Manager.current.LoanStart();
-                    FixItemSetting(_selectStruct.itemList);// 대출
-                    Debug.LogWarning("대출 타이머 시작");
-                    break;
+                Data_Dialog data = _selectStruct.scriptableObject as Data_Dialog;
+                DataDialog(data);
             }
-            OpenCanvas(false);
-            return;
+            else if (_selectStruct.scriptableObject as Data_Dialog_If)
+            {
+                Data_Dialog_If data = _selectStruct.scriptableObject as Data_Dialog_If;
+                DataDialogIf(data);
+            }
+            else if (_selectStruct.scriptableObject as Data_ItemList)
+            {
+                Data_ItemList data = _selectStruct.scriptableObject as Data_ItemList;
+                DataItemList(data);
+            }
         }
+        else
+        {
+            ActionDialog(_selectStruct);
+        }
+    }
 
+    void DataDialog(Data_Dialog _data)
+    {
+        DialogStart_NPC(_data.npc, _data.name);
+    }
+
+    void DataDialogIf(Data_Dialog_If _data)
+    {
+
+    }
+
+    void ActionDialog(SelectStruct _selectStruct)
+    {
         switch (_selectStruct.selectType)
         {
             case SelectStruct.SelectType.None:
-         
+
                 break;
 
             case SelectStruct.SelectType.Out:
@@ -250,12 +260,50 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 Game_Manager.current.OutOfControll(true);
                 break;
 
-            case SelectStruct.SelectType.Loan:
+            case SelectStruct.SelectType.PayBack:
                 Game_Manager.current.LoanEnd();
                 return;
 
             case SelectStruct.SelectType.GameOver:
                 StartCoroutine(SelectGameOver());
+                break;
+        }
+        OpenCanvas(false);
+    }
+
+    void DataItemList(Data_ItemList _data)
+    {
+        Game_Manager.current.GetMainUI.dele_CloseButton = Game_Manager.current.GetLanding.BackButton;// 상점이나 조선소 닫기시 섬 나가기 버튼으로 변경
+        switch (_data.inventoryType)
+        {
+            case Data_ItemList.InventoryType.Fix:
+                FixItemSetting(_data);// 일반 고정 아이템
+                break;
+
+            case Data_ItemList.InventoryType.Random:
+                RandomItemSetting(_data);
+                break;
+
+            case Data_ItemList.InventoryType.Shop:
+                // 상점 열기
+                Game_Manager.current.GetInventory.OpenShop(_data);
+                break;
+
+            case Data_ItemList.InventoryType.Shipyard:
+                // 조선소 열기
+                Game_Manager.current.GetInventory.OpenShipyard(_data);
+                break;
+
+            case Data_ItemList.InventoryType.Smuggler:
+                // 밀수 열기
+                Game_Manager.current.GetInventory.OpenShipyard(_data);
+                break;
+
+            case Data_ItemList.InventoryType.Fix_Loan:
+                // 대출 타이머 시작
+                Game_Manager.current.LoanStart();
+                FixItemSetting(_data);// 대출
+                Debug.LogWarning("대출 타이머 시작");
                 break;
         }
         OpenCanvas(false);

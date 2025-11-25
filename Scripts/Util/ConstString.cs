@@ -10,6 +10,11 @@ public class Const_Scene
     public const string _test = "Test";
 }
 
+public class Const_Shader
+{
+    public const string _fillAmount = "_FillAmount";
+}
+
 public class Const_Audio
 {
     public const string _titleTheme = "bgm_0001";
@@ -33,6 +38,8 @@ public class Const_ETC
     public const string _fishshop = "etc_0008";
     public const string _village = "etc_0009";
     public const string _notice = "etc_0010";
+    public const string _dragToFuel = "etc_0011";
+    public const string _fill = "etc_0012";
 }
 
 public class Const_Save

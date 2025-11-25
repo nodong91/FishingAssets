@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data_Dialog", menuName = "Scriptable Objects/Data_Dialog")]
 public class Data_Dialog : ScriptableObject
 {
+    public Data_NPC npc;
     [System.Serializable]
     public struct TextStruct
     {
@@ -58,7 +59,7 @@ public class Data_Dialog : ScriptableObject
             Rest = 6,// »ﬁΩƒ - ¿·¿⁄±‚
             Street = 7,// ∞≈∏Æ ø≠±‚
             InLand = 8,// ∆©≈‰∏ÆæÛ Ω√¿€
-            Loan = 9,// µ∑ ∞±±‚
+            PayBack = 9,// µ∑ ∞±±‚
             GameOver = 10,
         }
         public SelectType selectType;
@@ -67,6 +68,10 @@ public class Data_Dialog : ScriptableObject
         [Header(" [ ¥Î»≠ ]")]
         public Data_NPC npcData;
         public Data_Dialog dialogData;
+        [Header(" [ ¡∂∞« ]")]
+        public Data_Dialog_If dataDialogIf;
+
+        public ScriptableObject scriptableObject;
     }
     public SelectStruct[] selectStructs;
 }
