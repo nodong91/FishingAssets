@@ -246,6 +246,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6e94cad31948f5e4d85dfbe90fd9367c, type: 3}
   - {fileID: 21300000, guid: b01ae7b8cef0fc14888dd5e3ae9a7265, type: 3}
   - {fileID: 21300000, guid: 1baacfee7acd4d84d9d889e310b6a9f3, type: 3}
+  - {fileID: 21300000, guid: 94b2bd9bd92bfa14e939ef315b58abc0, type: 3}
+  - {fileID: 21300000, guid: 33d6d26b2df2e454880fd8ba19b1956b, type: 3}
+  - {fileID: 21300000, guid: f589596813bb3c147bbbd96324f33f5a, type: 3}
+  - {fileID: 21300000, guid: cde27620f051bcb43b0e8b2062a96e12, type: 3}
+  - {fileID: 21300000, guid: 1c8a76eb06c46cb438d58f9299b34793, type: 3}
+  - {fileID: 21300000, guid: 4937a5a954885554986f1ff33424e856, type: 3}
+  - {fileID: 21300000, guid: 57a5c8afa47d13746bb51473ccdd8f08, type: 3}
+  - {fileID: 21300000, guid: efe0eda797a7ecf4b93e49e741764a62, type: 3}
+  - {fileID: 21300000, guid: 333b5d7d03e2f684aaf28d80c14d2804, type: 3}
+  - {fileID: 21300000, guid: 100add5c44fd32840a5f9e35d92c1d04, type: 3}
   - {fileID: 21300000, guid: 7dfff1ca83eccfb4c8a0155b0b70f452, type: 3}
   - {fileID: 21300000, guid: 154eedd79976a024fbdb93ee6f4ea268, type: 3}
   - {fileID: 21300000, guid: a73091521303c5c4899dfadc6f7e3878, type: 3}
@@ -4409,10 +4419,20 @@ MonoBehaviour:
     chinese: "\u606D\u559C \u4F60"
   - id: di_3006_a
     english: I have settled the account completely.
-    korean: "\uD655\uC2E4\uD558\uAC8C \uC815\uC0B0\uD588\uC2B5\uB2C8\uB2E4. \uB2E4\uC74C\uC5D0
-      \uB610 \uBD80\uD0C1\uB4DC\uB824\uC694."
+    korean: "\uD655\uC2E4\uD558\uAC8C \uC815\uC0B0\uD588\uC2B5\uB2C8\uB2E4."
     japanese: "\u78BA\u304B\u306B \u7CBE\u7B97 \u3044\u305F\u3057\u307E\u3057\u305F."
     chinese: "\u5DF2\u7ECF \u5F7B\u5E95 \u7ED3\u6E05 \u4E86."
+  - id: "di_3006_\u3160"
+    english: And since repayment is possible any time you can return it when you
+      have the extra money.
+    korean: "\uADF8\uB9AC\uACE0 \uC5B8\uC81C\uB4E0 \uB300\uCD9C\uC0C1\uD658\uC774
+      \uAC00\uB2A5\uD558\uB2C8\uAE4C \uC5EC\uC720\uAC00 \uC0DD\uAE30\uBA74 \uB3CC\uB824\uC8FC\uC2DC\uBA74
+      \uB429\uB2C8\uB2E4."
+    japanese: "\u305D\u308C \u306B \u3044\u3064\u3067\u3082 \u8FD4\u6E08 \u53EF\u80FD
+      \u3067\u3059\u304B\u3089 \u4F59\u88D5 \u304C \u3067\u304D\u305F\u3089 \u304A\u8FD4\u3057
+      \u304F\u3060\u3055\u3044."
+    chinese: "\u800C\u4E14 \u968F\u65F6 \u90FD \u53EF\u4EE5 \u8FD8\u6B3E \u6240\u4EE5
+      \u6709 \u4F59\u529B \u7684 \u65F6\u5019 \u8FD8\u7ED9 \u6211 \u5C31 \u884C."
   - id: di_3007_a
     english: I think I am short on money.
     korean: "\uB3C8\uC774 \uBAA8\uC790\uB780 \uAC70 \uAC19\uC544\uC694."
@@ -4601,6 +4621,16 @@ MonoBehaviour:
     korean: "\uAC8C\uC2DC\uD310"
     japanese: "\u63B2\u793A\u677F"
     chinese: "\u5E03\u544A\u680F"
+  - id: etc_0011
+    english: Drag to Refuel
+    korean: "\uB4DC\uB798\uADF8\uD558\uC5EC \uC5F0\uB8CC\uBCF4\uAE09"
+    japanese: "\u30C9\u30E9\u30C3\u30B0 \u3057\u3066 \u71C3\u6599 \u88DC\u7D66"
+    chinese: "\u62D6\u52A8 \u6765 \u8865\u5145 \u71C3\u6599"
+  - id: etc_0012
+    english: fill
+    korean: "\uCC44\uC6B0\uAE30"
+    japanese: "\u6E80\u305F\u3059"
+    chinese: "\u8865\u5145"
   - id: ev_0001_01_a
     english: I chased after them and got badly beaten and lost {0}
     korean: "\uB4A4\uCAD3\uC544 \uAC14\uB2E4\uAC00 \uC5C4\uCCAD\uB098\uAC8C \uC5BB\uC5B4\uD130\uC9C0\uACE0
@@ -4890,7 +4920,7 @@ MonoBehaviour:
       \uAE30\uC0C1\uCC9C\uC678\uD55C \uBB3C\uACE0\uAE30\uAC00 \uB9CE\uB2E4\uB354\uAD70\"/n\"\uBA39\uC744
       \uC218 \uC788\uC5B4?\""
     japanese: "\"\u3042\u3093\u305F{0}\u3067\u91E3\u308A\u3092\u3057\u305F\u3053\u3068\u3042\u308B\u304B\u3044?\"/n\"\u4FFA\u306E\u8239\u3058\u3083\u305D\u306E\u8FD1\u304F\u306B\u3082\u884C\u3051\u306A\u3044\u3088\"/n\"\u3042\u305D\u3053\u306B\u306F\u3068\u3093\u3067\u3082\u306A\u3044\u9B5A\u304C\u305F\u304F\u3055\u3093\u3044\u308B\u3089\u3057\u3044\"/n\"\u98DF\u3079\u3089\u308C\u308B\u306E\u304B?\""
-    chinese: "\"\u4F60\u6709\u6CA1\u6709\u5728{\u6DF1\u6D77}\u9493\u8FC7\u9C7C?\"/n\"\u6211\u7684\u8239\u6839\u672C\u9760\u4E0D\u4E86\u90A3\u91CC\"/n\"\u542C\u8BF4\u90A3\u91CC\u6709\u5F88\u591A\u7A00\u5947\u53E4\u602A\u7684\u9C7C\"/n\"\u80FD\u5403\u5417?\""
+    chinese: "\"\u4F60\u6709\u6CA1\u6709\u5728{0}\u9493\u8FC7\u9C7C?\"/n\"\u6211\u7684\u8239\u6839\u672C\u9760\u4E0D\u4E86\u90A3\u91CC\"/n\"\u542C\u8BF4\u90A3\u91CC\u6709\u5F88\u591A\u7A00\u5947\u53E4\u602A\u7684\u9C7C\"/n\"\u80FD\u5403\u5417?\""
   - id: ev_0004_04_b
     english: Deep Sea
     korean: "\uC2EC\uD574"

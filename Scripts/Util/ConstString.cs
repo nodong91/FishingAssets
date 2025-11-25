@@ -33,6 +33,8 @@ public class Const_ETC
     public const string _fishshop = "etc_0008";
     public const string _village = "etc_0009";
     public const string _notice = "etc_0010";
+    public const string _dragToFuel = "etc_0011";
+    public const string _fill = "etc_0012";
 }
 
 public class Const_Save

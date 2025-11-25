@@ -267,7 +267,6 @@ public class UI_Shop : UI_Inventory_Base
         StartCoroutine(DisplayResultItem(_result));
     }
 
-
     IEnumerator DisplayResultItem(ResultStruct _result)
     {
         EmptyInventoryAllSlot();
