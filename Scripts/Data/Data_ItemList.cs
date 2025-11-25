@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data_ItemList", menuName = "Scriptable Objects/Data_ItemList")]
 public class Data_ItemList : ScriptableObject
 {
+    public string selectID;
     public enum InventoryType
     {
         Fix,

@@ -142,7 +142,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         currentDialog = 0;
         endDialog = false;
         selectCanvas.gameObject.SetActive(false);
-        // 선택 버튼 생성
+        // 선택 버튼 미리 생성
         for (int i = 0; i < dataDialog.selectStructs.Length; i++)
         {
             Dialog_SelectButton button = GetSelectButton();
@@ -160,10 +160,11 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         Data_Dialog setDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
         SelectStruct selectStruct = new SelectStruct
         {
-            selectDialog = setDialog.selectID,
+            //selectDialog = setDialog.selectID,
             selectType = SelectStruct.SelectType.None,
-            npcData = _npc,
-            dialogData = setDialog,
+            scriptableObject = setDialog,
+            //npcData = _npc,
+            //dialogData = setDialog,
         };
 
         Dialog_SelectButton button = GetSelectButton();
@@ -193,7 +194,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             else if (_selectStruct.scriptableObject as Data_Dialog_If)
             {
                 Data_Dialog_If data = _selectStruct.scriptableObject as Data_Dialog_If;
-                DataDialogIf(data);
+                Data_Dialog dataDialog = Dialog_SelectButton.DataDialogIf(data);
+                DataDialog(dataDialog);
             }
             else if (_selectStruct.scriptableObject as Data_ItemList)
             {
@@ -212,9 +214,18 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         DialogStart_NPC(_data.npc, _data.name);
     }
 
-    void DataDialogIf(Data_Dialog_If _data)
+    Data_Dialog DataDialogIf(Data_Dialog_If _data)
     {
-
+        switch (_data.ifType)
+        {
+            case Data_Dialog_If.IfType.Loan:
+                if (Game_Manager.current.GetMainUI.timeUI.loanActive == false)
+                {
+                    return _data.onDataDialog;
+                }
+                return _data.offDataDialog;
+        }
+        return null;
     }
 
     void ActionDialog(SelectStruct _selectStruct)

@@ -77,7 +77,7 @@ public class UI_Landing : MonoBehaviour
         villageInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._village);
         noticeInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._notice);
     }
-  
+
     void EnterButton(Custom_Button _button)
     {
         currentButton = _button;
@@ -174,7 +174,8 @@ public class UI_Landing : MonoBehaviour
 
     bool CheckShip()
     {
-        ExitButton(currentButton);
+        if (currentButton != null)
+            ExitButton(currentButton);
         if (Game_Manager.current.shipData == null)
         {
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];

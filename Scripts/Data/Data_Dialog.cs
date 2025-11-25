@@ -49,8 +49,8 @@ public class Data_Dialog : ScriptableObject
     [System.Serializable]
     public struct SelectStruct
     {
-        [TextArea]
-        public string selectDialog;
+        //[TextArea]
+        //public string selectDialog;
         public enum SelectType
         {
             None = 0,// 닫기
@@ -63,13 +63,13 @@ public class Data_Dialog : ScriptableObject
             GameOver = 10,
         }
         public SelectType selectType;
-        [Header(" [ 아이템 리스트 ]")]
-        public Data_ItemList itemList;// 아이템 리스트
-        [Header(" [ 대화 ]")]
-        public Data_NPC npcData;
-        public Data_Dialog dialogData;
-        [Header(" [ 조건 ]")]
-        public Data_Dialog_If dataDialogIf;
+        //[Header(" [ 아이템 리스트 ]")]
+        //public Data_ItemList itemList;// 아이템 리스트
+        //[Header(" [ 대화 ]")]
+        //public Data_NPC npcData;
+        //public Data_Dialog dialogData;
+        //[Header(" [ 조건 ]")]
+        //public Data_Dialog_If dataDialogIf;
 
         public ScriptableObject scriptableObject;
     }

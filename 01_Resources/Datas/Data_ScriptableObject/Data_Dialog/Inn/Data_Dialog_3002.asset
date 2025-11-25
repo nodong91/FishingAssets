@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
   m_Name: Data_Dialog_3002
   m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: f5051af63d2a58d4898565b06e66ba95, type: 2}
   selectID: di_3002_f
   textStruct:
   - contents: di_3002_a
@@ -31,11 +32,7 @@ MonoBehaviour:
   selectStructs:
   - selectDialog: di_3002_d
     selectType: 0
-    itemList: {fileID: 11400000, guid: 498bda7da60f52349a4e916d7e804c1d, type: 2}
-    npcData: {fileID: 0}
-    dialogData: {fileID: 0}
+    scriptableObject: {fileID: 11400000, guid: 498bda7da60f52349a4e916d7e804c1d, type: 2}
   - selectDialog: di_3002_e
-    selectType: 0
-    itemList: {fileID: 0}
-    npcData: {fileID: 0}
-    dialogData: {fileID: 0}
+    selectType: 1
+    scriptableObject: {fileID: 0}
