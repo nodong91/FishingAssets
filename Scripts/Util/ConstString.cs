@@ -10,6 +10,11 @@ public class Const_Scene
     public const string _test = "Test";
 }
 
+public class Const_Shader
+{
+    public const string _fillAmount = "_FillAmount";
+}
+
 public class Const_Audio
 {
     public const string _titleTheme = "bgm_0001";

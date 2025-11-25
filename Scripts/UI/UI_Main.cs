@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,7 +33,7 @@ public class UI_Main : MonoBehaviour
 
     public void SetStart()
     {
-        SetMoney(Game_Manager.current.GetContinue.money);
+        SetMoney(Game_Manager.current.GetContinue.money);// 로드 저장
         HealthSize = maxHealthImage.rectTransform.sizeDelta;
 
         inventoryButton.SetButton(InventoryButton);
@@ -311,7 +312,8 @@ public class UI_Main : MonoBehaviour
     IEnumerator MoneyMoving(float _price)
     {
         float prevMoney = moneyValue;
-        moneyValue = moneyValue + _price;
+        SetMoney(moneyValue + _price);// 돈 이동
+        StatsManager.current.StatsMoney((int)moneyValue);
         Singleton_Continue.INSTANCE.SaveContinue(); // 팔거나 사면 저장
         yield return null;
 

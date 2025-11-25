@@ -236,7 +236,6 @@ public class Fishing_Manager : MonoBehaviour
 
     IEnumerator StartCount()// 카운트
     {
-        fishingCanvas.SetCount(0);// 카운트 제거
         SetFishing();// 낚시 초기화
         yield return null;
 

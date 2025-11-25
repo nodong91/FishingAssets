@@ -144,4 +144,27 @@ public class StatsManager : MonoBehaviour
         SteamUserStats.StoreStats();
         return setCount;
     }
+
+    public void StatsMoney(int _value)
+    {
+        SteamUserStats.GetStat("Stats_Money", out int setCount);// 스탯 가져오기
+        setCount = _value;
+        SteamUserStats.SetStat("Stats_Money", setCount);// 스탯 저장하기
+        SteamUserStats.StoreStats();
+
+        Debug.LogWarning($"(머니 카운트 : {setCount})");
+        if (SteamManager.Initialized)
+        {
+            if (setCount >= 10000000)// 천만원
+            {
+                SteamUserStats.GetAchievement("The_Rich", out bool _achieved);
+                Debug.LogWarning($"(The_Rich 완료 : {_achieved})");
+                if (_achieved == false)// 완료 되지 않은 경우 완료
+                {
+                    SteamUserStats.SetAchievement("The_Rich");// 완료
+                    SteamUserStats.StoreStats();
+                }
+            }
+        }
+    }
 }
