@@ -246,6 +246,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6e94cad31948f5e4d85dfbe90fd9367c, type: 3}
   - {fileID: 21300000, guid: b01ae7b8cef0fc14888dd5e3ae9a7265, type: 3}
   - {fileID: 21300000, guid: 1baacfee7acd4d84d9d889e310b6a9f3, type: 3}
+  - {fileID: 21300000, guid: 94b2bd9bd92bfa14e939ef315b58abc0, type: 3}
+  - {fileID: 21300000, guid: 33d6d26b2df2e454880fd8ba19b1956b, type: 3}
+  - {fileID: 21300000, guid: f589596813bb3c147bbbd96324f33f5a, type: 3}
+  - {fileID: 21300000, guid: cde27620f051bcb43b0e8b2062a96e12, type: 3}
+  - {fileID: 21300000, guid: 1c8a76eb06c46cb438d58f9299b34793, type: 3}
+  - {fileID: 21300000, guid: 4937a5a954885554986f1ff33424e856, type: 3}
+  - {fileID: 21300000, guid: 57a5c8afa47d13746bb51473ccdd8f08, type: 3}
+  - {fileID: 21300000, guid: efe0eda797a7ecf4b93e49e741764a62, type: 3}
+  - {fileID: 21300000, guid: 333b5d7d03e2f684aaf28d80c14d2804, type: 3}
+  - {fileID: 21300000, guid: 100add5c44fd32840a5f9e35d92c1d04, type: 3}
   - {fileID: 21300000, guid: 7dfff1ca83eccfb4c8a0155b0b70f452, type: 3}
   - {fileID: 21300000, guid: 154eedd79976a024fbdb93ee6f4ea268, type: 3}
   - {fileID: 21300000, guid: a73091521303c5c4899dfadc6f7e3878, type: 3}
@@ -284,6 +294,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bcd86a0ba45c3ab439a8d7ca3ed90afc, type: 2}
   - {fileID: 11400000, guid: ea43906049b62854ab8bbdb5d48573b4, type: 2}
   - {fileID: 11400000, guid: 6e5d531141874b042b6708a57ec1077c, type: 2}
+  - {fileID: 11400000, guid: 5c2dafe34c5082642816500dd8eff506, type: 2}
   - {fileID: 11400000, guid: 873fc08aa8a5a964c882eac53e229b2b, type: 2}
   dialogData:
   - {fileID: 11400000, guid: 6ead66df73ce1a3498548c08d202ba48, type: 2}
@@ -3176,18 +3187,16 @@ MonoBehaviour:
       catchRadius: 0.1
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_001_01
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 2"
     description: sk_001_01_a
@@ -3199,18 +3208,16 @@ MonoBehaviour:
       catchRadius: 0.1
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_001_02
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 3"
     description: sk_001_02_a
@@ -3222,22 +3229,20 @@ MonoBehaviour:
       catchRadius: 0.1
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_001_03
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 4"
     description: sk_001_03_a
-    addStatusString: CatchRadius + 1
+    addStatusString: CatchRadius+1
     skillType: 0
     icon: Icon_Sk_001
     price: 1
@@ -3245,22 +3250,20 @@ MonoBehaviour:
       catchRadius: 0.1
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_001_04
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 5"
     description: sk_001_04_a
-    addStatusString: CatchRadius + 1
+    addStatusString: CatchRadius+1
     skillType: 0
     icon: Icon_Sk_001
     price: 1
@@ -3268,22 +3271,20 @@ MonoBehaviour:
       catchRadius: 0.1
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_001_05
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 6"
     description: sk_001_05_a
-    addStatusString: CatchRadius + 1
+    addStatusString: CatchRadius+1
     skillType: 0
     icon: Icon_Sk_001
     price: 1
@@ -3291,22 +3292,20 @@ MonoBehaviour:
       catchRadius: 0.1
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_001_06
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 7"
     description: sk_001_06_a
-    addStatusString: CatchRadius + 1
+    addStatusString: CatchRadius+1
     skillType: 0
     icon: Icon_Sk_001
     price: 1
@@ -3314,22 +3313,20 @@ MonoBehaviour:
       catchRadius: 0.1
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_001_07
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 8"
     description: sk_001_07_a
-    addStatusString: CatchRadius + 1
+    addStatusString: CatchRadius+1
     skillType: 0
     icon: Icon_Sk_001
     price: 1
@@ -3337,22 +3334,20 @@ MonoBehaviour:
       catchRadius: 0.1
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_001_08
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 9"
     description: sk_001_08_a
-    addStatusString: CatchRadius + 1
+    addStatusString: CatchRadius+1
     skillType: 0
     icon: Icon_Sk_001
     price: 1
@@ -3360,22 +3355,20 @@ MonoBehaviour:
       catchRadius: 0.1
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_001_09
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 10"
     description: sk_001_09_a
-    addStatusString: CatchRadius + 1
+    addStatusString: CatchRadius+1
     skillType: 0
     icon: Icon_Sk_001
     price: 1
@@ -3383,22 +3376,20 @@ MonoBehaviour:
       catchRadius: 0.1
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_002_00
     name: "\uAC15\uB825\uD55C \uC774\uB450\uADFC 1"
     description: sk_002_00_a
-    addStatusString: CatchPower + 1
+    addStatusString: CatchPower+1
     skillType: 0
     icon: Icon_Sk_002
     price: 1
@@ -3406,22 +3397,20 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 1
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_003_00
     name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC"
     description: sk_003_00_a
-    addStatusString: CatchSpeed + 1
+    addStatusString: CatchSpeed+1
     skillType: 0
     icon: Icon_Sk_003
     price: 1
@@ -3429,22 +3418,20 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 1
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_004_00
     name: "\uC2E0\uB4E4\uB9B0 \uCEE8\uD2B8\uB864"
     description: sk_004_00_a
-    addStatusString: ShipSpeed + 1
+    addStatusString: ShipSpeed+1
     skillType: 0
     icon: Icon_Sk_004
     price: 1
@@ -3452,22 +3439,20 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 1
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_005_00
     name: "\uC695\uC2EC\uC7C1\uC774"
     description: sk_005_00_a
-    addStatusString: MaxWeight + 1
+    addStatusString: MaxWeight+1
     skillType: 0
     icon: Icon_Sk_005
     price: 1
@@ -3475,22 +3460,20 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 1
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_006_00
     name: "\uBC29\uB791\uC790"
     description: sk_006_00_a
-    addStatusString: MaxEnergy + 1
+    addStatusString: MaxEnergy+1
     skillType: 0
     icon: Icon_Sk_006
     price: 1
@@ -3498,22 +3481,20 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 1
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_007_00
     name: "\uCE5C\uD658\uACBD"
     description: sk_007_00_a
-    addStatusString: MaxEfficient + 1
+    addStatusString: MaxEfficient+1
     skillType: 0
     icon: Icon_Sk_007
     price: 0
@@ -3521,22 +3502,20 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 1
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_008_00
     name: "\uB354 \uB9CE\uC774!!"
     description: sk_008_00_a
-    addStatusString: MaxBoxSize + 1
+    addStatusString: MaxBoxSize+1
     skillType: 0
     icon: Icon_Sk_008
     price: 1
@@ -3544,22 +3523,125 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 1, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_008_01
+    name: "\uB354 \uB9CE\uC774!!"
+    description: sk_008_01_a
+    addStatusString: MaxBoxSize+1
+    skillType: 0
+    icon: Icon_Sk_008
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 1, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_008_02
+    name: "\uB354 \uB9CE\uC774!!"
+    description: sk_008_02_a
+    addStatusString: MaxBoxSize+1
+    skillType: 0
+    icon: Icon_Sk_008
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 1, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_008_03
+    name: "\uB354 \uB9CE\uC774!!"
+    description: sk_008_03_a
+    addStatusString: MaxBoxSize+1
+    skillType: 0
+    icon: Icon_Sk_008
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 1}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_008_04
+    name: "\uB354 \uB9CE\uC774!!"
+    description: sk_008_04_a
+    addStatusString: MaxBoxSize+1
+    skillType: 0
+    icon: Icon_Sk_008
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 1}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_008_05
+    name: "\uB354 \uB9CE\uC774!!"
+    description: sk_008_05_a
+    addStatusString: MaxBoxSize+1
+    skillType: 0
+    icon: Icon_Sk_008
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 1}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_009_00
     name: "\uB450\uAEBC\uC6B4 \uD53C\uBD80"
     description: sk_009_00_a
-    addStatusString: ShipHealth + 1
+    addStatusString: ShipHealth+1
     skillType: 0
     icon: Icon_Sk_009
     price: 1
@@ -3567,22 +3649,20 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 1
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_010_00
     name: "\uD589\uC6B4"
     description: sk_010_00_a
-    addStatusString: LockFish + 1
+    addStatusString: LockFish+1
     skillType: 0
     icon: Icon_Sk_010
     price: 1
@@ -3590,22 +3670,20 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 1
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_011_00
     name: "\uC77C\uD0C0\uC30D\uD53C"
     description: sk_011_00_a
-    addStatusString: FishAmount + 1
+    addStatusString: FishAmount+1
     skillType: 0
     icon: Icon_Sk_011
     price: 1
@@ -3613,22 +3691,20 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 1
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_012_00
-    name: "\uB4B7\uD1B5\uC218"
+    name: "\uC218\uC644\uAC00"
     description: sk_012_00_a
-    addStatusString: FishPrice + 1
+    addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
     price: 1
@@ -3636,22 +3712,104 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 1
+      storageSize: {x: 0, y: 0}
+  - id: sk_012_01
+    name: "\uC218\uC644\uAC00"
+    description: sk_012_01_a
+    addStatusString: FishPrice+1
+    skillType: 0
+    icon: Icon_Sk_012
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 1
+      storageSize: {x: 0, y: 0}
+  - id: sk_012_02
+    name: "\uC218\uC644\uAC00"
+    description: sk_012_02_a
+    addStatusString: FishPrice+1
+    skillType: 0
+    icon: Icon_Sk_012
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 1
+      storageSize: {x: 0, y: 0}
+  - id: sk_012_03
+    name: "\uC218\uC644\uAC00"
+    description: sk_012_03_a
+    addStatusString: FishPrice+1
+    skillType: 0
+    icon: Icon_Sk_012
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 1
+      storageSize: {x: 0, y: 0}
+  - id: sk_012_04
+    name: "\uC218\uC644\uAC00"
+    description: sk_012_04_a
+    addStatusString: FishPrice+1
+    skillType: 0
+    icon: Icon_Sk_012
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 1
+      storageSize: {x: 0, y: 0}
   - id: sk_013_00
-    name: "\uCC3D\uACE0\uD655\uC7A5??? \uB9CC\uB4E4\uAE4C?"
+    name: "\uCC3D\uACE0\uD655\uC7A5"
     description: sk_013_00_a
-    addStatusString: 
+    addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_001
     price: 1
@@ -3659,18 +3817,163 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_013_01
+    name: "\uCC3D\uACE0\uD655\uC7A5"
+    description: sk_013_01_a
+    addStatusString: Storage+1
+    skillType: 0
+    icon: Icon_Sk_001
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_013_02
+    name: "\uCC3D\uACE0\uD655\uC7A5"
+    description: sk_013_02_a
+    addStatusString: Storage+1
+    skillType: 0
+    icon: Icon_Sk_001
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_013_03
+    name: "\uCC3D\uACE0\uD655\uC7A5"
+    description: sk_013_03_a
+    addStatusString: Storage+1
+    skillType: 0
+    icon: Icon_Sk_001
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_013_04
+    name: "\uCC3D\uACE0\uD655\uC7A5"
+    description: sk_013_04_a
+    addStatusString: Storage+1
+    skillType: 0
+    icon: Icon_Sk_001
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 1}
+  - id: sk_013_05
+    name: "\uCC3D\uACE0\uD655\uC7A5"
+    description: sk_013_05_a
+    addStatusString: Storage+1
+    skillType: 0
+    icon: Icon_Sk_001
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 1}
+  - id: sk_013_06
+    name: "\uCC3D\uACE0\uD655\uC7A5"
+    description: sk_013_06_a
+    addStatusString: Storage+1
+    skillType: 0
+    icon: Icon_Sk_001
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 1}
+  - id: sk_013_07
+    name: "\uCC3D\uACE0\uD655\uC7A5"
+    description: sk_013_07_a
+    addStatusString: Storage+1
+    skillType: 0
+    icon: Icon_Sk_001
+    price: 0
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 1}
   - id: sk_100_00
     name: "\uAE30\uBCF8 \uBC30"
     description: sk_100_00_a
@@ -3682,18 +3985,16 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_100_01
     name: "\uCF8C\uC18D\uC120"
     description: sk_100_01_a
@@ -3705,18 +4006,16 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_100_02
     name: "\uB55F\uBAA9"
     description: sk_100_02_a
@@ -3728,18 +4027,16 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_100_03
     name: "\uD06C\uB8E8\uC988"
     description: sk_100_03_a
@@ -3751,18 +4048,16 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_100_04
     name: "\uBC94\uC120"
     description: sk_100_04_a
@@ -3774,18 +4069,16 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_100_05
     name: "\uD1B5\uD1B5\uBC30"
     description: sk_100_05_a
@@ -3797,18 +4090,16 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_100_06
     name: "\uC624\uB9AC\uBC30"
     description: sk_100_06_a
@@ -3820,18 +4111,16 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   - id: sk_014_01
     name: "\uB09A\uC2DC\uC655"
     description: sk_014_01_a
@@ -3843,18 +4132,16 @@ MonoBehaviour:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 0
-      catchAttakSpeed: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
       efficient: 0
       maxBoxSize: {x: 0, y: 0}
       shipHealth: 0
-      freshness: 0
       luckFish: 0
       fishAmount: 0
       fishPrice: 0
+      storageSize: {x: 0, y: 0}
   questStruct:
   - id: qu_0001
     title: "\uCCAB \uB09A\uC2DC \uC131\uACF5"
@@ -4133,10 +4420,20 @@ MonoBehaviour:
     chinese: "\u606D\u559C \u4F60"
   - id: di_3006_a
     english: I have settled the account completely.
-    korean: "\uD655\uC2E4\uD558\uAC8C \uC815\uC0B0\uD588\uC2B5\uB2C8\uB2E4. \uB2E4\uC74C\uC5D0
-      \uB610 \uBD80\uD0C1\uB4DC\uB824\uC694."
+    korean: "\uD655\uC2E4\uD558\uAC8C \uC815\uC0B0\uD588\uC2B5\uB2C8\uB2E4."
     japanese: "\u78BA\u304B\u306B \u7CBE\u7B97 \u3044\u305F\u3057\u307E\u3057\u305F."
     chinese: "\u5DF2\u7ECF \u5F7B\u5E95 \u7ED3\u6E05 \u4E86."
+  - id: "di_3006_\u3160"
+    english: And since repayment is possible any time you can return it when you
+      have the extra money.
+    korean: "\uADF8\uB9AC\uACE0 \uC5B8\uC81C\uB4E0 \uB300\uCD9C\uC0C1\uD658\uC774
+      \uAC00\uB2A5\uD558\uB2C8\uAE4C \uC5EC\uC720\uAC00 \uC0DD\uAE30\uBA74 \uB3CC\uB824\uC8FC\uC2DC\uBA74
+      \uB429\uB2C8\uB2E4."
+    japanese: "\u305D\u308C \u306B \u3044\u3064\u3067\u3082 \u8FD4\u6E08 \u53EF\u80FD
+      \u3067\u3059\u304B\u3089 \u4F59\u88D5 \u304C \u3067\u304D\u305F\u3089 \u304A\u8FD4\u3057
+      \u304F\u3060\u3055\u3044."
+    chinese: "\u800C\u4E14 \u968F\u65F6 \u90FD \u53EF\u4EE5 \u8FD8\u6B3E \u6240\u4EE5
+      \u6709 \u4F59\u529B \u7684 \u65F6\u5019 \u8FD8\u7ED9 \u6211 \u5C31 \u884C."
   - id: di_3007_a
     english: I think I am short on money.
     korean: "\uB3C8\uC774 \uBAA8\uC790\uB780 \uAC70 \uAC19\uC544\uC694."
@@ -4325,6 +4622,16 @@ MonoBehaviour:
     korean: "\uAC8C\uC2DC\uD310"
     japanese: "\u63B2\u793A\u677F"
     chinese: "\u5E03\u544A\u680F"
+  - id: etc_0011
+    english: Drag to Refuel
+    korean: "\uB4DC\uB798\uADF8\uD558\uC5EC \uC5F0\uB8CC\uBCF4\uAE09"
+    japanese: "\u30C9\u30E9\u30C3\u30B0 \u3057\u3066 \u71C3\u6599 \u88DC\u7D66"
+    chinese: "\u62D6\u52A8 \u6765 \u8865\u5145 \u71C3\u6599"
+  - id: etc_0012
+    english: fill
+    korean: "\uCC44\uC6B0\uAE30"
+    japanese: "\u6E80\u305F\u3059"
+    chinese: "\u8865\u5145"
   - id: ev_0001_01_a
     english: I chased after them and got badly beaten and lost {0}
     korean: "\uB4A4\uCAD3\uC544 \uAC14\uB2E4\uAC00 \uC5C4\uCCAD\uB098\uAC8C \uC5BB\uC5B4\uD130\uC9C0\uACE0
@@ -4525,6 +4832,111 @@ MonoBehaviour:
     korean: "\uC8FC\uC778\uC774 \uC788\uC744\uAC70\uC57C"
     japanese: "\u6301\u3061\u4E3B\u304C\u3044\u308B\u3060\u308D\u3046"
     chinese: "\u5E94\u8BE5\u662F\u6709\u4E3B\u4EBA\u7684"
+  - id: ev_0004_a
+    english: Loud conversation
+    korean: "\uC2DC\uB044\uB7EC\uC6B4 \uB300\uD654"
+    japanese: "\u9A12\u304C\u3057\u3044\u4F1A\u8A71"
+    chinese: "\u5435\u95F9\u7684\u5BF9\u8BDD"
+  - id: ev_0004_b
+    english: Hear loud conversation from fishing cats near the inn.
+    korean: "\uC5EC\uAD00 \uADFC\uCC98\uC5D0\uC11C \uB09A\uC2DC\uAFBC \uACE0\uC591\uC774\uB4E4\uC774
+      \uC2DC\uB044\uB7FD\uAC8C \uB300\uD654\uD558\uB294 \uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4."
+    japanese: "\u65C5\u9928\u306E\u8FD1\u304F\u3067\u91E3\u308A\u4EBA\u732B\u305F\u3061\u306E\u9A12\u304C\u3057\u3044\u4F1A\u8A71\u304C\u805E\u3053\u3048\u308B\u3002"
+    chinese: "\u542C\u5230\u65C5\u9986\u9644\u8FD1\u9493\u9C7C\u732B\u4EEC\u7684\u5435\u95F9\u5BF9\u8BDD\u58F0\u3002"
+  - id: ev_0004_c
+    english: Give a warning
+    korean: "\uC8FC\uC758\uB97C \uC900\uB2E4"
+    japanese: "\u6CE8\u610F\u3092\u4E0E\u3048\u308B"
+    chinese: "\u7ED9\u4E88\u8B66\u544A"
+  - id: ev_0004_d
+    english: Eavesdrop secretly
+    korean: "\uBAB0\uB798 \uB300\uD654\uB97C \uC5FF\uB4E3\uB294\uB2E4"
+    japanese: "\u3053\u3063\u305D\u308A\u7ACB\u3061\u805E\u304D\u3059\u308B"
+    chinese: "\u5077\u5077\u5730\u542C"
+  - id: ev_0004_01_a
+    english: A big cat looking drunk stood up and approached/n{0}
+    korean: "\uCDE8\uD55C \uB4EF \uD55C \uCEE4\uB2E4\uB780 \uACE0\uC591\uC774\uAC00
+      \uC77C\uC5B4\uB098\uB354\uB2C8 \uB2E4\uAC00\uC628\uB2E4/n{0}"
+    japanese: "\u9154\u3063\u3066\u3044\u308B\u69D8\u5B50\u306E\u5927\u304D\u306A\u732B\u304C\u7ACB\u3061\u4E0A\u304C\u308A\u8FD1\u3065\u3044\u3066\u304F\u308B/n{0}"
+    chinese: "\u4E00\u53EA\u770B\u4F3C\u559D\u9189\u7684\u5927\u732B\u7AD9\u4E86\u8D77\u6765\u8D70\u8FD1/n{0}"
+  - id: ev_0004_01_b
+    english: '"What about it?"'
+    korean: "\"\uBB34\uC2A8 \uC0C1\uAD00\uC774\uC57C?\""
+    japanese: "\"\u304A\u524D\u306B\u95A2\u4FC2\u306A\u3044\u3060\u308D\""
+    chinese: "\"\u8DDF\u4F60\u6CA1\u5173\u7CFB\u5427\""
+  - id: ev_0004_01_c
+    english: You wanna fight?
+    korean: "\uC2F8\uC6B0\uC790\uB294\uAC70\uC57C?"
+    japanese: "\u55A7\u5629\u58F2\u3063\u3066\u308B\u306E\u304B?"
+    chinese: "\u60F3\u6253\u67B6\u5417?"
+  - id: ev_0004_01_01_a
+    english: The drunk cat was nothing much./nObtained {0}!
+    korean: "\uCDE8\uD55C \uC0C1\uB300\uB294 \uBCC4 \uAC70 \uC544\uB2C8\uC5C8\uB2E4./n{0}\uB97C
+      \uC5BB\uC5C8\uB2E4!"
+    japanese: "\u9154\u3063\u3071\u3089\u3044\u306E\u76F8\u624B\u306F\u5927\u3057\u305F\u3053\u3068\u306A\u304B\u3063\u305F\u3002/n{0}\u3092\u624B\u306B\u5165\u308C\u305F!"
+    chinese: "\u559D\u9189\u7684\u5BF9\u624B\u6CA1\u4EC0\u4E48\u5927\u4E0D\u4E86\u7684\u3002/n\u83B7\u5F97\u4E86
+      {0}!"
+  - id: ev_0004_01_01_b
+    english: 15G
+    korean: 15G
+    japanese: 15G
+    chinese: 15G
+  - id: ev_0004_01_02_a
+    english: I was nothing much. Lost {0}...
+    korean: "\uB098\uB294 \uBCC4 \uAC70 \uC544\uB2C8\uC5C8\uB2E4. {0}\uB97C \uC783\uC5C8\uB2E4..."
+    japanese: "\u79C1\u306F\u5927\u3057\u305F\u3053\u3068\u306A\u304B\u3063\u305F\u3002{0}\u3092\u5931\u3063\u305F..."
+    chinese: "\u6211\u6CA1\u4EC0\u4E48\u4E86\u4E0D\u8D77\u3002 \u635F\u5931\u4E86
+      {0}..."
+  - id: ev_0004_02_a
+    english: '"I heard there''s a {0}"/n"Nah don''t lie"/n"The cat from the blue
+      house fished it out of the great ocean"/n"I wonder if we can eat it?"'
+    korean: "\"{0}\uAC00 \uC788\uB2E4\uB354\uB77C\"/n\"\uC5D0\uC774 \uAC70\uC9D3\uB9D0
+      \uD558\uC9C0\uB9C8\"/n\"\uD30C\uB780\uC9D1 \uACE0\uC591\uC774\uAC00 \uB300\uC591\uC5D0\uC11C
+      \uADF8\uAC78 \uB09A\uC558\uB300\"/n\"\uBA39\uC744 \uC218 \uC788\uB294\uAC78\uAE4C?\""
+    japanese: "\"{0}\u304C\u3042\u308B\u3089\u3057\u3044\u3088\"/n\"\u3048\u3048\u5618\u3064\u304F\u306A\u3088\"/n\"\u9752\u3044\u5BB6\u306E\u732B\u304C\u305D\u308C\u3092\u5927\u6D0B\u3067\u91E3\u308A\u4E0A\u3052\u305F\u3093\u3060\u3063\u3066\"/n\"\u98DF\u3079\u3089\u308C\u308B\u306E\u304B\u306A?\""
+    chinese: "\"\u6211\u542C\u8BF4\u6709{0}\"/n\"\u54CE \u522B\u8BF4\u8C0E\u4E86\"/n\"\u84DD\u623F\u5B50\u7684\u732B\u5728\u5927\u6D0B\u91CC\u9493\u5230\u4E86\u90A3\u4E2A\"/n\"\u80FD\u5403\u5417?\""
+  - id: ev_0004_02_b
+    english: Dazzling Crab
+    korean: "\uBC88\uCA4D\uBC88\uCA4D\uD55C \uAC8C"
+    japanese: "\u307E\u3070\u3086\u3044\u30E4\u30C9\u30AB\u30EA"
+    chinese: "\u70AB\u76EE\u7684\u8783\u87F9"
+  - id: ev_0004_03_a
+    english: '"Hey guess what I saw near the coast?"/n"What did you see?"/n"I saw
+      a {0}"/n"Can we eat that?"'
+    korean: "\"\uC774\uBD10 \uB0B4\uAC00 \uC5F0\uC548\uC5D0\uC11C \uBB58\uBD24\uB294\uC904
+      \uC54C\uC544?\"/n\"\uBB58 \uBD24\uB294\uB370?\"/n\"{0}\uB97C \uBD24\uC5B4\"/n\"\uADF8\uAC70
+      \uBA39\uC744 \uC218 \uC788\uC5B4?\""
+    japanese: "\"\u304A\u3044\u4FFA\u304C\u6CBF\u5CB8\u3067\u4F55\u3092\u898B\u305F\u3068\u601D\u3046?\"/n\"\u4F55\u3092\u898B\u305F\u306E?\"/n{0}\"\u3092\u898B\u305F\u3093\u3060/n\u305D\u308C\u98DF\u3079\u3089\u308C\u308B\u306E?\""
+    chinese: "\"\u5582 \u4F60\u731C\u6211\u5728\u6CBF\u5CB8\u770B\u5230\u4E86\u4EC0\u4E48?\"/n\"\u4F60\u770B\u5230\u4E86\u4EC0\u4E48?\"/n\"\u6211\u770B\u5230\u4E86{0}\"/n\"\u90A3\u4E2A\u80FD\u5403\u5417?\""
+  - id: ev_0004_03_b
+    english: Long Winged Fish
+    korean: "\uB0A0\uAC1C\uB2EC\uB9B0 \uAE38\uB2E4\uB780 \uBB3C\uACE0\uAE30"
+    japanese: "\u7FBD\u306E\u3064\u3044\u305F\u7D30\u9577\u3044\u9B5A"
+    chinese: "\u957F\u6709\u7FC5\u8180\u7684\u7EC6\u957F\u9C7C"
+  - id: ev_0004_04_a
+    english: '"Have you fished in {0}?"/n"My boat can''t even get near there"/n"I
+      heard there are a lot of amazing fish there"/n"Can we eat them?"'
+    korean: "\"\uC790\uB124 {0}\uC5D0\uC11C \uB09A\uC2DC \uD574 \uBD24\uB098?\"/n\"\uB0B4
+      \uBC30\uB85C\uB294 \uADF8 \uADFC\uCC98\uB3C4 \uBABB\uAC00\"/n\"\uADF8\uACF3\uC5D0
+      \uAE30\uC0C1\uCC9C\uC678\uD55C \uBB3C\uACE0\uAE30\uAC00 \uB9CE\uB2E4\uB354\uAD70\"/n\"\uBA39\uC744
+      \uC218 \uC788\uC5B4?\""
+    japanese: "\"\u3042\u3093\u305F{0}\u3067\u91E3\u308A\u3092\u3057\u305F\u3053\u3068\u3042\u308B\u304B\u3044?\"/n\"\u4FFA\u306E\u8239\u3058\u3083\u305D\u306E\u8FD1\u304F\u306B\u3082\u884C\u3051\u306A\u3044\u3088\"/n\"\u3042\u305D\u3053\u306B\u306F\u3068\u3093\u3067\u3082\u306A\u3044\u9B5A\u304C\u305F\u304F\u3055\u3093\u3044\u308B\u3089\u3057\u3044\"/n\"\u98DF\u3079\u3089\u308C\u308B\u306E\u304B?\""
+    chinese: "\"\u4F60\u6709\u6CA1\u6709\u5728{0}\u9493\u8FC7\u9C7C?\"/n\"\u6211\u7684\u8239\u6839\u672C\u9760\u4E0D\u4E86\u90A3\u91CC\"/n\"\u542C\u8BF4\u90A3\u91CC\u6709\u5F88\u591A\u7A00\u5947\u53E4\u602A\u7684\u9C7C\"/n\"\u80FD\u5403\u5417?\""
+  - id: ev_0004_04_b
+    english: Deep Sea
+    korean: "\uC2EC\uD574"
+    japanese: "\u6DF1\u6D77"
+    chinese: "\u6DF1\u6D77"
+  - id: ev_0004_05_a
+    english: '"I want to go to another island"/n"Our island shipyard cat''s technology
+      can''t get us there yet"/n"Won''t we be able to go someday?"/n"Let''s eat something
+      first"'
+    korean: "\"\uB2E4\uB978 \uC12C\uC5D0 \uAC00\uBCF4\uACE0\uC2F6\uC5B4\"/n\"\uC544\uC9C1
+      \uC6B0\uB9AC \uC12C \uC870\uC120\uC18C \uACE0\uC591\uC774 \uAE30\uC220\uB85C\uB294
+      \uBABB\uAC00\"/n\"\uC5B8\uC820\uAC04 \uAC08 \uC218 \uC788\uC9C0 \uC54A\uC744\uAE4C?\"/n\"\uADF8\uBCF4\uB2E4
+      \uBB50 \uC880 \uBA39\uC790\""
+    japanese: "\"\u4ED6\u306E\u5CF6\u306B\u884C\u3063\u3066\u307F\u305F\u3044\"/n\"\u3046\u3061\u306E\u5CF6\u306E\u9020\u8239\u6240\u732B\u306E\u6280\u8853\u3058\u3083\u307E\u3060\u884C\u3051\u306A\u3044\u3088\"/n\"\u3044\u3064\u304B\u306F\u884C\u3051\u308B\u3093\u3058\u3083\u306A\u3044\u304B\u306A?\"/n\"\u305D\u308C\u3088\u308A\u4F55\u304B\u98DF\u3079\u3088\u3046\""
+    chinese: "\"\u6211\u60F3\u53BB\u522B\u7684\u5C9B\"/n\"\u6211\u4EEC\u5C9B\u4E0A\u9020\u8239\u5382\u732B\u54AA\u7684\u6280\u672F\u8FD8\u53BB\u4E0D\u4E86\"/n\"\u603B\u6709\u4E00\u5929\u80FD\u53BB\u7684\u5427?\"/n\"\u6BD4\u8D77\u90A3\u4E2A\u6211\u4EEC\u5148\u5403\u70B9\u4E1C\u897F\u5427\""
   - id: fs_1001
     english: Anchovy
     korean: "\uBA78\uCE58"

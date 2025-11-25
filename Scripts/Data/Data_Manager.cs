@@ -165,20 +165,21 @@ public class Data_Manager : Data_Parse
                 catchSpeed = Parse_Float(elements[8]),// 낚시대가 물고기를 향해 이동하는 속도
                 catchPower = Parse_Float(elements[9]),// 낚시대의 힘
                 catchMaxHealth = Parse_Float(elements[10]),// 낚시대의 최대 체력
-                catchAttakSpeed = Parse_Float(elements[11]),// 물고기를 공격하는 빈도
+                //catchAttakSpeed = Parse_Float(elements[11]),// 물고기를 공격하는 빈도
 
-                shipSpeed = Parse_Float(elements[12]),// 배의 이동 속도
-                maxWeight = Parse_Float(elements[13]),// 인벤토리 중량
-                maxEnergy = Parse_Float(elements[14]),// 연료통 크기
-                efficient = Parse_Float(elements[15]),// 에너지 효율
+                shipSpeed = Parse_Float(elements[11]),// 배의 이동 속도
+                maxWeight = Parse_Float(elements[12]),// 인벤토리 중량
+                maxEnergy = Parse_Float(elements[13]),// 연료통 크기
+                efficient = Parse_Float(elements[14]),// 에너지 효율
 
-                maxBoxSize = Parse_Vector2Int(elements[16]),// 인벤토리 크기
-                shipHealth = Parse_Int(elements[17]),// 배 체력
-                freshness = Parse_Float(elements[18]),// 신선도 유지 - 꼭 필요한가??????  
+                maxBoxSize = Parse_Vector2Int(elements[15]),// 인벤토리 크기
+                shipHealth = Parse_Int(elements[16]),// 배 체력
+                //freshness = Parse_Float(elements[18]),// 신선도 유지 - 꼭 필요한가??????  
 
-                luckFish = Parse_Float(elements[19]),// 희귀 물고기 확률
-                fishAmount = Parse_Int(elements[20]),// 낚시 횟수 증가
-                fishPrice = Parse_Float(elements[21]),// 판매 물고기 가격 증가
+                luckFish = Parse_Float(elements[17]),// 두마리 잡힐 확률
+                fishAmount = Parse_Int(elements[18]),// 낚시 횟수 증가
+                fishPrice = Parse_Float(elements[19]),// 판매 물고기 가격 증가
+                storageSize = Parse_Vector2Int(elements[20]),// 창고 사이즈
             };
 
             SkillStruct tempData = new SkillStruct
@@ -219,7 +220,7 @@ public class Data_Manager : Data_Parse
 
     void SetLanguageStruct(TextAsset _textAsset)
     {
-        string assetText = _textAsset.text.Replace('`','"');
+        string assetText = _textAsset.text.Replace('`', '"');
         string[] data = assetText.Split(new char[] { '\n' });
         for (int i = 1; i < data.Length; i++)// 첫째 라인 빼고 리스팅
         {
@@ -357,7 +358,7 @@ public class Data_Manager : Data_Parse
         public float catchSpeed;// 낚시대가 물고기를 향해 이동하는 속도
         public float catchPower;// 낚시대의 힘
         public float catchMaxHealth;// 낚시대의 최대 체력
-        public float catchAttakSpeed;// 물고기를 공격하는 빈도
+        //public float catchAttakSpeed;// 물고기를 공격하는 빈도
 
         [Header(" [ Ship ]")]
         public float shipSpeed;// 배의 이동 속도
@@ -366,12 +367,13 @@ public class Data_Manager : Data_Parse
         public float efficient;// 에너지 효율
         public Vector2Int maxBoxSize;// 인벤토리 크기
         public int shipHealth;// 배 체력
-        public float freshness;// 신선도 유지 - 꼭 필요한가??????  
+        //public float freshness;// 신선도 유지 - 꼭 필요한가??????  
 
         [Header(" [ Fish ]")]
         public float luckFish;// 낚시 성공 시 한마리 더 낚을 확률 (낚시 시작할 때 정해지고 두마리 중 등급이 높은 물고기가 기준)
         public int fishAmount;// 낚시 횟수 증가
         public float fishPrice;// 판매 물고기 가격 증가
+        public Vector2Int storageSize;// 창고 크기
 
         public void SettingStatus(SetStatus _status)
         {
@@ -379,17 +381,18 @@ public class Data_Manager : Data_Parse
             catchSpeed = _status.catchSpeed;
             catchPower = _status.catchPower;
             catchMaxHealth = _status.catchMaxHealth;
-            catchAttakSpeed = _status.catchAttakSpeed;
+            //catchAttakSpeed = _status.catchAttakSpeed;
             shipSpeed = _status.shipSpeed;
             maxWeight = _status.maxWeight;
             maxEnergy = _status.maxEnergy;
             efficient = _status.efficient;
             maxBoxSize = _status.maxBoxSize;
             shipHealth = _status.shipHealth;
-            freshness = _status.freshness;
+            //freshness = _status.freshness;
             luckFish = _status.luckFish;
             fishAmount = _status.fishAmount;
             fishPrice = _status.fishPrice;
+            storageSize = _status.storageSize;
         }
 
         public void AddStatus(SetStatus _status, int _remove = 1)
@@ -398,7 +401,7 @@ public class Data_Manager : Data_Parse
             catchSpeed += _status.catchSpeed * _remove;
             catchPower += _status.catchPower * _remove;
             catchMaxHealth += _status.catchMaxHealth * _remove;
-            catchAttakSpeed += _status.catchAttakSpeed * _remove;
+            //catchAttakSpeed += _status.catchAttakSpeed * _remove;
             shipSpeed += _status.shipSpeed * _remove;
             maxWeight += _status.maxWeight * _remove;
             if (maxEnergy > 0)// 최대 연료가 0보다 클때
@@ -408,10 +411,11 @@ public class Data_Manager : Data_Parse
                 efficient = 0f;
             maxBoxSize += _status.maxBoxSize * _remove;
             shipHealth += _status.shipHealth * _remove;
-            freshness += _status.freshness * _remove;
+            //freshness += _status.freshness * _remove;
             luckFish += _status.luckFish * _remove;
             fishAmount += _status.fishAmount * _remove;
             fishPrice += _status.fishPrice * _remove;
+            storageSize += _status.storageSize * _remove;
         }
     }
 

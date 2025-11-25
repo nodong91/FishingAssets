@@ -282,6 +282,8 @@ public class UI_Main : MonoBehaviour
     float moneyValue;
     public RectTransform moneyRect;
     private Coroutine shakeUI;
+
+    public RectTransform loanRect;
     public TMPro.TMP_Text loanText;
 
     public float TryMoney
@@ -348,7 +350,7 @@ public class UI_Main : MonoBehaviour
     public void SetLoanText(float _loan)
     {
         loanText.text = "-" + _loan.ToString();
-        loanText.gameObject.SetActive(_loan > 0);
+        loanRect.gameObject.SetActive(_loan > 0);
     }
 
     //===========================================================================================================================

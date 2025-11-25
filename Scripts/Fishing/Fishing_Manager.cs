@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using static Data_Manager;
-using static Data_Manager.FishStruct;
 
 public class Fishing_Manager : MonoBehaviour
 {
@@ -23,7 +22,7 @@ public class Fishing_Manager : MonoBehaviour
     public float defaultCameraDistance = 15f;
     [Header(" [ Object ]")]
     public GameObject fishingSet;
-    public GameObject catchaText;
+    public GameObject catchaText, failText;
     public GameObject shipPrefab;
     public float shipSize = 1f;
 
@@ -35,7 +34,6 @@ public class Fishing_Manager : MonoBehaviour
     float catchRadius = 1f;// 지름이 클수록 데미지가 약해짐 (줄을 느슨하게)
 
     FishStruct currentFish;
-    RandomSize currentSize;
     public GameObject fishPrefab;
     Coroutine fishAction;
 
@@ -88,7 +86,6 @@ public class Fishing_Manager : MonoBehaviour
     public void SetFishing(AreaType _areaType)// 트리거 닿았을 때 낚시 시작
     {
         areaType = _areaType;
-        fishingCanvas.SetCount(0);// 카운트 제거
 
         // 물고기 시간, 영역 세팅
         dayType = Game_Manager.current.GetMainUI.timeUI.lightMode;
@@ -229,7 +226,7 @@ public class Fishing_Manager : MonoBehaviour
         fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
         fishPrefab.transform.position = fishTargetPoint;
 
-        fishHealth = currentFish.fishHealth / (catchStatus.catchMaxHealth + currentFish.fishHealth);
+        fishHealth = currentFish.fishHealth / (currentFish.fishHealth + catchStatus.catchMaxHealth);
         fishingCanvas.SetFishHP(fishHealth);
 
         catchPrefab.transform.position = fishPrefab.transform.position;
@@ -239,6 +236,7 @@ public class Fishing_Manager : MonoBehaviour
 
     IEnumerator StartCount()// 카운트
     {
+        fishingCanvas.SetCount(0);// 카운트 제거
         SetFishing();// 낚시 초기화
         yield return null;
 
@@ -297,7 +295,7 @@ public class Fishing_Manager : MonoBehaviour
         Vector2 fishPosition = new Vector2(fishPrefab.transform.position.x, fishPrefab.transform.position.z);
         Vector2 catchPosition = new Vector2(catchPrefab.transform.position.x, catchPrefab.transform.position.z);
         float catchDistance = (fishPosition - catchPosition).magnitude;
-        isCatching = (catchDistance < catchRadius);
+        isCatching = (catchDistance < catchRadius);// 영역 안에 있는지 체크
         Color catchColor = isCatching ? onCatchColor : notCatchColor;
         catchRanderer.material.SetColor("_Color", catchColor);
         fishingCanvas.LinTention(catchDistance / catchRadius);
@@ -693,23 +691,36 @@ public class Fishing_Manager : MonoBehaviour
         fishingCanvas.SetFishSpell(0f);
 
         fishingCanvas.FishingOver();// 낚시 유아이 제거
+        StartCoroutine(CatchaAction(_success));// 낚시 성공
+        //if (_success == true)
+        //{
+        //    StartCoroutine(CatchaAction());// 낚시 성공
+        //}
+        //else
+        //{
+        //    CheckFishQueue();// 낚시 실패
+        //}
+    }
+
+    IEnumerator CatchaAction(bool _success)// 낚시 성공 텍스트
+    {
         if (_success == true)
         {
-            StartCoroutine(CatchaAction());// 낚시 성공
+            catchaText.SetActive(true);
+            yield return new WaitForSeconds(3f);
+
+            catchaText.SetActive(false);
+            SetReward();
         }
         else
         {
-            CheckFishQueue();// 낚시 실패
+
+            failText.SetActive(true);
+            yield return new WaitForSeconds(3f);
+
+            failText.SetActive(false);
+            CheckFishQueue();
         }
-    }
-
-    IEnumerator CatchaAction()// 낚시 성공 텍스트
-    {
-        catchaText.SetActive(true);
-        yield return new WaitForSeconds(3f);
-
-        catchaText.SetActive(false);
-        SetReward();
     }
 
     public void SetReward()

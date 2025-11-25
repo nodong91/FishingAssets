@@ -145,7 +145,7 @@ public class Skill_Tool : MonoBehaviour
             string id = data_SkillTree.skillList[i];
             if (string.IsNullOrEmpty(id))
                 continue;
-            Debug.LogWarning(id);
+
             if (Singleton_Data.INSTANCE.Dict_Skill.ContainsKey(id) == true)
             {
                 SkillStruct skill = Singleton_Data.INSTANCE.Dict_Skill[data_SkillTree.skillList[i]];
