@@ -118,4 +118,13 @@ public class Const_Dialog
     public const string _3009 = "Data_Dialog_3009";
     // ¹Ð¼ö²Û
     public const string _4001 = "Data_Dialog_4001";
+
+    // ´ëÈ­
+    public const string _exit = "di_0006_b";
+    public const string _upgrade = "di_2001_d";
+    public const string _rest = "di_3001_d";
+    public const string _street = "di_0008_d";
+    public const string _inLand = "di_0002_b";
+    public const string _payBack = "di_3004_d";
+    public const string _gameOver = "di_3008_b";
 }

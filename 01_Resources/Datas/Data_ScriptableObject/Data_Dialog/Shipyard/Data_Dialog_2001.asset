@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_Dialog_2001
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: c7a49494ad2b04c48ad3b660120a072d, type: 2}
-  selectID: 
+  selectID: "\uC870\uC120\uC18C \uC0AC\uC7A5"
   textStruct:
   - contents: di_2001_a
     emotionType: 1
@@ -27,12 +27,9 @@ MonoBehaviour:
       actionInterval: 0.5
       actionAngle: {x: 0, y: 5}
   selectStructs:
-  - selectDialog: di_2001_c
-    selectType: 0
+  - selectType: 0
     scriptableObject: {fileID: 11400000, guid: 21577614227c2d14cb0ea51777012ce9, type: 2}
-  - selectDialog: di_2001_d
-    selectType: 5
+  - selectType: 5
     scriptableObject: {fileID: 0}
-  - selectDialog: di_0006_b
-    selectType: 1
+  - selectType: 1
     scriptableObject: {fileID: 0}

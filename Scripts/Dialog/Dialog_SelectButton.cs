@@ -65,13 +65,13 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
     {
         switch (_selectStruct.selectType)
         {
-            case SelectStruct.SelectType.Out: return "di_0006_b";
-            case SelectStruct.SelectType.Upgrade: return "di_2001_d";
-            case SelectStruct.SelectType.Rest: return "di_3001_c";
-            case SelectStruct.SelectType.Street: return "di_0008_d";
-            case SelectStruct.SelectType.InLand: return "di_0001_c";
-            case SelectStruct.SelectType.PayBack: return "di_3003_c";
-            case SelectStruct.SelectType.GameOver: return "di_3004_d";
+            case SelectStruct.SelectType.Out: return Const_Dialog._exit; 
+            case SelectStruct.SelectType.Upgrade: return Const_Dialog._upgrade;
+            case SelectStruct.SelectType.Rest: return Const_Dialog._rest;
+            case SelectStruct.SelectType.Street: return Const_Dialog._street;
+            case SelectStruct.SelectType.InLand: return Const_Dialog._inLand;
+            case SelectStruct.SelectType.PayBack: return Const_Dialog._payBack;
+            case SelectStruct.SelectType.GameOver: return Const_Dialog._gameOver;
             default: return null;
         }
     }

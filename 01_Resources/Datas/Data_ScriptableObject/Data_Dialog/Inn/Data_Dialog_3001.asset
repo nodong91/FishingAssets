@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_Dialog_3001
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: f5051af63d2a58d4898565b06e66ba95, type: 2}
-  selectID: AddLoan
+  selectID: di_3001_c
   textStruct:
   - contents: di_3001_a
     emotionType: 0
@@ -22,12 +22,9 @@ MonoBehaviour:
     emotionType: 0
     dialogTypes: []
   selectStructs:
-  - selectDialog: di_3001_c
-    selectType: 6
+  - selectType: 6
     scriptableObject: {fileID: 0}
-  - selectDialog: di_0006_b
-    selectType: 0
+  - selectType: 0
     scriptableObject: {fileID: 11400000, guid: c8751236a4870454c805b2470d1a6e00, type: 2}
-  - selectDialog: di_0006_b
-    selectType: 1
+  - selectType: 1
     scriptableObject: {fileID: 0}
