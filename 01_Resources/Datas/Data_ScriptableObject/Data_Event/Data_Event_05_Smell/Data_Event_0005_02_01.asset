@@ -13,26 +13,25 @@ MonoBehaviour:
   m_Name: Data_Event_0005_02_01
   m_EditorClassIdentifier: 
   eventStruct:
-    contents: "\uC190\uC774 \uB2FF\uAE30\uB3C4 \uC804\uC5D0/n{0}\uB97C \uC4F4 {1}\uAC00/n\uC624\uC77C\uD1B5\uC744
-      \uC7AC\uBE60\uB974\uAC8C \uB09A\uC544\uCC44\uAC14\uB2E4"
+    contents: ev_0005_02_01_a
     emotionType: 3
     dialogTypes:
-    - replaceText: "\uBC84\uC12F \uBAA8\uC790"
-      textSize: 35
+    - replaceText: ev_0005_02_01_b
+      textSize: 32
       typingSpeed: 0
       textColor: {r: 0.9245283, g: 0.32733953, b: 0.28346387, a: 0}
       actionType: 1
       actionSpeed: 5
-      actionInterval: 5
-      actionAngle: {x: 0, y: 2}
-    - replaceText: "\uC218\uC0C1\uD55C \uADF8\uB9BC\uC790"
-      textSize: 35
+      actionInterval: 0
+      actionAngle: {x: 2, y: 2}
+    - replaceText: ev_0005_02_01_c
+      textSize: 32
       typingSpeed: 0
       textColor: {r: 0.5209088, g: 0.34349412, b: 0.8773585, a: 0}
       actionType: 1
-      actionSpeed: 5
-      actionInterval: 5
-      actionAngle: {x: 0, y: 2}
+      actionSpeed: 1
+      actionInterval: 0
+      actionAngle: {x: 0, y: 5}
   eventSelect:
-  - selectDialog: "\uBA38\uB9AC\uB97C \uAE01\uC801\uC774\uBA70 \uB3CC\uC544\uAC04\uB2E4"
+  - selectDialog: ev_0005_01_02_b
     selectEvent: []
