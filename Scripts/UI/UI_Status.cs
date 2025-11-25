@@ -25,7 +25,7 @@ public class UI_Status : MonoBehaviour
     public TMPro.TMP_Text catchRadius;// 물고기를 잡는 범위
     public TMPro.TMP_Text catchSpeed;// 낚시대가 물고기를 향해 이동하는 속도
     public TMPro.TMP_Text catchPower;// 낚시대의 힘
-    //public TMPro.TMP_Text catchMaxHealth;// 낚시대의 최대 체력
+    public TMPro.TMP_Text catchMaxHealth;// 낚시대의 최대 체력
     //public TMPro.TMP_Text catchAttakSpeed;// 물고기를 공격하는 빈도
 
     [Header(" [ Ship ]")]
@@ -47,7 +47,7 @@ public class UI_Status : MonoBehaviour
         catchRadius.text = totalStatus.catchRadius.ToString();
         catchSpeed.text = totalStatus.catchSpeed.ToString();
         catchPower.text = totalStatus.catchPower.ToString();
-        //catchMaxHealth.text = totalStatus.catchMaxHealth.ToString();
+        catchMaxHealth.text = totalStatus.catchMaxHealth.ToString();
         //catchAttakSpeed.text = totalStatus.catchAttakSpeed.ToString();
 
         shipSpeed.text = totalStatus.shipSpeed.ToString();

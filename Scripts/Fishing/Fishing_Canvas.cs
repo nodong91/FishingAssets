@@ -24,6 +24,7 @@ public class Fishing_Canvas : MonoBehaviour
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = Camera_Manager.current.UICamera;
         fishUI.gameObject.SetActive(false);
+        SetCount(0);
     }
 
     public void SetFishing()
