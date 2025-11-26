@@ -261,7 +261,7 @@ public class Static_JsonManager
 
     public static void SaveInventory(string fileName, InventoryData _data)
     {
-        Debug.LogError($"저장 : {fileName} ({_data.saveItems.Count})");
+        Debug.LogError($"저장 : {fileName} (아이템 수 : {_data.saveItems.Count})");
         if (String.IsNullOrEmpty(fileName))
             return;
 

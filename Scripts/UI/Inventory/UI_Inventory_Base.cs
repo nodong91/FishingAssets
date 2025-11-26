@@ -57,16 +57,14 @@ public class UI_Inventory_Base : MonoBehaviour
 
     IEnumerator SetLoadingItem()
     {
-        Debug.LogWarning($"SetLoadingItem-----------------------------{slotType} 세팅");
-        saveInventoryData = null;
-
         EmptyInventoryAllSlot();
         LoadInventory(); // saveInventoryData 불러오기
         yield return null;
 
-        if (saveInventoryData != null)
+        if (Game_Manager.current.shipData != null)// 배가 있어야
         {
-            SetInventorySlot(saveInventoryData.invenSize);// 데이터 불러온 이후
+            Vector2Int invenSize = (slotType == SlotType.MyBox) ? Game_Manager.current.currentStatus.maxBoxSize : saveInventoryData.invenSize;
+            SetInventorySlot(invenSize);// 데이터 불러온 이후
             yield return null;
 
             LoadItem(saveInventoryData);// 아이템 불러오기
@@ -104,6 +102,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public void SetInventorySlot(Vector2Int _size)// 인벤토리 세팅
     {
+        Debug.LogWarning($"{gameObject.name} : {_size}");
         if (allSlots != null)
         {
             foreach (var slot in allSlots)
@@ -583,7 +582,7 @@ public class UI_Inventory_Base : MonoBehaviour
         {
             saveInventoryData = _data;
         }
-        else if (Game_Manager.current.shipData != null)// 배가 없다면
+        else if (Game_Manager.current.shipData != null)// 배가 있다면
         {
             saveInventoryData = new Static_JsonManager.InventoryData
             {
@@ -603,7 +602,6 @@ public class UI_Inventory_Base : MonoBehaviour
             UI_Inventory_Slot slot = allSlots[slotNum.x, slotNum.y];
             SetSlot(slot, _data.saveItems[i].item);// LoadItem
         }
-        Debug.LogError($"저장 데이터 갱신({saveData}) : {saveInventoryData.saveItems.Count} 아이템");
     }
 
     void SetLoadDestroy()

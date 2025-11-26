@@ -57,6 +57,7 @@ public class Unit_Player : MonoBehaviour
             return;
 
         FocusTarget.transform.position = transform.position;
+        CheckDeep();
     }
 
     public void SetStatus()
@@ -67,7 +68,7 @@ public class Unit_Player : MonoBehaviour
         health = (FullHealth == true) ? CurrentStatus.shipHealth : CurrentStatus.shipHealth - continueData.destroySlot.Count;// 스탯 추가 하기  전 풀피 체크
         Game_Manager.current.GetMainUI.SetMaxHealthPoint(CurrentStatus.shipHealth);
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
-        energy = continueData.energy;
+        //energy = continueData.energy;
         efficient = CurrentStatus.efficient;
         Debug.LogWarning($"SetStatus - Energy : {energy}/{CurrentStatus.maxEnergy}, SetStatus - Health : {health}/{CurrentStatus.shipHealth}");
         SetEnergyUI();
@@ -184,7 +185,7 @@ public class Unit_Player : MonoBehaviour
     {
         while (state == State.Move)
         {
-            if(efficient > 0 && energy <= 0f)// 에너지가 없으면 못 움직임
+            if (efficient > 0 && energy <= 0f)// 에너지가 없으면 못 움직임
             {
                 // 이동 불가
                 Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._dontMove);
@@ -255,6 +256,14 @@ public class Unit_Player : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, target, speed);
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed);
         //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(focusTarget.transform.forward), speed * 5f);
+        CheckDeep();
+    }
+
+    void CheckDeep()
+    {
+        Map_Generator.Node node = Map_Generator.current.GetNodeFromPosition(transform.position);
+        Game_Manager.current.GetMainUI.CheckDeep(node.areaType);
+        Debug.LogWarning($"체크 : {node.areaType}");
     }
 
     //================================================================================================================================================
@@ -318,6 +327,7 @@ public class Unit_Player : MonoBehaviour
 
         Game_Manager.current.PlayerDestroy();// 플레이어 위치에 고스트 놓고 인벤토리 비우기
         Debug.LogError("견인 되는 연출 필요 - 보험 회사 도착");
+        CheckDeep();
         // 견인 되는 연출 필요
         // 위치 변경
 
@@ -371,6 +381,12 @@ public class Unit_Player : MonoBehaviour
                 triggerGameObject.Remove(closestTarget);
                 closestTarget = null;
                 Game_Manager.current.GetFollow.AddClosestTarget(null);// 팔로우 유아이 제거
+            }
+            else
+            {
+                Map_Generator.Node node = Map_Generator.current.GetNodeFromPosition(transform.position);
+                Game_Manager.current.StartFishing(node.areaType);
+                Debug.LogWarning($"클릭 낚시 시작 : {node.areaType}");
             }
         }
     }

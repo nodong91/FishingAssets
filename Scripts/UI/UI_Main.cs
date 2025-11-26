@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -148,7 +147,7 @@ public class UI_Main : MonoBehaviour
 
     public void SetWarnningText(string _text)
     {
-        warnningText.text = _text;
+        warnningText.text = Singleton_Data.INSTANCE.GetLanguage(_text);
         if (textActing != null)
             StopCoroutine(textActing);
         textActing = StartCoroutine(TextActing());
@@ -411,5 +410,12 @@ public class UI_Main : MonoBehaviour
         }
         UI_BuffSlot inst = Instantiate(buffSlotPrefab, buffGrid.transform);
         return inst;
+    }
+
+    public TMPro.TMP_Text deepText;
+    public void CheckDeep(Data_Manager.AreaType _areaType)
+    {
+        deepText.gameObject.SetActive(_areaType != Data_Manager.AreaType.None);
+        deepText.text = _areaType.ToString();
     }
 }

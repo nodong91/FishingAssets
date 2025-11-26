@@ -25,6 +25,7 @@ public class Editor_Map_Generator : Editor
     }
 }
 #endif
+
 //[ExecuteInEditMode]
 public class Map_Generator : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class Map_Generator : MonoBehaviour
     public float nodeSize = 2f;
     public Vector2Int worldGrid;
     private Vector2 worldSize;
+    public GameObject hideObject;
 
     [System.Serializable]
     public class Node
@@ -77,43 +79,57 @@ public class Map_Generator : MonoBehaviour
     public int fishCount = 15;
     public int boxCount = 15;
 
-    public GameObject safetyArea;
-    public float safetyRadius;
+    public GameObject[] safetyArea;
 
     public Trigger_Fish triggerFish;
     public Trigger_RandomBox triggerRandomBox;
+
+    public static Map_Generator current;
 
     public void UpdateData()
     {
         SetNodeGrid();
     }
 
+    private void Awake()
+    {
+        current = this;
+    }
+
     private void Start()
     {
         SetStart();
+        hideObject.SetActive(false);
     }
 
     public void SetStart()
     {
         SetNodeGrid();
-        for (int i = 0; i < fishCount; i++)
+        for (int area = 0; area < (int)(Data_Manager.AreaType.Abyssal + 1); area++)
         {
-            Data_Manager.AreaType areaType = Data_Manager.AreaType.Shallow;
-            Node node = GetTypeNode(areaType);// 임시 연안 노드 랜덤으로 가져오기
-            Trigger_Fish inst = Instantiate(triggerFish, transform);
-            inst.SetAreaType(areaType);
-            inst.transform.position = node.worldPosition;
-            inst.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-        }
+            Data_Manager.AreaType areaType = (Data_Manager.AreaType)area;
+            if (areaType != Data_Manager.AreaType.None)// 생성 불가 위치
+            {
+                for (int i = 0; i < fishCount; i++)// 낚시터 세팅
+                {
+                    //Data_Manager.AreaType areaType = Data_Manager.AreaType.Shallow;
+                    Node node = GetTypeNode(areaType);// 임시 연안 노드 랜덤으로 가져오기
+                    Trigger_Fish inst = Instantiate(triggerFish, transform);
+                    inst.SetAreaType(areaType);
+                    inst.transform.position = node.worldPosition;
+                    inst.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+                }
 
-        for (int i = 0; i < boxCount; i++)
-        {
-            Data_Manager.AreaType areaType = Data_Manager.AreaType.Shallow;
-            Node node = GetTypeNode(areaType);// 임시 연안 노드 랜덤으로 가져오기
-            Trigger_RandomBox inst = Instantiate(triggerRandomBox, transform);
-            inst.SetAreaType(areaType);
-            inst.transform.position = node.worldPosition;
-            inst.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+                for (int i = 0; i < boxCount; i++)// 박스 세팅
+                {
+                    //Data_Manager.AreaType areaType = Data_Manager.AreaType.Shallow;
+                    Node node = GetTypeNode(areaType);// 임시 연안 노드 랜덤으로 가져오기
+                    Trigger_RandomBox inst = Instantiate(triggerRandomBox, transform);
+                    inst.SetAreaType(areaType);
+                    inst.transform.position = node.worldPosition;
+                    inst.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+                }
+            }
         }
     }
 
@@ -134,34 +150,41 @@ public class Map_Generator : MonoBehaviour
                 Vector3 worldPoint = worldBottomLeft + Vector3.right * (x * nodeSize + nodeSize * 0.5f) + Vector3.forward * (y * nodeSize + nodeSize * 0.5f);
                 Vector2Int grid = new Vector2Int(x, y);
 
-                Vector3 hitPoint = TryNodeHit(worldPoint + Vector3.up * 1000f);
                 nodeMap[x, y] = new Node(worldPoint, grid);
-                Data_Manager.AreaType areaType = SetNodeType(hitPoint.y, nodeMap[x, y]);// 노드 타입 세팅
+                Data_Manager.AreaType areaType = SetNodeType(nodeMap[x, y]);// 노드 타입 세팅
                 nodeMap[x, y].SetNodeType(areaType);
                 allNodes.Add(nodeMap[x, y]);
             }
         }
     }
 
-    Data_Manager.AreaType SetNodeType(float _hitPointY, Node _node)
+    Data_Manager.AreaType SetNodeType(Node _node)
     {
-        float radius = (safetyArea.transform.position - _node.worldPosition).magnitude;
-        if (radius < safetyRadius)
-            return Data_Manager.AreaType.None;
-        else if (radius < (safetyRadius + 20f))
+        LayerMask layerMask = ~(1 << LayerMask.NameToLayer("Water"));
+        Vector3 worldPoint = _node.worldPosition + Vector3.up * 10f;
+        if (Physics.Raycast(worldPoint, Vector3.down, out RaycastHit hit, Mathf.Infinity, layerMask))
         {
-            shallowNodes.Add(_node);
-            return Data_Manager.AreaType.Shallow;
-        }
-        else if (radius < (safetyRadius + 40f))
-        {
-            coastalNodes.Add(_node);
-            return Data_Manager.AreaType.Coastal;
-        }
-        else if (radius < (safetyRadius + 60f))
-        {
-            oceanicNodes.Add(_node);
-            return Data_Manager.AreaType.Oceanic;
+            //Debug.DrawRay(worldPoint, Vector3.down * hit.distance, Color.yellow, 1f);
+            Debug.Log($"{hit.transform.name} : " + hit.distance);
+            if (hit.distance < 10f)
+            {
+                return Data_Manager.AreaType.None;
+            }
+            else if (hit.distance < 11f)
+            {
+                shallowNodes.Add(_node);
+                return Data_Manager.AreaType.Shallow;
+            }
+            else if (hit.distance < 15f)
+            {
+                coastalNodes.Add(_node);
+                return Data_Manager.AreaType.Coastal;
+            }
+            else if (hit.distance < 18f)
+            {
+                oceanicNodes.Add(_node);
+                return Data_Manager.AreaType.Oceanic;
+            }
         }
         abyssalNodes.Add(_node);
         return Data_Manager.AreaType.Abyssal;
@@ -212,16 +235,6 @@ public class Map_Generator : MonoBehaviour
         return null;
     }
 
-    Vector3 TryNodeHit(Vector3 _worldPoint)
-    {
-        LayerMask waterLayer = ~(1 << LayerMask.NameToLayer("Water"));
-        if (Physics.Raycast(_worldPoint, Vector3.down, out RaycastHit hit, Mathf.Infinity, waterLayer))
-        {
-            return hit.point;
-        }
-        return Vector3.zero;
-    }
-
     [Tooltip("8방향 이동가능")]
     public bool diagonal;
 
@@ -267,7 +280,7 @@ public class Map_Generator : MonoBehaviour
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, 1, worldSize.y));
         Handles.color = Color.blue;
-        UnityEditor.Handles.DrawWireDisc(safetyArea.transform.position, Vector3.up, safetyRadius);
+        //UnityEditor.Handles.DrawWireDisc(safetyArea.transform.position, Vector3.up, safetyRadius);
         if (nodeMap != null)
         {
             foreach (Node n in nodeMap)
