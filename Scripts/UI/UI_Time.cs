@@ -249,5 +249,7 @@ public class UI_Time : MonoBehaviour
         shopReset = true;
         shipyardReset = true;
         smugglerReset = true;
+
+        Map_Generator.current.ResetArea();
     }
 }

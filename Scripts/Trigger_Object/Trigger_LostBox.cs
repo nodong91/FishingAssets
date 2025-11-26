@@ -23,10 +23,11 @@ public class Trigger_LostBox : Trigger_Setting
             };
             setSaveItems.Add(dictCheck);
         }
-
+        //Vector2Int inventorySize = Game_Manager.current.GetInventory.myBox.inventorySize;
+        Vector2Int inventorySize = Game_Manager.current.currentStatus.maxBoxSize;
         setResult = new InventoryData
         {
-            invenSize = Game_Manager.current.GetInventory.myBox.inventorySize,
+            invenSize = inventorySize,
             saveItems = setSaveItems,
         };
 

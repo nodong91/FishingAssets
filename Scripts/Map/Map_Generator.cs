@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.VisualScripting;
+
+
 
 
 #if UNITY_EDITOR
@@ -105,6 +108,28 @@ public class Map_Generator : MonoBehaviour
     public void SetStart()
     {
         SetNodeGrid();
+        SetAreaObject();
+    }
+
+    public void ResetArea()
+    {
+        for (int i = 0; i < fishingList.Count; i++)// 낚시터 세팅
+        {
+            fishingQueue.Enqueue(fishingList[i]);
+            fishingList[i].gameObject.SetActive(false);
+        }
+        for (int i = 0; i < boxList.Count; i++)// 낚시터 세팅
+        {
+            boxQueue.Enqueue(boxList[i]);
+            fishingList[i].gameObject.SetActive(false);
+        }
+        fishingList.Clear();
+        boxList.Clear();
+        SetAreaObject();
+    }
+
+    void SetAreaObject()
+    {
         for (int area = 0; area < (int)(Data_Manager.AreaType.Abyssal + 1); area++)
         {
             Data_Manager.AreaType areaType = (Data_Manager.AreaType)area;
@@ -112,22 +137,24 @@ public class Map_Generator : MonoBehaviour
             {
                 for (int i = 0; i < fishCount; i++)// 낚시터 세팅
                 {
-                    //Data_Manager.AreaType areaType = Data_Manager.AreaType.Shallow;
-                    Node node = GetTypeNode(areaType);// 임시 연안 노드 랜덤으로 가져오기
-                    Trigger_Fish inst = Instantiate(triggerFish, transform);
+                    Node node = GetTypeNode(areaType);// 노드 랜덤으로 가져오기
+                    Trigger_Fish inst = FishingPool();
+                    inst.gameObject.SetActive(true);
                     inst.SetAreaType(areaType);
                     inst.transform.position = node.worldPosition;
                     inst.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+                    fishingList.Add(inst);
                 }
 
                 for (int i = 0; i < boxCount; i++)// 박스 세팅
                 {
-                    //Data_Manager.AreaType areaType = Data_Manager.AreaType.Shallow;
-                    Node node = GetTypeNode(areaType);// 임시 연안 노드 랜덤으로 가져오기
-                    Trigger_RandomBox inst = Instantiate(triggerRandomBox, transform);
+                    Node node = GetTypeNode(areaType);// 노드 랜덤으로 가져오기
+                    Trigger_RandomBox inst = BoxPool();
+                    inst.gameObject.SetActive(true);
                     inst.SetAreaType(areaType);
                     inst.transform.position = node.worldPosition;
                     inst.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+                    boxList.Add(inst);
                 }
             }
         }
@@ -234,6 +261,29 @@ public class Map_Generator : MonoBehaviour
         }
         return null;
     }
+
+    List<Trigger_Fish> fishingList = new List<Trigger_Fish>();
+    List<Trigger_RandomBox> boxList = new List<Trigger_RandomBox>();
+
+    Queue<Trigger_Fish> fishingQueue = new Queue<Trigger_Fish>();
+    Queue<Trigger_RandomBox> boxQueue = new Queue<Trigger_RandomBox>();
+
+    Trigger_Fish FishingPool()
+    {
+        if (fishingQueue.Count > 0)
+            return fishingQueue.Dequeue();
+        Trigger_Fish inst = Instantiate(triggerFish, transform);
+        return inst;
+    }
+
+    Trigger_RandomBox BoxPool()
+    {
+        if (boxQueue.Count > 0)
+            return boxQueue.Dequeue();
+        Trigger_RandomBox inst = Instantiate(triggerRandomBox, transform);
+        return inst;
+    }
+
 
     [Tooltip("8방향 이동가능")]
     public bool diagonal;

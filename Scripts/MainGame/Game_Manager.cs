@@ -94,10 +94,7 @@ public class Game_Manager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            //StatsManager.current.CatchCount();
-            //LoanStart();
-            //GameOver();
-            //Singleton_Continue.INSTANCE.SaveContinue();// Space Ω√ ¿˙¿Â
+            Map_Generator.current.ResetArea();
         }
     }
 

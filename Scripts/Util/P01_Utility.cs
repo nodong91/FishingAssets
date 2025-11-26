@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using static Data_Manager;
 
 public class P01_Utility
 {
@@ -128,5 +129,29 @@ public class P01_Utility
     {
         Vector2 v2 = end - start;
         return Mathf.Atan2(v2.y, v2.x) * Mathf.Rad2Deg;
+    }
+
+    public static string ClassColor(ItemStruct.ItemClass _class)
+    {
+        string color = "000000";
+        switch (_class)
+        {
+            case ItemStruct.ItemClass.Common:
+                color = "B3B3B3";
+                break;
+            case ItemStruct.ItemClass.Uncommon:
+                color = "00FF29";
+                break;
+            case ItemStruct.ItemClass.Rare:
+                color = "005CFF";
+                break;
+            case ItemStruct.ItemClass.Epic:
+                color = "FF1300";
+                break;
+            case ItemStruct.ItemClass.Legendary:
+                color = "FFDD00";
+                break;
+        }
+        return color;
     }
 }

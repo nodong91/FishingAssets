@@ -29,26 +29,10 @@ public class UI_Inventory_Infomation : MonoBehaviour
             $" {item.price} + {Game_Manager.current.currentStatus.fishPrice} = {price}");
         weightText.text = $"{item.weight}<size={weightText.fontSize * 0.5f}>kg</size>";
         priceText.text = price.ToString();
-        string color = "";
-        switch (item.itemClass)
-        {
-            case ItemStruct.ItemClass.Common:
-                color = "B3B3B3";
-                break;
-            case ItemStruct.ItemClass.Uncommon:
-                color = "00FF29";
-                break;
-            case ItemStruct.ItemClass.Rare:
-                color = "005CFF";
-                break;
-            case ItemStruct.ItemClass.Epic:
-                color = "FF1300";
-                break;
-            case ItemStruct.ItemClass.Legendary:
-                color = "FFDD00";
-                break;
-        }
+
+        string color = P01_Utility.ClassColor(item.itemClass);
         classText.text = $"<color=#{color}>{item.itemClass}</color>";
+
         switch (item.itemType)
         {
             case ItemStruct.ItemType.Fish:
