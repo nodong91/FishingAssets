@@ -40,6 +40,12 @@ public class Const_ETC
     public const string _notice = "etc_0010";
     public const string _dragToFuel = "etc_0011";
     public const string _fill = "etc_0012";
+
+    public const string _noMoney = "etc_1001";
+    public const string _overWeight = "etc_1002";
+    public const string _noQuest = "etc_1003";
+    public const string _dontMove = "etc_1004";
+    public const string _twoFish = "etc_1005";
 }
 
 public class Const_Save

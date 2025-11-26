@@ -184,7 +184,12 @@ public class Unit_Player : MonoBehaviour
     {
         while (state == State.Move)
         {
-            if(energy > 0f)// 에너지가 없으면 못 움직임
+            if(efficient > 0 && energy <= 0f)// 에너지가 없으면 못 움직임
+            {
+                // 이동 불가
+                Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._dontMove);
+            }
+            else
             {
                 SetMoving();
                 CheckClosestUnit();// 무브
@@ -339,6 +344,8 @@ public class Unit_Player : MonoBehaviour
             yield return null;
         }
         //StartCoroutine(ShipTowed(backwardPosition));
+
+        Singleton_Continue.INSTANCE.SaveContinue();// 견인됨
         Debug.LogError("견인 되는 연출 필요 - 마을 도착");
         CheckClosestUnit();// 가까운 트리거 체크
         //// 스탯 리셋

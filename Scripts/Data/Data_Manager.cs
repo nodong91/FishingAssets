@@ -406,7 +406,7 @@ public class Data_Manager : Data_Parse
             maxWeight += _status.maxWeight * _remove;
             if (maxEnergy > 0)// 최대 연료가 0보다 클때
                 maxEnergy += _status.maxEnergy * _remove;
-            efficient += _status.efficient * _remove;
+            efficient += Mathf.Clamp(_status.efficient * _remove * -0.1f, 0f, 100f);
             if (efficient < 0f)// 연료 효율이 0보다 작을 때
                 efficient = 0f;
             maxBoxSize += _status.maxBoxSize * _remove;
@@ -414,7 +414,7 @@ public class Data_Manager : Data_Parse
             //freshness += _status.freshness * _remove;
             luckFish += _status.luckFish * _remove;
             fishAmount += _status.fishAmount * _remove;
-            fishPrice += _status.fishPrice * _remove;
+            fishPrice += Mathf.Clamp(_status.fishPrice * _remove, -100f, 0);
             storageSize += _status.storageSize * _remove;
         }
     }
@@ -538,7 +538,7 @@ public class Data_Manager : Data_Parse
         public Vector2 fishTurnDelay;// 방향 바뀌는 딜레이 시간
         [Header(" [ 버프 ]")]
         public float addDuration;// 버프 시간
-        public float addValue;// 버프 수치
+        public float addValue;// 더해지는 버프 수치 - 버프수치가 높을 수록 해당 등급이 나올 확률이 올라간다.
 
         [System.Serializable]
         public struct RandomSize

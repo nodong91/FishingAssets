@@ -25,6 +25,7 @@ public class UI_ChangeShip : MonoBehaviour
             return;
 
         shipList.Add(_shipData);
+        Debug.LogWarning($"{_shipData.name} : {_shipData.shipName} : {shipList.Count} : {gameObject.name}");
 
         UI_ChangeShip_Slot inst = Instantiate(shipButton, shipParent.transform);
         inst.SetSlot(_shipData);
@@ -54,8 +55,9 @@ public class UI_ChangeShip : MonoBehaviour
 
     void ShipClick(UI_ChangeShip_Slot _slot)// 배선택
     {
-        Game_Manager.current.ChangeStatus(_slot.shipData);
         Singleton_Continue.INSTANCE.SaveContinue();// 배 변경 시 저장
+        Game_Manager.current.ChangeStatus(_slot.shipData);
+        Debug.LogWarning($"이게 뒤에 오나? : {shipList.Count} : {gameObject.name}");
     }
 
     void ShipEnter(Custom_Button _button)

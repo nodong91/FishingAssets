@@ -117,7 +117,7 @@ public class Fishing_Manager : MonoBehaviour
         if (dictFishStruct.ContainsKey(cordType))
         {
             List<FishStruct> fishList = dictFishStruct[cordType];// 해당 타입 물고기 리스트
-            FishStruct randomFish = FishingChance(fishList);
+            FishStruct randomFish = FishingChance(fishList);// 물고기 확률로 선택
             return randomFish;
         }
         Debug.LogError($"[Fishing_Manager] 해당 타입 물고기 없음 : {cordType}");
@@ -156,7 +156,7 @@ public class Fishing_Manager : MonoBehaviour
         // 버프는 배스탯 관련만??
         // 생선을 미끼로 사용?
         float addValue = 0f;
-        Game_Manager.FishBuffStruct fishBuff = Game_Manager.current.GetFishBuff;// 낚시 버프
+        Game_Manager.FishBuffStruct fishBuff = Game_Manager.current.GetFishBuff;// 낚시 버프 적용
         if (fishBuff != null && fishBuff.itemClass == _class)
         {
             addValue = fishBuff.addValue;
@@ -222,9 +222,9 @@ public class Fishing_Manager : MonoBehaviour
         catchStatus = Game_Manager.current.currentStatus;
         cooling = Time.time + currentFish.fishCoolTime;
 
-        Vector3 randomPoint = Random.insideUnitSphere * fieldRadius;
-        fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
-        fishPrefab.transform.position = fishTargetPoint;
+        //Vector3 randomPoint = Random.insideUnitSphere * fieldRadius;
+        //fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
+        //fishPrefab.transform.position = fishTargetPoint;
 
         fishHealth = currentFish.fishHealth / (currentFish.fishHealth + catchStatus.catchMaxHealth);
         fishingCanvas.SetFishHP(fishHealth);
@@ -436,22 +436,32 @@ public class Fishing_Manager : MonoBehaviour
 
     IEnumerator IdleState()
     {
-        if (currentFish.fishCoolTime > 0f && cooling < Time.time)
+        while (fishState == FishStateType.Idle)
         {
-            // 쿨타임이 0인 경우 공격하지 않음
-            FishState(FishStateType.Spelling);// 스킬 기술
+            Debug.LogWarning($"{currentFish.id} : {currentFish.fishCoolTime}({cooling} < {Time.time})");
+            if (currentFish.fishCoolTime > 0f && currentFish.fishDefenseCount > 0  && cooling < Time.time)
+            {
+                // 쿨타임이 0인 경우 공격하지 않음 디펜스 개수가 0보다 커야
+                FishState(FishStateType.Spelling);// 스킬 기술
+            }
+            else// 이동 능력이 없으면 이동 스테이트에 들어갈 수 없음
+            if (currentFish.fishSpeed > 0 && currentFish.fishTurnDelay.x + currentFish.fishTurnDelay.y > 0)
+            {
+                FishState(FishStateType.Moving);
+            }
+            else
+            {
+                float randomTime = Random.Range(currentFish.fishTurnDelay.x, currentFish.fishTurnDelay.y);
+                yield return new WaitForSeconds(randomTime);
+            }
+            yield return null;
         }
-        else// 이동 능력이 없으면 이동 스테이트에 들어갈 수 없음
-        if (currentFish.fishSpeed > 0 && currentFish.fishTurnDelay.x * currentFish.fishTurnDelay.y > 0)
-        {
-            fishTargetPoint = SetRandomPosition();
-            FishState(FishStateType.Moving);
-        }
-        yield return null;
     }
 
     IEnumerator FishMoving()
     {
+        fishTargetPoint = SetRandomPosition();
+
         float prevSpeed = fishSpeed;
         float distance = (fishTargetPoint - fishPrefab.transform.position).magnitude / fieldRadius;
         float randomSpeed = Random.Range(currentFish.fishSpeed * 0.3f, currentFish.fishSpeed);
@@ -491,9 +501,8 @@ public class Fishing_Manager : MonoBehaviour
         SetSkillCord();
 
         Vector3 targetPosition = shipPrefab.transform.position + (fishPrefab.transform.position - shipPrefab.transform.position).normalized * (shipSize + 1f);
-        float prevSpeed = fishSpeed;
         float normalize = 0f;
-        while (normalize < currentFish.fishSpellTime)
+        while (fishState == FishStateType.Spelling)
         {
             normalize += Time.deltaTime / currentFish.fishSpellTime;
             Vector3 direction = (fishTargetPoint - fishPrefab.transform.position);
@@ -508,13 +517,14 @@ public class Fishing_Manager : MonoBehaviour
             //fishSpeed = Mathf.Lerp(prevSpeed, 0f, normalize);// 서시히 정지
             fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * fishSpeed, Space.Self);
             fishingCanvas.SetFishSpell(normalize / currentFish.fishSpellTime);
+            if (normalize / currentFish.fishSpellTime > 1f)
+            {
+                FishState(FishStateType.Attack);
+            }
             yield return null;
         }
         fishingCanvas.SetFishSpell(0f);
         fishingCanvas.OnArrowParent(false);
-        yield return null;
-
-        FishState(FishStateType.Attack);
     }
     IEnumerator FishAttack()// 발사
     {
@@ -538,6 +548,7 @@ public class Fishing_Manager : MonoBehaviour
             }
             yield return null;
         }
+
         // 공격 끝난 이후
         if (destroy == true)
         {
@@ -684,6 +695,7 @@ public class Fishing_Manager : MonoBehaviour
 
         isFishing = false;
         StopAllCoroutines();
+        cinemachineBasicMultiChannelPerlin.AmplitudeGain = 0f;// 쉐이크 정지
         FishState(FishStateType.None);
 
         fishingCanvas.OnArrowParent(false);
@@ -691,14 +703,6 @@ public class Fishing_Manager : MonoBehaviour
 
         fishingCanvas.FishingOver();// 낚시 유아이 제거
         StartCoroutine(CatchaAction(_success));// 낚시 성공
-        //if (_success == true)
-        //{
-        //    StartCoroutine(CatchaAction());// 낚시 성공
-        //}
-        //else
-        //{
-        //    CheckFishQueue();// 낚시 실패
-        //}
     }
 
     IEnumerator CatchaAction(bool _success)// 낚시 성공 텍스트
@@ -740,7 +744,7 @@ public class Fishing_Manager : MonoBehaviour
             itemIDs = new string[2] { currentFish.id, bonusFish.id };
             Game_Manager.current.GetFishGuide.AddFishClass(bonusFish.id, bonusFish.GetRandom().size);// 생선 가이드에 추가
             // 두마리 낚음
-            Game_Manager.current.GetMainUI.SetWarnningText("축하합니다! 행운의 물고기 두 마리를 낚았습니다!");
+            Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._twoFish);
         }
         else// 일반 낚시
         {

@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static UI_BuffSlot;
-
 public class UI_BuffSlot : MonoBehaviour
 {
     public string buffID;

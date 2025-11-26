@@ -230,6 +230,7 @@ public class UI_Landing : MonoBehaviour
 
     void OutButton()
     {
+        // ³ª°¡±â
         if (CheckShip() == false || CheckEnergy() == false || CheckFix() == false)
             return;
 
@@ -329,6 +330,7 @@ public class UI_Landing : MonoBehaviour
 
     public void ChangeButton()
     {
+        Debug.LogWarning(Game_Manager.current.GetChangeShip.GetShipCount);
         if (Game_Manager.current.GetChangeShip.GetShipCount == 0)
         {
             CheckShip();

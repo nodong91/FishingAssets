@@ -116,11 +116,11 @@ public class Game_Manager : MonoBehaviour
         yield return null;
 
         GetMainUI.SetStart();
-        GetSkill.SetStart();
         GetDialog.SetStart();
         GetFishGuide.SetStart();
         GetQuest.SetStart();
         GetChangeShip.SetStart();
+        GetSkill.SetStart();
 
         //if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)
         //{
@@ -177,9 +177,10 @@ public class Game_Manager : MonoBehaviour
 
     public void ChangeStatus(Data_Ship _shipData)// 선박 변경
     {
+        continueData = Singleton_Continue.INSTANCE.LoadContinue();
         shipData = _shipData;
         GetPlayer.SetShip(_shipData);
-        AddStatus();// 스테이트 세팅
+        AddStatus();// 선박 변경 스테이트 세팅
     }
 
     public void AddStatus()
@@ -585,16 +586,38 @@ public class Game_Manager : MonoBehaviour
 
     public void AddBuff(FishStruct _fishStruct)
     {
+        string id = "";
+        switch (_fishStruct.itemStruct.itemClass)
+        {
+            case ItemStruct.ItemClass.Legendary:
+                id = "Icon_Buff_01Legendary";
+                break;
+
+            case ItemStruct.ItemClass.Epic:
+                id = "Icon_Buff_02Epic";
+                break;
+
+            case ItemStruct.ItemClass.Rare:
+                id = "Icon_Buff_03Rare";
+                break;
+
+            case ItemStruct.ItemClass.Uncommon:
+                id = "Icon_Buff_04Uncommon";
+                break;
+
+            case ItemStruct.ItemClass.Common:
+                id = "Icon_Buff_05Common";
+                break;
+        }
+
         // 물고기를 사용하여 버프 추가
         FishBuffStruct buff = new FishBuffStruct
         {
             id = _fishStruct.itemStruct.itemType.ToString(),
-            iconSprite = _fishStruct.itemStruct.icon,
+            iconSprite = id,
             itemClass = _fishStruct.itemStruct.itemClass,// 미끼 효과 종류
-            //duration = _fishStruct.addDuration,
-            //addValue = _fishStruct.addValue,// 미끼 효과 퍼센트
-            duration = 100f,
-            addValue = 100f,// 미끼 효과 퍼센트
+            duration = _fishStruct.addDuration,
+            addValue = _fishStruct.addValue,// 미끼 효과 퍼센트
         };
         GetMainUI.AddBuffSlot(buff);
         fishBuff = buff;
