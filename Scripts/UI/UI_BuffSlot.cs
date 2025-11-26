@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static Data_Manager;
 public class UI_BuffSlot : MonoBehaviour
 {
     public string buffID;
@@ -23,13 +24,34 @@ public class UI_BuffSlot : MonoBehaviour
 
     public void SetBuffSlot(Game_Manager.FishBuffStruct _buff)
     {
+        switch (_buff.itemClass)
+        {
+            case ItemStruct.ItemClass.Legendary:
+                buffID = "Icon_Buff_01Legendary";
+                break;
+
+            case ItemStruct.ItemClass.Epic:
+                buffID = "Icon_Buff_02Epic";
+                break;
+
+            case ItemStruct.ItemClass.Rare:
+                buffID = "Icon_Buff_03Rare";
+                break;
+
+            case ItemStruct.ItemClass.Uncommon:
+                buffID = "Icon_Buff_04Uncommon";
+                break;
+
+            case ItemStruct.ItemClass.Common:
+                buffID = "Icon_Buff_05Common";
+                break;
+        }
         buffType = BuffType.FishBuff;
 
-        buffID = _buff.id;
         buffStartTime = _buff.buffStartTime;
         buffDuration = _buff.duration;
 
-        Sprite icon = Singleton_Data.INSTANCE.Dict_Sprite[_buff.iconSprite];
+        Sprite icon = Singleton_Data.INSTANCE.Dict_Sprite[buffID];
         iconImage.sprite = icon;
 
         iconImage.SetNativeSize();
