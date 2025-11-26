@@ -26,7 +26,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
             day = Game_Manager.current.GetTimeUI.day,
             weatherType = Game_Manager.current.GetTimeUI.weatherType,
 
-            energy = Game_Manager.current.GetPlayer.GetEnergy,
+            energy = Game_Manager.current.GetPlayer.GetEnergy,// 에너지 어떻게 해야하나~
             money = Game_Manager.current.GetMainUI.TryMoney,
             destroySlot = Game_Manager.current.GetInventory.TryDestroySlot,
 

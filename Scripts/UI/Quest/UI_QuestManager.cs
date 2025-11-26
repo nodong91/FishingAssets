@@ -123,7 +123,7 @@ public class UI_QuestManager : MonoBehaviour
     {
         if (dictQuest.Count >= 10)// 받을 수 있는 최대 한도
         {
-            Game_Manager.current.GetMainUI.SetWarnningText("더 이상 퀘스트를 받을 수 없음");
+            Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._noQuest);
             return;
         }
 

@@ -33,7 +33,7 @@ public class Energy_Manager : MonoBehaviour
     void SetStartEnergy()
     {
         float energy = Game_Manager.current.GetPlayer.GetEnergy;
-        prevEnergy = Mathf.Max(energy / EnergyMaxAmount, 0);// 0~1
+        prevEnergy = Mathf.Clamp(energy / EnergyMaxAmount, 0f, 1f);// 0~1
         energySlider.value = prevEnergy;
         SetEnergy(prevEnergy);
     }
@@ -47,7 +47,7 @@ public class Energy_Manager : MonoBehaviour
     {
         if (Game_Manager.current.CheckMoney(buyPrice) == false)
         {
-            Game_Manager.current.GetMainUI.SetWarnningText("에너지 충전 불가 :  잔액 부족");
+            Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._noMoney);
             Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
             Game_Manager.current.GetDialog.DialogStart_NPC(npc, Const_Dialog._0004);
             return;
