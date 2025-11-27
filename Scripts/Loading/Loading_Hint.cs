@@ -25,7 +25,7 @@ using UnityEngine;
 
 public class Loading_Hint : MonoBehaviour
 {
-    public List<string> hintStrings = new List<string>();
+    private List<string> hintStrings = new List<string>();
     public TMPro.TMP_Text hintText;
 
     public void SetStart()

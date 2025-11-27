@@ -15,6 +15,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     public Image GetSlotImage { get { return itemImage; } }
 
     UI_Inventory_Slot linkSlot;// 링크 베이스 - 다 묶이게
+    public TMPro.TMP_Text adsfadsf;
 
     public UI_Inventory_Slot GetLinkSlot { get { return linkSlot; } }
 
@@ -81,6 +82,7 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     public void SetStart(int _x, int _y)
     {
         slotNum = new Vector2Int(_x, _y);
+        adsfadsf.text = slotNum.ToString();
         CheckOff();
 
         destroy = false;

@@ -103,7 +103,7 @@ public class UI_Inventory_Base : MonoBehaviour
     public void SetInventorySlot(Vector2Int _size)// 인벤토리 세팅
     {
         Debug.LogWarning($"{gameObject.name} : {_size}");
-        if (allSlots != null)
+        if (allSlots != null)// 기존 슬롯 모두 제거
         {
             foreach (var slot in allSlots)
             {
@@ -123,6 +123,7 @@ public class UI_Inventory_Base : MonoBehaviour
             for (int x = 0; x < inventorySize.x; x++)
             {
                 UI_Inventory_Slot inst = TrySlotPool();
+                inst.gameObject.SetActive(true);
                 inst.SetStart(x, y);
                 inst.SetEmpty();
                 inst.dele_LeftClick = OnPointerLeftClick;
@@ -130,7 +131,8 @@ public class UI_Inventory_Base : MonoBehaviour
                 inst.dele_Enter = OnPointerEnter;
                 inst.dele_Exit = OnPointerExit;
                 allSlots[x, y] = inst;
-                inst.transform.SetAsLastSibling();
+
+                inst.transform.SetAsLastSibling();// 하이라키 순서 변경
             }
         }
     }
@@ -140,7 +142,6 @@ public class UI_Inventory_Base : MonoBehaviour
         if (slotPool.Count > 0)
         {
             UI_Inventory_Slot slot = slotPool.Dequeue();
-            slot.gameObject.SetActive(true);
             return slot;
         }
         UI_Inventory_Slot inst = Instantiate(inventorySlot, gridLayoutGroup.transform);
@@ -377,6 +378,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
         if (shape == null)
             return onCheck;
+        Debug.LogWarning($"{inventorySize}+++++++++++++++++++++++++++++++++++++{shape.Length}++++++++++++++++++{_slot.slotNum}");
 
         for (int i = 0; i < shape.Length; i++)
         {
@@ -392,6 +394,7 @@ public class UI_Inventory_Base : MonoBehaviour
                 if (onCheck == true)
                     onCheck = linkCheck;
                 checkList.Add(allSlots[slotX, slotY]);
+                Debug.LogWarning($"슬롯 체크 -----------> {onCheck} : ({slotX}, {slotY})");
             }
         }
         return onCheck;
@@ -594,7 +597,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public void LoadItem(Static_JsonManager.InventoryData _data)
     {
-        inventorySize = _data.invenSize;
+        //inventorySize = _data.invenSize;
         for (int i = 0; i < _data.saveItems.Count; i++)
         {
             // 새로운 클라스 캡슐화
