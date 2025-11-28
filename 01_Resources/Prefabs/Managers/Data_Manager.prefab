@@ -302,6 +302,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ea43906049b62854ab8bbdb5d48573b4, type: 2}
   - {fileID: 11400000, guid: 6e5d531141874b042b6708a57ec1077c, type: 2}
   - {fileID: 11400000, guid: 5c2dafe34c5082642816500dd8eff506, type: 2}
+  - {fileID: 11400000, guid: 6420af438bfebf040a0d05d4cf150ee8, type: 2}
   - {fileID: 11400000, guid: 873fc08aa8a5a964c882eac53e229b2b, type: 2}
   dialogData:
   - {fileID: 11400000, guid: 6ead66df73ce1a3498548c08d202ba48, type: 2}
@@ -7029,7 +7030,7 @@ MonoBehaviour:
     chinese: "\u6BD4\u521A\u624D\u8DD1\u5F97\u66F4\u5FEB /n\u5B83\u6D88\u5931\u7684\u8DEF\u4E0A\u6709\u4E2A\u888B\u5B50"
   - id: ev_0001_02_01_b
     english: Grab it
-    korean: "\uAC00\uC838\uAC04\uB2E4."
+    korean: "\uAC00\uC838\uAC04\uB2E4"
     japanese: "\u6301\u3061\u5E30\u308B"
     chinese: "\u628A\u5B83\u62FF\u8D70"
   - id: ev_0001_02_02_a
@@ -7421,6 +7422,80 @@ MonoBehaviour:
     korean: "\uBE60\uB974\uAC8C \uB3CC\uC544\uAC04\uB2E4"
     japanese: "\u7D20\u65E9\u304F\u5411\u304D\u3092\u5909\u3048\u308B"
     chinese: "\u5FEB\u901F\u8F6C\u8FC7\u8EAB"
+  - id: ev_0005_a
+    english: Guitar sound
+    korean: "\uAE30\uD0C0\uC18C\uB9AC"
+    japanese: "\u30AE\u30BF\u30FC\u306E\u306D\u3044\u308D"
+    chinese: "\u5409\u4ED6\u58F0"
+  - id: ev_0006_b
+    english: A {0} sound is heard from somewhere.
+    korean: "\uC5B4\uB514\uC120\uAC00 {0}\uC18C\uB9AC\uAC00 \uB4E4\uB9B0\uB2E4"
+    japanese: "\u3069\u3053\u304B\u304B\u3089{0}\u306E\u306D\u304C\u3059\u308B"
+    chinese: "\u4ECE\u67D0\u4E2A\u5730\u65B9\u4F20\u6765{0}\u7684\u58F0\u97F3"
+  - id: ev_0006_c
+    english: music
+    korean: "\uC74C\uC545"
+    japanese: "\u304A\u3093\u304C\u304F"
+    chinese: "\u97F3\u4E50"
+  - id: ev_0006_d
+    english: Follow the sound.
+    korean: "\uC18C\uB9AC\uB97C \uB530\uB77C\uAC04\uB2E4"
+    japanese: "\u304A\u3068\u3092\u305F\u3069\u308B"
+    chinese: "\u8DDF\u7740\u58F0\u97F3\u8D70"
+  - id: ev_0006_01_a
+    english: Under the moonlight/n There is a cat playing the{0}.
+    korean: "\uB2EC\uBE5B \uC544\uB798\uC5D0\uC11C {0}\uB97C \uC5F0\uC8FC\uD558\uB294
+      \uACE0\uC591\uC774\uAC00 \uC788\uB2E4."
+    japanese: "\u3064\u304D\u3042\u304B\u308A\u306E\u3057\u305F\u3067/n{0}\u3092\u3072\u304F\u306D\u3053\u304C\u3044\u308B"
+    chinese: "\u5728\u6708\u5149\u4E0B/n \u6709\u4E00\u53EA\u732B\u5F39\u7740{0}"
+  - id: ev_0006_01_b
+    english: guitar
+    korean: "\uAE30\uD0C0"
+    japanese: "\u30AE\u30BF\u30FC"
+    chinese: "\u5409\u4ED6\u58F0"
+  - id: ev_0006_01_c
+    english: Approach
+    korean: "\uAC00\uAE4C\uC774 \uB2E4\uAC00\uAC04\uB2E4"
+    japanese: "\u3061\u304B\u3065\u304F"
+    chinese: "\u9760\u8FD1"
+  - id: ev_0006_01_d
+    english: Dance and approach
+    korean: "\uCDA4\uCD94\uBA70 \uB2E4\uAC00\uAC04\uB2E4"
+    japanese: "\u304A\u3069\u308A\u306A\u304C\u3089\u3061\u304B\u3065\u304F"
+    chinese: "\u8DF3\u7740\u821E\u8D70\u8FD1"
+  - id: ev_0006_01_01_a
+    english: A lonely beautiful song./nA {0} rolled down its fur..
+    korean: "\uC4F8\uC4F8\uD558\uACE0 \uC544\uB984\uB2E4\uC6B4 \uC5F0\uC8FC\uC600\uB2E4./n{0}\uC774
+      \uD138\uC744 \uD0C0\uACE0 \uD758\uB7EC\uB0B4\uB838\uB2E4.."
+    japanese: "\u3046\u3064\u304F\u3057\u304F\u3082\u304B\u306A\u3057\u3044\u304A\u3068./n{0}\u304C\u306A\u304C\u308C\u305F.."
+    chinese: "\u52A8\u4EBA\u7684\u60B2\u4F24\u4E50\u66F2./n{0}\u6D41\u4E86\u4E0B\u6765.."
+  - id: ev_0006_01_01_b
+    english: A tear
+    korean: "\uB208\uBB3C \uD55C \uBC29\uC6B8"
+    japanese: "\u306A\u307F\u3060"
+    chinese: "\u773C\u6CEA"
+  - id: ev_0006_01_01_c
+    english: I give 50G as a tip.
+    korean: "\uD301\uC73C\uB85C 50G\uB97C \uB0B8\uB2E4"
+    japanese: "\u30C1\u30C3\u30D7\u3068\u3057\u306650G\u3092\u308F\u305F\u3059"
+    chinese: "\u6211\u7ED9\u51FA50G\u4F5C\u4E3A\u5C0F\u8D39"
+  - id: ev_0006_01_02_a
+    english: Let's do {0} to the guitar sound./nA crowd gathered and gave {1}!
+    korean: "\uAE30\uD0C0 \uC18C\uB9AC\uC5D0 \uB9DE\uCDB0 {0}\uC744 \uCD94\uC790/n\uC8FC\uBCC0\uC5D0\uC11C
+      \uAD6C\uACBD\uAFBC\uC774 \uBAA8\uC5EC\uB4E4\uC5B4 {1}\uB97C \uC8FC\uC5C8\uB2E4!"
+    japanese: "\u30AE\u30BF\u30FC\u306E\u304A\u3068\u306B\u3042\u308F\u305B\u3066{0}\u3092\u307E\u304A\u3046./n
+      \u307E\u308F\u308A\u306B\u3072\u3068\u304C\u3042\u3064\u307E\u308A{1}\u3092\u304F\u308C\u305F!"
+    chinese: "\u968F\u7740\u5409\u4ED6\u58F0\u8DF3{0}\u5427./n \u4EBA\u7FA4\u805A\u96C6\u8D77\u6765\u7ED9\u4E86{1}!"
+  - id: ev_0006_01_02_b
+    english: dance
+    korean: "\uCDA4"
+    japanese: "\u304A\u3069\u308A"
+    chinese: "\u821E"
+  - id: ev_0006_01_02_c
+    english: Tip 25G
+    korean: "\uD301 25G"
+    japanese: "\u30C1\u30C3\u30D7 25G"
+    chinese: "\u5C0F\u8D39 25G"
   - id: fs_1001
     english: Anchovy
     korean: "\uBA78\uCE58"
