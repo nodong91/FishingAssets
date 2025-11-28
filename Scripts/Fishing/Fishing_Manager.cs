@@ -210,11 +210,21 @@ public class Fishing_Manager : MonoBehaviour
         isFishing = true;
 
         string _id = fishQueue.Dequeue();
-        currentFish = Singleton_Data.INSTANCE.Dict_Fish[_id];
+        currentFish = SetCurrentFish(_id);
         //Option_Manager.current.SetThemeMusic(bgmBattle);// 전투 시작 음악
         fishingCanvas.SetFishing();
         Debug.LogWarning($"물고기 이름 : {_id}");
         StartCoroutine(StartCount());
+    }
+
+    FishStruct SetCurrentFish(string _id)// 스킬 적용 스탯
+    {
+        FishStruct findFish = Singleton_Data.INSTANCE.Dict_Fish[_id];
+        FishStruct addStruct = new FishStruct
+        {
+
+        };
+        return findFish;
     }
 
     void SetFishing()// 초기 세팅
@@ -439,7 +449,7 @@ public class Fishing_Manager : MonoBehaviour
         while (fishState == FishStateType.Idle)
         {
             Debug.LogWarning($"{currentFish.id} : {currentFish.fishCoolTime}({cooling} < {Time.time})");
-            if (currentFish.fishCoolTime > 0f && currentFish.fishDefenseCount > 0  && cooling < Time.time)
+            if (currentFish.fishCoolTime > 0f && currentFish.fishDefenseCount > 0 && cooling < Time.time)
             {
                 // 쿨타임이 0인 경우 공격하지 않음 디펜스 개수가 0보다 커야
                 FishState(FishStateType.Spelling);// 스킬 기술

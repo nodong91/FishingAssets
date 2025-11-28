@@ -91,11 +91,11 @@ public class Game_Manager : MonoBehaviour
             GetFishing.SetFishingTest(addItemTest);
             Debug.LogError("물고기 치트");
         }
+    }
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            Map_Generator.current.ResetArea();
-        }
+    public void InputSpacebar(bool _input)
+    {
+        GetPlayer.SetBooster(_input);
     }
 
     IEnumerator SetStart()
@@ -166,10 +166,6 @@ public class Game_Manager : MonoBehaviour
             GetDialog.DialogStart_NPC(npc, Const_Dialog._0002);// 튜토리얼 대화 시작
             return;
         }
-        //if (shipData == null)
-        //{
-
-        //}
     }
 
     public void ChangeStatus(Data_Ship _shipData)// 선박 변경
@@ -529,6 +525,7 @@ public class Game_Manager : MonoBehaviour
 
         GetInventory.myBox.EmptyInventoryAllSlot();// 인벤토리 초기화
         Debug.LogWarning($"고스트 오브젝트 : {instLostBox.name}");
+        Singleton_Continue.INSTANCE.SaveContinue();// 상황 저장
     }
 
     public void FocusShip(bool _isOn)

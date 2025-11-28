@@ -7,7 +7,7 @@ public class UI_Status : MonoBehaviour
 
     [Header("[ 스테이터스 ]")]
     public SetStatus totalStatus => Game_Manager.current.currentStatus;
-   
+
     private void Start()
     {
         OpenCanvas(false);
@@ -37,6 +37,7 @@ public class UI_Status : MonoBehaviour
     public TMPro.TMP_Text shipHealth;// 배 체력
     public TMPro.TMP_Text storageSize;// 창고 크기
     //public TMPro.TMP_Text freshness;// 신선도 유지 - 꼭 필요한가??????  
+    public TMPro.TMP_Text critical;
 
     [Header(" [ Fish ]")]
     public TMPro.TMP_Text LuckFish;// 희귀 물고기 확률

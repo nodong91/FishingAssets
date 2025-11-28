@@ -222,10 +222,7 @@ public class Controll_Manager : MonoBehaviour
         // 양손검은 패링
         // 한손검은 구르기
         // 무기 특징
-        if (_input == true)
-        {
-          
-        }
+        Game_Manager.current.InputSpacebar(_input);
     }
 
     void InputMouseLeft(bool _input)

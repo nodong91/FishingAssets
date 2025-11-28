@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using static Data_Manager;
 
@@ -51,12 +53,19 @@ public class Unit_Player : MonoBehaviour
 
         health = CurrentStatus.shipHealth - continueData.destroySlot.Count;
         energy = continueData.energy;
+
+        boosterSpeed = 0f;
+        boosterValue = 2f;
+        maxBoosterValue = 2f;
+        Game_Manager.current.GetMainUI.SetMaxBoosterValue(maxBoosterValue);
+
         StateMachine(State.Idle);
 
         if (FocusTarget == null)
             return;
 
         FocusTarget.transform.position = transform.position;
+
         CheckDeep();
     }
 
@@ -86,51 +95,6 @@ public class Unit_Player : MonoBehaviour
         playerObject = inst;
         Debug.LogWarning($"{_shipData.name} : {_shipData.shipObject}");
     }
-
-    //================================================================================================================================================
-    // 업데이트
-    //================================================================================================================================================
-
-    //private void Update()
-    //{
-    //    //SetOceanRenderer();// 물 위에서 배의 움직임
-    //    //// 배 부분 물결 안생기게
-    //    //string shipPosition = "_ShipPosition";
-    //    //reflection_Manager.GetMaterial.SetVector(shipPosition, playerObject.transform.position);
-    //    //reflection_Manager.GetMaterial.SetFloat("_WaveSpeed", waveSpeed);
-    //}
-
-    //void SetOceanRenderer()
-    //{
-    //    if (playerObject == null)
-    //        return;
-
-    //    runningTime += Time.deltaTime * waveSpeed;
-
-    //    float moveHight = (Mathf.Sin(runningTime) + 1f) * 0.5f;// 위아래 움직임
-    //    Vector3 localPosition = Vector3.up * moveHight * shipHight;
-    //    playerObject.transform.localPosition = localPosition;
-
-    //    if (runningTime >= runningRandomTime)
-    //    {
-    //        randomTime = Random.Range(5f, 3f);
-    //        runningRandomTime = runningTime + randomTime;
-    //        prevAngle = playerObject.transform.localRotation;
-    //        setAngle = Quaternion.Euler(RandomAngle(targetAngle));
-    //    }
-
-    //    float curve = rotateCurve.Evaluate(1f - (runningRandomTime - runningTime) / randomTime);
-    //    playerObject.transform.localRotation = Quaternion.Slerp(prevAngle, setAngle, curve / randomTime);// 랜덤 회전
-
-    //}
-
-    //Vector3 RandomAngle(float _maxAngle)
-    //{
-    //    float x = Random.Range(-_maxAngle, _maxAngle);
-    //    float y = Random.Range(-_maxAngle, _maxAngle);
-    //    float z = Random.Range(-_maxAngle, _maxAngle);
-    //    return new Vector3(x, y, z);
-    //}
 
     //================================================================================================================================================
     // 컨트롤
@@ -204,6 +168,33 @@ public class Unit_Player : MonoBehaviour
             yield return null;
         }
     }
+
+    void SetMoving()
+    {
+        if (FocusTarget == null)
+            return;
+        //Transform focusTarget = Game_Manager.current.cameraManager.GetFocusTarget;
+        FocusTarget.transform.position = transform.position;
+
+        Vector3 dir = new Vector3(dirction.x, 0f, dirction.y);
+        Vector3 target = transform.position + FocusTarget.transform.TransformDirection(dir).normalized;
+        //Vector3 target = transform.position + focusTarget.transform.forward;
+
+        float speed = moveSpeed * Time.deltaTime * (boosterSpeed + 1f);
+        Vector3 offset = (target - transform.position).normalized;
+        transform.position = Vector3.Lerp(transform.position, target, speed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(focusTarget.transform.forward), speed * 5f);
+        CheckDeep();
+    }
+
+    void CheckDeep()
+    {
+        Map_Generator.Node node = Map_Generator.current.GetNodeFromPosition(transform.position);
+        Game_Manager.current.GetMainUI.CheckDeep(node.areaType);
+        Debug.LogWarning($"체크 : {node.areaType}");
+    }
+
     public void AddEnergy(float _value)
     {
         energy += _value;
@@ -240,30 +231,69 @@ public class Unit_Player : MonoBehaviour
         Game_Manager.current.GetFollow.AddClosestTarget(closestTarget);
     }
 
-    void SetMoving()
+    //================================================================================================================================================
+    // 부스터
+    //================================================================================================================================================
+    Coroutine boosting, boosterGage;
+    float boosterSpeed = 0f;
+    float boosterValue, maxBoosterValue;
+
+    public void SetBooster(bool _on)
     {
-        if (FocusTarget == null)
+        if (maxBoosterValue == 0)
             return;
-        //Transform focusTarget = Game_Manager.current.cameraManager.GetFocusTarget;
-        FocusTarget.transform.position = transform.position;
 
-        Vector3 dir = new Vector3(dirction.x, 0f, dirction.y);
-        Vector3 target = transform.position + FocusTarget.transform.TransformDirection(dir).normalized;
-        //Vector3 target = transform.position + focusTarget.transform.forward;
-
-        float speed = moveSpeed * Time.deltaTime;
-        Vector3 offset = (target - transform.position).normalized;
-        transform.position = Vector3.Lerp(transform.position, target, speed);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed);
-        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(focusTarget.transform.forward), speed * 5f);
-        CheckDeep();
+        // 부스터
+        if (boosting != null)
+            StopCoroutine(boosting);
+        if (_on == true)
+        {
+            boosterSpeed = 1f;// 부스터 최고 속도 1이면 두배속
+        }
+        else
+        {
+            boosting = StartCoroutine(BoosterAcceleration());
+        }
+        // 부스터 게이지
+        if (boosterGage != null)
+            StopCoroutine(boosterGage);
+        boosterGage = StartCoroutine(SetBoosterGage(_on));
     }
 
-    void CheckDeep()
+    IEnumerator BoosterAcceleration()
     {
-        Map_Generator.Node node = Map_Generator.current.GetNodeFromPosition(transform.position);
-        Game_Manager.current.GetMainUI.CheckDeep(node.areaType);
-        Debug.LogWarning($"체크 : {node.areaType}");
+        float prev = boosterSpeed;
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime * 10f;
+            boosterSpeed = Mathf.Lerp(prev, 0f, normalize);
+            yield return null;
+        }
+    }
+
+    IEnumerator SetBoosterGage(bool _on)
+    {
+        while (state == State.Move || boosterValue < maxBoosterValue)
+        {
+            if (_on == true)
+            {
+                boosterValue -= 1f * Time.deltaTime;
+                if (boosterValue <= 0)
+                {
+                    StateMachine(State.Damage);// 부스터 터짐
+                    StartCoroutine(MovingClash(transform.position));
+                    SetBooster(false);// 부스터 오프
+                }
+            }
+            else
+            {
+                boosterValue += 0.3f * Time.deltaTime;
+            }
+            boosterValue = Mathf.Clamp(boosterValue, 0f, maxBoosterValue);
+            Game_Manager.current.GetMainUI.SetBoosterGage(boosterValue / maxBoosterValue);
+            yield return null;
+        }
     }
 
     //================================================================================================================================================
@@ -312,6 +342,8 @@ public class Unit_Player : MonoBehaviour
     {
         // 완전 파괴
         StartCoroutine(ResetPosition());
+        boosterValue = maxBoosterValue;
+        Game_Manager.current.GetMainUI.SetBoosterGage(boosterValue / maxBoosterValue);
     }
 
     public void FishingDestroy()

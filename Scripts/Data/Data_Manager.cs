@@ -373,6 +373,7 @@ public class Data_Manager : Data_Parse
         public float luckFish;// 낚시 성공 시 한마리 더 낚을 확률 (낚시 시작할 때 정해지고 두마리 중 등급이 높은 물고기가 기준)
         public int fishAmount;// 낚시 횟수 증가
         public float fishPrice;// 판매 물고기 가격 증가
+
         public Vector2Int storageSize;// 창고 크기
 
         public void SettingStatus(SetStatus _status)

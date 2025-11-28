@@ -185,6 +185,10 @@ public class Skill_Manager : MonoBehaviour
             case SkillStruct.SkillType.ShipUnlocked:
                 ShipUnlock(_skill.id);
                 break;
+
+            case SkillStruct.SkillType.Etc:
+
+                break;
         }
     }
 

@@ -30,6 +30,13 @@ public class UI_Main : MonoBehaviour
     bool lowEnergy = false;
     bool lowHP = false;
 
+    [Header("[ Booster ]")]
+    public RectTransform boosterRect;
+    public Image boosterGage;
+
+    public delegate void Dele_CloseButton();
+    public Dele_CloseButton dele_CloseButton;
+
     public void SetStart()
     {
         SetMoney(Game_Manager.current.GetContinue.money);// ∑ŒµÂ ¿˙¿Â
@@ -133,8 +140,7 @@ public class UI_Main : MonoBehaviour
     //===========================================================================================================================
     // ¥›±‚
     //===========================================================================================================================
-    public delegate void Dele_CloseButton();
-    public Dele_CloseButton dele_CloseButton;
+
     public void CloseCanvas()
     {
         dele_CloseButton?.Invoke();
@@ -277,6 +283,7 @@ public class UI_Main : MonoBehaviour
     // µ∑
     //===========================================================================================================================
 
+    [Header("[ Money ]")]
     public TMPro.TMP_Text moneyText;
     Coroutine movingMoney;
     float moneyValue;
@@ -417,5 +424,18 @@ public class UI_Main : MonoBehaviour
     {
         deepText.gameObject.SetActive(_areaType != Data_Manager.AreaType.None);
         deepText.text = _areaType.ToString();
+    }
+
+
+
+
+    public void SetMaxBoosterValue(float _value)
+    {
+        boosterRect.sizeDelta = new Vector2(_value * 50f, boosterRect.sizeDelta.y);
+    }
+
+    public void SetBoosterGage(float _value)
+    {
+        boosterGage.fillAmount = _value;
     }
 }

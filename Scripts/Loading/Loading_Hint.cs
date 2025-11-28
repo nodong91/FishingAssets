@@ -1,27 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-//#if UNITY_EDITOR
-//using UnityEditor;
-
-//[CustomEditor(typeof(Loading_Hint))]
-//public class Loading_Hint_Editor : Editor
-//{
-//    public override void OnInspectorGUI()
-//    {
-//        GUIStyle fontStyle = new GUIStyle(GUI.skin.button);
-//        fontStyle.fontSize = 15;
-//        fontStyle.normal.textColor = Color.yellow;
-
-//        Loading_Hint Inspector = target as Loading_Hint;
-//        if (GUILayout.Button("움직이는 글자 세팅", fontStyle, GUILayout.Height(30f)))
-//        {
-//            Inspector.UpdateData();
-//            EditorUtility.SetDirty(Inspector);
-//        }
-//        base.OnInspectorGUI();
-//    }
-//}
-//#endif
 
 public class Loading_Hint : MonoBehaviour
 {
