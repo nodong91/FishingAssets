@@ -24,7 +24,7 @@ public class Tutorial_Manager : MonoBehaviour
 
     public bool IsTutorialCompleted(string _id)// 완료 인지 확인
     {
-        Debug.LogWarning($"Tutorial 완료 : {_id} {completedTutorial.Count}");
+        Debug.Log($"Tutorial 완료 : {_id} {completedTutorial.Count}");
         return completedTutorial.Contains(_id);
     }
 

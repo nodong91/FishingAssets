@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -194,6 +196,15 @@ public class Data_Manager : Data_Parse
                 addStatus = setAddStatus,
             };
             skillStruct.Add(tempData);
+
+            //Data_Skill tempSkill = GetSkillData(elements[0].Trim());
+            //tempSkill.skill_ID = elements[0].Trim();
+            //tempSkill.skill_Name = elements[1];
+            //tempSkill.skill_Description = elements[2];
+            //tempSkill.skill_Type = (Data_Skill.SkillType)System.Enum.Parse(typeof(Data_Skill.SkillType), elements[4]);
+            //tempSkill.skill_Icon = elements[5];
+            //tempSkill.skill_Price = Parse_Int(elements[6]);
+            //EditorUtility.SetDirty(tempSkill);
         }
     }
 
@@ -440,6 +451,11 @@ public class Data_Manager : Data_Parse
         public SetStatus addStatus;
     }
 
+    public class SkillFishType : SkillStruct
+    {
+        public FishStatus fishStatus;
+    }
+
     [System.Serializable]
     public class QuestStruct
     {
@@ -517,16 +533,10 @@ public class Data_Manager : Data_Parse
         Night,
     }
 
-    [System.Serializable]
-    public struct FishStruct// 물고기 정보
+    public class FishStatus
     {
         [HideInInspector]
         public string id;
-        public ItemStruct itemStruct;
-        public AreaType areaType;
-        public DayType fishDayType;// 등장 시간
-        public Vector2 size;
-
         // 낚시 관련
         public float fishHealth;// 물고기 체력
         public float fishPower;// 물고기 공격력
@@ -540,6 +550,30 @@ public class Data_Manager : Data_Parse
         [Header(" [ 버프 ]")]
         public float addDuration;// 버프 시간
         public float addValue;// 더해지는 버프 수치 - 버프수치가 높을 수록 해당 등급이 나올 확률이 올라간다.
+    }
+
+    [System.Serializable]
+    public class FishStruct : FishStatus // 물고기 정보
+    {
+        [Header(" [ 아이템 ]")]
+        public ItemStruct itemStruct;
+        public AreaType areaType;
+        public DayType fishDayType;// 등장 시간
+        public Vector2 size;
+
+        //// 낚시 관련
+        //public float fishHealth;// 물고기 체력
+        //public float fishPower;// 물고기 공격력
+        //public float fishSpeed;// 물고기 이동 속도
+        //public float fishCoolTime;// 물고기 공격 쿨타임
+        //public float fishAttackSpeed;// 물고기 공격 속도
+        //public float fishSpellTime;// 공격할 때 딜레이 시간
+        //public float fishGroggyTime;// 방어 성공 시 그로기 시간
+        //public int fishDefenseCount;// 공격시 입력 개수
+        //public Vector2 fishTurnDelay;// 방향 바뀌는 딜레이 시간
+        //[Header(" [ 버프 ]")]
+        //public float addDuration;// 버프 시간
+        //public float addValue;// 더해지는 버프 수치 - 버프수치가 높을 수록 해당 등급이 나올 확률이 올라간다.
 
         [System.Serializable]
         public struct RandomSize

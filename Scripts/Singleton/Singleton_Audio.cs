@@ -223,7 +223,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         AudioSource audioSource = TryAudioSource();
         audioSource.gameObject.SetActive(true);
         audioSource.name = _id;
-        Debug.LogWarning($"배경음 : {_id}");
+        //Debug.LogWarning($"배경음 : {_id}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
         audioSource.mute = masterMute == true ? true : envMute;
         audioSource.volume = envVolume * masterVolume;

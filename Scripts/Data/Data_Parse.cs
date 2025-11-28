@@ -19,6 +19,7 @@ public class Data_Parse : MonoBehaviour
         shipData = new List<Data_Ship>();
         eventData = new List<Data_Event_Start>();
         dialogData = new List<Data_Dialog>();
+        skillData = new List<Data_Skill>();
 
         if (ResourceFolders.Count == 0)
         {
@@ -116,6 +117,11 @@ public class Data_Parse : MonoBehaviour
                 Data_Dialog temp = data as Data_Dialog;
                 dialogData.Add(temp);
             }
+            else if (data as Data_Skill)
+            {
+                Data_Skill temp = data as Data_Skill;
+                skillData.Add(temp);
+            }
             EditorUtility.SetDirty(data);
         }
 
@@ -127,6 +133,18 @@ public class Data_Parse : MonoBehaviour
             CSV_Data.Add(addData);
             EditorUtility.SetDirty(data);
         }
+    }
+
+    public Data_Skill GetSkillData(string _id)
+    {
+        for (int i = 0; i < skillData.Count; i++)
+        {
+            if (skillData[i].name.Equals(_id) == true)
+            {
+                return skillData[i];
+            }
+        }
+        return null;
     }
 
     //void SetCSVData()
@@ -291,4 +309,5 @@ public class Data_Parse : MonoBehaviour
     public List<Data_Ship> shipData = new List<Data_Ship>();
     public List<Data_Event_Start> eventData = new List<Data_Event_Start>();
     public List<Data_Dialog> dialogData = new List<Data_Dialog>();
+    public List<Data_Skill> skillData = new List<Data_Skill>();
 }

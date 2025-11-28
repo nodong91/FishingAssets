@@ -178,7 +178,6 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public void SetSlot(UI_Inventory_Slot _slot, ItemInInventory _itemClass)
     {
-        Debug.LogWarning($"==========================================={slotType} 세팅");
         _slot.SetBase(_itemClass);// 메인 슬롯
         if (_itemClass != null)// 비워져 있는지
         {

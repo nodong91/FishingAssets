@@ -326,6 +326,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8039351f4b05ad843af0731282191adb, type: 2}
   - {fileID: 11400000, guid: 81f99dc11431cd5449d6ebe89235c197, type: 2}
   - {fileID: 11400000, guid: 0f81386f343730c4fb92db4354f90662, type: 2}
+  skillData: []
   usedStruct:
   - id: us_1001
     itemStruct:
@@ -467,6 +468,17 @@ MonoBehaviour:
     skillID: "-\r"
   fishStruct:
   - id: fs_1001
+    fishHealth: 10
+    fishPower: 1
+    fishSpeed: 1
+    fishCoolTime: 0
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
     itemStruct:
       id: fs_1001
       name: anchovy
@@ -481,6 +493,7 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 0.5, y: 10}
+  - id: fs_1002
     fishHealth: 10
     fishPower: 1
     fishSpeed: 1
@@ -492,7 +505,6 @@ MonoBehaviour:
     fishTurnDelay: {x: 0.3, y: 1.5}
     addDuration: 50
     addValue: 0.3
-  - id: fs_1002
     itemStruct:
       id: fs_1002
       name: mackerel
@@ -508,18 +520,18 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 20, y: 60}
-    fishHealth: 10
-    fishPower: 1
-    fishSpeed: 1
+  - id: fs_1003
+    fishHealth: 12
+    fishPower: 2
+    fishSpeed: 1.2
     fishCoolTime: 0
     fishAttackSpeed: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 50
-    addValue: 0.3
-  - id: fs_1003
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 60
+    addValue: 0.6
     itemStruct:
       id: fs_1003
       name: horsemackerel
@@ -534,18 +546,18 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 10, y: 50}
-    fishHealth: 12
-    fishPower: 2
-    fishSpeed: 1.2
+  - id: fs_1004
+    fishHealth: 10
+    fishPower: 1
+    fishSpeed: 1
     fishCoolTime: 0
-    fishAttackSpeed: 1
+    fishAttackSpeed: 0
     fishSpellTime: 0
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
-    addValue: 0.6
-  - id: fs_1004
+    addDuration: 50
+    addValue: 0.3
     itemStruct:
       id: fs_1004
       name: saury
@@ -561,7 +573,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 20, y: 40}
-    fishHealth: 10
+  - id: fs_1005
+    fishHealth: 12
     fishPower: 1
     fishSpeed: 1
     fishCoolTime: 0
@@ -570,9 +583,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 50
+    addDuration: 60
     addValue: 0.3
-  - id: fs_1005
     itemStruct:
       id: fs_1005
       name: seaurchin
@@ -587,9 +599,10 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 10, y: 50}
+  - id: fs_1006
     fishHealth: 12
-    fishPower: 1
-    fishSpeed: 1
+    fishPower: 0
+    fishSpeed: 0
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
@@ -597,8 +610,7 @@ MonoBehaviour:
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 60
-    addValue: 0.3
-  - id: fs_1006
+    addValue: 0
     itemStruct:
       id: fs_1006
       name: bigfinreefsquid
@@ -614,18 +626,18 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 15, y: 45}
-    fishHealth: 12
-    fishPower: 0
-    fishSpeed: 0
+  - id: fs_1007
+    fishHealth: 10
+    fishPower: 1
+    fishSpeed: 1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
-    addValue: 0
-  - id: fs_1007
+    addDuration: 50
+    addValue: 0.3
     itemStruct:
       id: fs_1007
       name: filefish
@@ -640,7 +652,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 8, y: 30}
-    fishHealth: 10
+  - id: fs_1008
+    fishHealth: 11
     fishPower: 1
     fishSpeed: 1
     fishCoolTime: 0
@@ -649,9 +662,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 50
+    addDuration: 55
     addValue: 0.3
-  - id: fs_1008
     itemStruct:
       id: fs_1008
       name: yellowtang
@@ -666,7 +678,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 7.5, y: 20}
-    fishHealth: 11
+  - id: fs_1009
+    fishHealth: 12
     fishPower: 1
     fishSpeed: 1
     fishCoolTime: 0
@@ -675,9 +688,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 55
+    addDuration: 60
     addValue: 0.3
-  - id: fs_1009
     itemStruct:
       id: fs_1009
       name: butterflyfish
@@ -692,9 +704,10 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 10.5, y: 30}
+  - id: fs_1010
     fishHealth: 12
-    fishPower: 1
-    fishSpeed: 1
+    fishPower: 1.1
+    fishSpeed: 1.1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
@@ -702,8 +715,7 @@ MonoBehaviour:
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 60
-    addValue: 0.3
-  - id: fs_1010
+    addValue: 0.33
     itemStruct:
       id: fs_1010
       name: cleanerwrasse
@@ -718,7 +730,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 5.2, y: 20}
-    fishHealth: 12
+  - id: fs_1011
+    fishHealth: 11
     fishPower: 1.1
     fishSpeed: 1.1
     fishCoolTime: 0
@@ -727,9 +740,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
+    addDuration: 55
     addValue: 0.33
-  - id: fs_1011
     itemStruct:
       id: fs_1011
       name: chromis
@@ -744,18 +756,18 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 8, y: 20}
-    fishHealth: 11
-    fishPower: 1.1
-    fishSpeed: 1.1
+  - id: fs_1012
+    fishHealth: 8
+    fishPower: 1
+    fishSpeed: 1
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 55
-    addValue: 0.33
-  - id: fs_1012
+    addDuration: 40
+    addValue: 0.3
     itemStruct:
       id: fs_1012
       name: pinkshrimp
@@ -770,18 +782,18 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 2.5, y: 12}
-    fishHealth: 8
-    fishPower: 1
-    fishSpeed: 1
+  - id: fs_1013
+    fishHealth: 13
+    fishPower: 0
+    fishSpeed: 0
     fishCoolTime: 0
     fishAttackSpeed: 0
     fishSpellTime: 0
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 40
-    addValue: 0.3
-  - id: fs_1013
+    addDuration: 65
+    addValue: 0
     itemStruct:
       id: fs_1013
       name: grubfish
@@ -797,7 +809,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 5.3, y: 20}
-    fishHealth: 13
+  - id: fs_1014
+    fishHealth: 15
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -806,9 +819,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 65
+    addDuration: 75
     addValue: 0
-  - id: fs_1014
     itemStruct:
       id: fs_1014
       name: marbledrockfish
@@ -824,18 +836,18 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 12, y: 30}
-    fishHealth: 15
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
-    addValue: 0
   - id: fs_2001
+    fishHealth: 10
+    fishPower: 1
+    fishSpeed: 1
+    fishCoolTime: 0
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
     itemStruct:
       id: fs_2001
       name: seabass
@@ -851,18 +863,18 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 20, y: 80}
-    fishHealth: 10
-    fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
+  - id: fs_2002
+    fishHealth: 30
+    fishPower: 3
+    fishSpeed: 2
+    fishCoolTime: 10
     fishAttackSpeed: 1
     fishSpellTime: 3
     fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 50
-    addValue: 0.3
-  - id: fs_2002
+    fishDefenseCount: 5
+    fishTurnDelay: {x: 0.7, y: 1}
+    addDuration: 150
+    addValue: 0.9
     itemStruct:
       id: fs_2002
       name: flounder
@@ -880,18 +892,18 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 12, y: 50}
-    fishHealth: 30
-    fishPower: 3
-    fishSpeed: 2
-    fishCoolTime: 10
-    fishAttackSpeed: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 5
-    fishTurnDelay: {x: 0.7, y: 1}
-    addDuration: 150
-    addValue: 0.9
   - id: fs_2003
+    fishHealth: 35
+    fishPower: 4
+    fishSpeed: 2
+    fishCoolTime: 12
+    fishAttackSpeed: 1.5
+    fishSpellTime: 3
+    fishGroggyTime: 2
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 1, y: 2}
+    addDuration: 175
+    addValue: 1.2
     itemStruct:
       id: fs_2003
       name: mullet
@@ -908,18 +920,18 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 25, y: 45}
-    fishHealth: 35
-    fishPower: 4
-    fishSpeed: 2
-    fishCoolTime: 12
-    fishAttackSpeed: 1.5
-    fishSpellTime: 3
-    fishGroggyTime: 2
-    fishDefenseCount: 4
-    fishTurnDelay: {x: 1, y: 2}
-    addDuration: 175
-    addValue: 1.2
   - id: fs_2004
+    fishHealth: 20
+    fishPower: 2
+    fishSpeed: 1
+    fishCoolTime: 0
+    fishAttackSpeed: 1
+    fishSpellTime: 2
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 0.7, y: 1}
+    addDuration: 100
+    addValue: 0.6
     itemStruct:
       id: fs_2004
       name: bluetang
@@ -934,18 +946,18 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 12.5, y: 30}
-    fishHealth: 20
-    fishPower: 2
+  - id: fs_2005
+    fishHealth: 10
+    fishPower: 1
     fishSpeed: 1
     fishCoolTime: 0
     fishAttackSpeed: 1
-    fishSpellTime: 2
+    fishSpellTime: 3
     fishGroggyTime: 1
     fishDefenseCount: 4
-    fishTurnDelay: {x: 0.7, y: 1}
-    addDuration: 100
-    addValue: 0.6
-  - id: fs_2005
+    fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
     itemStruct:
       id: fs_2005
       name: clownfish
@@ -960,6 +972,7 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 8, y: 15}
+  - id: fs_2006
     fishHealth: 10
     fishPower: 1
     fishSpeed: 1
@@ -971,7 +984,6 @@ MonoBehaviour:
     fishTurnDelay: {x: 0.3, y: 1.5}
     addDuration: 50
     addValue: 0.3
-  - id: fs_2006
     itemStruct:
       id: fs_2006
       name: bluespottedstingray
@@ -989,18 +1001,18 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 20, y: 60}
-    fishHealth: 10
-    fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
-    fishAttackSpeed: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 50
-    addValue: 0.3
   - id: fs_2007
+    fishHealth: 35
+    fishPower: 0
+    fishSpeed: 0
+    fishCoolTime: 0
+    fishAttackSpeed: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 175
+    addValue: 0
     itemStruct:
       id: fs_2007
       name: spanishmackerel
@@ -1018,7 +1030,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 30, y: 100}
-    fishHealth: 35
+  - id: fs_2008
+    fishHealth: 45
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1027,9 +1040,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 175
+    addDuration: 225
     addValue: 0
-  - id: fs_2008
     itemStruct:
       id: fs_2008
       name: redseabream
@@ -1049,7 +1061,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 35.5, y: 110}
-    fishHealth: 45
+  - id: fs_2009
+    fishHealth: 12
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1058,9 +1071,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 225
+    addDuration: 60
     addValue: 0
-  - id: fs_2009
     itemStruct:
       id: fs_2009
       name: chickengrunt
@@ -1076,7 +1088,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 15, y: 40}
-    fishHealth: 12
+  - id: fs_2010
+    fishHealth: 13
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1085,9 +1098,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
+    addDuration: 65
     addValue: 0
-  - id: fs_2010
     itemStruct:
       id: fs_2010
       name: sardine
@@ -1102,7 +1114,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 15, y: 30}
-    fishHealth: 13
+  - id: fs_2011
+    fishHealth: 30
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1111,9 +1124,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 65
+    addDuration: 150
     addValue: 0
-  - id: fs_2011
     itemStruct:
       id: fs_2011
       name: rockfish
@@ -1129,7 +1141,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 25, y: 70}
-    fishHealth: 30
+  - id: fs_2012
+    fishHealth: 20
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1138,9 +1151,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 150
+    addDuration: 100
     addValue: 0
-  - id: fs_2012
     itemStruct:
       id: fs_2012
       name: cuttlefish
@@ -1156,7 +1168,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 15, y: 45}
-    fishHealth: 20
+  - id: fs_2013
+    fishHealth: 10
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1165,9 +1178,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 100
+    addDuration: 50
     addValue: 0
-  - id: fs_2013
     itemStruct:
       id: fs_2013
       name: stripedeelcatfish
@@ -1183,7 +1195,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 9.5, y: 30}
-    fishHealth: 10
+  - id: fs_2014
+    fishHealth: 30
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1192,9 +1205,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 50
+    addDuration: 150
     addValue: 0
-  - id: fs_2014
     itemStruct:
       id: fs_2014
       name: flatfish
@@ -1214,7 +1226,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 30, y: 90}
-    fishHealth: 30
+  - id: fs_2015
+    fishHealth: 23
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1223,9 +1236,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 150
+    addDuration: 115
     addValue: 0
-  - id: fs_2015
     itemStruct:
       id: fs_2015
       name: obtusebarracuda
@@ -1241,7 +1253,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 20, y: 50}
-    fishHealth: 23
+  - id: fs_2016
+    fishHealth: 35
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1250,9 +1263,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 115
+    addDuration: 175
     addValue: 0
-  - id: fs_2016
     itemStruct:
       id: fs_2016
       name: salmon
@@ -1269,7 +1281,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 50, y: 100}
-    fishHealth: 35
+  - id: fs_3001
+    fishHealth: 10
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1278,9 +1291,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 175
+    addDuration: 50
     addValue: 0
-  - id: fs_3001
     itemStruct:
       id: fs_3001
       name: northernwhiting
@@ -1295,7 +1307,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 12, y: 30}
-    fishHealth: 10
+  - id: fs_3002
+    fishHealth: 11
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1304,9 +1317,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 50
+    addDuration: 55
     addValue: 0
-  - id: fs_3002
     itemStruct:
       id: fs_3002
       name: butterfish
@@ -1321,7 +1333,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 15, y: 30}
-    fishHealth: 11
+  - id: fs_3003
+    fishHealth: 36
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1330,9 +1343,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 55
+    addDuration: 180
     addValue: 0
-  - id: fs_3003
     itemStruct:
       id: fs_3003
       name: bonitofish
@@ -1349,7 +1361,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 90, y: 150}
-    fishHealth: 36
+  - id: fs_3004
+    fishHealth: 12
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1358,9 +1371,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 180
+    addDuration: 60
     addValue: 0
-  - id: fs_3004
     itemStruct:
       id: fs_3004
       name: bluecrab
@@ -1376,7 +1388,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 7, y: 20}
-    fishHealth: 12
+  - id: fs_3005
+    fishHealth: 15
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1385,9 +1398,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
+    addDuration: 75
     addValue: 0
-  - id: fs_3005
     itemStruct:
       id: fs_3005
       name: moonjellyfish
@@ -1402,6 +1414,7 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 10, y: 50}
+  - id: fs_3006
     fishHealth: 15
     fishPower: 0
     fishSpeed: 0
@@ -1413,7 +1426,6 @@ MonoBehaviour:
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 75
     addValue: 0
-  - id: fs_3006
     itemStruct:
       id: fs_3006
       name: flyingfish
@@ -1429,7 +1441,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 25.5, y: 50}
-    fishHealth: 15
+  - id: fs_3007
+    fishHealth: 30
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1438,9 +1451,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
+    addDuration: 150
     addValue: 0
-  - id: fs_3007
     itemStruct:
       id: fs_3007
       name: pacificcod
@@ -1457,7 +1469,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 90, y: 180}
-    fishHealth: 30
+  - id: fs_1301
+    fishHealth: 80
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1466,9 +1479,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 150
+    addDuration: 400
     addValue: 0
-  - id: fs_1301
     itemStruct:
       id: fs_1301
       name: unicornfish
@@ -1487,7 +1499,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 15, y: 100}
-    fishHealth: 80
+  - id: fs_2301
+    fishHealth: 60
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1496,9 +1509,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 400
+    addDuration: 300
     addValue: 0
-  - id: fs_2301
     itemStruct:
       id: fs_2301
       name: redtoothedtriggerfish
@@ -1518,18 +1530,18 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 30, y: 100}
-    fishHealth: 60
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
-    addDuration: 300
-    addValue: 0
   - id: fs_3301
+    fishHealth: 67
+    fishPower: 9
+    fishSpeed: 4
+    fishCoolTime: 14
+    fishAttackSpeed: 3
+    fishSpellTime: 2
+    fishGroggyTime: 1
+    fishDefenseCount: 5
+    fishTurnDelay: {x: 1.5, y: 1}
+    addDuration: 335
+    addValue: 2.7
     itemStruct:
       id: fs_3301
       name: swordfish
@@ -1551,18 +1563,18 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 250, y: 500}
-    fishHealth: 67
-    fishPower: 9
-    fishSpeed: 4
-    fishCoolTime: 14
-    fishAttackSpeed: 3
-    fishSpellTime: 2
-    fishGroggyTime: 1
-    fishDefenseCount: 5
-    fishTurnDelay: {x: 1.5, y: 1}
-    addDuration: 335
-    addValue: 2.7
   - id: fs_3302
+    fishHealth: 95
+    fishPower: 0
+    fishSpeed: 0
+    fishCoolTime: 0
+    fishAttackSpeed: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 475
+    addValue: 0
     itemStruct:
       id: fs_3302
       name: mantaray
@@ -1583,18 +1595,18 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 450, y: 800}
-    fishHealth: 95
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
-    addDuration: 475
-    addValue: 0
   - id: fs_4301
+    fishHealth: 100
+    fishPower: 10
+    fishSpeed: 5
+    fishCoolTime: 18
+    fishAttackSpeed: 4
+    fishSpellTime: 2
+    fishGroggyTime: 1
+    fishDefenseCount: 6
+    fishTurnDelay: {x: 0.3, y: 0.9}
+    addDuration: 500
+    addValue: 3
     itemStruct:
       id: fs_4301
       name: giantsquid
@@ -1619,18 +1631,18 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 500, y: 2000}
-    fishHealth: 100
-    fishPower: 10
-    fishSpeed: 5
-    fishCoolTime: 18
-    fishAttackSpeed: 4
-    fishSpellTime: 2
-    fishGroggyTime: 1
-    fishDefenseCount: 6
-    fishTurnDelay: {x: 0.3, y: 0.9}
-    addDuration: 500
-    addValue: 3
   - id: fs_4302
+    fishHealth: 120
+    fishPower: 0
+    fishSpeed: 0
+    fishCoolTime: 0
+    fishAttackSpeed: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 600
+    addValue: 0
     itemStruct:
       id: fs_4302
       name: goblinshark
@@ -1648,7 +1660,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 180, y: 720}
-    fishHealth: 120
+  - id: fs_4303
+    fishHealth: 15
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1657,9 +1670,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 600
+    addDuration: 75
     addValue: 0
-  - id: fs_4303
     itemStruct:
       id: fs_4303
       name: flapjackoctopus
@@ -1674,7 +1686,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 8, y: 20}
-    fishHealth: 15
+  - id: fs_4304
+    fishHealth: 65
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1683,9 +1696,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
+    addDuration: 325
     addValue: 0
-  - id: fs_4304
     itemStruct:
       id: fs_4304
       name: longnoselancetfish
@@ -1708,7 +1720,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 100, y: 250}
-    fishHealth: 65
+  - id: fs_4305
+    fishHealth: 55
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1717,9 +1730,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 325
+    addDuration: 275
     addValue: 0
-  - id: fs_4305
     itemStruct:
       id: fs_4305
       name: jellynosefish
@@ -1738,7 +1750,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 35, y: 120}
-    fishHealth: 55
+  - id: fs_4306
+    fishHealth: 20
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1747,9 +1760,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 275
+    addDuration: 100
     addValue: 0
-  - id: fs_4306
     itemStruct:
       id: fs_4306
       name: blobfish
@@ -1767,7 +1779,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 25, y: 50}
-    fishHealth: 20
+  - id: fs_2401
+    fishHealth: 75
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1776,9 +1789,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 100
+    addDuration: 375
     addValue: 0
-  - id: fs_2401
     itemStruct:
       id: fs_2401
       name: bluewingeel
@@ -1801,7 +1813,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 100, y: 250}
-    fishHealth: 75
+  - id: fs_3401
+    fishHealth: 32
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1810,9 +1823,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 375
+    addDuration: 160
     addValue: 0
-  - id: fs_3401
     itemStruct:
       id: fs_3401
       name: goldhermitcrab
@@ -1827,7 +1839,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 10, y: 20}
-    fishHealth: 32
+  - id: fs_4401
+    fishHealth: 65
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1836,9 +1849,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 160
+    addDuration: 325
     addValue: 0
-  - id: fs_4401
     itemStruct:
       id: fs_4401
       name: abyssalsnake
@@ -1856,7 +1868,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 60, y: 120}
-    fishHealth: 65
+  - id: fs_4402
+    fishHealth: 115
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1865,9 +1878,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 325
+    addDuration: 575
     addValue: 0
-  - id: fs_4402
     itemStruct:
       id: fs_4402
       name: drillfish
@@ -1886,7 +1898,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 120, y: 230}
-    fishHealth: 115
+  - id: fs_4403
+    fishHealth: 121
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1895,9 +1908,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 575
+    addDuration: 605
     addValue: 0
-  - id: fs_4403
     itemStruct:
       id: fs_4403
       name: coraliumqueen
@@ -1919,7 +1931,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 80, y: 180}
-    fishHealth: 121
+  - id: fs_4404
+    fishHealth: 155
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1928,9 +1941,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 605
+    addDuration: 775
     addValue: 0
-  - id: fs_4404
     itemStruct:
       id: fs_4404
       name: 'submarinegrouper '
@@ -1952,7 +1964,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 180, y: 300}
-    fishHealth: 155
+  - id: fs_1201
+    fishHealth: 30
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1961,9 +1974,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 775
+    addDuration: 150
     addValue: 0
-  - id: fs_1201
     itemStruct:
       id: fs_1201
       name: rockbream
@@ -1983,7 +1995,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 30, y: 80}
-    fishHealth: 30
+  - id: fs_1202
+    fishHealth: 50
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -1992,9 +2005,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 150
+    addDuration: 250
     addValue: 0
-  - id: fs_1202
     itemStruct:
       id: fs_1202
       name: parrotfish
@@ -2014,7 +2026,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 45.5, y: 100}
-    fishHealth: 50
+  - id: fs_2201
+    fishHealth: 20
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2023,9 +2036,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 250
+    addDuration: 100
     addValue: 0
-  - id: fs_2201
     itemStruct:
       id: fs_2201
       name: trigerfish
@@ -2041,7 +2053,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 25, y: 50}
-    fishHealth: 20
+  - id: fs_2202
+    fishHealth: 37
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2050,9 +2063,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 100
+    addDuration: 185
     addValue: 0
-  - id: fs_2202
     itemStruct:
       id: fs_2202
       name: redspottedgrouper
@@ -2069,7 +2081,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 30, y: 60}
-    fishHealth: 37
+  - id: fs_2203
+    fishHealth: 65
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2078,9 +2091,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 185
+    addDuration: 325
     addValue: 0
-  - id: fs_2203
     itemStruct:
       id: fs_2203
       name: napoleonwrasse
@@ -2100,18 +2112,18 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 90, y: 230}
-    fishHealth: 65
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
-    addDuration: 325
-    addValue: 0
   - id: fs_3201
+    fishHealth: 75
+    fishPower: 8
+    fishSpeed: 4
+    fishCoolTime: 14
+    fishAttackSpeed: 2
+    fishSpellTime: 2
+    fishGroggyTime: 2
+    fishDefenseCount: 5
+    fishTurnDelay: {x: 1.5, y: 1}
+    addDuration: 375
+    addValue: 2.4
     itemStruct:
       id: fs_3201
       name: oceansunfish
@@ -2133,18 +2145,18 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 200, y: 400}
-    fishHealth: 75
-    fishPower: 8
-    fishSpeed: 4
+  - id: fs_3202
+    fishHealth: 70
+    fishPower: 7
+    fishSpeed: 3
     fishCoolTime: 14
     fishAttackSpeed: 2
-    fishSpellTime: 2
-    fishGroggyTime: 2
-    fishDefenseCount: 5
+    fishSpellTime: 3
+    fishGroggyTime: 3
+    fishDefenseCount: 7
     fishTurnDelay: {x: 1.5, y: 1}
-    addDuration: 375
-    addValue: 2.4
-  - id: fs_3202
+    addDuration: 350
+    addValue: 2.1
     itemStruct:
       id: fs_3202
       name: cutlassfish
@@ -2163,18 +2175,18 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 150, y: 250}
-    fishHealth: 70
-    fishPower: 7
-    fishSpeed: 3
-    fishCoolTime: 14
-    fishAttackSpeed: 2
-    fishSpellTime: 3
-    fishGroggyTime: 3
-    fishDefenseCount: 7
-    fishTurnDelay: {x: 1.5, y: 1}
-    addDuration: 350
-    addValue: 2.1
   - id: fs_3203
+    fishHealth: 85
+    fishPower: 0
+    fishSpeed: 0
+    fishCoolTime: 0
+    fishAttackSpeed: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 425
+    addValue: 0
     itemStruct:
       id: fs_3203
       name: bluefintuna
@@ -2196,7 +2208,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 60, y: 500}
-    fishHealth: 85
+  - id: fs_3204
+    fishHealth: 73
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2205,9 +2218,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 425
+    addDuration: 365
     addValue: 0
-  - id: fs_3204
     itemStruct:
       id: fs_3204
       name: sailfish
@@ -2227,7 +2239,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 180, y: 400}
-    fishHealth: 73
+  - id: fs_3205
+    fishHealth: 78
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2236,9 +2249,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 365
+    addDuration: 390
     addValue: 0
-  - id: fs_3205
     itemStruct:
       id: fs_3205
       name: gianttrevally
@@ -2258,7 +2270,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 100, y: 180}
-    fishHealth: 78
+  - id: fs_4201
+    fishHealth: 65
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2267,9 +2280,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 390
+    addDuration: 325
     addValue: 0
-  - id: fs_4201
     itemStruct:
       id: fs_4201
       name: footballfish
@@ -2287,7 +2299,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 4, y: 70}
-    fishHealth: 65
+  - id: fs_4202
+    fishHealth: 80
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2296,9 +2309,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 325
+    addDuration: 400
     addValue: 0
-  - id: fs_4202
     itemStruct:
       id: fs_4202
       name: ghostshark
@@ -2317,7 +2329,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 40, y: 80}
-    fishHealth: 80
+  - id: fs_4203
+    fishHealth: 18
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2326,9 +2339,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 400
+    addDuration: 90
     addValue: 0
-  - id: fs_4203
     itemStruct:
       id: fs_4203
       name: fangtooth
@@ -2343,7 +2355,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 12, y: 20}
-    fishHealth: 18
+  - id: fs_4204
+    fishHealth: 100
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2352,9 +2365,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 90
+    addDuration: 500
     addValue: 0
-  - id: fs_4204
     itemStruct:
       id: fs_4204
       name: oarfish
@@ -2375,7 +2387,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 600, y: 1700}
-    fishHealth: 100
+  - id: fs_4205
+    fishHealth: 15
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2384,9 +2397,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 500
+    addDuration: 75
     addValue: 0
-  - id: fs_4205
     itemStruct:
       id: fs_4205
       name: predatorytunicate
@@ -2402,7 +2414,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 0.3, y: 9.5}
-    fishHealth: 15
+  - id: fs_1101
+    fishHealth: 11
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2411,9 +2424,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
+    addDuration: 55
     addValue: 0
-  - id: fs_1101
     itemStruct:
       id: fs_1101
       name: bluestripedfangblenny
@@ -2429,7 +2441,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 6.5, y: 15}
-    fishHealth: 11
+  - id: fs_1102
+    fishHealth: 20
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2438,9 +2451,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 55
+    addDuration: 100
     addValue: 0
-  - id: fs_1102
     itemStruct:
       id: fs_1102
       name: lionfish
@@ -2458,7 +2470,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 20, y: 40}
-    fishHealth: 20
+  - id: fs_1103
+    fishHealth: 15
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2467,9 +2480,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 100
+    addDuration: 75
     addValue: 0
-  - id: fs_1103
     itemStruct:
       id: fs_1103
       name: pipefish
@@ -2486,6 +2498,7 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 25, y: 50}
+  - id: fs_1104
     fishHealth: 15
     fishPower: 0
     fishSpeed: 0
@@ -2497,7 +2510,6 @@ MonoBehaviour:
     fishTurnDelay: {x: 0, y: 0}
     addDuration: 75
     addValue: 0
-  - id: fs_1104
     itemStruct:
       id: fs_1104
       name: yellowtaildamselfish
@@ -2512,7 +2524,8 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 4, y: 13}
-    fishHealth: 15
+  - id: fs_1105
+    fishHealth: 18
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2521,9 +2534,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
+    addDuration: 90
     addValue: 0
-  - id: fs_1105
     itemStruct:
       id: fs_1105
       name: yellowboxfish
@@ -2538,18 +2550,18 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 3.5, y: 25}
-    fishHealth: 18
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
-    addDuration: 90
-    addValue: 0
   - id: fs_2101
+    fishHealth: 50
+    fishPower: 5
+    fishSpeed: 3
+    fishCoolTime: 12
+    fishAttackSpeed: 1.5
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 5
+    fishTurnDelay: {x: 1, y: 2}
+    addDuration: 250
+    addValue: 1.5
     itemStruct:
       id: fs_2101
       name: octopus
@@ -2566,18 +2578,18 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 150, y: 250}
+  - id: fs_2102
     fishHealth: 50
-    fishPower: 5
-    fishSpeed: 3
-    fishCoolTime: 12
-    fishAttackSpeed: 1.5
+    fishPower: 1
+    fishSpeed: 1
+    fishCoolTime: 0
+    fishAttackSpeed: 1
     fishSpellTime: 3
     fishGroggyTime: 1
-    fishDefenseCount: 5
-    fishTurnDelay: {x: 1, y: 2}
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 0.3, y: 1.5}
     addDuration: 250
-    addValue: 1.5
-  - id: fs_2102
+    addValue: 0.3
     itemStruct:
       id: fs_2102
       name: giantmoray
@@ -2596,18 +2608,18 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 90, y: 100}
-    fishHealth: 50
-    fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
-    fishAttackSpeed: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 250
-    addValue: 0.3
   - id: fs_2103
+    fishHealth: 8
+    fishPower: 0
+    fishSpeed: 0
+    fishCoolTime: 0
+    fishAttackSpeed: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 40
+    addValue: 0
     itemStruct:
       id: fs_2103
       name: seahorse
@@ -2622,7 +2634,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 1.3, y: 12}
-    fishHealth: 8
+  - id: fs_2104
+    fishHealth: 12
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2631,9 +2644,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 40
+    addDuration: 60
     addValue: 0
-  - id: fs_2104
     itemStruct:
       id: fs_2104
       name: pufferfish
@@ -2651,7 +2663,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 0.5, y: 20}
-    fishHealth: 12
+  - id: fs_2105
+    fishHealth: 15
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2660,9 +2673,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
+    addDuration: 75
     addValue: 0
-  - id: fs_2105
     itemStruct:
       id: fs_2105
       name: seahare
@@ -2678,7 +2690,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 1, y: 30}
-    fishHealth: 15
+  - id: fs_2106
+    fishHealth: 12
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2687,9 +2700,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 75
+    addDuration: 60
     addValue: 0
-  - id: fs_2106
     itemStruct:
       id: fs_2106
       name: crab
@@ -2705,7 +2717,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 15, y: 25}
-    fishHealth: 12
+  - id: fs_2107
+    fishHealth: 11
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2714,9 +2727,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 60
+    addDuration: 55
     addValue: 0
-  - id: fs_2107
     itemStruct:
       id: fs_2107
       name: seacucumber
@@ -2731,7 +2743,8 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 10, y: 30}
-    fishHealth: 11
+  - id: fs_3101
+    fishHealth: 36
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2740,9 +2753,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 55
+    addDuration: 180
     addValue: 0
-  - id: fs_3101
     itemStruct:
       id: fs_3101
       name: coraltrout
@@ -2759,7 +2771,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 55, y: 120}
-    fishHealth: 36
+  - id: fs_3102
+    fishHealth: 28
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2768,9 +2781,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 180
+    addDuration: 140
     addValue: 0
-  - id: fs_3102
     itemStruct:
       id: fs_3102
       name: snowcrab
@@ -2790,7 +2802,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 70, y: 110}
-    fishHealth: 28
+  - id: fs_3103
+    fishHealth: 40
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2799,9 +2812,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 140
+    addDuration: 200
     addValue: 0
-  - id: fs_3103
     itemStruct:
       id: fs_3103
       name: barramundi
@@ -2818,7 +2830,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 100, y: 200}
-    fishHealth: 40
+  - id: fs_3104
+    fishHealth: 55
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2827,9 +2840,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 200
+    addDuration: 275
     addValue: 0
-  - id: fs_3104
     itemStruct:
       id: fs_3104
       name: wahoo
@@ -2847,7 +2859,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 130, y: 240}
-    fishHealth: 55
+  - id: fs_3105
+    fishHealth: 70
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2856,9 +2869,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 275
+    addDuration: 350
     addValue: 0
-  - id: fs_3105
     itemStruct:
       id: fs_3105
       name: sawfish
@@ -2879,7 +2891,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 250, y: 700}
-    fishHealth: 70
+  - id: fs_3106
+    fishHealth: 67
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2888,9 +2901,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 350
+    addDuration: 335
     addValue: 0
-  - id: fs_3106
     itemStruct:
       id: fs_3106
       name: longsnoutboarfish
@@ -2908,7 +2920,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 45, y: 75}
-    fishHealth: 67
+  - id: fs_3107
+    fishHealth: 25
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2917,9 +2930,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 335
+    addDuration: 125
     addValue: 0
-  - id: fs_3107
     itemStruct:
       id: fs_3107
       name: blacktigershrimp
@@ -2936,7 +2948,8 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 20, y: 45}
-    fishHealth: 25
+  - id: fs_3108
+    fishHealth: 75
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -2945,9 +2958,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 125
+    addDuration: 375
     addValue: 0
-  - id: fs_3108
     itemStruct:
       id: fs_3108
       name: longtoothgrouper
@@ -2967,18 +2979,18 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 95, y: 150}
-    fishHealth: 75
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
-    addDuration: 375
-    addValue: 0
   - id: fs_3109
+    fishHealth: 60
+    fishPower: 6
+    fishSpeed: 3
+    fishCoolTime: 12
+    fishAttackSpeed: 2
+    fishSpellTime: 4
+    fishGroggyTime: 3
+    fishDefenseCount: 6
+    fishTurnDelay: {x: 1, y: 2}
+    addDuration: 300
+    addValue: 1.8
     itemStruct:
       id: fs_3109
       name: amberjack
@@ -2998,18 +3010,18 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 50, y: 150}
-    fishHealth: 60
-    fishPower: 6
-    fishSpeed: 3
-    fishCoolTime: 12
-    fishAttackSpeed: 2
-    fishSpellTime: 4
-    fishGroggyTime: 3
-    fishDefenseCount: 6
-    fishTurnDelay: {x: 1, y: 2}
-    addDuration: 300
-    addValue: 1.8
   - id: fs_4101
+    fishHealth: 32
+    fishPower: 0
+    fishSpeed: 0
+    fishCoolTime: 0
+    fishAttackSpeed: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 160
+    addValue: 0
     itemStruct:
       id: fs_4101
       name: pollack
@@ -3025,7 +3037,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 30, y: 90}
-    fishHealth: 32
+  - id: fs_4102
+    fishHealth: 28
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -3034,9 +3047,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 160
+    addDuration: 140
     addValue: 0
-  - id: fs_4102
     itemStruct:
       id: fs_4102
       name: johndory
@@ -3054,7 +3066,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 50, y: 80}
-    fishHealth: 28
+  - id: fs_4103
+    fishHealth: 45
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -3063,9 +3076,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 140
+    addDuration: 225
     addValue: 0
-  - id: fs_4103
     itemStruct:
       id: fs_4103
       name: pelicaneel
@@ -3084,18 +3096,18 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 2
     size: {x: 50, y: 100}
-    fishHealth: 45
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
-    addDuration: 225
-    addValue: 0
   - id: fs_4104
+    fishHealth: 10
+    fishPower: 1
+    fishSpeed: 1
+    fishCoolTime: 0
+    fishAttackSpeed: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishTurnDelay: {x: 0.3, y: 1.5}
+    addDuration: 50
+    addValue: 0.3
     itemStruct:
       id: fs_4104
       name: alfonsino
@@ -3111,18 +3123,18 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 90, y: 100}
-    fishHealth: 10
-    fishPower: 1
-    fishSpeed: 1
-    fishCoolTime: 0
-    fishAttackSpeed: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishTurnDelay: {x: 0.3, y: 1.5}
-    addDuration: 50
-    addValue: 0.3
   - id: fs_4105
+    fishHealth: 21
+    fishPower: 0
+    fishSpeed: 0
+    fishCoolTime: 0
+    fishAttackSpeed: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 105
+    addValue: 0
     itemStruct:
       id: fs_4105
       name: hagfish
@@ -3137,7 +3149,8 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 35, y: 65}
-    fishHealth: 21
+  - id: fs_4106
+    fishHealth: 55
     fishPower: 0
     fishSpeed: 0
     fishCoolTime: 0
@@ -3146,9 +3159,8 @@ MonoBehaviour:
     fishGroggyTime: 0
     fishDefenseCount: 0
     fishTurnDelay: {x: 0, y: 0}
-    addDuration: 105
+    addDuration: 275
     addValue: 0
-  - id: fs_4106
     itemStruct:
       id: fs_4106
       name: opahfish
@@ -3171,17 +3183,6 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 120, y: 220}
-    fishHealth: 55
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
-    addDuration: 275
-    addValue: 0
   skillStruct:
   - id: sk_001_00
     name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 1"
@@ -4239,116 +4240,6 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_014_00
-    name: "\uB09A\uC2DC\uC655 1"
-    description: sk_014_00_a
-    addStatusString: DefenseCount-1 Chance
-    skillType: 2
-    icon: Icon_Sk_010
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_014_01
-    name: "\uB09A\uC2DC\uC655 2"
-    description: sk_014_00_a
-    addStatusString: DefenseCount-1 Chance
-    skillType: 2
-    icon: Icon_Sk_010
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_014_02
-    name: "\uB09A\uC2DC\uC655 3"
-    description: sk_014_00_a
-    addStatusString: DefenseCount-1 Chance
-    skillType: 2
-    icon: Icon_Sk_010
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_014_03
-    name: "\uB09A\uC2DC\uC655 4"
-    description: sk_014_00_a
-    addStatusString: DefenseCount-1 Chance
-    skillType: 2
-    icon: Icon_Sk_010
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_014_04
-    name: "\uB09A\uC2DC\uC655 5"
-    description: sk_014_00_a
-    addStatusString: DefenseCount-1 Chance
-    skillType: 2
-    icon: Icon_Sk_010
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
   - id: sk_010_00
     name: "\uC77C\uD0C0\uC30D\uC5B4 1"
     description: sk_010_00_a
@@ -4567,6 +4458,72 @@ MonoBehaviour:
       shipHealth: 0
       luckFish: 1
       fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_011_00
+    name: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 1"
+    description: sk_011_00_a
+    addStatusString: FishAmount+1
+    skillType: 0
+    icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 1
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_011_01
+    name: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 2"
+    description: sk_011_00_a
+    addStatusString: FishAmount+1
+    skillType: 0
+    icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 1
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_011_02
+    name: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 3"
+    description: sk_011_00_a
+    addStatusString: FishAmount+1
+    skillType: 0
+    icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 1
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_012_00
@@ -4789,226 +4746,6 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_100_00
-    name: "\uAE30\uBCF8 \uBC30"
-    description: sk_100_00_a
-    addStatusString: 
-    skillType: 1
-    icon: Icon_Sk_ship
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_100_01
-    name: "\uCF8C\uC18D\uC120"
-    description: sk_100_01_a
-    addStatusString: 
-    skillType: 1
-    icon: Icon_Sk_ship
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_100_02
-    name: "\uB55F\uBAA9"
-    description: sk_100_02_a
-    addStatusString: 
-    skillType: 1
-    icon: Icon_Sk_ship
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_100_03
-    name: "\uD06C\uB8E8\uC988"
-    description: sk_100_03_a
-    addStatusString: 
-    skillType: 1
-    icon: Icon_Sk_ship
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_100_04
-    name: "\uBC94\uC120"
-    description: sk_100_04_a
-    addStatusString: 
-    skillType: 1
-    icon: Icon_Sk_ship
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_100_05
-    name: "\uD1B5\uD1B5\uBC30"
-    description: sk_100_05_a
-    addStatusString: 
-    skillType: 1
-    icon: Icon_Sk_ship
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_100_06
-    name: "\uC624\uB9AC\uBC30"
-    description: sk_100_06_a
-    addStatusString: 
-    skillType: 1
-    icon: Icon_Sk_ship
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_011_00
-    name: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 1"
-    description: sk_011_00_a
-    addStatusString: FishAmount+1
-    skillType: 0
-    icon: popup_close
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 1
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_011_01
-    name: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 2"
-    description: sk_011_00_a
-    addStatusString: FishAmount+1
-    skillType: 0
-    icon: popup_close
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 1
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_011_02
-    name: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 3"
-    description: sk_011_00_a
-    addStatusString: FishAmount+1
-    skillType: 0
-    icon: popup_close
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 1
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
   - id: sk_013_00
     name: "\uCC3D\uACE0\uD655\uC7A5 1"
     description: sk_013_00_a
@@ -5213,6 +4950,116 @@ MonoBehaviour:
     addStatusString: Storage+1
     skillType: 0
     icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_014_00
+    name: "\uB09A\uC2DC\uC655 1"
+    description: sk_014_00_a
+    addStatusString: DefenseCount-1 Chance
+    skillType: 2
+    icon: Icon_Sk_010
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_014_01
+    name: "\uB09A\uC2DC\uC655 2"
+    description: sk_014_00_a
+    addStatusString: DefenseCount-1 Chance
+    skillType: 2
+    icon: Icon_Sk_010
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_014_02
+    name: "\uB09A\uC2DC\uC655 3"
+    description: sk_014_00_a
+    addStatusString: DefenseCount-1 Chance
+    skillType: 2
+    icon: Icon_Sk_010
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_014_03
+    name: "\uB09A\uC2DC\uC655 4"
+    description: sk_014_00_a
+    addStatusString: DefenseCount-1 Chance
+    skillType: 2
+    icon: Icon_Sk_010
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_014_04
+    name: "\uB09A\uC2DC\uC655 5"
+    description: sk_014_00_a
+    addStatusString: DefenseCount-1 Chance
+    skillType: 2
+    icon: Icon_Sk_010
     price: 1
     addStatus:
       catchRadius: 0
@@ -5559,51 +5406,161 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_017_05
-    name: "\uBD80\uC2A4\uD130 6"
-    description: sk_017_00_a
-    addStatusString: Buster+1
-    skillType: 2
-    icon: popup_close
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_017_06
-    name: "\uBD80\uC2A4\uD130 7"
-    description: sk_017_00_a
-    addStatusString: Buster+1
-    skillType: 2
-    icon: popup_close
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
   - id: sk_018_00
+    name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 1"
+    description: sk_018_00_a
+    addStatusString: BusterSize+1
+    skillType: 2
+    icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_018_01
+    name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 2"
+    description: sk_018_00_a
+    addStatusString: BusterSize+1
+    skillType: 2
+    icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_018_02
+    name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 3"
+    description: sk_018_00_a
+    addStatusString: BusterSize+1
+    skillType: 2
+    icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_018_03
+    name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 4"
+    description: sk_018_00_a
+    addStatusString: BusterSize+1
+    skillType: 2
+    icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_018_04
+    name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 5"
+    description: sk_018_00_a
+    addStatusString: BusterSize+1
+    skillType: 2
+    icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_018_05
+    name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 6"
+    description: sk_018_00_a
+    addStatusString: BusterSize+1
+    skillType: 2
+    icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_018_06
+    name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 7"
+    description: sk_018_00_a
+    addStatusString: BusterSize+1
+    skillType: 2
+    icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_019_00
     name: "\uBB3C\uACE0\uAE30 \uCCB4\uB825 \uAC10\uC18C 1"
     description: sk_018_00_a
     addStatusString: FishHealth-1
@@ -5625,7 +5582,7 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_018_01
+  - id: sk_019_01
     name: "\uBB3C\uACE0\uAE30 \uCCB4\uB825 \uAC10\uC18C 2"
     description: sk_018_00_a
     addStatusString: FishHealth-2
@@ -5647,7 +5604,7 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_018_02
+  - id: sk_019_02
     name: "\uBB3C\uACE0\uAE30 \uCCB4\uB825 \uAC10\uC18C 3"
     description: sk_018_00_a
     addStatusString: FishHealth-3
@@ -5669,7 +5626,7 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_018_03
+  - id: sk_019_03
     name: "\uBB3C\uACE0\uAE30 \uCCB4\uB825 \uAC10\uC18C 4"
     description: sk_018_00_a
     addStatusString: FishHealth-4
@@ -5691,120 +5648,10 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_018_04
+  - id: sk_019_04
     name: "\uBB3C\uACE0\uAE30 \uCCB4\uB825 \uAC10\uC18C 5"
     description: sk_018_00_a
     addStatusString: FishHealth-5
-    skillType: 2
-    icon: popup_close
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_018_05
-    name: "\uBB3C\uACE0\uAE30 \uCCB4\uB825 \uAC10\uC18C 6"
-    description: sk_018_00_a
-    addStatusString: FishHealth-6
-    skillType: 2
-    icon: popup_close
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_018_06
-    name: "\uBB3C\uACE0\uAE30 \uCCB4\uB825 \uAC10\uC18C 7"
-    description: sk_018_00_a
-    addStatusString: FishHealth-7
-    skillType: 2
-    icon: popup_close
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_018_07
-    name: "\uBB3C\uACE0\uAE30 \uCCB4\uB825 \uAC10\uC18C 8"
-    description: sk_018_00_a
-    addStatusString: FishHealth-7
-    skillType: 2
-    icon: popup_close
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_018_08
-    name: "\uBB3C\uACE0\uAE30 \uCCB4\uB825 \uAC10\uC18C 9"
-    description: sk_018_00_a
-    addStatusString: FishHealth-7
-    skillType: 2
-    icon: popup_close
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_018_09
-    name: "\uBB3C\uACE0\uAE30 \uCCB4\uB825 \uAC10\uC18C 10"
-    description: sk_018_00_a
-    addStatusString: FishHealth-7
     skillType: 2
     icon: popup_close
     price: 1
@@ -6467,6 +6314,160 @@ MonoBehaviour:
     addStatusString: 3%
     skillType: 2
     icon: popup_close
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_100_00
+    name: "\uAE30\uBCF8 \uBC30"
+    description: sk_100_00_a
+    addStatusString: 
+    skillType: 1
+    icon: Icon_Sk_ship
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_100_01
+    name: "\uCF8C\uC18D\uC120"
+    description: sk_100_01_a
+    addStatusString: 
+    skillType: 1
+    icon: Icon_Sk_ship
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_100_02
+    name: "\uB55F\uBAA9"
+    description: sk_100_02_a
+    addStatusString: 
+    skillType: 1
+    icon: Icon_Sk_ship
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_100_03
+    name: "\uD06C\uB8E8\uC988"
+    description: sk_100_03_a
+    addStatusString: 
+    skillType: 1
+    icon: Icon_Sk_ship
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_100_04
+    name: "\uBC94\uC120"
+    description: sk_100_04_a
+    addStatusString: 
+    skillType: 1
+    icon: Icon_Sk_ship
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_100_05
+    name: "\uD1B5\uD1B5\uBC30"
+    description: sk_100_05_a
+    addStatusString: 
+    skillType: 1
+    icon: Icon_Sk_ship
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_100_06
+    name: "\uC624\uB9AC\uBC30"
+    description: sk_100_06_a
+    addStatusString: 
+    skillType: 1
+    icon: Icon_Sk_ship
     price: 1
     addStatus:
       catchRadius: 0

@@ -72,7 +72,7 @@ public class Skill_Manager : MonoBehaviour
                 }
                 else
                 {
-                    statusStructs[x, y] = Singleton_Data.INSTANCE.Dict_Skill[skillTreeData.skillList[index]];
+                    statusStructs[x, y] = Singleton_Data.INSTANCE.Dict_Skill[id];
                 }
                 index++;
             }
@@ -126,6 +126,7 @@ public class Skill_Manager : MonoBehaviour
         startSlot.boxImage.gameObject.SetActive(true);
 
         SettingLoadSlot();
+        EnableSkill();
     }
 
     void SetParent()
@@ -157,6 +158,8 @@ public class Skill_Manager : MonoBehaviour
         enableSlotLIst.Add(_addNode);
         SetSlot(_addNode);
         Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._activeSkill);
+
+        EnableSkill();
     }
 
     void SetSlot(Vector2Int _addNode)
@@ -216,5 +219,22 @@ public class Skill_Manager : MonoBehaviour
         }
         enableSlotLIst.Clear();
         Static_JsonManager.SaveEnableSkillData(Const_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 리셋 저장
+    }
+
+
+
+
+    public List<string> enableList = new List<string>();
+    void EnableSkill()
+    {
+        enableList.Clear();
+        for (int i = 0; i < enableSlotLIst.Count; i++)
+        {
+            Skill_Slot slot = allSlot[enableSlotLIst[i].x, enableSlotLIst[i].y];
+
+            // 스탯 제거
+            string skillID = slot.Skill.id;
+            enableList.Add(skillID);
+        }
     }
 }
