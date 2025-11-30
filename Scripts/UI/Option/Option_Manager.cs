@@ -9,6 +9,7 @@ public class Option_Manager : MonoBehaviour
     public Custom_Button closeButton;
     public Custom_Button resetStatsButton, goTitleButton, goExitButton;
     public Data_Option optionData;
+    public FPSCounter fps;
 
     [System.Serializable]
     public struct ScreenStruct

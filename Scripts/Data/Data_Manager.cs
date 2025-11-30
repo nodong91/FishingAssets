@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -99,13 +97,12 @@ public class Data_Manager : Data_Parse
                 fishPower = Parse_Float(elements[13]),
                 fishSpeed = Parse_Float(elements[14]),
                 fishCoolTime = Parse_Float(elements[15]),
-                fishAttackSpeed = Parse_Float(elements[16]),
-                fishSpellTime = Parse_Float(elements[17]),
-                fishGroggyTime = Parse_Float(elements[18]),
-                fishDefenseCount = Parse_Int(elements[19]),
-                fishTurnDelay = Parse_Vector2(elements[20]),
-                addDuration = Parse_Float(elements[21]),
-                addValue = Parse_Float(elements[22]),
+                fishSpellTime = Parse_Float(elements[16]),
+                fishGroggyTime = Parse_Float(elements[17]),
+                fishDefenseCount = Parse_Int(elements[18]),
+                fishTurnDelay = Parse_Vector2(elements[19]),
+                addDuration = Parse_Float(elements[20]),
+                addValue = Parse_Float(elements[21]),
             };
             fishStruct.Add(tempData);
         }
@@ -197,16 +194,35 @@ public class Data_Manager : Data_Parse
             };
             skillStruct.Add(tempData);
 
-            //Data_Skill tempSkill = GetSkillData(elements[0].Trim());
+            //Data_Skill tempSkill = InstanceScriptableObejct(elements[0].Trim());
             //tempSkill.skill_ID = elements[0].Trim();
             //tempSkill.skill_Name = elements[1];
             //tempSkill.skill_Description = elements[2];
             //tempSkill.skill_Type = (Data_Skill.SkillType)System.Enum.Parse(typeof(Data_Skill.SkillType), elements[4]);
             //tempSkill.skill_Icon = elements[5];
             //tempSkill.skill_Price = Parse_Int(elements[6]);
+
+            //if (tempSkill.addShipStatus == null)
+            //{
+            //    EditorUtility.SetDirty(tempSkill);
+            //    continue;
+            //}
+
+            //for (int a = 0; a < tempSkill.addShipStatus.Length; a++)
+            //{
+            //    tempSkill.addShipStatus[a].SetViewID();
+            //}
+            //for (int a = 0; a < tempSkill.addFishStatus.Length; a++)
+            //{
+            //    tempSkill.addFishStatus[a].SetViewID();
+            //}
             //EditorUtility.SetDirty(tempSkill);
+
         }
     }
+
+
+
 
     void ConvertQuest(TextAsset _textAsset)
     {
@@ -532,7 +548,7 @@ public class Data_Manager : Data_Parse
         Day,
         Night,
     }
-
+    [System.Serializable]
     public class FishStatus
     {
         [HideInInspector]
@@ -542,7 +558,7 @@ public class Data_Manager : Data_Parse
         public float fishPower;// 물고기 공격력
         public float fishSpeed;// 물고기 이동 속도
         public float fishCoolTime;// 물고기 공격 쿨타임
-        public float fishAttackSpeed;// 물고기 공격 속도
+        //public float fishAttackSpeed;// 물고기 공격 속도
         public float fishSpellTime;// 공격할 때 딜레이 시간
         public float fishGroggyTime;// 방어 성공 시 그로기 시간
         public int fishDefenseCount;// 공격시 입력 개수
@@ -560,20 +576,6 @@ public class Data_Manager : Data_Parse
         public AreaType areaType;
         public DayType fishDayType;// 등장 시간
         public Vector2 size;
-
-        //// 낚시 관련
-        //public float fishHealth;// 물고기 체력
-        //public float fishPower;// 물고기 공격력
-        //public float fishSpeed;// 물고기 이동 속도
-        //public float fishCoolTime;// 물고기 공격 쿨타임
-        //public float fishAttackSpeed;// 물고기 공격 속도
-        //public float fishSpellTime;// 공격할 때 딜레이 시간
-        //public float fishGroggyTime;// 방어 성공 시 그로기 시간
-        //public int fishDefenseCount;// 공격시 입력 개수
-        //public Vector2 fishTurnDelay;// 방향 바뀌는 딜레이 시간
-        //[Header(" [ 버프 ]")]
-        //public float addDuration;// 버프 시간
-        //public float addValue;// 더해지는 버프 수치 - 버프수치가 높을 수록 해당 등급이 나올 확률이 올라간다.
 
         [System.Serializable]
         public struct RandomSize

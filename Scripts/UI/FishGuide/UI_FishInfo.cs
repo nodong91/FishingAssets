@@ -33,7 +33,8 @@ public class UI_FishInfo : MonoBehaviour
                 moon.SetActive(true);
                 break;
         }
-        SetItemStruct(itemStruct, _card.GetUnknown);
+        //SetItemStruct(itemStruct, _card.GetUnknown);
+        SetItemStruct(itemStruct, false);
     }
 
     void SetItemStruct(Data_Manager.ItemStruct _itemStruct, bool _unknown)

@@ -5,6 +5,7 @@ using static Data_Manager;
 
 public class Skill_Manager : MonoBehaviour
 {
+    public Skill_Setting skill_Setting;
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public Custom_Button resetButton;// 스킬 초기화 버튼
     public TMPro.TMP_Text activeDescription;
@@ -90,7 +91,7 @@ public class Skill_Manager : MonoBehaviour
         for (int i = 0; i < enableSlotLIst.Count; i++)
         {
             // 슬롯 활성화
-            SetSlot(enableSlotLIst[i]);
+            SetSlot(enableSlotLIst[i]);// 로딩이후?
         }
     }
 
@@ -126,7 +127,6 @@ public class Skill_Manager : MonoBehaviour
         startSlot.boxImage.gameObject.SetActive(true);
 
         SettingLoadSlot();
-        EnableSkill();
     }
 
     void SetParent()
@@ -156,13 +156,12 @@ public class Skill_Manager : MonoBehaviour
     void ActiveSkill(Vector2Int _addNode)// 스킬 활성화
     {
         enableSlotLIst.Add(_addNode);
+
         SetSlot(_addNode);
         Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._activeSkill);
-
-        EnableSkill();
     }
 
-    void SetSlot(Vector2Int _addNode)
+    void SetSlot(Vector2Int _addNode)// 슬롯 세팅
     {
         Skill_Slot slot = allSlot[_addNode.x, _addNode.y];
         slot.EnableSlot(true);// 활성화
@@ -171,36 +170,37 @@ public class Skill_Manager : MonoBehaviour
             Skill_Slot near = allSlot[slot.nearbySlot[i].x, slot.nearbySlot[i].y];
             near.SetHide(false, slot.transform.position);
         }
-        AddSkill(slot.Skill);
+        skill_Setting.AddLevel(slot.Skill.id, true);
+        //AddSkill(slot.Skill);
     }
 
-    void AddSkill(SkillStruct _skill)
-    {
-        switch (_skill.skillType)
-        {
-            case SkillStruct.SkillType.AddStatus:
-                // 스탯 추가
-                Debug.LogWarning(_skill.id);
-                addStatus.AddStatus(_skill.addStatus);
-                Game_Manager.current.AddStatus();
-                break;
+    //void AddSkill(SkillStruct _skill)
+    //{
+    //    switch (_skill.skillType)
+    //    {
+    //        case SkillStruct.SkillType.AddStatus:
+    //            // 스탯 추가
+    //            Debug.LogWarning(_skill.id);
+    //            addStatus.AddStatus(_skill.addStatus);
+    //            Game_Manager.current.AddStatus();
+    //            break;
 
-            case SkillStruct.SkillType.ShipUnlocked:
-                ShipUnlock(_skill.id);
-                break;
+    //        case SkillStruct.SkillType.ShipUnlocked:
+    //            ShipUnlock(_skill.id);
+    //            break;
 
-            case SkillStruct.SkillType.Etc:
+    //        case SkillStruct.SkillType.Etc:
 
-                break;
-        }
-    }
+    //            break;
+    //    }
+    //}
 
-    void ShipUnlock(string _id)
-    {
-        Data_Ship data_Ship = Singleton_Data.INSTANCE.Dict_Ship[_id];
-        Debug.LogWarning($"{_id} : {data_Ship.shipName}");
-        Game_Manager.current.GetChangeShip.AddShip(data_Ship);
-    }
+    //void ShipUnlock(string _id)
+    //{
+    //    Data_Ship data_Ship = Singleton_Data.INSTANCE.Dict_Ship[_id];
+    //    Debug.LogWarning($"{_id} : {data_Ship.shipName}");
+    //    Game_Manager.current.GetChangeShip.AddShip(data_Ship);
+    //}
 
     void SkillReset()
     {
@@ -218,23 +218,7 @@ public class Skill_Manager : MonoBehaviour
             Game_Manager.current.AddStatus();
         }
         enableSlotLIst.Clear();
+        skill_Setting.ResetLevel();
         Static_JsonManager.SaveEnableSkillData(Const_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 리셋 저장
-    }
-
-
-
-
-    public List<string> enableList = new List<string>();
-    void EnableSkill()
-    {
-        enableList.Clear();
-        for (int i = 0; i < enableSlotLIst.Count; i++)
-        {
-            Skill_Slot slot = allSlot[enableSlotLIst[i].x, enableSlotLIst[i].y];
-
-            // 스탯 제거
-            string skillID = slot.Skill.id;
-            enableList.Add(skillID);
-        }
     }
 }

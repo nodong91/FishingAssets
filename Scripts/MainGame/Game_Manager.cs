@@ -44,7 +44,7 @@ public class Game_Manager : MonoBehaviour
     public Data_Ship shipData;
     public SetStatus currentStatus;
     public string addItemTest;
-    public SetStatus GetAddStatus => GetSkill.addStatus;
+    public SetStatus GetAddStatus => GetSkill.skill_Setting.AddShipStatus();
 
     [Header(" [ 이어하기 ]")]
     public float loanTime = 0f;
@@ -95,7 +95,26 @@ public class Game_Manager : MonoBehaviour
 
     public void InputSpacebar(bool _input)
     {
-        GetPlayer.SetBooster(_input);
+        GetPlayer.ActiveBooster(_input);
+    }
+
+    public void SetEtc()
+    {
+        SetBooster();
+        SetCrashChance();
+    }
+
+    public void SetBooster()
+    {
+        GetSkill.skill_Setting.GetBooster(out float _boosterSpeed, out float _boosterValue);
+        player.SetBooster(_boosterSpeed, _boosterValue);
+        // 유아이 세팅
+        GetMainUI.SetMaxBoosterValue(_boosterValue);
+    }
+
+    public void SetCrashChance()
+    {
+        float crashChance = GetSkill.skill_Setting.GetCrashChance();
     }
 
     IEnumerator SetStart()

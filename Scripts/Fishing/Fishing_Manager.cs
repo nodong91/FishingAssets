@@ -220,11 +220,27 @@ public class Fishing_Manager : MonoBehaviour
     FishStruct SetCurrentFish(string _id)// 스킬 적용 스탯
     {
         FishStruct findFish = Singleton_Data.INSTANCE.Dict_Fish[_id];
-        FishStruct addStruct = new FishStruct
+        FishStatus addStruct = Game_Manager.current.GetSkill.skill_Setting.AddFishStatus();
+        FishStruct tempFish = new FishStruct
         {
+            itemStruct = findFish.itemStruct,
+            areaType = findFish.areaType,
+            fishDayType = findFish.fishDayType,
+            size = findFish.size,
+            id = findFish.id,
 
+            fishHealth = findFish.fishHealth + addStruct.fishHealth,
+            fishPower = findFish.fishPower + addStruct.fishPower,
+            fishSpeed = findFish.fishSpeed + addStruct.fishSpeed,
+            fishCoolTime = findFish.fishCoolTime + addStruct.fishCoolTime,
+            fishSpellTime = findFish.fishSpellTime + addStruct.fishSpellTime,
+            fishGroggyTime = findFish.fishGroggyTime + addStruct.fishGroggyTime,
+            fishDefenseCount = findFish.fishDefenseCount + addStruct.fishDefenseCount,
+            fishTurnDelay = findFish.fishTurnDelay + addStruct.fishTurnDelay,
+            addDuration = findFish.addDuration + addStruct.addDuration,
+            addValue = findFish.addValue + addStruct.addValue
         };
-        return findFish;
+        return tempFish;
     }
 
     void SetFishing()// 초기 세팅

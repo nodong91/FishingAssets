@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Trigger_Landing;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class UI_Landing : MonoBehaviour
 {

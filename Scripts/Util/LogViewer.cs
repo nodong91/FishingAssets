@@ -92,20 +92,10 @@ public class LogViewer : MonoBehaviour
             return;
         // 로그 메세지를 텍스트 파일에 저장
         // 파일이 없다면 새롭게 생성
-        FindFolder();
+        P01_Utility.FindFolder(filePath);
         using (StreamWriter sw = new StreamWriter(Path.Combine(filePath, fileName), true))
         {
             sw.WriteLine($"[{System.DateTime.Now}] {saveLog} \n");
-        }
-    }
-
-    void FindFolder()
-    {
-        DirectoryInfo dirInfo = new DirectoryInfo(filePath);
-        if (dirInfo.Exists == false)
-        {
-            // 없으면 만들기
-            dirInfo.Create();
         }
     }
 }

@@ -34,7 +34,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     {
         if (Skill == null || System.String.IsNullOrEmpty(Skill.id) == true)
             return;
-        Debug.LogWarning(Skill.id);
+        //Debug.Log(Skill.id);
 
         gageImage.fillAmount = 0f;
         if (Skill.icon != null && sprites.ContainsKey(Skill.icon))

@@ -110,7 +110,7 @@ namespace P01.Editor
 
         public void SetMeshCombine()
         {
-            FindFolder(folderPath + filePath);
+            P01_Utility.FindFolder(folderPath + filePath);
 
             batchDictionary.Clear();
             oldIndex = 0;
@@ -299,20 +299,6 @@ namespace P01.Editor
             string path = folderPath + filePath + $"/{_name}.asset";
             AssetDatabase.CreateAsset(_mesh, AssetDatabase.GenerateUniqueAssetPath(path));
             AssetDatabase.SaveAssets();
-        }
-
-        //======================================================================================
-        // 폴더 찾기
-        //======================================================================================
-
-        static void FindFolder(string folderName)
-        {
-            DirectoryInfo dirInfo = new DirectoryInfo(folderName);
-            if (dirInfo.Exists == false)
-            {
-                // 없으면 만들기
-                dirInfo.Create();
-            }
         }
 #endif
     }

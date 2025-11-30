@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -24,7 +25,7 @@ public class P01_Utility
     public static List<T> ShuffleList<T>(List<T> list, int seed)
     {
         System.Random prng = new System.Random(seed);
-        for (int i = 0; i < list.Count-1; i++)
+        for (int i = 0; i < list.Count - 1; i++)
         {
             int randomIndex = prng.Next(i, list.Count);
             T tempItem = list[randomIndex];
@@ -153,5 +154,15 @@ public class P01_Utility
                 break;
         }
         return color;
+    }
+
+    public static void FindFolder(string folderName)
+    {
+        DirectoryInfo dirInfo = new DirectoryInfo(folderName);
+        if (dirInfo.Exists == false)
+        {
+            // 없으면 만들기
+            dirInfo.Create();
+        }
     }
 }

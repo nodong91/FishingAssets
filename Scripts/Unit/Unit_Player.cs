@@ -54,10 +54,9 @@ public class Unit_Player : MonoBehaviour
         health = CurrentStatus.shipHealth - continueData.destroySlot.Count;
         energy = continueData.energy;
 
-        boosterSpeed = 0f;
-        boosterValue = 2f;
-        maxBoosterValue = 2f;
-        Game_Manager.current.GetMainUI.SetMaxBoosterValue(maxBoosterValue);
+        //boosterSpeed = 0f;
+        //boosterValue = 2f;
+        //maxBoosterValue = 2f;
 
         StateMachine(State.Idle);
 
@@ -236,9 +235,16 @@ public class Unit_Player : MonoBehaviour
     //================================================================================================================================================
     Coroutine boosting, boosterGage;
     float boosterSpeed = 0f;
+    float maxBoosterSpeed;
     float boosterValue, maxBoosterValue;
 
-    public void SetBooster(bool _on)
+    public void SetBooster(float _boosterSpeed, float _boosterValue)
+    {
+        maxBoosterSpeed = _boosterSpeed;
+        maxBoosterValue = _boosterValue;
+    }
+
+    public void ActiveBooster(bool _on)
     {
         if (maxBoosterValue == 0)
             return;
@@ -248,7 +254,7 @@ public class Unit_Player : MonoBehaviour
             StopCoroutine(boosting);
         if (_on == true)
         {
-            boosterSpeed = 1f;// 부스터 최고 속도 1이면 두배속
+            boosterSpeed = maxBoosterSpeed;// 부스터 최고 속도 1이면 두배속
         }
         else
         {
@@ -283,7 +289,7 @@ public class Unit_Player : MonoBehaviour
                 {
                     StateMachine(State.Damage);// 부스터 터짐
                     StartCoroutine(MovingClash(transform.position));
-                    SetBooster(false);// 부스터 오프
+                    ActiveBooster(false);// 부스터 오프
                 }
             }
             else
