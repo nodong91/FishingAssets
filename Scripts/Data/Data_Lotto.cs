@@ -12,7 +12,6 @@ public class Data_Lotto : ScriptableObject
     }
     public LotteryType lotteryType;
     public int slotCount = 6; // 슬롯 개수
-    public int price; // 로또 구매 가격
     public Sprite[] sprites;
     public LottoReward[] rewards;
 

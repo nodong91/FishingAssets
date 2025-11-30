@@ -23,6 +23,8 @@ public class Const_Audio
     public const string _clash = "fx_0004";
     public const string _reeling = "fx_0005";
     public const string _oceanSound = "env_0001";
+    public const string _waterDrop = "fx_0006";
+    public const string _penWrite = "fx_0007";
 }
 
 public class Const_ETC

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 using static Data_Dialog;
 using static Data_Event;
 
@@ -101,7 +100,7 @@ public class Event_Manager : MonoBehaviour
             yield return StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, true));
         }
         TextStruct textStruct = eventData.eventStruct;
-        StartCoroutine(Typing(textStruct));
+        StartCoroutine(Typing(textStruct, Const_Audio._penWrite));
         StartCoroutine(TextAction(textStruct));
         SetSelectButton();// 선택 버튼 세팅
     }
