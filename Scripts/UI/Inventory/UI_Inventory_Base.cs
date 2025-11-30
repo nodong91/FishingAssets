@@ -656,18 +656,28 @@ public class UI_Inventory_Base : MonoBehaviour
     //===========================================================================================================================
     // 수리하기
     //===========================================================================================================================
+
+    float repairPrice = 100f;
     public void FixSlot(UI_Inventory_Slot _slot)// 슬롯 복구
     {
+        if (Game_Manager.current.CheckMoney(repairPrice) == false)
+            return;
+
+        Game_Manager.current.GetMainUI.MoveMoney(-repairPrice);// 하나씩
         _slot.FixSlot();
         destroySlot.Remove(_slot.slotNum);
-        Game_Manager.current.GetPlayer.AddHealth(1);// 데미지
+        Game_Manager.current.GetPlayer.AddHealth(1);// 데미지 회복
     }
 
     public void FixAll()// 모든 슬롯 복구
     {
         if (destroySlot == null)
             return;
+        float fixPrice = repairPrice * destroySlot.Count;
+        if (Game_Manager.current.CheckMoney(fixPrice) == false)
+            return;
 
+        Game_Manager.current.GetMainUI.MoveMoney(-fixPrice);// AllFix
         Game_Manager.current.GetPlayer.AddHealth(destroySlot.Count);// 데미지
         for (int i = 0; i < destroySlot.Count; i++)
         {

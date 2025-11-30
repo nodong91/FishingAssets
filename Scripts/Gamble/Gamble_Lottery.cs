@@ -87,6 +87,7 @@ public class Gamble_Lottery : MonoBehaviour
                         isEnd = true;
                         testText.text = $"´çÃ·!!!!!! : {sellPrice}";
                         Game_Manager.current.GetMainUI.MoveMoney(sellPrice);
+                        Steam_StatsManager.current.CountLottery(sellPrice);// ´çÃ· Ä«¿îÆ®
                     }
                     else if (slotList.Count == 0)
                     {

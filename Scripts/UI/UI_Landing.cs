@@ -305,12 +305,12 @@ public class UI_Landing : MonoBehaviour
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
         Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._0008);// 플레이어 대화
 
-        if (lightMode == Data_Manager.DayType.Night)       // 밤
-        {
-            // 추가
-            data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._smuggler];// 밀수꾼 추가
-            Game_Manager.current.GetDialog.AddNPC(data_NPC, Const_Dialog._4001);
-        }
+        //if (lightMode == Data_Manager.DayType.Night)       // 밤
+        //{
+        //    // 추가
+        //    data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._smuggler];// 밀수꾼 추가
+        //    Game_Manager.current.GetDialog.AddNPC(data_NPC, Const_Dialog._4001);
+        //}
     }
 
     void StorageButton()

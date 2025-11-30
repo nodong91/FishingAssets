@@ -111,7 +111,7 @@ public class Option_Manager : MonoBehaviour
 
     void ResetStatsButton()
     {
-        StatsManager.current.ResetStats();
+        Steam_StatsManager.current.ResetStats();
     }
 
     void GoTitle()

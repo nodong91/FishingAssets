@@ -210,7 +210,6 @@ public class Fishing_Manager : MonoBehaviour
 
         string _id = fishQueue.Dequeue();
         currentFish = SetCurrentFish(_id);
-        //Option_Manager.current.SetThemeMusic(bgmBattle);// 전투 시작 음악
         fishingCanvas.SetFishing();
         Debug.LogWarning($"물고기 이름 : {_id}");
         StartCoroutine(StartCount());
@@ -760,7 +759,7 @@ public class Fishing_Manager : MonoBehaviour
     {
         if (currentFish.fishDayType == DayType.Night)
         {
-            StatsManager.current.NightFishing();// 밤낚시 체크
+            Steam_StatsManager.current.NightFishing();// 밤낚시 체크
         }
         Game_Manager.current.GetFishGuide.AddFishClass(currentFish.id, currentFish.GetRandom().size);// 생선 가이드에 추가
         // 행운의 물고기 두마리 낚을 확률

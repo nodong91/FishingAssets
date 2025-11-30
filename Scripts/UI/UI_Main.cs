@@ -319,7 +319,7 @@ public class UI_Main : MonoBehaviour
     {
         float prevMoney = moneyValue;
         SetMoney(moneyValue + _price);// µ· ÀÌµ¿
-        StatsManager.current.StatsMoney((int)moneyValue);
+        Steam_StatsManager.current.StatsMoney((int)moneyValue);
         Singleton_Continue.INSTANCE.SaveContinue(); // ÆÈ°Å³ª »ç¸é ÀúÀå
         yield return null;
 
@@ -429,9 +429,11 @@ public class UI_Main : MonoBehaviour
 
 
 
-    public void SetMaxBoosterValue(float _value)
+    public void SetMaxBoosterValue(float _speed, float _value)
     {
+        boosterRect.gameObject.SetActive(_speed * _value > 0f);
         boosterRect.sizeDelta = new Vector2(_value * 50f, boosterRect.sizeDelta.y);
+        //Debug.LogWarning($"{_speed}  {_value}");
     }
 
     public void SetBoosterGage(float _value)

@@ -109,7 +109,7 @@ public class Game_Manager : MonoBehaviour
         GetSkill.skill_Setting.GetBooster(out float _boosterSpeed, out float _boosterValue);
         player.SetBooster(_boosterSpeed, _boosterValue);
         // 유아이 세팅
-        GetMainUI.SetMaxBoosterValue(_boosterValue);
+        GetMainUI.SetMaxBoosterValue(_boosterSpeed, _boosterValue);
     }
 
     public void SetCrashChance()
@@ -137,7 +137,7 @@ public class Game_Manager : MonoBehaviour
         GetQuest.SetStart();
         GetChangeShip.SetStart();
         GetSkill.SetStart();
-
+        //SetEtc();
         //if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)
         //{
         //    shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];

@@ -128,7 +128,7 @@ public class FishGuide : MonoBehaviour
 
     public void AddFishClass(string _id, float _size)
     {
-        StatsManager.current.CatchFish();// 诀利 眉农
+        Steam_StatsManager.current.CatchFish();// 诀利 眉农
         if (dictFishClass.ContainsKey(_id) == true)
         {
             SaveFishClass fish = dictFishClass[_id];

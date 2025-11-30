@@ -234,18 +234,20 @@ public class Unit_Player : MonoBehaviour
     // ∫ŒΩ∫≈Õ
     //================================================================================================================================================
     Coroutine boosting, boosterGage;
-    float boosterSpeed = 0f;
-    float maxBoosterSpeed;
-    float boosterValue, maxBoosterValue;
+    public float boosterSpeed = 0f;
+    public float maxBoosterSpeed;
+    public float boosterValue, maxBoosterValue;
 
     public void SetBooster(float _boosterSpeed, float _boosterValue)
     {
         maxBoosterSpeed = _boosterSpeed;
         maxBoosterValue = _boosterValue;
+        boosterValue = maxBoosterValue;
     }
 
     public void ActiveBooster(bool _on)
     {
+        //Debug.LogWarning($"{maxBoosterSpeed} : {boosterValue}/{maxBoosterValue}");
         if (maxBoosterValue == 0)
             return;
 

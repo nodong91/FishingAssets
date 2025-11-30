@@ -73,43 +73,9 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         {
             // 오픈
             dataNPC = _npc;
+            Option_Manager.current.SetThemeMusic(dataNPC.themeMusic);
             dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
             Dialog_Npc(dataDialog);
-            if (dataDialog.selectID == "AddLoan")// 돈 빌리기
-            {
-                if (Game_Manager.current.GetMainUI.timeUI.loanActive == false)
-                {
-
-                }
-                else
-                {
-
-                }
-            }
-            //if (dataDialog.selectID == "AddLoan")// 돈 빌리기
-            //{
-            //    // 대출
-            //    if (Game_Manager.current.GetMainUI.timeUI.loanActive == false)
-            //    {
-            //        // 돈 빌림
-            //        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
-            //        AddNPC(data_NPC, Const_Dialog._3002);
-            //    }
-            //    else
-            //    {
-            //        // 돈 갚음
-            //        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
-            //        AddNPC(data_NPC, Const_Dialog._3005);
-            //    }
-            //    SelectStruct selectStruct = new SelectStruct();
-            //    selectStruct.selectDialog = "불고기버거";
-            //    selectStruct.selectType = SelectStruct.SelectType.Out;
-
-            //    Dialog_SelectButton button = GetSelectButton();
-            //    button.gameObject.SetActive(true);
-            //    button.SetStart(selectStruct, SelectedButton);
-            //    dialogSelectButton.Add(button);
-            //}
         }
         else
         {
@@ -155,25 +121,25 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         DialogAction();
     }
 
-    public void AddNPC(Data_NPC _npc, string _dialogID)
-    {
-        Data_Dialog setDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
-        SelectStruct selectStruct = new SelectStruct
-        {
-            //selectDialog = setDialog.selectID,
-            selectType = SelectStruct.SelectType.None,
-            scriptableObject = setDialog,
-            //npcData = _npc,
-            //dialogData = setDialog,
-        };
+    //public void AddNPC(Data_NPC _npc, string _dialogID)
+    //{
+    //    Data_Dialog setDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
+    //    SelectStruct selectStruct = new SelectStruct
+    //    {
+    //        //selectDialog = setDialog.selectID,
+    //        selectType = SelectStruct.SelectType.None,
+    //        scriptableObject = setDialog,
+    //        //npcData = _npc,
+    //        //dialogData = setDialog,
+    //    };
 
-        Dialog_SelectButton button = GetSelectButton();
-        button.gameObject.SetActive(true);
-        button.SetStart(selectStruct, SelectedButton);// 엔피씨 대화 추가
-        dialogSelectButton.Add(button);
+    //    Dialog_SelectButton button = GetSelectButton();
+    //    button.gameObject.SetActive(true);
+    //    button.SetStart(selectStruct, SelectedButton);// 엔피씨 대화 추가
+    //    dialogSelectButton.Add(button);
 
-        button.transform.SetAsLastSibling();// 순서 변경
-    }
+    //    button.transform.SetAsLastSibling();// 순서 변경
+    //}
 
     //======================================================================================================
     // 버튼 클릭
@@ -214,19 +180,19 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         DialogStart_NPC(_data.npc, _data.name);
     }
 
-    Data_Dialog DataDialogIf(Data_Dialog_If _data)
-    {
-        switch (_data.ifType)
-        {
-            case Data_Dialog_If.IfType.Loan:
-                if (Game_Manager.current.GetMainUI.timeUI.loanActive == false)
-                {
-                    return _data.onDataDialog;
-                }
-                return _data.offDataDialog;
-        }
-        return null;
-    }
+    //Data_Dialog DataDialogIf(Data_Dialog_If _data)
+    //{
+    //    switch (_data.ifType)
+    //    {
+    //        case Data_Dialog_If.IfType.Loan:
+    //            if (Game_Manager.current.GetMainUI.timeUI.loanActive == false)
+    //            {
+    //                return _data.onDataDialog;
+    //            }
+    //            return _data.offDataDialog;
+    //    }
+    //    return null;
+    //}
 
     void ActionDialog(SelectStruct _selectStruct)
     {
@@ -323,7 +289,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     IEnumerator SelectGameOver()
     {
         yield return StartCoroutine(Static_JsonManager.RemoveSaveFile());// 파일 제거
-        StatsManager.current.GameOver();// 게임오버 체크
+        Steam_StatsManager.current.GameOver();// 게임오버 체크
         LoadingManager.current.GoMain();// 다시 시작
     }
 
@@ -359,7 +325,10 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     void OpenCanvas(bool _open)
     {
         if (_open == false)// 닫히면 엔피씨 데이터 초기화
+        {
             dataNPC = null;
+            Option_Manager.current.SetThemeMusic(null);
+        }
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
 
