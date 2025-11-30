@@ -422,9 +422,9 @@ public class Unit_Player : MonoBehaviour
             }
             else
             {
-                Map_Generator.Node node = Map_Generator.current.GetNodeFromPosition(transform.position);
-                Game_Manager.current.StartFishing(node.areaType);
-                Debug.LogWarning($"클릭 낚시 시작 : {node.areaType}");
+                //Map_Generator.Node node = Map_Generator.current.GetNodeFromPosition(transform.position);
+                //Game_Manager.current.StartFishing(node.areaType);
+                //Debug.LogWarning($"클릭 낚시 시작 : {node.areaType}");
             }
         }
     }

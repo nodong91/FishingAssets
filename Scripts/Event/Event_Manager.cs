@@ -401,7 +401,7 @@ public class Event_Manager : MonoBehaviour
                 {
                     // 고정 아이템
                     string[] itemID = tempData.itemList.GetFixItems();// 고정 아이템
-                    Game_Manager.current.GetInventory.SetResult(itemID);// 대화 이벤트 보상
+                    Game_Manager.current.GetInventory.SetReward(itemID);// 대화 이벤트 보상
                     Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 창닫기 버튼 세팅
                     Debug.LogWarning("이벤트 보상 - 인벤토리 열기");
                 }

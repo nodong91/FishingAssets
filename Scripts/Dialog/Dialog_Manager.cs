@@ -331,7 +331,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     {
         // 고정 아이템
         string[] itemIDs = _itemList.GetFixItems();
-        Game_Manager.current.GetInventory.SetResult(itemIDs);// 대화 보상
+        Game_Manager.current.GetInventory.SetReward(itemIDs);// 대화 보상
     }
 
     void RandomItemSetting(Data_ItemList _itemList)
@@ -339,7 +339,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         // 랜덤 아이템
         int amount = Random.Range(_itemList.randomAmount.x, _itemList.randomAmount.y);
         string[] itemIDs = _itemList.GetRandomItems(amount);
-        Game_Manager.current.GetInventory.SetResult(itemIDs);// 대화 보상
+        Game_Manager.current.GetInventory.SetReward(itemIDs);// 대화 보상
     }
 
     public void Tutorial_Upgrade()

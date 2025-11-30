@@ -7,7 +7,7 @@ namespace P01.Editor
 {
     public class Editor_ScriptableObject : EditorWindow
     {
-        [MenuItem("Graphics Tool/07. Editor_ScriptableObject")]
+        [MenuItem("Graphics Tool/11. Editor_ScriptableObject")]
         public static void OpenWindow()
         {
             Editor_ScriptableObject window = EditorWindow.GetWindow<Editor_ScriptableObject>("Editor_ScriptableObject");

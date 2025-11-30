@@ -105,7 +105,7 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    public void OpenResult()
+    public void OpenReward()
     {
         if (resultItem.itemID == null || resultItem.itemID.Length == 0)
             return;
@@ -173,7 +173,7 @@ public class UI_Inventory : MonoBehaviour
     // 아이템 이동
     //===========================================================================================================================
 
-    public void SetResult(string[] _itemID)
+    public void SetReward(string[] _itemID)
     {
         ResultStruct resultStruct = new ResultStruct
         {
@@ -182,7 +182,7 @@ public class UI_Inventory : MonoBehaviour
         };
         // 퀘스트 결과 아이템 세팅
         resultItem = resultStruct;
-        OpenResult();
+        OpenReward();
     }
 
     void SellItem(ItemStruct _item)

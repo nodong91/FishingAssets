@@ -6,6 +6,9 @@ using static Data_Manager;
 
 public class Fishing_Manager : MonoBehaviour
 {
+    public Fishing_Canvas fishingCanvas;
+    [ColorUsage(true, true)]
+    public Color onCatchColor, notCatchColor;
     public enum FishStateType
     {
         None,
@@ -41,10 +44,6 @@ public class Fishing_Manager : MonoBehaviour
     private float fishSpeed = 0f;
     private float cooling;
 
-    [ColorUsage(true, true)]
-    public Color onCatchColor, notCatchColor;
-    public Fishing_Canvas fishingCanvas;
-
     public Transform focusTarget;
     private Vector3 fishTargetPoint;
     private bool isFishing = false;
@@ -53,6 +52,7 @@ public class Fishing_Manager : MonoBehaviour
     AreaType areaType;
     DayType dayType;
     Dictionary<string, List<FishStruct>> dictFishStruct = new Dictionary<string, List<FishStruct>>();
+    Queue<string> fishQueue = new Queue<string>();
     public TMPro.TMP_Text debugText;
 
     public void SetStart()
@@ -95,7 +95,6 @@ public class Fishing_Manager : MonoBehaviour
     // ¹°°í±â ¼¼ÆÃ
     //===================================================================================================================
 
-    Queue<string> fishQueue = new Queue<string>();
     void SetFish()
     {
         int addSkillAmount = Game_Manager.current.currentStatus.fishAmount;// ³¬½Ã ½ºÅ³·Î Ãß°¡ È½¼ö
@@ -221,7 +220,7 @@ public class Fishing_Manager : MonoBehaviour
     {
         FishStruct findFish = Singleton_Data.INSTANCE.Dict_Fish[_id];
         FishStatus addStruct = Game_Manager.current.GetSkill.skill_Setting.AddFishStatus();
-        FishStruct tempFish = new FishStruct
+        FishStruct addFishStatus = new FishStruct
         {
             itemStruct = findFish.itemStruct,
             areaType = findFish.areaType,
@@ -240,7 +239,7 @@ public class Fishing_Manager : MonoBehaviour
             addDuration = findFish.addDuration + addStruct.addDuration,
             addValue = findFish.addValue + addStruct.addValue
         };
-        return tempFish;
+        return addFishStatus;
     }
 
     void SetFishing()// ÃÊ±â ¼¼ÆÃ
@@ -296,13 +295,14 @@ public class Fishing_Manager : MonoBehaviour
             yield return null;
 
             PlayingControll();
-            TestControll();
+            FishingControll();
             CheckingCatch();
+            // ³¬½ÃÁÙ ÅÙ™o Ã¼Å©
             if (fishingCanvas.TryTention == true)
             {
                 cutTime += Time.deltaTime;
-                if (cutTime > 1f)// 1ÃÊÀÌ»ó ÆØÆØÇÏ°Ô ´ç±â¸é ²÷¾îÁü
-                    FishingComplate(false);
+                if (cutTime > 1f)
+                    FishingComplate(false);// 1ÃÊÀÌ»ó ÆØÆØÇÏ°Ô ´ç±â¸é ²÷¾îÁü
             }
             else
             {
@@ -347,25 +347,29 @@ public class Fishing_Manager : MonoBehaviour
         if (isCatching == true)
         {
             //bool critical = Random.Range(0f, 1f) > 0.5f;
-            //// ³¬½Ã´ë Èû¸¸Å­ µ¥¹ÌÁö
+            //
             //float setDamage = critical ? catchStatus.catchPower + catchStatus.catchPower * 0.2f : catchStatus.catchPower;
             //float damage = setDamage / (currentFish.fishHealth + catchStatus.catchMaxHealth);
             if (catching == true)
             {
+                // ³¬½Ã´ë Èû¸¸Å­ µ¥¹ÌÁö
                 float damage = catchStatus.catchPower / (currentFish.fishHealth + catchStatus.catchMaxHealth);
                 fishHealth -= damage * Time.deltaTime;
+                fishingCanvas.SetFishIcon(1f);
             }
-            fishingCanvas.SetFishIcon(1f);
+            else
+            {
+                // ¹°°í±â Èû¸¸Å­ µ¥¹ÌÁö
+                float damage = currentFish.fishPower / (currentFish.fishHealth + catchStatus.catchMaxHealth);
+                fishHealth += damage * Time.deltaTime;
+                fishingCanvas.SetFishIcon(-1f);
+            }
         }
-        else
-        {
-            // ¹°°í±â Èû¸¸Å­ Èú
-            float damage = currentFish.fishPower / (currentFish.fishHealth + catchStatus.catchMaxHealth);
-            fishHealth += damage * Time.deltaTime;
-            fishingCanvas.SetFishIcon(-1f);
-        }
+        //else
+        //{
+    
+        //}
         fishingCanvas.SetFishHP(fishHealth);
-
         if (fishHealth >= 1f || fishHealth <= 0f)
         {
             FishingComplate(fishHealth <= 0f);// ³¬½Ã ¼º°ø ½ÇÆÐ
@@ -377,7 +381,7 @@ public class Fishing_Manager : MonoBehaviour
     //===================================================================================================================
 
     bool catching;
-    void TestControll()
+    void FishingControll()
     {
         if (Input.GetMouseButton(0))
         {
@@ -777,13 +781,13 @@ public class Fishing_Manager : MonoBehaviour
             itemIDs = new string[1] { currentFish.id };
         }
 
-        Game_Manager.current.GetInventory.SetResult(itemIDs);// ³¬½Ã º¸»ó ¾ÆÀÌÅÛ ¼³Á¤
+        Game_Manager.current.GetInventory.SetReward(itemIDs);// ³¬½Ã º¸»ó ¾ÆÀÌÅÛ ¼³Á¤
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
     }
 
     void CloseButton()// ÀÎº¥Åä¸® ´Ý±â ¹öÆ°
     {
-        Game_Manager.current.OutOfControll(false);
+        //Game_Manager.current.OutOfControll(false);
         Game_Manager.current.GetInventory.CloseShop();// »óÁ¡ ´Ý±â
         CheckFishQueue();// ³¬½Ã Á¾·á
     }
@@ -875,8 +879,7 @@ public class Fishing_Manager : MonoBehaviour
 
     public void SetFishingTest(string _id)
     {
-        int addSkillAmount = Game_Manager.current.currentStatus.fishAmount;// ³¬½Ã ½ºÅ³·Î Ãß°¡ È½¼ö
-        int fishingAmount = 100 + addSkillAmount;// ³¬½Ã È½¼ö
+        int fishingAmount = 100;// ³¬½Ã È½¼ö
         fishQueue.Clear();
         for (int i = 0; i < fishingAmount; i++)
         {

@@ -210,7 +210,6 @@ public class Game_Manager : MonoBehaviour
 
         GetInventory.myBox.AddMaxWeight(currentStatus.maxWeight);// 인벤토리 무게 적용
         GetInventory.myBox.AddInventory(currentStatus.maxBoxSize);// 인벤토리 사이즈 적용
-
         GetPlayer.SetStatus();// 플레이어에 스탯 적용
     }
 
