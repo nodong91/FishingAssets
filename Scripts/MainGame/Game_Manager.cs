@@ -138,6 +138,7 @@ public class Game_Manager : MonoBehaviour
         GetQuest.SetStart();
         GetChangeShip.SetStart();
         GetSkill.SetStart();
+        GetMinimap.SetStart();
 
         string shipID = continueData.shipData;// 배 세팅
         if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)
@@ -499,7 +500,6 @@ public class Game_Manager : MonoBehaviour
             if (instMinimap == null)
             {
                 instMinimap = Instantiate(mapMinimap, transform);
-                instMinimap.SetStart();
             }
             return instMinimap;
         }
@@ -549,6 +549,7 @@ public class Game_Manager : MonoBehaviour
 
         GetInventory.myBox.EmptyInventoryAllSlot();// 인벤토리 초기화
         Debug.LogWarning($"고스트 오브젝트 : {instLostBox.name}");
+        GetMinimap.SetLostBox(instLostBox.gameObject);// 미니맵에 표시
         Singleton_Continue.INSTANCE.SaveContinue();// 상황 저장
     }
 

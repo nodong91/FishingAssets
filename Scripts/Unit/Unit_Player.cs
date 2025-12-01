@@ -348,18 +348,18 @@ public class Unit_Player : MonoBehaviour
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// µ¥¹ÌÁö
     }
 
+    public void FishingDestroy()
+    {
+        // ³¬½Ã Áß ÆÄ±«
+        StateMachine(State.Destroy);
+    }
+
     void StateDestroy()
     {
         // ¿ÏÀü ÆÄ±«
         StartCoroutine(ResetPosition());
         boosterValue = maxBoosterValue;
         Game_Manager.current.GetMainUI.SetBoosterGage(boosterValue / maxBoosterValue);
-    }
-
-    public void FishingDestroy()
-    {
-        // ³¬½Ã Áß ÆÄ±«
-        StateMachine(State.Destroy);
     }
 
     IEnumerator ResetPosition()

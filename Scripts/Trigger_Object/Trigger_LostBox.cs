@@ -53,6 +53,7 @@ public class Trigger_LostBox : Trigger_Setting
         Game_Manager.current.GetInventory.shop.LoadItem(setResult);// 상자 세팅
         Game_Manager.current.GetInventory.OpenGhost(true);// 상자 열기
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
+        Game_Manager.current.GetMinimap.RemoveLostBox();
 
         gameObject.SetActive(false);// 트리거 오브젝트 비활성화
     }
