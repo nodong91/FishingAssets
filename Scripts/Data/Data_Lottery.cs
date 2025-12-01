@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data_Lotto", menuName = "Scriptable Objects/Data_Lotto")]
-public class Data_Lotto : ScriptableObject
+[CreateAssetMenu(fileName = "Data_Lottery", menuName = "Scriptable Objects/Data_Lottery")]
+public class Data_Lottery : ScriptableObject
 {
     public enum LotteryType
     {

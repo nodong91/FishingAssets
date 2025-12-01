@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &380078334073469761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8684728872735153196}
+  - component: {fileID: 5980138457993862739}
+  - component: {fileID: 1944279366479514823}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8684728872735153196
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380078334073469761}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7057696633538574703}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5980138457993862739
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380078334073469761}
+  m_CullTransparentMesh: 1
+--- !u!114 &1944279366479514823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 380078334073469761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 1, b: 0.015245676, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 541271403, guid: 0def08a46c85dc5439d93b3da868780a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &428730274000438520
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +133,13 @@ MonoBehaviour:
     canvasGroup: {fileID: 0}
     targetPosition: {x: 0, y: 0}
   canvas: {fileID: 1245293488108117655}
-  data: {fileID: 11400000, guid: 7cbe4db6835132948ade86cae3c46208, type: 2}
+  testIndex: 1
+  lotteries:
+  - {fileID: 11400000, guid: 3e67cc1824665fe459cbb138b3f55c20, type: 2}
+  - {fileID: 11400000, guid: 7cbe4db6835132948ade86cae3c46208, type: 2}
+  lotteryObjects:
+  - {fileID: 5272044798504819541}
+  - {fileID: 380078334073469761}
   lineRenderer: {fileID: 2606534646431936447}
   slotParent: {fileID: 8164049366244016013}
   answerSlot: {fileID: 4786366151969944872}
@@ -71,9 +152,6 @@ MonoBehaviour:
   isAnswer: 0
   isEnd: 0
   answerEffect: {fileID: 1137145794774312244}
-  isOpen: 0
-  target: {fileID: 0}
-  canvasGroup: {fileID: 6431337388590700956}
 --- !u!1 &861115332408287412
 GameObject:
   m_ObjectHideFlags: 0
@@ -5148,6 +5226,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2306141318548441121}
+  - {fileID: 8684728872735153196}
   - {fileID: 8051695461596751701}
   - {fileID: 8164049366244016013}
   - {fileID: 8182353763556940942}

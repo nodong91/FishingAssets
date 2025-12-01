@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +6,10 @@ public class Gamble_Lottery : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStruct;
     public Canvas canvas;
-    public Data_Lotto data;
+    //public Data_Lottery dataLottery;
+    public int testIndex;
+    public Data_Lottery[] lotteries;
+    public GameObject[] lotteryObjects;
 
     public LineRenderer lineRenderer;
     LineRenderer instLine;
@@ -58,6 +60,7 @@ public class Gamble_Lottery : MonoBehaviour
         {
             positionsList.Clear();
             instLine = TryLine();
+            instLine.gameObject.SetActive(true);
             lineList.Add(instLine);
 
             point = SetWorldPoint();
@@ -70,17 +73,18 @@ public class Gamble_Lottery : MonoBehaviour
             if (distance > 0.001f)
             {
                 SetPoint(point);// 일정거리가 멀어지면 포인트 기입
-                if (setEnterSlot == answerSlot)
+                if (setEnterSlot == answerSlot)// 정답슬롯 열렸는지 확인
                 {
                     isAnswer = true;
                 }
-                else if (slotList.Contains(setEnterSlot) == true)// 열었는지 확인
+                else if (slotList.Contains(setEnterSlot) == false)// 열었는지 확인
                 {
-                    slotQueue.Enqueue(setEnterSlot);
-                    slotList.Remove(setEnterSlot);
+                    //slotQueue.Enqueue(setEnterSlot);
+                    //slotList.Remove(setEnterSlot);
+                    slotList.Add(setEnterSlot);
                 }
                 // 체크
-                if (isAnswer == true && isEnd == false)// 정답이 공개 되어 있고
+                if (isAnswer == true && isEnd == false)// 정답이 공개 되어 있고 완료되지 않았으면
                 {
                     if (CheckImage() == true)
                     {
@@ -89,7 +93,7 @@ public class Gamble_Lottery : MonoBehaviour
                         Game_Manager.current.GetMainUI.MoveMoney(sellPrice);
                         Steam_StatsManager.current.CountLottery(sellPrice);// 당첨 카운트
                     }
-                    else if (slotList.Count == 0)
+                    else if (slotList.Count >= lotteries[testIndex].slotCount)
                     {
                         isEnd = true;
                         testText.text = "노당첨!!!!!!";
@@ -101,17 +105,28 @@ public class Gamble_Lottery : MonoBehaviour
 
     bool CheckImage()
     {
-        foreach (var child in slotQueue)
+        for (int i = 0; i < slotList.Count; i++)
         {
-            if (answerSlot.iconImage.sprite == child.iconImage.sprite)
+            if (answerSlot.iconImage.sprite == slotList[i].iconImage.sprite)
             {
                 answerSlot.iconImage.material.SetFloat("_FillAmount", 1f);
-                child.iconImage.material.SetFloat("_FillAmount", 1f);
-                answerEffect.transform.position = child.iconImage.transform.position;
+                slotList[i].iconImage.material.SetFloat("_FillAmount", 1f);
+                answerEffect.transform.position = slotList[i].iconImage.transform.position;
                 answerEffect.Play();
                 return true;
             }
         }
+        //foreach (var child in slotQueue)
+        //{
+        //    if (answerSlot.iconImage.sprite == child.iconImage.sprite)
+        //    {
+        //        answerSlot.iconImage.material.SetFloat("_FillAmount", 1f);
+        //        child.iconImage.material.SetFloat("_FillAmount", 1f);
+        //        answerEffect.transform.position = child.iconImage.transform.position;
+        //        answerEffect.Play();
+        //        return true;
+        //    }
+        //}
         return false;
     }
 
@@ -135,11 +150,13 @@ public class Gamble_Lottery : MonoBehaviour
         {
             slotList[i].iconImage.color = Color.white;
             slotQueue.Enqueue(slotList[i]);
+            slotList[i].gameObject.SetActive(false);
         }
         for (int i = 0; i < lineList.Count; i++)
         {
             lineList[i].positionCount = 0;
             lineQueue.Enqueue(lineList[i]);
+            lineList[i].gameObject.SetActive(false);
         }
 
         slotList.Clear();
@@ -151,8 +168,13 @@ public class Gamble_Lottery : MonoBehaviour
 
     void SetRandom()
     {
-        List<Data_Lotto.LottoSlot> lottoSlots = data.SetRandom(out Sprite _mainSprite, out int _sellPrice);// 미리 당첨 슬롯, 가격 세팅
-        sellPrice = _sellPrice;
+        for (int i = 0; i < lotteryObjects.Length; i++)// 뒷배경
+        {
+            lotteryObjects[i].SetActive(i == testIndex);
+        }
+        Data_Lottery dataLottery = lotteries[testIndex];
+        List<Data_Lottery.LottoSlot> lottoSlots = dataLottery.SetRandom(out Sprite _mainSprite, out int _sellPrice);// 미리 당첨 슬롯, 가격 세팅
+        sellPrice = _sellPrice;// 당첨 가격
         answerSlot.SetSlot(_mainSprite, 0);
         answerSlot.deleEnterSlot = EnterSlot;
         answerSlot.iconImage.material.SetFloat("_FillAmount", 0f);
@@ -160,11 +182,13 @@ public class Gamble_Lottery : MonoBehaviour
         for (int i = 0; i < lottoSlots.Count; i++)
         {
             Gamble_Lotto_Slot inst = TrySlot();
+            inst.gameObject.SetActive(true);
             inst.SetSlot(lottoSlots[i].sprite, lottoSlots[i].reward);
             inst.deleEnterSlot = EnterSlot;
             inst.iconImage.material.SetFloat("_FillAmount", 0f);
-            slotList.Add(inst);
+            //slotList.Add(inst);
         }
+        //Debug.LogWarning(slotList.Count);
     }
 
     void EnterSlot(Gamble_Lotto_Slot _slot)
@@ -220,12 +244,13 @@ public class Gamble_Lottery : MonoBehaviour
 
 
 
-    public bool isOpen;
+    //public bool isOpen;
 
-    public GameObject target;
-    public CanvasGroup canvasGroup;
+    //public GameObject target;
+    //public CanvasGroup canvasGroup;
     public void OpenCanas()
     {
+        Debug.LogWarning("ijijoijijijijj");
         ResetButton();
         //StartCoroutine(OpenCanvas());
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStruct, true));
@@ -238,39 +263,39 @@ public class Gamble_Lottery : MonoBehaviour
         //openCanvas = StartCoroutine(CloseCanvas());
     }
 
-    IEnumerator OpenCanvas()
-    {
-        canvasGroup.gameObject.SetActive(true);
-        canvasGroup.alpha = 1f;
-        Vector3 prevPoint = Input.mousePosition;
-        float normalize = 0f;
-        while (normalize < 1f)
-        {
-            normalize += Time.deltaTime * 10f;
-            Vector3 actionPoint = Vector3.Lerp(prevPoint, target.transform.position, normalize);
-            canvasGroup.transform.position = actionPoint;
-            float rotate = Mathf.Lerp(45f, 0f, normalize);
-            canvasGroup.transform.rotation = Quaternion.Euler(0f, 0f, rotate);
-            float size = Mathf.Lerp(0f, 1f, normalize);
-            canvasGroup.transform.localScale = Vector3.one * size;
-            yield return null;
-        }
-    }
-    Coroutine openCanvas;
+    //IEnumerator OpenCanvas()
+    //{
+    //    canvasGroup.gameObject.SetActive(true);
+    //    canvasGroup.alpha = 1f;
+    //    Vector3 prevPoint = Input.mousePosition;
+    //    float normalize = 0f;
+    //    while (normalize < 1f)
+    //    {
+    //        normalize += Time.deltaTime * 10f;
+    //        Vector3 actionPoint = Vector3.Lerp(prevPoint, target.transform.position, normalize);
+    //        canvasGroup.transform.position = actionPoint;
+    //        float rotate = Mathf.Lerp(45f, 0f, normalize);
+    //        canvasGroup.transform.rotation = Quaternion.Euler(0f, 0f, rotate);
+    //        float size = Mathf.Lerp(0f, 1f, normalize);
+    //        canvasGroup.transform.localScale = Vector3.one * size;
+    //        yield return null;
+    //    }
+    //}
+    //Coroutine openCanvas;
 
-    IEnumerator CloseCanvas()
-    {
-        Vector3 prevPoint = canvasGroup.transform.position;
-        float normalize = 0f;
-        while (normalize < 1f)
-        {
-            normalize += Time.deltaTime * 10f;
-            Vector3 actionPoint = Vector3.Lerp(prevPoint, target.transform.position + Vector3.up * 500f, normalize);
-            canvasGroup.transform.position = actionPoint;
-            float alpha = Mathf.Lerp(0f, 1, normalize);
-            canvasGroup.alpha = 1f - alpha;
-            yield return null;
-        }
-        canvasGroup.gameObject.SetActive(false);
-    }
+    //IEnumerator CloseCanvas()
+    //{
+    //    Vector3 prevPoint = canvasGroup.transform.position;
+    //    float normalize = 0f;
+    //    while (normalize < 1f)
+    //    {
+    //        normalize += Time.deltaTime * 10f;
+    //        Vector3 actionPoint = Vector3.Lerp(prevPoint, target.transform.position + Vector3.up * 500f, normalize);
+    //        canvasGroup.transform.position = actionPoint;
+    //        float alpha = Mathf.Lerp(0f, 1, normalize);
+    //        canvasGroup.alpha = 1f - alpha;
+    //        yield return null;
+    //    }
+    //    canvasGroup.gameObject.SetActive(false);
+    //}
 }
