@@ -10,7 +10,7 @@ public class UI_Main : MonoBehaviour
     public UI_Status statusUI;
     public Custom_Button inventoryButton;
     public Custom_Button fishGuideButton;
-    public Custom_Button questButton;
+    public Custom_Button mapButton;
     public Custom_Button optionButton;
 
     public CanvasGroup fadeScreen;
@@ -44,7 +44,7 @@ public class UI_Main : MonoBehaviour
 
         inventoryButton.SetButton(InventoryButton);
         fishGuideButton.SetButton(FishGuideButton);
-        questButton.SetButton(QuestButton);
+        mapButton.SetButton(MapButton);
         optionButton.SetButton(OptionButton);
 
         if (energyMaterial == null)
@@ -96,18 +96,19 @@ public class UI_Main : MonoBehaviour
         OpenCanvas(true);
     }
 
-    void QuestButton()
+    void MapButton()
     {
         OpenCanvas(false);
-        dele_CloseButton = CloseQuest;
-        Game_Manager.current.GetQuest.OpenCanvas(true);
+        dele_CloseButton = CloseMap;
+        //Game_Manager.current.GetQuest.OpenCanvas(true);
         Game_Manager.current.OutOfControll(true);
+        Game_Manager.current.GetMinimap.OpenCanvas(true);
     }
 
-    void CloseQuest()
+    void CloseMap()
     {
         Game_Manager.current.OutOfControll(false);
-        Game_Manager.current.GetQuest.OpenCanvas(false);
+        Game_Manager.current.GetMinimap.OpenCanvas(false);
         OpenCanvas(true);
     }
 

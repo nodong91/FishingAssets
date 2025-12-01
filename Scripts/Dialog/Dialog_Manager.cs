@@ -35,7 +35,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
     public RectTransform gridRect;
 
     Vector2Int[] dialogVector;
-    RectTransform rectParent;
+    public RectTransform rectParent;
 
     public void SetStart()
     {

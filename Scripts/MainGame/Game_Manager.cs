@@ -28,6 +28,7 @@ public class Game_Manager : MonoBehaviour
     public Rest_Manager rest_Manager;
     public UI_ChangeShip changeShip;
     public Event_Manager event_Manager;
+    public Map_Minimap mapMinimap;
 
     [Header(" [ ¹ã³· ]")]
     public Material skyboxMatial;
@@ -122,7 +123,7 @@ public class Game_Manager : MonoBehaviour
         Camera_Manager.current.SetCameraManager();
         continueData = Singleton_Continue.INSTANCE.LoadContinue();
 
-        while (CurrentLand == null)
+        while (CurrentLand == null)// ¸ÊÀÌ ÀÖ´ÂÁö Ã¼Å©
             yield return null;
 
         GetTimeUI.SetStart(continueData);// ½Ã°£
@@ -137,17 +138,8 @@ public class Game_Manager : MonoBehaviour
         GetQuest.SetStart();
         GetChangeShip.SetStart();
         GetSkill.SetStart();
-        //SetEtc();
-        //if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)
-        //{
-        //    shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
-        //    GetInventory.TryDestroySlot = continueData.destroySlot;// ºÎ¼­Áø ½½·Ô
 
-        //    ChangeStatus(shipData);
-        //    OutOfControll(false);
-        //}
-
-        string shipID = continueData.shipData;
+        string shipID = continueData.shipData;// ¹è ¼¼ÆÃ
         if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)
         {
             shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
@@ -496,6 +488,20 @@ public class Game_Manager : MonoBehaviour
                 instEvent = Instantiate(event_Manager, transform);
             }
             return instEvent;
+        }
+    }
+
+    private Map_Minimap instMinimap;
+    public Map_Minimap GetMinimap
+    {
+        get
+        {
+            if (instMinimap == null)
+            {
+                instMinimap = Instantiate(mapMinimap, transform);
+                instMinimap.SetStart();
+            }
+            return instMinimap;
         }
     }
 

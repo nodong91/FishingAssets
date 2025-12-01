@@ -189,6 +189,8 @@ public class Unit_Player : MonoBehaviour
 
     void CheckDeep()
     {
+        if (Map_Generator.current == null)
+            return;
         Map_Generator.Node node = Map_Generator.current.GetNodeFromPosition(transform.position);
         Game_Manager.current.GetMainUI.CheckDeep(node.areaType);
         Debug.LogWarning($"üũ : {node.areaType}");
