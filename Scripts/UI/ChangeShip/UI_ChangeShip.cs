@@ -47,11 +47,11 @@ public class UI_ChangeShip : MonoBehaviour
         OpenCanvas(false);
     }
 
-    public void SelectTutorialShip()
-    {
-        // 튜토리얼용 배선택
-        Game_Manager.current.ChangeStatus(shipList[0]);
-    }
+    //public void SelectTutorialShip()
+    //{
+    //    // 튜토리얼용 배선택
+    //    Game_Manager.current.ChangeStatus(shipList[0]);
+    //}
 
     void ShipClick(UI_ChangeShip_Slot _slot)// 배선택
     {

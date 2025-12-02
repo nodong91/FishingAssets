@@ -620,7 +620,7 @@ public class UI_Inventory_Base : MonoBehaviour
     }
 
     public List<Vector2Int> destroySlot = new List<Vector2Int>();
-    public void DistroySlot()// ½½·Ô ºÎ¼ö±â
+    public void DestroySlot()// ½½·Ô ºÎ¼ö±â
     {
         if (destroySlot == null)
             destroySlot = new List<Vector2Int>();

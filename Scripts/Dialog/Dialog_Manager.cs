@@ -400,7 +400,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
         // 색, 사이즈
         int lastIndex = dialogVector.Length - 1;
-        //Debug.LogWarning($"{replace}({_textStruct.contents}) : {dialogVector.Length}");
         for (int i = lastIndex; i >= 0; i--)
         {
             string textColor = P01_Utility.ColorToHex(_textStruct.dialogTypes[i].textColor);
@@ -409,8 +408,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             {
                 Debug.LogError(replace + " : 교체할 단어 {" + i + "}가 없음");
             }
-            replace = replace.Insert(dialogVector[i].y, "</size></color>");// 끼워 넣기
-            replace = replace.Insert(dialogVector[i].x, $"<color=#{textColor}><size={size}>");
+            replace = replace.Insert(dialogVector[i].y, (size > 0 ? "</size>" : "") + "</color>");// 끼워 넣기
+            replace = replace.Insert(dialogVector[i].x, $"<color=#{textColor}>" + (size > 0 ? "<size={size}>" : ""));
         }
         return replace;
     }

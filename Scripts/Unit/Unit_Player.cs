@@ -92,7 +92,7 @@ public class Unit_Player : MonoBehaviour
 
         GameObject inst = Instantiate(_shipData.shipObject, transform);
         playerObject = inst;
-        Debug.LogWarning($"{_shipData.name} : {_shipData.shipObject}");
+        //Debug.LogWarning($"{_shipData.name} : {_shipData.shipObject}");
     }
 
     //================================================================================================================================================
@@ -185,6 +185,15 @@ public class Unit_Player : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(offset), speed);
         //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(focusTarget.transform.forward), speed * 5f);
         CheckDeep();
+
+        // 이동 제한
+        Transform center = Map_Generator.current.transform;
+        float radius = Map_Generator.current.GetRadius;
+        Vector3 distance = center.transform.position - transform.position;
+        if (distance.magnitude > radius)
+        {
+            transform.position = transform.position + distance.normalized * (distance.magnitude - radius);
+        }
     }
 
     void CheckDeep()
@@ -333,7 +342,7 @@ public class Unit_Player : MonoBehaviour
     public bool TakeDamage()
     {
         Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._clash);
-        Game_Manager.current.GetInventory.DistroySlot();// 랜덤 슬롯 부수기
+        Game_Manager.current.GetInventory.DestroySlot();// 랜덤 슬롯 부수기
 
         health = CurrentStatus.shipHealth - destroyCount;
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지

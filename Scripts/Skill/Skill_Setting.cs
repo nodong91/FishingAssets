@@ -50,7 +50,7 @@ public class Skill_Setting : MonoBehaviour
 
     public void AddLevel(string _id, bool _add)
     {
-        Debug.LogWarning(_id);
+        //Debug.LogWarning(_id);
         if (_id.Contains(_001)) Level_CatchRadius = _add ? Level_CatchRadius + 1 : Level_CatchRadius - 1;
         else if (_id.Contains(_002)) Level_CatchPower = _add ? Level_CatchPower + 1 : Level_CatchPower - 1;
         else if (_id.Contains(_003)) Level_CatchSpeed = _add ? Level_CatchSpeed + 1 : Level_CatchSpeed - 1;
@@ -193,7 +193,7 @@ public class Skill_Setting : MonoBehaviour
     void ShipUnlock(string _id)
     {
         Data_Ship data_Ship = Singleton_Data.INSTANCE.Dict_Ship[_id];
-        Debug.LogWarning($"{_id} : {data_Ship.shipName}");
+        //Debug.LogWarning($"{_id} : {data_Ship.shipName}");
         Game_Manager.current.GetChangeShip.AddShip(data_Ship);
     }
 

@@ -200,7 +200,7 @@ public class UI_Landing : MonoBehaviour
         {
             SetLandingCanvas(false);// 랜드 UI 제거
             Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._0004);// 연료가 필요하다는 대사
+            Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._0010);// 연료가 필요하다는 대사
             StaticOpenCanvas.deleEndOpen = EndDialog;
             return false;
         }

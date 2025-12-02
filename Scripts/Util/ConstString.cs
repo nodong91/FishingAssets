@@ -108,6 +108,7 @@ public class Const_Dialog
     public const string _0007 = "Data_Dialog_0007";
     public const string _0008 = "Data_Dialog_0008";
     public const string _0009 = "Data_Dialog_0009";
+    public const string _0010 = "Data_Dialog_0010";
     // 생선장수
     public const string _1001 = "Data_Dialog_1001";
     // 조선소

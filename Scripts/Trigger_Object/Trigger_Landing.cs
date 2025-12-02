@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.Cinemachine;
+using UnityEditor;
 using UnityEngine;
 
 public class Trigger_Landing : MonoBehaviour
@@ -33,7 +34,8 @@ public class Trigger_Landing : MonoBehaviour
     {
         landingPoint.deleTriggerAction = SetLandingAction;// 섬 입장
         landingPoint.GetIconSprite = iconImage;// 트리거 아이콘 설정
-        Game_Manager.current.CurrentLand = this;
+        if (Game_Manager.current != null)
+            Game_Manager.current.CurrentLand = this;
     }
 
     public void SetLandingAction()

@@ -153,7 +153,7 @@ public class Game_Manager : MonoBehaviour
     {
         SetThemeMusic();
         bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._newGame);
-        Debug.LogWarning($"튜토리얼 완료? {Const_Tutorial._newGame} {isCompleted}");
+        Debug.LogWarning($"튜토리얼 완료? {Const_Tutorial._newGame} {isCompleted}----------{continueData.shipData}");
         // 튜토리얼 시작
         if (isCompleted == true)
         {
@@ -182,10 +182,18 @@ public class Game_Manager : MonoBehaviour
 
     public void ChangeStatus(Data_Ship _shipData)// 선박 변경
     {
+        bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._newGame);
+        if (isCompleted == false)
+        {
+            Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._newGame);// 튜토완료
+        }
+
         continueData = Singleton_Continue.INSTANCE.LoadContinue();
         shipData = _shipData;
         GetPlayer.SetShip(_shipData);
         AddStatus();// 선박 변경 스테이트 세팅
+
+        Singleton_Continue.INSTANCE.SaveContinue();
     }
 
     public void AddStatus()
@@ -461,6 +469,7 @@ public class Game_Manager : MonoBehaviour
             if (instLottery == null)
             {
                 instLottery = Instantiate(lottery, transform);
+                instLottery.SetStart();
             }
             return instLottery;
         }

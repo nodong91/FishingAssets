@@ -87,6 +87,18 @@ public class Map_Generator : MonoBehaviour
     public Trigger_Fish triggerFish;
     public Trigger_RandomBox triggerRandomBox;
 
+    List<Trigger_Fish> fishingList = new List<Trigger_Fish>();
+    List<Trigger_RandomBox> boxList = new List<Trigger_RandomBox>();
+
+    Queue<Trigger_Fish> fishingQueue = new Queue<Trigger_Fish>();
+    Queue<Trigger_RandomBox> boxQueue = new Queue<Trigger_RandomBox>();
+
+    [Tooltip("8방향 이동가능")]
+    public bool diagonal;
+
+    public float radius = 150f;
+    public float angle = 360f;
+
     public static Map_Generator current;
 
     public void UpdateData()
@@ -102,13 +114,13 @@ public class Map_Generator : MonoBehaviour
     private void Start()
     {
         SetStart();
-        hideObject.SetActive(false);
     }
 
     public void SetStart()
     {
         SetNodeGrid();
         SetAreaObject();
+        hideObject.SetActive(false);
     }
 
     public void ResetArea()
@@ -213,6 +225,12 @@ public class Map_Generator : MonoBehaviour
                 return Data_Manager.AreaType.Oceanic;
             }
         }
+
+        Vector3 distance = _node.worldPosition - transform.position;
+        if (distance.magnitude > radius)
+        {
+            return Data_Manager.AreaType.None;
+        }
         abyssalNodes.Add(_node);
         return Data_Manager.AreaType.Abyssal;
     }
@@ -233,40 +251,26 @@ public class Map_Generator : MonoBehaviour
         {
             case Data_Manager.AreaType.Shallow:
                 if (shallowQueue.Count == 0)
-                {
                     shallowQueue = P01_Utility.ShuffleQueue(shallowNodes, 0);
-                }
                 return shallowQueue.Dequeue();
 
             case Data_Manager.AreaType.Coastal:
                 if (coastalQueue.Count == 0)
-                {
                     coastalQueue = P01_Utility.ShuffleQueue(coastalNodes, 0);
-                }
                 return coastalQueue.Dequeue();
 
             case Data_Manager.AreaType.Oceanic:
                 if (oceanicQueue.Count == 0)
-                {
                     oceanicQueue = P01_Utility.ShuffleQueue(oceanicNodes, 0);
-                }
                 return oceanicQueue.Dequeue();
 
             case Data_Manager.AreaType.Abyssal:
                 if (abyssalQueue.Count == 0)
-                {
                     abyssalQueue = P01_Utility.ShuffleQueue(abyssalNodes, 0);
-                }
                 return abyssalQueue.Dequeue();
         }
         return null;
     }
-
-    List<Trigger_Fish> fishingList = new List<Trigger_Fish>();
-    List<Trigger_RandomBox> boxList = new List<Trigger_RandomBox>();
-
-    Queue<Trigger_Fish> fishingQueue = new Queue<Trigger_Fish>();
-    Queue<Trigger_RandomBox> boxQueue = new Queue<Trigger_RandomBox>();
 
     Trigger_Fish FishingPool()
     {
@@ -284,9 +288,6 @@ public class Map_Generator : MonoBehaviour
         return inst;
     }
 
-
-    [Tooltip("8방향 이동가능")]
-    public bool diagonal;
 
     // 근처 타일 리스팅
     public List<Node> GetNeighbours(Node node)
@@ -324,13 +325,13 @@ public class Map_Generator : MonoBehaviour
         return nodeMap[x, y];
     }
 
+
+    public float GetRadius { get { return radius; } }
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireCube(transform.position, new Vector3(worldSize.x, 1, worldSize.y));
-        Handles.color = Color.blue;
-        //UnityEditor.Handles.DrawWireDisc(safetyArea.transform.position, Vector3.up, safetyRadius);
         if (nodeMap != null)
         {
             foreach (Node n in nodeMap)
@@ -347,23 +348,18 @@ public class Map_Generator : MonoBehaviour
                         Gizmos.color = Color.green;
                         break;
                     case Data_Manager.AreaType.Oceanic:
-                        Gizmos.color = Color.blue;
+                        Gizmos.color = Color.magenta;
                         break;
                     case Data_Manager.AreaType.Abyssal:
                         Gizmos.color = Color.black;
                         break;
                 }
                 Gizmos.DrawSphere(n.worldPosition, 0.3f);
-                //GUIStyle fontStyle = new()
-                //{
-                //    fontSize = 20,
-                //    normal = { textColor = Color.yellow },
-                //    alignment = TextAnchor.MiddleCenter,
-                //    fontStyle = FontStyle.Bold,
-                //};
-                //UnityEditor.Handles.Label(n.worldPosition, $"{n.grid.x}/{n.grid.y}", fontStyle);
             }
         }
+        Handles.color = Color.blue;
+        Handles.DrawWireArc(transform.position, Vector3.up, Vector3.forward, angle, radius);// 이동 제한
+        //UnityEditor.Handles.DrawWireDisc(safetyArea.transform.position, Vector3.up, safetyRadius);
     }
 #endif
 }

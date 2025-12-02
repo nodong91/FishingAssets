@@ -35,7 +35,7 @@ public class Data_Lottery : ScriptableObject
         // 당첨 금액 먼저
         // 당첨 금액이 0일 경우 - 메인 슬롯 모양 정하고 리스트에서 뺀 다음 랜덤
         // 0이 아닌경우 - slotCount번까지 중 랜덤 슬롯 정하고 
-        int reward = rewards[ChanceReward()].price;
+        int reward = rewards[ChanceReward()].price;// 당첨금
         List<Sprite> tempSpriteList = new List<Sprite>(sprites);// 리스트 새로 만들기
         Sprite mainSprite = sprites[Random.Range(0, sprites.Length)];
         tempSpriteList.Remove(mainSprite);// 정답 없는 리스트

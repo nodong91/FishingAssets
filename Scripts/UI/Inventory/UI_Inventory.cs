@@ -65,16 +65,6 @@ public class UI_Inventory : MonoBehaviour
         myBox.OpenCanvas(_open);
     }
 
-    public void CloseShop()
-    {
-        if (currentType != SlotType.None)
-        {
-            currentType = SlotType.None;
-            myBox.OpenCanvas(false);
-            shop.OpenCanvas(false);
-        }
-    }
-
     public void OpenShop(Data_ItemList _itemList)
     {
         if (currentType != SlotType.Shop)
@@ -82,6 +72,18 @@ public class UI_Inventory : MonoBehaviour
             currentType = SlotType.Shop;
             myBox.OpenCanvas(true);
             shop.SetShop(true, _itemList);
+        }
+    }
+
+    public void CloseShop()
+    {
+        if (currentType != SlotType.None)
+        {
+            currentType = SlotType.None;
+            myBox.OpenCanvas(false);
+            shop.OpenCanvas(false);
+
+            Cursor_Manager.current?.OnMouseRepair(false);// 커서 변경
         }
     }
 
@@ -237,6 +239,7 @@ public class UI_Inventory : MonoBehaviour
             RepairMode(false);
             if (_slot.destroy == true)
             {
+                // 클릭
                 myBox.FixSlot(_slot);    // 하나씩 수리
                 if (selectSlot != null)// 선택된 슬롯이 있으면
                 {
@@ -561,7 +564,7 @@ public class UI_Inventory : MonoBehaviour
 
             case ItemStruct.ItemType.Lottery:// 복권
                 //Game_Manager.current.GetMainUI.CloseInventory();
-                Game_Manager.current.GetLottery.OpenCanas();// 복권 열기
+                Game_Manager.current.GetLottery.OpenCanvas(true);// 복권 열기
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
 
@@ -709,9 +712,9 @@ public class UI_Inventory : MonoBehaviour
         infomation.SetStart(_slot);
     }
 
-    public void DistroySlot()
+    public void DestroySlot()
     {
-        myBox.DistroySlot();
+        myBox.DestroySlot();
     }
 
     //===========================================================================================================================
