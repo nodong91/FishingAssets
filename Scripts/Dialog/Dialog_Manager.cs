@@ -409,7 +409,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 Debug.LogError(replace + " : 교체할 단어 {" + i + "}가 없음");
             }
             replace = replace.Insert(dialogVector[i].y, (size > 0 ? "</size>" : "") + "</color>");// 끼워 넣기
-            replace = replace.Insert(dialogVector[i].x, $"<color=#{textColor}>" + (size > 0 ? "<size={size}>" : ""));
+            replace = replace.Insert(dialogVector[i].x, $"<color=#{textColor}>" + (size > 0 ? $"<size={size}>" : ""));
         }
         return replace;
     }
