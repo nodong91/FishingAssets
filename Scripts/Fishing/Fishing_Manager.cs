@@ -244,7 +244,6 @@ public class Fishing_Manager : MonoBehaviour
     void SetFishing()// 초기 세팅
     {
         catchStatus = Game_Manager.current.currentStatus;
-        cooling = Time.time + currentFish.fishCoolTime;
 
         //Vector3 randomPoint = Random.insideUnitSphere * fieldRadius;
         //fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
@@ -276,6 +275,8 @@ public class Fishing_Manager : MonoBehaviour
         //Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
         //Game_Manager.current.GetTutorial.StartTutorial();
         yield return null;
+        SetCooling();
+
         fishingSet.SetActive(true);
         StartCoroutine(CatchMovement());
         FishState(FishStateType.Idle);
@@ -590,7 +591,7 @@ public class Fishing_Manager : MonoBehaviour
         }
         else
         {
-            cooling = Time.time + currentFish.fishCoolTime;
+            SetCooling();
             FishState(FishStateType.Idle);
         }
     }
@@ -707,8 +708,13 @@ public class Fishing_Manager : MonoBehaviour
         SetShaking();
         yield return new WaitForSeconds(currentFish.fishGroggyTime);// 그로기 타임
 
-        cooling = Time.time + currentFish.fishCoolTime;
+        SetCooling();
         FishState(FishStateType.Idle);
+    }
+
+    void SetCooling()
+    {
+        cooling = Time.time + currentFish.fishCoolTime;
     }
 
     //===================================================================================================================
