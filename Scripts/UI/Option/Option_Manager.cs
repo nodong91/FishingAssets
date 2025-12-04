@@ -10,9 +10,6 @@ public class Option_Manager : MonoBehaviour
     public Custom_Button resetStatsButton, goTitleButton, goExitButton;
     public Data_Option optionData;
 
-    public Toggle fpsToggle;
-    public FPSCounter fpsCanvas;
-
     [System.Serializable]
     public struct ScreenStruct
     {
@@ -21,7 +18,7 @@ public class Option_Manager : MonoBehaviour
     }
     public ScreenStruct[] screenStruct;
 
-    public TranslateLanguage translateLanguage;
+    public Option_Control optionControl;
     public Audio_Manager audioManager;
     public Quality_Manager qualityManager;
 
@@ -40,7 +37,7 @@ public class Option_Manager : MonoBehaviour
     public void SetStart()
     {
         LoadOption();// 옵션 데이터 로드
-        translateLanguage.SetStart();// 컨트롤 쪽 세팅
+        optionControl.SetStart();// 컨트롤 쪽 세팅
         audioManager.SetStart();// 오디오 매니저 세팅
         qualityManager.SetStart();// 퀄리티 매니저 세팅
 
@@ -100,8 +97,6 @@ public class Option_Manager : MonoBehaviour
         resetStatsButton.SetButton(ResetStatsButton, EnterButton);
         goTitleButton.SetButton(GoTitle, EnterButton);
         goExitButton.SetButton(GoExit, EnterButton);
-
-        fpsToggle.onValueChanged.AddListener(SetFPS);
     }
 
     void EnterButton(Custom_Button _button)
@@ -133,11 +128,6 @@ public class Option_Manager : MonoBehaviour
         LoadingManager.current.GoExit();
     }
 
-    void SetFPS(bool _open)
-    {
-        fpsCanvas.gameObject.SetActive(_open);
-    }
-
     public void SetThemeMusic(string _music)
     {
         if (string.IsNullOrEmpty(_music))
@@ -166,6 +156,7 @@ public class Option_Manager : MonoBehaviour
     {
         optionData = new Data_Option
         {
+            setFPS = optionControl.fpsToggle.isOn,
             language = (int)Singleton_Data.INSTANCE.languageType,
             qualityLevel = qualityManager.levelIndex,
             resolutionIndex = qualityManager.resolutionIndex,

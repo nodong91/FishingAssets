@@ -218,6 +218,9 @@ public class Camera_Manager : MonoBehaviour
 
     public void InputShake()
     {
+        if (Option_Manager.current.optionControl.GetShake == false)
+            return;
+
         if (shaking != null)
             StopCoroutine(shaking);
         shaking = StartCoroutine(Shaking());

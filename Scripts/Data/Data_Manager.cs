@@ -336,6 +336,8 @@ public class Data_Manager : Data_Parse
     public struct Data_Option
     {
         public int language;
+        public bool setFPS;
+        public bool shake;
         // 그래픽 관련
         public bool fullScreen;
         public int qualityLevel;
@@ -359,6 +361,7 @@ public class Data_Manager : Data_Parse
 
         public void DefaultOption()
         {
+            setFPS = false;
             fullScreen = true;
             qualityLevel = 2;
             resolutionIndex = 6;

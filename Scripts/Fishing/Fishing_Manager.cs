@@ -640,6 +640,9 @@ public class Fishing_Manager : MonoBehaviour
 
     void SetShaking()
     {
+        if (Option_Manager.current.optionControl.GetShake == false)
+            return;
+
         if (shakingObject != null)
             StopCoroutine(shakingObject);
         shakingObject = StartCoroutine(Shaking());
