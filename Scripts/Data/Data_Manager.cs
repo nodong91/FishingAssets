@@ -362,10 +362,11 @@ public class Data_Manager : Data_Parse
         public void DefaultOption()
         {
             setFPS = false;
+            shake = true;
             fullScreen = true;
             qualityLevel = 2;
             resolutionIndex = 6;
-            frameRateIndex = 2;
+            frameRateIndex = 3;
             audioStruct = new AudioStruct
             {
                 masterMute = false,

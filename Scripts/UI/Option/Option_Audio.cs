@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager.Data_Option;
 
-public class Audio_Manager : MonoBehaviour
+public class Option_Audio : MonoBehaviour
 {
     public Custom_Button prevButton, nextButton;
     public TMP_Text audioText;

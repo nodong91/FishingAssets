@@ -18,9 +18,10 @@ public class Option_Manager : MonoBehaviour
     }
     public ScreenStruct[] screenStruct;
 
+    public Option_Language optionLanguage;
     public Option_Control optionControl;
-    public Audio_Manager audioManager;
-    public Quality_Manager qualityManager;
+    public Option_Audio optionAudio;
+    public Option_Quality optionQuality;
 
     public delegate void DeleCloseOption();
     public DeleCloseOption deleCloseOption;
@@ -38,8 +39,8 @@ public class Option_Manager : MonoBehaviour
     {
         LoadOption();// 옵션 데이터 로드
         optionControl.SetStart();// 컨트롤 쪽 세팅
-        audioManager.SetStart();// 오디오 매니저 세팅
-        qualityManager.SetStart();// 퀄리티 매니저 세팅
+        optionAudio.SetStart();// 오디오 매니저 세팅
+        optionQuality.SetStart();// 퀄리티 매니저 세팅
 
         closeButton.SetButton(CloseCanvas);
         SetToggle();
@@ -135,33 +136,20 @@ public class Option_Manager : MonoBehaviour
             Singleton_Audio.INSTANCE.Audio_BGM(null);
             return;
         }
-        audioManager.PlayBGMAudio(_music);
+        optionAudio.PlayBGMAudio(_music);
     }
-
-
-    //public bool TryOptionFile()
-    //{
-    //    string filePath = Application.dataPath + "/Save/" + Const_Save._option + ".json";
-    //    FileInfo fileInfo = new FileInfo(filePath);
-    //    return fileInfo.Exists;
-    //}
-
-
-
-
-
-
 
     void SaveOption()
     {
         optionData = new Data_Option
         {
-            setFPS = optionControl.fpsToggle.isOn,
+            setFPS = optionControl.GetFPS,
+            shake = optionControl.GetShake,
             language = (int)Singleton_Data.INSTANCE.languageType,
-            qualityLevel = qualityManager.levelIndex,
-            resolutionIndex = qualityManager.resolutionIndex,
-            fullScreen = qualityManager.fullScreen,
-            frameRateIndex = qualityManager.frameRate,
+            qualityLevel = optionQuality.levelIndex,
+            resolutionIndex = optionQuality.resolutionIndex,
+            fullScreen = optionQuality.fullScreen,
+            frameRateIndex = optionQuality.frameRate,
             audioStruct = new Data_Option.AudioStruct
             {
                 masterMute = Singleton_Audio.INSTANCE.masterMute,

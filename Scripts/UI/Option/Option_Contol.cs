@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class Option_Control : MonoBehaviour
 {
     public Toggle fpsToggle;
+    public bool GetFPS { get { return fpsToggle.isOn; } }
     public FPSCounter fpsCanvas;
     public Toggle shakeToggle;
 
@@ -53,6 +54,7 @@ public class Option_Control : MonoBehaviour
         language.value = _index;
         Singleton_Data.LanguageType languageType = (Singleton_Data.LanguageType)_index;
         Singleton_Data.INSTANCE.languageType = languageType;
+        Option_Manager.current.optionLanguage.SetStart();
     }
 
     void SetFPS(bool _open)

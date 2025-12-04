@@ -48,7 +48,7 @@ public class Title_Manager : MonoBehaviour
         settingButton.SetButton(SettingButton, ActionEnter, ActionExit);
         exitButton.SetButton(ExitButton, ActionEnter, ActionExit);
         testButton.SetButton(TestScene, ActionEnter, ActionExit);
-        Debug.LogWarning($"Option_Manager : {continueEnable}");
+        //Debug.LogWarning($"Option_Manager : {continueEnable}");
 
         originalSize = selectMask.sizeDelta;
         ActionExit(null);

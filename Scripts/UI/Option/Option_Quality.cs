@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
 
-public class Quality_Manager : MonoBehaviour
+public class Option_Quality : MonoBehaviour
 {
     public TMP_Dropdown qualityDropdown; // Assuming you are using TMPro for the dropdown, otherwise use UnityEngine.UI.Dropdown
     public TMP_Dropdown resolutionDropdown; // Assuming you are using TMPro for the dropdown, otherwise use UnityEngine.UI.Dropdown
