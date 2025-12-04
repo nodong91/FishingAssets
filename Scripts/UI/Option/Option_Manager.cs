@@ -9,7 +9,9 @@ public class Option_Manager : MonoBehaviour
     public Custom_Button closeButton;
     public Custom_Button resetStatsButton, goTitleButton, goExitButton;
     public Data_Option optionData;
-    public FPSCounter fps;
+
+    public Toggle fpsToggle;
+    public FPSCounter fpsCanvas;
 
     [System.Serializable]
     public struct ScreenStruct
@@ -25,6 +27,7 @@ public class Option_Manager : MonoBehaviour
 
     public delegate void DeleCloseOption();
     public DeleCloseOption deleCloseOption;
+    bool open;
 
     public static Option_Manager current;
 
@@ -58,7 +61,7 @@ public class Option_Manager : MonoBehaviour
             Game_Manager.current.GetMainUI?.CloseCanvas();
         }
     }
-    bool open;
+
     public void OpenCanvas(bool _open)
     {
         if (open == _open)
@@ -97,6 +100,8 @@ public class Option_Manager : MonoBehaviour
         resetStatsButton.SetButton(ResetStatsButton, EnterButton);
         goTitleButton.SetButton(GoTitle, EnterButton);
         goExitButton.SetButton(GoExit, EnterButton);
+
+        fpsToggle.onValueChanged.AddListener(SetFPS);
     }
 
     void EnterButton(Custom_Button _button)
@@ -126,6 +131,11 @@ public class Option_Manager : MonoBehaviour
     {
         Singleton_Continue.INSTANCE.SaveContinue();// 게임 종료
         LoadingManager.current.GoExit();
+    }
+
+    void SetFPS(bool _open)
+    {
+        fpsCanvas.gameObject.SetActive(_open);
     }
 
     public void SetThemeMusic(string _music)

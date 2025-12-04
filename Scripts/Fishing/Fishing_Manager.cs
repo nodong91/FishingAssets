@@ -244,7 +244,6 @@ public class Fishing_Manager : MonoBehaviour
     void SetFishing()// 초기 세팅
     {
         catchStatus = Game_Manager.current.currentStatus;
-        cooling = Time.time + currentFish.fishCoolTime;
 
         //Vector3 randomPoint = Random.insideUnitSphere * fieldRadius;
         //fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
@@ -276,6 +275,8 @@ public class Fishing_Manager : MonoBehaviour
         //Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
         //Game_Manager.current.GetTutorial.StartTutorial();
         yield return null;
+        SetCooling();
+
         fishingSet.SetActive(true);
         StartCoroutine(CatchMovement());
         FishState(FishStateType.Idle);
@@ -366,7 +367,7 @@ public class Fishing_Manager : MonoBehaviour
         }
         //else
         //{
-    
+
         //}
         fishingCanvas.SetFishHP(fishHealth);
         if (fishHealth >= 1f || fishHealth <= 0f)
@@ -533,7 +534,7 @@ public class Fishing_Manager : MonoBehaviour
         float normalize = 0f;
         while (fishState == FishStateType.Spelling)
         {
-            normalize += Time.deltaTime / currentFish.fishSpellTime;
+            normalize += Time.deltaTime;
             Vector3 direction = (fishTargetPoint - fishPrefab.transform.position);
             if (direction.sqrMagnitude < 0.1f)
             {
@@ -545,8 +546,9 @@ public class Fishing_Manager : MonoBehaviour
             fishPrefab.transform.rotation = Quaternion.Slerp(fishPrefab.transform.rotation, rotation, Time.deltaTime * currentFish.fishSpellTime);
             //fishSpeed = Mathf.Lerp(prevSpeed, 0f, normalize);// 서시히 정지
             fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * fishSpeed, Space.Self);
+            Debug.LogWarning($"{normalize} / {currentFish.fishSpellTime}");
             fishingCanvas.SetFishSpell(normalize / currentFish.fishSpellTime);
-            if (normalize / currentFish.fishSpellTime > 1f)
+            if (normalize > currentFish.fishSpellTime)
             {
                 FishState(FishStateType.Attack);
             }
@@ -589,7 +591,7 @@ public class Fishing_Manager : MonoBehaviour
         }
         else
         {
-            cooling = Time.time + currentFish.fishCoolTime;
+            SetCooling();
             FishState(FishStateType.Idle);
         }
     }
@@ -706,8 +708,13 @@ public class Fishing_Manager : MonoBehaviour
         SetShaking();
         yield return new WaitForSeconds(currentFish.fishGroggyTime);// 그로기 타임
 
-        cooling = Time.time + currentFish.fishCoolTime;
+        SetCooling();
         FishState(FishStateType.Idle);
+    }
+
+    void SetCooling()
+    {
+        cooling = Time.time + currentFish.fishCoolTime;
     }
 
     //===================================================================================================================
