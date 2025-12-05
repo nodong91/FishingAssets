@@ -328,7 +328,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         if (_open == false)// 닫히면 엔피씨 데이터 초기화
         {
             dataNPC = null;
-            Option_Manager.current.SetThemeMusic(null);
+            //Option_Manager.current.SetThemeMusic(null);
         }
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }

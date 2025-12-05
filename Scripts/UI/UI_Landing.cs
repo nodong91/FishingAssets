@@ -364,7 +364,8 @@ public class UI_Landing : MonoBehaviour
             case LandingType.Shop:
             case LandingType.Shipyard:
                 Game_Manager.current.GetInventory.CloseShop();// ªÛ¡° ¥›±‚
-                Option_Manager.current.SetThemeMusic(null);
+                Game_Manager.current.SetThemeMusic();
+                //Option_Manager.current.SetThemeMusic(null);
                 break;
 
             case LandingType.Storage:
