@@ -657,11 +657,16 @@ public class UI_Inventory_Base : MonoBehaviour
     // 수리하기
     //===========================================================================================================================
 
-    float repairPrice = 100f;
+    float repairPrice = 100f;// 수리비
     public void FixSlot(UI_Inventory_Slot _slot)// 슬롯 복구
     {
         if (Game_Manager.current.CheckMoney(repairPrice) == false)
+        {
+            // 돈이 모자라면
+            //Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._noMoney);
+            StaticOpenCanvas.deleEndOpen = DeleClose;// 경고메세지 넣기
             return;
+        }
 
         Game_Manager.current.GetMainUI.MoveMoney(-repairPrice);// 하나씩
         _slot.FixSlot();
@@ -674,8 +679,13 @@ public class UI_Inventory_Base : MonoBehaviour
         if (destroySlot == null)
             return;
         float fixPrice = repairPrice * destroySlot.Count;
-        if (Game_Manager.current.CheckMoney(fixPrice) == false)
+        if (Game_Manager.current.CheckMoney(repairPrice) == false)
+        {
+            // 돈이 모자라면
+            //Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._noMoney);
+            StaticOpenCanvas.deleEndOpen = DeleClose;// 경고메세지 넣기
             return;
+        }
 
         Game_Manager.current.GetMainUI.MoveMoney(-fixPrice);// AllFix
         Game_Manager.current.GetPlayer.AddHealth(destroySlot.Count);// 데미지
@@ -686,5 +696,13 @@ public class UI_Inventory_Base : MonoBehaviour
             allSlots[x, y].FixSlot();
         }
         destroySlot.Clear();
+    }
+
+    void DeleClose()
+    {
+        Game_Manager.current.GetMainUI.DelayCloseCanvas();
+        Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
+        Game_Manager.current.GetDialog.DialogStart_NPC(npc, Const_Dialog._0005);
+        StaticOpenCanvas.deleEndOpen = null;
     }
 }

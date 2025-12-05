@@ -43,7 +43,7 @@ public class UI_ChangeShip : MonoBehaviour
 
     public void CloseCanvas()
     {
-        Game_Manager.current.GetLanding.OpenLandingUI();
+        Game_Manager.current.GetLanding.OpenIslandUI();
         OpenCanvas(false);
     }
 

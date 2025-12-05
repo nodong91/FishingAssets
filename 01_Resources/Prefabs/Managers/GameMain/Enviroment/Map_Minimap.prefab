@@ -139,7 +139,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 992495462659945365}
+  - {fileID: 3242306251354331844}
   m_Father: {fileID: 4899527806960290709}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -506,10 +506,10 @@ MonoBehaviour:
     canvasGroup: {fileID: 0}
     targetPosition: {x: 0, y: 0}
   - direction: 1
-    rect: {fileID: 992495462659945365}
+    rect: {fileID: 3242306251354331844}
     canvasGroup: {fileID: 0}
     targetPosition: {x: 0, y: 0}
-  closeButton: {fileID: 3628710738377406984}
+  closeButton: {fileID: 1397017719465431897}
 --- !u!1 &4670207879680479872
 GameObject:
   m_ObjectHideFlags: 0
@@ -909,7 +909,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &2964159732270507552
+--- !u!1001 &583847908475441009
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -943,7 +943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1006,15 +1006,10 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
---- !u!224 &992495462659945365 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
-  m_PrefabInstance: {fileID: 2964159732270507552}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3628710738377406984 stripped
+--- !u!114 &1397017719465431897 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1979625204290247720, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
-  m_PrefabInstance: {fileID: 2964159732270507552}
+  m_PrefabInstance: {fileID: 583847908475441009}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -1022,3 +1017,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0251791e9ec4f8545894db6359f1e33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &3242306251354331844 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
+  m_PrefabInstance: {fileID: 583847908475441009}
+  m_PrefabAsset: {fileID: 0}

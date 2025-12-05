@@ -372,7 +372,10 @@ public class UI_Landing : MonoBehaviour
                 break;
 
             case LandingType.Energy:
-                Game_Manager.current.GetEnergyUI.CloseEnergy();
+                if (Game_Manager.current.GetEnergyUI.CloseEnergy() == true)
+                {
+                    return;
+                }
                 break;
 
             case LandingType.Rest:
@@ -388,10 +391,10 @@ public class UI_Landing : MonoBehaviour
                 Game_Manager.current.GetInventory.CloseShop();// 상점 닫기
                 break;
         }
-        OpenLandingUI();
+        OpenIslandUI();
     }
 
-    public void OpenLandingUI()
+    public void OpenIslandUI()
     {
         SetLandingCanvas(true);// 랜드 UI 열기
         Game_Manager.current.CurrentLand.CameraOutFouce(false);

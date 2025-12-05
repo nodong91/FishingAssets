@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UI_Main;
 
 public class Map_Minimap : MonoBehaviour
 {
@@ -9,23 +8,20 @@ public class Map_Minimap : MonoBehaviour
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     const float percent = 2.3f;
     GameObject setLostBox;
+    public void CloseCanvas() => Game_Manager.current.GetMainUI?.CloseCanvas();
 
     public Custom_Button closeButton;
 
     public void SetStart()
     {
-        closeButton.SetButton(SetButton);
+        closeButton.SetButton(CloseCanvas);
         RemoveLostBox();
         OpenCanvas(false);
     }
 
-    void SetButton()
-    {
-        Game_Manager.current.GetMainUI.dele_CloseButton();
-    }
-
     public void OpenCanvas(bool _open)
     {
+        Debug.LogWarning("oihiujojoijoijoijoijoijoijo");
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
         SetPlayerPosition();
         SetLostBoxPosition();

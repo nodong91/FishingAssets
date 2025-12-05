@@ -233,7 +233,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
             case SelectStruct.SelectType.InLand:
                 // 섬입장
-                Game_Manager.current.CurrentLand.SetLandingAction();
+                //Game_Manager.current.CurrentLand.SetLandingAction();
+                Game_Manager.current.GetLanding.OpenIslandUI();
                 Game_Manager.current.OutOfControll(true);
                 break;
 
@@ -353,7 +354,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
         else if (endDialog == true)
         {
-            if (dataDialog.selectStructs.Length == 0)
+            if (dataDialog.selectStructs.Length == 0)// 선택할 내용이 없다면 창닫기
             {
                 OpenCanvas(false);
             }

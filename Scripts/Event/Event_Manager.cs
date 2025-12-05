@@ -410,7 +410,7 @@ public class Event_Manager : MonoBehaviour
             {
                 Debug.LogWarning("보상 대화가 아님");
             }
-            Game_Manager.current.GetLanding.OpenLandingUI();// 섬 유아이 열기
+            Game_Manager.current.GetLanding.OpenIslandUI();// 섬 유아이 열기
             StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 이벤트 창 닫기
         }
         else

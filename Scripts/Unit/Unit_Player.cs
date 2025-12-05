@@ -18,6 +18,7 @@ public class Unit_Player : MonoBehaviour
     public State state = State.None;
     public Rigidbody rb = null;
     SetStatus CurrentStatus => Game_Manager.current.currentStatus;
+    int DestroyCount => Game_Manager.current.GetInventory.myBox.destroySlot.Count;
     public float moveSpeed = 1f;
     public int health;
     public bool FullHealth { get { return health >= CurrentStatus?.shipHealth; } }
@@ -29,34 +30,20 @@ public class Unit_Player : MonoBehaviour
 
     public GameObject playerObject;
     GameObject FocusTarget => Camera_Manager.current?.GetFocusTarget;
-    Data_Continue continueData => Game_Manager.current.GetContinue;
+    Data_Continue ContinueData => Game_Manager.current.GetContinue;
     Coroutine stateAction;
 
     [SerializeField] private List<Trigger_Setting> triggerGameObject = new List<Trigger_Setting>();
     private Trigger_Setting closestTarget;
 
-    //Quaternion prevAngle, setAngle;
-    //float randomTime, runningRandomTime;
-    //// 물위에서 배의 움직임
-    //private float shipHight = -0.1f;
-    //private float waveSpeed = 2f;
-    //private float targetAngle = 10f;
-
-    //float runningTime;
-    //public AnimationCurve rotateCurve;// 위아래 흔들릴 때 로테이션
-
     public void SetStart()
     {
         rb.useGravity = false;
-        if (continueData == null)
+        if (ContinueData == null)
             return;
 
-        health = CurrentStatus.shipHealth - continueData.destroySlot.Count;
-        energy = continueData.energy;
-
-        //boosterSpeed = 0f;
-        //boosterValue = 2f;
-        //maxBoosterValue = 2f;
+        health = CurrentStatus.shipHealth - ContinueData.destroySlot.Count;
+        energy = ContinueData.energy;
 
         StateMachine(State.Idle);
 
@@ -73,7 +60,7 @@ public class Unit_Player : MonoBehaviour
         moveSpeed = CurrentStatus.shipSpeed;
 
         Game_Manager.current.GetMainUI.SetMaxEnergyPoint(CurrentStatus.maxEnergy);
-        health = (FullHealth == true) ? CurrentStatus.shipHealth : CurrentStatus.shipHealth - continueData.destroySlot.Count;// 스탯 추가 하기  전 풀피 체크
+        health = (FullHealth == true) ? CurrentStatus.shipHealth : CurrentStatus.shipHealth - ContinueData.destroySlot.Count;// 스탯 추가 하기  전 풀피 체크
         Game_Manager.current.GetMainUI.SetMaxHealthPoint(CurrentStatus.shipHealth);
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 시작 세팅
         //energy = continueData.energy;
@@ -110,16 +97,20 @@ public class Unit_Player : MonoBehaviour
             case State.None:
 
                 break;
+
             case State.Idle:
                 if (dirction.x != 0f || dirction.y != 0f)
                     StateMachine(State.Move);
                 break;
+
             case State.Move:
                 stateAction = StartCoroutine(Moving());
                 break;
+
             case State.Damage:
                 TakeDamage();
                 break;
+
             case State.Destroy:
                 StateDestroy();
                 break;
@@ -148,7 +139,7 @@ public class Unit_Player : MonoBehaviour
     {
         while (state == State.Move)
         {
-            if (efficient > 0 && energy <= 0f)// 에너지가 없으면 못 움직임
+            if ((efficient > 0 && energy <= 0f) || DestroyCount >= CurrentStatus.shipHealth)// 에너지가 없거나 파괴되면 못 움직임
             {
                 // 이동 불가
                 Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._dontMove);
@@ -338,16 +329,18 @@ public class Unit_Player : MonoBehaviour
             StateMachine(State.Destroy);
     }
 
-    int destroyCount => Game_Manager.current.GetInventory.myBox.destroySlot.Count;
     public bool TakeDamage()
     {
+        if (Game_Manager.current.TryCrashChance() == true)// 회피 확률 적용
+            return false;
+
         Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._clash);
         Game_Manager.current.GetInventory.DestroySlot();// 랜덤 슬롯 부수기
 
-        health = CurrentStatus.shipHealth - destroyCount;
+        health = CurrentStatus.shipHealth - DestroyCount;
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
 
-        Debug.LogWarning($"TakeDamage - {health} ({destroyCount})");
+        Debug.LogWarning($"TakeDamage - {health} ({DestroyCount})");
         return health <= 0;
     }
 

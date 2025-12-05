@@ -1,5 +1,25 @@
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+
+[CustomEditor(typeof(Data_Dialog))]
+public class Data_Dialog_Editor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        GUIStyle fontStyle = new GUIStyle();
+        fontStyle.fontSize = 15;
+        fontStyle.normal.textColor = Color.yellow;
+
+        GUILayout.Label("선택창에 추가 가능한 ScriptableObject", fontStyle);
+        GUILayout.Label("1. Data_Dialog : 다음 대화 이어가기 (선택 버튼 출력 : SelectID)");
+        GUILayout.Label("2. Data_Dialog_If : 대화 상황 if 선택 출력");
+        GUILayout.Label("3. Data_ItemList : 물건 교환창 오픈");
+    }
+}
+#endif
 [CreateAssetMenu(fileName = "Data_Dialog", menuName = "Scriptable Objects/Data_Dialog")]
 public class Data_Dialog : ScriptableObject
 {

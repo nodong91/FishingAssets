@@ -38,18 +38,30 @@ public class Energy_Manager : MonoBehaviour
         SetEnergy(prevEnergy);
     }
 
-    public void CloseEnergy()
+    public bool CloseEnergy()
     {
+        //Game_Manager.current.GetLanding.SetLandingCanvas(false);// 랜드 UI 제거
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));
+        if (StaticOpenCanvas.deleEndOpen == null)
+            return false;
+        return true;
+    }
+
+    void DeleClose()
+    {
+        //Game_Manager.current.GetLanding.SetLandingCanvas(true);// 랜드 UI 제거
+        Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
+        Game_Manager.current.GetDialog.DialogStart_NPC(npc, Const_Dialog._0005);
+        StaticOpenCanvas.deleEndOpen = null;
     }
 
     void FillUpEnergy()
     {
         if (Game_Manager.current.CheckMoney(buyPrice) == false)
         {
+            // 돈이 모자라면
             Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._noMoney);
-            Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
-            Game_Manager.current.GetDialog.DialogStart_NPC(npc, Const_Dialog._0004);
+            StaticOpenCanvas.deleEndOpen = DeleClose;// 경고메세지 넣기
             return;
         }
 

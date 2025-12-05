@@ -571,7 +571,7 @@ public class Fishing_Manager : MonoBehaviour
             if (distance < shipSize && damaged == false)
             {
                 damaged = true;
-                //SetShaking();
+                SetShaking();
                 destroy = Game_Manager.current.GetPlayer.TakeDamage();// ¼±¹Ú¿¡ µ¥¹ÌÁö
             }
             yield return null;
@@ -582,7 +582,7 @@ public class Fishing_Manager : MonoBehaviour
         {
             // ÆÄ±« µÆÀ» ¶§
             FishingComplate(false);
-            OutFishing();// ÆÄ±« µÇ¼­       ³¬½Ã Á¾·á
+            OutFishing();// ÆÄ±«µÇ¼­ ³¬½Ã Á¾·á
 
             StartCoroutine(DestroyShip());// ¹è ºÎ¼ÅÁ®¼­ ³¬½Ã ½ÇÆÐ
         }

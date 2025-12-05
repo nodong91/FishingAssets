@@ -75,10 +75,10 @@ public class UI_Main : MonoBehaviour
 
     void CloseInventory()
     {
-        Game_Manager.current.OutOfControll(false);
-        Game_Manager.current.GetInventory.OpenInventory(false);
-        statusUI.OpenCanvas(false);
         OpenCanvas(true);
+        statusUI.OpenCanvas(false);
+        Game_Manager.current.GetInventory.OpenInventory(false);
+        Game_Manager.current.OutOfControll(false);
     }
 
     void FishGuideButton()
@@ -146,6 +146,15 @@ public class UI_Main : MonoBehaviour
     {
         dele_CloseButton?.Invoke();
         dele_CloseButton = null;
+    }
+
+    public void DelayCloseCanvas()
+    {
+        if (StaticOpenCanvas.deleEndOpen == null)
+        {
+            dele_CloseButton?.Invoke();
+            dele_CloseButton = null;
+        }
     }
 
     //===========================================================================================================================

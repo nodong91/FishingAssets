@@ -102,7 +102,6 @@ public class Game_Manager : MonoBehaviour
     public void SetEtc()
     {
         SetBooster();
-        SetCrashChance();
     }
 
     public void SetBooster()
@@ -113,11 +112,15 @@ public class Game_Manager : MonoBehaviour
         GetMainUI.SetMaxBoosterValue(_boosterSpeed, _boosterValue);
     }
 
-    public void SetCrashChance()
+    public bool TryCrashChance()
     {
         float crashChance = GetSkill.skill_Setting.GetCrashChance();
+        float randomChance = Random.Range(0, 100f);
+        Debug.LogWarning($"회피 확률 : {crashChance} > {randomChance}");
+        return crashChance > randomChance;
     }
-    public string[] bgms;
+    public string[] bgms; 
+    Coroutine randomTheme;
     IEnumerator SetStart()
     {
 
@@ -181,6 +184,28 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
+    public void SetThemeMusic()
+    {
+        SetTheme();
+        Singleton_Audio.INSTANCE.Audio_Environment(Const_Audio._oceanSound);
+    }
+  
+    IEnumerator RandomTheme()
+    {
+        string bgmID = bgms[Random.Range(0, bgms.Length)];
+        float length = Singleton_Data.INSTANCE.Dict_Audio[bgmID].clip.length;
+        Option_Manager.current.SetThemeMusic(bgmID);
+        yield return new WaitForSeconds(length);
+        SetTheme();
+    }
+
+    void SetTheme()
+    {
+        if (randomTheme != null)
+            StopCoroutine(randomTheme);
+        randomTheme = StartCoroutine(RandomTheme());
+    }
+
     public void ChangeStatus(Data_Ship _shipData)// 선박 변경
     {
         bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._newGame);
@@ -213,15 +238,6 @@ public class Game_Manager : MonoBehaviour
         GetInventory.myBox.AddMaxWeight(currentStatus.maxWeight);// 인벤토리 무게 적용
         GetInventory.myBox.AddInventory(currentStatus.maxBoxSize);// 인벤토리 사이즈 적용
         GetPlayer.SetStatus();// 플레이어에 스탯 적용
-    }
-
-    public void SetThemeMusic()
-    {
-        string bgmID = bgms[Random.Range(0, bgms.Length)];
-        //Singleton_Audio.INSTANCE.Audio_BGM(bgmID);
-        Option_Manager.current.SetThemeMusic(bgmID);
-        //Option_Manager.current.SetThemeMusic(null);
-        Singleton_Audio.INSTANCE.Audio_Environment(Const_Audio._oceanSound);
     }
 
     public void InputLeftMouse(bool _input)
