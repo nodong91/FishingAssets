@@ -117,9 +117,10 @@ public class Game_Manager : MonoBehaviour
     {
         float crashChance = GetSkill.skill_Setting.GetCrashChance();
     }
-
+    public string[] bgms;
     IEnumerator SetStart()
     {
+
         Camera_Manager.current.SetCameraManager();
         continueData = Singleton_Continue.INSTANCE.LoadContinue();
 
@@ -216,7 +217,10 @@ public class Game_Manager : MonoBehaviour
 
     public void SetThemeMusic()
     {
-        Option_Manager.current.SetThemeMusic(null);
+        string bgmID = bgms[Random.Range(0, bgms.Length)];
+        //Singleton_Audio.INSTANCE.Audio_BGM(bgmID);
+        Option_Manager.current.SetThemeMusic(bgmID);
+        //Option_Manager.current.SetThemeMusic(null);
         Singleton_Audio.INSTANCE.Audio_Environment(Const_Audio._oceanSound);
     }
 

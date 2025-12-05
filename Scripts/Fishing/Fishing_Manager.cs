@@ -237,7 +237,7 @@ public class Fishing_Manager : MonoBehaviour
         };
         return addFishStatus;
     }
-    public string[] bgms;
+
     void SetFishing()// 초기 세팅
     {
         catchStatus = Game_Manager.current.currentStatus;
@@ -268,9 +268,6 @@ public class Fishing_Manager : MonoBehaviour
         }
         fishingCanvas.SetCount(0);// 카운트 완료
         fishingCanvas.SetFishUI();
-
-        string bgmID = bgms[Random.Range(0, bgms.Length)];
-        Singleton_Audio.INSTANCE.Audio_BGM(bgmID);
         Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
         //Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
         //Game_Manager.current.GetTutorial.StartTutorial();
@@ -726,7 +723,6 @@ public class Fishing_Manager : MonoBehaviour
 
     void FishingComplate(bool _success)// 낚시 완료
     {
-        Singleton_Audio.INSTANCE.Audio_BGM(null);
         fishingSet.SetActive(false);// 물고기, 낚시대 제거
 
         Debug.LogWarning($"FishingComplate : {_success}");
