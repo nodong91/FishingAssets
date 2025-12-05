@@ -151,9 +151,6 @@ public class Fishing_Manager : MonoBehaviour
 
     float GetProbability(ItemStruct.ItemClass _class)// 물고기 클래스별 확률
     {
-        // 버프는 중복 적용 안됨
-        // 버프는 배스탯 관련만??
-        // 생선을 미끼로 사용?
         float addValue = 0f;
         Game_Manager.FishBuffStruct fishBuff = Game_Manager.current.GetFishBuff;// 낚시 버프 적용
         if (fishBuff != null && fishBuff.itemClass == _class)
@@ -240,7 +237,7 @@ public class Fishing_Manager : MonoBehaviour
         };
         return addFishStatus;
     }
-
+    public string[] bgms;
     void SetFishing()// 초기 세팅
     {
         catchStatus = Game_Manager.current.currentStatus;
@@ -266,11 +263,14 @@ public class Fishing_Manager : MonoBehaviour
         {
             int index = 3 - i;
             fishingCanvas.SetCount(index);
+            Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._countDown);
             yield return new WaitForSeconds(1f);
         }
         fishingCanvas.SetCount(0);// 카운트 완료
         fishingCanvas.SetFishUI();
 
+        string bgmID = bgms[Random.Range(0, bgms.Length)];
+        Singleton_Audio.INSTANCE.Audio_BGM(bgmID);
         Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
         //Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
         //Game_Manager.current.GetTutorial.StartTutorial();
@@ -726,6 +726,7 @@ public class Fishing_Manager : MonoBehaviour
 
     void FishingComplate(bool _success)// 낚시 완료
     {
+        Singleton_Audio.INSTANCE.Audio_BGM(null);
         fishingSet.SetActive(false);// 물고기, 낚시대 제거
 
         Debug.LogWarning($"FishingComplate : {_success}");

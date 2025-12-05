@@ -5953,6 +5953,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7221c1c39f0fabd4abe195648d9b00ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishingCanvas: {fileID: 5139216425171326708}
+  onCatchColor: {r: 0, g: 26.63379, b: 34.29675, a: 1}
+  notCatchColor: {r: 41.901115, g: 0, b: 1.894904, a: 1}
   fishState: 0
   positionComposer: {fileID: 6633660423939428097}
   defaultCameraDistance: 15
@@ -5964,11 +5967,15 @@ MonoBehaviour:
   catchPrefab: {fileID: 5307465895394525306}
   catchRanderer: {fileID: 9220036340358260554}
   fishPrefab: {fileID: 4495835396089734593}
-  onCatchColor: {r: 0, g: 26.63379, b: 34.29675, a: 1}
-  notCatchColor: {r: 41.901115, g: 0, b: 1.894904, a: 1}
-  fishingCanvas: {fileID: 5139216425171326708}
   focusTarget: {fileID: 2987525655021667049}
   debugText: {fileID: 2998618673736894112}
+  bgms:
+  - bgm_0007
+  - bgm_0008
+  - bgm_0009
+  - bgm_0010
+  - bgm_0011
+  - bgm_0012
 --- !u!114 &5139216425171326708
 MonoBehaviour:
   m_ObjectHideFlags: 0
