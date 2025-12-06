@@ -344,8 +344,12 @@ public class Unit_Player : MonoBehaviour
         return health <= 0;
     }
 
-    public void AddHealth(int _health)
+    public void AddHealth(int _health)// 체력 변경
     {
+        if (_health > 0)// 수리
+        {
+            Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._repear);// 수리 소리
+        }
         health += _health;
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
     }

@@ -26,6 +26,7 @@ public class Const_Audio
     public const string _waterDrop = "fx_0006";
     public const string _penWrite = "fx_0007";
     public const string _countDown= "fx_0008";
+    public const string _repear = "fx_0009";
 }
 
 public class Const_ETC

@@ -669,9 +669,9 @@ public class UI_Inventory_Base : MonoBehaviour
         }
 
         Game_Manager.current.GetMainUI.MoveMoney(-repairPrice);// 하나씩
+        Game_Manager.current.GetPlayer.AddHealth(1);// 데미지 회복
         _slot.FixSlot();
         destroySlot.Remove(_slot.slotNum);
-        Game_Manager.current.GetPlayer.AddHealth(1);// 데미지 회복
     }
 
     public void FixAll()// 모든 슬롯 복구
