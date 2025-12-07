@@ -119,7 +119,7 @@ public class Game_Manager : MonoBehaviour
         Debug.LogWarning($"È¸ÇÇ È®·ü : {crashChance} > {randomChance}");
         return crashChance > randomChance;
     }
-    public string[] bgms; 
+    public string[] bgms;
     Coroutine randomTheme;
     IEnumerator SetStart()
     {
@@ -189,10 +189,10 @@ public class Game_Manager : MonoBehaviour
         SetTheme();
         Singleton_Audio.INSTANCE.Audio_Environment(Const_Audio._oceanSound);
     }
-  
+
     IEnumerator RandomTheme()
     {
-        string bgmID = bgms[Random.Range(0, bgms.Length)];
+        string bgmID = bgms[Random.Range(0, bgms.Length - 1)];
         float length = Singleton_Data.INSTANCE.Dict_Audio[bgmID].clip.length;
         Option_Manager.current.SetThemeMusic(bgmID);
         yield return new WaitForSeconds(length);
