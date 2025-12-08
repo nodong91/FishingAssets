@@ -10,6 +10,7 @@ public class Data_ItemList : ScriptableObject
         Random,
         Shop,
         Shipyard,
+        Inn,
         Smuggler,
         Fix_Loan,
     }

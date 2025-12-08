@@ -97,6 +97,26 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
+    public void OpenSmuggler(Data_ItemList _itemList)
+    {
+        if (currentType != SlotType.Shipyard)
+        {
+            currentType = SlotType.Shipyard;
+            myBox.OpenCanvas(true);
+            shop.SetSmuggler(true, _itemList);
+        }
+    }
+
+    public void OpenInn(Data_ItemList _itemList)
+    {
+        if (currentType != SlotType.Shipyard)
+        {
+            currentType = SlotType.Shipyard;
+            myBox.OpenCanvas(true);
+            shop.SetInn(true, _itemList);
+        }
+    }
+
     public void OpenStorage(bool _open)
     {
         if (currentType != SlotType.Storage)

@@ -113,6 +113,37 @@ public class UI_Shop : UI_Inventory_Base
         }
     }
 
+    public void SetInn(bool _open, Data_ItemList _itemList)
+    {
+        Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
+        inventoryID = data_NPC.npc_ID;
+        currentIndex = 0;
+        saveData = inventoryID + currentIndex;
+        if (_open)
+        {
+            OpenCanvas(true);
+
+            layoutGroup.padding.bottom = 40;
+
+            slotType = SlotType.Shipyard;// SetShipyard
+            fixGroup.gameObject.SetActive(true);
+            if (Game_Manager.current.GetMainUI.timeUI.innReset == true)
+            {
+                Game_Manager.current.GetMainUI.timeUI.innReset = false;
+                SetItemDisplay(_itemList);// 조선소 상점 물건 리셋
+            }
+            else
+            {
+                // 저장된 내용 불러오기
+                SetInventoryItem(saveData);//  Shipyard 세팅
+            }
+        }
+        else
+        {
+            OpenCanvas(false);
+        }
+    }
+
     public void SetSmuggler(bool _open, Data_ItemList _itemList)
     {
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._smuggler];

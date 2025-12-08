@@ -241,12 +241,14 @@ public class UI_Time : MonoBehaviour
 
     [Header(" [ 하루 초기화 ]")]
     public bool shopReset = false;
+    public bool innReset = false;
     public bool shipyardReset = false;
     public bool smugglerReset = false;
 
     void SetResetTime()
     {
         shopReset = true;
+        innReset = true;
         shipyardReset = true;
         smugglerReset = true;
 

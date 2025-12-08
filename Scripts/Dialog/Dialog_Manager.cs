@@ -272,9 +272,14 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 Game_Manager.current.GetInventory.OpenShipyard(_data);
                 break;
 
+            case Data_ItemList.InventoryType.Inn:
+                // 밀수 열기
+                Game_Manager.current.GetInventory.OpenInn(_data);
+                break;
+
             case Data_ItemList.InventoryType.Smuggler:
                 // 밀수 열기
-                Game_Manager.current.GetInventory.OpenShipyard(_data);
+                Game_Manager.current.GetInventory.OpenSmuggler(_data);
                 break;
 
             case Data_ItemList.InventoryType.Fix_Loan:
