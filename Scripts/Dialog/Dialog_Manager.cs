@@ -233,7 +233,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
             case SelectStruct.SelectType.InLand:
                 // º∂¿‘¿Â
-                //Game_Manager.current.CurrentLand.SetLandingAction();
+                Game_Manager.current.CurrentLand.SetLandingAction();
                 Game_Manager.current.GetLanding.OpenIslandUI();
                 Game_Manager.current.OutOfControll(true);
                 break;
