@@ -7,6 +7,7 @@ using static Data_Manager;
 public class Fishing_Manager : MonoBehaviour
 {
     public Fishing_Canvas fishingCanvas;
+    public Sprite_Animation fishingTutorial;
     [ColorUsage(true, true)]
     public Color onCatchColor, notCatchColor;
     public enum FishStateType
@@ -81,6 +82,12 @@ public class Fishing_Manager : MonoBehaviour
                 dictFishStruct[dictType] = new List<FishStruct> { fish };
             }
         }
+        fishingSet.SetActive(false);
+
+        Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
+        //Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
+        //Game_Manager.current.GetTutorial.StartTutorial();
+        fishingTutorial.OpenCanvas(true);// 낚시 튜토리얼 시작
     }
 
     public void SetFishing(AreaType _areaType)// 트리거 닿았을 때 낚시 시작
@@ -268,10 +275,8 @@ public class Fishing_Manager : MonoBehaviour
         }
         fishingCanvas.SetCount(0);// 카운트 완료
         fishingCanvas.SetFishUI();
-        Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
-        //Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
-        //Game_Manager.current.GetTutorial.StartTutorial();
         yield return null;
+
         SetCooling();
 
         fishingSet.SetActive(true);
