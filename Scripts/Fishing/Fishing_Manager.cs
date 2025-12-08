@@ -242,11 +242,11 @@ public class Fishing_Manager : MonoBehaviour
     {
         catchStatus = Game_Manager.current.currentStatus;
 
-        //Vector3 randomPoint = Random.insideUnitSphere * fieldRadius;
-        //fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
-        //fishPrefab.transform.position = fishTargetPoint;
+        Vector3 randomPoint = Random.insideUnitSphere * fieldRadius;
+        fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
+        fishPrefab.transform.position = fishTargetPoint;
 
-        fishHealth = currentFish.fishHealth / (currentFish.fishHealth + catchStatus.catchMaxHealth);
+        fishHealth = catchStatus.catchMaxHealth / (currentFish.fishHealth + catchStatus.catchMaxHealth);
         fishingCanvas.SetFishHP(fishHealth);
 
         catchPrefab.transform.position = fishPrefab.transform.position;
@@ -343,33 +343,26 @@ public class Fishing_Manager : MonoBehaviour
     {
         if (isCatching == true)
         {
-            //bool critical = Random.Range(0f, 1f) > 0.5f;
-            //
-            //float setDamage = critical ? catchStatus.catchPower + catchStatus.catchPower * 0.2f : catchStatus.catchPower;
-            //float damage = setDamage / (currentFish.fishHealth + catchStatus.catchMaxHealth);
             if (catching == true)
             {
                 // 낚시대 힘만큼 데미지
                 float damage = catchStatus.catchPower / (currentFish.fishHealth + catchStatus.catchMaxHealth);
-                fishHealth -= damage * Time.deltaTime;
-                fishingCanvas.SetFishIcon(1f);
+                fishHealth += damage * Time.deltaTime;
+                fishingCanvas.SetFishIcon(-1f);
             }
             else
             {
                 // 물고기 힘만큼 데미지
                 float damage = currentFish.fishPower / (currentFish.fishHealth + catchStatus.catchMaxHealth);
-                fishHealth += damage * Time.deltaTime;
-                fishingCanvas.SetFishIcon(-1f);
+                fishHealth -= damage * Time.deltaTime;
+                fishingCanvas.SetFishIcon(1f);
             }
         }
-        //else
-        //{
-
-        //}
+        
         fishingCanvas.SetFishHP(fishHealth);
         if (fishHealth >= 1f || fishHealth <= 0f)
         {
-            FishingComplate(fishHealth <= 0f);// 낚시 성공 실패
+            FishingComplate(fishHealth >= 1f);// 낚시 성공 실패
         }
     }
 

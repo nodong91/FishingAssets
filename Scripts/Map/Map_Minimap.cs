@@ -21,7 +21,6 @@ public class Map_Minimap : MonoBehaviour
 
     public void OpenCanvas(bool _open)
     {
-        Debug.LogWarning("oihiujojoijoijoijoijoijoijo");
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
         SetPlayerPosition();
         SetLostBoxPosition();
