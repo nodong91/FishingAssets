@@ -193,7 +193,7 @@ public class Unit_Player : MonoBehaviour
             return;
         Map_Generator.Node node = Map_Generator.current.GetNodeFromPosition(transform.position);
         Game_Manager.current.GetMainUI.CheckDeep(node.areaType);
-        Debug.LogWarning($"체크 : {node.areaType}");
+        Debug.Log($"바다 체크 : {node.areaType}");
     }
 
     public void AddEnergy(float _value)
