@@ -57,6 +57,16 @@ public class Steam_StatsManager : MonoBehaviour
         }
     }
 
+    public void CatchLegendary()
+    {
+        int addCount = AddCount("Legendary_Collecter", 1);
+        if (addCount >= 10)// 레전더리 등급 개수
+        {
+            string achievement = "Legendary_Collecter";
+            ComplateAchievement(achievement);
+        }
+    }
+
     public void NightFishing()
     {
         int addCount = AddCount("Night_Fishing", 1);
