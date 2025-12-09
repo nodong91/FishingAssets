@@ -7,7 +7,6 @@ using static Data_Manager;
 public class Fishing_Manager : MonoBehaviour
 {
     public Fishing_Canvas fishingCanvas;
-    public Sprite_Animation fishingTutorial;
     [ColorUsage(true, true)]
     public Color onCatchColor, notCatchColor;
     public enum FishStateType
@@ -72,7 +71,7 @@ public class Fishing_Manager : MonoBehaviour
         foreach (var child in tempDict)
         {
             FishStruct fish = child.Value;
-            string dictType = fish.areaType.ToString() + fish.fishDayType.ToString();
+            string dictType = fish.areaType.ToString() + fish.fishDayType.ToString();// Å° °ª ¼³Á¤ -> Áö¿ª Å¸ÀÔ + ³·,¹ã
             if (dictFishStruct.ContainsKey(dictType))
             {
                 dictFishStruct[dictType].Add(fish);
@@ -84,10 +83,12 @@ public class Fishing_Manager : MonoBehaviour
         }
         fishingSet.SetActive(false);
 
-        Debug.LogWarning("³¬½Ã°¡ Ã³À½ÀÎÁö È®ÀÎ - Æ©Åä¸®¾ó ½ÃÀÛ");
-        //Game_Manager.current.GetTutorial.SetTutorial(String_Tutorial._fishing);
-        //Game_Manager.current.GetTutorial.StartTutorial();
-        fishingTutorial.OpenCanvas(true);// ³¬½Ã Æ©Åä¸®¾ó ½ÃÀÛ
+        bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._firstFishing);
+        if (isCompleted == false)
+        {
+            Debug.LogWarning("³¬½Ã°¡ Ã³À½ÀÎÁö È®ÀÎ - Æ©Åä¸®¾ó ½ÃÀÛ");
+            Tutorial_Manager.current.FishingTutorial();// ³¬½Ã Æ©Åä¸®¾ó ½ÃÀÛ
+        }
     }
 
     public void SetFishing(AreaType _areaType)// Æ®¸®°Å ´ê¾ÒÀ» ¶§ ³¬½Ã ½ÃÀÛ
@@ -363,7 +364,7 @@ public class Fishing_Manager : MonoBehaviour
                 fishingCanvas.SetFishIcon(1f);
             }
         }
-        
+
         fishingCanvas.SetFishHP(fishHealth);
         if (fishHealth >= 1f || fishHealth <= 0f)
         {
@@ -579,7 +580,8 @@ public class Fishing_Manager : MonoBehaviour
         if (destroy == true)
         {
             // ÆÄ±« µÆÀ» ¶§
-            FishingComplate(false);
+            //FishingComplate(false);
+            FishingDestroy();
             OutFishing();// ÆÄ±«µÇ¼­ ³¬½Ã Á¾·á
 
             StartCoroutine(DestroyShip());// ¹è ºÎ¼ÅÁ®¼­ ³¬½Ã ½ÇÆÐ
@@ -718,6 +720,23 @@ public class Fishing_Manager : MonoBehaviour
     //===================================================================================================================
     // ³¬½Ã ¿Ï·á
     //===================================================================================================================
+    void FishingDestroy()// ³¬½Ã ¿Ï·á
+    {
+        fishingSet.SetActive(false);// ¹°°í±â, ³¬½Ã´ë Á¦°Å
+
+        //Option_Manager.current.SetThemeMusic(null);// Å×¸¶ À½¾Ç ÃÊ±âÈ­
+        Singleton_Audio.INSTANCE.Stop_LoopFX();// ³¬½Ã ¼Ò¸® Á¤Áö
+
+        isFishing = false;
+        StopAllCoroutines();
+        cinemachineBasicMultiChannelPerlin.AmplitudeGain = 0f;// ½¦ÀÌÅ© Á¤Áö
+        FishState(FishStateType.None);
+
+        fishingCanvas.OnArrowParent(false);
+        fishingCanvas.SetFishSpell(0f);
+
+        fishingCanvas.FishingOver();// ³¬½Ã À¯¾ÆÀÌ Á¦°Å
+    }
 
     void FishingComplate(bool _success)// ³¬½Ã ¿Ï·á
     {

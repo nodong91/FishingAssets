@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using static Data_Manager;
 
@@ -373,6 +372,7 @@ public class Unit_Player : MonoBehaviour
         Game_Manager.current.GetMainUI.SetFadeScreen(true);
         yield return new WaitForSeconds(0.5f);
 
+        playerObject.SetActive(false);
         Game_Manager.current.PlayerDestroy();// 플레이어 위치에 고스트 놓고 인벤토리 비우기
         Debug.LogError("견인 되는 연출 필요 - 보험 회사 도착");
         CheckDeep();
@@ -391,6 +391,7 @@ public class Unit_Player : MonoBehaviour
             FocusTarget.transform.position = transform.position;
         yield return new WaitForSeconds(1f);
 
+        playerObject.SetActive(true);
         Game_Manager.current.GetMainUI.SetFadeScreen(false);
         //yield return new WaitForSeconds(0.5f);
 

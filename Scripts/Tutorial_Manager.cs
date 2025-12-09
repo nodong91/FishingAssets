@@ -9,6 +9,7 @@ public class Tutorial_Manager : MonoBehaviour
     //=========================================================================================================
 
     public List<string> completedTutorial;
+    public Sprite_Animation fishingTutorial;
 
     public static Tutorial_Manager current;
 
@@ -20,6 +21,7 @@ public class Tutorial_Manager : MonoBehaviour
     public void SetStart()
     {
         LoadTutorial();
+        fishingTutorial.OpenCanvas(false);
     }
 
     public bool IsTutorialCompleted(string _id)// 완료 인지 확인
@@ -34,6 +36,11 @@ public class Tutorial_Manager : MonoBehaviour
             completedTutorial = new List<string>();
         completedTutorial.Add(_id);
         SaveTutorial();
+    }
+
+    public void FishingTutorial()
+    {
+        fishingTutorial.OpenCanvas(true);
     }
 
     void SaveTutorial()
