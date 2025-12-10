@@ -9,11 +9,15 @@ public class Option_Audio : MonoBehaviour
     public Custom_Button prevButton, nextButton;
     public TMP_Text audioText;
     public int currentAudio;
-    //public string[] audioStrings;
-    public Slider master_Slider, bgm_Slider, fx_Slider, env_Slider;
+    [Header(" [ 슬라이더 ]")]
+    public Slider master_Slider;
+    public Slider bgm_Slider, fx_Slider, env_Slider;
     public Toggle master_Mute, bgm_Mute, fx_Mute, env_Mute;
     const float divide = 10f;
     bool onSet;
+
+    const string enableColor = "3D83FF";
+    const string disableColor = "BCBCBC";
     Dictionary<Data_Manager.AudioStruct, int> tryAudioStructToIndex = new Dictionary<Data_Manager.AudioStruct, int>();
 
     //===========================================================================================================================
@@ -23,13 +27,13 @@ public class Option_Audio : MonoBehaviour
         int index = 0;
         foreach (var child in Singleton_Data.INSTANCE.Dict_Audio)
         {
-            if(child.Value.type == Data_Manager.AudioStruct.AudioType.BGM)
+            if (child.Value.type == Data_Manager.AudioStruct.AudioType.BGM)
             {
                 index++;
                 tryAudioStructToIndex[child.Value] = index;
             }
         }
-        
+
         prevButton.SetButton(delegate { NextButton(-1); }, OnArrowButton, OffArrowButton);
         nextButton.SetButton(delegate { NextButton(1); }, OnArrowButton, OffArrowButton);
 
@@ -138,6 +142,7 @@ public class Option_Audio : MonoBehaviour
     {
         master_Mute.isOn = _isOn;
         Singleton_Audio.INSTANCE.SetMasterMute(_isOn);
+        SetSliderColor(master_Slider.fillRect, _isOn);
     }
 
     void BGMVolume(float _value)
@@ -151,6 +156,7 @@ public class Option_Audio : MonoBehaviour
     {
         bgm_Mute.isOn = _isOn;
         Singleton_Audio.INSTANCE.SetBGMMute(_isOn);
+        SetSliderColor(bgm_Slider.fillRect, _isOn);
     }
 
     void FXVolume(float _value)
@@ -166,6 +172,7 @@ public class Option_Audio : MonoBehaviour
     {
         fx_Mute.isOn = _isOn;
         Singleton_Audio.INSTANCE.SetFXMute(_isOn);
+        SetSliderColor(fx_Slider.fillRect, _isOn);
     }
 
     void EnvVolume(float _value)
@@ -179,6 +186,14 @@ public class Option_Audio : MonoBehaviour
     {
         env_Mute.isOn = _isOn;
         Singleton_Audio.INSTANCE.SetEnvironmentMute(_isOn);
+        SetSliderColor(env_Slider.fillRect, _isOn);
+    }
+
+    void SetSliderColor(RectTransform _sliderFillRect, bool _isOn)
+    {
+        Image image = _sliderFillRect.GetComponent<Image>();
+        string colorString = (_isOn == true) ? disableColor : enableColor;
+        image.color = P01_Utility.HexToColor(colorString);
     }
 
     void SetFxPrev()
