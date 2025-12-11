@@ -258,10 +258,21 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6a9bca9b68423474190089050fa81d3b, type: 3}
   - {fileID: 21300000, guid: 35e2c232f6f321c4cb1674e1ca108360, type: 3}
   - {fileID: 21300000, guid: c36afbcc404c5dd44876e672fc91fc8f, type: 3}
+  - {fileID: 21300000, guid: 462b64b68e7d8d14baf8fa44f9285120, type: 3}
+  - {fileID: 21300000, guid: 7c5d454cd789c4049b5f9d51010910d0, type: 3}
+  - {fileID: 21300000, guid: 1e97be2357a395d4791479b4c7d56c59, type: 3}
+  - {fileID: 21300000, guid: 3cfa7921ae7cbd34d8f8f4f7a83b5497, type: 3}
+  - {fileID: 21300000, guid: 02ccc64eb445d554ab665782e00fe8bf, type: 3}
   - {fileID: 21300000, guid: 18163c630a796e24a9777605d0dcd516, type: 3}
   - {fileID: 21300000, guid: 44eddae19a59b934685d35d27fb2888d, type: 3}
+  - {fileID: 21300000, guid: 341e66d46d24caa4791d251807a783c8, type: 3}
+  - {fileID: 21300000, guid: c4b0e20c53ef7454dabcdd8b6ed436d3, type: 3}
+  - {fileID: 21300000, guid: 545a9d1697cb5154a8196d677e7c8671, type: 3}
+  - {fileID: 21300000, guid: a755b1222e6f9194aa2ecbad2d340402, type: 3}
+  - {fileID: 21300000, guid: 862acd19864fb3344aae7d301d1d83f1, type: 3}
   - {fileID: 21300000, guid: efba2a4d5bbf24a4788d9dc8a9deeadc, type: 3}
   - {fileID: 21300000, guid: 6e94cad31948f5e4d85dfbe90fd9367c, type: 3}
+  - {fileID: 21300000, guid: 2326e409d0525294b98632321659ac47, type: 3}
   - {fileID: 21300000, guid: b01ae7b8cef0fc14888dd5e3ae9a7265, type: 3}
   - {fileID: 21300000, guid: 1baacfee7acd4d84d9d889e310b6a9f3, type: 3}
   - {fileID: 21300000, guid: 94b2bd9bd92bfa14e939ef315b58abc0, type: 3}
@@ -417,10 +428,10 @@ MonoBehaviour:
   - id: us_4001
     itemStruct:
       id: us_4001
-      name: lotterytoto
+      name: lotterytoto_01
       itemType: 4
       explanation: us_4001_01
-      icon: Item_Lottery
+      icon: Item_Lottery_01
       itemClass: 4
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
@@ -433,7 +444,7 @@ MonoBehaviour:
     itemStruct:
       id: us_6001
       name: badanews
-      itemType: 6
+      itemType: 7
       explanation: us_6001_01
       icon: Item_Quest
       itemClass: 4
@@ -449,7 +460,7 @@ MonoBehaviour:
     itemStruct:
       id: us_6002
       name: "\uC21C\uAC04\uC774\uB3D9"
-      itemType: 6
+      itemType: 7
       explanation: us_6002_01
       icon: Item_Quest
       itemClass: 4
@@ -491,6 +502,126 @@ MonoBehaviour:
     buffDuration: 0
     etcValue: 500
     skillID: "-\r"
+  - id: us_3003
+    itemStruct:
+      id: us_3003
+      name: bait_01
+      itemType: 6
+      explanation: us_3003_01
+      icon: Item_Bait_01
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 50
+    buffDuration: 0
+    etcValue: 0
+    skillID: "\r"
+  - id: us_3004
+    itemStruct:
+      id: us_3004
+      name: bait_02
+      itemType: 6
+      explanation: us_3004_01
+      icon: Item_Bait_02
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 100
+    buffDuration: 0
+    etcValue: 0
+    skillID: "\r"
+  - id: us_3005
+    itemStruct:
+      id: us_3005
+      name: bait_03
+      itemType: 6
+      explanation: us_3005_01
+      icon: Item_Bait_03
+      itemClass: 1
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 500
+    buffDuration: 0
+    etcValue: 0
+    skillID: "\r"
+  - id: us_3006
+    itemStruct:
+      id: us_3006
+      name: bait_04
+      itemType: 6
+      explanation: us_3006_01
+      icon: Item_Bait_04
+      itemClass: 2
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 1000
+    buffDuration: 0
+    etcValue: 0
+    skillID: "\r"
+  - id: us_3007
+    itemStruct:
+      id: us_3007
+      name: bait_05
+      itemType: 6
+      explanation: us_3007_01
+      icon: Item_Bait_05
+      itemClass: 0
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 10000
+    buffDuration: 0
+    etcValue: 0
+    skillID: "\r"
+  - id: us_4002
+    itemStruct:
+      id: us_4002
+      name: lotterytoto_02
+      itemType: 4
+      explanation: us_4002_01
+      icon: Item_Lottery_02
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 500
+    buffDuration: 0
+    etcValue: 1
+    skillID: "\r"
+  - id: us_4003
+    itemStruct:
+      id: us_4003
+      name: lotterytoto_03
+      itemType: 4
+      explanation: us_4003_01
+      icon: Item_Lottery_03
+      itemClass: 1
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 1000
+    buffDuration: 0
+    etcValue: 2
+    skillID: "\r"
+  - id: us_4004
+    itemStruct:
+      id: us_4004
+      name: lotterytoto_04
+      itemType: 4
+      explanation: us_4004_01
+      icon: Item_Lottery_04
+      itemClass: 2
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 5000
+    buffDuration: 0
+    etcValue: 3
+    skillID: "\r"
   fishStruct:
   - id: fs_1001
     fishHealth: 20

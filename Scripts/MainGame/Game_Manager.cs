@@ -275,15 +275,6 @@ public class Game_Manager : MonoBehaviour
         return true;
     }
 
-    public void StartFishing(AreaType _areaType)
-    {
-        // 공격하는 물고기가 처음인지 확인
-        Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
-        //GetTutorial.SetTutorial(String_Tutorial._firstFishing);// 낚시 튜토리얼 세팅
-        //GetTutorial.StartTutorial();// 낚시 튜토리얼 시작
-        GetFishing.SetFishing(_areaType);
-    }
-
     //====================================================================================================================
     // 매니저 가져오기
     //====================================================================================================================

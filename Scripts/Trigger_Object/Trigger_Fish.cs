@@ -4,12 +4,10 @@ using static Data_Manager;
 public class Trigger_Fish : MonoBehaviour
 {
     public Trigger_Setting triggerSetting;
-    public AreaType areaType;
     public Sprite catchIcon;
 
     public void SetAreaType(AreaType _areaType)
     {
-        areaType = _areaType;
         triggerSetting.deleTriggerAction = FishingStart;// 낚시 게임 스타트
         triggerSetting.GetIconSprite = catchIcon;// 트리거 아이콘 설정
     }
@@ -17,7 +15,7 @@ public class Trigger_Fish : MonoBehaviour
     void FishingStart()
     {
         Debug.LogWarning("낚시 시작");
-        Game_Manager.current.StartFishing(areaType);
+        Game_Manager.current.GetFishing.SetFishingTrigger();
         triggerSetting.gameObject.SetActive(false);// 트리거 오브젝트 비활성화
     }
 }

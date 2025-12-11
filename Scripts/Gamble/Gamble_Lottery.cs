@@ -30,7 +30,7 @@ public class Gamble_Lottery : MonoBehaviour
     public List<Gamble_Lotto_Slot> slotList = new List<Gamble_Lotto_Slot>();
     Queue<Gamble_Lotto_Slot> slotQueue = new Queue<Gamble_Lotto_Slot>();
 
-    public TMPro.TMP_Text testText;
+    //public TMPro.TMP_Text testText;
     public int sellPrice;
     public bool isAnswer, isEnd;
     public ParticleSystem answerEffect;
@@ -80,14 +80,14 @@ public class Gamble_Lottery : MonoBehaviour
                     if (CheckImage() == true)
                     {
                         isEnd = true;
-                        testText.text = $"¥Á√∑!!!!!! : {sellPrice}";
+                        //testText.text = $"¥Á√∑!!!!!! : {sellPrice}";
                         Game_Manager.current.GetMainUI.MoveMoney(sellPrice);
                         Steam_StatsManager.current.CountLottery(sellPrice);// ¥Á√∑ ƒ´øÓ∆Æ
                     }
                     else if (slotList.Count >= lotteryCards[currentIndex].lottery.slotCount)
                     {
                         isEnd = true;
-                        testText.text = "≥Î¥Á√∑!!!!!!";
+                        //testText.text = "≥Î¥Á√∑!!!!!!";
                     }
                 }
             }
@@ -119,7 +119,7 @@ public class Gamble_Lottery : MonoBehaviour
     {
         isEnd = false;
         isAnswer = false;
-        testText.text = "";
+        //testText.text = "";
         SetLotto();
     }
 
@@ -168,8 +168,10 @@ public class Gamble_Lottery : MonoBehaviour
         for (int i = 0; i < lottoSlots.Count; i++)
         {
             Gamble_Lotto_Slot inst = TrySlot();
-            inst.transform.SetParent(parent);
             inst.gameObject.SetActive(true);
+            inst.transform.SetParent(parent);
+            inst.transform.localScale = Vector3.one;
+
             inst.SetSlot(lottoSlots[i].sprite, lottoSlots[i].reward);
             inst.deleEnterSlot = EnterSlot;
             inst.iconImage.material.SetFloat("_FillAmount", 0f);
@@ -237,6 +239,12 @@ public class Gamble_Lottery : MonoBehaviour
 
     //public GameObject target;
     //public CanvasGroup canvasGroup;
+
+    public void SetLottery(int _index)
+    {
+        currentIndex = _index;
+        OpenCanvas(true);
+    }
     public void OpenCanvas(bool _open)
     {
         if (_open == true)

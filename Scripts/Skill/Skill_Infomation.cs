@@ -43,10 +43,10 @@ public class Skill_Infomation : MonoBehaviour
         if (_status == null)
             return;
 
-        text_Neme.text = Singleton_Data.INSTANCE.GetLanguage(_status.id);
+        text_Neme.text = Singleton_Data.INSTANCE.GetLanguage(_status.name);
         int fontSize = (int)(text_Description.fontSize * 0.7f);
-        string addStatusString = $"\n<size={fontSize}>{_status.addStatusString}</size>";
-        text_Description.text = Singleton_Data.INSTANCE.GetLanguage(_status.description) + addStatusString;
+        //string addStatusString = $"\n<size={fontSize}>{_status.addStatusString}</size>";
+        text_Description.text = Singleton_Data.INSTANCE.GetLanguage(_status.description);
         text_Price.text = _status.price.ToString();
 
     }

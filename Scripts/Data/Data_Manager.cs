@@ -516,6 +516,7 @@ public class Data_Manager : Data_Parse
             Repare,// ¼ö¸®
             Lottery,// º¹±Ç
             Money,// µ·
+            Bait,// ¹Ì³¢
             Etc
         }
         public ItemType itemType;

@@ -584,13 +584,23 @@ public class UI_Inventory : MonoBehaviour
 
             case ItemStruct.ItemType.Lottery:// 복권
                 //Game_Manager.current.GetMainUI.CloseInventory();
-                Game_Manager.current.GetLottery.OpenCanvas(true);// 복권 열기
+                usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
+                Game_Manager.current.GetLottery.SetLottery((int)usedStruct.etcValue);// 복권 열기
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
 
             case ItemStruct.ItemType.Money:// 돈
                 usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
                 Game_Manager.current.GetMainUI.MoveMoney(usedStruct.etcValue);// 돈 추가 테스트
+                SetEmptySlot(selectSlot);// 사용한 아이템 비우기
+                break;
+
+            case ItemStruct.ItemType.Bait:// 미끼 아이템
+                // 미끼 사용
+                usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
+                ItemStruct.ItemClass itemClass = usedStruct.itemStruct.itemClass;
+                Game_Manager.current.GetFishing.SetBait(itemClass);
+                Game_Manager.current.GetMainUI.CloseInventory();// 인벤토리 닫기
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
 

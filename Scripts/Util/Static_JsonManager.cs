@@ -10,7 +10,7 @@ public class Static_JsonManager
     //======================================================================================
     // 폴더 찾기
     //======================================================================================
-
+    static string keyCode = "InventoryDataKey"; // 테스트용
     static void FindFolder(string folderName)
     {
         DirectoryInfo dirInfo = new DirectoryInfo(folderName);
@@ -98,7 +98,7 @@ public class Static_JsonManager
         FindFolder(filePath);
 
         string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
-        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        toJson = Static_AES.Program.Encrypt(toJson, keyCode);          // 암호화 저장
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
@@ -111,7 +111,7 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
+            fromJson = Static_AES.Program.Decrypt(fromJson, keyCode);      // 복화
             data = JsonHelper.FromJson<string>(fromJson);
             return true;
         }
@@ -127,7 +127,7 @@ public class Static_JsonManager
         FindFolder(filePath);
 
         string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
-        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        toJson = Static_AES.Program.Encrypt(toJson, keyCode);          // 암호화 저장
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
@@ -140,7 +140,7 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
+            fromJson = Static_AES.Program.Decrypt(fromJson, keyCode);      // 복화
             data = JsonHelper.FromJson<Vector2Int>(fromJson);
             return true;
         }
@@ -160,7 +160,7 @@ public class Static_JsonManager
         FindFolder(filePath);
 
         string toJson = JsonUtility.ToJson(option, prettyPrint: true);
-        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        toJson = Static_AES.Program.Encrypt(toJson, keyCode);          // 암호화 저장
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
@@ -173,7 +173,7 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            //fromJson = Static_AES.Program.Decrypt(fromJson, "StatusData");      // 복화
+            fromJson = Static_AES.Program.Decrypt(fromJson, keyCode);      // 복화
             option = JsonUtility.FromJson<Data_Option>(fromJson);
             return true;
         }
@@ -192,7 +192,7 @@ public class Static_JsonManager
         FindFolder(filePath);
 
         string toJson = JsonUtility.ToJson(_data, prettyPrint: true);
-        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        toJson = Static_AES.Program.Encrypt(toJson, keyCode);          // 암호화 저장
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
@@ -205,7 +205,7 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            //fromJson = Static_AES.Program.Decrypt(fromJson, "SaveOptionData");      // 복화
+            fromJson = Static_AES.Program.Decrypt(fromJson, keyCode);      // 복화
             _data = JsonUtility.FromJson<Data_Continue>(fromJson);
             return true;
         }
@@ -225,7 +225,7 @@ public class Static_JsonManager
         FindFolder(filePath);
 
         string toJson = JsonUtility.ToJson(_data, prettyPrint: true);
-        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        toJson = Static_AES.Program.Encrypt(toJson, keyCode);          // 암호화 저장
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
@@ -238,7 +238,7 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            //fromJson = Static_AES.Program.Decrypt(fromJson, "SaveOptionData");      // 복화
+            fromJson = Static_AES.Program.Decrypt(fromJson, keyCode);      // 복화
             _data = JsonUtility.FromJson<UI_QuestManager.SetQuest>(fromJson);
             return true;
         }
@@ -270,10 +270,10 @@ public class Static_JsonManager
         FindFolder(filePath);
 
         string toJson = JsonUtility.ToJson(_data, prettyPrint: true);
-        //toJson = Static_AES.Program.Encrypt(toJson, "SaveOptionData");          // 암호화 저장
+        toJson = Static_AES.Program.Encrypt(toJson, keyCode);          // 암호화 저장
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
-
+ 
     public static bool TryLoadInventory(string fileName, out InventoryData _data)
     {
         string filePath = Application.dataPath + Const_Save._save;
@@ -283,7 +283,7 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            //fromJson = Static_AES.Program.Decrypt(fromJson, "SaveOptionData");      // 복화
+            fromJson = Static_AES.Program.Decrypt(fromJson, keyCode);      // 복화
             _data = JsonUtility.FromJson<InventoryData>(fromJson);
             return true;
         }

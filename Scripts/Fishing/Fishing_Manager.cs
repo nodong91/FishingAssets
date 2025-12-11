@@ -22,7 +22,8 @@ public class Fishing_Manager : MonoBehaviour
 
     [Header(" [ Camera ]")]
     public CinemachinePositionComposer positionComposer;
-    public float defaultCameraDistance = 15f;
+    const float defaultCameraDistance = 25f;
+
     [Header(" [ Object ]")]
     public GameObject fishingSet;
     public GameObject catchaText, failText;
@@ -49,8 +50,8 @@ public class Fishing_Manager : MonoBehaviour
     private bool isFishing = false;
     private bool isCatching = false;
 
-    AreaType areaType;
-    DayType dayType;
+    AreaType GetAreaType => Game_Manager.current.GetMainUI.GetAreaType;
+    DayType dayType => Game_Manager.current.GetMainUI.timeUI.lightMode;
     Dictionary<string, List<FishStruct>> dictFishStruct = new Dictionary<string, List<FishStruct>>();
     Queue<string> fishQueue = new Queue<string>();
     public TMPro.TMP_Text debugText;
@@ -91,19 +92,11 @@ public class Fishing_Manager : MonoBehaviour
         }
     }
 
-    public void SetFishing(AreaType _areaType)// 트리거 닿았을 때 낚시 시작
-    {
-        areaType = _areaType;
-
-        // 물고기 시간, 영역 세팅
-        dayType = Game_Manager.current.GetMainUI.timeUI.lightMode;
-        SetFish();// 트리거 닿았을 때
-    }
     //===================================================================================================================
     // 물고기 세팅
     //===================================================================================================================
 
-    void SetFish()
+    public void SetFishingTrigger()
     {
         int addSkillAmount = Game_Manager.current.currentStatus.fishAmount;// 낚시 스킬로 추가 횟수
         int fishingAmount = Random.Range(1, 5) + addSkillAmount;// 낚시 횟수
@@ -120,7 +113,7 @@ public class Fishing_Manager : MonoBehaviour
 
     FishStruct GetFishStruct()// 해당 타입 물고기 중 랜덤
     {
-        string cordType = areaType.ToString() + dayType.ToString();
+        string cordType = GetAreaType.ToString() + dayType.ToString();
         if (dictFishStruct.ContainsKey(cordType))
         {
             List<FishStruct> fishList = dictFishStruct[cordType];// 해당 타입 물고기 리스트
@@ -134,30 +127,32 @@ public class Fishing_Manager : MonoBehaviour
 
     FishStruct FishingChance(List<FishStruct> _fishList)// 확률로 물고기 선택
     {
+        List<float> _floatList = new List<float>();
         float total = 0;
         for (int i = 0; i < _fishList.Count; i++)
         {
-            float fishProbability = GetProbability(_fishList[i].itemStruct.itemClass);
+            ItemStruct.ItemClass itemClass = _fishList[i].itemStruct.itemClass;
+            float fishProbability = GetProbability(itemClass) + GetAddBuff(itemClass);
+            _floatList.Add(fishProbability);
             total += fishProbability;
         }
 
         float randomPoint = Random.value * total;
-        for (int i = 0; i < _fishList.Count; i++)
+        for (int i = 0; i < _floatList.Count; i++)
         {
-            float fishProbability = GetProbability(_fishList[i].itemStruct.itemClass);
-            if (randomPoint < fishProbability)
+            if (randomPoint < _floatList[i])
             {
                 return _fishList[i];
             }
             else
             {
-                randomPoint -= fishProbability;
+                randomPoint -= _floatList[i];
             }
         }
         return _fishList[^1];
     }
 
-    float GetProbability(ItemStruct.ItemClass _class)// 물고기 클래스별 확률
+    float GetAddBuff(ItemStruct.ItemClass _class)
     {
         float addValue = 0f;
         Game_Manager.FishBuffStruct fishBuff = Game_Manager.current.GetFishBuff;// 낚시 버프 적용
@@ -165,20 +160,24 @@ public class Fishing_Manager : MonoBehaviour
         {
             addValue = fishBuff.addValue;
         }
+        return addValue;
+    }
 
+    float GetProbability(ItemStruct.ItemClass _class)// 물고기 클래스별 확률
+    {
         // 물고기 클래스별 확률
         float classValue = _class switch
         {
             // 필요한 물고기가 안나올 확률????? - 낮은 클래스 물고기 안나올 수 있음
             // 미끼가 특정 클래스의 확률을 조정
-            ItemStruct.ItemClass.Common => 0.6f,
+            ItemStruct.ItemClass.Common => 1.0f,
             ItemStruct.ItemClass.Uncommon => 0.25f,
             ItemStruct.ItemClass.Rare => 0.1f,
             ItemStruct.ItemClass.Epic => 0.04f,
             ItemStruct.ItemClass.Legendary => 0.01f,
             _ => 0f,
         };
-        return classValue + addValue;
+        return classValue;
     }
 
     //===================================================================================================================
@@ -202,7 +201,7 @@ public class Fishing_Manager : MonoBehaviour
     public void CheckFishQueue()
     {
         // 버튼 활성화
-        fishingCanvas.OnStartButton(fishQueue.Count, areaType.ToString(), dayType.ToString());// 스타트 버튼 활성화
+        fishingCanvas.OnStartButton(fishQueue.Count, GetAreaType.ToString(), dayType.ToString());// 스타트 버튼 활성화
     }
 
     //===================================================================================================================
@@ -276,6 +275,9 @@ public class Fishing_Manager : MonoBehaviour
         }
         fishingCanvas.SetCount(0);// 카운트 완료
         fishingCanvas.SetFishUI();
+
+        //float fishDistance = (fishPrefab.transform.position - shipPrefab.transform.position).magnitude;
+        //positionComposer.CameraDistance = (fishDistance * 0.5f) + defaultCameraDistance;
         yield return null;
 
         SetCooling();
@@ -329,7 +331,7 @@ public class Fishing_Manager : MonoBehaviour
         fishingCanvas.LinTention(catchDistance / catchRadius);
 
         float fishDistance = (fishPrefab.transform.position - shipPrefab.transform.position).magnitude;
-        positionComposer.CameraDistance = (fishDistance * 0.5f) + defaultCameraDistance;
+        positionComposer.CameraDistance = Mathf.Lerp(positionComposer.CameraDistance, (fishDistance * 0.5f) + defaultCameraDistance, 0.1f);
     }
 
     Vector3 CatchRayCast()
@@ -886,14 +888,66 @@ public class Fishing_Manager : MonoBehaviour
 
 
 
+    const float baitValue = 100f;
 
+    public void SetBait(ItemStruct.ItemClass _itemClass)
+    {
+        int addSkillAmount = Game_Manager.current.currentStatus.fishAmount;// 낚시 스킬로 추가 횟수
+        int fishingAmount = Random.Range(1, 5) + addSkillAmount;// 낚시 횟수
 
+        fishQueue.Clear();
+        for (int i = 0; i < fishingAmount; i++)
+        {
+            // 물고기 세팅
+            FishStruct fishStruct = AddFishClass(_itemClass);// 낚시터 세팅
+            fishQueue.Enqueue(fishStruct.id);
+        }
+        SetReady(true);// 낚시 준비
+    }
 
+    FishStruct AddFishClass(ItemStruct.ItemClass _itemClass)// 해당 타입 물고기 중 랜덤
+    {
+        string cordType = Game_Manager.current.GetMainUI.GetAreaType.ToString() + dayType.ToString();
+        if (dictFishStruct.ContainsKey(cordType))
+        {
+            List<FishStruct> fishList = dictFishStruct[cordType];// 해당 타입 물고기 리스트
+            FishStruct randomFish = GetFishClassChance(fishList, _itemClass);// 물고기 확률로 선택
+            return randomFish;
+        }
+        FishStruct defaultFish = Singleton_Data.INSTANCE.Dict_Fish["fs_1001"];// 기본 물고기
+        return defaultFish;
+    }
 
+    FishStruct GetFishClassChance(List<FishStruct> _fishList, ItemStruct.ItemClass _itemClass)// 확률로 물고기 선택
+    {
+        List<float> _floatList = new List<float>();
+        float total = 0;
+        for (int i = 0; i < _fishList.Count; i++)
+        {
+            ItemStruct.ItemClass itemClass = _fishList[i].itemStruct.itemClass;
+            float fishProbability = GetProbability(itemClass) + GetAddBuff(itemClass);
+            if (itemClass == _itemClass)
+            {
+                fishProbability += baitValue; // 해당 클래스 확률 대폭 상승
+            }
+            _floatList.Add(fishProbability);
+            total += fishProbability;
+        }
 
-
-
-
+        float randomPoint = Random.value * total;
+        for (int i = 0; i < _floatList.Count; i++)
+        {
+            if (randomPoint < _floatList[i])
+            {
+                return _fishList[i];
+            }
+            else
+            {
+                randomPoint -= _floatList[i];
+            }
+        }
+        return _fishList[^1];
+    }
 
 
     //===================================================================================================================

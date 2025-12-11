@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -21,10 +22,11 @@ public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         fishStruct = _fishStruct;
         unknown = (_fishClass == null);
         ItemStruct itemStruct = _fishStruct.itemStruct;
-        nameText.text = (_fishClass != null) ? Singleton_Data.INSTANCE.GetLanguage(itemStruct.name) : "???";
-        idText.text = itemStruct.id;
+        nameText.text = unknown ? "???" : Singleton_Data.INSTANCE.GetLanguage(itemStruct.name);
+        string color = P01_Utility.ClassColor(itemStruct.itemClass);
+        idText.text = unknown ? "???" : $"<color=#{color}>{itemStruct.itemClass}</color>";
         iconImage.sprite = Singleton_Data.INSTANCE.Dict_Sprite[itemStruct.icon];
-        iconImage.color = _fishClass != null ? Color.white : P01_Utility.HexToColor("000000CC");
+        iconImage.color = unknown ? P01_Utility.HexToColor("000000CC") : Color.white;
         iconImage.rectTransform.sizeDelta = SetIconImage(itemStruct, 20f);
     }
 

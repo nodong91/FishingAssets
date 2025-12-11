@@ -73,7 +73,7 @@ public class UI_Main : MonoBehaviour
         Game_Manager.current.OutOfControll(true);
     }
 
-    void CloseInventory()
+    public void CloseInventory()
     {
         OpenCanvas(true);
         statusUI.OpenCanvas(false);
@@ -213,6 +213,8 @@ public class UI_Main : MonoBehaviour
 
     public void SetMaxEnergyPoint(float _energy)
     {
+        Debug.LogWarning($"최대 연료량 : {_energy}");
+        shipEnergyRect.gameObject.SetActive(_energy > 0f);
         shipEnergyRect.sizeDelta = new Vector2((1f + _energy) * 2f, shipEnergyRect.sizeDelta.y);
     }
 
@@ -429,15 +431,25 @@ public class UI_Main : MonoBehaviour
         return inst;
     }
 
+
+    //===========================================================================================================================
+    // 깊이 체크
+    //===========================================================================================================================
+    Data_Manager.AreaType areaType;
+    public Data_Manager.AreaType GetAreaType { get { return areaType; } }
     public TMPro.TMP_Text deepText;
     public void CheckDeep(Data_Manager.AreaType _areaType)
     {
+        areaType = _areaType;
         deepText.gameObject.SetActive(_areaType != Data_Manager.AreaType.None);
         deepText.text = _areaType.ToString();
     }
 
 
 
+    //===========================================================================================================================
+    // 부스터
+    //===========================================================================================================================
 
     public void SetMaxBoosterValue(float _speed, float _value)
     {
