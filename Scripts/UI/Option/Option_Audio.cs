@@ -9,6 +9,7 @@ public class Option_Audio : MonoBehaviour
     public Custom_Button prevButton, nextButton;
     public TMP_Text audioText;
     public int currentAudio;
+
     [Header(" [ 슬라이더 ]")]
     public Slider master_Slider;
     public Slider bgm_Slider, fx_Slider, env_Slider;
@@ -18,6 +19,7 @@ public class Option_Audio : MonoBehaviour
 
     const string enableColor = "3D83FF";
     const string disableColor = "BCBCBC";
+
     Dictionary<Data_Manager.AudioStruct, int> tryAudioStructToIndex = new Dictionary<Data_Manager.AudioStruct, int>();
 
     //===========================================================================================================================

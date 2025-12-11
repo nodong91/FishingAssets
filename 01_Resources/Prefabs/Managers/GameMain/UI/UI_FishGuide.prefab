@@ -146,7 +146,7 @@ MonoBehaviour:
     canvasGroup: {fileID: 0}
     targetPosition: {x: 0, y: 0}
   - direction: 1
-    rect: {fileID: 5178101421326316242}
+    rect: {fileID: 6723802823488565532}
     canvasGroup: {fileID: 0}
     targetPosition: {x: 0, y: 0}
   allFishStruct: []
@@ -154,7 +154,7 @@ MonoBehaviour:
   parentBase: {fileID: 1518823890089130284}
   guideSize: {x: 4, y: 3}
   cardBase: {fileID: 7961156160660015001}
-  backButton: {fileID: 8665356293960153935}
+  backButton: {fileID: 7120885243168749697}
   leftButton: {fileID: 4719707392142710501}
   rightButton: {fileID: 6722231724424968051}
   pageText: {fileID: 90063450498785233}
@@ -2921,8 +2921,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5178101421326316242}
   - {fileID: 7067090464772232515}
+  - {fileID: 6723802823488565532}
   m_Father: {fileID: 5987198659356596465}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3943,6 +3943,16 @@ MonoBehaviour:
   card: {fileID: 6351034964120125738}
   fishStruct:
     id: 
+    fishHealth: 0
+    fishPower: 0
+    fishSpeed: 0
+    fishCoolTime: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishTurnDelay: {x: 0, y: 0}
+    addDuration: 0
+    addValue: 0
     itemStruct:
       id: 
       name: 
@@ -3957,17 +3967,6 @@ MonoBehaviour:
     areaType: 0
     fishDayType: 0
     size: {x: 0, y: 0}
-    fishHealth: 0
-    fishPower: 0
-    fishSpeed: 0
-    fishCoolTime: 0
-    fishAttackSpeed: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
-    addDuration: 0
-    addValue: 0
   iconImage: {fileID: 2343202938731197895}
   nameText: {fileID: 7157627388511951326}
   idText: {fileID: 7656071925949673517}
@@ -4240,7 +4239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overStyle: 1
   buttonImage: {fileID: 2305483982312508443}
---- !u!1001 &7149619447837353831
+--- !u!1001 &8767239380630086825
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -4274,7 +4273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 120
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4298,15 +4297,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4337,15 +4336,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
---- !u!224 &5178101421326316242 stripped
+--- !u!224 &6723802823488565532 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
-  m_PrefabInstance: {fileID: 7149619447837353831}
+  m_PrefabInstance: {fileID: 8767239380630086825}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8665356293960153935 stripped
+--- !u!114 &7120885243168749697 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1979625204290247720, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
-  m_PrefabInstance: {fileID: 7149619447837353831}
+  m_PrefabInstance: {fileID: 8767239380630086825}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
