@@ -28,6 +28,10 @@ public class Skill_Manager : MonoBehaviour
     public AnimationCurve openingCurve;
     SkillStruct[,] statusStructs;
 
+    public int defaultSkillPrice = 100; // 스킬 포인트 가격
+    public int skillPrice = 100; // 스킬 포인트 가격
+    public int GetSkillPrice { get { return skillPrice; } }
+
     public Skill_Infomation infomation;
 
     public void SetStart()
@@ -159,6 +163,7 @@ public class Skill_Manager : MonoBehaviour
 
         SetSlot(_addNode);
         Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._activeSkill);
+        skillPrice = Mathf.RoundToInt(defaultSkillPrice + (enableSlotLIst.Count * skillPrice * 0.3f));
     }
 
     void SetSlot(Vector2Int _addNode)// 슬롯 세팅

@@ -186,6 +186,7 @@ public class Fishing_Manager : MonoBehaviour
 
     void SetReady(bool _ready)// 준비
     {
+        Debug.LogWarning("낚시 시작");
         transform.position = Game_Manager.current.GetPlayer.transform.position;
 
         float rotateY = Camera.main.transform.rotation.eulerAngles.y;
@@ -544,7 +545,7 @@ public class Fishing_Manager : MonoBehaviour
             fishPrefab.transform.rotation = Quaternion.Slerp(fishPrefab.transform.rotation, rotation, Time.deltaTime * currentFish.fishSpellTime);
             //fishSpeed = Mathf.Lerp(prevSpeed, 0f, normalize);// 서시히 정지
             fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * fishSpeed, Space.Self);
-            Debug.LogWarning($"{normalize} / {currentFish.fishSpellTime}");
+            //Debug.LogWarning($"{normalize} / {currentFish.fishSpellTime}");
             fishingCanvas.SetFishSpell(normalize / currentFish.fishSpellTime);
             if (normalize > currentFish.fishSpellTime)
             {
@@ -887,7 +888,6 @@ public class Fishing_Manager : MonoBehaviour
 
 
 
-
     const float baitValue = 100f;
 
     public void SetBait(ItemStruct.ItemClass _itemClass)
@@ -907,7 +907,7 @@ public class Fishing_Manager : MonoBehaviour
 
     FishStruct AddFishClass(ItemStruct.ItemClass _itemClass)// 해당 타입 물고기 중 랜덤
     {
-        string cordType = Game_Manager.current.GetMainUI.GetAreaType.ToString() + dayType.ToString();
+        string cordType = GetAreaType.ToString() + dayType.ToString();
         if (dictFishStruct.ContainsKey(cordType))
         {
             List<FishStruct> fishList = dictFishStruct[cordType];// 해당 타입 물고기 리스트
@@ -970,6 +970,6 @@ public class Fishing_Manager : MonoBehaviour
                 Debug.LogError($"[Fishing_Manager] 해당 ID 물고기 없음 : {_id}");
             }
         }
-        SetReady(true);// 테스트 낚시 준비
+        SetReady(true);// 치트 테스트 낚시 준비
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UI_Main : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
+    public CanvasGroup mainAll;
     public UI_Time timeUI;
     public UI_Status statusUI;
     public Custom_Button inventoryButton;
@@ -114,18 +115,32 @@ public class UI_Main : MonoBehaviour
 
     public void OptionButton()
     {
-        OpenCanvas(false);
+        //OpenCanvas(false);
+        StartCoroutine(MainAllOpen(false));
         dele_CloseButton = CloseOption;
         Option_Manager.current.OpenCanvas(true);
         Game_Manager.current.OutOfControll(true);
         Debug.LogWarning("Option Button Clicked");
     }
 
+    IEnumerator MainAllOpen(bool _open)
+    {
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime * 3f;
+            mainAll.alpha = _open == true ? normalize : 1f - normalize;
+            yield return null;
+        }
+        mainAll.alpha = (int)(_open == true ? normalize : 1f - normalize);
+    }
+
     void CloseOption()
     {
+        StartCoroutine(MainAllOpen(true));
         Game_Manager.current.OutOfControll(false);
         Option_Manager.current.OpenCanvas(false);
-        OpenCanvas(true);
+        //OpenCanvas(true);
     }
 
     //===========================================================================================================================

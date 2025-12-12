@@ -40,13 +40,13 @@ public class Skill_Setting : MonoBehaviour
     const string _023 = "_023";// 물고기 그로기 타임 증가
     const string _024 = "_024";// 충돌방지 확률
 
-    const string _1000 = "_100_00";// 배 언락
-    const string _1001 = "_100_01";// 배 언락
-    const string _1002 = "_100_02";// 배 언락
-    const string _1003 = "_100_03";// 배 언락
-    const string _1004 = "_100_04";// 배 언락
-    const string _1005 = "_100_05";// 배 언락
-    const string _1006 = "_100_06";// 배 언락
+    const string _100 = "_100";// 배 언락
+    const string _101 = "_101";// 배 언락
+    const string _102 = "_102";// 배 언락
+    const string _103 = "_103";// 배 언락
+    const string _104 = "_104";// 배 언락
+    const string _105 = "_105";// 배 언락
+    const string _106 = "_106";// 배 언락
 
     public void AddLevel(string _id, bool _add)
     {
@@ -75,13 +75,14 @@ public class Skill_Setting : MonoBehaviour
         else if (_id.Contains(_022)) Level_FishCoolTime = _add ? Level_FishCoolTime + 1 : Level_FishCoolTime - 1;
         else if (_id.Contains(_023)) Level_FishGroggyTime = _add ? Level_FishGroggyTime + 1 : Level_FishGroggyTime - 1;
         else if (_id.Contains(_024)) Level_CrashChance = _add ? Level_CrashChance + 1 : Level_CrashChance - 1;
-        else if (_id.Contains(_1000)) Level_Ship_00 = _add ? Level_Ship_00 + 1 : Level_Ship_00 - 1;
-        else if (_id.Contains(_1001)) Level_Ship_01 = _add ? Level_Ship_01 + 1 : Level_Ship_01 - 1;
-        else if (_id.Contains(_1002)) Level_Ship_02 = _add ? Level_Ship_02 + 1 : Level_Ship_02 - 1;
-        else if (_id.Contains(_1003)) Level_Ship_03 = _add ? Level_Ship_03 + 1 : Level_Ship_03 - 1;
-        else if (_id.Contains(_1004)) Level_Ship_04 = _add ? Level_Ship_04 + 1 : Level_Ship_04 - 1;
-        else if (_id.Contains(_1005)) Level_Ship_05 = _add ? Level_Ship_05 + 1 : Level_Ship_05 - 1;
-        else if (_id.Contains(_1006)) Level_Ship_06 = _add ? Level_Ship_06 + 1 : Level_Ship_06 - 1;
+
+        else if (_id.Contains(_100)) Level_Ship_00 = _add ? Level_Ship_00 + 1 : Level_Ship_00 - 1;
+        else if (_id.Contains(_101)) Level_Ship_01 = _add ? Level_Ship_01 + 1 : Level_Ship_01 - 1;
+        else if (_id.Contains(_102)) Level_Ship_02 = _add ? Level_Ship_02 + 1 : Level_Ship_02 - 1;
+        else if (_id.Contains(_103)) Level_Ship_03 = _add ? Level_Ship_03 + 1 : Level_Ship_03 - 1;
+        else if (_id.Contains(_104)) Level_Ship_04 = _add ? Level_Ship_04 + 1 : Level_Ship_04 - 1;
+        else if (_id.Contains(_105)) Level_Ship_05 = _add ? Level_Ship_05 + 1 : Level_Ship_05 - 1;
+        else if (_id.Contains(_106)) Level_Ship_06 = _add ? Level_Ship_06 + 1 : Level_Ship_06 - 1;
         SetSkillType(_id);
     }
 
@@ -173,7 +174,9 @@ public class Skill_Setting : MonoBehaviour
     {
         if (Singleton_Data.INSTANCE.Dict_Skill.ContainsKey(_id) == false)
             return;
+
         Data_Manager.SkillStruct data = Singleton_Data.INSTANCE.Dict_Skill[_id];
+        Debug.LogWarning($"{_id} ({data.skillType}): 활성화");
         switch (data.skillType)
         {
             case Data_Manager.SkillStruct.SkillType.AddStatus:
@@ -186,6 +189,10 @@ public class Skill_Setting : MonoBehaviour
 
             case Data_Manager.SkillStruct.SkillType.Etc:
                 SetEtc();
+                break;
+
+            case Data_Manager.SkillStruct.SkillType.License:
+                Level_License++;
                 break;
         }
     }
@@ -216,6 +223,11 @@ public class Skill_Setting : MonoBehaviour
     public float GetCrashChance()
     {
         return constCrashChance * Level_CrashChance;
+    }
+
+    public int GetLicenseLevel()
+    {
+        return Level_License;
     }
 
     public void ResetLevel()
@@ -252,6 +264,8 @@ public class Skill_Setting : MonoBehaviour
         Level_FishSpellTime = 0;
         Level_FishGroggyTime = 0;
         Level_FishDefenseChance = 0;
+
+        Level_License = 0;
     }
 
     [Header(" [ Unlock Ship ]")]
@@ -284,16 +298,19 @@ public class Skill_Setting : MonoBehaviour
     public int Level_FishPrice;// 판매 물고기 가격 증가
 
     [Header(" [ Fish ]")]
-    public int Level_FishHealth;
-    public int Level_FishPower;
-    public int Level_FishSpeed;
-    public int Level_FishCoolTime;
-    public int Level_FishSpellTime;
-    public int Level_FishGroggyTime;
-    public int Level_FishDefenseChance;
+    public int Level_FishHealth;// 물고기 체력
+    public int Level_FishPower;// 물고기 공격력
+    public int Level_FishSpeed;//   물고기 이동 속도
+    public int Level_FishCoolTime;// 물고기 공격 쿨타임
+    public int Level_FishSpellTime;// 공격할 때 딜레이 시간
+    public int Level_FishGroggyTime;// 방어 성공 시 그로기 시간
+    public int Level_FishDefenseChance;// 공격시 입력 개수
 
     [Header(" [ Etc ]")]
-    public int Level_BusterSpeed;
-    public int Level_BusterValue;
-    public int Level_CrashChance;
+    public int Level_BusterSpeed;// 부스터 속도
+    public int Level_BusterValue;// 부스터 크기
+    public int Level_CrashChance;// 충돌방지 확률
+
+    [Header(" [ 자격증 ]")]
+    public int Level_License;// 라이센스 레벨
 }

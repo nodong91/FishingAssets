@@ -27,6 +27,11 @@ public class Singleton_Controller : MonoSingleton<Singleton_Controller>
             }
         }
         Mouse_Wheel(Input.GetAxis("Mouse ScrollWheel"));
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Game_Manager.current?.GetMainUI.OptionButton();
+        }
     }
 
     public void SetController()

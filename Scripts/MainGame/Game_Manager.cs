@@ -119,11 +119,30 @@ public class Game_Manager : MonoBehaviour
         Debug.LogWarning($"회피 확률 : {crashChance} > {randomChance}");
         return crashChance > randomChance;
     }
+
+    public bool CheckLicense()
+    {
+        int areaType = (int)GetMainUI.GetAreaType;
+        if (areaType == 0)
+        {
+            GetMainUI.SetWarnningText("낚시를 할 수 없습니다.");
+            return false;
+        }
+
+        int licenseLevel = GetSkill.skill_Setting.GetLicenseLevel();
+        Debug.LogWarning($"낚시 면허 레벨 : {licenseLevel} / 필요 레벨 : {areaType}");
+        if (licenseLevel < areaType)
+        {
+            GetMainUI.SetWarnningText("낚시 면허가 필요합니다.");
+            return false;
+        }
+        return true;
+    }
+
     public string[] bgms;
     Coroutine randomTheme;
     IEnumerator SetStart()
     {
-
         Camera_Manager.current.SetCameraManager();
         continueData = Singleton_Continue.INSTANCE.LoadContinue();
 
@@ -157,7 +176,7 @@ public class Game_Manager : MonoBehaviour
     {
         SetThemeMusic();
         bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._newGame);
-        Debug.LogWarning($"튜토리얼 완료? {Const_Tutorial._newGame} {isCompleted}----------{continueData.shipData}");
+        Debug.LogWarning($"튜토리얼 완료? {Const_Tutorial._newGame} ({isCompleted} : {continueData.shipData})");
         // 튜토리얼 시작
         if (isCompleted == true)
         {
@@ -172,15 +191,14 @@ public class Game_Manager : MonoBehaviour
             {
                 GetMainUI.OpenCanvas(false);
                 Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
-                GetDialog.DialogStart_NPC(npc, Const_Dialog._0001);// 튜토리얼 대화 시작
+                GetDialog.DialogStart_NPC(npc, Const_Dialog._0002);// 튜토리얼 대화 시작
             }
         }
         else
         {
             GetMainUI.OpenCanvas(false);
             Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
-            GetDialog.DialogStart_NPC(npc, Const_Dialog._0002);// 튜토리얼 대화 시작
-            return;
+            GetDialog.DialogStart_NPC(npc, Const_Dialog._0001);// 튜토리얼 대화 시작
         }
     }
 

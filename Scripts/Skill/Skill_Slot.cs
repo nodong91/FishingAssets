@@ -8,9 +8,9 @@ using static Data_Manager;
 
 public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
+    public bool activeSlot;// 슬롯 활성화 여부
     public bool startSlot;
     public Vector2Int slotNode;
-    public bool onSlot;
     public bool hide = true;
     public List<Vector2Int> nearbySlot = new List<Vector2Int>();
     public Sprite[] levelIcons;
@@ -25,7 +25,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public delegate void DeleSlotAction(Vector2Int _grid);
     public DeleSlotAction deleSlotAction;
 
-    public delegate void DeleSlotPosition(SkillStruct _status, Vector3 _position = default);
+    public delegate void DeleSlotPosition(Skill_Slot _slot, Vector3 _position = default);
     public DeleSlotPosition deleSlotPosition;
 
     Dictionary<string, Sprite> sprites => Singleton_Data.INSTANCE.Dict_Sprite;
@@ -101,7 +101,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.localScale = Vector3.one * 1.1f;
-        deleSlotPosition?.Invoke(Skill, transform.position);
+        deleSlotPosition?.Invoke(this, transform.position);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -115,13 +115,13 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (Skill == null || System.String.IsNullOrEmpty(Skill.id) == true)
+        if (activeSlot == true || Skill == null || System.String.IsNullOrEmpty(Skill.id) == true)
             return;
 
-        if (Game_Manager.current.CheckMoney(Skill.price) == false)// 돈이 없으면
+        if (Game_Manager.current.CheckMoney(Game_Manager.current.GetSkill.GetSkillPrice) == false)// 돈이 없으면
             return;
 
-        if (onSlot == false)
+        if (activeSlot == false)
             // 누르고 있기
             inputSlotCoroutine = StartCoroutine(InputSlot());
     }
@@ -131,7 +131,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         if (inputSlotCoroutine != null)
             StopCoroutine(inputSlotCoroutine);
 
-        if (onSlot == false)
+        if (activeSlot == false)
         {
             gageImage.fillAmount = 0f;
             iconImage.material.SetFloat(Const_Shader._fillAmount, gageImage.fillAmount);
@@ -140,7 +140,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void EnableSlot(bool _enable)
     {
-        onSlot = _enable;
+        activeSlot = _enable;
         gageImage.fillAmount = _enable == true ? 1f : 0f;
         iconImage.material.SetFloat(Const_Shader._fillAmount, gageImage.fillAmount);
     }
@@ -174,7 +174,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
     public void ActiveSlot()
     {
         // 스킬 활성화
-        float price = -Skill.price;
+        float price = -Game_Manager.current.GetSkill.GetSkillPrice;
         Game_Manager.current.GetMainUI.MoveMoney(price);// 돈 이동
 
         deleSlotAction?.Invoke(slotNode);

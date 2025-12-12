@@ -1,7 +1,6 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 using static Data_Manager;
 
 public class Skill_Infomation : MonoBehaviour
@@ -19,9 +18,9 @@ public class Skill_Infomation : MonoBehaviour
         SetPosition(null);
     }
 
-    public void SetPosition(SkillStruct _status, Vector3 _position = default)
+    public void SetPosition(Skill_Slot _slot, Vector3 _position = default)
     {
-        float alpha = (_status == null) ? 0f : 1f;
+        float alpha = (_slot == null) ? 0f : 1f;
         Vector2 viewportPoint;
         if (alpha == 0f)
         {
@@ -40,15 +39,18 @@ public class Skill_Infomation : MonoBehaviour
             StopCoroutine(moving);
         moving = StartCoroutine(SetMoving(_position, viewportPoint, alpha));
 
-        if (_status == null)
+        if (_slot == null)
             return;
 
-        text_Neme.text = Singleton_Data.INSTANCE.GetLanguage(_status.name);
+        text_Neme.text = Singleton_Data.INSTANCE.GetLanguage(_slot.Skill.name);
         int fontSize = (int)(text_Description.fontSize * 0.7f);
         //string addStatusString = $"\n<size={fontSize}>{_status.addStatusString}</size>";
-        text_Description.text = Singleton_Data.INSTANCE.GetLanguage(_status.description);
-        text_Price.text = _status.price.ToString();
+        text_Description.text = Singleton_Data.INSTANCE.GetLanguage(_slot.Skill.description);
 
+        text_Price.gameObject.SetActive(!_slot.activeSlot);// È°¼ºÈ­ µÈ ½½·ÔÀÌ¸é °¡°Ý ¼û±è
+        if (_slot.activeSlot == true)
+            return;
+        text_Price.text = Game_Manager.current.GetSkill.GetSkillPrice.ToString();
     }
 
     IEnumerator SetMoving(Vector3 _position, Vector2 _viewportPoint, float _alpha)

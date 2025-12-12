@@ -160,6 +160,7 @@ public class Gamble_Lottery : MonoBehaviour
         answerSlot.SetSlot(_mainSprite, 0);
         answerSlot.deleEnterSlot = EnterSlot;
         answerSlot.iconImage.material.SetFloat("_FillAmount", 0f);
+
         Transform parent = lotteryCards[currentIndex].answerSlotPosition.transform;
         answerSlot.transform.SetParent(parent);
         answerSlot.transform.position = parent.position;

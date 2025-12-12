@@ -317,6 +317,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ea8b3a9884940af4681c9c0530b37843, type: 3}
   - {fileID: 21300000, guid: d0171c8693d433149ae478ccbd3d9a06, type: 3}
   - {fileID: 21300000, guid: 23b755ca0cb726e4388141ee73b4de85, type: 3}
+  - {fileID: 21300000, guid: c04c78e7305e3cb4ca91fc96555c30ce, type: 3}
+  - {fileID: 21300000, guid: 4945b1952eaeadc44a36d4f67352915f, type: 3}
+  - {fileID: 21300000, guid: a8b5a85347e78134796886b8855c01a6, type: 3}
+  - {fileID: 21300000, guid: 84cd9038c6b3bdd468bfa91b43ba1ccf, type: 3}
   - {fileID: 21300000, guid: a2944d14c621d4b4faa86675c31e4ff9, type: 3}
   npcData:
   - {fileID: 11400000, guid: f5051af63d2a58d4898565b06e66ba95, type: 2}
@@ -3376,7 +3380,7 @@ MonoBehaviour:
     size: {x: 180, y: 300}
   skillStruct:
   - id: sk_001_00
-    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 1"
+    name: sk_001_00
     description: sk_001_00_a
     addStatusString: CatchRadius + 1
     skillType: 0
@@ -3398,7 +3402,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_001_01
-    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 2"
+    name: sk_001_00
     description: sk_001_00_a
     addStatusString: CatchRadius + 1
     skillType: 0
@@ -3420,7 +3424,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_001_02
-    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 3"
+    name: sk_001_00
     description: sk_001_00_a
     addStatusString: CatchRadius + 1
     skillType: 0
@@ -3442,7 +3446,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_001_03
-    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 4"
+    name: sk_001_00
     description: sk_001_00_a
     addStatusString: CatchRadius+1
     skillType: 0
@@ -3464,7 +3468,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_001_04
-    name: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 5"
+    name: sk_001_00
     description: sk_001_00_a
     addStatusString: CatchRadius+1
     skillType: 0
@@ -3486,7 +3490,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_002_00
-    name: "\uAC15\uB825\uD55C \uC774\uB450\uADFC 1"
+    name: sk_002_00
     description: sk_002_00_a
     addStatusString: CatchPower+1
     skillType: 0
@@ -3508,8 +3512,8 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_002_01
-    name: "\uAC15\uB825\uD55C \uC774\uB450\uADFC 2"
-    description: sk_002_00_a
+    name: sk_002_01
+    description: sk_002_01_a
     addStatusString: CatchPower+1
     skillType: 0
     icon: Icon_Sk_002
@@ -3530,8 +3534,8 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_002_02
-    name: "\uAC15\uB825\uD55C \uC774\uB450\uADFC 3"
-    description: sk_002_00_a
+    name: sk_002_02
+    description: sk_002_02_a
     addStatusString: CatchPower+1
     skillType: 0
     icon: Icon_Sk_002
@@ -3552,8 +3556,8 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_002_03
-    name: "\uAC15\uB825\uD55C \uC774\uB450\uADFC 4"
-    description: sk_002_00_a
+    name: sk_002_03
+    description: sk_002_03_a
     addStatusString: CatchPower+1
     skillType: 0
     icon: Icon_Sk_002
@@ -3574,8 +3578,8 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_002_04
-    name: "\uAC15\uB825\uD55C \uC774\uB450\uADFC 5"
-    description: sk_002_00_a
+    name: sk_002_04
+    description: sk_002_04_a
     addStatusString: CatchPower+1
     skillType: 0
     icon: Icon_Sk_002
@@ -3596,7 +3600,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_003_00
-    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 1"
+    name: sk_003_00
     description: sk_003_00_a
     addStatusString: CatchSpeed+1
     skillType: 0
@@ -3618,7 +3622,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_003_01
-    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 2"
+    name: sk_003_00
     description: sk_003_00_a
     addStatusString: CatchSpeed+1
     skillType: 0
@@ -3640,7 +3644,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_003_02
-    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 3"
+    name: sk_003_00
     description: sk_003_00_a
     addStatusString: CatchSpeed+1
     skillType: 0
@@ -3662,7 +3666,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_003_03
-    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 4"
+    name: sk_003_00
     description: sk_003_00_a
     addStatusString: CatchSpeed+1
     skillType: 0
@@ -3684,7 +3688,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_003_04
-    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 5"
+    name: sk_003_00
     description: sk_003_00_a
     addStatusString: CatchSpeed+1
     skillType: 0
@@ -3706,7 +3710,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_003_05
-    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 6"
+    name: sk_003_00
     description: sk_003_00_a
     addStatusString: CatchSpeed+1
     skillType: 0
@@ -3728,7 +3732,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_003_06
-    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 7"
+    name: sk_003_00
     description: sk_003_00_a
     addStatusString: CatchSpeed+1
     skillType: 0
@@ -3750,7 +3754,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_003_07
-    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 8"
+    name: sk_003_00
     description: sk_003_00_a
     addStatusString: CatchSpeed+1
     skillType: 0
@@ -3772,7 +3776,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_003_08
-    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 9"
+    name: sk_003_00
     description: sk_003_00_a
     addStatusString: CatchSpeed+1
     skillType: 0
@@ -3794,7 +3798,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_003_09
-    name: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 10"
+    name: sk_003_00
     description: sk_003_00_a
     addStatusString: CatchSpeed+1
     skillType: 0
@@ -3816,7 +3820,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_004_00
-    name: "\uC2E0\uB4E4\uB9B0 \uCEE8\uD2B8\uB864 1"
+    name: sk_004_00
     description: sk_004_00_a
     addStatusString: ShipSpeed+1
     skillType: 0
@@ -3838,7 +3842,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_004_01
-    name: "\uC2E0\uB4E4\uB9B0 \uCEE8\uD2B8\uB864 2"
+    name: sk_004_00
     description: sk_004_00_a
     addStatusString: ShipSpeed+1
     skillType: 0
@@ -3860,7 +3864,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_004_02
-    name: "\uC2E0\uB4E4\uB9B0 \uCEE8\uD2B8\uB864 3"
+    name: sk_004_00
     description: sk_004_00_a
     addStatusString: ShipSpeed+1
     skillType: 0
@@ -3882,7 +3886,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_004_03
-    name: "\uC2E0\uB4E4\uB9B0 \uCEE8\uD2B8\uB864 4"
+    name: sk_004_00
     description: sk_004_00_a
     addStatusString: ShipSpeed+1
     skillType: 0
@@ -3904,7 +3908,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_004_04
-    name: "\uC2E0\uB4E4\uB9B0 \uCEE8\uD2B8\uB864 5"
+    name: sk_004_00
     description: sk_004_00_a
     addStatusString: ShipSpeed+1
     skillType: 0
@@ -3926,7 +3930,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_005_00
-    name: "\uC695\uC2EC\uC7C1\uC774 1 - \uAE4A\uC740 \uBB3C\uC5D0\uC11C \uB09A\uC2DC"
+    name: sk_005_00
     description: sk_005_00_a
     addStatusString: MaxWeight+1
     skillType: 0
@@ -3948,7 +3952,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_005_01
-    name: "\uC695\uC2EC\uC7C1\uC774 2"
+    name: sk_005_00
     description: sk_005_00_a
     addStatusString: MaxWeight+1
     skillType: 0
@@ -3970,7 +3974,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_005_02
-    name: "\uC695\uC2EC\uC7C1\uC774 3"
+    name: sk_005_00
     description: sk_005_00_a
     addStatusString: MaxWeight+1
     skillType: 0
@@ -3992,7 +3996,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_005_03
-    name: "\uC695\uC2EC\uC7C1\uC774 4"
+    name: sk_005_00
     description: sk_005_00_a
     addStatusString: MaxWeight+1
     skillType: 0
@@ -4014,7 +4018,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_005_04
-    name: "\uC695\uC2EC\uC7C1\uC774 5"
+    name: sk_005_00
     description: sk_005_00_a
     addStatusString: MaxWeight+1
     skillType: 0
@@ -4036,7 +4040,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_006_00
-    name: "\uBC29\uB791\uC790 1"
+    name: sk_006_00
     description: sk_006_00_a
     addStatusString: MaxEnergy+1
     skillType: 0
@@ -4058,7 +4062,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_006_01
-    name: "\uBC29\uB791\uC790 2"
+    name: sk_006_00
     description: sk_006_00_a
     addStatusString: MaxEnergy+1
     skillType: 0
@@ -4080,7 +4084,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_006_02
-    name: "\uBC29\uB791\uC790 3"
+    name: sk_006_00
     description: sk_006_00_a
     addStatusString: MaxEnergy+1
     skillType: 0
@@ -4102,7 +4106,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_006_03
-    name: "\uBC29\uB791\uC790 4"
+    name: sk_006_00
     description: sk_006_00_a
     addStatusString: MaxEnergy+1
     skillType: 0
@@ -4124,7 +4128,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_006_04
-    name: "\uBC29\uB791\uC790 5"
+    name: sk_006_00
     description: sk_006_00_a
     addStatusString: MaxEnergy+1
     skillType: 0
@@ -4146,7 +4150,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_007_00
-    name: "\uCE5C\uD658\uACBD 1"
+    name: sk_007_00
     description: sk_007_00_a
     addStatusString: MaxEfficient+1
     skillType: 0
@@ -4168,7 +4172,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_007_01
-    name: "\uCE5C\uD658\uACBD 2"
+    name: sk_007_00
     description: sk_007_00_a
     addStatusString: MaxEfficient+1
     skillType: 0
@@ -4190,7 +4194,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_007_02
-    name: "\uCE5C\uD658\uACBD 3"
+    name: sk_007_00
     description: sk_007_00_a
     addStatusString: MaxEfficient+1
     skillType: 0
@@ -4212,7 +4216,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_007_03
-    name: "\uCE5C\uD658\uACBD 4"
+    name: sk_007_00
     description: sk_007_00_a
     addStatusString: MaxEfficient+1
     skillType: 0
@@ -4234,7 +4238,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_007_04
-    name: "\uCE5C\uD658\uACBD 5"
+    name: sk_007_00
     description: sk_007_00_a
     addStatusString: MaxEfficient+1
     skillType: 0
@@ -4256,7 +4260,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_008_00
-    name: "\uC778\uBCA4\uD1A0\uB9AC \uC99D\uAC00 1"
+    name: sk_008_00
     description: sk_008_00_a
     addStatusString: MaxBoxSize+1
     skillType: 0
@@ -4278,8 +4282,8 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_008_01
-    name: "\uC778\uBCA4\uD1A0\uB9AC \uC99D\uAC00 2"
-    description: sk_008_00_a
+    name: sk_008_01
+    description: sk_008_01_a
     addStatusString: MaxBoxSize+1
     skillType: 0
     icon: Icon_Sk_008
@@ -4300,8 +4304,8 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_008_02
-    name: "\uC778\uBCA4\uD1A0\uB9AC \uC99D\uAC00 3"
-    description: sk_008_00_a
+    name: sk_008_02
+    description: sk_008_02_a
     addStatusString: MaxBoxSize+1
     skillType: 0
     icon: Icon_Sk_008
@@ -4322,8 +4326,8 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_008_03
-    name: "\uC778\uBCA4\uD1A0\uB9AC \uC99D\uAC00 4"
-    description: sk_008_00_a
+    name: sk_008_03
+    description: sk_008_03_a
     addStatusString: MaxBoxSize+1
     skillType: 0
     icon: Icon_Sk_008
@@ -4344,8 +4348,8 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_008_04
-    name: "\uC778\uBCA4\uD1A0\uB9AC \uC99D\uAC00 5"
-    description: sk_008_00_a
+    name: sk_008_04
+    description: sk_008_04_a
     addStatusString: MaxBoxSize+1
     skillType: 0
     icon: Icon_Sk_008
@@ -4366,7 +4370,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_009_00
-    name: "\uB450\uAEBC\uC6B4 \uD53C\uBD80 1"
+    name: sk_009_00
     description: sk_009_00_a
     addStatusString: ShipHealth+1
     skillType: 0
@@ -4388,7 +4392,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_009_01
-    name: "\uB450\uAEBC\uC6B4 \uD53C\uBD80 2"
+    name: sk_009_00
     description: sk_009_00_a
     addStatusString: ShipHealth+1
     skillType: 0
@@ -4410,7 +4414,7 @@ MonoBehaviour:
       fishPrice: 0
       storageSize: {x: 0, y: 0}
   - id: sk_009_02
-    name: "\uB450\uAEBC\uC6B4 \uD53C\uBD80 3"
+    name: sk_009_00
     description: sk_009_00_a
     addStatusString: ShipHealth+1
     skillType: 0
@@ -4433,7 +4437,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_010_00
     name: "\uC77C\uD0C0\uC30D\uC5B4 1"
-    description: sk_010_00_a
+    description: "\uC77C\uD0C0\uC30D\uC5B4 1_a"
     addStatusString: LuckFish+1
     skillType: 0
     icon: Icon_Sk_010
@@ -4455,7 +4459,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_010_01
     name: "\uC77C\uD0C0\uC30D\uC5B4 2"
-    description: sk_010_00_a
+    description: "\uC77C\uD0C0\uC30D\uC5B4 2_a"
     addStatusString: LuckFish+1
     skillType: 0
     icon: Icon_Sk_010
@@ -4477,7 +4481,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_010_02
     name: "\uC77C\uD0C0\uC30D\uC5B4 3"
-    description: sk_010_00_a
+    description: "\uC77C\uD0C0\uC30D\uC5B4 3_a"
     addStatusString: LuckFish+1
     skillType: 0
     icon: Icon_Sk_010
@@ -4499,7 +4503,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_010_03
     name: "\uC77C\uD0C0\uC30D\uC5B4 4"
-    description: sk_010_00_a
+    description: "\uC77C\uD0C0\uC30D\uC5B4 4_a"
     addStatusString: LuckFish+1
     skillType: 0
     icon: Icon_Sk_010
@@ -4521,7 +4525,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_010_04
     name: "\uC77C\uD0C0\uC30D\uC5B4 5"
-    description: sk_010_00_a
+    description: "\uC77C\uD0C0\uC30D\uC5B4 5_a"
     addStatusString: LuckFish+1
     skillType: 0
     icon: Icon_Sk_010
@@ -4543,7 +4547,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_010_05
     name: "\uC77C\uD0C0\uC30D\uC5B4 6"
-    description: sk_010_00_a
+    description: "\uC77C\uD0C0\uC30D\uC5B4 6_a"
     addStatusString: LuckFish+1
     skillType: 0
     icon: Icon_Sk_010
@@ -4565,7 +4569,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_010_06
     name: "\uC77C\uD0C0\uC30D\uC5B4 7"
-    description: sk_010_00_a
+    description: "\uC77C\uD0C0\uC30D\uC5B4 7_a"
     addStatusString: LuckFish+1
     skillType: 0
     icon: Icon_Sk_010
@@ -4587,7 +4591,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_010_07
     name: "\uC77C\uD0C0\uC30D\uC5B4 8"
-    description: sk_010_00_a
+    description: "\uC77C\uD0C0\uC30D\uC5B4 8_a"
     addStatusString: LuckFish+1
     skillType: 0
     icon: Icon_Sk_010
@@ -4609,7 +4613,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_010_08
     name: "\uC77C\uD0C0\uC30D\uC5B4 9"
-    description: sk_010_00_a
+    description: "\uC77C\uD0C0\uC30D\uC5B4 9_a"
     addStatusString: LuckFish+1
     skillType: 0
     icon: Icon_Sk_010
@@ -4631,7 +4635,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_010_09
     name: "\uC77C\uD0C0\uC30D\uC5B4 10"
-    description: sk_010_00_a
+    description: "\uC77C\uD0C0\uC30D\uC5B4 10_a"
     addStatusString: LuckFish+1
     skillType: 0
     icon: Icon_Sk_010
@@ -4653,7 +4657,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_011_00
     name: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 1"
-    description: sk_011_00_a
+    description: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 1_a"
     addStatusString: FishAmount+1
     skillType: 0
     icon: Icon_Sk_011
@@ -4675,7 +4679,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_011_01
     name: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 2"
-    description: sk_011_00_a
+    description: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 2_a"
     addStatusString: FishAmount+1
     skillType: 0
     icon: Icon_Sk_011
@@ -4697,7 +4701,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_011_02
     name: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 3"
-    description: sk_011_00_a
+    description: "\uB09A\uC2DC\uD69F\uC218 \uC99D\uAC00 3_a"
     addStatusString: FishAmount+1
     skillType: 0
     icon: Icon_Sk_011
@@ -4719,7 +4723,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_012_00
     name: "\uC218\uC644\uAC00 1"
-    description: sk_012_00_a
+    description: "\uC218\uC644\uAC00 1_a"
     addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
@@ -4741,7 +4745,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_012_01
     name: "\uC218\uC644\uAC00 2"
-    description: sk_012_00_a
+    description: "\uC218\uC644\uAC00 2_a"
     addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
@@ -4763,7 +4767,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_012_02
     name: "\uC218\uC644\uAC00 3"
-    description: sk_012_00_a
+    description: "\uC218\uC644\uAC00 3_a"
     addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
@@ -4785,7 +4789,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_012_03
     name: "\uC218\uC644\uAC00 4"
-    description: sk_012_00_a
+    description: "\uC218\uC644\uAC00 4_a"
     addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
@@ -4807,7 +4811,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_012_04
     name: "\uC218\uC644\uAC00 5"
-    description: sk_012_00_a
+    description: "\uC218\uC644\uAC00 5_a"
     addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
@@ -4829,7 +4833,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_012_05
     name: "\uC218\uC644\uAC00 6"
-    description: sk_012_00_a
+    description: "\uC218\uC644\uAC00 6_a"
     addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
@@ -4851,7 +4855,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_012_06
     name: "\uC218\uC644\uAC00 7"
-    description: sk_012_00_a
+    description: "\uC218\uC644\uAC00 7_a"
     addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
@@ -4873,7 +4877,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_012_07
     name: "\uC218\uC644\uAC00 8"
-    description: sk_012_00_a
+    description: "\uC218\uC644\uAC00 8_a"
     addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
@@ -4895,7 +4899,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_012_08
     name: "\uC218\uC644\uAC00 9"
-    description: sk_012_00_a
+    description: "\uC218\uC644\uAC00 9_a"
     addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
@@ -4917,7 +4921,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_012_09
     name: "\uC218\uC644\uAC00 10"
-    description: sk_012_00_a
+    description: "\uC218\uC644\uAC00 10_a"
     addStatusString: FishPrice+1
     skillType: 0
     icon: Icon_Sk_012
@@ -4939,7 +4943,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_013_00
     name: "\uCC3D\uACE0\uD655\uC7A5 1"
-    description: sk_013_00_a
+    description: "\uCC3D\uACE0\uD655\uC7A5 1_a"
     addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_013
@@ -4961,7 +4965,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_013_01
     name: "\uCC3D\uACE0\uD655\uC7A5 2"
-    description: sk_013_00_a
+    description: "\uCC3D\uACE0\uD655\uC7A5 2_a"
     addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_013
@@ -4983,7 +4987,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_013_02
     name: "\uCC3D\uACE0\uD655\uC7A5 3"
-    description: sk_013_00_a
+    description: "\uCC3D\uACE0\uD655\uC7A5 3_a"
     addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_013
@@ -5005,7 +5009,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_013_03
     name: "\uCC3D\uACE0\uD655\uC7A5 4"
-    description: sk_013_00_a
+    description: "\uCC3D\uACE0\uD655\uC7A5 4_a"
     addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_013
@@ -5027,7 +5031,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_013_04
     name: "\uCC3D\uACE0\uD655\uC7A5 5"
-    description: sk_013_00_a
+    description: "\uCC3D\uACE0\uD655\uC7A5 5_a"
     addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_013
@@ -5049,7 +5053,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 1}
   - id: sk_013_05
     name: "\uCC3D\uACE0\uD655\uC7A5 6"
-    description: sk_013_00_a
+    description: "\uCC3D\uACE0\uD655\uC7A5 6_a"
     addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_013
@@ -5071,7 +5075,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 1}
   - id: sk_013_06
     name: "\uCC3D\uACE0\uD655\uC7A5 7"
-    description: sk_013_00_a
+    description: "\uCC3D\uACE0\uD655\uC7A5 7_a"
     addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_013
@@ -5093,7 +5097,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 1}
   - id: sk_013_07
     name: "\uCC3D\uACE0\uD655\uC7A5 8"
-    description: sk_013_00_a
+    description: "\uCC3D\uACE0\uD655\uC7A5 8_a"
     addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_013
@@ -5115,7 +5119,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 1}
   - id: sk_013_08
     name: "\uCC3D\uACE0\uD655\uC7A5 9"
-    description: sk_013_00_a
+    description: "\uCC3D\uACE0\uD655\uC7A5 9_a"
     addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_013
@@ -5137,7 +5141,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_013_09
     name: "\uCC3D\uACE0\uD655\uC7A5 10"
-    description: sk_013_00_a
+    description: "\uCC3D\uACE0\uD655\uC7A5 10_a"
     addStatusString: Storage+1
     skillType: 0
     icon: Icon_Sk_013
@@ -5159,7 +5163,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_014_00
     name: "\uC26C\uC6B4 \uBC29\uC5B4 1"
-    description: sk_014_00_a
+    description: "\uC26C\uC6B4 \uBC29\uC5B4 1_a"
     addStatusString: DefenseCount-1 Chance
     skillType: 2
     icon: Icon_Sk_014
@@ -5181,7 +5185,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_014_01
     name: "\uC26C\uC6B4 \uBC29\uC5B4 2"
-    description: sk_014_00_a
+    description: "\uC26C\uC6B4 \uBC29\uC5B4 2_a"
     addStatusString: DefenseCount-1 Chance
     skillType: 2
     icon: Icon_Sk_014
@@ -5203,7 +5207,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_014_02
     name: "\uC26C\uC6B4 \uBC29\uC5B4 3"
-    description: sk_014_00_a
+    description: "\uC26C\uC6B4 \uBC29\uC5B4 3_a"
     addStatusString: DefenseCount-1 Chance
     skillType: 2
     icon: Icon_Sk_014
@@ -5225,7 +5229,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_014_03
     name: "\uC26C\uC6B4 \uBC29\uC5B4 4"
-    description: sk_014_00_a
+    description: "\uC26C\uC6B4 \uBC29\uC5B4 4_a"
     addStatusString: DefenseCount-1 Chance
     skillType: 2
     icon: Icon_Sk_014
@@ -5247,7 +5251,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_014_04
     name: "\uC26C\uC6B4 \uBC29\uC5B4 5"
-    description: sk_014_00_a
+    description: "\uC26C\uC6B4 \uBC29\uC5B4 5_a"
     addStatusString: DefenseCount-1 Chance
     skillType: 2
     icon: Icon_Sk_014
@@ -5269,7 +5273,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_015_00
     name: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 1"
-    description: sk_015_00_a
+    description: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 1_a"
     addStatusString: CatchHealth+1
     skillType: 0
     icon: Icon_Sk_015
@@ -5291,7 +5295,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_015_01
     name: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 2"
-    description: sk_015_00_a
+    description: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 2_a"
     addStatusString: CatchHealth+1
     skillType: 0
     icon: Icon_Sk_015
@@ -5313,7 +5317,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_015_02
     name: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 3"
-    description: sk_015_00_a
+    description: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 3_a"
     addStatusString: CatchHealth+1
     skillType: 0
     icon: Icon_Sk_015
@@ -5335,7 +5339,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_015_03
     name: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 4"
-    description: sk_015_00_a
+    description: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 4_a"
     addStatusString: CatchHealth+1
     skillType: 0
     icon: Icon_Sk_015
@@ -5357,7 +5361,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_015_04
     name: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 5"
-    description: sk_015_00_a
+    description: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 5_a"
     addStatusString: CatchHealth+1
     skillType: 0
     icon: Icon_Sk_015
@@ -5379,7 +5383,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_015_05
     name: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 6"
-    description: sk_015_00_a
+    description: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 6_a"
     addStatusString: CatchHealth+1
     skillType: 0
     icon: Icon_Sk_015
@@ -5401,7 +5405,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_015_06
     name: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 7"
-    description: sk_015_00_a
+    description: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 7_a"
     addStatusString: CatchHealth+1
     skillType: 0
     icon: Icon_Sk_015
@@ -5421,62 +5425,18 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_015_07
-    name: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 8"
-    description: sk_015_00_a
-    addStatusString: CatchHealth+1
-    skillType: 0
-    icon: Icon_Sk_015
+  - id: sk_016_00
+    name: "\uBD80\uC2A4\uD130! 1"
+    description: "\uBD80\uC2A4\uD130! 1_a"
+    addStatusString: Booster+1
+    skillType: 2
+    icon: Icon_Sk_016
     price: 1
     addStatus:
       catchRadius: 0
       catchSpeed: 0
       catchPower: 0
-      catchMaxHealth: 1
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_015_08
-    name: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 9"
-    description: sk_015_00_a
-    addStatusString: CatchHealth+1
-    skillType: 0
-    icon: Icon_Sk_015
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 1
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_015_09
-    name: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300 10"
-    description: sk_015_00_a
-    addStatusString: CatchHealth+1
-    skillType: 0
-    icon: Icon_Sk_015
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 1
+      catchMaxHealth: 0
       shipSpeed: 0
       maxWeight: 0
       maxEnergy: 0
@@ -5489,7 +5449,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_016_01
     name: "\uBD80\uC2A4\uD130! 2"
-    description: sk_016_00_a
+    description: "\uBD80\uC2A4\uD130! 2_a"
     addStatusString: Booster+1
     skillType: 2
     icon: Icon_Sk_016
@@ -5511,7 +5471,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_016_02
     name: "\uBD80\uC2A4\uD130! 3"
-    description: sk_016_00_a
+    description: "\uBD80\uC2A4\uD130! 3_a"
     addStatusString: Booster+1
     skillType: 2
     icon: Icon_Sk_016
@@ -5533,7 +5493,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_016_03
     name: "\uBD80\uC2A4\uD130! 4"
-    description: sk_016_00_a
+    description: "\uBD80\uC2A4\uD130! 4_a"
     addStatusString: Booster+1
     skillType: 2
     icon: Icon_Sk_016
@@ -5555,29 +5515,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_016_04
     name: "\uBD80\uC2A4\uD130! 5"
-    description: sk_016_00_a
-    addStatusString: Booster+1
-    skillType: 2
-    icon: Icon_Sk_016
-    price: 1
-    addStatus:
-      catchRadius: 0
-      catchSpeed: 0
-      catchPower: 0
-      catchMaxHealth: 0
-      shipSpeed: 0
-      maxWeight: 0
-      maxEnergy: 0
-      efficient: 0
-      maxBoxSize: {x: 0, y: 0}
-      shipHealth: 0
-      luckFish: 0
-      fishAmount: 0
-      fishPrice: 0
-      storageSize: {x: 0, y: 0}
-  - id: sk_016_00
-    name: "\uBD80\uC2A4\uD130! 1"
-    description: sk_017_00_a
+    description: "\uBD80\uC2A4\uD130! 5_a"
     addStatusString: Booster+1
     skillType: 2
     icon: Icon_Sk_016
@@ -5599,7 +5537,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_017_00
     name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 1"
-    description: sk_017_00_a
+    description: "\uBD80\uC2A4\uD130 \uD06C\uAE30 1_a"
     addStatusString: BoosterSize+1
     skillType: 2
     icon: Icon_Sk_017
@@ -5621,7 +5559,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_017_01
     name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 2"
-    description: sk_017_00_a
+    description: "\uBD80\uC2A4\uD130 \uD06C\uAE30 2_a"
     addStatusString: BoosterSize+1
     skillType: 2
     icon: Icon_Sk_017
@@ -5643,7 +5581,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_017_02
     name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 3"
-    description: sk_017_00_a
+    description: "\uBD80\uC2A4\uD130 \uD06C\uAE30 3_a"
     addStatusString: BoosterSize+1
     skillType: 2
     icon: Icon_Sk_017
@@ -5665,7 +5603,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_017_03
     name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 4"
-    description: sk_017_00_a
+    description: "\uBD80\uC2A4\uD130 \uD06C\uAE30 4_a"
     addStatusString: BoosterSize+1
     skillType: 2
     icon: Icon_Sk_017
@@ -5687,7 +5625,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_017_04
     name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 5"
-    description: sk_017_00_a
+    description: "\uBD80\uC2A4\uD130 \uD06C\uAE30 5_a"
     addStatusString: BoosterSize+1
     skillType: 2
     icon: Icon_Sk_017
@@ -5709,7 +5647,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_017_05
     name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 6"
-    description: sk_017_00_a
+    description: "\uBD80\uC2A4\uD130 \uD06C\uAE30 6_a"
     addStatusString: BoosterSize+1
     skillType: 2
     icon: Icon_Sk_017
@@ -5731,7 +5669,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_017_06
     name: "\uBD80\uC2A4\uD130 \uD06C\uAE30 7"
-    description: sk_017_00_a
+    description: "\uBD80\uC2A4\uD130 \uD06C\uAE30 7_a"
     addStatusString: BoosterSize+1
     skillType: 2
     icon: Icon_Sk_017
@@ -5753,7 +5691,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_018_00
     name: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30 1"
-    description: sk_018_00_a
+    description: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30 1_a"
     addStatusString: FishHealth-1
     skillType: 2
     icon: Icon_Sk_018
@@ -5775,7 +5713,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_018_01
     name: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30 2"
-    description: sk_018_00_a
+    description: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30 2_a"
     addStatusString: FishHealth-2
     skillType: 2
     icon: Icon_Sk_018
@@ -5797,7 +5735,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_018_02
     name: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30 3"
-    description: sk_018_00_a
+    description: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30 3_a"
     addStatusString: FishHealth-3
     skillType: 2
     icon: Icon_Sk_018
@@ -5819,7 +5757,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_018_03
     name: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30 4"
-    description: sk_018_00_a
+    description: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30 4_a"
     addStatusString: FishHealth-4
     skillType: 2
     icon: Icon_Sk_018
@@ -5841,7 +5779,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_018_04
     name: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30 5"
-    description: sk_018_00_a
+    description: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30 5_a"
     addStatusString: FishHealth-5
     skillType: 2
     icon: Icon_Sk_018
@@ -5863,7 +5801,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_019_00
     name: "\uC218\uC911 \uC2AC\uB85C\uC6B0 1"
-    description: sk_019_00_a
+    description: "\uC218\uC911 \uC2AC\uB85C\uC6B0 1_a"
     addStatusString: FishSpeed-1
     skillType: 2
     icon: Icon_Sk_019
@@ -5885,7 +5823,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_019_01
     name: "\uC218\uC911 \uC2AC\uB85C\uC6B0 2"
-    description: sk_019_00_a
+    description: "\uC218\uC911 \uC2AC\uB85C\uC6B0 2_a"
     addStatusString: FishSpeed-1
     skillType: 2
     icon: Icon_Sk_019
@@ -5907,7 +5845,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_019_02
     name: "\uC218\uC911 \uC2AC\uB85C\uC6B0 3"
-    description: sk_019_00_a
+    description: "\uC218\uC911 \uC2AC\uB85C\uC6B0 3_a"
     addStatusString: FishSpeed-1
     skillType: 2
     icon: Icon_Sk_019
@@ -5929,7 +5867,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_019_03
     name: "\uC218\uC911 \uC2AC\uB85C\uC6B0 4"
-    description: sk_019_00_a
+    description: "\uC218\uC911 \uC2AC\uB85C\uC6B0 4_a"
     addStatusString: FishSpeed-1
     skillType: 2
     icon: Icon_Sk_019
@@ -5951,7 +5889,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_019_04
     name: "\uC218\uC911 \uC2AC\uB85C\uC6B0 5"
-    description: sk_019_00_a
+    description: "\uC218\uC911 \uC2AC\uB85C\uC6B0 5_a"
     addStatusString: FishSpeed-1
     skillType: 2
     icon: Icon_Sk_019
@@ -5973,7 +5911,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_020_00
     name: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9 1"
-    description: sk_020_00_a
+    description: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9 1_a"
     addStatusString: FishPower-1
     skillType: 2
     icon: Icon_Sk_020
@@ -5995,7 +5933,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_020_01
     name: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9 2"
-    description: sk_020_00_a
+    description: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9 2_a"
     addStatusString: FishPower-1
     skillType: 2
     icon: Icon_Sk_020
@@ -6017,7 +5955,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_020_02
     name: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9 3"
-    description: sk_020_00_a
+    description: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9 3_a"
     addStatusString: FishPower-1
     skillType: 2
     icon: Icon_Sk_020
@@ -6039,7 +5977,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_020_03
     name: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9 4"
-    description: sk_020_00_a
+    description: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9 4_a"
     addStatusString: FishPower-1
     skillType: 2
     icon: Icon_Sk_020
@@ -6061,7 +5999,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_020_04
     name: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9 5"
-    description: sk_020_00_a
+    description: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9 5_a"
     addStatusString: FishPower-1
     skillType: 2
     icon: Icon_Sk_020
@@ -6083,7 +6021,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_021_00
     name: "\uCC9C\uCC9C\uD788 \uD558\uC790 1"
-    description: sk_021_00_a
+    description: "\uCC9C\uCC9C\uD788 \uD558\uC790 1_a"
     addStatusString: FishSpell-1
     skillType: 2
     icon: Icon_Sk_021
@@ -6105,7 +6043,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_021_01
     name: "\uCC9C\uCC9C\uD788 \uD558\uC790 2"
-    description: sk_021_00_a
+    description: "\uCC9C\uCC9C\uD788 \uD558\uC790 2_a"
     addStatusString: FishSpell-1
     skillType: 2
     icon: Icon_Sk_021
@@ -6127,7 +6065,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_021_02
     name: "\uCC9C\uCC9C\uD788 \uD558\uC790 3"
-    description: sk_021_00_a
+    description: "\uCC9C\uCC9C\uD788 \uD558\uC790 3_a"
     addStatusString: FishSpell-1
     skillType: 2
     icon: Icon_Sk_021
@@ -6149,7 +6087,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_021_03
     name: "\uCC9C\uCC9C\uD788 \uD558\uC790 4"
-    description: sk_021_00_a
+    description: "\uCC9C\uCC9C\uD788 \uD558\uC790 4_a"
     addStatusString: FishSpell-1
     skillType: 2
     icon: Icon_Sk_021
@@ -6171,7 +6109,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_021_04
     name: "\uCC9C\uCC9C\uD788 \uD558\uC790 5"
-    description: sk_021_00_a
+    description: "\uCC9C\uCC9C\uD788 \uD558\uC790 5_a"
     addStatusString: FishSpell-1
     skillType: 2
     icon: Icon_Sk_021
@@ -6193,7 +6131,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_022_00
     name: "\uACF5\uACA9 \uB51C\uB808\uC774 1"
-    description: sk_022_00_a
+    description: "\uACF5\uACA9 \uB51C\uB808\uC774 1_a"
     addStatusString: FishCooling+1
     skillType: 2
     icon: Icon_Sk_022
@@ -6215,7 +6153,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_022_01
     name: "\uACF5\uACA9 \uB51C\uB808\uC774 2"
-    description: sk_022_00_a
+    description: "\uACF5\uACA9 \uB51C\uB808\uC774 2_a"
     addStatusString: FishCooling+1
     skillType: 2
     icon: Icon_Sk_022
@@ -6237,7 +6175,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_022_02
     name: "\uACF5\uACA9 \uB51C\uB808\uC774 3"
-    description: sk_022_00_a
+    description: "\uACF5\uACA9 \uB51C\uB808\uC774 3_a"
     addStatusString: FishCooling+1
     skillType: 2
     icon: Icon_Sk_022
@@ -6259,7 +6197,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_022_03
     name: "\uACF5\uACA9 \uB51C\uB808\uC774 4"
-    description: sk_022_00_a
+    description: "\uACF5\uACA9 \uB51C\uB808\uC774 4_a"
     addStatusString: FishCooling+1
     skillType: 2
     icon: Icon_Sk_022
@@ -6281,7 +6219,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_022_04
     name: "\uACF5\uACA9 \uB51C\uB808\uC774 5"
-    description: sk_022_00_a
+    description: "\uACF5\uACA9 \uB51C\uB808\uC774 5_a"
     addStatusString: FishCooling+1
     skillType: 2
     icon: Icon_Sk_022
@@ -6303,7 +6241,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_023_00
     name: "\uBB3C\uBA4D\uD0C0\uC784 1"
-    description: sk_023_00_a
+    description: "\uBB3C\uBA4D\uD0C0\uC784 1_a"
     addStatusString: FishGroggy+1
     skillType: 2
     icon: Icon_Sk_023
@@ -6325,7 +6263,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_023_01
     name: "\uBB3C\uBA4D\uD0C0\uC784 2"
-    description: sk_023_00_a
+    description: "\uBB3C\uBA4D\uD0C0\uC784 2_a"
     addStatusString: FishGroggy+1
     skillType: 2
     icon: Icon_Sk_023
@@ -6347,7 +6285,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_023_02
     name: "\uBB3C\uBA4D\uD0C0\uC784 3"
-    description: sk_023_00_a
+    description: "\uBB3C\uBA4D\uD0C0\uC784 3_a"
     addStatusString: FishGroggy+1
     skillType: 2
     icon: Icon_Sk_023
@@ -6369,7 +6307,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_023_03
     name: "\uBB3C\uBA4D\uD0C0\uC784 4"
-    description: sk_023_00_a
+    description: "\uBB3C\uBA4D\uD0C0\uC784 4_a"
     addStatusString: FishGroggy+1
     skillType: 2
     icon: Icon_Sk_023
@@ -6391,7 +6329,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_023_04
     name: "\uBB3C\uBA4D\uD0C0\uC784 5"
-    description: sk_023_00_a
+    description: "\uBB3C\uBA4D\uD0C0\uC784 5_a"
     addStatusString: FishGroggy+1
     skillType: 2
     icon: Icon_Sk_023
@@ -6413,7 +6351,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_024_00
     name: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960 1"
-    description: sk_024_00_a
+    description: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960 1_a"
     addStatusString: 3%
     skillType: 2
     icon: Icon_Sk_024
@@ -6435,7 +6373,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_024_01
     name: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960 2"
-    description: sk_024_00_a
+    description: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960 2_a"
     addStatusString: 3%
     skillType: 2
     icon: Icon_Sk_024
@@ -6457,7 +6395,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_024_02
     name: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960 3"
-    description: sk_024_00_a
+    description: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960 3_a"
     addStatusString: 3%
     skillType: 2
     icon: Icon_Sk_024
@@ -6479,7 +6417,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_024_03
     name: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960 4"
-    description: sk_024_00_a
+    description: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960 4_a"
     addStatusString: 3%
     skillType: 2
     icon: Icon_Sk_024
@@ -6501,7 +6439,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_024_04
     name: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960 5"
-    description: sk_024_00_a
+    description: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960 5_a"
     addStatusString: 3%
     skillType: 2
     icon: Icon_Sk_024
@@ -6523,7 +6461,7 @@ MonoBehaviour:
       storageSize: {x: 0, y: 0}
   - id: sk_100_00
     name: "\uAE30\uBCF8 \uBC30"
-    description: sk_100_00_a
+    description: "\uAE30\uBCF8 \uBC30_a"
     addStatusString: 
     skillType: 1
     icon: Icon_Sk_ship
@@ -6543,9 +6481,9 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_100_01
+  - id: sk_101_00
     name: "\uCF8C\uC18D\uC120"
-    description: sk_100_01_a
+    description: "\uCF8C\uC18D\uC120_a"
     addStatusString: 
     skillType: 1
     icon: Icon_Sk_ship
@@ -6565,9 +6503,9 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_100_02
+  - id: sk_102_00
     name: "\uB55F\uBAA9"
-    description: sk_100_02_a
+    description: "\uB55F\uBAA9_a"
     addStatusString: 
     skillType: 1
     icon: Icon_Sk_ship
@@ -6587,9 +6525,9 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_100_03
+  - id: sk_103_00
     name: "\uD06C\uB8E8\uC988"
-    description: sk_100_03_a
+    description: "\uD06C\uB8E8\uC988_a"
     addStatusString: 
     skillType: 1
     icon: Icon_Sk_ship
@@ -6609,9 +6547,9 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_100_04
+  - id: sk_104_00
     name: "\uBC94\uC120"
-    description: sk_100_04_a
+    description: "\uBC94\uC120_a"
     addStatusString: 
     skillType: 1
     icon: Icon_Sk_ship
@@ -6631,9 +6569,9 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_100_05
+  - id: sk_105_00
     name: "\uD1B5\uD1B5\uBC30"
-    description: sk_100_05_a
+    description: "\uD1B5\uD1B5\uBC30_a"
     addStatusString: 
     skillType: 1
     icon: Icon_Sk_ship
@@ -6653,12 +6591,78 @@ MonoBehaviour:
       fishAmount: 0
       fishPrice: 0
       storageSize: {x: 0, y: 0}
-  - id: sk_100_06
+  - id: sk_106_00
     name: "\uC624\uB9AC\uBC30"
-    description: sk_100_06_a
+    description: "\uC624\uB9AC\uBC30_a"
     addStatusString: 
     skillType: 1
     icon: Icon_Sk_ship
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_200_01
+    name: "\uC790\uACA9\uC99D \uAC15\uD654"
+    description: "\uC790\uACA9\uC99D \uAC15\uD654_a"
+    addStatusString: CatchHealth+1
+    skillType: 3
+    icon: Icon_Sk_License_01
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_200_02
+    name: "\uC790\uACA9\uC99D \uAC15\uD654"
+    description: "\uC790\uACA9\uC99D \uAC15\uD654_a"
+    addStatusString: CatchHealth+1
+    skillType: 3
+    icon: Icon_Sk_License_01
+    price: 1
+    addStatus:
+      catchRadius: 0
+      catchSpeed: 0
+      catchPower: 0
+      catchMaxHealth: 0
+      shipSpeed: 0
+      maxWeight: 0
+      maxEnergy: 0
+      efficient: 0
+      maxBoxSize: {x: 0, y: 0}
+      shipHealth: 0
+      luckFish: 0
+      fishAmount: 0
+      fishPrice: 0
+      storageSize: {x: 0, y: 0}
+  - id: sk_200_03
+    name: "\uC790\uACA9\uC99D \uAC15\uD654"
+    description: "\uC790\uACA9\uC99D \uAC15\uD654_a"
+    addStatusString: CatchHealth+1
+    skillType: 3
+    icon: Icon_Sk_License_01
     price: 1
     addStatus:
       catchRadius: 0

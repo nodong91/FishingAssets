@@ -26,10 +26,10 @@ public class Controll_Manager : MonoBehaviour
 
     void Key_Esc(bool _input)
     {
-        if (_input == false)
-            Game_Manager.current?.GetMainUI?.OptionButton();
+        //if (_input == false)
+        //    Game_Manager.current?.GetMainUI?.OptionButton();
 
-        Debug.Log("Key_Esc");
+        //Debug.Log("Key_Esc");
     }
 
     void SetMouse()

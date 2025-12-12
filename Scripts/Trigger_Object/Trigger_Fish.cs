@@ -14,7 +14,9 @@ public class Trigger_Fish : MonoBehaviour
 
     void FishingStart()
     {
-        Debug.LogWarning("낚시 시작");
+        if (Game_Manager.current.CheckLicense() == false)// 낚시 면허가 없으면 사용 불가
+            return;
+
         Game_Manager.current.GetFishing.SetFishingTrigger();
         triggerSetting.gameObject.SetActive(false);// 트리거 오브젝트 비활성화
     }

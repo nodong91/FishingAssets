@@ -551,7 +551,7 @@ public class UI_Inventory : MonoBehaviour
     void ItemAction()
     {
         ItemStruct item = selectSlot.itemInInventory.item;
-        Debug.LogWarning($"아이템 타입 : {item.itemType}");
+        Debug.LogWarning($"아이템 사용 (타입 : {item.itemType})");
         // 아이템 사용
         switch (item.itemType)
         {
@@ -596,11 +596,14 @@ public class UI_Inventory : MonoBehaviour
                 break;
 
             case ItemStruct.ItemType.Bait:// 미끼 아이템
+                if (Game_Manager.current.CheckLicense() == false)// 낚시 면허가 없으면 사용 불가
+                    return;
+
                 // 미끼 사용
                 usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
                 ItemStruct.ItemClass itemClass = usedStruct.itemStruct.itemClass;
-                Game_Manager.current.GetFishing.SetBait(itemClass);
                 Game_Manager.current.GetMainUI.CloseInventory();// 인벤토리 닫기
+                Game_Manager.current.GetFishing.SetBait(itemClass);
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
 
