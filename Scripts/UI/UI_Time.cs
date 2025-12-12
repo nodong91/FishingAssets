@@ -256,6 +256,8 @@ public class UI_Time : MonoBehaviour
     public bool shipyardReset = false;
     public bool smugglerReset = false;
 
+    public bool eventReset = false;
+
     void SetResetTime()
     {
         shopReset = true;
@@ -263,6 +265,17 @@ public class UI_Time : MonoBehaviour
         shipyardReset = true;
         smugglerReset = true;
 
-        Map_Generator.current.ResetArea();
+        eventReset = true;
+        Map_Generator.current.ResetArea();// ¸Ê ¸®¼Â
+    }
+
+    public bool TryEvnet()
+    {
+        if (eventReset == true && lightMode == DayType.Night)
+        {
+            eventReset = false;
+            return true;
+        }
+        return false;
     }
 }

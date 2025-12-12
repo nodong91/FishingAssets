@@ -56,18 +56,22 @@ public class Event_Manager : MonoBehaviour
             SetDictKey();
 
         Data_Event activeEvent;
-        if (testEvent != null)
+        if (testEvent != null)// 테스트 이벤트가 있다면
         {
-            activeEvent = testEvent;
+            activeEvent = testEvent;// 테스트 이벤트로 설정
+        }
+        else if (Game_Manager.current.GetTimeUI.TryEvnet() == true)
+        {
+            Game_Manager.current.GetMainUI.timeUI.eventReset = false;
+            string setEventKey = eventKeys[Random.Range(0, eventKeys.Count)];// 랜덤 이벤트
+            activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
         }
         else
         {
-            //string setEventKey = "Data_Event_0001";
-            string setEventKey = eventKeys[Random.Range(0, eventKeys.Count)];
+            string setEventKey = "Data_Event_0002";// 아무일도 없었다.
             activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
         }
         SetEvent(activeEvent);
-        Debug.LogWarning(activeEvent);
     }
 
     public void SetEvent(Data_Event _eventData)
