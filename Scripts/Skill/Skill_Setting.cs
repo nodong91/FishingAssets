@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Skill_Setting : MonoBehaviour
 {
-    public string skill_ID = "sk_001_00";
-    public Data_Manager.SetStatus addShipStatus;
-    public Data_Manager.FishStatus addFishStatus;
+    //public string skill_ID = "sk_001_00";
+    //public Data_Manager.SetStatus addShipStatus;
+    //public Data_Manager.FishStatus addFishStatus;
 
     //void Update()
     //{
@@ -14,6 +14,21 @@ public class Skill_Setting : MonoBehaviour
     //        addShipStatus = AddShipStatus();
     //    }
     //}
+
+    const float constCatchRadius = 1f;
+    const float constCatchSpeed = 1f;
+    const float constCatchPower = 1f;
+    const float constCatchHealth = 1f;
+
+    const float constShipSpeed = 1f;// 배의 이동 속도
+    const float constMaxWeight = 1f;// 인벤토리 중량
+    const float constMaxEnergy = 1f;// 연료통 크기
+    const float constEfficient = 1f;// 에너지 효율
+    const int constShipHealth = 1;// 배 체력
+
+    const float constLuckFish = 1f;// 낚시 성공 시 한마리 더 낚을 확률 (낚시 시작할 때 정해지고 두마리 중 등급이 높은 물고기가 기준)
+    const int constFishAmount = 1;// 낚시 횟수 증가
+    const float constFishPrice = 1f;// 판매 물고기 가격 증가
 
     const string _001 = "_001";// 강철 낚시줄
     const string _002 = "_002";// 강력한 
@@ -85,21 +100,6 @@ public class Skill_Setting : MonoBehaviour
         else if (_id.Contains(_106)) Level_Ship_06 = _add ? Level_Ship_06 + 1 : Level_Ship_06 - 1;
         SetSkillType(_id);
     }
-
-    const float constCatchRadius = 1f;
-    const float constCatchSpeed = 1f;
-    const float constCatchPower = 1f;
-    const float constCatchHealth = 1f;
-
-    const float constShipSpeed = 1f;// 배의 이동 속도
-    const float constMaxWeight = 1f;// 인벤토리 중량
-    const float constMaxEnergy = 1f;// 연료통 크기
-    const float constEfficient = 1f;// 에너지 효율
-    const int constShipHealth = 1;// 배 체력
-
-    const float constLuckFish = 1f;// 낚시 성공 시 한마리 더 낚을 확률 (낚시 시작할 때 정해지고 두마리 중 등급이 높은 물고기가 기준)
-    const int constFishAmount = 1;// 낚시 횟수 증가
-    const float constFishPrice = 1f;// 판매 물고기 가격 증가
 
     public Data_Manager.SetStatus AddShipStatus()
     {
@@ -180,7 +180,7 @@ public class Skill_Setting : MonoBehaviour
         switch (data.skillType)
         {
             case Data_Manager.SkillStruct.SkillType.AddStatus:
-
+                Game_Manager.current.AddStatus();// 스탯 적용
                 break;
 
             case Data_Manager.SkillStruct.SkillType.ShipUnlocked:

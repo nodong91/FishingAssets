@@ -129,7 +129,7 @@ public class Game_Manager : MonoBehaviour
             return false;
         }
 
-        int licenseLevel = GetSkill.skill_Setting.GetLicenseLevel();
+        int licenseLevel = GetSkill.skill_Setting.GetLicenseLevel() + 1;// 면허 레벨은 1부터 시작
         Debug.LogWarning($"낚시 면허 레벨 : {licenseLevel} / 필요 레벨 : {areaType}");
         if (licenseLevel < areaType)
         {

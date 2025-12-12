@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -190,6 +191,7 @@ public class Unit_Player : MonoBehaviour
     {
         if (Map_Generator.current == null)
             return;
+
         Map_Generator.Node node = Map_Generator.current.GetNodeFromPosition(transform.position);
         Game_Manager.current.GetMainUI.CheckDeep(node.areaType);
         Debug.Log($"바다 체크 : {node.areaType}");

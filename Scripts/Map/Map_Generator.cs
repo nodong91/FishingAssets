@@ -325,6 +325,14 @@ public class Map_Generator : MonoBehaviour
         return nodeMap[x, y];
     }
 
+    public Vector3 TestPosition(Vector3 worldPosition)
+    {
+        float percentX = (worldPosition.x + worldSize.x * 0.5f) / worldSize.x;
+        float percentY = (worldPosition.z + worldSize.y * 0.5f) / worldSize.y;
+
+        return new Vector3(percentX,0f, percentY);
+    }
+
 
     public float GetRadius { get { return radius; } }
 #if UNITY_EDITOR
