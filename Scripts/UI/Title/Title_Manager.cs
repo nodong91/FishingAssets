@@ -2,9 +2,11 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 using static Data_Manager;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class Title_Manager : MonoBehaviour
 {
+    public bool isNewGame = false;
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
 
     public Option_Manager optionManager;
@@ -40,7 +42,7 @@ public class Title_Manager : MonoBehaviour
     {
         StartCoroutine(SetManager());
 
-        continueEnable = TryOptionFile();
+        continueEnable = TryContinue();
         continueButton.gameObject.SetActive(continueEnable);
         continueButton.SetButton(ContinueButton, ActionEnter, ActionExit);
         newStartButton.SetButton(NewStartButton, ActionEnter, ActionExit);
@@ -55,6 +57,15 @@ public class Title_Manager : MonoBehaviour
 
         OnTitle();
         SetTime();
+    }
+
+    bool TryContinue()
+    {
+        // 컨티뉴 파일과 옵션파일이 모두 존재해야 컨티뉴 가능
+        bool continueData = Static_JsonManager.TryLoadCountinueData(Const_Save._continue, out Data_Continue _dataContinue);
+        bool optionData = Static_JsonManager.TryLoadOptionData(Const_Save._option, out Data_Option _dataOption);
+
+        return continueData && optionData;
     }
 
     void TestScene()
@@ -83,13 +94,6 @@ public class Title_Manager : MonoBehaviour
             Shader.SetGlobalColor("_EmissionColor", Color.black);
             RenderSettings.skybox.SetFloat("_Amount", 0f);
         }
-    }
-
-    bool TryOptionFile()
-    {
-        string filePath = Application.dataPath + "/Save/" + "SaveContinue" + ".json";
-        FileInfo fileInfo = new FileInfo(filePath);
-        return fileInfo.Exists;
     }
 
     void TextSetting()
@@ -187,8 +191,6 @@ public class Title_Manager : MonoBehaviour
     IEnumerator SetNewGame()
     {
         yield return StartCoroutine(Static_JsonManager.RemoveSaveFile());// 타이틀에서 새로 시작
-        //yield return StartCoroutine(Static_JsonManager.RemoveDontDestroyFile());
-        
         StartGame();//RemoveSaveFile
     }
 

@@ -7,19 +7,6 @@ using static Data_Manager;
 
 public class Static_JsonManager
 {
-    //======================================================================================
-    // 폴더 찾기
-    //======================================================================================
-    static string keyCode = "SaveDataKey"; // 테스트용
-    static void FindFolder(string folderName)
-    {
-        DirectoryInfo dirInfo = new DirectoryInfo(folderName);
-        if (dirInfo.Exists == false)
-        {
-            // 없으면 만들기
-            dirInfo.Create();
-        }
-    }
     ////======================================================================================
     //// 채용 배치 캐릭터
     ////======================================================================================
@@ -83,6 +70,20 @@ public class Static_JsonManager
     //    return false;
     //}
 
+    //======================================================================================
+    // 폴더 찾기
+    //======================================================================================
+    static string keyCode = "SaveDataKey"; // 테스트용
+    static void FindFolder(string folderName)
+    {
+        DirectoryInfo dirInfo = new DirectoryInfo(folderName);
+        if (dirInfo.Exists == false)
+        {
+            // 없으면 만들기
+            dirInfo.Create();
+        }
+    }
+
     public static void RemoveFile(string fileName)
     {
         File.Delete(Application.dataPath + Const_Save._save + fileName + ".json");
@@ -114,7 +115,7 @@ public class Static_JsonManager
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
-    public static bool TryLoadTutorialData(string fileName, out List<string> data)
+    public static bool TryLoadTutorialData(string fileName, out List<string> _data)
     {
         string filePath = Application.dataPath + Const_Save._saveDontDestroy;
         string path = filePath + fileName + ".json";
@@ -123,18 +124,23 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            fromJson = Decrypt(fromJson);  // 복화
-            data = JsonHelper.FromJson<string>(fromJson);
+            fromJson = Decrypt(fromJson);  // 복호화
+            if (fromJson == null)// 복호화 실패
+            {
+                _data = default;
+                return false;
+            }
+            _data = JsonHelper.FromJson<string>(fromJson);
             return true;
         }
 
-        data = default;
+        _data = default;
         return false;
     }
 
     public static void SaveEnableSkillData(string fileName, List<Vector2Int> _data)
     {
-        string filePath = Application.dataPath + Const_Save._save;
+        string filePath = Application.dataPath + Const_Save._saveDontDestroy;
         // 폴더 생성
         FindFolder(filePath);
 
@@ -143,21 +149,26 @@ public class Static_JsonManager
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
-    public static bool TryLoadEnableSkillData(string fileName, out List<Vector2Int> data)
+    public static bool TryLoadEnableSkillData(string fileName, out List<Vector2Int> _data)
     {
-        string filePath = Application.dataPath + Const_Save._save;
+        string filePath = Application.dataPath + Const_Save._saveDontDestroy;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            fromJson = Decrypt(fromJson);  // 복화
-            data = JsonHelper.FromJson<Vector2Int>(fromJson);
+            fromJson = Decrypt(fromJson);   // 복호화
+            if (fromJson == null)// 복호화 실패
+            {
+                _data = default;
+                return false;
+            }
+            _data = JsonHelper.FromJson<Vector2Int>(fromJson);
             return true;
         }
 
-        data = default;
+        _data = default;
         return false;
     }
 
@@ -165,18 +176,18 @@ public class Static_JsonManager
     // 옵션 데이터 관련
     //======================================================================================
 
-    public static void SaveOptionData(string fileName, Data_Option option)
+    public static void SaveOptionData(string fileName, Data_Option _data)
     {
         string filePath = Application.dataPath + Const_Save._saveDontDestroy;
         // 폴더 생성
         FindFolder(filePath);
 
-        string toJson = JsonUtility.ToJson(option, prettyPrint: true);
+        string toJson = JsonUtility.ToJson(_data, prettyPrint: true);
         toJson = Encrypt(toJson);  // 암호화 저장
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
-    public static bool TryLoadOptionData(string fileName, out Data_Option option)
+    public static bool TryLoadOptionData(string fileName, out Data_Option _data)
     {
         string filePath = Application.dataPath + Const_Save._saveDontDestroy;
         string path = filePath + fileName + ".json";
@@ -185,12 +196,17 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            fromJson = Decrypt(fromJson);  // 복화
-            option = JsonUtility.FromJson<Data_Option>(fromJson);
+            fromJson = Decrypt(fromJson);  // 복호화
+            if (fromJson == null)// 복호화 실패
+            {
+                _data = default;
+                return false;
+            }
+            _data = JsonUtility.FromJson<Data_Option>(fromJson);
             return true;
         }
 
-        option = default;
+        _data = default;
         return false;
     }
     //======================================================================================
@@ -217,7 +233,12 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            fromJson = Decrypt(fromJson);  // 복화
+            fromJson = Decrypt(fromJson);  // 복호화
+            if (fromJson == null)// 복호화 실패
+            {
+                _data = default;
+                return false;
+            }
             _data = JsonUtility.FromJson<Data_Continue>(fromJson);
             return true;
         }
@@ -250,7 +271,12 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            fromJson = Decrypt(fromJson);  // 복화
+            fromJson = Decrypt(fromJson);  // 복호화
+            if (fromJson == null)// 복호화 실패
+            {
+                _data = default;
+                return false;
+            }
             _data = JsonUtility.FromJson<UI_QuestManager.SetQuest>(fromJson);
             return true;
         }
@@ -295,7 +321,12 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
-            fromJson = Decrypt(fromJson);  // 복화
+            fromJson = Decrypt(fromJson);  // 복호화
+            if (fromJson == null)// 복호화 실패
+            {
+                _data = default;
+                return false;
+            }
             _data = JsonUtility.FromJson<InventoryData>(fromJson);
             return true;
         }
@@ -326,6 +357,11 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
+            if (fromJson == null)// 복호화 실패
+            {
+                _data = default;
+                return false;
+            }
             _data = JsonHelper.FromJson<FishGuide.SaveFishClass>(fromJson);
             return true;
         }

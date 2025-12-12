@@ -44,7 +44,6 @@ public class Option_Manager : MonoBehaviour
 
         closeButton.SetButton(CloseCanvas);
         SetToggle();
-
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 저장 안하고 닫기
     }
 

@@ -238,7 +238,7 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(false);// 섬에서 나가기
 
         outLanding?.Invoke();
-        Game_Manager.current.GetInventory.CloseShop();
+        //Game_Manager.current.GetInventory.CloseShop();
         Game_Manager.current.OutOfControll(false);
         RemoveUI();
     }

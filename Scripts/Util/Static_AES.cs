@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Security.Cryptography;
+using UnityEngine;
 
 namespace Static_AES
 {
@@ -13,102 +14,106 @@ namespace Static_AES
         //    Console.WriteLine(Encrypt("abc@naver.com", "_dhqxlak2010_"));
         //}
 
-        //public static string Encrypt(string textToEncrypt, string key)
-        //{
-        //    RijndaelManaged rijndaelCipher = new RijndaelManaged();
-        //    rijndaelCipher.Mode = CipherMode.CBC;
-        //    rijndaelCipher.Padding = PaddingMode.PKCS7;
-
-        //    rijndaelCipher.KeySize = 128;
-        //    rijndaelCipher.BlockSize = 128;
-        //    byte[] pwdBytes = Encoding.UTF8.GetBytes(key);
-        //    byte[] keyBytes = new byte[16];
-        //    int len = pwdBytes.Length;
-
-        //    if (len > keyBytes.Length)
-        //    {
-        //        len = keyBytes.Length;
-        //    }
-        //    Array.Copy(pwdBytes, keyBytes, len);
-
-        //    rijndaelCipher.Key = keyBytes;
-        //    rijndaelCipher.IV = keyBytes;
-        //    ICryptoTransform transform = rijndaelCipher.CreateEncryptor();
-
-        //    byte[] plainText = Encoding.UTF8.GetBytes(textToEncrypt);
-        //    return Convert.ToBase64String(transform.TransformFinalBlock(plainText, 0, plainText.Length));
-        //}
-
-        //public static string Decrypt(string textToDecrypt, string key)
-        //{
-        //    RijndaelManaged rijndaelCipher = new RijndaelManaged();
-        //    rijndaelCipher.Mode = CipherMode.CBC;
-        //    rijndaelCipher.Padding = PaddingMode.PKCS7;
-
-        //    rijndaelCipher.KeySize = 128;
-        //    rijndaelCipher.BlockSize = 128;
-        //    byte[] encryptedData = Convert.FromBase64String(textToDecrypt);
-        //    byte[] pwdBytes = Encoding.UTF8.GetBytes(key);
-        //    byte[] keyBytes = new byte[16];
-        //    int len = pwdBytes.Length;
-        //    if (len > keyBytes.Length)
-        //    {
-        //        len = keyBytes.Length;
-        //    }
-
-        //    Array.Copy(pwdBytes, keyBytes, len);
-        //    rijndaelCipher.Key = keyBytes;
-        //    rijndaelCipher.IV = keyBytes;
-
-        //    byte[] plainText = rijndaelCipher.CreateDecryptor().TransformFinalBlock(encryptedData, 0, encryptedData.Length);
-        //    return Encoding.UTF8.GetString(plainText);
-        //}
         public static string Encrypt(string textToEncrypt, string key)
         {
-            RijndaelManaged rijndaelCipher = GetRijndaelCipher(key);
-            byte[] plainText = Encoding.UTF8.GetBytes(textToEncrypt);
-            return Convert.ToBase64String(rijndaelCipher.CreateEncryptor().TransformFinalBlock(plainText, 0, plainText.Length));
+            try
+            {
+                RijndaelManaged rijndaelCipher = new RijndaelManaged();
+                rijndaelCipher.Mode = CipherMode.CBC;
+                rijndaelCipher.Padding = PaddingMode.PKCS7;
+
+                rijndaelCipher.KeySize = 128;
+                rijndaelCipher.BlockSize = 128;
+                byte[] pwdBytes = Encoding.UTF8.GetBytes(key);
+                byte[] keyBytes = new byte[16];
+                int len = pwdBytes.Length;
+
+                if (len > keyBytes.Length)
+                {
+                    len = keyBytes.Length;
+                }
+                Array.Copy(pwdBytes, keyBytes, len);
+
+                rijndaelCipher.Key = keyBytes;
+                rijndaelCipher.IV = keyBytes;
+                ICryptoTransform transform = rijndaelCipher.CreateEncryptor();
+
+                byte[] plainText = Encoding.UTF8.GetBytes(textToEncrypt);
+                return Convert.ToBase64String(transform.TransformFinalBlock(plainText, 0, plainText.Length));
+            }
+            catch (Exception ex)
+            {
+                // 암호화 실패
+                Debug.LogError("Encrypt Error : " + ex.Message);
+                return null;
+            }
         }
 
         public static string Decrypt(string textToDecrypt, string key)
         {
-            RijndaelManaged rijndaelCipher = GetRijndaelCipher(key);
-            byte[] encryptedData = Convert.FromBase64String(textToDecrypt);
-            byte[] plainText = rijndaelCipher.CreateDecryptor().TransformFinalBlock(encryptedData, 0, encryptedData.Length);
-            return Encoding.UTF8.GetString(plainText);
-        }
-
-
-        static RijndaelManaged GetRijndaelCipher(string key)
-        {
-            byte[] pwdBytes = Encoding.UTF8.GetBytes(key);
-            byte[] keyBytes = new byte[16];
-            int len = pwdBytes.Length;
-            if (len > keyBytes.Length) len = keyBytes.Length;
-            Array.Copy(pwdBytes, keyBytes, len);
-
-            return new RijndaelManaged
+            try
             {
-                Mode = CipherMode.CBC,
-                Padding = PaddingMode.PKCS7,
-                KeySize = 128,
-                BlockSize = 128,
-                Key = keyBytes,
-                IV = keyBytes
-            };
+                RijndaelManaged rijndaelCipher = new RijndaelManaged();
+                rijndaelCipher.Mode = CipherMode.CBC;
+                rijndaelCipher.Padding = PaddingMode.PKCS7;
+
+                rijndaelCipher.KeySize = 128;
+                rijndaelCipher.BlockSize = 128;
+                byte[] encryptedData = Convert.FromBase64String(textToDecrypt);
+                byte[] pwdBytes = Encoding.UTF8.GetBytes(key);
+                byte[] keyBytes = new byte[16];
+                int len = pwdBytes.Length;
+                if (len > keyBytes.Length)
+                {
+                    len = keyBytes.Length;
+                }
+
+                Array.Copy(pwdBytes, keyBytes, len);
+                rijndaelCipher.Key = keyBytes;
+                rijndaelCipher.IV = keyBytes;
+
+                byte[] plainText = rijndaelCipher.CreateDecryptor().TransformFinalBlock(encryptedData, 0, encryptedData.Length);
+                return Encoding.UTF8.GetString(plainText);
+            }
+            catch (Exception ex)
+            {
+                // 복화 실패
+                Debug.LogError("Decrypt Error : " + ex.Message);
+                return null;
+            }
         }
-
-
-        //void Start()
+        //public static string Encrypt(string textToEncrypt, string key)
         //{
-        //    string key = "password";
-        //    string original = "안녕하세요 이거는 비밀문서입니다 12345&@!";
+        //    RijndaelManaged rijndaelCipher = GetRijndaelCipher(key);
+        //    byte[] plainText = Encoding.UTF8.GetBytes(textToEncrypt);
+        //    return Convert.ToBase64String(rijndaelCipher.CreateEncryptor().TransformFinalBlock(plainText, 0, plainText.Length));
+        //}
 
-        //    string encrypted = EncryptAES(original, key);
-        //    string roundtrip = DecryptAES(encrypted, key);
+        //    public static string Decrypt(string textToDecrypt, string key)
+        //{
+        //    RijndaelManaged rijndaelCipher = GetRijndaelCipher(key);
+        //    byte[] encryptedData = Convert.FromBase64String(textToDecrypt);
+        //    byte[] plainText = rijndaelCipher.CreateDecryptor().TransformFinalBlock(encryptedData, 0, encryptedData.Length);
+        //    return Encoding.UTF8.GetString(plainText);
+        //}
 
-        //    print($"Encrypted: {encrypted}");
-        //    print($"Round Trip: {roundtrip}");
+        //static RijndaelManaged GetRijndaelCipher(string key)
+        //{
+        //    byte[] pwdBytes = Encoding.UTF8.GetBytes(key);
+        //    byte[] keyBytes = new byte[16];
+        //    int len = pwdBytes.Length;
+        //    if (len > keyBytes.Length) len = keyBytes.Length;
+        //    Array.Copy(pwdBytes, keyBytes, len);
+
+        //    return new RijndaelManaged
+        //    {
+        //        Mode = CipherMode.CBC,
+        //        Padding = PaddingMode.PKCS7,
+        //        KeySize = 128,
+        //        BlockSize = 128,
+        //        Key = keyBytes,
+        //        IV = keyBytes
+        //    };
         //}
     }
 }

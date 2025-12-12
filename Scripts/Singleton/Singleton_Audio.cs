@@ -216,7 +216,13 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 
     public void Audio_Environment(string _id)
     {
-        ResetEnvironment();
+        if (envSource != null)// 기존 환경음 정지
+        {
+            envSource.Stop();
+            envSource.gameObject.SetActive(false);
+            audioQueue.Enqueue(envSource);
+        }
+
         if (_id == null)
             return;
 
@@ -251,11 +257,6 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
     //===========================================================================================================================
     // 리셋
     //===========================================================================================================================
-
-    void ResetEnvironment()
-    {
-        StartCoroutine(PlayEnvironmentAudio());
-    }
 
     IEnumerator PlayEnvironmentAudio()
     {

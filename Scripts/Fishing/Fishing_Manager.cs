@@ -87,6 +87,7 @@ public class Fishing_Manager : MonoBehaviour
         bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._firstFishing);
         if (isCompleted == false)
         {
+            Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._firstFishing);// 튜토완료
             Debug.LogWarning("낚시가 처음인지 확인 - 튜토리얼 시작");
             Tutorial_Manager.current.FishingTutorial();// 낚시 튜토리얼 시작
         }
