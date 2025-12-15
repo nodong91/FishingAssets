@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -65,9 +66,9 @@ public class UI_Shop : UI_Inventory_Base
             slotType = SlotType.Shop;// SetShop
             fixGroup.gameObject.SetActive(false);
 
-            if (Game_Manager.current.GetMainUI.timeUI.shopReset == true)
+            if (Game_Manager.current.shopReset == true)
             {
-                Game_Manager.current.GetMainUI.timeUI.shopReset = false;
+                Game_Manager.current.shopReset = false;
                 SetItemDisplay(_itemList);// 생선상점 물건 리셋
             }
             else
@@ -96,9 +97,9 @@ public class UI_Shop : UI_Inventory_Base
 
             slotType = SlotType.Shipyard;// SetShipyard
             fixGroup.gameObject.SetActive(true);
-            if (Game_Manager.current.GetMainUI.timeUI.shipyardReset == true)
+            if (Game_Manager.current.shipyardReset == true)
             {
-                Game_Manager.current.GetMainUI.timeUI.shipyardReset = false;
+                Game_Manager.current.shipyardReset = false;
                 SetItemDisplay(_itemList);// 조선소 상점 물건 리셋
             }
             else
@@ -127,9 +128,9 @@ public class UI_Shop : UI_Inventory_Base
 
             slotType = SlotType.Shipyard;// SetShipyard
             fixGroup.gameObject.SetActive(true);
-            if (Game_Manager.current.GetMainUI.timeUI.innReset == true)
+            if (Game_Manager.current.innReset == true)
             {
-                Game_Manager.current.GetMainUI.timeUI.innReset = false;
+                Game_Manager.current.innReset = false;
                 SetItemDisplay(_itemList);// 조선소 상점 물건 리셋
             }
             else
@@ -158,9 +159,9 @@ public class UI_Shop : UI_Inventory_Base
 
             slotType = SlotType.Shipyard;// SetShipyard
             fixGroup.gameObject.SetActive(true);
-            if (Game_Manager.current.GetMainUI.timeUI.smugglerReset == true)
+            if (Game_Manager.current.smugglerReset == true)
             {
-                Game_Manager.current.GetMainUI.timeUI.smugglerReset = false;
+                Game_Manager.current.smugglerReset = false;
                 SetItemDisplay(_itemList);// 밀수꾼 상점 물건 리셋
             }
             else
@@ -313,4 +314,24 @@ public class UI_Shop : UI_Inventory_Base
             }
         }
     }
+
+
+    //===========================================================================================================================
+    // 상점 시세
+    //===========================================================================================================================
+
+    //public int GetShopPrice(ItemStruct _item)
+    //{
+    //    int price = _item.price;
+    //    // 시세 변동
+    //    float fluctuation = Singleton_Data.INSTANCE.shopFluctuation;
+    //    float randomFactor = Random.Range(-fluctuation, fluctuation);
+    //    price = Mathf.RoundToInt(price * (1 + randomFactor));
+    //    // 최소 가격 보장
+    //    if (price < 1)
+    //    {
+    //        price = 1;
+    //    }
+    //    return price;
+    //}
 }

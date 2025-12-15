@@ -24,6 +24,13 @@ public class Data_Dialog_Editor : Editor
 public class Data_Dialog : ScriptableObject
 {
     public Data_NPC npc;
+    //public enum DialogType
+    //{
+    //    Dialog = 0,
+    //    Select = 1,
+    //    FishNews = 2,
+    //}
+    //public DialogType dialogType;
     [System.Serializable]
     public struct TextStruct
     {
@@ -75,6 +82,7 @@ public class Data_Dialog : ScriptableObject
         {
             None = 0,// 닫기
             Out = 1,// 섬으로 들어가기
+            FishPrice = 2,// 마을로 들어가기
             Upgrade = 5,// 스킬 업그레이드
             Rest = 6,// 휴식 - 잠자기
             Street = 7,// 거리 열기

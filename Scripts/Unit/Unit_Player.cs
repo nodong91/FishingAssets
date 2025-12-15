@@ -229,8 +229,8 @@ public class Unit_Player : MonoBehaviour
         if (closestTarget != tempTarget)
         {
             closestTarget = tempTarget;
+            Game_Manager.current.GetFollow.AddClosestTarget(closestTarget);
         }
-        Game_Manager.current.GetFollow.AddClosestTarget(closestTarget);
     }
 
     //================================================================================================================================================
@@ -429,7 +429,6 @@ public class Unit_Player : MonoBehaviour
             if (closestTarget != null)
             {
                 closestTarget.TriggerAction();// 가까운 트리거 액션
-                triggerGameObject.Remove(closestTarget);
                 closestTarget = null;
                 Game_Manager.current.GetFollow.AddClosestTarget(null);// 팔로우 유아이 제거
             }
@@ -440,6 +439,11 @@ public class Unit_Player : MonoBehaviour
                 //Debug.LogWarning($"클릭 낚시 시작 : {node.areaType}");
             }
         }
+    }
+
+    public void RemoveClosestTarget()
+    {
+        triggerGameObject.Remove(closestTarget);
     }
 
     public void OutOfControll(bool _isOn)

@@ -10,23 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
-  m_Name: Data_Dialog_2002
+  m_Name: Data_Dialog_1002
   m_EditorClassIdentifier: 
-  npc: {fileID: 11400000, guid: c7a49494ad2b04c48ad3b660120a072d, type: 2}
-  dialogType: 0
-  selectID: "\uAC15\uD654 \uC2E4\uD328"
+  npc: {fileID: 11400000, guid: 438593d79ed055d4b8b5a4112c02a68e, type: 2}
+  dialogType: 2
+  selectID: Fish News
   textStruct:
-  - contents: di_2002_a
-    emotionType: 3
+  - contents: di_1001_a
+    emotionType: 0
     dialogTypes:
-    - replaceText: di_2002_b
+    - replaceText: di_1001_b
       textSize: 30
       typingSpeed: 0
-      textColor: {r: 0, g: 1, b: 0.037703037, a: 0}
+      textColor: {r: 0.06007475, g: 0.6709951, b: 0.8490566, a: 0}
       actionType: 1
       actionSpeed: 20
       actionInterval: 1
       actionAngle: {x: 0, y: 5}
+    - replaceText: di_1001_c
+      textSize: 30
+      typingSpeed: 0
+      textColor: {r: 0.058823533, g: 0.67058825, b: 0.85098046, a: 0}
+      actionType: 3
+      actionSpeed: 0
+      actionInterval: 0
+      actionAngle: {x: -2, y: 2}
   selectStructs:
-  - selectType: 1
+  - selectType: 2
     scriptableObject: {fileID: 0}

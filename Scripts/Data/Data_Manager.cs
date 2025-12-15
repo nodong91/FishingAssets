@@ -438,9 +438,7 @@ public class Data_Manager : Data_Parse
             maxWeight += _status.maxWeight * _remove;
             if (maxEnergy > 0)// 최대 연료가 0보다 클때
                 maxEnergy += _status.maxEnergy * _remove;
-            efficient += Mathf.Clamp(_status.efficient * _remove * -0.1f, 0f, 100f);
-            if (efficient < 0f)// 연료 효율이 0보다 작을 때
-                efficient = 0f;
+            efficient += Mathf.Clamp(_status.efficient * _remove * -1f, 0f, 100f);
             maxBoxSize += _status.maxBoxSize * _remove;
             shipHealth += _status.shipHealth * _remove;
             //freshness += _status.freshness * _remove;

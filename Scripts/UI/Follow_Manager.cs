@@ -32,6 +32,7 @@ public class Follow_Manager : MonoBehaviour
             return;
         }
 
+        _target.EnterTrigger();
         closestTarget = _target.gameObject;
         followUI.sprite = _target.GetIconSprite;
 
@@ -42,7 +43,6 @@ public class Follow_Manager : MonoBehaviour
     IEnumerator FollowClosestTarget()
     {
         float addValue = 0f;
-        float imageSize = 0f;
         float startTime = Time.time;
         while (closestTarget != null)
         {
@@ -50,7 +50,7 @@ public class Follow_Manager : MonoBehaviour
             if (setTime < 1f)
             {
                 addValue = animationCurve.Evaluate(setTime);
-                imageSize = addValue;
+                float imageSize = addValue;
                 followUI.transform.localScale = Vector3.one * imageSize;
             }
             Vector3 addOffset = offset + Vector3.up * addValue;
@@ -88,22 +88,6 @@ public class Follow_Manager : MonoBehaviour
             {
                 Transform trans = child.Key.transform;
                 Transform followUI = child.Value.transform;
-                //    followUI.transform.localScale = Vector3.one;
-
-                //    Vector3 screenPosition = Camera.main.WorldToScreenPoint(target.position);
-                //    switch (followUI.followType)// 카메라 캔버스인 경우
-                //    {
-                //        case Follow_Target.FollowType.Overlay:
-                //            followUI.transform.SetParent(overlayParent);
-                //            followUI.transform.position = screenPosition;
-                //            break;
-
-                //        case Follow_Target.FollowType.Camera:
-                //            Vector3 followPosition = UICamera.ScreenToWorldPoint(screenPosition);
-                //    followUI.transform.SetParent(cameraParent);
-                //    followUI.transform.position = followPosition;
-                //    break;
-                //}
 
                 FollowTarget_Camera(trans, followUI, offset);
             }

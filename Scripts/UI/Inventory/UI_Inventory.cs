@@ -129,8 +129,8 @@ public class UI_Inventory : MonoBehaviour
 
     public void OpenReward()
     {
-        if (resultItem.itemID == null || resultItem.itemID.Length == 0)
-            return;
+        //if (resultItem.itemID == null || resultItem.itemID.Length == 0)
+        //    return;
 
         if (currentType != SlotType.Result)
         {
@@ -213,6 +213,12 @@ public class UI_Inventory : MonoBehaviour
         float price = Mathf.Round(_item.price + addPrice);// 스킬 스탯 추가
         Game_Manager.current.GetMainUI.MoveMoney(price);
         Debug.Log($"아이템 판매: {_item.id} for {_item.price} + {addPrice} = {price}");
+
+        if (_item.itemType == ItemStruct.ItemType.Fish)// 생선 판매 시 통계 추가
+        {
+            FishStruct fishItem = Singleton_Data.INSTANCE.Dict_Fish[_item.id];
+            //shop.SellFishCheckCount(fishItem);
+        }
     }
 
     void BuyItem(ItemStruct _item)
@@ -380,7 +386,7 @@ public class UI_Inventory : MonoBehaviour
         {
             if (selectItemClass.item.itemType != ItemStruct.ItemType.Fish)
             {
-                SellItem(selectItemClass.item);// 생선만 드래그 판매
+                SellItem(selectItemClass.item);// 생선외 드래그 판매
             }
             else
             {
@@ -465,7 +471,7 @@ public class UI_Inventory : MonoBehaviour
                     {
                         if (item.itemType != ItemStruct.ItemType.Fish)// 생선만 판매
                             return;
-                        SellItem(item);// 우클릭 판매
+                        SellItem(item);// Shop 우클릭 판매
                     }
                     else// 구매
                     {
@@ -482,7 +488,7 @@ public class UI_Inventory : MonoBehaviour
                     {
                         if (item.itemType == ItemStruct.ItemType.Fish)// 생선은 판매 불가
                             return;
-                        SellItem(item);// 우클릭 판매
+                        SellItem(item);// Shipyard 우클릭 판매
                     }
                     else// 구매
                     {

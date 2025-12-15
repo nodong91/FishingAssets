@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Data_Dialog_1001
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: 438593d79ed055d4b8b5a4112c02a68e, type: 2}
+  dialogType: 0
   selectID: "\uC0DD\uC120 \uC0C1\uC810"
   textStruct:
   - contents: di_1001_a
@@ -40,5 +41,7 @@ MonoBehaviour:
   selectStructs:
   - selectType: 0
     scriptableObject: {fileID: 11400000, guid: 2a19779eb9207634f9b944490c8f5aa1, type: 2}
+  - selectType: 0
+    scriptableObject: {fileID: 11400000, guid: 42af8dd1e06fb954a9a56dd10946c061, type: 2}
   - selectType: 1
     scriptableObject: {fileID: 0}

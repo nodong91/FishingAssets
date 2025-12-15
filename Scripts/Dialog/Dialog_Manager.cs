@@ -108,7 +108,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         currentDialog = 0;
         endDialog = false;
         selectCanvas.gameObject.SetActive(false);
-        // 선택 버튼 미리 생성
         for (int i = 0; i < dataDialog.selectStructs.Length; i++)
         {
             Dialog_SelectButton button = GetSelectButton();
@@ -118,6 +117,30 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
             button.transform.SetAsLastSibling();// 순서 변경
         }
+
+        //Debug.LogWarning(_dialog.dialogType);
+        //switch (_dialog.dialogType)
+        //{
+        //    case DialogType.Dialog:
+        //        // 일반 대화
+        //        // 선택 버튼 미리 생성
+        //        for (int i = 0; i < dataDialog.selectStructs.Length; i++)
+        //        {
+        //            Dialog_SelectButton button = GetSelectButton();
+        //            button.gameObject.SetActive(true);
+        //            button.SetStart(dataDialog.selectStructs[i], SelectedButton);
+        //            dialogSelectButton.Add(button);
+
+        //            button.transform.SetAsLastSibling();// 순서 변경
+        //        }
+        //        break;
+        //    case DialogType.FishNews:
+        //        // 어업 뉴스
+        //        //Game_Manager.current.GetMainUI.fishNewsUI.SetStart(_dialog);
+        //        //OpenCanvas(false);
+        //        FishNews();
+        //        break;
+        //}
         DialogAction();
     }
 
@@ -205,6 +228,11 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             case SelectStruct.SelectType.Out:
                 // 섬 나가기
                 Game_Manager.current.GetLanding.BackButton();
+                break;
+
+            case SelectStruct.SelectType.FishPrice:
+                Debug.LogWarning("어업 뉴스 창 열기");
+                Game_Manager.current.FishNews();
                 break;
 
             case SelectStruct.SelectType.Upgrade:

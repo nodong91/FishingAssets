@@ -133,7 +133,7 @@ public class Game_Manager : MonoBehaviour
         Debug.LogWarning($"낚시 면허 레벨 : {licenseLevel} / 필요 레벨 : {areaType}");
         if (licenseLevel < areaType)
         {
-            GetMainUI.SetWarnningText("낚시 면허가 필요합니다.");
+            //GetMainUI.SetWarnningText("낚시 면허가 필요합니다.");
             return false;
         }
         return true;
@@ -150,6 +150,7 @@ public class Game_Manager : MonoBehaviour
             yield return null;
 
         GetTimeUI.SetStart(continueData);// 시간
+        GetTimeUI.deleDayReset = SetResetTime;// 하루 초기화 델리게이트 등록
         GetMainUI.SetMoney(continueData.money);// 돈
 
         SetRendererFeature();
@@ -291,6 +292,11 @@ public class Game_Manager : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public void FishNews()
+    {
+
     }
 
     //====================================================================================================================
@@ -607,8 +613,15 @@ public class Game_Manager : MonoBehaviour
 
 
 
+    //====================================================================================================================
+    // 낚시 시작
+    //====================================================================================================================
 
-
+    public void StartFishing()
+    {
+        GetPlayer.RemoveClosestTarget();// 낚시 시작 시 가까운 오브젝트 제거
+        GetFishing.StartFishing_Trigger();
+    }
 
     //====================================================================================================================
     // 버프 관련
@@ -741,5 +754,47 @@ public class Game_Manager : MonoBehaviour
             int loanText = (int)(loanPrice + loanInterest);
             GetMainUI.SetLoanText(loanText);
         }
+    }
+
+
+
+
+
+
+
+
+    //====================================================================================================================
+    // 하루 초기화
+    //====================================================================================================================
+
+    DayType lightMode => GetMainUI.timeUI.lightMode;
+
+    [Header(" [ 하루 초기화 ]")]
+    public bool shopReset = false;
+    public bool innReset = false;
+    public bool shipyardReset = false;
+    public bool smugglerReset = false;
+
+    public bool eventReset = false;
+
+    void SetResetTime()
+    {
+        shopReset = true;
+        innReset = true;
+        shipyardReset = true;
+        smugglerReset = true;
+
+        eventReset = true;
+        Map_Generator.current.ResetArea();// 맵 리셋
+    }
+
+    public bool TryEvnet()
+    {
+        if (eventReset == true && lightMode == DayType.Night)
+        {
+            eventReset = false;
+            return true;
+        }
+        return false;
     }
 }

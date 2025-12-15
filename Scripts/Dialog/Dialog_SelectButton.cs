@@ -65,7 +65,8 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
     {
         switch (_selectStruct.selectType)
         {
-            case SelectStruct.SelectType.Out: return Const_Dialog._exit; 
+            case SelectStruct.SelectType.Out: return Const_Dialog._exit;
+            //case SelectStruct.SelectType.FishPrice: return Const_Dialog._1002;
             case SelectStruct.SelectType.Upgrade: return Const_Dialog._upgrade;
             case SelectStruct.SelectType.Rest: return Const_Dialog._rest;
             case SelectStruct.SelectType.Street: return Const_Dialog._street;

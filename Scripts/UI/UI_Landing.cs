@@ -51,7 +51,6 @@ public class UI_Landing : MonoBehaviour
     public TMPro.TMP_Text shipyardInfo;
     public TMPro.TMP_Text villageInfo;
     public TMPro.TMP_Text noticeInfo;
-    Data_Manager.DayType lightMode => Game_Manager.current.GetMainUI.timeUI.lightMode;
     Dictionary<GameObject, GameObject> dictLandingUI = new Dictionary<GameObject, GameObject>();
     Custom_Button currentButton = null;
 

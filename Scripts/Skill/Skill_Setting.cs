@@ -2,33 +2,33 @@ using UnityEngine;
 
 public class Skill_Setting : MonoBehaviour
 {
-    //public string skill_ID = "sk_001_00";
-    //public Data_Manager.SetStatus addShipStatus;
-    //public Data_Manager.FishStatus addFishStatus;
+    // 낚시 관련
+    public float constFishHealth;// 물고기 체력
+    public float constFishPower;// 물고기 공격력
+    public float constFishSpeed;// 물고기 이동 속도
+    public float constFishCoolTime;// 물고기 공격 쿨타임
+    public float constFishSpellTime;// 공격할 때 딜레이 시간
+    public float constFishGroggyTime;// 방어 성공 시 그로기 시간
+    public int constFishDefenseCount;// 공격시 입력 개수
 
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        AddLevel(skill_ID, true);
-    //        addShipStatus = AddShipStatus();
-    //    }
-    //}
-
-    const float constCatchRadius = 1f;
-    const float constCatchSpeed = 1f;
+    const float constCatchRadius = 0.2f;
+    const float constCatchSpeed = 0.2f;
     const float constCatchPower = 1f;
     const float constCatchHealth = 1f;
 
-    const float constShipSpeed = 1f;// 배의 이동 속도
+    const float constShipSpeed = 0.2f;// 배의 이동 속도
     const float constMaxWeight = 1f;// 인벤토리 중량
     const float constMaxEnergy = 1f;// 연료통 크기
-    const float constEfficient = 1f;// 에너지 효율
+    const float constEfficient = 0.1f;// 에너지 효율
     const int constShipHealth = 1;// 배 체력
 
     const float constLuckFish = 1f;// 낚시 성공 시 한마리 더 낚을 확률 (낚시 시작할 때 정해지고 두마리 중 등급이 높은 물고기가 기준)
     const int constFishAmount = 1;// 낚시 횟수 증가
     const float constFishPrice = 1f;// 판매 물고기 가격 증가
+
+    const float constBoosterSpeed = 0.5f;
+    const float constBoosterValue = 1f;
+    const float constCrashChance = 5f;
 
     const string _001 = "_001";// 강철 낚시줄
     const string _002 = "_002";// 강력한 
@@ -138,15 +138,6 @@ public class Skill_Setting : MonoBehaviour
         }
         return temp;
     }
-
-    // 낚시 관련
-    public float constFishHealth;// 물고기 체력
-    public float constFishPower;// 물고기 공격력
-    public float constFishSpeed;// 물고기 이동 속도
-    public float constFishCoolTime;// 물고기 공격 쿨타임
-    public float constFishSpellTime;// 공격할 때 딜레이 시간
-    public float constFishGroggyTime;// 방어 성공 시 그로기 시간
-    public int constFishDefenseCount;// 공격시 입력 개수
     //public Vector2 constFishTurnDelay;// 방향 바뀌는 딜레이 시간
     //[Header(" [ 버프 ]")]
     //public float constAddDuration;// 버프 시간
@@ -203,11 +194,6 @@ public class Skill_Setting : MonoBehaviour
         //Debug.LogWarning($"{_id} : {data_Ship.shipName}");
         Game_Manager.current.GetChangeShip.AddShip(data_Ship);
     }
-
-    [Header(" [ Etc ]")]
-    const float constBoosterSpeed = 1f;
-    const float constBoosterValue = 1f;
-    const float constCrashChance = 1f;
 
     void SetEtc()
     {

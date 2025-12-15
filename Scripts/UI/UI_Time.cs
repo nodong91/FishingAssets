@@ -250,32 +250,11 @@ public class UI_Time : MonoBehaviour
     // 하루 초기화
     //==========================================================================================================
 
-    [Header(" [ 하루 초기화 ]")]
-    public bool shopReset = false;
-    public bool innReset = false;
-    public bool shipyardReset = false;
-    public bool smugglerReset = false;
-
-    public bool eventReset = false;
+    public delegate void DeleDayReset();
+    public DeleDayReset deleDayReset;
 
     void SetResetTime()
     {
-        shopReset = true;
-        innReset = true;
-        shipyardReset = true;
-        smugglerReset = true;
-
-        eventReset = true;
-        Map_Generator.current.ResetArea();// 맵 리셋
-    }
-
-    public bool TryEvnet()
-    {
-        if (eventReset == true && lightMode == DayType.Night)
-        {
-            eventReset = false;
-            return true;
-        }
-        return false;
+        deleDayReset?.Invoke();
     }
 }

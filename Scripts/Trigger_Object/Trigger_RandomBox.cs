@@ -20,17 +20,18 @@ public class Trigger_RandomBox : Trigger_Setting
     void SetItem()
     {
         // 보상 아이템 세팅
-        randomItemCount = Random.Range(0, 3);
+        randomItemCount = Random.Range(1, 3);
+        randomItemCount = 0;
         itemRewards = dataItemList.GetRandomItems(randomItemCount);
     }
 
     void SetTrigger()
     {
-        Game_Manager.current.OutOfControll(true);
         Steam_StatsManager.current.CatchBox();// 박스 수집 체크
+        Game_Manager.current.OutOfControll(true);
         Game_Manager.current.GetInventory.SetReward(itemRewards);// 결과 아이템 세팅
-        Game_Manager.current.GetMainUI.OpenCanvas(false);// 메인 유아이 닫기
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 인벤토리의 닫기 버튼 세팅
+        Game_Manager.current.GetMainUI.OpenCanvas(false);// 메인 유아이 닫기
         gameObject.SetActive(false);// 트리거 오브젝트 비활성화
     }
 

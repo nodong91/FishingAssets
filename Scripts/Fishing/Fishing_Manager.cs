@@ -97,7 +97,7 @@ public class Fishing_Manager : MonoBehaviour
     // ¹°°í±â ¼¼ÆÃ
     //===================================================================================================================
 
-    public void SetFishingTrigger()
+    public void StartFishing_Trigger()
     {
         int addSkillAmount = Game_Manager.current.currentStatus.fishAmount;// ³¬½Ã ½ºÅ³·Î Ãß°¡ È½¼ö
         int fishingAmount = Random.Range(1, 5) + addSkillAmount;// ³¬½Ã È½¼ö
@@ -232,17 +232,17 @@ public class Fishing_Manager : MonoBehaviour
             fishDayType = findFish.fishDayType,
             size = findFish.size,
             id = findFish.id,
-
-            fishHealth = findFish.fishHealth + addStruct.fishHealth,
-            fishPower = findFish.fishPower + addStruct.fishPower,
-            fishSpeed = findFish.fishSpeed + addStruct.fishSpeed,
-            fishCoolTime = findFish.fishCoolTime + addStruct.fishCoolTime,
-            fishSpellTime = findFish.fishSpellTime + addStruct.fishSpellTime,
-            fishGroggyTime = findFish.fishGroggyTime + addStruct.fishGroggyTime,
-            fishDefenseCount = findFish.fishDefenseCount + addStruct.fishDefenseCount,
-            fishTurnDelay = findFish.fishTurnDelay + addStruct.fishTurnDelay,
-            addDuration = findFish.addDuration + addStruct.addDuration,
-            addValue = findFish.addValue + addStruct.addValue
+            // ½ºÅ³ Àû¿ë ½ºÅÈ
+            fishHealth = findFish.fishHealth - addStruct.fishHealth,
+            fishPower = findFish.fishPower - addStruct.fishPower,
+            fishSpeed = findFish.fishSpeed - addStruct.fishSpeed,
+            fishCoolTime = findFish.fishCoolTime - addStruct.fishCoolTime,
+            fishSpellTime = findFish.fishSpellTime - addStruct.fishSpellTime,
+            fishGroggyTime = findFish.fishGroggyTime - addStruct.fishGroggyTime,
+            fishDefenseCount = findFish.fishDefenseCount - addStruct.fishDefenseCount,
+            fishTurnDelay = findFish.fishTurnDelay - addStruct.fishTurnDelay,
+            addDuration = findFish.addDuration - addStruct.addDuration,
+            addValue = findFish.addValue - addStruct.addValue
         };
         return addFishStatus;
     }

@@ -60,9 +60,9 @@ public class Event_Manager : MonoBehaviour
         {
             activeEvent = testEvent;// 테스트 이벤트로 설정
         }
-        else if (Game_Manager.current.GetTimeUI.TryEvnet() == true)
+        else if (Game_Manager.current.TryEvnet() == true)
         {
-            Game_Manager.current.GetMainUI.timeUI.eventReset = false;
+            Game_Manager.current.eventReset = false;
             string setEventKey = eventKeys[Random.Range(0, eventKeys.Count)];// 랜덤 이벤트
             activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
         }
