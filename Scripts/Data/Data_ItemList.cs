@@ -20,7 +20,7 @@ public class Data_ItemList : ScriptableObject
     public struct ItemIDStruct
     {
         public string itemID;
-        [Range(0.1f, 100f)]
+        [Range(0f, 100f)]
         public float chance;
     }
     public Vector2Int randomAmount;

@@ -63,7 +63,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (LoadingManager.current != null)
             LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료 딜리게이트 등록
-
+        SetResetTime();// 하루 초기화 세팅
         StartCoroutine(SetStart());
     }
 

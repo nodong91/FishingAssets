@@ -59,6 +59,7 @@ public class UI_Shop : UI_Inventory_Base
         saveData = inventoryID + currentIndex;
         if (_open)
         {
+            Debug.LogWarning($"{Game_Manager.current.shopReset}  : {saveData}");
             OpenCanvas(true);
 
             layoutGroup.padding.bottom = 15;
