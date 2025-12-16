@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using static Data_Manager;
-using static Fishing_News;
 
 public class Fishing_News : MonoBehaviour
 {
+    public AreaType areaType;
+    public TMPro.TMP_Text areaText;
     [System.Serializable]
     public struct SellCountStruct
     {
@@ -22,15 +23,31 @@ public class Fishing_News : MonoBehaviour
     }
     Dictionary<AreaType, int> sellDict = new Dictionary<AreaType, int>();
     Dictionary<AreaType, int> randomDict = new Dictionary<AreaType, int>();
+    public UI_FishingNews_Point[] lineRects;
+    public Custom_Button[] areaButtons;
 
     public int sellCount = 0;
     public float totalCount = 0;
     public List<SellCountStruct> sellList = new List<SellCountStruct>();
-    public List<SellCountStruct> pricePercent = new List<SellCountStruct>();
+
+    public List<float> shallowPrices = new List<float>();
+    public List<float> coastalPrices = new List<float>();
+    public List<float> oceanicPrices = new List<float>();
+    public List<float> abyssalPrices = new List<float>();
 
     private void Start()
     {
         ResetAll();
+        for (int i = 0; i < areaButtons.Length; i++)
+        {
+            int index = i;
+            areaButtons[i].SetButton(() =>
+            {
+                areaType = (AreaType)(index + 1);
+                SettestPrices();
+            });
+        }
+        SettestPrices();
     }
 
     void Update()
@@ -38,14 +55,16 @@ public class Fishing_News : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             ResetAll();
-            for (int i = 0; i < 20; i++)
+            SetPrice();
+            for (int i = 0; i < 20; i++)// 잡은 물고기 수
             {
                 int randomFactor = Random.Range(0, (int)AreaType.Abyssal) + 1;// 1~4// 잡은 물고기 타입
+                randomFactor = 1;
                 AreaType areaType = (AreaType)randomFactor;
                 sellDict[areaType]++;
                 sellCount++;
-                SetSellList();
             }
+            SetSellList();
 
             int randomCount = (10 + sellCount) * (int)AreaType.Abyssal;// 팔린 물고기 수 * 깊이 타입
             totalCount = randomCount + sellCount;
@@ -60,13 +79,51 @@ public class Fishing_News : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            SavePercent();
+            SettestPrices();
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            DisplayGraph();
+            ResetAll();
+            SetPrice();
+            SetSellList();
         }
+    }
+
+    void SetPrice()
+    {
+        for (int i = 0; i < (int)AreaType.Abyssal; i++)// 시세 합
+        {
+            int randomFactor = i + 1;// 1~4
+            AreaType areaType = (AreaType)randomFactor;
+            int addValue = 0;
+            switch (areaType)
+            {
+                case AreaType.Shallow:
+                    addValue = TryAddValue(shallowPrices);
+                    break;
+                case AreaType.Coastal:
+                    addValue = TryAddValue(coastalPrices);
+                    break;
+                case AreaType.Oceanic:
+                    addValue = TryAddValue(oceanicPrices);
+                    break;
+                case AreaType.Abyssal:
+                    addValue = TryAddValue(abyssalPrices);
+                    break;
+            }
+            sellDict[areaType] = addValue;
+        }
+    }
+
+    int TryAddValue(List<float> _addList)
+    {
+        int addValue = 0;
+        for (int i = 0; i < _addList.Count; i++)
+        {
+            addValue += (int)_addList[i];
+        }
+        return addValue;
     }
 
     void SetSellList()
@@ -81,19 +138,13 @@ public class Fishing_News : MonoBehaviour
 
     void SetTest()
     {
-        //float test = 0f;
         float perSell = (sellCount * 2f / (float)AreaType.Abyssal);
-        pricePercent.Clear();
         for (int i = 0; i < (int)AreaType.Abyssal; i++)// 랜덤 시세
         {
             AreaType areaType = (AreaType)(i + 1);// 1~4
             int randomValue = randomDict[areaType];
             int sellValue = sellDict[areaType];
             float percent = (randomValue + perSell - sellValue) / totalCount * 100f * (float)AreaType.Abyssal;
-            SellCountStruct sellCountStruct = new SellCountStruct(areaType, percent);
-            pricePercent.Add(sellCountStruct);
-
-
 
             switch (areaType)
             {
@@ -121,7 +172,52 @@ public class Fishing_News : MonoBehaviour
                     abyssalPrices.Add(percent);
                     break;
             }
-            //Debug.LogWarning($"AreaType : {areaType} / RandomValue : {randomValue} / SellValue : {sellValue} / Percent : {percent}% -- {test += percent}");
+        }
+        SettestPrices();
+    }
+
+    void SettestPrices()
+    {
+        areaText.text = areaType.ToString();
+        Color areaColor = Color.white;
+        List<float> prices = new List<float>();
+        switch (areaType)
+        {
+            case AreaType.Shallow:
+                prices = shallowPrices;
+                areaColor = new Color(0.4f, 0.8f, 1f); // Light Blue
+                break;
+            case AreaType.Coastal:
+                prices = coastalPrices;
+                areaColor = new Color(0.2f, 0.6f, 0.2f); // Green
+                break;
+            case AreaType.Oceanic:
+                prices = oceanicPrices;
+                areaColor = new Color(1f, 0.5f, 0f); // Orange
+                break;
+            case AreaType.Abyssal:
+                prices = abyssalPrices;
+                areaColor = new Color(0.6f, 0.2f, 0.8f); // Purple
+                break;
+        }
+        for (int i = 0; i < lineRects.Length; i++)
+        {
+            UI_FishingNews_Point next = (i + 1 < lineRects.Length) ? lineRects[i + 1] : null;
+            lineRects[i].SetStart(next, areaColor);
+        }
+        SetPrice(prices);
+    }
+
+    void SetPrice(List<float> _price)
+    {
+        for (int i = 0; i < _price.Count; i++)
+        {
+            lineRects[i].SetPoint(_price[i]);
+        }
+
+        for (int i = 0; i < lineRects.Length; i++)
+        {
+            lineRects[i].UpdateLine();
         }
     }
 
@@ -131,7 +227,6 @@ public class Fishing_News : MonoBehaviour
         sellCount = 0;
         totalCount = 0;
         sellList.Clear();
-        pricePercent.Clear();
     }
 
     void ResetAreaDictionary()
@@ -144,62 +239,6 @@ public class Fishing_News : MonoBehaviour
             AreaType areaType = (AreaType)i + 1;
             sellDict.Add(areaType, 0);// 기본 수치
             randomDict.Add(areaType, 0);// 기본 수치
-        }
-    }
-    [System.Serializable]
-    public struct SaveStruct
-    {
-        public List<SellCountStruct> pricePercent;
-        public SaveStruct(List<SellCountStruct> _pricePercent)
-        {
-            pricePercent = _pricePercent;
-        }
-    }
-
-    public List<SaveStruct> saveCountStructs = new List<SaveStruct>();
-    void SavePercent()
-    {
-        SaveStruct temp = new SaveStruct(new List<SellCountStruct>(pricePercent));
-        saveCountStructs.Add(temp);
-        foreach (var percent in pricePercent)
-        {
-            Debug.LogWarning($"AreaType : {percent.areaType} / Percent : {percent.sellCount}%");
-        }
-    }
-
-
-
-
-
-
-
-    public List<SaveStruct> saveStruct = new List<SaveStruct>();
-    public TestPrice[] testPrices;
-
-    public List<float> shallowPrices = new List<float>();
-    public List<float> coastalPrices = new List<float>();
-    public List<float> oceanicPrices = new List<float>();
-    public List<float> abyssalPrices = new List<float>();
-
-    private void DisplayGraph()
-    {
-        saveStruct = new List<SaveStruct>();
-        int count = Mathf.Clamp(saveCountStructs.Count - testPrices.Length, 0, saveCountStructs.Count);
-        for (int i = count; i < saveCountStructs.Count; i++)
-        {
-            Debug.LogWarning($"Display Graph Index : {i}");
-            if (saveCountStructs.Count <= i)
-            {
-                continue;
-            }
-            saveStruct.Add(saveCountStructs[i]);
-        }
-
-        for (int i = 0; i < saveStruct.Count; i++)
-        {
-            List<SellCountStruct> percentStruct = saveStruct[i].pricePercent;
-            testPrices[i].SetStart(percentStruct);
-            //Debug.LogWarning($"Graph AreaType : {percentStruct.areaType} / Percent : {percentStruct.sellCount}%");
         }
     }
 }
