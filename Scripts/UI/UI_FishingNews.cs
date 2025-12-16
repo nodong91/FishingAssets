@@ -92,6 +92,35 @@ public class Fishing_News : MonoBehaviour
             float percent = (randomValue + perSell - sellValue) / totalCount * 100f * (float)AreaType.Abyssal;
             SellCountStruct sellCountStruct = new SellCountStruct(areaType, percent);
             pricePercent.Add(sellCountStruct);
+
+
+
+            switch (areaType)
+            {
+                case AreaType.Shallow:
+                    if (shallowPrices.Count > 6)
+                        shallowPrices.RemoveAt(0);
+                    shallowPrices.Add(percent);
+                    break;
+
+                case AreaType.Coastal:
+                    if (coastalPrices.Count > 6)
+                        coastalPrices.RemoveAt(0);
+                    coastalPrices.Add(percent);
+                    break;
+
+                case AreaType.Oceanic:
+                    if (oceanicPrices.Count > 6)
+                        oceanicPrices.RemoveAt(0);
+                    oceanicPrices.Add(percent);
+                    break;
+
+                case AreaType.Abyssal:
+                    if (abyssalPrices.Count > 6)
+                        abyssalPrices.RemoveAt(0);
+                    abyssalPrices.Add(percent);
+                    break;
+            }
             //Debug.LogWarning($"AreaType : {areaType} / RandomValue : {randomValue} / SellValue : {sellValue} / Percent : {percent}% -- {test += percent}");
         }
     }
@@ -147,9 +176,14 @@ public class Fishing_News : MonoBehaviour
     public List<SaveStruct> saveStruct = new List<SaveStruct>();
     public TestPrice[] testPrices;
 
+    public List<float> shallowPrices = new List<float>();
+    public List<float> coastalPrices = new List<float>();
+    public List<float> oceanicPrices = new List<float>();
+    public List<float> abyssalPrices = new List<float>();
+
     private void DisplayGraph()
     {
-         saveStruct = new List<SaveStruct>();
+        saveStruct = new List<SaveStruct>();
         int count = Mathf.Clamp(saveCountStructs.Count - testPrices.Length, 0, saveCountStructs.Count);
         for (int i = count; i < saveCountStructs.Count; i++)
         {

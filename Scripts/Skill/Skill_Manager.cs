@@ -163,7 +163,7 @@ public class Skill_Manager : MonoBehaviour
 
         SetSlot(_addNode);
         Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._activeSkill);
-        skillPrice = Mathf.RoundToInt(defaultSkillPrice + (enableSlotLIst.Count * skillPrice * 0.3f));
+        skillPrice = Mathf.RoundToInt(defaultSkillPrice + (enableSlotLIst.Count * skillPrice * 0.1f));
     }
 
     void SetSlot(Vector2Int _addNode)// ½½·Ô ¼¼ÆÃ

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Data_Manager;
 using static Fishing_News;
 
 public class TestPrice : MonoBehaviour
@@ -18,5 +19,10 @@ public class TestPrice : MonoBehaviour
         {
             // Draw line between graphPoints[i] and graphPoints[i + 1] ∂Û¿Œ∑ª¥ı∏µ
         }
+    }
+
+    public void SetPrice(AreaType areaType, List<float> _prices)
+    {
+
     }
 }
