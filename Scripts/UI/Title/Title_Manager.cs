@@ -255,7 +255,7 @@ public class Title_Manager : MonoBehaviour
     void LoadingComplate()
     {
         Debug.Log("타이틀 로딩 완료");
-        Option_Manager.current.SetThemeMusic(Const_Audio._titleTheme); // 테마 음악 시작
+        Option_Manager.current.SetThemeMusic(Const_Audio._titleTheme); // 타이틀 음악 시작
     }
 
     private Unit_Player instPlayer;

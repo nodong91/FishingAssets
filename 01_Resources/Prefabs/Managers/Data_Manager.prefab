@@ -268,16 +268,16 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3cfa7921ae7cbd34d8f8f4f7a83b5497, type: 3}
   - {fileID: 21300000, guid: 02ccc64eb445d554ab665782e00fe8bf, type: 3}
   - {fileID: 21300000, guid: 18163c630a796e24a9777605d0dcd516, type: 3}
+  - {fileID: 21300000, guid: 862acd19864fb3344aae7d301d1d83f1, type: 3}
   - {fileID: 21300000, guid: 44eddae19a59b934685d35d27fb2888d, type: 3}
   - {fileID: 21300000, guid: 341e66d46d24caa4791d251807a783c8, type: 3}
   - {fileID: 21300000, guid: c4b0e20c53ef7454dabcdd8b6ed436d3, type: 3}
   - {fileID: 21300000, guid: 545a9d1697cb5154a8196d677e7c8671, type: 3}
   - {fileID: 21300000, guid: a755b1222e6f9194aa2ecbad2d340402, type: 3}
-  - {fileID: 21300000, guid: 862acd19864fb3344aae7d301d1d83f1, type: 3}
   - {fileID: 21300000, guid: efba2a4d5bbf24a4788d9dc8a9deeadc, type: 3}
   - {fileID: 21300000, guid: 6e94cad31948f5e4d85dfbe90fd9367c, type: 3}
-  - {fileID: 21300000, guid: 2326e409d0525294b98632321659ac47, type: 3}
   - {fileID: 21300000, guid: b01ae7b8cef0fc14888dd5e3ae9a7265, type: 3}
+  - {fileID: 21300000, guid: 2326e409d0525294b98632321659ac47, type: 3}
   - {fileID: 21300000, guid: 1baacfee7acd4d84d9d889e310b6a9f3, type: 3}
   - {fileID: 21300000, guid: 94b2bd9bd92bfa14e939ef315b58abc0, type: 3}
   - {fileID: 21300000, guid: 33d6d26b2df2e454880fd8ba19b1956b, type: 3}
@@ -370,6 +370,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e9411cd5469df39418ccee7c1c3b1185, type: 2}
   - {fileID: 11400000, guid: 8039351f4b05ad843af0731282191adb, type: 2}
   - {fileID: 11400000, guid: 81f99dc11431cd5449d6ebe89235c197, type: 2}
+  - {fileID: 11400000, guid: cfc4c04feb351db4fa2eeabbf8c43aaa, type: 2}
   - {fileID: 11400000, guid: 0f81386f343730c4fb92db4354f90662, type: 2}
   usedStruct:
   - id: us_1001
@@ -384,6 +385,24 @@ MonoBehaviour:
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
       weight: 3
       price: 10
+    buffDuration: 0
+    etcValue: 3
+    skillID: "-\r"
+  - id: us_1002
+    itemStruct:
+      id: us_1002
+      name: bigoilcan
+      itemType: 2
+      explanation: us_1002_01
+      icon: Item_BigOilcan
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      - {x: 1, y: 1}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.75}
+      weight: 10
+      price: 100
     buffDuration: 0
     etcValue: 3
     skillID: "-\r"
@@ -402,37 +421,97 @@ MonoBehaviour:
     buffDuration: 0
     etcValue: 0
     skillID: "-\r"
-  - id: us_3001
+  - id: us_2002
     itemStruct:
-      id: us_3001
-      name: lugworm
-      itemType: 1
-      explanation: us_3001_01
-      icon: Item_Bait_Worm
+      id: us_2002
+      name: fullrepairkit
+      itemType: 3
+      explanation: us_2002_01
+      icon: Item_RepairKitAll
       itemClass: 3
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
-      price: 5
-    buffDuration: 100
-    etcValue: 0
-    skillID: "-\r"
-  - id: us_3002
-    itemStruct:
-      id: us_3002
-      name: lugworm
-      itemType: 1
-      explanation: us_3002_01
-      icon: fs_1002_mackerel
-      itemClass: 1
       shape:
       - {x: 1, y: 0}
       iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
       weight: 1
-      price: 5
-    buffDuration: 100
+      price: 10
+    buffDuration: 0
     etcValue: 0
-    skillID: "sk_002_00\r"
+    skillID: "-\r"
+  - id: us_3001
+    itemStruct:
+      id: us_3001
+      name: bait_01
+      itemType: 6
+      explanation: us_3001_01
+      icon: Item_Bait_01
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 150
+    buffDuration: 0
+    etcValue: 0
+    skillID: "\r"
+  - id: us_3002
+    itemStruct:
+      id: us_3002
+      name: bait_02
+      itemType: 6
+      explanation: us_3002_01
+      icon: Item_Bait_02
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 300
+    buffDuration: 0
+    etcValue: 0
+    skillID: "\r"
+  - id: us_3003
+    itemStruct:
+      id: us_3003
+      name: bait_03
+      itemType: 6
+      explanation: us_3003_01
+      icon: Item_Bait_03
+      itemClass: 2
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 500
+    buffDuration: 0
+    etcValue: 0
+    skillID: "\r"
+  - id: us_3004
+    itemStruct:
+      id: us_3004
+      name: bait_04
+      itemType: 6
+      explanation: us_3004_01
+      icon: Item_Bait_04
+      itemClass: 1
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 1000
+    buffDuration: 0
+    etcValue: 0
+    skillID: "\r"
+  - id: us_3005
+    itemStruct:
+      id: us_3005
+      name: bait_05
+      itemType: 6
+      explanation: us_3005_01
+      icon: Item_Bait_05
+      itemClass: 0
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 2000
+    buffDuration: 0
+    etcValue: 0
+    skillID: "\r"
   - id: us_4001
     itemStruct:
       id: us_4001
@@ -443,10 +522,85 @@ MonoBehaviour:
       itemClass: 4
       shape: []
       iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
+      weight: 0.5
       price: 100
     buffDuration: 0
     etcValue: 0
+    skillID: "-\r"
+  - id: us_4002
+    itemStruct:
+      id: us_4002
+      name: lotterytoto_02
+      itemType: 4
+      explanation: us_4002_01
+      icon: Item_Lottery_02
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 500
+    buffDuration: 0
+    etcValue: 1
+    skillID: "\r"
+  - id: us_4003
+    itemStruct:
+      id: us_4003
+      name: lotterytoto_03
+      itemType: 4
+      explanation: us_4003_01
+      icon: Item_Lottery_03
+      itemClass: 2
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 1000
+    buffDuration: 0
+    etcValue: 2
+    skillID: "\r"
+  - id: us_4004
+    itemStruct:
+      id: us_4004
+      name: lotterytoto_04
+      itemType: 4
+      explanation: us_4004_01
+      icon: Item_Lottery_04
+      itemClass: 1
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 5000
+    buffDuration: 0
+    etcValue: 3
+    skillID: "\r"
+  - id: us_5003
+    itemStruct:
+      id: us_5003
+      name: brownmoneypouch
+      itemType: 5
+      explanation: us_5003_01
+      icon: Icon_Sk_012
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 100
+    buffDuration: 0
+    etcValue: 100
+    skillID: "-\r"
+  - id: us_5004
+    itemStruct:
+      id: us_5004
+      name: bluemoneypouch
+      itemType: 5
+      explanation: us_5004_01
+      icon: Icon_Sk_012
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 500
+    buffDuration: 0
+    etcValue: 500
     skillID: "-\r"
   - id: us_6001
     itemStruct:
@@ -480,156 +634,6 @@ MonoBehaviour:
     buffDuration: 0
     etcValue: 0
     skillID: "-\r"
-  - id: us_5003
-    itemStruct:
-      id: us_5003
-      name: brownmoneypouch
-      itemType: 5
-      explanation: us_5003_01
-      icon: Icon_Sk_012
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
-      price: 100
-    buffDuration: 0
-    etcValue: 100
-    skillID: "-\r"
-  - id: us_5004
-    itemStruct:
-      id: us_5004
-      name: bluemoneypouch
-      itemType: 5
-      explanation: us_5004_01
-      icon: Icon_Sk_012
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
-      price: 500
-    buffDuration: 0
-    etcValue: 500
-    skillID: "-\r"
-  - id: us_3003
-    itemStruct:
-      id: us_3003
-      name: bait_01
-      itemType: 6
-      explanation: us_3003_01
-      icon: Item_Bait_01
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.5
-      price: 50
-    buffDuration: 0
-    etcValue: 0
-    skillID: "\r"
-  - id: us_3004
-    itemStruct:
-      id: us_3004
-      name: bait_02
-      itemType: 6
-      explanation: us_3004_01
-      icon: Item_Bait_02
-      itemClass: 3
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.5
-      price: 100
-    buffDuration: 0
-    etcValue: 0
-    skillID: "\r"
-  - id: us_3005
-    itemStruct:
-      id: us_3005
-      name: bait_03
-      itemType: 6
-      explanation: us_3005_01
-      icon: Item_Bait_03
-      itemClass: 1
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.5
-      price: 500
-    buffDuration: 0
-    etcValue: 0
-    skillID: "\r"
-  - id: us_3006
-    itemStruct:
-      id: us_3006
-      name: bait_04
-      itemType: 6
-      explanation: us_3006_01
-      icon: Item_Bait_04
-      itemClass: 2
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.5
-      price: 1000
-    buffDuration: 0
-    etcValue: 0
-    skillID: "\r"
-  - id: us_3007
-    itemStruct:
-      id: us_3007
-      name: bait_05
-      itemType: 6
-      explanation: us_3007_01
-      icon: Item_Bait_05
-      itemClass: 0
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.5
-      price: 10000
-    buffDuration: 0
-    etcValue: 0
-    skillID: "\r"
-  - id: us_4002
-    itemStruct:
-      id: us_4002
-      name: lotterytoto_02
-      itemType: 4
-      explanation: us_4002_01
-      icon: Item_Lottery_02
-      itemClass: 3
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.5
-      price: 500
-    buffDuration: 0
-    etcValue: 1
-    skillID: "\r"
-  - id: us_4003
-    itemStruct:
-      id: us_4003
-      name: lotterytoto_03
-      itemType: 4
-      explanation: us_4003_01
-      icon: Item_Lottery_03
-      itemClass: 1
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.5
-      price: 1000
-    buffDuration: 0
-    etcValue: 2
-    skillID: "\r"
-  - id: us_4004
-    itemStruct:
-      id: us_4004
-      name: lotterytoto_04
-      itemType: 4
-      explanation: us_4004_01
-      icon: Item_Lottery_04
-      itemClass: 2
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.5
-      price: 5000
-    buffDuration: 0
-    etcValue: 3
-    skillID: "\r"
   fishStruct:
   - id: fs_1001
     fishHealth: 20
@@ -7115,6 +7119,27 @@ MonoBehaviour:
     korean: "\uBB3C\uAC74\uC744 \uBCF4\uC5EC\uC918."
     japanese: "\u5546\u54C1\u3092 \u898B\u305B\u3066"
     chinese: "\u8BF7 \u628A \u4E1C\u897F \u7ED9 \u6211 \u770B\u770B"
+  - id: di_1002_a
+    english: '{0} reports the current prices of fish.'
+    korean: "{0}\uB294 \uD604\uC7AC \uC0DD\uC120\uB4E4\uC758 \uAC00\uACA9\uC744 \uC54C\uB824\uC918\uC694."
+    japanese: "{0}\u30CB\u30E5\u30FC\u30B9\u306F\u73FE\u5728\u306E\u9B5A\u306E\u4FA1\u683C\u3092\u77E5\u3089\u305B\u3066\u304F\u308C\u307E\u3059\u3002"
+    chinese: "{0}\u65B0\u95FB\u62A5\u9053\u76EE\u524D\u7684\u9C7C\u7C7B\u4EF7\u683C\u3002"
+  - id: di_1002_b
+    english: Fishery news
+    korean: "\uC5B4\uC5C5 \uB274\uC2A4"
+    japanese: "\u6F01\u696D"
+    chinese: "\u6E14\u4E1A"
+  - id: di_1002_c
+    english: The price changes once a day and is {0} after one week.
+    korean: "\uAC00\uACA9\uC740 \uD558\uB8E8\uC5D0 \uD55C\uBC88\uC529 \uBCC0\uB3D9\uC774
+      \uB418\uACE0 \uC77C\uC8FC\uC77C\uC774 \uC9C0\uB098\uBA74 {0}\uAC00 \uB418\uC694."
+    japanese: "\u4FA1\u683C\u306F\u4E00\u65E5\u306B\u4E00\u5EA6\u5909\u52D5\u3057\u4E00\u9031\u9593\u304C\u904E\u304E\u308B\u3068{0}\u3055\u308C\u307E\u3059."
+    chinese: "\u4EF7\u683C\u6BCF\u5929\u53D8\u52A8\u4E00\u6B21\u4E00\u5468\u540E\u5C31\u4F1A{0}."
+  - id: di_1002_d
+    english: reset
+    korean: "\uCD08\uAE30\uD654"
+    japanese: "\u30EA\u30BB\u30C3\u30C8"
+    chinese: "\u91CD\u7F6E"
   - id: etc_0001
     english: Continue
     korean: "\uACC4\uC18D\uD558\uAE30"
@@ -9292,107 +9317,6 @@ MonoBehaviour:
     korean: "\uC5F0\uB8CC\uB97C \uC870\uAE08 \uCC44\uC6CC\uC900\uB2E4"
     japanese: "\u71C3\u6599\u3092\u5C11\u3057\u3060\u3051\u5165\u308C\u308B"
     chinese: "\u52A0\u4E86\u4E00\u70B9\u70B9\u71C3\u6599"
-  - id: us_2001
-    english: Repair Kit
-    korean: "\uC218\uB9AC \uD0A4\uD2B8"
-    japanese: "\u4FEE\u7406\u30AD\u30C3\u30C8"
-    chinese: "\u4FEE\u7406 \u5305"
-  - id: us_2001_01
-    english: A set to repair malfunctions
-    korean: "\uACE0\uC7A5\uC744 \uC218\uB9AC\uD558\uB294 \uC138\uD2B8"
-    japanese: "\u6545\u969C\u3092\u4FEE\u7406\u3059\u308B\u30BB\u30C3\u30C8"
-    chinese: "\u4FEE\u590D \u635F\u574F \u7684 \u5957\u88C5"
-  - id: us_3001
-    english: Worm
-    korean: "\uC9C0\uB801\uC774"
-    japanese: "\u30DF\u30DF\u30BA"
-    chinese: "\u86AF\u8693"
-  - id: us_3001_01
-    english: Live worm bait
-    korean: "\uC9C0\uB801\uC774\uB97C \uC774\uC6A9\uD55C \uC0DD\uBBF8\uB07C"
-    japanese: "\u30DF\u30DF\u30BA \u3092 \u4F7F\u3063\u305F \u751F\u304D\u990C"
-    chinese: "\u7528 \u86AF\u8693 \u4F5C \u7684 \u6D3B \u9C7C\u9975"
-  - id: us_4001
-    english: Lucky Ticket A
-    korean: "\uB7ED\uD0A4\uD2F0\uCF13 A"
-    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 A"
-    chinese: "\u5E78\u8FD0\u7968 A"
-  - id: us_4001_01
-    english: Let's grab some luck
-    korean: "\uD589\uC6B4\uC744 \uC950\uC5B4\uBCF4\uC790"
-    japanese: "\u5E78\u904B\u3092\u63B4\u307F\u53D6\u308D\u3046"
-    chinese: "\u628A\u63E1\u597D\u8FD0\u5427"
-  - id: us_4002
-    english: Lucky Ticket B
-    korean: "\uB7ED\uD0A4\uD2F0\uCF13 B"
-    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 B"
-    chinese: "\u5E78\u8FD0\u7968 B"
-  - id: us_4002_01
-    english: Let's grab even more luck
-    korean: "\uD589\uC6B4\uC744 \uB354 \uC950\uC5B4\uBCF4\uC790"
-    japanese: "\u3082\u3063\u3068\u5E78\u904B\u3092\u63B4\u307F\u53D6\u308D\u3046"
-    chinese: "\u518D\u628A\u63E1\u66F4\u591A\u597D\u8FD0\u5427"
-  - id: us_4003
-    english: Lucky Ticket C
-    korean: "\uB7ED\uD0A4\uD2F0\uCF13 C"
-    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 C"
-    chinese: "\u5E78\u8FD0\u7968 C"
-  - id: us_4003_01
-    english: Let's grab a handful of luck
-    korean: "\uD589\uC6B4\uC744 \uAC00\uB4DD \uC950\uC5B4\uBCF4\uC790"
-    japanese: "\u5E78\u904B\u3092\u305F\u3063\u3077\u308A\u63B4\u307F\u53D6\u308D\u3046"
-    chinese: "\u628A\u63E1\u6EE1\u6EE1\u7684\u597D\u8FD0\u5427"
-  - id: us_4004
-    english: Lucky Ticket D
-    korean: "\uB7ED\uD0A4\uD2F0\uCF13 D"
-    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 D"
-    chinese: "\u5E78\u8FD0\u7968 D"
-  - id: us_4004_01
-    english: Luck is only for me
-    korean: "\uD589\uC6B4\uC740 \uC624\uC9C1 \uB098\uB97C \uC704\uD55C \uAC83"
-    japanese: "\u5E78\u904B\u306F\u305F\u3060\u79C1\u306E\u305F\u3081\u306E\u3082\u306E"
-    chinese: "\u597D\u8FD0\u53EA\u5C5E\u4E8E\u6211"
-  - id: us_6001
-    english: Bada News
-    korean: "\uBC14\uB2E4\uC77C\uBCF4"
-    japanese: "\u30D0\u30C0\u65E5\u5831"
-    chinese: "\u5DF4\u8FBE \u65E5\u62A5"
-  - id: us_6001_01
-    english: news of the day
-    korean: "\uC624\uB298\uC758 \uB274\uC2A4"
-    japanese: "\u4ECA\u65E5\u306E\u30CB\u30E5\u30FC\u30B9"
-    chinese: "\u5F53\u5929\u7684\u65B0\u95FB"
-  - id: us_5003
-    english: Brown Money Pouch
-    korean: "\uAC08\uC0C9 \uB3C8\uC8FC\uBA38\uB2C8"
-    japanese: "\u8336\u8272 \u306E \u91D1\u888B"
-    chinese: "\u68D5\u8272 \u94B1\u888B"
-  - id: us_5003_01
-    english: A pouch containing a small amount of money
-    korean: "\uC57D\uAC04\uC758 \uB3C8\uC774 \uB4E4\uC5B4 \uC788\uB294 \uC8FC\uBA38\uB2C8"
-    japanese: "\u3044\u304F\u3089\u304B \u306E \u304A\u91D1 \u304C \u5165\u3063\u305F
-      \u888B"
-    chinese: "\u88C5\u6709 \u5C11\u91CF \u94B1 \u7684 \u888B\u5B50"
-  - id: us_5004
-    english: Blue Money Pouch
-    korean: "\uD30C\uB780 \uB3C8\uC8FC\uBA38\uB2C8"
-    japanese: "\u9752\u8272 \u306E \u91D1\u888B"
-    chinese: "\u84DD\u8272 \u94B1\u888B"
-  - id: us_5004_01
-    english: A pouch with money inside
-    korean: "\uB3C8\uC774 \uB4E4\uC5B4 \uC788\uB294 \uC8FC\uBA38\uB2C8"
-    japanese: "\u304A\u91D1 \u304C \u5165\u3063\u305F \u888B"
-    chinese: "\u88C5\u6709 \u94B1 \u7684 \u888B\u5B50"
-  - id: us_6002
-    english: 
-    korean: "\uC21C\uAC04\uC774\uB3D9"
-    japanese: 
-    chinese: 
-  - id: us_6003_01
-    english: 
-    korean: "\uB9C8\uC744\uB85C \uB3CC\uC544\uAC04\uB2E4"
-    japanese: 
-    chinese: 
   - id: us_1002
     english: Large Oil Can
     korean: "\uD070 \uC624\uC77C\uD1B5"
@@ -9403,6 +9327,16 @@ MonoBehaviour:
     korean: "\uC5F0\uB8CC\uB97C \uB9CE\uC774 \uCC44\uC6CC\uC900\uB2E4"
     japanese: "\u71C3\u6599\u3092\u305F\u304F\u3055\u3093\u5165\u308C\u308B"
     chinese: "\u52A0\u4E86\u5F88\u591A\u71C3\u6599"
+  - id: us_2001
+    english: Repair Kit
+    korean: "\uC218\uB9AC \uD0A4\uD2B8"
+    japanese: "\u4FEE\u7406\u30AD\u30C3\u30C8"
+    chinese: "\u4FEE\u7406 \u5305"
+  - id: us_2001_01
+    english: A set to repair malfunctions
+    korean: "\uACE0\uC7A5\uC744 \uC218\uB9AC\uD558\uB294 \uC138\uD2B8"
+    japanese: "\u6545\u969C\u3092\u4FEE\u7406\u3059\u308B\u30BB\u30C3\u30C8"
+    chinese: "\u4FEE\u590D \u635F\u574F \u7684 \u5957\u88C5"
   - id: us_2002
     english: Full Repair Kit
     korean: "\uC644\uBCBD\uD55C \uC218\uB9AC\uD0A4\uD2B8"
@@ -9413,6 +9347,17 @@ MonoBehaviour:
     korean: "\uACE0\uC7A5\uC744 \uBAA8\uB450 \uC218\uB9AC\uD558\uB294 \uC138\uD2B8"
     japanese: "\u5168\u6545\u969C\u4FEE\u7406\u30BB\u30C3\u30C8"
     chinese: "\u5B8C\u6574\u6545\u969C\u4FEE\u590D\u5957\u88C5"
+  - id: us_3001
+    english: Common Bait
+    korean: "\uC77C\uBC18 \uBBF8\uB07C"
+    japanese: "\u30CE\u30FC\u30DE\u30EB\u30EB\u30A2\u30FC"
+    chinese: "\u666E\u901A\u9C7C\u9975"
+  - id: us_3001_01
+    english: Can of Bait Worms
+    korean: "\uBBF8\uB07C\uC6A9 \uC9C0\uB801\uC774\uAC00 \uB4E4\uC5B4\uC788\uB294
+      \uCE94"
+    japanese: "\u91E3\u308A\u990C\u30DF\u30DF\u30BA\u306E\u7F36\u8A70"
+    chinese: "\u7F50\u88DD\u86AF\u8693\u9B5A\u990C"
   - id: us_3002
     english: Quality Bait
     korean: "\uC88B\uC740 \uBBF8\uB07C"
@@ -9455,6 +9400,87 @@ MonoBehaviour:
     korean: ' maybe..?"'
     japanese: "\uC774\uAC8C \uC788\uC73C\uBA74 \uC544\uB9C8\uB3C4..?"
     chinese: "\u3053\u308C\u3055\u3048\u3042\u308C\u3070..?"
+  - id: us_4001
+    english: Lucky Ticket A
+    korean: "\uB7ED\uD0A4\uD2F0\uCF13 A"
+    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 A"
+    chinese: "\u5E78\u8FD0\u7968 A"
+  - id: us_4001_01
+    english: Let's grab some luck
+    korean: "\uD589\uC6B4\uC744 \uC950\uC5B4\uBCF4\uC790"
+    japanese: "\u5E78\u904B\u3092\u63B4\u307F\u53D6\u308D\u3046"
+    chinese: "\u628A\u63E1\u597D\u8FD0\u5427"
+  - id: us_4002
+    english: Lucky Ticket B
+    korean: "\uB7ED\uD0A4\uD2F0\uCF13 B"
+    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 B"
+    chinese: "\u5E78\u8FD0\u7968 B"
+  - id: us_4002_01
+    english: Let's grab even more luck
+    korean: "\uD589\uC6B4\uC744 \uB354 \uC950\uC5B4\uBCF4\uC790"
+    japanese: "\u3082\u3063\u3068\u5E78\u904B\u3092\u63B4\u307F\u53D6\u308D\u3046"
+    chinese: "\u518D\u628A\u63E1\u66F4\u591A\u597D\u8FD0\u5427"
+  - id: us_4003
+    english: Lucky Ticket C
+    korean: "\uB7ED\uD0A4\uD2F0\uCF13 C"
+    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 C"
+    chinese: "\u5E78\u8FD0\u7968 C"
+  - id: us_4003_01
+    english: Let's grab a handful of luck
+    korean: "\uD589\uC6B4\uC744 \uAC00\uB4DD \uC950\uC5B4\uBCF4\uC790"
+    japanese: "\u5E78\u904B\u3092\u305F\u3063\u3077\u308A\u63B4\u307F\u53D6\u308D\u3046"
+    chinese: "\u628A\u63E1\u6EE1\u6EE1\u7684\u597D\u8FD0\u5427"
+  - id: us_4004
+    english: Lucky Ticket D
+    korean: "\uB7ED\uD0A4\uD2F0\uCF13 D"
+    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 D"
+    chinese: "\u5E78\u8FD0\u7968 D"
+  - id: us_4004_01
+    english: Luck is only for me
+    korean: "\uD589\uC6B4\uC740 \uC624\uC9C1 \uB098\uB97C \uC704\uD55C \uAC83"
+    japanese: "\u5E78\u904B\u306F\u305F\u3060\u79C1\u306E\u305F\u3081\u306E\u3082\u306E"
+    chinese: "\u597D\u8FD0\u53EA\u5C5E\u4E8E\u6211"
+  - id: us_5003
+    english: Brown Money Pouch
+    korean: "\uAC08\uC0C9 \uB3C8\uC8FC\uBA38\uB2C8"
+    japanese: "\u8336\u8272 \u306E \u91D1\u888B"
+    chinese: "\u68D5\u8272 \u94B1\u888B"
+  - id: us_5003_01
+    english: A pouch containing a small amount of money
+    korean: "\uC57D\uAC04\uC758 \uB3C8\uC774 \uB4E4\uC5B4 \uC788\uB294 \uC8FC\uBA38\uB2C8"
+    japanese: "\u3044\u304F\u3089\u304B \u306E \u304A\u91D1 \u304C \u5165\u3063\u305F
+      \u888B"
+    chinese: "\u88C5\u6709 \u5C11\u91CF \u94B1 \u7684 \u888B\u5B50"
+  - id: us_5004
+    english: Blue Money Pouch
+    korean: "\uD30C\uB780 \uB3C8\uC8FC\uBA38\uB2C8"
+    japanese: "\u9752\u8272 \u306E \u91D1\u888B"
+    chinese: "\u84DD\u8272 \u94B1\u888B"
+  - id: us_5004_01
+    english: A pouch with money inside
+    korean: "\uB3C8\uC774 \uB4E4\uC5B4 \uC788\uB294 \uC8FC\uBA38\uB2C8"
+    japanese: "\u304A\u91D1 \u304C \u5165\u3063\u305F \u888B"
+    chinese: "\u88C5\u6709 \u94B1 \u7684 \u888B\u5B50"
+  - id: us_6001
+    english: Bada News
+    korean: "\uBC14\uB2E4\uC77C\uBCF4"
+    japanese: "\u30D0\u30C0\u65E5\u5831"
+    chinese: "\u5DF4\u8FBE \u65E5\u62A5"
+  - id: us_6001_01
+    english: news of the day
+    korean: "\uC624\uB298\uC758 \uB274\uC2A4"
+    japanese: "\u4ECA\u65E5\u306E\u30CB\u30E5\u30FC\u30B9"
+    chinese: "\u5F53\u5929\u7684\u65B0\u95FB"
+  - id: us_6002
+    english: 
+    korean: "\uC21C\uAC04\uC774\uB3D9"
+    japanese: 
+    chinese: 
+  - id: us_6002_01
+    english: 
+    korean: "\uB9C8\uC744\uB85C \uB3CC\uC544\uAC04\uB2E4"
+    japanese: 
+    chinese: 
   - id: sk_001_00
     english: Steel fishing line
     korean: "\uAC15\uCCA0 \uB09A\uC2DC\uC904"

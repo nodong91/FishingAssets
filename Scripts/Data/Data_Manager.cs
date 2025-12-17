@@ -134,6 +134,7 @@ public class Data_Manager : Data_Parse
 
     ItemStruct GetItemStruct(string[] _elements)
     {
+        //Debug.LogWarning($"{_elements[0]} : ({_elements[5].Trim()})"  );
         Vector2Int[] tempShape = Parse_Vector2IntArray(_elements[5].Trim());// ¸ð¾ç
         ItemStruct tempItem = new ItemStruct
         {
@@ -512,7 +513,7 @@ public class Data_Manager : Data_Parse
             Fish,
             Buff,// ¹Ì³¢
             Fuel,// ¿¬·á
-            Repare,// ¼ö¸®
+            Repair,// ¼ö¸®
             Lottery,// º¹±Ç
             Money,// µ·
             Bait,// ¹Ì³¢

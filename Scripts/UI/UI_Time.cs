@@ -44,7 +44,7 @@ public class UI_Time : MonoBehaviour
         TimePause(false);
 
         StartLoanTimer(false);// 대출 타이머
-        SetResetTime();
+        SetResetTime();// 게임 시작 시 초기화
     }
 
     void SetSkyBox()
@@ -168,6 +168,7 @@ public class UI_Time : MonoBehaviour
                 break;
             case 1:
                 weekText.text = "Mon";
+                SetWeeklyReset();
                 break;
             case 2:
                 weekText.text = "Tue";
@@ -188,6 +189,11 @@ public class UI_Time : MonoBehaviour
                 weekText.text = "Error";
                 break;
         }
+    }
+
+    public void SetWeeklyReset()
+    {
+        Game_Manager.current.fishingNews.SetWeeklyReset();
     }
     //==========================================================================================================
     // 외부 컨트롤

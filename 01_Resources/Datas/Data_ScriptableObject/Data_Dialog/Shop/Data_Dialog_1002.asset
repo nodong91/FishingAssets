@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
+  m_Name: Data_Dialog_1002
+  m_EditorClassIdentifier: 
+  npc: {fileID: 11400000, guid: 438593d79ed055d4b8b5a4112c02a68e, type: 2}
+  selectID: "\uC0DD\uC120 \uC0C1\uC810"
+  textStruct:
+  - contents: di_1002_a
+    emotionType: 0
+    dialogTypes:
+    - replaceText: di_1002_b
+      textSize: 0
+      typingSpeed: 0
+      textColor: {r: 0.17041424, g: 0.7264151, b: 0.07195621, a: 0}
+      actionType: 0
+      actionSpeed: 0
+      actionInterval: 0
+      actionAngle: {x: 0, y: 0}
+  - contents: di_1002_c
+    emotionType: 1
+    dialogTypes:
+    - replaceText: di_1002_d
+      textSize: 0
+      typingSpeed: 0
+      textColor: {r: 0.8584906, g: 0.06074225, b: 0.06074225, a: 0}
+      actionType: 0
+      actionSpeed: 0
+      actionInterval: 0
+      actionAngle: {x: 0, y: 0}
+  selectStructs:
+  - selectType: 2
+    scriptableObject: {fileID: 0}

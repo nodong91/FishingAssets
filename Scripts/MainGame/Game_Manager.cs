@@ -165,6 +165,7 @@ public class Game_Manager : MonoBehaviour
         GetChangeShip.SetStart();
         GetSkill.SetStart();
         GetMinimap.SetStart();
+        GetFishingNews.SetStart();
 
         string shipID = continueData.shipData;// ¹è ¼¼ÆÃ
         if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)
@@ -215,7 +216,7 @@ public class Game_Manager : MonoBehaviour
     {
         string bgmID = bgms[Random.Range(0, bgms.Length - 1)];
         float length = Singleton_Data.INSTANCE.Dict_Audio[bgmID].clip.length;
-        Option_Manager.current.SetThemeMusic(bgmID);
+        Option_Manager.current.SetThemeMusic(bgmID);// ·£´ý Å×¸¶ À½¾Ç ¼³Á¤
         yield return new WaitForSeconds(length);
         SetTheme();
     }
@@ -801,6 +802,7 @@ public class Game_Manager : MonoBehaviour
 
         eventReset = true;
         Map_Generator.current.ResetArea();// ¸Ê ¸®¼Â
+        GetFishingNews.NextDay();// ³¬½Ã ´º½º ´ÙÀ½³¯
     }
 
     public bool TryEvnet()

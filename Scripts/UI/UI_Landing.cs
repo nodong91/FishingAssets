@@ -56,7 +56,8 @@ public class UI_Landing : MonoBehaviour
 
     public void SetStart()
     {
-        canvasGroup.gameObject.SetActive(false);
+        OpenCanvasUI(canvasGroup, 0f);
+        //canvasGroup.gameObject.SetActive(false);
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = Camera_Manager.current.UICamera;
 
@@ -141,6 +142,7 @@ public class UI_Landing : MonoBehaviour
     {
         if (landUIOpen == _open)
             return;
+
         landUIOpen = _open;
 
         if (opening != null)
@@ -268,7 +270,7 @@ public class UI_Landing : MonoBehaviour
         currentType = LandingType.Shop;
         SetLandingCanvas(false);        // 샵 버튼 누르면 랜드 UI 제거
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._shop];
-        Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);
+        //Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);// 상점 음악 설정
         Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._1001);
         Game_Manager.current.CurrentLand.CameraOutFouce(true);
     }
@@ -278,7 +280,7 @@ public class UI_Landing : MonoBehaviour
         currentType = LandingType.Shipyard;
         SetLandingCanvas(false);        // 조선소 버튼 누르면 랜드 UI 제거
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._shipyard];
-        Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);
+        //Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);// 조선소 음악 설정
         Game_Manager.current.CurrentLand.CameraOutFouce(true);
 
         if (Game_Manager.current.shipData == null)// 배가 없다면
@@ -363,7 +365,6 @@ public class UI_Landing : MonoBehaviour
             case LandingType.Shop:
             case LandingType.Shipyard:
                 Game_Manager.current.GetInventory.CloseShop();// 상점 닫기
-                Game_Manager.current.SetThemeMusic();
                 //Option_Manager.current.SetThemeMusic(null);
                 break;
 

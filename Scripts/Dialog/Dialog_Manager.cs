@@ -73,7 +73,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         {
             // 오픈
             dataNPC = _npc;
-            Option_Manager.current.SetThemeMusic(dataNPC.themeMusic);
+            Option_Manager.current.SetThemeMusic(dataNPC.themeMusic);// NPC 테마 음악 설정
             dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
             Dialog_Npc(dataDialog);
         }
@@ -232,6 +232,14 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
             case SelectStruct.SelectType.FishPrice:
                 Debug.LogWarning("어업 뉴스 창 열기");
+                if (Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._fishingNews) == false)
+                {
+                    Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._fishingNews);// 튜토완료
+
+                    Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._shop];
+                    DialogStart_NPC(data_NPC, Const_Dialog._1002);
+                    return;
+                }
                 Game_Manager.current.FishNews();
                 break;
 
@@ -362,6 +370,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         {
             dataNPC = null;
             //Option_Manager.current.SetThemeMusic(null);
+            Game_Manager.current.SetThemeMusic();
         }
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }

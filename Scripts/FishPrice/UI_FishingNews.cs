@@ -6,7 +6,7 @@ using static Data_Manager;
 public class UI_FishingNews : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
-    public AreaType areaType;
+    public AreaType setAreaType;
     public TMPro.TMP_Text areaText;
     Dictionary<AreaType, int> sellDict = new Dictionary<AreaType, int>();
     Dictionary<AreaType, int> randomDict = new Dictionary<AreaType, int>();
@@ -15,6 +15,7 @@ public class UI_FishingNews : MonoBehaviour
 
     public int sellCount = 0;
     public float totalCount = 0;
+    public Custom_Button closeButton;
 
     public List<float> shallowPrices = new List<float>();
     public List<float> coastalPrices = new List<float>();
@@ -39,67 +40,94 @@ public class UI_FishingNews : MonoBehaviour
     }
     public List<SellCountStruct> sellList = new List<SellCountStruct>();
 
-    private void Start()
+    public void SetStart()
     {
         shallowPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
         coastalPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
         oceanicPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
         abyssalPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
 
-        StartCoroutine(SetStart());
+        closeButton.SetButton(CloseCanvas);
+        OpenCanvas(false);
     }
 
-    IEnumerator SetStart()
+    IEnumerator Starting()
     {
-        ResetAll();
+        ResetRandomDictionary();
+        totalCount = 0;
         for (int i = 0; i < areaButtons.Length; i++)
         {
             int index = i;
             areaButtons[i].SetButton(() =>
             {
-                areaType = (AreaType)(index + 1);
-                SettestPrices();
+                setAreaType = (AreaType)(index + 1);
+                SetPricesPercent();
             });
         }
         yield return new WaitForEndOfFrame();
-        SettestPrices();
+        SetPricesPercent();
     }
 
     public void OpenCanvas(bool _open)
     {
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (_open == true)
         {
-            SetPrice(areaType);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            ResetSellDict();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SettestPrices();
+            setAreaType = AreaType.Shallow;
+            StartCoroutine(Starting());
         }
     }
 
-
-    void SetPrice(AreaType areaType)
+    void CloseCanvas()
     {
-        ResetAll();
-        for (int i = 0; i < 20; i++)// 잡은 물고기 수
-        {
-            if (sellDict.ContainsKey(areaType) == false)
-            {
-                sellDict.Add(areaType, 0);
-            }
-            sellDict[areaType]++;
-        }
+        OpenCanvas(false);
+        Game_Manager.current.GetLanding.OpenIslandUI();
+    }
+
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.A))
+    //    {
+    //        SetPrice();
+    //    }
+
+    //    if (Input.GetKeyDown(KeyCode.S))
+    //    {
+    //        ResetSellDict();
+    //    }
+
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        SetPricesPercent();
+    //    }
+    //}
+
+    public void SellFishCount(FishStruct _fishItem)
+    {
+        // 판매된 물고기 수 집계
+        AreaType areaType = _fishItem.areaType;
+        if (sellDict.ContainsKey(areaType) == false)
+            sellDict.Add(areaType, 0);
+        
+        sellDict[areaType]++;
+    }
+
+    public void NextDay()
+    {
+        // 하루가 지나면 시세 갱신
+        SetPrice();
+    }
+
+    public void SetWeeklyReset()
+    {
+        // 일주일이 지나면 판매된 물고기 수 초기화
+        ResetSellDictionary();
+    }
+
+    void SetPrice()
+    {
+        ResetRandomDictionary();
+        totalCount = 0;
         sellCount = TrySellCount();
         SetSellList();
 
@@ -172,16 +200,16 @@ public class UI_FishingNews : MonoBehaviour
             }
             totalPercent += percent;
         }
-        SettestPrices();
+        SetPricesPercent();
         Debug.Log($"총 시세 갯수 : {totalCount}, 팔린 갯수 : {sellCount} = {totalPercent}");
     }
 
-    void SettestPrices()
+    void SetPricesPercent()
     {
-        areaText.text = areaType.ToString();
+        areaText.text = setAreaType.ToString();
         Color areaColor = Color.white;
         List<float> prices = new List<float>();
-        switch (areaType)
+        switch (setAreaType)
         {
             case AreaType.Shallow:
                 prices = shallowPrices;
@@ -222,13 +250,7 @@ public class UI_FishingNews : MonoBehaviour
         }
     }
 
-    private void ResetAll()
-    {
-        ResetAreaDictionary();
-        totalCount = 0;
-    }
-
-    private void ResetSellDict()
+    private void ResetSellDictionary()
     {
         sellDict.Clear();
         int areaCount = (int)AreaType.Abyssal;
@@ -239,7 +261,7 @@ public class UI_FishingNews : MonoBehaviour
         }
     }
 
-    void ResetAreaDictionary()
+    void ResetRandomDictionary()
     {
         randomDict.Clear();
         int areaCount = (int)AreaType.Abyssal;

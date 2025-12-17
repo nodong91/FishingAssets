@@ -217,6 +217,7 @@ public class UI_Inventory : MonoBehaviour
         if (_item.itemType == ItemStruct.ItemType.Fish)// 생선 판매 시 통계 추가
         {
             FishStruct fishItem = Singleton_Data.INSTANCE.Dict_Fish[_item.id];
+            Game_Manager.current.GetFishingNews.SellFishCount(fishItem);
             //shop.SellFishCheckCount(fishItem);
         }
     }
@@ -578,7 +579,7 @@ public class UI_Inventory : MonoBehaviour
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;
 
-            case ItemStruct.ItemType.Repare:
+            case ItemStruct.ItemType.Repair:
                 RepairMode(true);// 수리 모드 켜기
                 break;
 

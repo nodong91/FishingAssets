@@ -30,28 +30,31 @@ public class UI_Inventory_Infomation : MonoBehaviour
         weightText.text = $"{item.weight}<size={weightText.fontSize * 0.5f}>kg</size>";
         priceText.text = price.ToString();
 
-        string color = P01_Utility.ClassColor(item.itemClass);
-        classText.text = $"<color=#{color}>{item.itemClass}</color>";
-
+        string classColor = P01_Utility.ClassColor(item.itemClass);
+        classText.text = $"<color=#{classColor}>{item.itemClass}</color>";
+        string typeColor = "B3B3B3";
         switch (item.itemType)
         {
             case ItemStruct.ItemType.Fish:
-                color = "30AEEA";
+                typeColor = "30AEEA";
                 break;
             case ItemStruct.ItemType.Fuel:
-                color = "222222";
+                typeColor = "222222";
                 break;
             case ItemStruct.ItemType.Buff:
-                color = "1DE02B";
+                typeColor = "1DE02B";
                 break;
-            case ItemStruct.ItemType.Repare:
-                color = "FFC300";
+            case ItemStruct.ItemType.Repair:
+                typeColor = "FFC300";
+                break;
+            case ItemStruct.ItemType.Bait:
+                typeColor = "FF5733";
                 break;
             case ItemStruct.ItemType.Etc:
-                color = "B3B3B3";
+                typeColor = "B3B3B3";
                 break;
         }
-        typeText.text = $"<color=#{color}>{item.itemType}</color>";
+        typeText.text = $"<color=#{typeColor}>{item.itemType}</color>";
         if (Game_Manager.current.GetInventory.enterSlotType == UI_Inventory_Base.SlotType.MyBox)
         {
             rectTransform.pivot = new Vector2(1f, 0.5f);

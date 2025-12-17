@@ -95,7 +95,7 @@ public class Const_Tutorial
     public const string _newGame = "NewGame";
     public const string _fillFuel = "FillFuel";
     public const string _firstFishing = "FirstFishing";
-    public const string _howToFishing = "HowToFishing";
+    public const string _fishingNews = "FishingNews";
 }
 
 public class Const_Dialog
@@ -139,4 +139,5 @@ public class Const_Dialog
     public const string _inLand = "di_0002_b";
     public const string _payBack = "di_3004_d";
     public const string _gameOver = "di_3008_b";
+    public const string _fishingNews = "di_1002_b";
 }
