@@ -63,7 +63,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (LoadingManager.current != null)
             LoadingManager.current.deleComplate = LoadingComplate;// 로딩 완료 딜리게이트 등록
-        SetResetTime();// 하루 초기화 세팅
+
         StartCoroutine(SetStart());
     }
 
@@ -148,6 +148,7 @@ public class Game_Manager : MonoBehaviour
 
         while (CurrentLand == null)// 맵이 있는지 체크
             yield return null;
+        SetResetTime();// 하루 초기화 세팅
 
         GetTimeUI.SetStart(continueData);// 시간
         GetTimeUI.deleDayReset = SetResetTime;// 하루 초기화 델리게이트 등록
