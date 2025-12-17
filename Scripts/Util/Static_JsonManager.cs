@@ -345,6 +345,7 @@ public class Static_JsonManager
         FindFolder(filePath);
 
         string toJson = JsonHelper.ToJson(_data, prettyPrint: true);
+        toJson = Encrypt(toJson);  // 암호화 저장
         File.WriteAllText(filePath + fileName + ".json", toJson);
     }
 
@@ -357,12 +358,50 @@ public class Static_JsonManager
         if (fileInfo.Exists == true)
         {
             string fromJson = File.ReadAllText(path);
+            fromJson = Decrypt(fromJson);  // 복호화
             if (fromJson == null)// 복호화 실패
             {
                 _data = default;
                 return false;
             }
             _data = JsonHelper.FromJson<FishGuide.SaveFishClass>(fromJson);
+            return true;
+        }
+        _data = default;
+        return false;
+    }
+
+    //======================================================================================
+    // 도감 저장
+    //======================================================================================
+
+    public static void SaveFishingNewsData(string fileName, UI_FishingNews.PriceStruct _data)
+    {
+        string filePath = Application.dataPath + Const_Save._save;
+        // 폴더 없으면 생성
+        FindFolder(filePath);
+
+        string toJson = JsonUtility.ToJson(_data, prettyPrint: true);
+        toJson = Encrypt(toJson);  // 암호화 저장
+        File.WriteAllText(filePath + fileName + ".json", toJson);
+    }
+
+    public static bool TryLoadFishingNewsData(string fileName, out UI_FishingNews.PriceStruct _data)
+    {
+        string filePath = Application.dataPath + Const_Save._save;
+        string path = filePath + fileName + ".json";
+        FileInfo fileInfo = new FileInfo(path);
+
+        if (fileInfo.Exists == true)
+        {
+            string fromJson = File.ReadAllText(path);
+            fromJson = Decrypt(fromJson);  // 복호화
+            if (fromJson == null)// 복호화 실패
+            {
+                _data = default;
+                return false;
+            }
+            _data = JsonUtility.FromJson<UI_FishingNews.PriceStruct>(fromJson);
             return true;
         }
         _data = default;

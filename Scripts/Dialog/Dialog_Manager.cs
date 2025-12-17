@@ -44,7 +44,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         dialogText.fontSize = defaultSize;
         dialogText.color = Color.white;
 
-        OpenCanvas(false);// Ω√¿€ ¥›±‚
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));
     }
 
     public void DialogStart_NPC(Data_NPC _npc, string _dialogID)

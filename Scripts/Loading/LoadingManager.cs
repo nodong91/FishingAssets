@@ -56,8 +56,9 @@ public class LoadingManager : MonoBehaviour
 
     IEnumerator StartLoading()
     {
-        hint.SetHint();
         yield return StartCoroutine(OpenScreen(true));
+        hint.SetHint();
+        hint.gameObject.SetActive(true);
         yield return StartCoroutine(UnloadScene());
 
         for (int i = 0; i < sceneNames.Length; i++)
@@ -72,12 +73,12 @@ public class LoadingManager : MonoBehaviour
 
         // 완료 체크
         yield return new WaitForSeconds(2.5f);// 완료 후 잠시 대기
+        hint.gameObject.SetActive(false);
         yield return StartCoroutine(OpenScreen(false));
         deleComplate?.Invoke();
         currentNames = sceneNames;
     }
 
-    public CanvasGroup alphaCanvas;
     IEnumerator OpenScreen(bool _open)
     {
         float prevHight, targetHight, targetAlpha;
@@ -103,7 +104,6 @@ public class LoadingManager : MonoBehaviour
 
             float alpha = Mathf.Lerp(1f - targetAlpha, targetAlpha, normalize);
             background.gameObject.SetActive(alpha > 0);
-            alphaCanvas.alpha = alpha;
             yield return null;
         }
     }

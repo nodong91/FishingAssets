@@ -62,6 +62,7 @@ public class Const_Save
     public const string _option = "SaveOptionData";
     public const string _quest = "SaveQuestData";
     public const string _fishGuideData = "FishGuideData";
+    public const string _fishingNews = "FishingNews";
 }
 
 public class Const_Select

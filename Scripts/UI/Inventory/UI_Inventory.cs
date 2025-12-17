@@ -209,17 +209,17 @@ public class UI_Inventory : MonoBehaviour
 
     void SellItem(ItemStruct _item)
     {
-        float addPrice = _item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 비싸게 판매 
+        float addPrice = _item.price * (Game_Manager.current.currentStatus.fishPrice * 0.01f);// 퍼센트 만큼 비싸게 판매 
         float price = Mathf.Round(_item.price + addPrice);// 스킬 스탯 추가
-        Game_Manager.current.GetMainUI.MoveMoney(price);
-        Debug.Log($"아이템 판매: {_item.id} for {_item.price} + {addPrice} = {price}");
-
         if (_item.itemType == ItemStruct.ItemType.Fish)// 생선 판매 시 통계 추가
         {
             FishStruct fishItem = Singleton_Data.INSTANCE.Dict_Fish[_item.id];
             Game_Manager.current.GetFishingNews.SellFishCount(fishItem);
-            //shop.SellFishCheckCount(fishItem);
+            float fishPercent = Game_Manager.current.GetFishingNews.GetFishPricePercent(fishItem.areaType);// 생선 가격 변동 퍼센트
+            price = price * fishPercent;// 생선 가격 변동 적용
         }
+        Game_Manager.current.GetMainUI.MoveMoney(price);
+        Debug.Log($"아이템 판매: {_item.id} for {_item.price} + {addPrice} = {price}");
     }
 
     void BuyItem(ItemStruct _item)

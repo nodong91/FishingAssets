@@ -22,6 +22,15 @@ public class UI_FishingNews : MonoBehaviour
     public List<float> oceanicPrices = new List<float>();
     public List<float> abyssalPrices = new List<float>();
 
+    public struct PriceStruct
+    {
+        public List<SellCountStruct> _sellList;
+
+        public List<float> _shallow;
+        public List<float> _coastal;
+        public List<float> _oceanic;
+        public List<float> _abyssal;
+    }
 
     [System.Serializable]
     public struct SellCountStruct
@@ -40,12 +49,73 @@ public class UI_FishingNews : MonoBehaviour
     }
     public List<SellCountStruct> sellList = new List<SellCountStruct>();
 
+    void SaveData()
+    {
+        // 판매된 물고기 수 저장
+        // 판매 퍼센트 저장
+        PriceStruct priceStruct = new PriceStruct()
+        {
+            _sellList = sellList,
+            _shallow = shallowPrices,
+            _coastal = coastalPrices,
+            _oceanic = oceanicPrices,
+            _abyssal = abyssalPrices,
+        };
+        Static_JsonManager.SaveFishingNewsData(Const_Save._fishingNews, priceStruct);
+    }
+
+    void LoadData()
+    {
+        // 판매된 물고기 수 불러오기
+        // 판매 퍼센트 불러오기
+
+        if (Static_JsonManager.TryLoadFishingNewsData(Const_Save._fishingNews, out PriceStruct priceStruct))
+        {
+            sellDict = new Dictionary<AreaType, int>();
+            foreach (var sell in priceStruct._sellList)
+            {
+                sellDict.Add(sell.areaType, (int)sell.sellCount);
+            }
+            shallowPrices = priceStruct._shallow;
+            coastalPrices = priceStruct._coastal;
+            oceanicPrices = priceStruct._oceanic;
+            abyssalPrices = priceStruct._abyssal;
+        }
+        else
+        {
+            sellDict = new Dictionary<AreaType, int>();
+            shallowPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
+            coastalPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
+            oceanicPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
+            abyssalPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            FishStruct testFish = new FishStruct()
+            {
+                areaType = AreaType.Shallow,
+            };
+            SellFishCount(testFish);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SetPrice();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SaveData();
+        }
+    }
+
     public void SetStart()
     {
-        shallowPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
-        coastalPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
-        oceanicPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
-        abyssalPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
+        LoadData();
 
         closeButton.SetButton(CloseCanvas);
         OpenCanvas(false);
@@ -84,32 +154,31 @@ public class UI_FishingNews : MonoBehaviour
         Game_Manager.current.GetLanding.OpenIslandUI();
     }
 
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.A))
-    //    {
-    //        SetPrice();
-    //    }
-
-    //    if (Input.GetKeyDown(KeyCode.S))
-    //    {
-    //        ResetSellDict();
-    //    }
-
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        SetPricesPercent();
-    //    }
-    //}
-
     public void SellFishCount(FishStruct _fishItem)
     {
         // 판매된 물고기 수 집계
         AreaType areaType = _fishItem.areaType;
         if (sellDict.ContainsKey(areaType) == false)
             sellDict.Add(areaType, 0);
-        
+
         sellDict[areaType]++;
+    }
+
+    public float GetFishPricePercent(AreaType _areaType)
+    {
+        // 물고기 시세 퍼센트 반환
+        switch (_areaType)
+        {
+            case AreaType.Shallow:
+                return shallowPrices[shallowPrices.Count - 1];
+            case AreaType.Coastal:
+                return coastalPrices[coastalPrices.Count - 1];
+            case AreaType.Oceanic:
+                return oceanicPrices[oceanicPrices.Count - 1];
+            case AreaType.Abyssal:
+                return abyssalPrices[abyssalPrices.Count - 1];
+        }
+        return 100f;
     }
 
     public void NextDay()
