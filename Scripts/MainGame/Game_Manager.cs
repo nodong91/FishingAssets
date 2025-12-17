@@ -29,6 +29,7 @@ public class Game_Manager : MonoBehaviour
     public UI_ChangeShip changeShip;
     public Event_Manager event_Manager;
     public Map_Minimap mapMinimap;
+    public UI_FishingNews fishingNews;
 
     [Header(" [ ¹ã³· ]")]
     public Material skyboxMatial;
@@ -297,7 +298,7 @@ public class Game_Manager : MonoBehaviour
 
     public void FishNews()
     {
-
+        GetFishingNews.OpenCanvas(true);
     }
 
     //====================================================================================================================
@@ -547,6 +548,19 @@ public class Game_Manager : MonoBehaviour
                 instMinimap = Instantiate(mapMinimap, transform);
             }
             return instMinimap;
+        }
+    }
+
+    private UI_FishingNews instFishingNews;
+    public UI_FishingNews GetFishingNews
+    {
+        get
+        {
+            if (instFishingNews == null)
+            {
+                instFishingNews = Instantiate(fishingNews, transform);
+            }
+            return instFishingNews;
         }
     }
 
