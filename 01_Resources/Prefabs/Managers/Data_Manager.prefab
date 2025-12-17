@@ -9284,15 +9284,15 @@ MonoBehaviour:
     chinese: "\u597D\u50CF \u4E5F \u5B58\u5728 \u7740 \u80FD \u7834\u574F \u8239\u53EA
       \u7684 \u9C7C"
   - id: us_1001
-    english: Small Oil Tank
+    english: Small Oil Can
     korean: "\uC791\uC740 \uC624\uC77C\uD1B5"
     japanese: "\u5C0F\u3055\u306A\u30AA\u30A4\u30EB\u7F36"
     chinese: "\u5C0F\u578B \u6CB9\u7BB1"
   - id: us_1001_01
-    english: Oil Tank
-    korean: "\uC5F0\uB8CC\uD1B5"
-    japanese: "\u30AA\u30A4\u30EB\u7F36"
-    chinese: "\u6CB9\u7BB1"
+    english: Fills up a small amount of fuel
+    korean: "\uC5F0\uB8CC\uB97C \uC870\uAE08 \uCC44\uC6CC\uC900\uB2E4"
+    japanese: "\u71C3\u6599\u3092\u5C11\u3057\u3060\u3051\u5165\u308C\u308B"
+    chinese: "\u52A0\u4E86\u4E00\u70B9\u70B9\u71C3\u6599"
   - id: us_2001
     english: Repair Kit
     korean: "\uC218\uB9AC \uD0A4\uD2B8"
@@ -9320,7 +9320,7 @@ MonoBehaviour:
     chinese: "\u91CD\u590D \u5F69\u7968"
   - id: us_4001_01
     english: Aim for a quick fortune.
-    korean: "\uC77C\uD655\uCC9C\uAE08\uC744 \uB178\uB9AC\uC138\uC694."
+    korean: "\uC77C\uD655\uCC9C\uAE08\uC744 \uB178\uB9AC\uC138\uC694"
     japanese: "\u4E00\u652B\u5343\u91D1\u3092\u72D9\u3063\u3066\u304F\u3060\u3055\u3044\u3002"
     chinese: "\u7784\u51C6 \u4E00\u591C\u66B4\u5BCC"
   - id: us_6001
@@ -9361,134 +9361,244 @@ MonoBehaviour:
     chinese: 
   - id: us_6003_01
     english: 
-    korean: "\uB9C8\uC744\uB85C \uB3CC\uC544\uAC04\uB2E4."
+    korean: "\uB9C8\uC744\uB85C \uB3CC\uC544\uAC04\uB2E4"
     japanese: 
     chinese: 
+  - id: us_1002
+    english: Large Oil Can
+    korean: "\uD070 \uC624\uC77C\uD1B5"
+    japanese: "\u5927\u304D\u306A\u30AA\u30A4\u30EB\u7F36"
+    chinese: "\u5927\u6CB9\u6876"
+  - id: us_1002_01
+    english: Fills up a lot of fuel
+    korean: "\uC5F0\uB8CC\uB97C \uB9CE\uC774 \uCC44\uC6CC\uC900\uB2E4"
+    japanese: "\u71C3\u6599\u3092\u305F\u304F\u3055\u3093\u5165\u308C\u308B"
+    chinese: "\u52A0\u4E86\u5F88\u591A\u71C3\u6599"
+  - id: us_2002
+    english: Full Repair Kit
+    korean: "\uC644\uBCBD\uD55C \uC218\uB9AC\uD0A4\uD2B8"
+    japanese: "\u5B8C\u5168\u4FEE\u7406\u30AD\u30C3\u30C8"
+    chinese: "\u5B8C\u7F8E\u5DE5\u5177\u5305"
+  - id: us_2002_01
+    english: Full Malfunction Repair Set
+    korean: "\uACE0\uC7A5\uC744 \uBAA8\uB450 \uC218\uB9AC\uD558\uB294 \uC138\uD2B8"
+    japanese: "\u5168\u6545\u969C\u4FEE\u7406\u30BB\u30C3\u30C8"
+    chinese: "\u5B8C\u6574\u6545\u969C\u4FEE\u590D\u5957\u88C5"
+  - id: us_3002
+    english: Basic Bait
+    korean: "\uAE30\uBCF8 \uBBF8\uB07C"
+    japanese: "\u57FA\u672C\u306E\u990C"
+    chinese: "\u57FA\u7840\u9C7C\u9975"
+  - id: us_3002_01
+    english: Can of Worms
+    korean: "\uC9C0\uB801\uC774\uAC00 \uB4E4\uC5B4\uC788\uB294 \uCE94"
+    japanese: "\u30DF\u30DF\u30BA\u306E\u7F36\u8A70"
+    chinese: "\u86AF\u8693\u7F50\u5934"
+  - id: us_3003
+    english: Quality Bait
+    korean: "\uC88B\uC740 \uBBF8\uB07C"
+    japanese: "\u826F\u3044\u990C"
+    chinese: "\u4F18\u8D28\u9C7C\u9975"
+  - id: us_3003_01
+    english: Can of Bait Shrimp
+    korean: "\uBBF8\uB07C\uC6A9 \uC0C8\uC6B0\uAC00 \uB4E4\uC5B4\uC788\uB294 \uCE94"
+    japanese: "\u91E3\u308A\u990C\u7528\u30A8\u30D3\u306E\u7F36\u8A70"
+    chinese: "\u9975\u6599\u867E\u7F50\u5934"
+  - id: us_3004
+    english: Excellent Bait
+    korean: "\uD6CC\uB96D\uD55C \uBBF8\uB07C"
+    japanese: "\u512A\u308C\u305F\u990C"
+    chinese: "\u6781\u597D\u9C7C\u9975"
+  - id: us_3004_01
+    english: Can of Bait Clams
+    korean: "\uBBF8\uB07C\uC6A9 \uC870\uAC1C\uB958\uAC00 \uB4E4\uC5B4\uC788\uB294
+      \uCE94"
+    japanese: "\u91E3\u308A\u990C\u7528\u8C9D\u985E\u306E\u7F36\u8A70"
+    chinese: "\u9975\u6599\u8D1D\u7C7B\u7F50\u5934"
+  - id: us_3005
+    english: Incredible Bait
+    korean: "\uC5C4\uCCAD\uB09C \uBBF8\uB07C"
+    japanese: "\u3059\u3054\u3044\u990C"
+    chinese: "\u60CA\u4EBA\u9C7C\u9975"
+  - id: us_3005_01
+    english: Can of Delicious Smelling Bait
+    korean: "\uB9DB\uC788\uB294 \uB0C4\uC0C8\uAC00 \uB098\uB294 \uBBF8\uB07C\uAC00
+      \uB4E4\uC5B4\uC788\uB294 \uCE94"
+    japanese: "\u7F8E\u5473\u3057\u305D\u3046\u306A\u5302\u3044\u306E\u3059\u308B\u990C\u306E\u7F36\u8A70"
+    chinese: "\u88C5\u6EE1\u7F8E\u5473\u6C14\u5473\u9C7C\u9975\u7684\u7F50\u5934"
+  - id: us_3006
+    english: Legendary Bait
+    korean: "\uC804\uC124\uC758 \uBBF8\uB07C"
+    japanese: "\u4F1D\u8AAC\u306E\u990C"
+    chinese: "\u4F20\u8BF4\u7EA7\u9C7C\u9975"
+  - id: us_3006_01
+    english: '"With this'
+    korean: ' maybe..?"'
+    japanese: "\uC774\uAC8C \uC788\uC73C\uBA74 \uC544\uB9C8\uB3C4..?"
+    chinese: "\u3053\u308C\u3055\u3048\u3042\u308C\u3070..?"
+  - id: us_4002
+    english: Lucky Ticket A
+    korean: "\uB7ED\uD0A4\uD2F0\uCF13A"
+    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 A"
+    chinese: "\u5E78\u8FD0\u7968 A"
+  - id: us_4002_01
+    english: Let's grab some luck
+    korean: "\uD589\uC6B4\uC744 \uC950\uC5B4\uBCF4\uC790"
+    japanese: "\u5E78\u904B\u3092\u63B4\u307F\u53D6\u308D\u3046"
+    chinese: "\u628A\u63E1\u597D\u8FD0\u5427"
+  - id: us_4003
+    english: Lucky Ticket B
+    korean: "\uB7ED\uD0A4\uD2F0\uCF13B"
+    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 B"
+    chinese: "\u5E78\u8FD0\u7968 B"
+  - id: us_4003_01
+    english: Let's grab even more luck
+    korean: "\uD589\uC6B4\uC744 \uB354 \uC950\uC5B4\uBCF4\uC790"
+    japanese: "\u3082\u3063\u3068\u5E78\u904B\u3092\u63B4\u307F\u53D6\u308D\u3046"
+    chinese: "\u518D\u628A\u63E1\u66F4\u591A\u597D\u8FD0\u5427"
+  - id: us_4004
+    english: Lucky Ticket C
+    korean: "\uB7ED\uD0A4\uD2F0\uCF13C"
+    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 C"
+    chinese: "\u5E78\u8FD0\u7968 C"
+  - id: us_4004_01
+    english: Let's grab a handful of luck
+    korean: "\uD589\uC6B4\uC744 \uAC00\uB4DD \uC950\uC5B4\uBCF4\uC790"
+    japanese: "\u5E78\u904B\u3092\u305F\u3063\u3077\u308A\u63B4\u307F\u53D6\u308D\u3046"
+    chinese: "\u628A\u63E1\u6EE1\u6EE1\u7684\u597D\u8FD0\u5427"
+  - id: us_4005
+    english: Lucky Ticket D
+    korean: "\uB7ED\uD0A4\uD2F0\uCF13D"
+    japanese: "\u30E9\u30C3\u30AD\u30FC\u30C1\u30B1\u30C3\u30C8 D"
+    chinese: "\u5E78\u8FD0\u7968 D"
+  - id: us_4005_01
+    english: Luck is only for me
+    korean: "\uD589\uC6B4\uC740 \uC624\uC9C1 \uB098\uB97C \uC704\uD55C \uAC83"
+    japanese: "\u5E78\u904B\u306F\u305F\u3060\u79C1\u306E\u305F\u3081\u306E\u3082\u306E"
+    chinese: "\u597D\u8FD0\u53EA\u5C5E\u4E8E\u6211"
   - id: sk_001_00
-    english: Steel fishing line 1
-    korean: "\uAC15\uCCA0 \uB09A\uC2DC\uC904 1"
-    japanese: "\u92FC\u9244\u306E\u91E3\u308A\u7CF8 1"
-    chinese: "\u94A2\u5236\u9C7C\u7EBF 1"
+    english: Steel fishing line
+    korean: "\uAC15\uCCA0 \uB09A\uC2DC\uC904"
+    japanese: "\u92FC\u9244\u306E\u91E3\u308A\u7CF8"
+    chinese: "\u94A2\u5236\u9C7C\u7EBF"
   - id: sk_001_00_a
     english: The fishing area expands
-    korean: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4."
+    korean: "\uB09A\uC2DC \uC601\uC5ED\uC774 \uB113\uC5B4\uC9C4\uB2E4"
     japanese: "\u91E3\u308A\u306E\u30A8\u30EA\u30A2\u304C \u5E83\u304C\u308B"
     chinese: "\u6355\u9C7C\u533A\u57DF\u6269\u5927\u4E86"
   - id: sk_002_00
-    english: Powerful strength 1
-    korean: "\uAC15\uB825\uD55C \uD798 1"
-    japanese: "\u5F37\u529B\u306A\u529B 1"
-    chinese: "\u5F3A\u5927\u7684\u529B\u91CF 1"
+    english: Powerful strength
+    korean: "\uAC15\uB825\uD55C \uD798"
+    japanese: "\u5F37\u529B\u306A\u529B"
+    chinese: "\u5F3A\u5927\u7684\u529B\u91CF"
   - id: sk_002_00_a
     english: Quickly deplete the fish's stamina
-    korean: "\uBB3C\uACE0\uAE30\uC758 \uCCB4\uB825\uC744 \uBE60\uB974\uAC8C \uBE7C\uC557\uB294\uB2E4."
+    korean: "\uBB3C\uACE0\uAE30\uC758 \uCCB4\uB825\uC744 \uBE60\uB974\uAC8C \uBE7C\uC557\uB294\uB2E4"
     japanese: "\u9B5A\u306E\u4F53\u529B\u3092\u7D20\u65E9\u304F\u596A\u3046"
     chinese: "\u5FEB\u901F\u6D88\u8017\u9C7C\u7684\u4F53\u529B"
   - id: sk_003_00
-    english: Quick hand movements 1
-    korean: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC 1"
-    japanese: "\u6A5F\u654F\u306A\u624B\u634C\u304D 1"
-    chinese: "\u654F\u6377\u7684\u624B\u6CD5 1"
+    english: Quick hand movements
+    korean: "\uC7AC\uBE60\uB978 \uC190\uB180\uB9BC"
+    japanese: "\u6A5F\u654F\u306A\u624B\u634C\u304D"
+    chinese: "\u654F\u6377\u7684\u624B\u6CD5"
   - id: sk_003_00_a
     english: Fishing control speed increases
-    korean: "\uB09A\uC2DC\uC758 \uCEE8\uD2B8\uB864\uC774 \uBE68\uB77C\uC9C4\uB2E4."
+    korean: "\uB09A\uC2DC\uC758 \uCEE8\uD2B8\uB864\uC774 \uBE68\uB77C\uC9C4\uB2E4"
     japanese: "\u91E3\u308A\u306E\u30B3\u30F3\u30C8\u30ED\u30FC\u30EB\u304C \u901F\u304F\u306A\u308B"
     chinese: "\u9493\u9C7C \u7684 \u64CD\u63A7 \u901F\u5EA6 \u53D8\u5FEB \u4E86"
   - id: sk_004_00
-    english: Wind and sea 1
-    korean: "\uBC14\uB78C\uACFC \uBC14\uB2E4 1"
-    japanese: " \u98A8\u3068\u6D77 1"
-    chinese: " \u98CE\u4E0E\u6D77 1"
+    english: Wind and sea
+    korean: "\uBC14\uB78C\uACFC \uBC14\uB2E4"
+    japanese: " \u98A8\u3068\u6D77"
+    chinese: " \u98CE\u4E0E\u6D77"
   - id: sk_004_00_a
     english: The ship's speed increases
-    korean: "\uBC30\uC758 \uC18D\uB3C4\uAC00 \uBE68\uB77C\uC9C4\uB2E4."
+    korean: "\uBC30\uC758 \uC18D\uB3C4\uAC00 \uBE68\uB77C\uC9C4\uB2E4"
     japanese: "\u8239\u306E\u901F\u5EA6\u304C\u901F\u304F\u306A\u308B"
     chinese: "\u8239 \u7684 \u901F\u5EA6 \u53D8\u5FEB \u4E86"
   - id: sk_005_00
-    english: Greedy 1
-    korean: "\uC695\uC2EC\uC7C1\uC774 1"
-    japanese: "\u5F37\u6B32\u306A\u4EBA 1"
-    chinese: "\u8D2A\u5A6A\u7684\u4EBA 1"
+    english: Greedy
+    korean: "\uC695\uC2EC\uC7C1\uC774"
+    japanese: "\u5F37\u6B32\u306A\u4EBA"
+    chinese: "\u8D2A\u5A6A\u7684\u4EBA"
   - id: sk_005_00_a
     english: The carrying weight increases
-    korean: "\uC2E4\uC744 \uC218 \uC788\uB294 \uBB34\uAC8C\uAC00 \uB298\uC5B4\uB09C\uB2E4."
+    korean: "\uC2E4\uC744 \uC218 \uC788\uB294 \uBB34\uAC8C\uAC00 \uB298\uC5B4\uB09C\uB2E4"
     japanese: "\u7A4D\u8F09 \u3067\u304D\u308B \u91CD\u3055 \u304C \u5897\u3048\u308B"
     chinese: "\u53EF \u627F\u8F7D \u7684 \u91CD\u91CF \u589E\u52A0 \u4E86"
   - id: sk_006_00
-    english: Wanderer 1
-    korean: "\uBC29\uB791\uC790 1"
-    japanese: "\u653E\u6D6A\u8005 1"
-    chinese: "\u6D41\u6D6A\u8005 1"
+    english: Wanderer
+    korean: "\uBC29\uB791\uC790"
+    japanese: "\u653E\u6D6A\u8005"
+    chinese: "\u6D41\u6D6A\u8005"
   - id: sk_006_00_a
     english: The fuel capacity is increased
-    korean: "\uC5F0\uB8CC\uB97C \uB354 \uB9CE\uC774 \uB123\uC744 \uC218 \uC788\uB2E4."
+    korean: "\uC5F0\uB8CC\uB97C \uB354 \uB9CE\uC774 \uB123\uC744 \uC218 \uC788\uB2E4"
     japanese: "\u71C3\u6599\u3092\u3088\u308A \u591A\u304F \u5165\u308C\u308B \u3053\u3068\u304C
       \u3067\u304D\u308B"
     chinese: "\u53EF\u4EE5 \u88C5\u8F7D \u66F4\u591A \u71C3\u6599"
   - id: sk_007_00
-    english: Eco 1
-    korean: "\uCE5C\uD658\uACBD 1"
-    japanese: "\u74B0\u5883\u306B\u512A\u3057\u3044 1"
-    chinese: "\u73AF\u4FDD 1"
+    english: Eco
+    korean: "\uCE5C\uD658\uACBD"
+    japanese: "\u74B0\u5883\u306B\u512A\u3057\u3044"
+    chinese: "\u73AF\u4FDD"
   - id: sk_007_00_a
     english: Fuel efficiency improves
-    korean: "\uC5F0\uB8CC\uC758 \uD6A8\uC728\uC774 \uC88B\uC544\uC9C4\uB2E4."
+    korean: "\uC5F0\uB8CC\uC758 \uD6A8\uC728\uC774 \uC88B\uC544\uC9C4\uB2E4"
     japanese: "\u71C3\u6599 \u306E \u52B9\u7387 \u304C \u826F\u304F \u306A\u308B"
     chinese: "\u71C3\u6599 \u6548\u7387 \u63D0\u9AD8"
   - id: sk_008_00
-    english: More 1
-    korean: "\uB354 \uB9CE\uC774!! 1"
-    japanese: "\u3082\u3063\u3068 1"
-    chinese: "\u66F4\u591A 1"
+    english: More
+    korean: "\uB354 \uB9CE\uC774!!"
+    japanese: "\u3082\u3063\u3068"
+    chinese: "\u66F4\u591A"
   - id: sk_008_00_a
     english: The inventory increases by one row
-    korean: "\uC778\uBCA4\uD1A0\uB9AC\uAC00 1\uC5F4 \uB298\uC5B4\uB09C\uB2E4."
+    korean: "\uC778\uBCA4\uD1A0\uB9AC\uAC00 1\uC5F4 \uB298\uC5B4\uB09C\uB2E4"
     japanese: "\u30A4\u30F3\u30D9\u30F3\u30C8\u30EA \u304C 1 \u5217 \u5897\u3048\u308B"
     chinese: "\u80CC\u5305 \u589E\u52A0 \u4E00\u884C"
   - id: sk_009_00
-    english: Thick skin 1
-    korean: "\uB450\uAEBC\uC6B4 \uD53C\uBD80 1"
-    japanese: "\u5206\u539A\u3044\u76AE 1"
-    chinese: "\u539A\u76AE 1"
+    english: Thick skin
+    korean: "\uB450\uAEBC\uC6B4 \uD53C\uBD80"
+    japanese: "\u5206\u539A\u3044\u76AE"
+    chinese: "\u539A\u76AE"
   - id: sk_009_00_a
     english: The ship becomes resistant to impact
-    korean: "\uC120\uBC15\uC774 \uCDA9\uACA9\uC5D0 \uAC15\uD574\uC9C4\uB2E4."
+    korean: "\uC120\uBC15\uC774 \uCDA9\uACA9\uC5D0 \uAC15\uD574\uC9C4\uB2E4"
     japanese: "\u8239\u8236 \u304C \u885D\u6483 \u306B \u5F37\u304F \u306A\u308B"
     chinese: "\u8239\u8236 \u66F4\u52A0 \u8010 \u649E"
   - id: sk_010_00
-    english: Luck 1
-    korean: "\uD589\uC6B4 1"
-    japanese: "\u5E78\u904B 1"
-    chinese: "\u5E78\u8FD0 1"
-  - id: sk_010_00_a
-    english: Rare fish appear with a certain probability
-    korean: "\uC77C\uC815 \uD655\uB960\uB85C \uD76C\uADC0\uD55C \uBB3C\uACE0\uAE30\uAC00
-      \uB4F1\uC7A5\uD55C\uB2E4."
-    japanese: "\u4E00\u5B9A \u78BA\u7387 \u3067 \u73CD\u3057\u3044 \u9B5A \u304C
-      \u51FA\u73FE \u3059\u308B"
-    chinese: "\u6709 \u4E00\u5B9A \u6982\u7387 \u51FA\u73B0 \u7A00\u6709 \u9C7C \u7C7B"
-  - id: sk_011_00
     english: Killing two birds with one stone 1
-    korean: "\uC77C\uD0C0\uC30D\uD53C 1"
-    japanese: "\u4E00\u77F3\u4E8C\u9CE5 1"
-    chinese: "\u4E00\u7BAD\u53CC\u96D5 1"
-  - id: sk_011_00_a
+    korean: "\uC77C\uC11D\uC774\uC870"
+    japanese: "\u4E00\u77F3\u4E8C\u9CE5"
+    chinese: "\u4E00\u7BAD\u53CC\u96D5"
+  - id: sk_010_00_a
     english: Catch an extra fish with a certain probability
     korean: "\uC77C\uC815 \uD655\uB960\uB85C \uCD94\uAC00 \uBB3C\uACE0\uAE30\uB97C
-      \uB09A\uB294\uB2E4."
+      \uB09A\uB294\uB2E4"
     japanese: "\u4E00\u5B9A \u78BA\u7387 \u3067 \u8FFD\u52A0 \u306E \u9B5A \u3092
       \u91E3\u308B"
     chinese: "\u6709 \u4E00\u5B9A \u6982\u7387 \u9493 \u5230 \u989D\u5916 \u7684
       \u9C7C"
+  - id: sk_011_00
+    english: One more time!
+    korean: "\uD55C\uBC88 \uB354!"
+    japanese: "\u3082\u3046\u4E00\u56DE\uFF01"
+    chinese: "\u518D\u6765\u4E00\u6B21\uFF01"
+  - id: sk_011_00_a
+    english: You can fish longer in one spot
+    korean: "\uD55C \uACF3\uC5D0\uC11C \uB09A\uC2DC\uB97C \uB354 \uD560 \uC218 \uC788\uB2E4"
+    japanese: "\u540C\u3058\u5834\u6240\u3067\u3055\u3089\u306B\u91E3\u308A\u304C\u3067\u304D\u308B"
+    chinese: "\u53EF\u4EE5\u5728\u540C\u4E00\u4E2A\u5730\u65B9\u9493\u66F4\u591A\u9C7C"
   - id: sk_012_00
-    english: A resourceful person 1
+    english: A resourceful person
     korean: "\uC218\uC644\uAC00"
-    japanese: "\u3084\u308A\u624B 1"
-    chinese: "\u80FD\u4EBA 1"
+    japanese: "\u3084\u308A\u624B"
+    chinese: "\u80FD\u4EBA"
   - id: sk_012_00_a
     english: Sell fish for a higher price at the store
     korean: "\uC0C1\uC810\uC5D0 \uBB3C\uACE0\uAE30\uB97C \uB354 \uBE44\uC2F8\uAC8C
-      \uD310\uB9E4"
+      \uD310\uB9E4 \uD560 \uC218 \uC788\uB2E4"
     japanese: "\u5E97 \u306B \u9B5A \u3092 \u3088\u308A \u9AD8\u304F \u58F2\u308B"
     chinese: "\u5C06 \u9C7C \u4EE5 \u66F4\u9AD8 \u4EF7\u683C \u51FA\u552E \u7ED9
       \u5546\u5E97"
@@ -9499,20 +9609,20 @@ MonoBehaviour:
     chinese: "\u4ED3\u5E93 \u6269\u5EFA"
   - id: sk_013_00_a
     english: Put more items into storage
-    korean: "\uB354 \uB9CE\uC740 \uC544\uC774\uD15C\uC744 \uCC3D\uACE0\uC5D0 \uC218\uB0A9\uD55C\uB2E4."
+    korean: "\uB354 \uB9CE\uC740 \uC544\uC774\uD15C\uC744 \uCC3D\uACE0\uC5D0 \uC218\uB0A9\uD55C\uB2E4"
     japanese: "\u3088\u308A \u591A\u304F \u306E \u30A2\u30A4\u30C6\u30E0 \u3092 \u5009\u5EAB
       \u306B \u53CE\u7D0D \u3059\u308B"
     chinese: "\u5728 \u4ED3\u5E93 \u4E2D \u5B58\u653E \u66F4 \u591A \u7269\u54C1"
   - id: sk_014_01
-    english: Master Angler
-    korean: "\uB09A\uC2DC\uC655"
-    japanese: "\u91E3\u308A\u738B"
-    chinese: "\u9493\u9C7C\u738B"
+    english: Easier Defense
+    korean: "\uC26C\uC6CC\uC9C4 \uBC29\uC5B4"
+    japanese: "\u6613\u3057\u304F\u306A\u3063\u305F\u9632\u885B"
+    chinese: "\u53D8\u8F7B\u677E\u7684\u9632\u5FA1"
   - id: sk_014_01_a
-    english: The defense indicator decreases
-    korean: "\uBC29\uC5B4 \uD654\uC0B4\uD45C\uAC00 \uC904\uC5B4\uB4E0\uB2E4."
-    japanese: "\u9632\u5FA1 \u306E \u77E2\u5370 \u304C \u6E1B\u308B"
-    chinese: "\u9632\u5FA1 \u6307\u793A \u7BAD\u5934 \u51CF\u5C11"
+    english: Decreases defense arrows
+    korean: "\uBC29\uC5B4 \uD654\uC0B4\uD45C\uAC00 \uC904\uC5B4\uB4E0\uB2E4"
+    japanese: "\u9632\u885B\u77E2\u5370\u304C\u6E1B\u308B"
+    chinese: "\u51CF\u5C11\u9632\u5FA1\u7BAD\u5934"
   - id: sk_100_00
     english: Basic ship
     korean: "\uAE30\uBCF8 \uBC30"
@@ -9530,7 +9640,7 @@ MonoBehaviour:
     chinese: "\u5FEB\u8247"
   - id: sk_100_01_a
     english: It is fast but weak because it is light
-    korean: "\uBE60\uB978 \uC9C0\uB9CC \uAC00\uBCBC\uC6B4 \uB9CC\uD07C \uC57D\uD558\uB2E4."
+    korean: "\uBE60\uB974\uC9C0\uB9CC \uAC00\uBCBC\uC6B4 \uB9CC\uD07C \uC57D\uD558\uB2E4"
     japanese: "\u8FC5\u901F \u3060\u304C \u8EFD\u91CF \u306E \u305F\u3081 \u8106\u3044"
     chinese: "\u901F\u5EA6 \u5FEB \u4F46 \u7531\u4E8E \u8F7B\u76C8 \u6240\u4EE5 \u8106\u5F31"
   - id: sk_100_02
@@ -9539,11 +9649,10 @@ MonoBehaviour:
     japanese: "\u3044\u304B\u3060"
     chinese: "\u6728\u7B4F"
   - id: sk_100_02_a
-    english: The first ship is eco-friendly
-    korean: "\uCD5C\uCD08\uC758 \uBC30 \uCE5C\uD658\uACBD\uC801\uC774\uB2E4."
-    japanese: "\u4E00\u756A \u6700\u521D \u306E \u821F \u306F \u30A8\u30B3\u30D5\u30EC\u30F3\u30C9\u30EA\u30FC
-      \u3060"
-    chinese: "\u6700\u521D \u7684 \u8239 \u662F \u73AF\u4FDD \u7684"
+    english: Eco-friendly
+    korean: "\uCE5C\uD658\uACBD\uC801\uC774\uB2E4"
+    japanese: "\u74B0\u5883\u306B\u512A\u3057\u3044"
+    chinese: "\u73AF\u4FDD\u578B"
   - id: sk_100_03
     english: Cruise
     korean: "\uD06C\uB8E8\uC988"
@@ -9552,7 +9661,7 @@ MonoBehaviour:
   - id: sk_100_03_a
     english: A luxurious ship as a passenger liner it is very sturdy
     korean: "\uD638\uD654\uB85C\uC6B4 \uBC30. \uC5EC\uAC1D\uC120\uC778 \uB9CC\uD07C
-      \uC544\uC8FC \uD2BC\uD2BC\uD558\uB2E4."
+      \uC544\uC8FC \uD2BC\uD2BC\uD558\uB2E4"
     japanese: "\u8D05\u6CA2\u306A \u8239\u8236 \u306F \u65C5\u5BA2\u8239 \u306E \u305F\u3081
       \u975E\u5E38\u306B \u9811\u4E08 \u3060"
     chinese: "\u8FD9\u8258 \u5962\u4F88 \u7684 \u8239 \u662F \u4E00\u8258 \u5BA2\u8239
@@ -9577,7 +9686,7 @@ MonoBehaviour:
   - id: sk_100_05_a
     english: The boat chosen by fishing experts
     korean: "\uB09A\uC2DC \uC804\uBB38\uAC00\uB4E4\uC774 \uC120\uD0DD\uD55C \uADF8
-      \uBC30."
+      \uBC30"
     japanese: "\u91E3\u308A \u306E \u5C02\u9580\u5BB6 \u305F\u3061 \u304C \u9078\u3093\u3060
       \u305D\u306E \u8239"
     chinese: "\u9493\u9C7C \u4E13\u5BB6\u4EEC \u9009\u62E9 \u7684 \u90A3\u8258 \u8239"
@@ -9588,11 +9697,144 @@ MonoBehaviour:
     chinese: "\u811A\u8E0F\u8239"
   - id: sk_100_06_a
     english: The eco-friendly ship loved by fish
-    korean: "\uBB3C\uACE0\uAE30\uAC00 \uC0AC\uB791\uD55C \uC790\uC5F0 \uCE5C\uD654\uC801\uC778
-      \uBC30"
+    korean: "\uD1B5\uD1B5\uBC30"
     japanese: "\u9B5A \u306B \u597D\u307E\u308C\u308B \u30A8\u30B3\u30D5\u30EC\u30F3\u30C9\u30EA\u30FC
       \u306A \u30DC\u30FC\u30C8"
     chinese: "\u53D7 \u9C7C \u7C7B \u6B22\u8FCE \u7684 \u73AF\u4FDD \u8239"
+  - id: sk_015_00
+    english: Sturdy Fishing Rod
+    korean: "\uD2BC\uD2BC\uD55C \uB09A\uC2EF\uB300"
+    japanese: "\u4E08\u592B\u306A\u91E3\u7AFF"
+    chinese: "\u7ED3\u5B9E\u7684\u9493\u7AFF"
+  - id: sk_015_00_a
+    english: It doesn't break easily
+    korean: "\uC27D\uAC8C \uBD80\uB7EC\uC9C0\uC9C0 \uC54A\uB294\uB2E4"
+    japanese: "\u7C21\u5358\u306B\u6298\u308C\u306A\u3044"
+    chinese: "\u4E0D\u6613 \u63B0\u65AD"
+  - id: sk_016_01
+    english: Booster!
+    korean: "\uBD80\uC2A4\uD130!"
+    japanese: "\u30D6\u30FC\u30B9\u30BF\u30FC\uFF01"
+    chinese: "\u52A0\u901F\u5668\uFF01"
+  - id: sk_016_01_a
+    english: Increased speed
+    korean: "\uC18D\uB3C4\uAC00 \uB354 \uBE68\uB77C\uC9C4\uB2E4"
+    japanese: "\u901F\u5EA6\u304C\u3055\u3089\u306B\u901F\u304F\u306A\u308B"
+    chinese: "\u901F\u5EA6\u53D8\u5F97\u66F4\u5FEB"
+  - id: sk_017_00
+    english: Booster Size Up
+    korean: "\uBD80\uC2A4\uD130 \uC0AC\uC774\uC988 \uC99D\uAC00"
+    japanese: "\u30D6\u30FC\u30B9\u30BF\u30FC\u62E1\u5927"
+    chinese: "\u52A0\u5927\u52A0\u901F\u5668"
+  - id: sk_017_00_a
+    english: Booster duration extended
+    korean: "\uBD80\uC2A4\uD130 \uC9C0\uC18D \uC2DC\uAC04 \uC5F0\uC7A5"
+    japanese: "\u30D6\u30FC\u30B9\u30BF\u30FC\u6301\u7D9A\u6642\u9593\u5EF6\u9577"
+    chinese: "\u5EF6\u957F\u52A0\u901F\u5668\u6301\u7EED\u65F6\u95F4"
+  - id: sk_018_01
+    english: Smart Catch
+    korean: "\uD5C8\uC810 \uAFF0\uB6AB\uAE30"
+    japanese: "\u9699\u3092\u898B\u9003\u3055\u306A\u3044"
+    chinese: "\u5BFB\u627E\u7834\u7EFD"
+  - id: sk_018_01_a
+    english: Drains fish stamina quickly
+    korean: "\uBB3C\uACE0\uAE30\uC758 \uCCB4\uB825\uC744 \uBE60\uB974\uAC8C \uC18C\uBAA8\uC2DC\uD0A8\uB2E4"
+    japanese: "\u9B5A\u306E\u4F53\u529B\u3092\u65E9\u304F\u6E1B\u3089\u3059"
+    chinese: "\u5FEB\u901F\u6D88\u8017\u9C7C\u7684\u4F53\u529B"
+  - id: sk_019_00
+    english: Underwater Slow
+    korean: "\uC218\uC911 \uC2AC\uB85C\uC6B0"
+    japanese: "\u6C34\u4E2D\u30B9\u30ED\u30FC"
+    chinese: "\u6C34\u4E0B\u51CF\u901F"
+  - id: sk_019_00_a
+    english: Slows down the fish
+    korean: "\uBB3C\uACE0\uAE30\uAC00 \uB290\uB824\uC9C4\uB2E4"
+    japanese: "\u9B5A\u306E\u52D5\u304D\u304C\u9045\u304F\u306A\u308B"
+    chinese: "\u9C7C\u7684\u901F\u5EA6\u53D8\u6162"
+  - id: sk_020_01
+    english: Weakened Pounce
+    korean: "\uC19C\uBC29\uB9DD\uC774 \uACF5\uACA9"
+    japanese: "\u306D\u3053\u30D1\u30F3\u30C1\u5316"
+    chinese: "\u65E0\u529B\u6253\u51FB"
+  - id: sk_020_01_a
+    english: Reduces fish's attack power
+    korean: "\uBB3C\uACE0\uAE30\uC758 \uACF5\uACA9\uB825\uC744 \uAC10\uC18C\uC2DC\uD0A8\uB2E4"
+    japanese: "\u9B5A\u306E\u653B\u6483\u529B\u304C\u4F4E\u4E0B\u3059\u308B"
+    chinese: "\u964D\u4F4E\u9C7C\u7684\u653B\u51FB\u529B"
+  - id: sk_021_00
+    english: Take Your Time
+    korean: "\uCC9C\uCC9C\uD788 \uD558\uC790"
+    japanese: "\u843D\u3061\u7740\u3044\u3066"
+    chinese: "\u4E0D\u6025\u6162\u6162\u6765"
+  - id: sk_021_00_a
+    english: Extended defense input time
+    korean: "\uBC29\uC5B4 \uC785\uB825 \uC2DC\uAC04 \uC5F0\uC7A5"
+    japanese: "\u30AC\u30FC\u30C9\u306E\u5165\u529B\u6642\u9593\u3092\u5EF6\u9577"
+    chinese: "\u5EF6\u957F\u9632\u5FA1\u8F93\u5165\u65F6\u95F4"
+  - id: sk_022_01
+    english: Attack Delay
+    korean: "\uACF5\uACA9 \uB51C\uB808\uC774"
+    japanese: "\u653B\u6483\u30C7\u30A3\u30EC\u30A4"
+    chinese: "\u653B\u51FB\u5EF6\u8FDF"
+  - id: sk_022_01_a
+    english: Delays fish attacks
+    korean: "\uBB3C\uACE0\uAE30\uC758 \uACF5\uACA9 \uAC04\uACA9\uC744 \uB298\uB9B0\uB2E4"
+    japanese: "\u653B\u6483\u306E\u9593\u9694\u3092\u5EF6\u3070\u3059"
+    chinese: "\u5EF6\u957F\u653B\u51FB\u95F4\u9694"
+  - id: sk_023_00
+    english: Fish Daze Time
+    korean: "\uBB3C\uBA4D\uD0C0\uC784"
+    japanese: "\u304A\u9B5A\u307D\u304B\u3093\u30BF\u30A4\u30E0"
+    chinese: "\u9C7C\u513F\u53D1\u5446\u65F6\u95F4"
+  - id: sk_023_00_a
+    english: Extends groggy duration
+    korean: "\uADF8\uB85C\uAE30 \uC9C0\uC18D \uC2DC\uAC04\uC744 \uC5F0\uC7A5\uD55C\uB2E4"
+    japanese: "\u30B0\u30ED\u30C3\u30AD\u30FC\u6642\u9593\u3092\u5EF6\u9577"
+    chinese: "\u5EF6\u957F\u865A\u5F31\u72B6\u6001\u65F6\u95F4"
+  - id: sk_024_01
+    english: Collision Evasion
+    korean: "\uCDA9\uB3CC \uBC29\uC9C0 \uD655\uB960"
+    japanese: "\u885D\u7A81\u56DE\u907F\u7387"
+    chinese: "\u9632\u649E\u6982\u7387"
+  - id: sk_024_01_a
+    english: Chance to negate collision damage
+    korean: "\uCDA9\uB3CC \uD53C\uD574\uB97C \uBB34\uD6A8\uD654\uD560 \uD655\uB960\uC774
+      \uC0DD\uAE34\uB2E4"
+    japanese: "\u4F4E\u78BA\u7387\u3067\u885D\u7A81\u30C0\u30E1\u30FC\u30B8\u3092\u7121\u52B9\u5316"
+    chinese: "\u4F4E\u6982\u7387\u62B5\u6D88\u78B0\u649E\u4F24\u5BB3"
+  - id: sk_200_01
+    english: License Upgrade
+    korean: "\uC790\uACA9\uC99D \uC5C5\uADF8\uB808\uC774\uB4DC"
+    japanese: "\u8CC7\u683C\u30A2\u30C3\u30D7\u30B0\u30EC\u30FC\u30C9"
+    chinese: "\u6267\u7167\u5347\u7EA7"
+  - id: sk_200_01_a
+    english: Allows you to fish in farther waters.
+    korean: "\uB354 \uBA3C \uBC14\uB2E4\uC5D0\uC11C \uB09A\uC2DC \uD560 \uC218 \uC788\uB294
+      \uC790\uACA9\uC99D"
+    japanese: "\u3088\u308A\u9060\u304F\u306E\u6D77\u57DF\u3067\u306E\u91E3\u308A\u304C\u53EF\u80FD\u306B\u306A\u308A\u307E\u3059"
+    chinese: "\u83B7\u5F97\u5728\u66F4\u8FDC\u6D77\u57DF\u5782\u9493\u7684\u8D44\u683C"
+  - id: sk_200_02
+    english: License Upgrade
+    korean: "\uC790\uACA9\uC99D \uC5C5\uADF8\uB808\uC774\uB4DC"
+    japanese: "\u8CC7\u683C\u30A2\u30C3\u30D7\u30B0\u30EC\u30FC\u30C9"
+    chinese: "\u6267\u7167\u5347\u7EA7"
+  - id: sk_200_02_a
+    english: Allows you to fish in farther waters.
+    korean: "\uB354 \uBA3C \uBC14\uB2E4\uC5D0\uC11C \uB09A\uC2DC \uD560 \uC218 \uC788\uB294
+      \uC790\uACA9\uC99D"
+    japanese: "\u3088\u308A\u9060\u304F\u306E\u6D77\u57DF\u3067\u306E\u91E3\u308A\u304C\u53EF\u80FD\u306B\u306A\u308A\u307E\u3059"
+    chinese: "\u83B7\u5F97\u5728\u66F4\u8FDC\u6D77\u57DF\u5782\u9493\u7684\u8D44\u683C"
+  - id: sk_200_03
+    english: License Upgrade
+    korean: "\uC790\uACA9\uC99D \uC5C5\uADF8\uB808\uC774\uB4DC"
+    japanese: "\u8CC7\u683C\u30A2\u30C3\u30D7\u30B0\u30EC\u30FC\u30C9"
+    chinese: "\u6267\u7167\u5347\u7EA7"
+  - id: sk_200_03_a
+    english: Allows you to fish in farther waters.
+    korean: "\uB354 \uBA3C \uBC14\uB2E4\uC5D0\uC11C \uB09A\uC2DC \uD560 \uC218 \uC788\uB294
+      \uC790\uACA9\uC99D"
+    japanese: "\u3088\u308A\u9060\u304F\u306E\u6D77\u57DF\u3067\u306E\u91E3\u308A\u304C\u53EF\u80FD\u306B\u306A\u308A\u307E\u3059"
+    chinese: "\u83B7\u5F97\u5728\u66F4\u8FDC\u6D77\u57DF\u5782\u9493\u7684\u8D44\u683C"
   audioStruct:
   - id: bgm_0001
     clip: {fileID: 8300000, guid: 901bda1c05964594d8139e0d5620b017, type: 3}
