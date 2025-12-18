@@ -8,6 +8,7 @@ using static Data_Manager;
 
 public class Game_Manager : MonoBehaviour
 {
+    public string addItemTest;
     public Unit_Player player;
     public Controll_Manager controllManager;
 
@@ -45,7 +46,6 @@ public class Game_Manager : MonoBehaviour
     [Header(" [ 빈 오브젝트 ]")]
     public Data_Ship shipData;
     public SetStatus currentStatus;
-    public string addItemTest;
     public SetStatus GetAddStatus => GetSkill.skill_Setting.AddShipStatus();
 
     [Header(" [ 이어하기 ]")]

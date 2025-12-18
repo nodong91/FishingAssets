@@ -11,6 +11,7 @@ public class Rest_Manager : MonoBehaviour
     public Slider timeSlider;
     public TMPro.TMP_Text timeText;
     public TMPro.TMP_Text beforeTimeText, afterTimeText;
+    public TMPro.TMP_Text restText, doneText;
 
     public int hour;
     public int minute;
@@ -63,6 +64,8 @@ public class Rest_Manager : MonoBehaviour
         {
             timeSlider.value = 0;
             TimeSliderChange(0f);
+            restText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._1027);
+            doneText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._1028);
         }
     }
 

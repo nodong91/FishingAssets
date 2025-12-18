@@ -13,11 +13,13 @@ public class UI_Main : MonoBehaviour
     public Custom_Button fishGuideButton;
     public Custom_Button mapButton;
     public Custom_Button optionButton;
-
-    public CanvasGroup fadeScreen;
     public Canvas cameraCanvas;
     public TMPro.TMP_Text warnningText;
     Coroutine textActing;
+
+    [Header("[ FadeScreen ]")]
+    public CanvasGroup fadeScreen;
+    public TMPro.TMP_Text fadeText;
 
     [Header("[ Ship ]")]
     public Image shipEnergyMask;
@@ -209,6 +211,8 @@ public class UI_Main : MonoBehaviour
 
     IEnumerator OpenFadeScreen(bool _open)
     {
+        fadeText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._1026);
+
         float prevAlpha = fadeScreen.alpha;
         float targetAlpha = _open == true ? 1f : 0f;
         float normalize = 0f;

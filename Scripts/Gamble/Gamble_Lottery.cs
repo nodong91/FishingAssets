@@ -47,7 +47,7 @@ public class Gamble_Lottery : MonoBehaviour
         answerSlot.iconImage.material = Instantiate(answerSlot.iconImage.material);
     }
 
-    void Update()
+    void Update()// º¹±Ç ±Ü±â
     {
         if (Input.GetMouseButtonDown(0))
         {

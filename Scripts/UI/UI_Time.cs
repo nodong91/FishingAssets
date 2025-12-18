@@ -72,17 +72,6 @@ public class UI_Time : MonoBehaviour
         Shader.SetGlobalColor("_EmissionColor", setEmissionColor);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            if (lightMode == DayType.Day)
-                StartCoroutine(DayChange(DayType.Night));
-            else
-                StartCoroutine(DayChange(DayType.Day));
-        }
-    }
-
     IEnumerator TimeUpdate()
     {
         while (paused == false)

@@ -103,7 +103,7 @@ public class Fishing_Canvas : MonoBehaviour
 
     public void SetArrow(string _cord)
     {
-        arrowParent.gameObject.SetActive(true);
+        OnArrowParent(true);
         arrowQueue = new Queue<Image>();
         for (int i = 0; i < arrowList.Count; i++)
         {

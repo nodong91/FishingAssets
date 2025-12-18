@@ -11,6 +11,12 @@ public class Singleton_Controller : MonoSingleton<Singleton_Controller>
 
     private void Update()
     {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Game_Manager.current?.GetMainUI.OptionButton();
+            Debug.LogWarning("GetMainUI.OptionButton");
+        }
+
         if (outOfControll == true)
             return;
 
@@ -27,11 +33,6 @@ public class Singleton_Controller : MonoSingleton<Singleton_Controller>
             }
         }
         Mouse_Wheel(Input.GetAxis("Mouse ScrollWheel"));
-
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            Game_Manager.current?.GetMainUI.OptionButton();
-        }
     }
 
     public void SetController()

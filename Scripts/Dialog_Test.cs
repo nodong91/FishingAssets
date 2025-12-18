@@ -18,7 +18,7 @@ public class Dialog_Test : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))// ½ºÅµ
         {
             if (typing == true)
                 typing = false;

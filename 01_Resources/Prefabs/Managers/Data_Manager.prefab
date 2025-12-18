@@ -638,12 +638,12 @@ MonoBehaviour:
   - id: fs_1001
     fishHealth: 20
     fishPower: 0.1
-    fishSpeed: 0.3
+    fishSpeed: 1
     fishCoolTime: 0
     fishSpellTime: 0
     fishGroggyTime: 0
     fishDefenseCount: 0
-    fishTurnDelay: {x: 1, y: 1}
+    fishTurnDelay: {x: 0.1, y: 0.5}
     addDuration: 100
     addValue: 0.03
     itemStruct:
@@ -7314,6 +7314,37 @@ MonoBehaviour:
     korean: "\uC800\uC7A5 \uBC0F \uB098\uAC00\uAE30"
     japanese: "\u4FDD\u5B58\u3057\u3066\u7D42\u4E86"
     chinese: "\u4FDD\u5B58\u5E76\u9000\u51FA"
+  - id: etc_1023
+    english: Yes
+    korean: "\uC608"
+    japanese: "\u306F\u3044"
+    chinese: "\u662F"
+  - id: etc_1024
+    english: No
+    korean: "\uC544\uB2C8\uC694"
+    japanese: "\u3044\u3044\u3048"
+    chinese: "\u4E0D\u662F"
+  - id: etc_1025
+    english: All data will be DELETED./nDo you want start a new game?
+    korean: "\uBAA8\uB4E0 \uB370\uC774\uD130\uAC00 \uC0AD\uC81C\uB429\uB2C8\uB2E4./n\uC0C8\uB85C\uC6B4
+      \uAC8C\uC784\uC744 \uC2DC\uC791\uD558\uC2DC\uACA0\uC2B5\uB2C8\uAE4C."
+    japanese: "\u3059\u3079\u3066\u306E\u30C7\u30FC\u30BF\u304C\u524A\u9664\u3055\u308C\u307E\u3059\u3002/n\u65B0\u3057\u3044\u30B2\u30FC\u30E0\u3092\u59CB\u3081\u307E\u3059\u304B\u3002"
+    chinese: "\u6240\u6709\u6570\u636E\u5C06\u88AB\u5220\u9664\u3002/n\u60A8\u60F3\u5F00\u59CB\u65B0\u6E38\u620F\u5417\u3002"
+  - id: etc_1026
+    english: lost everything.
+    korean: "\uBAA8\uB4E0 \uAC83\uC744 \uC783\uC5C8\uB2E4."
+    japanese: "\u5168\u3066\u3092\u5931\u3063\u305F."
+    chinese: "\u5931\u53BB\u4E86\u4E00\u5207."
+  - id: etc_1027
+    english: take a rest
+    korean: "\uD734\uC2DD\uD558\uAE30"
+    japanese: "\u4F11\u61A9\u3059\u308B."
+    chinese: "\u4F11\u606F"
+  - id: etc_1028
+    english: Rest
+    korean: "\uD734\uC2DD"
+    japanese: "\u4F11\u307F"
+    chinese: "\u4F11\u606F"
   - id: ev_0001_01_a
     english: I chased after them and got badly beaten and lost {0}
     korean: "\uB4A4\uCAD3\uC544 \uAC14\uB2E4\uAC00 \uC5C4\uCCAD\uB098\uAC8C \uC5BB\uC5B4\uD130\uC9C0\uACE0

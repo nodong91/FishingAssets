@@ -50,6 +50,14 @@ public class Const_ETC
     public const string _noQuest = "etc_1003";
     public const string _dontMove = "etc_1004";
     public const string _twoFish = "etc_1005";
+
+
+    public const string _1023 = "etc_1023";
+    public const string _1024 = "etc_1024";
+    public const string _1025 = "etc_1025";
+    public const string _1026 = "etc_1026";
+    public const string _1027 = "etc_1027";
+    public const string _1028 = "etc_1028";
 }
 
 public class Const_Save

@@ -83,35 +83,43 @@ public class UI_FishingNews : MonoBehaviour
         }
         else
         {
+            // 랜덤 그래프
             sellDict = new Dictionary<AreaType, int>();
-            shallowPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
-            coastalPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
-            oceanicPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
-            abyssalPrices = new List<float>() { 100f, 100f, 100f, 100f, 100f, 100f, 100f };
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            FishStruct testFish = new FishStruct()
+            for (int c = 0; c < 7; c++)
             {
-                areaType = AreaType.Shallow,
-            };
-            SellFishCount(testFish);
-        }
-
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SetPrice();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+                for (int i = 0; i < 20; i++)
+                {
+                    AreaType areaType = (AreaType)Random.Range(1, (int)AreaType.Abyssal + 1);
+                    SellFishCount(areaType);
+                }
+                SetPrice();
+            }
             SaveData();
         }
     }
+
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.A))
+    //    {
+    //        FishStruct testFish = new FishStruct()
+    //        {
+    //            areaType = AreaType.Shallow,
+    //        };
+    //        SellFishCount(testFish);
+    //    }
+
+    //    if (Input.GetKeyDown(KeyCode.S))
+    //    {
+    //        SetPrice();
+    //    }
+
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+          
+    //        SaveData();
+    //    }
+    //}
 
     public void SetStart()
     {
@@ -164,6 +172,14 @@ public class UI_FishingNews : MonoBehaviour
         sellDict[areaType]++;
     }
 
+    public void SellFishCount(AreaType _areaType)
+    {
+        if (sellDict.ContainsKey(_areaType) == false)
+            sellDict.Add(_areaType, 0);
+
+        sellDict[_areaType]++;
+    }
+
     public float GetFishPricePercent(AreaType _areaType)
     {
         // 물고기 시세 퍼센트 반환
@@ -200,7 +216,7 @@ public class UI_FishingNews : MonoBehaviour
         sellCount = TrySellCount();
         SetSellList();
 
-        int randomCount = (10 + sellCount) * (int)AreaType.Abyssal;// 팔린 물고기 수 * 깊이 타입
+        int randomCount = Mathf.Max(10, sellCount) * (int)AreaType.Abyssal;// 팔린 물고기 수 * 깊이 타입
         totalCount = randomCount + sellCount;
         for (int i = 0; i < randomCount; i++)// 랜덤 시세
         {
