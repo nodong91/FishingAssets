@@ -342,6 +342,7 @@ public class Unit_Player : MonoBehaviour
         Game_Manager.current.GetMainUI.SetHealthPoint(health);// 데미지
 
         Debug.LogWarning($"TakeDamage - {health} ({DestroyCount})");
+        Singleton_Continue.INSTANCE.SaveContinue();
         return health <= 0;
     }
 
@@ -376,7 +377,7 @@ public class Unit_Player : MonoBehaviour
 
         playerObject.SetActive(false);
         Game_Manager.current.PlayerDestroy();// 플레이어 위치에 고스트 놓고 인벤토리 비우기
-        Debug.LogError("견인 되는 연출 필요 - 보험 회사 도착");
+        //Debug.LogError("견인 되는 연출 필요 - 보험 회사 도착");
         CheckDeep();
         // 견인 되는 연출 필요
         // 위치 변경
@@ -406,8 +407,8 @@ public class Unit_Player : MonoBehaviour
         }
         //StartCoroutine(ShipTowed(backwardPosition));
 
-        Singleton_Continue.INSTANCE.SaveContinue();// 견인됨
-        Debug.LogError("견인 되는 연출 필요 - 마을 도착");
+        Singleton_Continue.INSTANCE.SaveContinue();// 견인됨 저장
+        //Debug.LogError("견인 되는 연출 필요 - 마을 도착");
         CheckClosestUnit();// 가까운 트리거 체크
         //// 스탯 리셋
         //SetStatus();

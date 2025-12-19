@@ -135,12 +135,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2341830621618178060}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 9.313227e-10, z: 0.000000014901163, w: 0.70710677}
-  m_LocalPosition: {x: 0, y: -0.49999997, z: 0}
+  m_LocalRotation: {x: -0.00000008940697, y: -0.000000009878169, z: 0.000000011195259, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.5}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5329327922490736071}
+  m_Father: {fileID: 857003647880649635}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &7244423998248568523
 ParticleSystem:
@@ -449,8 +449,8 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 1
+      scalar: 0.4
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -715,7 +715,7 @@ ParticleSystem:
     gravitySource: 0
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
-    size3D: 0
+    size3D: 1
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
@@ -860,7 +860,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.61
       mode: 0
       spread: 0
       speed:
@@ -4968,11 +4968,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3987270991862631104}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalRotation: {x: -0.70710677, y: 5.551115e-16, z: -8.881784e-16, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4725938997807573873}
   m_Father: {fileID: 5329327922490736071}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &7593780394776393711
@@ -9804,10 +9805,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4725938997807573873}
+  - {fileID: 857003647880649635}
   - {fileID: 6643336602131032595}
   - {fileID: 4849499912777873754}
-  - {fileID: 857003647880649635}
   m_Father: {fileID: 7318285923073338879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6701785339502911550

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Data_Manager;
@@ -12,7 +13,14 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
         if (Game_Manager.current.shipData == null)
             return;
 
+        StartCoroutine(SetContinue());
+    }
+
+    IEnumerator SetContinue()
+    {
         Debug.LogError("저장 : 컨티뉴");
+        yield return null;
+
         Data_Continue continueData = new Data_Continue
         {
             shipData = Game_Manager.current.shipData.id,

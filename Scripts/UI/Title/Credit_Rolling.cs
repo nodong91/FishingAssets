@@ -6,7 +6,7 @@ public class Credit_Rolling : MonoBehaviour, IPointerClickHandler
 {
     public CanvasGroup canvasGroup;
     public RectTransform rolling;
-    public float endY = 1000f; // Final position on the Y-axis
+    float hight = 600f; // Final position on the Y-axis
     public float currentY = 0f; // Distance to roll
     public float speed = 0.01f;
     Coroutine rollingCoroutine;
@@ -20,7 +20,7 @@ public class Credit_Rolling : MonoBehaviour, IPointerClickHandler
         {
             currentY = 0f; // Reset currentY to 0
             canvasGroup.alpha = 0f; // Reset alpha to 0
-            rolling.anchoredPosition = new Vector3(0, 0, 0);
+            hight = rolling.sizeDelta.y * 0.5f;
             rollingCoroutine = StartCoroutine(OpeningCanvas(1f)); // Fade in the canvas
         }
         else
@@ -47,9 +47,12 @@ public class Credit_Rolling : MonoBehaviour, IPointerClickHandler
 
     IEnumerator StartRolling()
     {
-        while (currentY < endY)
+        rolling.anchoredPosition = new Vector3(0, -hight, 0);
+        float normalize = 0f;
+        while (currentY < hight)
         {
-            currentY = Mathf.Lerp(currentY, endY, Time.deltaTime * speed); // Lerp between start and end positions
+            normalize += Time.deltaTime * speed;
+            currentY = Mathf.Lerp(-hight, hight, normalize); // Lerp between start and end positions
             rolling.anchoredPosition = new Vector3(0, currentY, 0);
             yield return null; // Wait for the next frame
         }
