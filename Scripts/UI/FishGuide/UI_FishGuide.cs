@@ -142,9 +142,22 @@ public class FishGuide : MonoBehaviour
                 fish.maxSize = _size;
             }
             Data_Manager.FishStruct fishStruct = Singleton_Data.INSTANCE.Dict_Fish[_id];
-            if (fishStruct.itemStruct.itemClass == Data_Manager.ItemStruct.ItemClass.Legendary)
+
+            switch (fishStruct.itemStruct.itemClass)
             {
-                Steam_StatsManager.current.CatchLegendary();// 레전드 체크
+                case Data_Manager.ItemStruct.ItemClass.Legendary:
+                    Steam_StatsManager.current.CatchLegendary();// 레전드 체크
+                    break;
+                case Data_Manager.ItemStruct.ItemClass.Epic:
+                    Steam_StatsManager.current.First_Epic();
+                    break;
+                case Data_Manager.ItemStruct.ItemClass.Rare:
+                    Steam_StatsManager.current.First_Rare();
+                    break;
+                case Data_Manager.ItemStruct.ItemClass.Uncommon:
+                    break;
+                case Data_Manager.ItemStruct.ItemClass.Common:
+                    break;
             }
         }
         else

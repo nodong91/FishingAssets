@@ -47,6 +47,7 @@ public class Option_Control : MonoBehaviour
 
         shakeToggle.onValueChanged.AddListener(SetFPS);
         shakeToggle.isOn = optionData.shake;
+        OnValueChange(optionData.language);
     }
 
     void OnValueChange(int _index)

@@ -26,7 +26,7 @@ public class UI_Landing : MonoBehaviour
     public GameObject shopUI;
     public GameObject shipyardUI;
     public GameObject downTownUI;
-    public GameObject boardUI;
+    //public GameObject boardUI;
 
     LandingSetting[] landingData;
     public LandingSetting[] GetLandingData { get { return landingData; } }
@@ -132,8 +132,8 @@ public class UI_Landing : MonoBehaviour
             case LandingSetting.LandingType.Shipyard:
                 return shipyardUI;
 
-            case LandingSetting.LandingType.Board:
-                return boardUI;
+            //case LandingSetting.LandingType.Board:
+            //    return boardUI;
         }
         return null;
     }

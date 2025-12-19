@@ -636,9 +636,9 @@ MonoBehaviour:
     skillID: "-\r"
   fishStruct:
   - id: fs_1001
-    fishHealth: 20
-    fishPower: 3
-    fishSpeed: 3
+    fishHealth: 10
+    fishPower: 1
+    fishSpeed: 1
     fishCoolTime: 0
     fishSpellTime: 0
     fishGroggyTime: 0
@@ -660,263 +660,10 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 0.5, y: 10}
-  - id: fs_1002
-    fishHealth: 30
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 4
-    fishGroggyTime: 3
-    fishDefenseCount: 1
-    fishLazy: 0.5
-    addDuration: 150
-    addValue: 0.3
-    itemStruct:
-      id: fs_1002
-      name: mackerel
-      itemType: 0
-      explanation: fs_1002_01
-      icon: fs_1002_mackerel
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 2
-      price: 85
-    areaType: 1
-    fishDayType: 1
-    size: {x: 20, y: 60}
-  - id: fs_1003
-    fishHealth: 120
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 5
-    fishGroggyTime: 2
-    fishDefenseCount: 1
-    fishLazy: 0.5
-    addDuration: 600
-    addValue: 0.09
-    itemStruct:
-      id: fs_1003
-      name: horsemackerel
-      itemType: 0
-      explanation: fs_1003_01
-      icon: fs_1003_horsemackerel
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.6
-      price: 100
-    areaType: 1
-    fishDayType: 1
-    size: {x: 10, y: 50}
-  - id: fs_1004
-    fishHealth: 100
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishLazy: 0.5
-    addDuration: 500
-    addValue: 0.15
-    itemStruct:
-      id: fs_1004
-      name: saury
-      itemType: 0
-      explanation: fs_1004_01
-      icon: fs_1004_saury
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 1
-      price: 80
-    areaType: 1
-    fishDayType: 1
-    size: {x: 20, y: 40}
-  - id: fs_1005
-    fishHealth: 120
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 5
-    fishSpellTime: 10
-    fishGroggyTime: 1
-    fishDefenseCount: 6
-    fishLazy: 0.5
-    addDuration: 600
-    addValue: 0.15
-    itemStruct:
-      id: fs_1005
-      name: seaurchin
-      itemType: 0
-      explanation: fs_1005_01
-      icon: fs_1005_seaurchin
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
-      price: 100
-    areaType: 1
-    fishDayType: 2
-    size: {x: 10, y: 50}
-  - id: fs_1006
-    fishHealth: 120
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 4
-    fishSpellTime: 3
-    fishGroggyTime: 2
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 600
-    addValue: 0.3
-    itemStruct:
-      id: fs_1006
-      name: bigfinreefsquid
-      itemType: 0
-      explanation: fs_1006_01
-      icon: fs_1006_bigfinreefsquid
-      itemClass: 4
-      shape:
-      - {x: 0, y: -1}
-      iconSize: {x: 1, y: 2, z: 0.5, w: 0.25}
-      weight: 2
-      price: 130
-    areaType: 1
-    fishDayType: 2
-    size: {x: 15, y: 45}
-  - id: fs_1007
-    fishHealth: 100
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 5
-    fishGroggyTime: 3
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 500
-    addValue: 0.12
-    itemStruct:
-      id: fs_1007
-      name: filefish
-      itemType: 0
-      explanation: fs_1007_01
-      icon: fs_1007_filefish
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.8
-      price: 110
-    areaType: 1
-    fishDayType: 1
-    size: {x: 8, y: 30}
-  - id: fs_1008
-    fishHealth: 110
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 4
-    fishGroggyTime: 3
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 550
-    addValue: 0.225
-    itemStruct:
-      id: fs_1008
-      name: yellowtang
-      itemType: 0
-      explanation: fs_1008_01
-      icon: fs_1008_yellowtang
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1.5
-      price: 120
-    areaType: 1
-    fishDayType: 1
-    size: {x: 7.5, y: 20}
-  - id: fs_1009
-    fishHealth: 120
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 4
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 600
-    addValue: 0.225
-    itemStruct:
-      id: fs_1009
-      name: butterflyfish
-      itemType: 0
-      explanation: fs_1009_01
-      icon: fs_1009_butterflyfish
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1.5
-      price: 130
-    areaType: 1
-    fishDayType: 1
-    size: {x: 10.5, y: 30}
-  - id: fs_1010
-    fishHealth: 120
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 4
-    fishGroggyTime: 1
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 600
-    addValue: 0.3
-    itemStruct:
-      id: fs_1010
-      name: cleanerwrasse
-      itemType: 0
-      explanation: fs_1010_01
-      icon: fs_1010_cleanerwrasse
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 2
-      price: 100
-    areaType: 1
-    fishDayType: 2
-    size: {x: 5.2, y: 20}
-  - id: fs_1011
-    fishHealth: 110
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 550
-    addValue: 0.12
-    itemStruct:
-      id: fs_1011
-      name: chromis
-      itemType: 0
-      explanation: fs_1011_01
-      icon: fs_1011_chromis
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.8
-      price: 80
-    areaType: 1
-    fishDayType: 1
-    size: {x: 8, y: 20}
   - id: fs_1012
     fishHealth: 80
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 2
     fishSpellTime: 4
     fishGroggyTime: 2
@@ -938,62 +685,10 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 2.5, y: 12}
-  - id: fs_1013
-    fishHealth: 130
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 3
-    fishGroggyTime: 3
-    fishDefenseCount: 1
-    fishLazy: 0.5
-    addDuration: 650
-    addValue: 0.225
-    itemStruct:
-      id: fs_1013
-      name: grubfish
-      itemType: 0
-      explanation: fs_1013_01
-      icon: fs_1013_grubfish
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 1.5
-      price: 120
-    areaType: 1
-    fishDayType: 2
-    size: {x: 5.3, y: 20}
-  - id: fs_1014
-    fishHealth: 150
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 2
-    fishGroggyTime: 2
-    fishDefenseCount: 1
-    fishLazy: 0.5
-    addDuration: 750
-    addValue: 0.375
-    itemStruct:
-      id: fs_1014
-      name: marbledrockfish
-      itemType: 0
-      explanation: fs_1014_01
-      icon: fs_1014_marbledrockfish
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 2.5
-      price: 130
-    areaType: 1
-    fishDayType: 2
-    size: {x: 12, y: 30}
   - id: fs_1015
     fishHealth: 240
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 5
     fishSpellTime: 4
     fishGroggyTime: 3
@@ -1015,62 +710,61 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 1
     size: {x: 3, y: 15}
-  - id: fs_1016
+  - id: fs_2010
     fishHealth: 130
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 4
-    fishSpellTime: 2
-    fishGroggyTime: 2
-    fishDefenseCount: 2
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
     fishLazy: 0.5
     addDuration: 650
-    addValue: 0.18
+    addValue: 0.045
     itemStruct:
-      id: fs_1016
-      name: halfbeak
+      id: fs_2010
+      name: sardine
       itemType: 0
-      explanation: fs_1016_01
-      icon: fs_1016_halfbeak
+      explanation: fs_2010_01
+      icon: fs_2010_sardine
       itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 2
-      price: 110
-    areaType: 1
-    fishDayType: 1
-    size: {x: 10, y: 50}
-  - id: fs_2001
-    fishHealth: 100
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 500
-    addValue: 0.09
-    itemStruct:
-      id: fs_2001
-      name: seabass
-      itemType: 0
-      explanation: fs_2001_01
-      icon: fs_2001_seabass
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 0.6
-      price: 120
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.3
+      price: 100
     areaType: 2
     fishDayType: 1
-    size: {x: 20, y: 80}
+    size: {x: 15, y: 30}
+  - id: fs_4205
+    fishHealth: 150
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 2
+    fishGroggyTime: 1
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 750
+    addValue: 0.105
+    itemStruct:
+      id: fs_4205
+      name: predatorytunicate
+      itemType: 0
+      explanation: fs_4205_01
+      icon: fs_4205_predatorytunicate
+      itemClass: 2
+      shape:
+      - {x: 0, y: -1}
+      iconSize: {x: 1, y: 2, z: 0.5, w: 0.25}
+      weight: 0.3
+      price: 500
+    areaType: 4
+    fishDayType: 2
+    size: {x: 0.3, y: 9.5}
   - id: fs_2002
     fishHealth: 300
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 3
     fishSpellTime: 3
     fishGroggyTime: 1
@@ -1095,37 +789,137 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 12, y: 50}
-  - id: fs_2003
-    fishHealth: 350
-    fishPower: 3
-    fishSpeed: 3
+  - id: fs_2013
+    fishHealth: 100
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 1
     fishSpellTime: 3
-    fishGroggyTime: 5
-    fishDefenseCount: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
     fishLazy: 0.5
-    addDuration: 1750
-    addValue: 0.12
+    addDuration: 500
+    addValue: 0.06
     itemStruct:
-      id: fs_2003
-      name: mullet
+      id: fs_2013
+      name: stripedeelcatfish
       itemType: 0
-      explanation: fs_2003_01
-      icon: fs_2003_mullet
+      explanation: fs_2013_01
+      icon: fs_2013_stripedeelcatfish
       itemClass: 4
       shape:
-      - {x: -1, y: 0}
       - {x: 1, y: 0}
-      iconSize: {x: 3, y: 1, z: 0.5, w: 0.5}
-      weight: 0.8
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 0.4
+      price: 120
+    areaType: 2
+    fishDayType: 2
+    size: {x: 9.5, y: 30}
+  - id: fs_2103
+    fishHealth: 80
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishLazy: 0.5
+    addDuration: 400
+    addValue: 0.75
+    itemStruct:
+      id: fs_2103
+      name: seahorse
+      itemType: 0
+      explanation: fs_2103_01
+      icon: fs_2103_seahorse
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
       price: 250
     areaType: 2
+    fishDayType: 2
+    size: {x: 1.3, y: 12}
+  - id: fs_4105
+    fishHealth: 210
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 5
+    fishSpellTime: 4
+    fishGroggyTime: 2
+    fishDefenseCount: 5
+    fishLazy: 0.5
+    addDuration: 1050
+    addValue: 0.45
+    itemStruct:
+      id: fs_4105
+      name: hagfish
+      itemType: 0
+      explanation: fs_4105_01
+      icon: fs_4105_hagfish
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.5
+      price: 420
+    areaType: 4
     fishDayType: 1
-    size: {x: 25, y: 45}
+    size: {x: 35, y: 65}
+  - id: fs_1003
+    fishHealth: 120
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 5
+    fishGroggyTime: 2
+    fishDefenseCount: 1
+    fishLazy: 0.5
+    addDuration: 600
+    addValue: 0.09
+    itemStruct:
+      id: fs_1003
+      name: horsemackerel
+      itemType: 0
+      explanation: fs_1003_01
+      icon: fs_1003_horsemackerel
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.6
+      price: 100
+    areaType: 1
+    fishDayType: 1
+    size: {x: 10, y: 50}
+  - id: fs_2001
+    fishHealth: 100
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 500
+    addValue: 0.09
+    itemStruct:
+      id: fs_2001
+      name: seabass
+      itemType: 0
+      explanation: fs_2001_01
+      icon: fs_2001_seabass
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 0.6
+      price: 120
+    areaType: 2
+    fishDayType: 1
+    size: {x: 20, y: 80}
   - id: fs_2004
     fishHealth: 200
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 4
     fishSpellTime: 5
     fishGroggyTime: 4
@@ -1149,8 +943,8 @@ MonoBehaviour:
     size: {x: 12.5, y: 30}
   - id: fs_2005
     fishHealth: 100
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 1
     fishSpellTime: 3
     fishGroggyTime: 1
@@ -1172,38 +966,1101 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 8, y: 15}
-  - id: fs_2006
+  - id: fs_2017
+    fishHealth: 160
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 800
+    addValue: 0.24
+    itemStruct:
+      id: fs_2017
+      name: spearsquid
+      itemType: 0
+      explanation: fs_2017_01
+      icon: fs_2017_spearsquid
+      itemClass: 4
+      shape:
+      - {x: 0, y: -1}
+      iconSize: {x: 1, y: 2, z: 0.5, w: 0.25}
+      weight: 0.7
+      price: 120
+    areaType: 2
+    fishDayType: 2
+    size: {x: 15, y: 35}
+  - id: fs_4203
+    fishHealth: 180
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 4
+    fishGroggyTime: 1
+    fishDefenseCount: 5
+    fishLazy: 0.5
+    addDuration: 900
+    addValue: 0.975
+    itemStruct:
+      id: fs_4203
+      name: fangtooth
+      itemType: 0
+      explanation: fs_4203_01
+      icon: fs_4203_fangtooth
+      itemClass: 2
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.7
+      price: 440
+    areaType: 4
+    fishDayType: 2
+    size: {x: 12, y: 20}
+  - id: fs_1007
     fishHealth: 100
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 4
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
     fishSpellTime: 5
-    fishGroggyTime: 6
+    fishGroggyTime: 3
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 500
+    addValue: 0.12
+    itemStruct:
+      id: fs_1007
+      name: filefish
+      itemType: 0
+      explanation: fs_1007_01
+      icon: fs_1007_filefish
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.8
+      price: 110
+    areaType: 1
+    fishDayType: 1
+    size: {x: 8, y: 30}
+  - id: fs_1011
+    fishHealth: 110
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 550
+    addValue: 0.12
+    itemStruct:
+      id: fs_1011
+      name: chromis
+      itemType: 0
+      explanation: fs_1011_01
+      icon: fs_1011_chromis
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 0.8
+      price: 80
+    areaType: 1
+    fishDayType: 1
+    size: {x: 8, y: 20}
+  - id: fs_2003
+    fishHealth: 350
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 5
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 1750
+    addValue: 0.12
+    itemStruct:
+      id: fs_2003
+      name: mullet
+      itemType: 0
+      explanation: fs_2003_01
+      icon: fs_2003_mullet
+      itemClass: 4
+      shape:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      iconSize: {x: 3, y: 1, z: 0.5, w: 0.5}
+      weight: 0.8
+      price: 250
+    areaType: 2
+    fishDayType: 1
+    size: {x: 25, y: 45}
+  - id: fs_2012
+    fishHealth: 200
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 1000
+    addValue: 0.12
+    itemStruct:
+      id: fs_2012
+      name: cuttlefish
+      itemType: 0
+      explanation: fs_2012_01
+      icon: fs_2012_cuttlefish
+      itemClass: 4
+      shape:
+      - {x: 0, y: -1}
+      iconSize: {x: 1, y: 2, z: 0.5, w: 0.25}
+      weight: 0.8
+      price: 150
+    areaType: 2
+    fishDayType: 2
+    size: {x: 15, y: 45}
+  - id: fs_2015
+    fishHealth: 230
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 1150
+    addValue: 0.12
+    itemStruct:
+      id: fs_2015
+      name: obtusebarracuda
+      itemType: 0
+      explanation: fs_2015_01
+      icon: fs_2015_obtusebarracuda
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 0.8
+      price: 120
+    areaType: 2
+    fishDayType: 2
+    size: {x: 20, y: 50}
+  - id: fs_1004
+    fishHealth: 100
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishLazy: 0.5
+    addDuration: 500
+    addValue: 0.15
+    itemStruct:
+      id: fs_1004
+      name: saury
+      itemType: 0
+      explanation: fs_1004_01
+      icon: fs_1004_saury
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 1
+      price: 80
+    areaType: 1
+    fishDayType: 1
+    size: {x: 20, y: 40}
+  - id: fs_1005
+    fishHealth: 120
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 5
+    fishSpellTime: 10
+    fishGroggyTime: 1
+    fishDefenseCount: 6
+    fishLazy: 0.5
+    addDuration: 600
+    addValue: 0.15
+    itemStruct:
+      id: fs_1005
+      name: seaurchin
+      itemType: 0
+      explanation: fs_1005_01
+      icon: fs_1005_seaurchin
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 100
+    areaType: 1
+    fishDayType: 2
+    size: {x: 10, y: 50}
+  - id: fs_2009
+    fishHealth: 120
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 600
+    addValue: 0.15
+    itemStruct:
+      id: fs_2009
+      name: chickengrunt
+      itemType: 0
+      explanation: fs_2009_01
+      icon: fs_2009_chickengrunt
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 1
+      price: 100
+    areaType: 2
+    fishDayType: 1
+    size: {x: 15, y: 40}
+  - id: fs_2011
+    fishHealth: 300
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 1500
+    addValue: 0.15
+    itemStruct:
+      id: fs_2011
+      name: rockfish
+      itemType: 0
+      explanation: fs_2011_01
+      icon: fs_2011_rockfish
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 1
+      price: 150
+    areaType: 2
+    fishDayType: 1
+    size: {x: 25, y: 70}
+  - id: fs_2016
+    fishHealth: 350
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 1750
+    addValue: 0.15
+    itemStruct:
+      id: fs_2016
+      name: salmon
+      itemType: 0
+      explanation: fs_2016_01
+      icon: fs_2016_salmon
+      itemClass: 4
+      shape:
+      - {x: 1, y: -1}
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
+      weight: 1
+      price: 150
+    areaType: 2
+    fishDayType: 1
+    size: {x: 50, y: 100}
+  - id: fs_3001
+    fishHealth: 100
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishLazy: 0.5
+    addDuration: 500
+    addValue: 1.8
+    itemStruct:
+      id: fs_3001
+      name: northernwhiting
+      itemType: 0
+      explanation: fs_3001_01
+      icon: fs_3001_northernwhiting
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 130
+    areaType: 3
+    fishDayType: 1
+    size: {x: 12, y: 30}
+  - id: fs_3005
+    fishHealth: 150
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 5
+    fishSpellTime: 3
+    fishGroggyTime: 4
+    fishDefenseCount: 1
+    fishLazy: 0.5
+    addDuration: 750
+    addValue: 0.75
+    itemStruct:
+      id: fs_3005
+      name: moonjellyfish
+      itemType: 0
+      explanation: fs_3005_01
+      icon: fs_3005_moonjellyfish
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 220
+    areaType: 3
+    fishDayType: 2
+    size: {x: 10, y: 50}
+  - id: fs_3401
+    fishHealth: 320
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 5
+    fishSpellTime: 1
+    fishGroggyTime: 4
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 1600
+    addValue: 0.975
+    itemStruct:
+      id: fs_3401
+      name: goldhermitcrab
+      itemType: 0
+      explanation: fs_3401_01
+      icon: fs_3401_goldhermitcrab
+      itemClass: 0
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 1060
+    areaType: 3
+    fishDayType: 2
+    size: {x: 10, y: 20}
+  - id: fs_1106
+    fishHealth: 250
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 4
+    fishGroggyTime: 2
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 1250
+    addValue: 0.51
+    itemStruct:
+      id: fs_1106
+      name: bluestripedangelfish
+      itemType: 0
+      explanation: fs_1106_01
+      icon: fs_1106_bluestripedangelfish
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 120
+    areaType: 1
+    fishDayType: 1
+    size: {x: 8, y: 30}
+  - id: fs_2105
+    fishHealth: 150
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishLazy: 0.5
+    addDuration: 750
+    addValue: 0.225
+    itemStruct:
+      id: fs_2105
+      name: seahare
+      itemType: 0
+      explanation: fs_2105_01
+      icon: fs_2105_seahare
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 1
+      price: 280
+    areaType: 2
+    fishDayType: 1
+    size: {x: 1, y: 30}
+  - id: fs_2107
+    fishHealth: 110
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 0
+    fishSpellTime: 0
+    fishGroggyTime: 0
+    fishDefenseCount: 0
+    fishLazy: 0.5
+    addDuration: 550
+    addValue: 0.18
+    itemStruct:
+      id: fs_2107
+      name: seacucumber
+      itemType: 0
+      explanation: fs_2107_01
+      icon: fs_2107_seacucumber
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1
+      price: 270
+    areaType: 2
+    fishDayType: 2
+    size: {x: 10, y: 30}
+  - id: fs_3002
+    fishHealth: 110
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 5
+    fishGroggyTime: 3
+    fishDefenseCount: 1
+    fishLazy: 0.5
+    addDuration: 550
+    addValue: 3
+    itemStruct:
+      id: fs_3002
+      name: butterfish
+      itemType: 0
+      explanation: fs_3002_01
+      icon: fs_3002_butterfish
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1.2
+      price: 160
+    areaType: 3
+    fishDayType: 2
+    size: {x: 15, y: 30}
+  - id: fs_4303
+    fishHealth: 150
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 8
+    fishLazy: 0.5
+    addDuration: 750
+    addValue: 0.75
+    itemStruct:
+      id: fs_4303
+      name: flapjackoctopus
+      itemType: 0
+      explanation: fs_4303_01
+      icon: fs_4303_flapjackoctopus
+      itemClass: 1
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1.2
+      price: 880
+    areaType: 4
+    fishDayType: 1
+    size: {x: 8, y: 20}
+  - id: fs_1105
+    fishHealth: 180
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 5
+    fishGroggyTime: 2
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 900
+    addValue: 0.18
+    itemStruct:
+      id: fs_1105
+      name: yellowboxfish
+      itemType: 0
+      explanation: fs_1105_01
+      icon: fs_1105_yellowboxfish
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1.2
+      price: 200
+    areaType: 1
+    fishDayType: 1
+    size: {x: 3.5, y: 25}
+  - id: fs_2106
+    fishHealth: 120
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 3
+    fishGroggyTime: 2
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 600
+    addValue: 0.15
+    itemStruct:
+      id: fs_2106
+      name: crab
+      itemType: 0
+      explanation: fs_2106_01
+      icon: fs_2106_crab
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 1.2
+      price: 250
+    areaType: 2
+    fishDayType: 2
+    size: {x: 15, y: 25}
+  - id: fs_4101
+    fishHealth: 320
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 3
+    fishGroggyTime: 4
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 1600
+    addValue: 1.575
+    itemStruct:
+      id: fs_4101
+      name: pollack
+      itemType: 0
+      explanation: fs_4101_01
+      icon: fs_4101_pollack
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 1.2
+      price: 280
+    areaType: 4
+    fishDayType: 1
+    size: {x: 30, y: 90}
+  - id: fs_1008
+    fishHealth: 110
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 4
+    fishGroggyTime: 3
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 550
+    addValue: 0.225
+    itemStruct:
+      id: fs_1008
+      name: yellowtang
+      itemType: 0
+      explanation: fs_1008_01
+      icon: fs_1008_yellowtang
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1.5
+      price: 120
+    areaType: 1
+    fishDayType: 1
+    size: {x: 7.5, y: 20}
+  - id: fs_1009
+    fishHealth: 120
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 4
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 600
+    addValue: 0.225
+    itemStruct:
+      id: fs_1009
+      name: butterflyfish
+      itemType: 0
+      explanation: fs_1009_01
+      icon: fs_1009_butterflyfish
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1.5
+      price: 130
+    areaType: 1
+    fishDayType: 1
+    size: {x: 10.5, y: 30}
+  - id: fs_1013
+    fishHealth: 130
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 3
+    fishGroggyTime: 3
+    fishDefenseCount: 1
+    fishLazy: 0.5
+    addDuration: 650
+    addValue: 0.225
+    itemStruct:
+      id: fs_1013
+      name: grubfish
+      itemType: 0
+      explanation: fs_1013_01
+      icon: fs_1013_grubfish
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 1.5
+      price: 120
+    areaType: 1
+    fishDayType: 2
+    size: {x: 5.3, y: 20}
+  - id: fs_1104
+    fishHealth: 150
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 5
+    fishGroggyTime: 3
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 750
+    addValue: 0.225
+    itemStruct:
+      id: fs_1104
+      name: yellowtaildamselfish
+      itemType: 0
+      explanation: fs_1104_01
+      icon: fs_1104_yellowtaildamselfish
+      itemClass: 3
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 1.5
+      price: 200
+    areaType: 1
+    fishDayType: 2
+    size: {x: 4, y: 13}
+  - id: fs_2104
+    fishHealth: 120
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 600
+    addValue: 0.075
+    itemStruct:
+      id: fs_2104
+      name: pufferfish
+      itemType: 0
+      explanation: fs_2104_01
+      icon: fs_2104_pufferfish
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.75}
+      weight: 1.5
+      price: 300
+    areaType: 2
+    fishDayType: 1
+    size: {x: 0.5, y: 20}
+  - id: fs_3109
+    fishHealth: 600
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 6
+    fishSpellTime: 3
+    fishGroggyTime: 3
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 3000
+    addValue: 0.45
+    itemStruct:
+      id: fs_3109
+      name: amberjack
+      itemType: 0
+      explanation: fs_3109_01
+      icon: fs_3109_amberjack
+      itemClass: 3
+      shape:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      iconSize: {x: 3, y: 2, z: 0.5, w: 0.75}
+      weight: 1.5
+      price: 500
+    areaType: 3
+    fishDayType: 1
+    size: {x: 50, y: 150}
+  - id: fs_1002
+    fishHealth: 30
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 4
+    fishGroggyTime: 3
+    fishDefenseCount: 1
+    fishLazy: 0.5
+    addDuration: 150
+    addValue: 0.3
+    itemStruct:
+      id: fs_1002
+      name: mackerel
+      itemType: 0
+      explanation: fs_1002_01
+      icon: fs_1002_mackerel
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 2
+      price: 85
+    areaType: 1
+    fishDayType: 1
+    size: {x: 20, y: 60}
+  - id: fs_1006
+    fishHealth: 120
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 4
+    fishSpellTime: 3
+    fishGroggyTime: 2
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 600
+    addValue: 0.3
+    itemStruct:
+      id: fs_1006
+      name: bigfinreefsquid
+      itemType: 0
+      explanation: fs_1006_01
+      icon: fs_1006_bigfinreefsquid
+      itemClass: 4
+      shape:
+      - {x: 0, y: -1}
+      iconSize: {x: 1, y: 2, z: 0.5, w: 0.25}
+      weight: 2
+      price: 130
+    areaType: 1
+    fishDayType: 2
+    size: {x: 15, y: 45}
+  - id: fs_1010
+    fishHealth: 120
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 4
+    fishGroggyTime: 1
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 600
+    addValue: 0.3
+    itemStruct:
+      id: fs_1010
+      name: cleanerwrasse
+      itemType: 0
+      explanation: fs_1010_01
+      icon: fs_1010_cleanerwrasse
+      itemClass: 4
+      shape: []
+      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
+      weight: 2
+      price: 100
+    areaType: 1
+    fishDayType: 2
+    size: {x: 5.2, y: 20}
+  - id: fs_1016
+    fishHealth: 130
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 4
+    fishSpellTime: 2
+    fishGroggyTime: 2
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 650
+    addValue: 0.18
+    itemStruct:
+      id: fs_1016
+      name: halfbeak
+      itemType: 0
+      explanation: fs_1016_01
+      icon: fs_1016_halfbeak
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 2
+      price: 110
+    areaType: 1
+    fishDayType: 1
+    size: {x: 10, y: 50}
+  - id: fs_3004
+    fishHealth: 120
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 600
+    addValue: 0.18
+    itemStruct:
+      id: fs_3004
+      name: bluecrab
+      itemType: 0
+      explanation: fs_3004_01
+      icon: fs_3004_bluecrab
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 2
+      price: 210
+    areaType: 3
+    fishDayType: 1
+    size: {x: 7, y: 20}
+  - id: fs_2201
+    fishHealth: 200
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 7
+    fishGroggyTime: 5
+    fishDefenseCount: 6
+    fishLazy: 0.5
+    addDuration: 1000
+    addValue: 0.15
+    itemStruct:
+      id: fs_2201
+      name: trigerfish
+      itemType: 0
+      explanation: fs_2201_01
+      icon: fs_2201_trigerfish
+      itemClass: 2
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 2
+      price: 400
+    areaType: 2
+    fishDayType: 2
+    size: {x: 25, y: 50}
+  - id: fs_1101
+    fishHealth: 110
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 3
+    fishGroggyTime: 5
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 550
+    addValue: 0.3
+    itemStruct:
+      id: fs_1101
+      name: bluestripedfangblenny
+      itemType: 0
+      explanation: fs_1101_01
+      icon: fs_1101_bluestripedfangblenny
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 2
+      price: 220
+    areaType: 1
+    fishDayType: 2
+    size: {x: 6.5, y: 15}
+  - id: fs_4104
+    fishHealth: 100
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
     fishDefenseCount: 4
     fishLazy: 0.5
     addDuration: 500
-    addValue: 0.75
+    addValue: 0.33
     itemStruct:
-      id: fs_2006
-      name: bluespottedstingray
+      id: fs_4104
+      name: alfonsino
       itemType: 0
-      explanation: fs_2006_01
-      icon: fs_2006_bluespottedstingray
+      explanation: fs_4104_01
+      icon: fs_4104_alfonsino
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 2
+      price: 470
+    areaType: 4
+    fishDayType: 1
+    size: {x: 90, y: 100}
+  - id: fs_3006
+    fishHealth: 150
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 2
+    fishGroggyTime: 3
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 750
+    addValue: 0.3
+    itemStruct:
+      id: fs_3006
+      name: flyingfish
+      itemType: 0
+      explanation: fs_3006_01
+      icon: fs_3006_flyingfish
       itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 2.2
+      price: 250
+    areaType: 3
+    fishDayType: 1
+    size: {x: 25.5, y: 50}
+  - id: fs_4306
+    fishHealth: 200
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 1
+    fishGroggyTime: 1
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 1000
+    addValue: 0.81
+    itemStruct:
+      id: fs_4306
+      name: blobfish
+      itemType: 0
+      explanation: fs_4306_01
+      icon: fs_4306_blobfish
+      itemClass: 1
       shape:
       - {x: 0, y: -1}
       - {x: 1, y: -1}
       - {x: 1, y: 0}
       iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
-      weight: 5
-      price: 200
-    areaType: 2
+      weight: 2.2
+      price: 780
+    areaType: 4
+    fishDayType: 1
+    size: {x: 25, y: 50}
+  - id: fs_4102
+    fishHealth: 280
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 4
+    fishSpellTime: 3
+    fishGroggyTime: 5
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 1400
+    addValue: 0.15
+    itemStruct:
+      id: fs_4102
+      name: johndory
+      itemType: 0
+      explanation: fs_4102_01
+      icon: fs_4102_johndory
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.75}
+      weight: 2.2
+      price: 320
+    areaType: 4
+    fishDayType: 1
+    size: {x: 50, y: 80}
+  - id: fs_4305
+    fishHealth: 550
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 5
+    fishLazy: 0.5
+    addDuration: 2750
+    addValue: 0.18
+    itemStruct:
+      id: fs_4305
+      name: jellynosefish
+      itemType: 0
+      explanation: fs_4305_01
+      icon: fs_4305_jellynosefish
+      itemClass: 1
+      shape:
+      - {x: 0, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      iconSize: {x: 4, y: 2, z: 0.375, w: 0.25}
+      weight: 2.4
+      price: 760
+    areaType: 4
     fishDayType: 2
-    size: {x: 20, y: 60}
+    size: {x: 35, y: 120}
+  - id: fs_1014
+    fishHealth: 150
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 2
+    fishGroggyTime: 2
+    fishDefenseCount: 1
+    fishLazy: 0.5
+    addDuration: 750
+    addValue: 0.375
+    itemStruct:
+      id: fs_1014
+      name: marbledrockfish
+      itemType: 0
+      explanation: fs_1014_01
+      icon: fs_1014_marbledrockfish
+      itemClass: 4
+      shape:
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
+      weight: 2.5
+      price: 130
+    areaType: 1
+    fishDayType: 2
+    size: {x: 12, y: 30}
   - id: fs_2007
     fishHealth: 350
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 2
     fishSpellTime: 4
     fishGroggyTime: 5
@@ -1228,169 +2085,10 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 30, y: 100}
-  - id: fs_2008
-    fishHealth: 450
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 2250
-    addValue: 0.6
-    itemStruct:
-      id: fs_2008
-      name: redseabream
-      itemType: 0
-      explanation: fs_2008_01
-      icon: fs_2008_redseabream
-      itemClass: 4
-      shape:
-      - {x: -1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      - {x: 1, y: 0}
-      iconSize: {x: 3, y: 2, z: 0.5, w: 0.75}
-      weight: 4
-      price: 250
-    areaType: 2
-    fishDayType: 2
-    size: {x: 35.5, y: 110}
-  - id: fs_2009
-    fishHealth: 120
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 600
-    addValue: 0.15
-    itemStruct:
-      id: fs_2009
-      name: chickengrunt
-      itemType: 0
-      explanation: fs_2009_01
-      icon: fs_2009_chickengrunt
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 1
-      price: 100
-    areaType: 2
-    fishDayType: 1
-    size: {x: 15, y: 40}
-  - id: fs_2010
-    fishHealth: 130
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishLazy: 0.5
-    addDuration: 650
-    addValue: 0.045
-    itemStruct:
-      id: fs_2010
-      name: sardine
-      itemType: 0
-      explanation: fs_2010_01
-      icon: fs_2010_sardine
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.3
-      price: 100
-    areaType: 2
-    fishDayType: 1
-    size: {x: 15, y: 30}
-  - id: fs_2011
-    fishHealth: 300
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 1500
-    addValue: 0.15
-    itemStruct:
-      id: fs_2011
-      name: rockfish
-      itemType: 0
-      explanation: fs_2011_01
-      icon: fs_2011_rockfish
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 1
-      price: 150
-    areaType: 2
-    fishDayType: 1
-    size: {x: 25, y: 70}
-  - id: fs_2012
-    fishHealth: 200
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 1000
-    addValue: 0.12
-    itemStruct:
-      id: fs_2012
-      name: cuttlefish
-      itemType: 0
-      explanation: fs_2012_01
-      icon: fs_2012_cuttlefish
-      itemClass: 4
-      shape:
-      - {x: 0, y: -1}
-      iconSize: {x: 1, y: 2, z: 0.5, w: 0.25}
-      weight: 0.8
-      price: 150
-    areaType: 2
-    fishDayType: 2
-    size: {x: 15, y: 45}
-  - id: fs_2013
-    fishHealth: 100
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 500
-    addValue: 0.06
-    itemStruct:
-      id: fs_2013
-      name: stripedeelcatfish
-      itemType: 0
-      explanation: fs_2013_01
-      icon: fs_2013_stripedeelcatfish
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 0.4
-      price: 120
-    areaType: 2
-    fishDayType: 2
-    size: {x: 9.5, y: 30}
   - id: fs_2014
     fishHealth: 300
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 1
     fishSpellTime: 3
     fishGroggyTime: 1
@@ -1417,139 +2115,318 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 30, y: 90}
-  - id: fs_2015
-    fishHealth: 230
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
+  - id: fs_3202
+    fishHealth: 700
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 5
     fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
+    fishGroggyTime: 3
+    fishDefenseCount: 3
     fishLazy: 0.5
-    addDuration: 1150
-    addValue: 0.12
+    addDuration: 3500
+    addValue: 0.225
     itemStruct:
-      id: fs_2015
-      name: obtusebarracuda
+      id: fs_3202
+      name: cutlassfish
       itemType: 0
-      explanation: fs_2015_01
-      icon: fs_2015_obtusebarracuda
-      itemClass: 4
+      explanation: fs_3202_01
+      icon: fs_3202_cutlassfish
+      itemClass: 2
       shape:
       - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 0.8
-      price: 120
-    areaType: 2
+      - {x: -1, y: -1}
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      iconSize: {x: 3, y: 2, z: 0.5, w: 0.25}
+      weight: 3
+      price: 650
+    areaType: 3
     fishDayType: 2
-    size: {x: 20, y: 50}
-  - id: fs_2016
-    fishHealth: 350
-    fishPower: 3
-    fishSpeed: 3
+    size: {x: 150, y: 250}
+  - id: fs_2101
+    fishHealth: 500
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 12
+    fishSpellTime: 4
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 2500
+    addValue: 0.24
+    itemStruct:
+      id: fs_2101
+      name: octopus
+      itemType: 0
+      explanation: fs_2101_01
+      icon: fs_2101_octopus
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      - {x: 0, y: -1}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
+      weight: 3
+      price: 350
+    areaType: 2
+    fishDayType: 1
+    size: {x: 150, y: 250}
+  - id: fs_3107
+    fishHealth: 250
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 9
+    fishGroggyTime: 6
+    fishDefenseCount: 5
+    fishLazy: 0.5
+    addDuration: 1250
+    addValue: 0.975
+    itemStruct:
+      id: fs_3107
+      name: blacktigershrimp
+      itemType: 0
+      explanation: fs_3107_01
+      icon: fs_3107_blacktigershrimp
+      itemClass: 3
+      shape:
+      - {x: -1, y: 0}
+      - {x: 0, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
+      weight: 3
+      price: 550
+    areaType: 3
+    fishDayType: 2
+    size: {x: 20, y: 45}
+  - id: fs_4103
+    fishHealth: 450
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 4
+    fishGroggyTime: 3
+    fishDefenseCount: 5
+    fishLazy: 0.5
+    addDuration: 2250
+    addValue: 0.18
+    itemStruct:
+      id: fs_4103
+      name: pelicaneel
+      itemType: 0
+      explanation: fs_4103_01
+      icon: fs_4103_pelicaneel
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      iconSize: {x: 3, y: 2, z: 0.16666667, w: 0.75}
+      weight: 3
+      price: 450
+    areaType: 4
+    fishDayType: 2
+    size: {x: 50, y: 100}
+  - id: fs_4401
+    fishHealth: 650
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 1
     fishSpellTime: 3
     fishGroggyTime: 1
     fishDefenseCount: 4
     fishLazy: 0.5
-    addDuration: 1750
-    addValue: 0.15
+    addDuration: 3250
+    addValue: 0.36
     itemStruct:
-      id: fs_2016
-      name: salmon
+      id: fs_4401
+      name: abyssalsnake
       itemType: 0
-      explanation: fs_2016_01
-      icon: fs_2016_salmon
-      itemClass: 4
+      explanation: fs_4401_01
+      icon: fs_4401_abyssalsnake
+      itemClass: 0
+      shape:
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
+      weight: 3.2
+      price: 1120
+    areaType: 4
+    fishDayType: 2
+    size: {x: 60, y: 120}
+  - id: fs_2202
+    fishHealth: 370
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 5
+    fishGroggyTime: 3
+    fishDefenseCount: 5
+    fishLazy: 0.5
+    addDuration: 1850
+    addValue: 0.39
+    itemStruct:
+      id: fs_2202
+      name: redspottedgrouper
+      itemType: 0
+      explanation: fs_2202_01
+      icon: fs_2202_redspottedgrouper
+      itemClass: 2
+      shape:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      iconSize: {x: 3, y: 1, z: 0.5, w: 0.5}
+      weight: 3.5
+      price: 500
+    areaType: 2
+    fishDayType: 2
+    size: {x: 30, y: 60}
+  - id: fs_1103
+    fishHealth: 150
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 1
+    fishLazy: 0.5
+    addDuration: 750
+    addValue: 0.57
+    itemStruct:
+      id: fs_1103
+      name: pipefish
+      itemType: 0
+      explanation: fs_1103_01
+      icon: fs_1103_pipefish
+      itemClass: 3
       shape:
       - {x: 1, y: -1}
       - {x: 1, y: 0}
       iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
-      weight: 1
-      price: 150
-    areaType: 2
+      weight: 3.8
+      price: 230
+    areaType: 1
     fishDayType: 1
-    size: {x: 50, y: 100}
-  - id: fs_2017
-    fishHealth: 160
-    fishPower: 3
-    fishSpeed: 3
+    size: {x: 25, y: 50}
+  - id: fs_2008
+    fishHealth: 450
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 3
     fishSpellTime: 3
     fishGroggyTime: 1
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 2250
+    addValue: 0.6
+    itemStruct:
+      id: fs_2008
+      name: redseabream
+      itemType: 0
+      explanation: fs_2008_01
+      icon: fs_2008_redseabream
+      itemClass: 4
+      shape:
+      - {x: -1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      - {x: 1, y: 0}
+      iconSize: {x: 3, y: 2, z: 0.5, w: 0.75}
+      weight: 4
+      price: 250
+    areaType: 2
+    fishDayType: 2
+    size: {x: 35.5, y: 110}
+  - id: fs_3106
+    fishHealth: 670
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 4
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 3350
+    addValue: 1.05
+    itemStruct:
+      id: fs_3106
+      name: longsnoutboarfish
+      itemType: 0
+      explanation: fs_3106_01
+      icon: fs_3106_longsnoutboarfish
+      itemClass: 3
+      shape:
+      - {x: 1, y: 0}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.75}
+      weight: 4
+      price: 580
+    areaType: 3
+    fishDayType: 1
+    size: {x: 45, y: 75}
+  - id: fs_1102
+    fishHealth: 200
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 2
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 1000
+    addValue: 0.675
+    itemStruct:
+      id: fs_1102
+      name: lionfish
+      itemType: 0
+      explanation: fs_1102_01
+      icon: fs_1102_lionfish
+      itemClass: 3
+      shape:
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
+      weight: 4.5
+      price: 250
+    areaType: 1
+    fishDayType: 1
+    size: {x: 20, y: 40}
+  - id: fs_2006
+    fishHealth: 100
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 4
+    fishSpellTime: 5
+    fishGroggyTime: 6
     fishDefenseCount: 4
     fishLazy: 0.5
-    addDuration: 800
-    addValue: 0.24
+    addDuration: 500
+    addValue: 0.75
     itemStruct:
-      id: fs_2017
-      name: spearsquid
+      id: fs_2006
+      name: bluespottedstingray
       itemType: 0
-      explanation: fs_2017_01
-      icon: fs_2017_spearsquid
+      explanation: fs_2006_01
+      icon: fs_2006_bluespottedstingray
       itemClass: 4
       shape:
       - {x: 0, y: -1}
-      iconSize: {x: 1, y: 2, z: 0.5, w: 0.25}
-      weight: 0.7
-      price: 120
+      - {x: 1, y: -1}
+      - {x: 1, y: 0}
+      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
+      weight: 5
+      price: 200
     areaType: 2
     fishDayType: 2
-    size: {x: 15, y: 35}
-  - id: fs_3001
-    fishHealth: 100
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishLazy: 0.5
-    addDuration: 500
-    addValue: 1.8
-    itemStruct:
-      id: fs_3001
-      name: northernwhiting
-      itemType: 0
-      explanation: fs_3001_01
-      icon: fs_3001_northernwhiting
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
-      price: 130
-    areaType: 3
-    fishDayType: 1
-    size: {x: 12, y: 30}
-  - id: fs_3002
-    fishHealth: 110
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 5
-    fishGroggyTime: 3
-    fishDefenseCount: 1
-    fishLazy: 0.5
-    addDuration: 550
-    addValue: 3
-    itemStruct:
-      id: fs_3002
-      name: butterfish
-      itemType: 0
-      explanation: fs_3002_01
-      icon: fs_3002_butterfish
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1.2
-      price: 160
-    areaType: 3
-    fishDayType: 2
-    size: {x: 15, y: 30}
+    size: {x: 20, y: 60}
   - id: fs_3003
     fishHealth: 360
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 3
     fishSpellTime: 4
     fishGroggyTime: 3
@@ -1573,114 +2450,10 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 90, y: 150}
-  - id: fs_3004
-    fishHealth: 120
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 600
-    addValue: 0.18
-    itemStruct:
-      id: fs_3004
-      name: bluecrab
-      itemType: 0
-      explanation: fs_3004_01
-      icon: fs_3004_bluecrab
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 2
-      price: 210
-    areaType: 3
-    fishDayType: 1
-    size: {x: 7, y: 20}
-  - id: fs_3005
-    fishHealth: 150
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 5
-    fishSpellTime: 3
-    fishGroggyTime: 4
-    fishDefenseCount: 1
-    fishLazy: 0.5
-    addDuration: 750
-    addValue: 0.75
-    itemStruct:
-      id: fs_3005
-      name: moonjellyfish
-      itemType: 0
-      explanation: fs_3005_01
-      icon: fs_3005_moonjellyfish
-      itemClass: 4
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
-      price: 220
-    areaType: 3
-    fishDayType: 2
-    size: {x: 10, y: 50}
-  - id: fs_3006
-    fishHealth: 150
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 2
-    fishGroggyTime: 3
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 750
-    addValue: 0.3
-    itemStruct:
-      id: fs_3006
-      name: flyingfish
-      itemType: 0
-      explanation: fs_3006_01
-      icon: fs_3006_flyingfish
-      itemClass: 4
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 2.2
-      price: 250
-    areaType: 3
-    fishDayType: 1
-    size: {x: 25.5, y: 50}
-  - id: fs_3007
-    fishHealth: 300
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 3
-    fishGroggyTime: 3
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 1500
-    addValue: 0.15
-    itemStruct:
-      id: fs_3007
-      name: pacificcod
-      itemType: 0
-      explanation: fs_3007_01
-      icon: fs_3007_pacificcod
-      itemClass: 4
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      iconSize: {x: 3, y: 1, z: 0.5, w: 0.5}
-      weight: 6
-      price: 350
-    areaType: 3
-    fishDayType: 2
-    size: {x: 90, y: 180}
   - id: fs_1301
     fishHealth: 800
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 3
     fishSpellTime: 3
     fishGroggyTime: 3
@@ -1706,103 +2479,10 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 15, y: 100}
-  - id: fs_2301
-    fishHealth: 600
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 5
-    fishSpellTime: 4
-    fishGroggyTime: 6
-    fishDefenseCount: 6
-    fishLazy: 0.5
-    addDuration: 3000
-    addValue: 0.525
-    itemStruct:
-      id: fs_2301
-      name: redtoothedtriggerfish
-      itemType: 0
-      explanation: fs_2301_01
-      icon: fs_2301_redtoothedtriggerfish
-      itemClass: 1
-      shape:
-      - {x: -1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      - {x: 1, y: 0}
-      iconSize: {x: 3, y: 2, z: 0.5, w: 0.75}
-      weight: 12
-      price: 850
-    areaType: 2
-    fishDayType: 1
-    size: {x: 30, y: 100}
-  - id: fs_3301
-    fishHealth: 670
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 3
-    fishGroggyTime: 2
-    fishDefenseCount: 6
-    fishLazy: 0.5
-    addDuration: 3350
-    addValue: 1.2
-    itemStruct:
-      id: fs_3301
-      name: swordfish
-      itemType: 0
-      explanation: fs_3301_01
-      icon: fs_3301_swordfish
-      itemClass: 1
-      shape:
-      - {x: -2, y: 0}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      - {x: 2, y: -1}
-      iconSize: {x: 5, y: 2, z: 0.5, w: 0.25}
-      weight: 6.5
-      price: 850
-    areaType: 3
-    fishDayType: 1
-    size: {x: 250, y: 500}
-  - id: fs_3302
-    fishHealth: 950
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 4
-    fishGroggyTime: 5
-    fishDefenseCount: 7
-    fishLazy: 0.5
-    addDuration: 4750
-    addValue: 0.75
-    itemStruct:
-      id: fs_3302
-      name: mantaray
-      itemType: 0
-      explanation: fs_3302_01
-      icon: fs_3302_mantaray
-      itemClass: 1
-      shape:
-      - {x: -1, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      iconSize: {x: 3, y: 3, z: 0.5, w: 0.5}
-      weight: 10.5
-      price: 880
-    areaType: 3
-    fishDayType: 2
-    size: {x: 450, y: 800}
   - id: fs_4301
     fishHealth: 1000
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 18
     fishSpellTime: 3
     fishGroggyTime: 1
@@ -1834,332 +2514,10 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 500, y: 2000}
-  - id: fs_4302
-    fishHealth: 1200
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 7
-    fishLazy: 0.5
-    addDuration: 6000
-    addValue: 0.045
-    itemStruct:
-      id: fs_4302
-      name: goblinshark
-      itemType: 0
-      explanation: fs_4302_01
-      icon: fs_4302_goblinshark
-      itemClass: 1
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      iconSize: {x: 4, y: 1, z: 0.375, w: 0.5}
-      weight: 8.1
-      price: 850
-    areaType: 4
-    fishDayType: 2
-    size: {x: 180, y: 720}
-  - id: fs_4303
-    fishHealth: 150
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 8
-    fishLazy: 0.5
-    addDuration: 750
-    addValue: 0.75
-    itemStruct:
-      id: fs_4303
-      name: flapjackoctopus
-      itemType: 0
-      explanation: fs_4303_01
-      icon: fs_4303_flapjackoctopus
-      itemClass: 1
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1.2
-      price: 880
-    areaType: 4
-    fishDayType: 1
-    size: {x: 8, y: 20}
-  - id: fs_4304
-    fishHealth: 650
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 6
-    fishLazy: 0.5
-    addDuration: 3250
-    addValue: 1.215
-    itemStruct:
-      id: fs_4304
-      name: longnoselancetfish
-      itemType: 0
-      explanation: fs_4304_01
-      icon: fs_4304_longnoselancetfish
-      itemClass: 1
-      shape:
-      - {x: -1, y: -1}
-      - {x: 0, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      - {x: 2, y: 1}
-      iconSize: {x: 4, y: 3, z: 0.375, w: 0.5}
-      weight: 5.4
-      price: 890
-    areaType: 4
-    fishDayType: 2
-    size: {x: 100, y: 250}
-  - id: fs_4305
-    fishHealth: 550
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 5
-    fishLazy: 0.5
-    addDuration: 2750
-    addValue: 0.18
-    itemStruct:
-      id: fs_4305
-      name: jellynosefish
-      itemType: 0
-      explanation: fs_4305_01
-      icon: fs_4305_jellynosefish
-      itemClass: 1
-      shape:
-      - {x: 0, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      iconSize: {x: 4, y: 2, z: 0.375, w: 0.25}
-      weight: 2.4
-      price: 760
-    areaType: 4
-    fishDayType: 2
-    size: {x: 35, y: 120}
-  - id: fs_4306
-    fishHealth: 200
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 1
-    fishGroggyTime: 1
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 1000
-    addValue: 0.81
-    itemStruct:
-      id: fs_4306
-      name: blobfish
-      itemType: 0
-      explanation: fs_4306_01
-      icon: fs_4306_blobfish
-      itemClass: 1
-      shape:
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
-      weight: 2.2
-      price: 780
-    areaType: 4
-    fishDayType: 1
-    size: {x: 25, y: 50}
-  - id: fs_2401
-    fishHealth: 750
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 4
-    fishGroggyTime: 2
-    fishDefenseCount: 8
-    fishLazy: 0.5
-    addDuration: 3750
-    addValue: 3
-    itemStruct:
-      id: fs_2401
-      name: bluewingeel
-      itemType: 0
-      explanation: fs_2401_01
-      icon: fs_2401_bluewingeel
-      itemClass: 0
-      shape:
-      - {x: -1, y: -1}
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      iconSize: {x: 3, y: 3, z: 0.5, w: 0.5}
-      weight: 20
-      price: 940
-    areaType: 2
-    fishDayType: 1
-    size: {x: 100, y: 250}
-  - id: fs_3401
-    fishHealth: 320
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 5
-    fishSpellTime: 1
-    fishGroggyTime: 4
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 1600
-    addValue: 0.975
-    itemStruct:
-      id: fs_3401
-      name: goldhermitcrab
-      itemType: 0
-      explanation: fs_3401_01
-      icon: fs_3401_goldhermitcrab
-      itemClass: 0
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
-      price: 1060
-    areaType: 3
-    fishDayType: 2
-    size: {x: 10, y: 20}
-  - id: fs_4401
-    fishHealth: 650
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 3250
-    addValue: 0.36
-    itemStruct:
-      id: fs_4401
-      name: abyssalsnake
-      itemType: 0
-      explanation: fs_4401_01
-      icon: fs_4401_abyssalsnake
-      itemClass: 0
-      shape:
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
-      weight: 3.2
-      price: 1120
-    areaType: 4
-    fishDayType: 2
-    size: {x: 60, y: 120}
-  - id: fs_4402
-    fishHealth: 1150
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 4
-    fishSpellTime: 3
-    fishGroggyTime: 3
-    fishDefenseCount: 7
-    fishLazy: 0.5
-    addDuration: 5750
-    addValue: 0.33
-    itemStruct:
-      id: fs_4402
-      name: drillfish
-      itemType: 0
-      explanation: fs_4402_01
-      icon: fs_4402_drillfish
-      itemClass: 0
-      shape:
-      - {x: -2, y: 0}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      iconSize: {x: 5, y: 1, z: 0.5, w: 0.5}
-      weight: 7.6
-      price: 1190
-    areaType: 4
-    fishDayType: 2
-    size: {x: 120, y: 230}
-  - id: fs_4403
-    fishHealth: 1210
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 2
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 6050
-    addValue: 0.48
-    itemStruct:
-      id: fs_4403
-      name: coraliumqueen
-      itemType: 0
-      explanation: fs_4403_01
-      icon: fs_4403_coraliumqueen
-      itemClass: 0
-      shape:
-      - {x: -1, y: -1}
-      - {x: 0, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      iconSize: {x: 3, y: 3, z: 0.5, w: 0.5}
-      weight: 6.5
-      price: 1230
-    areaType: 4
-    fishDayType: 1
-    size: {x: 80, y: 180}
-  - id: fs_4404
-    fishHealth: 1550
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 5
-    fishSpellTime: 4
-    fishGroggyTime: 5
-    fishDefenseCount: 9
-    fishLazy: 0.5
-    addDuration: 7750
-    addValue: 1.14
-    itemStruct:
-      id: fs_4404
-      name: submarinegrouper
-      itemType: 0
-      explanation: fs_4404_01
-      icon: fs_4404_submarinegrouper
-      itemClass: 0
-      shape:
-      - {x: -1, y: -1}
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      - {x: 2, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      iconSize: {x: 4, y: 2, z: 0.375, w: 0.25}
-      weight: 11.5
-      price: 1250
-    areaType: 4
-    fishDayType: 2
-    size: {x: 180, y: 300}
   - id: fs_1201
     fishHealth: 300
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 5
     fishSpellTime: 3
     fishGroggyTime: 4
@@ -2186,246 +2544,10 @@ MonoBehaviour:
     areaType: 1
     fishDayType: 2
     size: {x: 30, y: 80}
-  - id: fs_1202
-    fishHealth: 500
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 5
-    fishGroggyTime: 1
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 2500
-    addValue: 1.05
-    itemStruct:
-      id: fs_1202
-      name: parrotfish
-      itemType: 0
-      explanation: fs_1202_01
-      icon: fs_1202_parrotfish
-      itemClass: 2
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      iconSize: {x: 3, y: 2, z: 0.5, w: 0.75}
-      weight: 7
-      price: 450
-    areaType: 1
-    fishDayType: 1
-    size: {x: 45.5, y: 100}
-  - id: fs_2201
-    fishHealth: 200
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 7
-    fishGroggyTime: 5
-    fishDefenseCount: 6
-    fishLazy: 0.5
-    addDuration: 1000
-    addValue: 0.15
-    itemStruct:
-      id: fs_2201
-      name: trigerfish
-      itemType: 0
-      explanation: fs_2201_01
-      icon: fs_2201_trigerfish
-      itemClass: 2
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 2
-      price: 400
-    areaType: 2
-    fishDayType: 2
-    size: {x: 25, y: 50}
-  - id: fs_2202
-    fishHealth: 370
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 5
-    fishGroggyTime: 3
-    fishDefenseCount: 5
-    fishLazy: 0.5
-    addDuration: 1850
-    addValue: 0.39
-    itemStruct:
-      id: fs_2202
-      name: redspottedgrouper
-      itemType: 0
-      explanation: fs_2202_01
-      icon: fs_2202_redspottedgrouper
-      itemClass: 2
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      iconSize: {x: 3, y: 1, z: 0.5, w: 0.5}
-      weight: 3.5
-      price: 500
-    areaType: 2
-    fishDayType: 2
-    size: {x: 30, y: 60}
-  - id: fs_2203
-    fishHealth: 650
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 4
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 3250
-    addValue: 0.3
-    itemStruct:
-      id: fs_2203
-      name: napoleonwrasse
-      itemType: 0
-      explanation: fs_2203_01
-      icon: fs_2203_napoleonwrasse
-      itemClass: 2
-      shape:
-      - {x: -1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      - {x: 1, y: 0}
-      iconSize: {x: 3, y: 2, z: 0.5, w: 0.75}
-      weight: 20
-      price: 650
-    areaType: 2
-    fishDayType: 1
-    size: {x: 90, y: 230}
-  - id: fs_3201
-    fishHealth: 750
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 14
-    fishSpellTime: 7
-    fishGroggyTime: 1
-    fishDefenseCount: 8
-    fishLazy: 0.5
-    addDuration: 3750
-    addValue: 0.9
-    itemStruct:
-      id: fs_3201
-      name: oceansunfish
-      itemType: 0
-      explanation: fs_3201_01
-      icon: fs_3201_oceansunfish
-      itemClass: 2
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      - {x: 0, y: 2}
-      - {x: 0, y: -1}
-      iconSize: {x: 3, y: 4, z: 0.5, w: 0.625}
-      weight: 10
-      price: 550
-    areaType: 3
-    fishDayType: 1
-    size: {x: 200, y: 400}
-  - id: fs_3202
-    fishHealth: 700
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 5
-    fishSpellTime: 3
-    fishGroggyTime: 3
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 3500
-    addValue: 0.225
-    itemStruct:
-      id: fs_3202
-      name: cutlassfish
-      itemType: 0
-      explanation: fs_3202_01
-      icon: fs_3202_cutlassfish
-      itemClass: 2
-      shape:
-      - {x: 1, y: 0}
-      - {x: -1, y: -1}
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      iconSize: {x: 3, y: 2, z: 0.5, w: 0.25}
-      weight: 3
-      price: 650
-    areaType: 3
-    fishDayType: 2
-    size: {x: 150, y: 250}
-  - id: fs_3203
-    fishHealth: 850
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 5
-    fishGroggyTime: 3
-    fishDefenseCount: 7
-    fishLazy: 0.5
-    addDuration: 4250
-    addValue: 1.5
-    itemStruct:
-      id: fs_3203
-      name: bluefintuna
-      itemType: 0
-      explanation: fs_3203_01
-      icon: fs_3203_bluefintuna
-      itemClass: 2
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      - {x: 2, y: 1}
-      iconSize: {x: 4, y: 2, z: 0.375, w: 0.75}
-      weight: 15
-      price: 800
-    areaType: 3
-    fishDayType: 1
-    size: {x: 60, y: 500}
-  - id: fs_3204
-    fishHealth: 730
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 4
-    fishGroggyTime: 2
-    fishDefenseCount: 6
-    fishLazy: 0.5
-    addDuration: 3650
-    addValue: 0.45
-    itemStruct:
-      id: fs_3204
-      name: sailfish
-      itemType: 0
-      explanation: fs_3204_01
-      icon: fs_3204_sailfish
-      itemClass: 2
-      shape:
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      iconSize: {x: 4, y: 2, z: 0.375, w: 0.25}
-      weight: 8
-      price: 750
-    areaType: 3
-    fishDayType: 1
-    size: {x: 180, y: 400}
   - id: fs_3205
     fishHealth: 780
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 1
     fishSpellTime: 2
     fishGroggyTime: 1
@@ -2452,332 +2574,10 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 2
     size: {x: 100, y: 180}
-  - id: fs_4201
-    fishHealth: 650
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 8
-    fishSpellTime: 5
-    fishGroggyTime: 3
-    fishDefenseCount: 6
-    fishLazy: 0.5
-    addDuration: 3250
-    addValue: 0.075
-    itemStruct:
-      id: fs_4201
-      name: footballfish
-      itemType: 0
-      explanation: fs_4201_01
-      icon: fs_4201_footballfish
-      itemClass: 2
-      shape:
-      - {x: 0, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      iconSize: {x: 3, y: 2, z: 0.5, w: 0.25}
-      weight: 6.5
-      price: 560
-    areaType: 4
-    fishDayType: 2
-    size: {x: 4, y: 70}
-  - id: fs_4202
-    fishHealth: 800
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 4
-    fishGroggyTime: 2
-    fishDefenseCount: 6
-    fishLazy: 0.5
-    addDuration: 4000
-    addValue: 0.75
-    itemStruct:
-      id: fs_4202
-      name: ghostshark
-      itemType: 0
-      explanation: fs_4202_01
-      icon: fs_4202_ghostshark
-      itemClass: 2
-      shape:
-      - {x: 0, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      iconSize: {x: 4, y: 2, z: 0.375, w: 0.25}
-      weight: 7.2
-      price: 670
-    areaType: 4
-    fishDayType: 2
-    size: {x: 40, y: 80}
-  - id: fs_4203
-    fishHealth: 180
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 4
-    fishGroggyTime: 1
-    fishDefenseCount: 5
-    fishLazy: 0.5
-    addDuration: 900
-    addValue: 0.975
-    itemStruct:
-      id: fs_4203
-      name: fangtooth
-      itemType: 0
-      explanation: fs_4203_01
-      icon: fs_4203_fangtooth
-      itemClass: 2
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.7
-      price: 440
-    areaType: 4
-    fishDayType: 2
-    size: {x: 12, y: 20}
-  - id: fs_4204
-    fishHealth: 1000
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 5
-    fishGroggyTime: 5
-    fishDefenseCount: 8
-    fishLazy: 0.5
-    addDuration: 5000
-    addValue: 1.08
-    itemStruct:
-      id: fs_4204
-      name: oarfish
-      itemType: 0
-      explanation: fs_4204_01
-      icon: fs_4204_oarfish
-      itemClass: 2
-      shape:
-      - {x: -1, y: -1}
-      - {x: 0, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 1, y: 1}
-      - {x: 2, y: 1}
-      iconSize: {x: 4, y: 3, z: 0.375, w: 0.5}
-      weight: 10.7
-      price: 720
-    areaType: 4
-    fishDayType: 1
-    size: {x: 600, y: 1700}
-  - id: fs_4205
-    fishHealth: 150
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 2
-    fishGroggyTime: 1
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 750
-    addValue: 0.105
-    itemStruct:
-      id: fs_4205
-      name: predatorytunicate
-      itemType: 0
-      explanation: fs_4205_01
-      icon: fs_4205_predatorytunicate
-      itemClass: 2
-      shape:
-      - {x: 0, y: -1}
-      iconSize: {x: 1, y: 2, z: 0.5, w: 0.25}
-      weight: 0.3
-      price: 500
-    areaType: 4
-    fishDayType: 2
-    size: {x: 0.3, y: 9.5}
-  - id: fs_1101
-    fishHealth: 110
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 3
-    fishGroggyTime: 5
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 550
-    addValue: 0.3
-    itemStruct:
-      id: fs_1101
-      name: bluestripedfangblenny
-      itemType: 0
-      explanation: fs_1101_01
-      icon: fs_1101_bluestripedfangblenny
-      itemClass: 3
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 2
-      price: 220
-    areaType: 1
-    fishDayType: 2
-    size: {x: 6.5, y: 15}
-  - id: fs_1102
-    fishHealth: 200
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 2
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 1000
-    addValue: 0.675
-    itemStruct:
-      id: fs_1102
-      name: lionfish
-      itemType: 0
-      explanation: fs_1102_01
-      icon: fs_1102_lionfish
-      itemClass: 3
-      shape:
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
-      weight: 4.5
-      price: 250
-    areaType: 1
-    fishDayType: 1
-    size: {x: 20, y: 40}
-  - id: fs_1103
-    fishHealth: 150
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 1
-    fishLazy: 0.5
-    addDuration: 750
-    addValue: 0.57
-    itemStruct:
-      id: fs_1103
-      name: pipefish
-      itemType: 0
-      explanation: fs_1103_01
-      icon: fs_1103_pipefish
-      itemClass: 3
-      shape:
-      - {x: 1, y: -1}
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
-      weight: 3.8
-      price: 230
-    areaType: 1
-    fishDayType: 1
-    size: {x: 25, y: 50}
-  - id: fs_1104
-    fishHealth: 150
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 5
-    fishGroggyTime: 3
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 750
-    addValue: 0.225
-    itemStruct:
-      id: fs_1104
-      name: yellowtaildamselfish
-      itemType: 0
-      explanation: fs_1104_01
-      icon: fs_1104_yellowtaildamselfish
-      itemClass: 3
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1.5
-      price: 200
-    areaType: 1
-    fishDayType: 2
-    size: {x: 4, y: 13}
-  - id: fs_1105
-    fishHealth: 180
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 5
-    fishGroggyTime: 2
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 900
-    addValue: 0.18
-    itemStruct:
-      id: fs_1105
-      name: yellowboxfish
-      itemType: 0
-      explanation: fs_1105_01
-      icon: fs_1105_yellowboxfish
-      itemClass: 3
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1.2
-      price: 200
-    areaType: 1
-    fishDayType: 1
-    size: {x: 3.5, y: 25}
-  - id: fs_1106
-    fishHealth: 250
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 4
-    fishGroggyTime: 2
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 1250
-    addValue: 0.51
-    itemStruct:
-      id: fs_1106
-      name: bluestripedangelfish
-      itemType: 0
-      explanation: fs_1106_01
-      icon: fs_1106_bluestripedangelfish
-      itemClass: 3
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
-      price: 120
-    areaType: 1
-    fishDayType: 1
-    size: {x: 8, y: 30}
-  - id: fs_2101
-    fishHealth: 500
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 12
-    fishSpellTime: 4
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 2500
-    addValue: 0.24
-    itemStruct:
-      id: fs_2101
-      name: octopus
-      itemType: 0
-      explanation: fs_2101_01
-      icon: fs_2101_octopus
-      itemClass: 3
-      shape:
-      - {x: 1, y: 0}
-      - {x: 0, y: -1}
-      iconSize: {x: 2, y: 2, z: 0.25, w: 0.25}
-      weight: 3
-      price: 350
-    areaType: 2
-    fishDayType: 1
-    size: {x: 150, y: 250}
   - id: fs_2102
     fishHealth: 500
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 1
     fishSpellTime: 3
     fishGroggyTime: 3
@@ -2803,140 +2603,10 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 2
     size: {x: 90, y: 100}
-  - id: fs_2103
-    fishHealth: 80
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishLazy: 0.5
-    addDuration: 400
-    addValue: 0.75
-    itemStruct:
-      id: fs_2103
-      name: seahorse
-      itemType: 0
-      explanation: fs_2103_01
-      icon: fs_2103_seahorse
-      itemClass: 3
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.5
-      price: 250
-    areaType: 2
-    fishDayType: 2
-    size: {x: 1.3, y: 12}
-  - id: fs_2104
-    fishHealth: 120
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 600
-    addValue: 0.075
-    itemStruct:
-      id: fs_2104
-      name: pufferfish
-      itemType: 0
-      explanation: fs_2104_01
-      icon: fs_2104_pufferfish
-      itemClass: 3
-      shape:
-      - {x: 1, y: 0}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.25, w: 0.75}
-      weight: 1.5
-      price: 300
-    areaType: 2
-    fishDayType: 1
-    size: {x: 0.5, y: 20}
-  - id: fs_2105
-    fishHealth: 150
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishLazy: 0.5
-    addDuration: 750
-    addValue: 0.225
-    itemStruct:
-      id: fs_2105
-      name: seahare
-      itemType: 0
-      explanation: fs_2105_01
-      icon: fs_2105_seahare
-      itemClass: 3
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 1
-      price: 280
-    areaType: 2
-    fishDayType: 1
-    size: {x: 1, y: 30}
-  - id: fs_2106
-    fishHealth: 120
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 3
-    fishGroggyTime: 2
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 600
-    addValue: 0.15
-    itemStruct:
-      id: fs_2106
-      name: crab
-      itemType: 0
-      explanation: fs_2106_01
-      icon: fs_2106_crab
-      itemClass: 3
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 1.2
-      price: 250
-    areaType: 2
-    fishDayType: 2
-    size: {x: 15, y: 25}
-  - id: fs_2107
-    fishHealth: 110
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 0
-    fishSpellTime: 0
-    fishGroggyTime: 0
-    fishDefenseCount: 0
-    fishLazy: 0.5
-    addDuration: 550
-    addValue: 0.18
-    itemStruct:
-      id: fs_2107
-      name: seacucumber
-      itemType: 0
-      explanation: fs_2107_01
-      icon: fs_2107_seacucumber
-      itemClass: 3
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 1
-      price: 270
-    areaType: 2
-    fishDayType: 2
-    size: {x: 10, y: 30}
   - id: fs_2108
     fishHealth: 270
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 1
     fishSpellTime: 5
     fishGroggyTime: 3
@@ -2961,67 +2631,10 @@ MonoBehaviour:
     areaType: 2
     fishDayType: 1
     size: {x: 60, y: 220}
-  - id: fs_3101
-    fishHealth: 360
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 4
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 1800
-    addValue: 0.33
-    itemStruct:
-      id: fs_3101
-      name: coraltrout
-      itemType: 0
-      explanation: fs_3101_01
-      icon: fs_3101_coraltrout
-      itemClass: 3
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      iconSize: {x: 3, y: 1, z: 0.5, w: 0.5}
-      weight: 6.5
-      price: 430
-    areaType: 3
-    fishDayType: 1
-    size: {x: 55, y: 120}
-  - id: fs_3102
-    fishHealth: 280
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 2
-    fishGroggyTime: 1
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 1400
-    addValue: 0.9
-    itemStruct:
-      id: fs_3102
-      name: snowcrab
-      itemType: 0
-      explanation: fs_3102_01
-      icon: fs_3102_snowcrab
-      itemClass: 3
-      shape:
-      - {x: -1, y: -1}
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      iconSize: {x: 3, y: 2, z: 0.5, w: 0.25}
-      weight: 5.5
-      price: 380
-    areaType: 3
-    fishDayType: 2
-    size: {x: 70, y: 110}
   - id: fs_3103
     fishHealth: 400
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 6
     fishSpellTime: 3
     fishGroggyTime: 4
@@ -3045,318 +2658,10 @@ MonoBehaviour:
     areaType: 3
     fishDayType: 1
     size: {x: 100, y: 200}
-  - id: fs_3104
-    fishHealth: 550
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 3
-    fishGroggyTime: 4
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 2750
-    addValue: 0.825
-    itemStruct:
-      id: fs_3104
-      name: wahoo
-      itemType: 0
-      explanation: fs_3104_01
-      icon: fs_3104_wahoo
-      itemClass: 3
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      iconSize: {x: 4, y: 1, z: 0.375, w: 0.5}
-      weight: 7
-      price: 500
-    areaType: 3
-    fishDayType: 2
-    size: {x: 130, y: 240}
-  - id: fs_3105
-    fishHealth: 700
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 4
-    fishGroggyTime: 4
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 3500
-    addValue: 0.75
-    itemStruct:
-      id: fs_3105
-      name: sawfish
-      itemType: 0
-      explanation: fs_3105_01
-      icon: fs_3105_sawfish
-      itemClass: 3
-      shape:
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      - {x: 1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: -1}
-      iconSize: {x: 3, y: 3, z: 0.5, w: 0.5}
-      weight: 6.5
-      price: 450
-    areaType: 3
-    fishDayType: 2
-    size: {x: 250, y: 700}
-  - id: fs_3106
-    fishHealth: 670
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 4
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 3350
-    addValue: 1.05
-    itemStruct:
-      id: fs_3106
-      name: longsnoutboarfish
-      itemType: 0
-      explanation: fs_3106_01
-      icon: fs_3106_longsnoutboarfish
-      itemClass: 3
-      shape:
-      - {x: 1, y: 0}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.25, w: 0.75}
-      weight: 4
-      price: 580
-    areaType: 3
-    fishDayType: 1
-    size: {x: 45, y: 75}
-  - id: fs_3107
-    fishHealth: 250
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 9
-    fishGroggyTime: 6
-    fishDefenseCount: 5
-    fishLazy: 0.5
-    addDuration: 1250
-    addValue: 0.975
-    itemStruct:
-      id: fs_3107
-      name: blacktigershrimp
-      itemType: 0
-      explanation: fs_3107_01
-      icon: fs_3107_blacktigershrimp
-      itemClass: 3
-      shape:
-      - {x: -1, y: 0}
-      - {x: 0, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.75, w: 0.75}
-      weight: 3
-      price: 550
-    areaType: 3
-    fishDayType: 2
-    size: {x: 20, y: 45}
-  - id: fs_3108
-    fishHealth: 750
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 5
-    fishSpellTime: 2
-    fishGroggyTime: 1
-    fishDefenseCount: 2
-    fishLazy: 0.5
-    addDuration: 3750
-    addValue: 0.6
-    itemStruct:
-      id: fs_3108
-      name: longtoothgrouper
-      itemType: 0
-      explanation: fs_3108_01
-      icon: fs_3108_longtoothgrouper
-      itemClass: 3
-      shape:
-      - {x: 0, y: -1}
-      - {x: 1, y: -1}
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      iconSize: {x: 4, y: 2, z: 0.375, w: 0.25}
-      weight: 6
-      price: 580
-    areaType: 3
-    fishDayType: 2
-    size: {x: 95, y: 150}
-  - id: fs_3109
-    fishHealth: 600
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 6
-    fishSpellTime: 3
-    fishGroggyTime: 3
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 3000
-    addValue: 0.45
-    itemStruct:
-      id: fs_3109
-      name: amberjack
-      itemType: 0
-      explanation: fs_3109_01
-      icon: fs_3109_amberjack
-      itemClass: 3
-      shape:
-      - {x: -1, y: 0}
-      - {x: 1, y: 0}
-      - {x: -1, y: 1}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      iconSize: {x: 3, y: 2, z: 0.5, w: 0.75}
-      weight: 1.5
-      price: 500
-    areaType: 3
-    fishDayType: 1
-    size: {x: 50, y: 150}
-  - id: fs_4101
-    fishHealth: 320
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 2
-    fishSpellTime: 3
-    fishGroggyTime: 4
-    fishDefenseCount: 3
-    fishLazy: 0.5
-    addDuration: 1600
-    addValue: 1.575
-    itemStruct:
-      id: fs_4101
-      name: pollack
-      itemType: 0
-      explanation: fs_4101_01
-      icon: fs_4101_pollack
-      itemClass: 3
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 1.2
-      price: 280
-    areaType: 4
-    fishDayType: 1
-    size: {x: 30, y: 90}
-  - id: fs_4102
-    fishHealth: 280
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 4
-    fishSpellTime: 3
-    fishGroggyTime: 5
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 1400
-    addValue: 0.15
-    itemStruct:
-      id: fs_4102
-      name: johndory
-      itemType: 0
-      explanation: fs_4102_01
-      icon: fs_4102_johndory
-      itemClass: 3
-      shape:
-      - {x: 1, y: 0}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      iconSize: {x: 2, y: 2, z: 0.25, w: 0.75}
-      weight: 2.2
-      price: 320
-    areaType: 4
-    fishDayType: 1
-    size: {x: 50, y: 80}
-  - id: fs_4103
-    fishHealth: 450
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 3
-    fishSpellTime: 4
-    fishGroggyTime: 3
-    fishDefenseCount: 5
-    fishLazy: 0.5
-    addDuration: 2250
-    addValue: 0.18
-    itemStruct:
-      id: fs_4103
-      name: pelicaneel
-      itemType: 0
-      explanation: fs_4103_01
-      icon: fs_4103_pelicaneel
-      itemClass: 3
-      shape:
-      - {x: 1, y: 0}
-      - {x: 2, y: 0}
-      - {x: 0, y: 1}
-      - {x: 1, y: 1}
-      iconSize: {x: 3, y: 2, z: 0.16666667, w: 0.75}
-      weight: 3
-      price: 450
-    areaType: 4
-    fishDayType: 2
-    size: {x: 50, y: 100}
-  - id: fs_4104
-    fishHealth: 100
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 1
-    fishSpellTime: 3
-    fishGroggyTime: 1
-    fishDefenseCount: 4
-    fishLazy: 0.5
-    addDuration: 500
-    addValue: 0.33
-    itemStruct:
-      id: fs_4104
-      name: alfonsino
-      itemType: 0
-      explanation: fs_4104_01
-      icon: fs_4104_alfonsino
-      itemClass: 3
-      shape:
-      - {x: 1, y: 0}
-      iconSize: {x: 2, y: 1, z: 0.25, w: 0.5}
-      weight: 2
-      price: 470
-    areaType: 4
-    fishDayType: 1
-    size: {x: 90, y: 100}
-  - id: fs_4105
-    fishHealth: 210
-    fishPower: 3
-    fishSpeed: 3
-    fishCoolTime: 5
-    fishSpellTime: 4
-    fishGroggyTime: 2
-    fishDefenseCount: 5
-    fishLazy: 0.5
-    addDuration: 1050
-    addValue: 0.45
-    itemStruct:
-      id: fs_4105
-      name: hagfish
-      itemType: 0
-      explanation: fs_4105_01
-      icon: fs_4105_hagfish
-      itemClass: 3
-      shape: []
-      iconSize: {x: 1, y: 1, z: 0.5, w: 0.5}
-      weight: 0.5
-      price: 420
-    areaType: 4
-    fishDayType: 1
-    size: {x: 35, y: 65}
   - id: fs_4106
     fishHealth: 550
-    fishPower: 3
-    fishSpeed: 3
+    fishPower: 2
+    fishSpeed: 2
     fishCoolTime: 1
     fishSpellTime: 3
     fishGroggyTime: 1
@@ -3386,6 +2691,701 @@ MonoBehaviour:
     areaType: 4
     fishDayType: 1
     size: {x: 120, y: 220}
+  - id: fs_4304
+    fishHealth: 650
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 6
+    fishLazy: 0.5
+    addDuration: 3250
+    addValue: 1.215
+    itemStruct:
+      id: fs_4304
+      name: longnoselancetfish
+      itemType: 0
+      explanation: fs_4304_01
+      icon: fs_4304_longnoselancetfish
+      itemClass: 1
+      shape:
+      - {x: -1, y: -1}
+      - {x: 0, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      - {x: 2, y: 1}
+      iconSize: {x: 4, y: 3, z: 0.375, w: 0.5}
+      weight: 5.4
+      price: 890
+    areaType: 4
+    fishDayType: 2
+    size: {x: 100, y: 250}
+  - id: fs_3102
+    fishHealth: 280
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 2
+    fishGroggyTime: 1
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 1400
+    addValue: 0.9
+    itemStruct:
+      id: fs_3102
+      name: snowcrab
+      itemType: 0
+      explanation: fs_3102_01
+      icon: fs_3102_snowcrab
+      itemClass: 3
+      shape:
+      - {x: -1, y: -1}
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      iconSize: {x: 3, y: 2, z: 0.5, w: 0.25}
+      weight: 5.5
+      price: 380
+    areaType: 3
+    fishDayType: 2
+    size: {x: 70, y: 110}
+  - id: fs_3007
+    fishHealth: 300
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 3
+    fishGroggyTime: 3
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 1500
+    addValue: 0.15
+    itemStruct:
+      id: fs_3007
+      name: pacificcod
+      itemType: 0
+      explanation: fs_3007_01
+      icon: fs_3007_pacificcod
+      itemClass: 4
+      shape:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      iconSize: {x: 3, y: 1, z: 0.5, w: 0.5}
+      weight: 6
+      price: 350
+    areaType: 3
+    fishDayType: 2
+    size: {x: 90, y: 180}
+  - id: fs_3108
+    fishHealth: 750
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 5
+    fishSpellTime: 2
+    fishGroggyTime: 1
+    fishDefenseCount: 2
+    fishLazy: 0.5
+    addDuration: 3750
+    addValue: 0.6
+    itemStruct:
+      id: fs_3108
+      name: longtoothgrouper
+      itemType: 0
+      explanation: fs_3108_01
+      icon: fs_3108_longtoothgrouper
+      itemClass: 3
+      shape:
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      iconSize: {x: 4, y: 2, z: 0.375, w: 0.25}
+      weight: 6
+      price: 580
+    areaType: 3
+    fishDayType: 2
+    size: {x: 95, y: 150}
+  - id: fs_3301
+    fishHealth: 670
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 3
+    fishGroggyTime: 2
+    fishDefenseCount: 6
+    fishLazy: 0.5
+    addDuration: 3350
+    addValue: 1.2
+    itemStruct:
+      id: fs_3301
+      name: swordfish
+      itemType: 0
+      explanation: fs_3301_01
+      icon: fs_3301_swordfish
+      itemClass: 1
+      shape:
+      - {x: -2, y: 0}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: 2, y: -1}
+      iconSize: {x: 5, y: 2, z: 0.5, w: 0.25}
+      weight: 6.5
+      price: 850
+    areaType: 3
+    fishDayType: 1
+    size: {x: 250, y: 500}
+  - id: fs_4403
+    fishHealth: 1210
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 2
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 6050
+    addValue: 0.48
+    itemStruct:
+      id: fs_4403
+      name: coraliumqueen
+      itemType: 0
+      explanation: fs_4403_01
+      icon: fs_4403_coraliumqueen
+      itemClass: 0
+      shape:
+      - {x: -1, y: -1}
+      - {x: 0, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      iconSize: {x: 3, y: 3, z: 0.5, w: 0.5}
+      weight: 6.5
+      price: 1230
+    areaType: 4
+    fishDayType: 1
+    size: {x: 80, y: 180}
+  - id: fs_4201
+    fishHealth: 650
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 8
+    fishSpellTime: 5
+    fishGroggyTime: 3
+    fishDefenseCount: 6
+    fishLazy: 0.5
+    addDuration: 3250
+    addValue: 0.075
+    itemStruct:
+      id: fs_4201
+      name: footballfish
+      itemType: 0
+      explanation: fs_4201_01
+      icon: fs_4201_footballfish
+      itemClass: 2
+      shape:
+      - {x: 0, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      iconSize: {x: 3, y: 2, z: 0.5, w: 0.25}
+      weight: 6.5
+      price: 560
+    areaType: 4
+    fishDayType: 2
+    size: {x: 4, y: 70}
+  - id: fs_3101
+    fishHealth: 360
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 4
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 1800
+    addValue: 0.33
+    itemStruct:
+      id: fs_3101
+      name: coraltrout
+      itemType: 0
+      explanation: fs_3101_01
+      icon: fs_3101_coraltrout
+      itemClass: 3
+      shape:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      iconSize: {x: 3, y: 1, z: 0.5, w: 0.5}
+      weight: 6.5
+      price: 430
+    areaType: 3
+    fishDayType: 1
+    size: {x: 55, y: 120}
+  - id: fs_3105
+    fishHealth: 700
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 4
+    fishGroggyTime: 4
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 3500
+    addValue: 0.75
+    itemStruct:
+      id: fs_3105
+      name: sawfish
+      itemType: 0
+      explanation: fs_3105_01
+      icon: fs_3105_sawfish
+      itemClass: 3
+      shape:
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: 1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: -1}
+      iconSize: {x: 3, y: 3, z: 0.5, w: 0.5}
+      weight: 6.5
+      price: 450
+    areaType: 3
+    fishDayType: 2
+    size: {x: 250, y: 700}
+  - id: fs_1202
+    fishHealth: 500
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 5
+    fishGroggyTime: 1
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 2500
+    addValue: 1.05
+    itemStruct:
+      id: fs_1202
+      name: parrotfish
+      itemType: 0
+      explanation: fs_1202_01
+      icon: fs_1202_parrotfish
+      itemClass: 2
+      shape:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      iconSize: {x: 3, y: 2, z: 0.5, w: 0.75}
+      weight: 7
+      price: 450
+    areaType: 1
+    fishDayType: 1
+    size: {x: 45.5, y: 100}
+  - id: fs_3104
+    fishHealth: 550
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 3
+    fishGroggyTime: 4
+    fishDefenseCount: 3
+    fishLazy: 0.5
+    addDuration: 2750
+    addValue: 0.825
+    itemStruct:
+      id: fs_3104
+      name: wahoo
+      itemType: 0
+      explanation: fs_3104_01
+      icon: fs_3104_wahoo
+      itemClass: 3
+      shape:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      iconSize: {x: 4, y: 1, z: 0.375, w: 0.5}
+      weight: 7
+      price: 500
+    areaType: 3
+    fishDayType: 2
+    size: {x: 130, y: 240}
+  - id: fs_4202
+    fishHealth: 800
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 4
+    fishGroggyTime: 2
+    fishDefenseCount: 6
+    fishLazy: 0.5
+    addDuration: 4000
+    addValue: 0.75
+    itemStruct:
+      id: fs_4202
+      name: ghostshark
+      itemType: 0
+      explanation: fs_4202_01
+      icon: fs_4202_ghostshark
+      itemClass: 2
+      shape:
+      - {x: 0, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      iconSize: {x: 4, y: 2, z: 0.375, w: 0.25}
+      weight: 7.2
+      price: 670
+    areaType: 4
+    fishDayType: 2
+    size: {x: 40, y: 80}
+  - id: fs_4402
+    fishHealth: 1150
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 4
+    fishSpellTime: 3
+    fishGroggyTime: 3
+    fishDefenseCount: 7
+    fishLazy: 0.5
+    addDuration: 5750
+    addValue: 0.33
+    itemStruct:
+      id: fs_4402
+      name: drillfish
+      itemType: 0
+      explanation: fs_4402_01
+      icon: fs_4402_drillfish
+      itemClass: 0
+      shape:
+      - {x: -2, y: 0}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      iconSize: {x: 5, y: 1, z: 0.5, w: 0.5}
+      weight: 7.6
+      price: 1190
+    areaType: 4
+    fishDayType: 2
+    size: {x: 120, y: 230}
+  - id: fs_3204
+    fishHealth: 730
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 4
+    fishGroggyTime: 2
+    fishDefenseCount: 6
+    fishLazy: 0.5
+    addDuration: 3650
+    addValue: 0.45
+    itemStruct:
+      id: fs_3204
+      name: sailfish
+      itemType: 0
+      explanation: fs_3204_01
+      icon: fs_3204_sailfish
+      itemClass: 2
+      shape:
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      iconSize: {x: 4, y: 2, z: 0.375, w: 0.25}
+      weight: 8
+      price: 750
+    areaType: 3
+    fishDayType: 1
+    size: {x: 180, y: 400}
+  - id: fs_4302
+    fishHealth: 1200
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 3
+    fishGroggyTime: 1
+    fishDefenseCount: 7
+    fishLazy: 0.5
+    addDuration: 6000
+    addValue: 0.045
+    itemStruct:
+      id: fs_4302
+      name: goblinshark
+      itemType: 0
+      explanation: fs_4302_01
+      icon: fs_4302_goblinshark
+      itemClass: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      iconSize: {x: 4, y: 1, z: 0.375, w: 0.5}
+      weight: 8.1
+      price: 850
+    areaType: 4
+    fishDayType: 2
+    size: {x: 180, y: 720}
+  - id: fs_3201
+    fishHealth: 750
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 14
+    fishSpellTime: 7
+    fishGroggyTime: 1
+    fishDefenseCount: 8
+    fishLazy: 0.5
+    addDuration: 3750
+    addValue: 0.9
+    itemStruct:
+      id: fs_3201
+      name: oceansunfish
+      itemType: 0
+      explanation: fs_3201_01
+      icon: fs_3201_oceansunfish
+      itemClass: 2
+      shape:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      - {x: 0, y: 2}
+      - {x: 0, y: -1}
+      iconSize: {x: 3, y: 4, z: 0.5, w: 0.625}
+      weight: 10
+      price: 550
+    areaType: 3
+    fishDayType: 1
+    size: {x: 200, y: 400}
+  - id: fs_3302
+    fishHealth: 950
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 2
+    fishSpellTime: 4
+    fishGroggyTime: 5
+    fishDefenseCount: 7
+    fishLazy: 0.5
+    addDuration: 4750
+    addValue: 0.75
+    itemStruct:
+      id: fs_3302
+      name: mantaray
+      itemType: 0
+      explanation: fs_3302_01
+      icon: fs_3302_mantaray
+      itemClass: 1
+      shape:
+      - {x: -1, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      iconSize: {x: 3, y: 3, z: 0.5, w: 0.5}
+      weight: 10.5
+      price: 880
+    areaType: 3
+    fishDayType: 2
+    size: {x: 450, y: 800}
+  - id: fs_4204
+    fishHealth: 1000
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 5
+    fishGroggyTime: 5
+    fishDefenseCount: 8
+    fishLazy: 0.5
+    addDuration: 5000
+    addValue: 1.08
+    itemStruct:
+      id: fs_4204
+      name: oarfish
+      itemType: 0
+      explanation: fs_4204_01
+      icon: fs_4204_oarfish
+      itemClass: 2
+      shape:
+      - {x: -1, y: -1}
+      - {x: 0, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 1, y: 1}
+      - {x: 2, y: 1}
+      iconSize: {x: 4, y: 3, z: 0.375, w: 0.5}
+      weight: 10.7
+      price: 720
+    areaType: 4
+    fishDayType: 1
+    size: {x: 600, y: 1700}
+  - id: fs_4404
+    fishHealth: 1550
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 5
+    fishSpellTime: 4
+    fishGroggyTime: 5
+    fishDefenseCount: 9
+    fishLazy: 0.5
+    addDuration: 7750
+    addValue: 1.14
+    itemStruct:
+      id: fs_4404
+      name: submarinegrouper
+      itemType: 0
+      explanation: fs_4404_01
+      icon: fs_4404_submarinegrouper
+      itemClass: 0
+      shape:
+      - {x: -1, y: -1}
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: 2, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      iconSize: {x: 4, y: 2, z: 0.375, w: 0.25}
+      weight: 11.5
+      price: 1250
+    areaType: 4
+    fishDayType: 2
+    size: {x: 180, y: 300}
+  - id: fs_2301
+    fishHealth: 600
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 5
+    fishSpellTime: 4
+    fishGroggyTime: 6
+    fishDefenseCount: 6
+    fishLazy: 0.5
+    addDuration: 3000
+    addValue: 0.525
+    itemStruct:
+      id: fs_2301
+      name: redtoothedtriggerfish
+      itemType: 0
+      explanation: fs_2301_01
+      icon: fs_2301_redtoothedtriggerfish
+      itemClass: 1
+      shape:
+      - {x: -1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      - {x: 1, y: 0}
+      iconSize: {x: 3, y: 2, z: 0.5, w: 0.75}
+      weight: 12
+      price: 850
+    areaType: 2
+    fishDayType: 1
+    size: {x: 30, y: 100}
+  - id: fs_3203
+    fishHealth: 850
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 5
+    fishGroggyTime: 3
+    fishDefenseCount: 7
+    fishLazy: 0.5
+    addDuration: 4250
+    addValue: 1.5
+    itemStruct:
+      id: fs_3203
+      name: bluefintuna
+      itemType: 0
+      explanation: fs_3203_01
+      icon: fs_3203_bluefintuna
+      itemClass: 2
+      shape:
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: 2, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      - {x: 2, y: 1}
+      iconSize: {x: 4, y: 2, z: 0.375, w: 0.75}
+      weight: 15
+      price: 800
+    areaType: 3
+    fishDayType: 1
+    size: {x: 60, y: 500}
+  - id: fs_2401
+    fishHealth: 750
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 3
+    fishSpellTime: 4
+    fishGroggyTime: 2
+    fishDefenseCount: 8
+    fishLazy: 0.5
+    addDuration: 3750
+    addValue: 3
+    itemStruct:
+      id: fs_2401
+      name: bluewingeel
+      itemType: 0
+      explanation: fs_2401_01
+      icon: fs_2401_bluewingeel
+      itemClass: 0
+      shape:
+      - {x: -1, y: -1}
+      - {x: 0, y: -1}
+      - {x: 1, y: -1}
+      - {x: -1, y: 0}
+      - {x: 1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      iconSize: {x: 3, y: 3, z: 0.5, w: 0.5}
+      weight: 20
+      price: 940
+    areaType: 2
+    fishDayType: 1
+    size: {x: 100, y: 250}
+  - id: fs_2203
+    fishHealth: 650
+    fishPower: 2
+    fishSpeed: 2
+    fishCoolTime: 1
+    fishSpellTime: 4
+    fishGroggyTime: 1
+    fishDefenseCount: 4
+    fishLazy: 0.5
+    addDuration: 3250
+    addValue: 0.3
+    itemStruct:
+      id: fs_2203
+      name: napoleonwrasse
+      itemType: 0
+      explanation: fs_2203_01
+      icon: fs_2203_napoleonwrasse
+      itemClass: 2
+      shape:
+      - {x: -1, y: 0}
+      - {x: -1, y: 1}
+      - {x: 0, y: 1}
+      - {x: 1, y: 1}
+      - {x: 1, y: 0}
+      iconSize: {x: 3, y: 2, z: 0.5, w: 0.75}
+      weight: 20
+      price: 650
+    areaType: 2
+    fishDayType: 1
+    size: {x: 90, y: 230}
   skillStruct:
   - id: sk_001_00
     name: sk_001_00

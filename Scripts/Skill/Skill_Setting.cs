@@ -11,14 +11,14 @@ public class Skill_Setting : MonoBehaviour
     const float constFishGroggyTime = 0.2f;// 방어 성공 시 그로기 시간
     const float constFishDefenseChance = 0.05f;// 방어시 입력 개수
 
-    const float constCatchRadius = 0.5f;//- 레벨 5
+    const float constCatchRadius = 1f;//- 레벨 5
     const float constCatchSpeed = 1f;//- 레벨 10
     const float constCatchPower = 1f;//- 레벨 5
-    const float constCatchHealth = 1f; //- 레벨 7
+    const float constCatchHealth = 10f; //- 레벨 7
 
     const float constShipSpeed = 0.5f;// 배의 이동 속도 - 레벨 5
-    const float constMaxWeight = 1f;// 인벤토리 중량 - 레벨 5
-    const float constMaxEnergy = 1f;// 연료통 크기 - 레벨 5
+    const float constMaxWeight = 2f;// 인벤토리 중량 - 레벨 5
+    const float constMaxEnergy = 10f;// 연료통 크기 - 레벨 5
     const float constEfficient = 0.1f;// 에너지 효율 - 레벨 5
     const int constShipHealth = 1;// 배 체력 - 레벨 3
 

@@ -1,5 +1,6 @@
 using Steamworks;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Steam_StatsManager : MonoBehaviour
 {
@@ -59,28 +60,43 @@ public class Steam_StatsManager : MonoBehaviour
 
     public void CatchLegendary()
     {
-        int addCount = AddCount("Legendary_Collecter", 1);
-        if (addCount >= 10)// 레전더리 등급 개수
+        int addCount = AddCount("Stats_Legendary", 1);
+        string achievement = "First_Legendary";
+        ComplateAchievement(achievement);
+
+        if (addCount >= 6)// 레전더리 등급 개수
         {
-            string achievement = "Legendary_Collecter";
+            achievement = "Legendary_Collecter";
             ComplateAchievement(achievement);
         }
+    }
+
+    public void First_Rare()
+    {
+        string achievement = "First_Rare";
+        ComplateAchievement(achievement);
+    }
+
+    public void First_Epic()
+    {
+        string achievement = "First_Epic";
+        ComplateAchievement(achievement);
     }
 
     public void NightFishing()
     {
-        int addCount = AddCount("Night_Fishing", 1);
-        Debug.LogWarning($"(밤 카운트 : {addCount})");
-        if (addCount >= 1)
-        {
-            string achievement = "Night_Fishing";
-            ComplateAchievement(achievement);
-        }
+        //int addCount = AddCount("Night_Fishing", 1);
+        //Debug.LogWarning($"(밤 카운트 : {addCount})");
+        //if (addCount >= 1)
+        //{
+        string achievement = "Night_Fishing";
+        ComplateAchievement(achievement);
+        //}
     }
 
     public void GameOver()
     {
-        int addCount = AddCount("Stats_GameOver",1);
+        int addCount = AddCount("Stats_GameOver", 1);
         Debug.LogWarning($"(게임오버 카운트 : {addCount})");
         if (SteamManager.Initialized)
         {
@@ -94,7 +110,7 @@ public class Steam_StatsManager : MonoBehaviour
 
     public void CatchBox()
     {
-        int addCount = AddCount("Stats_Catch_Box",1);
+        int addCount = AddCount("Stats_Catch_Box", 1);
         Debug.LogWarning($"(박스 카운트 : {addCount})");
         if (SteamManager.Initialized)
         {
