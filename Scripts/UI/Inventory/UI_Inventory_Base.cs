@@ -377,7 +377,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
         if (shape == null)
             return onCheck;
-        Debug.LogWarning($"{inventorySize}+++++++++++++++++++++++++++++++++++++{shape.Length}++++++++++++++++++{_slot.slotNum}");
+        //Debug.LogWarning($"{inventorySize}+++++++++++++++++++++++++++++++++++++{shape.Length}++++++++++++++++++{_slot.slotNum}");
 
         for (int i = 0; i < shape.Length; i++)
         {

@@ -56,7 +56,7 @@ MonoBehaviour:
     fishSpellTime: 3
     fishGroggyTime: 5
     fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
+    fishLazy: 0
     addDuration: 0
     addValue: 0
     itemStruct:
@@ -75,8 +75,6 @@ MonoBehaviour:
     size: {x: 0, y: 0}
   state: 0
   fishSpeed: 0
-  fieldRadius: 5.8
-  fishLazy: 0.5
   fishAgent: {fileID: 5057709628917360249}
   formObject: {fileID: 697481169290442177}
   addAngle: 180
@@ -201,7 +199,7 @@ GameObject:
   - component: {fileID: 4220993281241617030}
   - component: {fileID: 7018630798226826454}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5603,7 +5601,7 @@ GameObject:
   - component: {fileID: 3234195552138455831}
   - component: {fileID: 7184731066827383912}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Image_Reel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10965,7 +10963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7221c1c39f0fabd4abe195648d9b00ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  immortal: 1
+  immortal: 0
+  spelling: 0
   fishingCanvas: {fileID: 5139216425171326708}
   fishingFish: {fileID: 8351549823705718960}
   onCatchColor: {r: 0, g: 13.6226225, b: 34.296745, a: 1}
@@ -10975,12 +10974,10 @@ MonoBehaviour:
   catchaText: {fileID: 7764666468681224870}
   failText: {fileID: 1776870965123513212}
   shipPrefab: {fileID: 7003132308704612524}
-  shipSize: 1.5
   catchPrefab: {fileID: 5307465895394525306}
   catchRanderer: {fileID: 9220036340358260554}
   focusTarget: {fileID: 2987525655021667049}
   debugText: {fileID: 2998618673736894112}
-  spelling: 0
 --- !u!114 &5139216425171326708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11002,14 +10999,11 @@ MonoBehaviour:
   outButton: {fileID: 4774992330287116148}
   startTypeText: {fileID: 2133235342814335945}
   animator: {fileID: 6579040038717403465}
-  testRect: {fileID: 7184731066827383912}
   arrowParent: {fileID: 136113371707782893}
   arrowImage: {fileID: 4844686117374276643}
   fishingDamage: {fileID: 4201093234493794188}
-  testSize: 0
-  tentionSpeed: 0.1
-  testColor01: {r: 1, g: 1, b: 1, a: 1}
-  testColor02: {r: 8.574187, g: 0, b: 0, a: 1}
+  reelRect: {fileID: 7184731066827383912}
+  tentionSize: 0
 --- !u!1 &3167512084901833672
 GameObject:
   m_ObjectHideFlags: 0
@@ -11694,7 +11688,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5376918626255219441}
@@ -11782,7 +11776,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: f718099824a70ca4c9810fd39a61df45, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 7a2300731e9c6e54d9de9848923d38a9, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &5392740303003578680
 GameObject:
@@ -18320,7 +18314,7 @@ GameObject:
   - component: {fileID: 1682143907433636177}
   - component: {fileID: 5057709628917360249}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

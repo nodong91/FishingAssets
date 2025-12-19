@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using static Data_Manager;
-using static Fishing_Fish;
 
 public class Fishing_Manager : MonoBehaviour
 {
     public bool immortal;
+    public bool spelling;
     public Fishing_Canvas fishingCanvas;
     public Fishing_Fish fishingFish;
     [ColorUsage(true, true)]
@@ -32,9 +31,8 @@ public class Fishing_Manager : MonoBehaviour
     public GameObject fishingSet;
     public GameObject catchaText, failText;
     public GameObject shipPrefab;
-    public float shipSize = 1f;
 
-    private const float fieldRadius = 5f;
+    private float FieldRadius => fishingFish.GetFieldRadius;
 
     public GameObject catchPrefab;
     public Renderer catchRanderer;
@@ -42,12 +40,8 @@ public class Fishing_Manager : MonoBehaviour
     float catchRadius = 1f;// 지름이 클수록 데미지가 약해짐 (줄을 느슨하게)
 
     FishStruct currentFish;
-    //public GameObject fishPrefab;
-    //Coroutine fishAction;
 
     private float fishHealth = 0f;
-    private float fishSpeed = 0f;
-    private float cooling;
 
     public Transform focusTarget;
     private Vector3 fishTargetPoint;
@@ -59,6 +53,8 @@ public class Fishing_Manager : MonoBehaviour
     Dictionary<string, List<FishStruct>> dictFishStruct = new Dictionary<string, List<FishStruct>>();
     Queue<string> fishQueue = new Queue<string>();
     public TMPro.TMP_Text debugText;
+
+    bool catching;
 
     public void SetStart()
     {
@@ -238,16 +234,16 @@ public class Fishing_Manager : MonoBehaviour
             size = findFish.size,
             id = findFish.id,
             // 스킬 적용 스탯
-            fishHealth = findFish.fishHealth - addStruct.fishHealth,
-            fishPower = findFish.fishPower - addStruct.fishPower,
-            fishSpeed = findFish.fishSpeed - addStruct.fishSpeed,
-            fishCoolTime = findFish.fishCoolTime - addStruct.fishCoolTime,
-            fishSpellTime = findFish.fishSpellTime - addStruct.fishSpellTime,
-            fishGroggyTime = findFish.fishGroggyTime - addStruct.fishGroggyTime,
-            fishDefenseCount = findFish.fishDefenseCount - addStruct.fishDefenseCount,
-            fishTurnDelay = findFish.fishTurnDelay - addStruct.fishTurnDelay,
-            addDuration = findFish.addDuration - addStruct.addDuration,
-            addValue = findFish.addValue - addStruct.addValue
+            fishHealth = findFish.fishHealth + addStruct.fishHealth,
+            fishPower = findFish.fishPower + addStruct.fishPower,
+            fishSpeed = findFish.fishSpeed + addStruct.fishSpeed,
+            fishCoolTime = findFish.fishCoolTime + addStruct.fishCoolTime,
+            fishSpellTime = findFish.fishSpellTime + addStruct.fishSpellTime,
+            fishGroggyTime = findFish.fishGroggyTime + addStruct.fishGroggyTime,
+            fishDefenseCount = findFish.fishDefenseCount + addStruct.fishDefenseCount,
+            fishLazy = findFish.fishLazy + addStruct.fishLazy,
+            addDuration = findFish.addDuration + addStruct.addDuration,
+            addValue = findFish.addValue + addStruct.addValue
         };
         return addFishStatus;
     }
@@ -256,7 +252,7 @@ public class Fishing_Manager : MonoBehaviour
     {
         catchStatus = Game_Manager.current.currentStatus;
 
-        Vector3 randomPoint = Random.insideUnitSphere * fieldRadius;
+        Vector3 randomPoint = Random.insideUnitSphere * FieldRadius;
         fishTargetPoint = new Vector3(randomPoint.x, 0f, randomPoint.z) + transform.position;
         fishingFish.SetFish(fishTargetPoint);
 
@@ -298,35 +294,43 @@ public class Fishing_Manager : MonoBehaviour
 
     IEnumerator CatchMovement()
     {
-        float cutTime = 0f;
-        float catchSpeed = catchStatus.catchSpeed;
+        float catchSpeed = catchStatus.catchSpeed * 0.1f;
         while (isFishing == true)
         {
-            Vector3 catchOffset = CatchRayCast() - catchPrefab.transform.position;
-            catchSpeed = Mathf.Lerp(catchSpeed, catchStatus.catchSpeed * Mathf.Clamp01(catchOffset.magnitude), 0.1f);
-            catchPrefab.transform.Translate(catchOffset.normalized * Time.deltaTime * catchSpeed, Space.World);
+            //Vector3 catchOffset = CatchRayCast() - catchPrefab.transform.position;
+            //catchSpeed = Mathf.Lerp(catchSpeed, catchStatus.catchSpeed * Mathf.Clamp01(catchOffset.magnitude), 0.1f * Time.deltaTime);
+            //catchPrefab.transform.Translate(catchOffset.normalized * catchSpeed, Space.World);
+            catchPrefab.transform.position = Vector3.Lerp(catchPrefab.transform.position, CatchRayCast(), catchSpeed * Time.deltaTime);
             MoveCatch();
             yield return null;
 
-            PlayingControll();
+            fishingCanvas.FollowUI(fishPrefab.transform.position);
+            DefenseControll();
             FishingControll();
 
             if (immortal == false)
             {
                 CheckingCatch();
-                // 낚시줄 텐셭 체크
-                if (fishingCanvas.TryTention == true)
-                {
-                    cutTime += Time.deltaTime;
-                    if (cutTime > 1f)
-                        FishingComplate(false);// 1초이상 팽팽하게 당기면 끊어짐
-                }
-                else
-                {
-                    cutTime = 0f;
-                }
+                //// 낚시줄 텐셭 체크
+                //if (fishingCanvas.TryTention == true)
+                //{
+                //    FishingComplate(false);// 1초이상 팽팽하게 당기면 끊어짐
+                //}
             }
         }
+    }
+
+    Vector3 CatchRayCast()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        int downhillLayer = 1 << LayerMask.NameToLayer("Water");
+        if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, downhillLayer))
+        {
+            Vector3 hitOffset = (hit.point - transform.position);
+            Vector3 direction = hitOffset.normalized;
+            return transform.position + direction * Mathf.Clamp(hitOffset.magnitude, 0f, FieldRadius);
+        }
+        return default;
     }
 
     void MoveCatch()
@@ -339,25 +343,12 @@ public class Fishing_Manager : MonoBehaviour
         Vector2 catchPosition = new Vector2(catchPrefab.transform.position.x, catchPrefab.transform.position.z);
         float catchDistance = (fishPosition - catchPosition).magnitude;
         isCatching = (catchDistance < catchRadius);// 영역 안에 있는지 체크
-        Color catchColor = isCatching ? onCatchColor : notCatchColor;
+        Color catchColor = isCatching == true ? onCatchColor : notCatchColor;
         catchRanderer.material.SetColor("_Color", catchColor);
-        fishingCanvas.LinTention(catchDistance / catchRadius);
+        fishingCanvas.ReelTention(catchDistance / catchRadius);// 텐션UI 표시
 
         float fishDistance = (fishPrefab.transform.position - shipPrefab.transform.position).magnitude;
         positionComposer.CameraDistance = Mathf.Lerp(positionComposer.CameraDistance, (fishDistance * 0.5f) + defaultCameraDistance, 0.1f);
-    }
-
-    Vector3 CatchRayCast()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        int downhillLayer = 1 << LayerMask.NameToLayer("Water");
-        if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, downhillLayer))
-        {
-            Vector3 hitOffset = (hit.point - transform.position);
-            Vector3 direction = hitOffset.normalized;
-            return transform.position + direction * Mathf.Clamp(hitOffset.magnitude, 0f, fieldRadius);
-        }
-        return default;
     }
 
     void CheckingCatch()
@@ -371,13 +362,14 @@ public class Fishing_Manager : MonoBehaviour
                 fishHealth += damage * Time.deltaTime;
                 fishingCanvas.SetFishIcon(-1f);
             }
-            else
-            {
-                // 물고기 힘만큼 데미지
-                float damage = currentFish.fishPower / (currentFish.fishHealth + catchStatus.catchMaxHealth);
-                fishHealth -= damage * Time.deltaTime;
-                fishingCanvas.SetFishIcon(1f);
-            }
+        }
+        else
+        {
+            float addDamage = (catching == true) ? 2f : 1f;// 영역외에 계속 누르고 있으면 두배로 깎음
+            // 물고기 힘만큼 데미지
+            float damage = currentFish.fishPower * addDamage / (currentFish.fishHealth + catchStatus.catchMaxHealth);
+            fishHealth -= damage * Time.deltaTime;
+            fishingCanvas.SetFishIcon(1f);
         }
 
         fishingCanvas.SetFishHP(fishHealth);
@@ -391,8 +383,6 @@ public class Fishing_Manager : MonoBehaviour
     // 컨트롤
     //===================================================================================================================
 
-    bool catching;
-    public bool spelling;
     void FishingControll()
     {
         if (Input.GetMouseButton(0))
@@ -403,7 +393,7 @@ public class Fishing_Manager : MonoBehaviour
                 Singleton_Audio.INSTANCE.Audio_LoopFX(Const_Audio._reeling);// 낚시 소리
             }
             if (catchRadius > 0.1f)
-                catchRadius -= 1f * Time.deltaTime;
+                catchRadius -= 0.5f * Time.deltaTime;
         }
         else if (catchRadius <= catchStatus.catchRadius)
         {
@@ -417,9 +407,8 @@ public class Fishing_Manager : MonoBehaviour
         catchPrefab.transform.localScale = Vector3.one * catchRadius;
     }
 
-    void PlayingControll()
+    void DefenseControll()
     {
-        fishingCanvas.FollowUI(fishPrefab.transform.position);
         if (spelling == true)
         {
             if (Input.GetKeyDown(KeyCode.W))
@@ -889,30 +878,6 @@ public class Fishing_Manager : MonoBehaviour
 
         cinemachineBasicMultiChannelPerlin.AmplitudeGain = 0f;
     }
-
-
-#if UNITY_EDITOR
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = UnityEditor.Handles.color = Color.yellow;
-        Gizmos.DrawSphere(shipPrefab.transform.position, shipSize);
-        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, fieldRadius);
-
-        UnityEditor.Handles.color = Color.red;
-        if (catchPrefab != null && catchStatus != null)
-            UnityEditor.Handles.DrawWireDisc(catchPrefab.transform.position, Vector3.up, catchStatus.catchRadius);
-
-        //Gizmos.color = fishState == FishStateType.Dodge ? Color.blue : Color.yellow;
-        //if (fishState == FishStateType.Dodge || fishState == FishStateType.Moving)
-        //{
-        //    Gizmos.DrawSphere(fishTargetPoint, 0.3f);
-        //    Gizmos.DrawLine(fishTargetPoint, fishPrefab.transform.position);
-        //    float distance = (fishTargetPoint - fishPrefab.transform.position).magnitude;
-        //    Vector3 lerfVector = Vector3.Lerp(fishPrefab.transform.position, fishTargetPoint, 0.5f);
-        //    UnityEditor.Handles.Label(lerfVector, distance.ToString());
-        //}
-    }
-#endif
 
 
 

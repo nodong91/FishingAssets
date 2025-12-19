@@ -3,57 +3,59 @@ using UnityEngine;
 public class Skill_Setting : MonoBehaviour
 {
     // 낚시 관련
-    public float constFishHealth;// 물고기 체력
-    public float constFishPower;// 물고기 공격력
-    public float constFishSpeed;// 물고기 이동 속도
-    public float constFishCoolTime;// 물고기 공격 쿨타임
-    public float constFishSpellTime;// 공격할 때 딜레이 시간
-    public float constFishGroggyTime;// 방어 성공 시 그로기 시간
-    public int constFishDefenseCount;// 공격시 입력 개수
+    const float constFishHealth = -1f;// 물고기 체력
+    const float constFishPower = -0.2f;// 물고기 공격력
+    const float constFishSpeed = -0.2f;// 물고기 이동 속도
+    const float constFishCoolTime = 0.2f;// 물고기 공격 쿨타임
+    const float constFishSpellTime = 0.2f;// 공격할 때 딜레이 시간
+    const float constFishGroggyTime = 0.2f;// 방어 성공 시 그로기 시간
+    const float constFishDefenseChance = 0.05f;// 방어시 입력 개수
 
-    const float constCatchRadius = 0.2f;
-    const float constCatchSpeed = 0.2f;
-    const float constCatchPower = 1f;
-    const float constCatchHealth = 1f;
+    const float constCatchRadius = 0.5f;//- 레벨 5
+    const float constCatchSpeed = 1f;//- 레벨 10
+    const float constCatchPower = 1f;//- 레벨 5
+    const float constCatchHealth = 1f; //- 레벨 7
 
-    const float constShipSpeed = 0.2f;// 배의 이동 속도
-    const float constMaxWeight = 1f;// 인벤토리 중량
-    const float constMaxEnergy = 1f;// 연료통 크기
-    const float constEfficient = 0.1f;// 에너지 효율
-    const int constShipHealth = 1;// 배 체력
+    const float constShipSpeed = 0.5f;// 배의 이동 속도 - 레벨 5
+    const float constMaxWeight = 1f;// 인벤토리 중량 - 레벨 5
+    const float constMaxEnergy = 1f;// 연료통 크기 - 레벨 5
+    const float constEfficient = 0.1f;// 에너지 효율 - 레벨 5
+    const int constShipHealth = 1;// 배 체력 - 레벨 3
 
-    const float constLuckFish = 1f;// 낚시 성공 시 한마리 더 낚을 확률 (낚시 시작할 때 정해지고 두마리 중 등급이 높은 물고기가 기준)
-    const int constFishAmount = 1;// 낚시 횟수 증가
-    const float constFishPrice = 1f;// 판매 물고기 가격 증가
+    const float constLuckFish = 1f;// 낚시 성공 시 한마리 더 낚을 확률 (낚시 시작할 때 정해지고 두마리 중 등급이 높은 물고기가 기준) - 레벨 10
+    const int constFishAmount = 1;// 낚시 횟수 증가 - 레벨 3
+    const float constFishPrice = 1f;// 판매 물고기 가격 증가 - 레벨10
 
-    const float constBoosterSpeed = 0.5f;
-    const float constBoosterValue = 1f;
-    const float constCrashChance = 5f;
+    const float constBoosterSpeed = 0.5f;//- 레벨 5
+    const float constBoosterValue = 1f;//- 레벨 7
+    const float constCrashChance = 5f;//- 레벨 5 최대 25%
 
-    const string _001 = "_001";// 강철 낚시줄
-    const string _002 = "_002";// 강력한 
-    const string _003 = "_003";// 재빠른 손놀림
-    const string _004 = "_004";// 신들린 컨트롤
-    const string _005 = "_005";// 욕심쟁이
-    const string _006 = "_006";// 방랑자
-    const string _007 = "_007";// 친환경
-    const string _008 = "_008";// 인벤토리증가
-    const string _009 = "_009";// 두꺼운 피부
-    const string _010 = "_010";// 일타쌍어
-    const string _011 = "_011";// 낚시 횟수 증가
-    const string _012 = "_012";// 수완가
-    const string _013 = "_013";// 창고확장
-    const string _014 = "_014";// 낚시왕
-    const string _015 = "_015";// 손쉬운 낚시
-    const string _016 = "_016";// 부스터
-    const string _017 = "_017";// 부스터 크기
-    const string _018 = "_018";// 물고기 체력감소
-    const string _019 = "_019";// 물고기 스피드감소
-    const string _020 = "_020";// 물고기 공격력 감소
-    const string _021 = "_021";// 물고기 스펠 속도감소
-    const string _022 = "_022";// 물고기 쿨타임 증가
-    const string _023 = "_023";// 물고기 그로기 타임 증가
-    const string _024 = "_024";// 충돌방지 확률
+    const string _001 = "_001";// 강철 낚시줄    //- 레벨 5
+    const string _002 = "_002";// 강력한 힘     //- 레벨 5
+    const string _003 = "_003";// 재빠른 손놀림   //- 레벨 10
+    const string _004 = "_004";// 신들린 컨트롤   //- 레벨 5
+    const string _005 = "_005";// 욕심쟁이      //- 레벨 5
+    const string _006 = "_006";// 방랑자       //- 레벨 5
+    const string _007 = "_007";// 친환경       //- 레벨 5
+    const string _008 = "_008";// 인벤토리증가    //- 레벨 5
+    const string _009 = "_009";// 두꺼운 피부    //- 레벨 3
+    const string _010 = "_010";// 일타쌍어      //- 레벨 10
+    const string _011 = "_011";// 낚시 횟수 증가  //- 레벨 3
+    const string _012 = "_012";// 수완가       //- 레벨 10
+    const string _013 = "_013";// 창고확장      //- 레벨 10
+    const string _014 = "_014";// 쉬워진 방어       //- 레벨 5
+    const string _015 = "_015";// 손쉬운 낚시    //- 레벨 7
+    const string _016 = "_016";// 부스터       //- 레벨 5
+    const string _017 = "_017";// 부스터 크기    //- 레벨 7
+
+    const string _018 = "_018";// 물고기 체력감소  //- 레벨 5
+    const string _019 = "_019";// 물고기 스피드감소     //- 레벨 5
+    const string _020 = "_020";// 물고기 공격력 감소    //- 레벨 5
+    const string _021 = "_021";// 물고기 스펠 속도감소   //- 레벨 5
+    const string _022 = "_022";// 물고기 쿨타임 증가    //- 레벨 5
+    const string _023 = "_023";// 물고기 그로기 타임 증가 //- 레벨 5
+
+    const string _024 = "_024";// 충돌방지 확률       //- 레벨 5
 
     const string _100 = "_100";// 배 언락
     const string _101 = "_101";// 배 언락
@@ -153,7 +155,7 @@ public class Skill_Setting : MonoBehaviour
             fishCoolTime = constFishCoolTime * Level_FishCoolTime,
             fishSpellTime = constFishSpellTime * Level_FishSpellTime,
             fishGroggyTime = constFishGroggyTime * Level_FishGroggyTime,
-            fishDefenseCount = constFishDefenseCount * Level_FishDefenseChance,
+            fishDefenseCount = (Random.Range(0f, 1f) < constFishDefenseChance * Level_FishDefenseChance) ? -1 : 0,// 개수를 줄일 확률
             //fishTurnDelay = Vector2.zero,
             //addDuration = 0,
             //addValue = 0

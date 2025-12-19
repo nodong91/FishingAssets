@@ -18,8 +18,8 @@ public class Fishing_Fish : MonoBehaviour
 
     Vector3 fishTargetPoint;
     public float fishSpeed;
-    public float fieldRadius;
-    public float fishLazy;
+    const float fieldRadius = 9f;
+    public float GetFieldRadius { get { return fieldRadius; } }
 
     public NavMeshAgent fishAgent;
     public GameObject formObject;
@@ -35,9 +35,15 @@ public class Fishing_Fish : MonoBehaviour
     public delegate void DeleDestroy();
     public DeleDestroy deleDestroy;
 
-    public void SetStart(Data_Manager.FishStruct _fishStruct)
+    private void Start()
     {
         fishAgent.updateRotation = false;
+        fishAgent.gameObject.SetActive(false);
+    }
+
+    public void SetStart(Data_Manager.FishStruct _fishStruct)
+    {
+        fishAgent.gameObject.SetActive(true);
         currentFish = _fishStruct;
         FishState(StateType.Idle);
         StateCooling();
@@ -108,8 +114,11 @@ public class Fishing_Fish : MonoBehaviour
         yield return new WaitForSeconds(1f);// 얼마나 오래 정지해있는지
         FishState(StateType.Move);
 
-        if (onCooling == true)
+        bool attacking = currentFish.fishCoolTime * currentFish.fishSpellTime > 0f;
+        if (attacking && onCooling == true)
+        {
             State_Spell();// 움직이면서 스펠
+        }
     }
 
     // 에이전트가 정지했는지 확인하는 함수
@@ -148,8 +157,8 @@ public class Fishing_Fish : MonoBehaviour
 
         float prevSpeed = fishSpeed;
         float randomSpeed = Random.Range(currentFish.fishSpeed * 0.5f, currentFish.fishSpeed);
-        float randomTime = 5f / randomSpeed * fishLazy;
-
+        float randomTime = 10f / randomSpeed * (currentFish.fishLazy + 1f);// 최고속도 상수
+        //float dist = Vector3.Distance(fishTargetPoint, fishAgent.transform.position);
         bool active = true;
         float normalize = 0f;
         while (active == true)
@@ -168,7 +177,7 @@ public class Fishing_Fish : MonoBehaviour
         yield return null;
 
         float randomValue = Random.Range(0f, 1f);
-        if (randomValue < fishLazy)// 얼마나 자주 제자리에 있는지
+        if (randomValue < currentFish.fishLazy)// 얼마나 자주 제자리에 있는지
             FishState(StateType.Idle);
         else
             FishState(StateType.Move);
@@ -241,6 +250,7 @@ public class Fishing_Fish : MonoBehaviour
 
         Vector3 prevPoint = fishAgent.transform.position;
         fishAgent.enabled = false;
+        bool succeeded = false;
         float normalize = 0f;
         while (normalize < 1f)
         {
@@ -249,11 +259,14 @@ public class Fishing_Fish : MonoBehaviour
             //fishPrefab.transform.Translate(Vector3.forward * Time.deltaTime * fishSpeed, Space.Self);
             fishAgent.transform.position = Vector3.Lerp(prevPoint, targetPoint, normalize);
             MoveTargetPoint(targetPoint);
-            yield return null; 
-            
+            yield return null;
+
             getDistance = Vector3.Distance(formObject.transform.position, fishAgent.transform.position);// 반대편에 위치 구하기
-            if (getDistance < 0.5f)
+            if (getDistance < 0.5f && succeeded == false)
+            {
+                succeeded = true;
                 deleDestroy?.Invoke();
+            }
 
             if (speed < 0.01f)
                 normalize = 1f;
@@ -311,6 +324,7 @@ public class Fishing_Fish : MonoBehaviour
     public void FishingComplate()
     {
         FishState(StateType.None);
+        fishAgent.gameObject.SetActive(false);
     }
 
 #if UNITY_EDITOR

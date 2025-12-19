@@ -17,8 +17,6 @@ public class Fishing_Canvas : MonoBehaviour
     public TMP_Text startTypeText;
     public Animator animator;
 
-    public Image testRect;
-
     public void SetStart()
     {
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -184,26 +182,17 @@ public class Fishing_Canvas : MonoBehaviour
     // ¶óÀÎ ÅÙ¼Ç
     //=========================================================================================================
 
+    public Image reelRect;
+    float maxTentionSize = 120f;
+    public float tentionSize;
+    //public float tentionSpeed = 0.1f;
 
-    float maxTestSize = 120f;
-    public float testSize;
-    public float tentionSpeed = 0.1f;
-    [ColorUsage(true, true)]
-    public Color testColor01, testColor02;
+    public bool TryTention { get { return tentionSize > 0.9f; } }
 
-    public bool TryTention
+    public void ReelTention(float _tention)
     {
-        get
-        {
-            return testSize > 0.9f;
-        }
-    }
-
-    public void LinTention(float _tention)
-    {
-        //testSize = Mathf.Lerp(testSize, _tention, Time.deltaTime * tentionSpeed);
-        testSize = _tention;
-        testRect.color = Color.Lerp(testColor01, testColor02, testSize);
-        testRect.rectTransform.sizeDelta = new Vector2(testSize * maxTestSize, testRect.rectTransform.sizeDelta.y);
+        tentionSize = _tention;
+        reelRect.color = Color.Lerp(Color.white, Color.red, tentionSize);
+        reelRect.rectTransform.sizeDelta = new Vector2(tentionSize * maxTentionSize, reelRect.rectTransform.sizeDelta.y);
     }
 }

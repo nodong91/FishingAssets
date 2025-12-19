@@ -100,7 +100,7 @@ public class Data_Manager : Data_Parse
                 fishSpellTime = Parse_Float(elements[16]),
                 fishGroggyTime = Parse_Float(elements[17]),
                 fishDefenseCount = Parse_Int(elements[18]),
-                fishTurnDelay = Parse_Vector2(elements[19]),
+                fishLazy = Parse_Float(elements[19]),
                 addDuration = Parse_Float(elements[20]),
                 addValue = Parse_Float(elements[21]),
             };
@@ -567,7 +567,7 @@ public class Data_Manager : Data_Parse
         public float fishSpellTime;// 공격할 때 딜레이 시간
         public float fishGroggyTime;// 방어 성공 시 그로기 시간
         public int fishDefenseCount;// 공격시 입력 개수
-        public Vector2 fishTurnDelay;// 방향 바뀌는 딜레이 시간
+        public float fishLazy;// 방향 바뀌는 딜레이 시간
         [Header(" [ 버프 ]")]
         public float addDuration;// 버프 시간
         public float addValue;// 더해지는 버프 수치 - 버프수치가 높을 수록 해당 등급이 나올 확률이 올라간다.
