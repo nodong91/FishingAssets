@@ -195,4 +195,23 @@ public class Fishing_Canvas : MonoBehaviour
         reelRect.color = Color.Lerp(Color.white, Color.red, tentionSize);
         reelRect.rectTransform.sizeDelta = new Vector2(tentionSize * maxTentionSize, reelRect.rectTransform.sizeDelta.y);
     }
+
+
+
+
+
+
+
+
+    public TMP_Text debugText;
+    public void DebugDisplayState(bool _isOn)
+    {
+        debugText.gameObject.SetActive(_isOn);
+    }
+
+    public void DebugDisplayState(Fishing_Fish.StateType _state)
+    {
+
+        debugText.text = _state.ToString();
+    }
 }

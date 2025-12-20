@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using static Fishing_Fish;
 
 public class Fishing_Fish : MonoBehaviour
 {
@@ -49,21 +50,18 @@ public class Fishing_Fish : MonoBehaviour
         StateCooling();
     }
 
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        Interfere();
-    //    }
-    //}
-
     public void SetFish(Vector3 _position)
     {
         fishAgent.transform.position = _position;
     }
 
+    public delegate void DeleGetState(StateType _state);
+    public DeleGetState deleGetState;
+
     void FishState(StateType _state)
     {
+        deleGetState?.Invoke(_state);
+
         if (coroutineState != null)
             StopCoroutine(coroutineState);
 

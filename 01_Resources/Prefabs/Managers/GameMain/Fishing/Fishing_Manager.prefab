@@ -10961,7 +10961,6 @@ MonoBehaviour:
   catchPrefab: {fileID: 5307465895394525306}
   catchRanderer: {fileID: 9220036340358260554}
   focusTarget: {fileID: 2987525655021667049}
-  debugText: {fileID: 2998618673736894112}
 --- !u!114 &5139216425171326708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10988,6 +10987,7 @@ MonoBehaviour:
   fishingDamage: {fileID: 4201093234493794188}
   reelRect: {fileID: 7184731066827383912}
   tentionSize: 0
+  debugText: {fileID: 2998618673736894112}
 --- !u!1 &3167512084901833672
 GameObject:
   m_ObjectHideFlags: 0
@@ -18027,7 +18027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6407620300758088708
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18075,10 +18075,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: New TextNew Text
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6b3afd15f685f534696e524dd48431a7, type: 2}
-  m_sharedMaterial: {fileID: -891524190667785659, guid: 6b3afd15f685f534696e524dd48431a7, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 9c0b7a2f8e0ec8f4a8bc6eae0f4cd121, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -18102,13 +18102,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -18118,7 +18118,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}

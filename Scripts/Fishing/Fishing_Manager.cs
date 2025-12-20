@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static Data_Manager;
 
 public class Fishing_Manager : MonoBehaviour
@@ -10,6 +11,7 @@ public class Fishing_Manager : MonoBehaviour
     public bool spelling;
     public Fishing_Canvas fishingCanvas;
     public Fishing_Fish fishingFish;
+
     [ColorUsage(true, true)]
     public Color onCatchColor, notCatchColor;
     //public enum FishStateType
@@ -52,7 +54,6 @@ public class Fishing_Manager : MonoBehaviour
     DayType dayType => Game_Manager.current.GetMainUI.timeUI.lightMode;
     Dictionary<string, List<FishStruct>> dictFishStruct = new Dictionary<string, List<FishStruct>>();
     Queue<string> fishQueue = new Queue<string>();
-    public TMPro.TMP_Text debugText;
 
     bool catching;
 
@@ -210,14 +211,22 @@ public class Fishing_Manager : MonoBehaviour
     // 시작
     //===================================================================================================================
 
+    void SetDebugText()
+    {
+        fishingCanvas.DebugDisplayState(immortal);// 상태 체크 디스플레이
+        fishingFish.deleGetState = (immortal == true) ? fishingCanvas.DebugDisplayState : null;// 상태 델레게이트
+    }
+
     void FishingStartButton()// 시작 버튼
     {
+        SetDebugText();
         isFishing = true;
 
         string _id = fishQueue.Dequeue();
         currentFish = SetCurrentFish(_id);
         fishingCanvas.SetFishing();
-        Debug.LogWarning($"물고기 이름 : {_id}");
+        //Debug.LogWarning($"물고기 이름 : {_id}");
+
         StartCoroutine(StartCount());
     }
 
