@@ -56,6 +56,7 @@ public class Credit_Rolling : MonoBehaviour, IPointerClickHandler
             rolling.anchoredPosition = new Vector3(0, currentY, 0);
             yield return null; // Wait for the next frame
         }
+        OpenCanvas(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)

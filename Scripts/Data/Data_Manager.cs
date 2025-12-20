@@ -365,9 +365,9 @@ public class Data_Manager : Data_Parse
             setFPS = false;
             shake = true;
             fullScreen = true;
-            qualityLevel = 2;
+            qualityLevel = 1;
             resolutionIndex = 6;
-            frameRateIndex = 3;
+            frameRateIndex = 1;
             audioStruct = new AudioStruct
             {
                 masterMute = false,
