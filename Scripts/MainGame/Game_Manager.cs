@@ -144,6 +144,8 @@ public class Game_Manager : MonoBehaviour
     Coroutine randomTheme;
     IEnumerator SetStart()
     {
+        SetRandomSeed();
+
         Camera_Manager.current.SetCameraManager();
         continueData = Singleton_Continue.INSTANCE.LoadContinue();
 
@@ -174,6 +176,12 @@ public class Game_Manager : MonoBehaviour
             GetInventory.TryDestroySlot = continueData.destroySlot;// ºÎ¼­Áø ½½·Ô
             ChangeStatus(shipData);
         }
+    }
+
+    public void SetRandomSeed()
+    {
+        int randomSeed = Random.Range(0, int.MaxValue);
+        Random.InitState(randomSeed);
     }
 
     void LoadingComplate()
