@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using static Fishing_Fish;
 
 public class Fishing_Fish : MonoBehaviour
 {
@@ -44,8 +43,9 @@ public class Fishing_Fish : MonoBehaviour
 
     public void SetStart(Data_Manager.FishStruct _fishStruct)
     {
-        fishAgent.gameObject.SetActive(true);
         currentFish = _fishStruct;
+        fishAgent.gameObject.SetActive(true);
+        fishAgent.acceleration = _fishStruct.fishSpeed * 2f;
         FishState(StateType.Idle);
         StateCooling();
     }
@@ -154,14 +154,14 @@ public class Fishing_Fish : MonoBehaviour
         fishAgent.SetDestination(fishTargetPoint);
 
         float prevSpeed = fishSpeed;
-        float randomSpeed = Random.Range(currentFish.fishSpeed * 0.5f, currentFish.fishSpeed);
+        float randomSpeed = Random.Range(currentFish.fishSpeed * 0.8f, currentFish.fishSpeed);
         float randomTime = 10f / randomSpeed * (currentFish.fishLazy + 1f);// 최고속도 상수
         //float dist = Vector3.Distance(fishTargetPoint, fishAgent.transform.position);
         bool active = true;
         float normalize = 0f;
         while (active == true)
         {
-            normalize += Time.deltaTime;
+            normalize += Time.deltaTime * randomSpeed;
             fishSpeed = Mathf.Lerp(prevSpeed, randomSpeed, normalize);
             fishAgent.speed = fishSpeed;
             MoveTargetPoint(fishAgent.steeringTarget);// 에이전트가 현재 조향하고 있는 경로의 다음 지점

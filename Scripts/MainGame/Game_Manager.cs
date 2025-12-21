@@ -8,7 +8,7 @@ using static Data_Manager;
 
 public class Game_Manager : MonoBehaviour
 {
-    public string addItemTest;
+    public int addItemTest;
     public Unit_Player player;
     public Controll_Manager controllManager;
 
@@ -78,7 +78,7 @@ public class Game_Manager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            GetInventory.AddPickUpItem(addItemTest);
+            GetInventory.AddPickUpItem("fs_" + addItemTest);
             Debug.LogError("아이템 치트");
         }
 
@@ -90,7 +90,7 @@ public class Game_Manager : MonoBehaviour
 
         if (Input.GetKeyUp(KeyCode.Alpha4))
         {
-            GetFishing.SetFishingTest(addItemTest);
+            GetFishing.SetFishingTest("fs_" + addItemTest);
             Debug.LogError("물고기 치트");
         }
     }

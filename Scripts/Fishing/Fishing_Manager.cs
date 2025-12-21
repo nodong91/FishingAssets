@@ -302,13 +302,25 @@ public class Fishing_Manager : MonoBehaviour
 
     IEnumerator CatchMovement()
     {
-        float catchSpeed = catchStatus.catchSpeed * 0.1f;
+        float catchSpeed = catchStatus.catchSpeed *0.1f;
         while (isFishing == true)
         {
             //Vector3 catchOffset = CatchRayCast() - catchPrefab.transform.position;
             //catchSpeed = Mathf.Lerp(catchSpeed, catchStatus.catchSpeed * Mathf.Clamp01(catchOffset.magnitude), 0.1f * Time.deltaTime);
             //catchPrefab.transform.Translate(catchOffset.normalized * catchSpeed, Space.World);
+
+            //Vector3 hitOffset = (CatchRayCast() - catchPrefab.transform.position);
+            //Vector3 direction = hitOffset.normalized;
+            //transform.position + direction * Mathf.Clamp(hitOffset.magnitude, 0f, FieldRadius);
+
+            //Vector3 targetPoint = (transform.position + direction * FieldRadius);
             catchPrefab.transform.position = Vector3.Lerp(catchPrefab.transform.position, CatchRayCast(), catchSpeed * Time.deltaTime);
+            // ¿Ãµø ¡¶«—
+            Vector3 distance = transform.position - catchPrefab.transform.position;
+            if (distance.magnitude > FieldRadius)
+            {
+                catchPrefab.transform.position = catchPrefab.transform.position + distance.normalized * (distance.magnitude - FieldRadius);
+            }
             MoveCatch();
             yield return null;
 
@@ -319,11 +331,6 @@ public class Fishing_Manager : MonoBehaviour
             if (immortal == false)
             {
                 CheckingCatch();
-                //// ≥¨Ω√¡Ÿ ≈Ÿôo √º≈©
-                //if (fishingCanvas.TryTention == true)
-                //{
-                //    FishingComplate(false);// 1√ ¿ÃªÛ ∆ÿ∆ÿ«œ∞‘ ¥Á±‚∏È ≤˜æÓ¡¸
-                //}
             }
         }
     }
@@ -334,9 +341,7 @@ public class Fishing_Manager : MonoBehaviour
         int downhillLayer = 1 << LayerMask.NameToLayer("Water");
         if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, downhillLayer))
         {
-            Vector3 hitOffset = (hit.point - transform.position);
-            Vector3 direction = hitOffset.normalized;
-            return transform.position + direction * Mathf.Clamp(hitOffset.magnitude, 0f, FieldRadius);
+            return hit.point;
         }
         return default;
     }
