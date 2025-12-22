@@ -48,6 +48,16 @@ public class Option_Control : MonoBehaviour
         shakeToggle.onValueChanged.AddListener(SetFPS);
         shakeToggle.isOn = optionData.shake;
         OnValueChange(optionData.language);
+
+
+        onValueChange += ChangeLanguage;
+    }
+    public delegate void DeleOptionChange();
+    public DeleOptionChange onValueChange;
+
+    void ChangeLanguage()
+    {
+        Option_Manager.current.optionLanguage.SetStart();
     }
 
     void OnValueChange(int _index)
@@ -55,7 +65,7 @@ public class Option_Control : MonoBehaviour
         language.value = _index;
         Singleton_Data.LanguageType languageType = (Singleton_Data.LanguageType)_index;
         Singleton_Data.INSTANCE.languageType = languageType;
-        Option_Manager.current.optionLanguage.SetStart();
+        onValueChange?.Invoke();
     }
 
     void SetFPS(bool _open)

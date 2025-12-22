@@ -2302,7 +2302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 3e650aade6ec49c4abe958d0b19d51a5, type: 2}
-  m_Color: {r: 0, g: 0.54118204, b: 1, a: 0.29803923}
+  m_Color: {r: 0, g: 0.5411765, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4330,7 +4330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 3e650aade6ec49c4abe958d0b19d51a5, type: 2}
-  m_Color: {r: 0, g: 0.54118204, b: 1, a: 0.29803923}
+  m_Color: {r: 0, g: 0.5411765, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6673,7 +6673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 3e650aade6ec49c4abe958d0b19d51a5, type: 2}
-  m_Color: {r: 0, g: 0.54118204, b: 1, a: 0.29803923}
+  m_Color: {r: 0, g: 0.5411765, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6748,7 +6748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 3e650aade6ec49c4abe958d0b19d51a5, type: 2}
-  m_Color: {r: 0, g: 0.54118204, b: 1, a: 0.29803923}
+  m_Color: {r: 0, g: 0.5411765, b: 1, a: 0.8}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -14142,6 +14142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4002615243970688238}
   - component: {fileID: 2842766159109909893}
+  - component: {fileID: 4163545123634310930}
   m_Layer: 0
   m_Name: Reset Button
   m_TagString: Untagged
@@ -14167,7 +14168,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -200, y: 15}
-  m_SizeDelta: {x: 150, y: 30}
+  m_SizeDelta: {x: 200, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2842766159109909893
 MonoBehaviour:
@@ -14183,6 +14184,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overStyle: 1
   buttonImage: {fileID: 0}
+--- !u!114 &4163545123634310930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8965201870780350246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a8805f06cb797a4bb6a840c52d6e173, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonLocalation: {fileID: 1336480660074522885}
+  buttonID: etc_0014
 --- !u!1 &9000736918111587447
 GameObject:
   m_ObjectHideFlags: 0
