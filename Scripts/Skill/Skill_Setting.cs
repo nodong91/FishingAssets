@@ -169,7 +169,7 @@ public class Skill_Setting : MonoBehaviour
             return;
 
         Data_Manager.SkillStruct data = Singleton_Data.INSTANCE.Dict_Skill[_id];
-        Debug.LogWarning($"{_id} ({data.skillType}): 활성화");
+        Debug.LogWarning($"{_id} ({data.skillType}): 스킬 활성화");
         switch (data.skillType)
         {
             case Data_Manager.SkillStruct.SkillType.AddStatus:
@@ -193,7 +193,7 @@ public class Skill_Setting : MonoBehaviour
     void ShipUnlock(string _id)
     {
         Data_Ship data_Ship = Singleton_Data.INSTANCE.Dict_Ship[_id];
-        //Debug.LogWarning($"{_id} : {data_Ship.shipName}");
+        Debug.LogWarning($"{_id} : {data_Ship.shipName}");
         Game_Manager.current.GetChangeShip.AddShip(data_Ship);
     }
 
