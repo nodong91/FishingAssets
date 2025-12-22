@@ -11,6 +11,7 @@ public class UI_Inventory : MonoBehaviour
 {
     public SlotType currentType;
     public Custom_Button backButton;
+    public Custom_Button GetBackButton { get { return backButton; } }
 
     public UI_MyBox myBox;
     public UI_Shop shop;
@@ -38,13 +39,18 @@ public class UI_Inventory : MonoBehaviour
 
     public void SetStart()
     {
-        backButton.SetButton(CloseCanvas);
+        SetBackButton();
         myBox.SetSlotSize = slotSize;
         shop.SetSlotSize = slotSize;
         myBox.SetStart();
         shop.SetStart();
 
         SetInfomation(null);// 인포메이션 제거
+    }
+
+    public void SetBackButton()
+    {
+        backButton.SetButton(CloseCanvas);
     }
 
     //===========================================================================================================================

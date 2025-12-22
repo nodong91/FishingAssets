@@ -23,7 +23,7 @@ public class Gamble_Lottery : MonoBehaviour
 
     Vector3 point;
 
-    public Custom_Button closeButton;
+    //public Custom_Button closeButton;
     private List<Vector3> positionsList = new List<Vector3>();
     private List<LineRenderer> lineList = new List<LineRenderer>();
     private Queue<LineRenderer> lineQueue = new Queue<LineRenderer>();
@@ -38,7 +38,7 @@ public class Gamble_Lottery : MonoBehaviour
     public void SetStart()
     {
         canvas.worldCamera = Camera_Manager.current.UICamera;
-        closeButton.SetButton(delegate { OpenCanvas(false); });
+        //closeButton.SetButton(delegate { OpenCanvas(false); });
         maskTexture = new RenderTexture(Screen.width, Screen.height, 24);
         maskTexture.useMipMap = true;
 
@@ -92,6 +92,23 @@ public class Gamble_Lottery : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetLottery(int _index)// 복권 세팅
+    {
+        currentIndex = _index;// 복권 종류
+        Game_Manager.current.GetInventory.GetBackButton.SetButton(delegate { OpenCanvas(false); });
+        OpenCanvas(true);
+    }
+
+    void OpenCanvas(bool _open)
+    {
+        if (_open == true)
+            ResetButton();
+        else
+            Game_Manager.current.GetInventory.SetBackButton();// 닫으면 인벤토리 닫기 버튼으로 변경
+        //StartCoroutine(OpenCanvas());
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStruct, _open));
     }
 
     bool CheckImage()
@@ -223,34 +240,5 @@ public class Gamble_Lottery : MonoBehaviour
         Vector3[] positions = positionsList.ToArray();
         instLine.positionCount = positions.Length;
         instLine.SetPositions(positions);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    //public bool isOpen;
-
-    //public GameObject target;
-    //public CanvasGroup canvasGroup;
-
-    public void SetLottery(int _index)
-    {
-        currentIndex = _index;
-        OpenCanvas(true);
-    }
-    public void OpenCanvas(bool _open)
-    {
-        if (_open == true)
-            ResetButton();
-        //StartCoroutine(OpenCanvas());
-        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStruct, _open));
     }
 }

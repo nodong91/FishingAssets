@@ -463,6 +463,7 @@ public class Unit_Player : MonoBehaviour
     {
         if (other.TryGetComponent<Trigger_Setting>(out var _trigger) == false)
             return;
+
         if (triggerGameObject.Contains(_trigger) == false)
             triggerGameObject.Add(_trigger);
     }
