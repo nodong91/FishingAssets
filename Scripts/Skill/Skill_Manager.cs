@@ -46,9 +46,17 @@ public class Skill_Manager : MonoBehaviour
         activeDescription.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._activeSkill);
         OpenCanvas(false);
     }
+
     public void OpenCanvas(bool _open)
     {
+        SetSkillPrice();
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
+    }
+
+    void SetSkillPrice()
+    {
+        Debug.LogWarning($"{enableSlotLIst.Count} : {skillPrice}");
+        skillPrice = Mathf.RoundToInt((enableSlotLIst.Count + (enableSlotLIst.Count * 0.5f)) * defaultSkillPrice);
     }
 
     public void CloseCanvas()
@@ -56,6 +64,40 @@ public class Skill_Manager : MonoBehaviour
         OpenCanvas(false);
         Static_JsonManager.SaveEnableSkillData(Const_Save._enableSkill, enableSlotLIst);// 활성화 된 스킬 저장
         Game_Manager.current.GetLanding.BackButton();
+    }
+
+    public void UpdateData()
+    {
+        LoadData();// 데이타 불러오기
+        SetParent();
+        allSlot = new Skill_Slot[skillMap.x, skillMap.y];
+        for (int y = 0; y < skillMap.y; y++)
+        {
+            for (int x = 0; x < skillMap.x; x++)
+            {
+                Skill_Slot inst = Instantiate(slot, instParent);
+                inst.slotNode = new Vector2Int(x, y);
+                inst.name = inst.slotNode.ToString();
+                inst.SetHide(true);
+                inst.deleSlotAction = ActiveSkill;
+                inst.deleSlotPosition = infomation.SetPosition;
+
+                SkillStruct skill = statusStructs[x, y];
+                inst.Skill = skill;
+                inst.SetStart();
+                inst.SetNearBySlot(skillMap);   // 근처 슬롯 설정
+
+                allSlot[x, y] = inst;
+            }
+        }
+        Vector2Int startIndex = skillTreeData.startSlot;
+        startSlot = allSlot[startIndex.x, startIndex.y];
+
+        startSlot.startSlot = true;
+        startSlot.SetHide(false);// 활성화
+        startSlot.boxImage.gameObject.SetActive(true);
+
+        SettingLoadSlot();
     }
 
     void LoadData()
@@ -99,40 +141,6 @@ public class Skill_Manager : MonoBehaviour
         }
     }
 
-    public void UpdateData()
-    {
-        LoadData();// 데이타 불러오기
-        SetParent();
-        allSlot = new Skill_Slot[skillMap.x, skillMap.y];
-        for (int y = 0; y < skillMap.y; y++)
-        {
-            for (int x = 0; x < skillMap.x; x++)
-            {
-                Skill_Slot inst = Instantiate(slot, instParent);
-                inst.slotNode = new Vector2Int(x, y);
-                inst.name = inst.slotNode.ToString();
-                inst.SetHide(true);
-                inst.deleSlotAction = ActiveSkill;
-                inst.deleSlotPosition = infomation.SetPosition;
-
-                SkillStruct skill = statusStructs[x, y];
-                inst.Skill = skill;
-                inst.SetStart();
-                inst.SetNearBySlot(skillMap);   // 근처 슬롯 설정
-
-                allSlot[x, y] = inst;
-            }
-        }
-        Vector2Int startIndex = skillTreeData.startSlot;
-        startSlot = allSlot[startIndex.x, startIndex.y];
-
-        startSlot.startSlot = true;
-        startSlot.SetHide(false);// 활성화
-        startSlot.boxImage.gameObject.SetActive(true);
-
-        SettingLoadSlot();
-    }
-
     void SetParent()
     {
         if (instParent != null)
@@ -163,7 +171,7 @@ public class Skill_Manager : MonoBehaviour
 
         SetSlot(_addNode);
         Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._activeSkill);
-        skillPrice = Mathf.RoundToInt(defaultSkillPrice + (enableSlotLIst.Count * skillPrice * 0.1f));
+        SetSkillPrice();
     }
 
     void SetSlot(Vector2Int _addNode)// 슬롯 세팅
@@ -176,7 +184,6 @@ public class Skill_Manager : MonoBehaviour
             near.SetHide(false, slot.transform.position);
         }
         skill_Setting.AddLevel(slot.Skill.id, true);
-        //AddSkill(slot.Skill);
     }
 
     //void AddSkill(SkillStruct _skill)
