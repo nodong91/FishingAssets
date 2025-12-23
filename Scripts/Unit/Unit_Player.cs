@@ -128,7 +128,7 @@ public class Unit_Player : MonoBehaviour
         if (state == State.Idle)
         {
             Debug.LogWarning($"// 무브 시작 {fxSound}");
-            Singleton_Audio.INSTANCE.Audio_LoopFX(fxSound);
+            Singleton_Audio.INSTANCE.Audio_LoopFX("fx_1000");
             StateMachine(State.Move);
         }
         if (state == State.Move)// 공격이나 회피가 있을 수 있으니
