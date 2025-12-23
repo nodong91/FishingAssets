@@ -8,5 +8,6 @@ public class Data_Ship : ScriptableObject
     public string shipName;
     public GameObject shipObject;
     public Sprite icon;
+    public string fxSound;
     public SetStatus status;
 }

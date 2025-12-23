@@ -19,6 +19,7 @@ public class Unit_Player : MonoBehaviour
     public Rigidbody rb = null;
     SetStatus CurrentStatus => Game_Manager.current.currentStatus;
     int DestroyCount => Game_Manager.current.GetInventory.myBox.destroySlot.Count;
+    public string fxSound;
     public float moveSpeed = 1f;
     public int health;
     public bool FullHealth { get { return health >= CurrentStatus?.shipHealth; } }
@@ -68,7 +69,7 @@ public class Unit_Player : MonoBehaviour
         Debug.LogWarning($"SetStatus - Energy : {energy}/{CurrentStatus.maxEnergy}, SetStatus - Health : {health}/{CurrentStatus.shipHealth}");
         SetEnergyUI();
     }
-
+   
     public void SetShip(Data_Ship _shipData)// 배 생성 및 변경
     {
         if (playerObject != null)
@@ -76,9 +77,9 @@ public class Unit_Player : MonoBehaviour
             Destroy(playerObject);
         }
         rb.useGravity = true;
-
         GameObject inst = Instantiate(_shipData.shipObject, transform);
         playerObject = inst;
+        fxSound = _shipData.fxSound;
         //Debug.LogWarning($"{_shipData.name} : {_shipData.shipObject}");
     }
 
@@ -126,12 +127,18 @@ public class Unit_Player : MonoBehaviour
         //dirction = _dirction;
         if (state == State.Idle)
         {
+            Debug.LogWarning($"// 무브 시작 {fxSound}");
+            Singleton_Audio.INSTANCE.Audio_LoopFX(fxSound);
             StateMachine(State.Move);
         }
         if (state == State.Move)// 공격이나 회피가 있을 수 있으니
         {
             if (dirction.x == 0f && dirction.y == 0f)
+            {
                 StateMachine(State.Idle);
+                Singleton_Audio.INSTANCE.Stop_LoopFX();
+                Debug.LogWarning("// 무브 끝");
+            }
         }
     }
 
