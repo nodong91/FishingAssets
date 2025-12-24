@@ -286,6 +286,7 @@ public class UI_Inventory : MonoBehaviour
             if (_slot.empty == true)
                 return;
 
+            Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._itemDrop);
             if (enterSlotType == SlotType.Submit && shop.CheckMy(_slot.slotNum) == false)// 내가 넣은거 아니라면
             {
                 Debug.LogWarning("퀘스트 아이템이 필요");
@@ -320,6 +321,7 @@ public class UI_Inventory : MonoBehaviour
 
     private void DragEnd()// 드랍
     {
+        Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._fishDrop);
         if (onCheck == true)// 놓을 수 있다.
         {
             if (enterSlotType == selectSlotType)// 같은 인벤토리 안이라면
