@@ -121,6 +121,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
         if (Game_Manager.current.CheckMoney(Game_Manager.current.GetSkill.GetSkillPrice) == false)// 돈이 없으면
             return;
 
+        Singleton_Audio.INSTANCE.Audio_LoopFX(Const_Audio._skillPick);
         if (activeSlot == false)
             // 누르고 있기
             inputSlotCoroutine = StartCoroutine(InputSlot());
@@ -133,6 +134,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
         if (activeSlot == false)
         {
+            Singleton_Audio.INSTANCE.Stop_LoopFX();
             gageImage.fillAmount = 0f;
             iconImage.material.SetFloat(Const_Shader._fillAmount, gageImage.fillAmount);
         }
@@ -173,6 +175,7 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void ActiveSlot()
     {
+        Singleton_Audio.INSTANCE.Stop_LoopFX();
         // 스킬 활성화
         float price = -Game_Manager.current.GetSkill.GetSkillPrice;
         Game_Manager.current.GetMainUI.MoveMoney(price);// 돈 이동
