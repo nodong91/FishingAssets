@@ -51,6 +51,7 @@ public class Gamble_Lottery : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            Singleton_Audio.INSTANCE.Audio_LoopFX(Const_Audio._lottery);
             positionsList.Clear();
             instLine = TryLine();
             instLine.gameObject.SetActive(true);
@@ -91,6 +92,10 @@ public class Gamble_Lottery : MonoBehaviour
                     }
                 }
             }
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            Singleton_Audio.INSTANCE.Stop_LoopFX();
         }
     }
 

@@ -25,13 +25,15 @@ public class Const_Audio
     public const string _oceanSound = "env_0001";
     public const string _waterDrop = "fx_0006";
     public const string _penWrite = "fx_0007";
-    public const string _countDown= "fx_0008";
+    public const string _countDown = "fx_0008";
     public const string _repear = "fx_0009";
 
     public const string _boxPick = "fx_0013";
     public const string _money = "fx_0014";
     public const string _fishCatch = "fx_0015";
     public const string _fishFail = "fx_0016";
+
+    public const string _lottery = "fx_0018";
 }
 
 public class Const_ETC
