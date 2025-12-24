@@ -331,16 +331,13 @@ public class UI_Main : MonoBehaviour
 
     public void SetMoney(float _value)
     {
-        float money = _value;
+        int money = Mathf.Max(0, Mathf.RoundToInt(_value));
         moneyText.text = money.ToString();
         moneyValue = money;
     }
 
     public void MoveMoney(float _price)
     {
-        if (_price == 0 || moneyValue + _price < 0f)
-            return;
-
         if (movingMoney != null)
             StopCoroutine(movingMoney);
         movingMoney = StartCoroutine(MoneyMoving(_price));
@@ -348,10 +345,13 @@ public class UI_Main : MonoBehaviour
 
     IEnumerator MoneyMoving(float _price)
     {
-        float prevMoney = moneyValue;
-        SetMoney(moneyValue + _price);// 돈 이동
-        Steam_StatsManager.current.StatsMoney((int)moneyValue);
-        Singleton_Continue.INSTANCE.SaveContinue(); // 팔거나 사면 저장
+        float prevMoney = moneyValue;// 원래 금액
+        SetMoney(moneyValue + _price);// 바뀐 금액
+        Steam_StatsManager.current.StatsMoney((int)moneyValue);// 업적
+        if (moneyValue > prevMoney)
+        {
+            Singleton_Audio.INSTANCE.Audio_FX("fx_0014");
+        }
         yield return null;
 
         float normalize = 0f;
@@ -363,6 +363,7 @@ public class UI_Main : MonoBehaviour
             yield return null;
         }
         moneyText.text = moneyValue.ToString();
+        Singleton_Continue.INSTANCE.SaveContinue(); // 팔거나 사면 저장
     }
 
     public void NoMoney()

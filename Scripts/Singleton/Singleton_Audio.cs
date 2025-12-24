@@ -122,7 +122,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
     {
         if (_id == null)
             return;
-
+        Debug.LogWarning($"È¿°úÀ½ ({_id})");
         AudioSource audioSource = TryAudioSource();
         audioSource.gameObject.SetActive(true);
         audioSource.name = _id;
