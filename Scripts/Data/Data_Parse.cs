@@ -206,7 +206,7 @@ public class Data_Parse : MonoBehaviour
             if (_str.Contains(audioClip[i].name))
                 return audioClip[i];
         }
-        Debug.LogError("해당 파일이 없음");
+        Debug.LogError($"{_str} : 해당 파일이 없음");
         return null;
     }
 

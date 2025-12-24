@@ -249,6 +249,7 @@ public class Title_Manager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
 
             GetPlayer.transform.position = startPoint.position;
+            yield return new WaitForSeconds(1.0f);
         }
     }
 
