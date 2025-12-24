@@ -302,7 +302,7 @@ public class Fishing_Manager : MonoBehaviour
 
     IEnumerator CatchMovement()
     {
-        float catchSpeed = catchStatus.catchSpeed *0.1f;
+        float catchSpeed = catchStatus.catchSpeed * 0.1f;
         while (isFishing == true)
         {
             //Vector3 catchOffset = CatchRayCast() - catchPrefab.transform.position;
@@ -621,6 +621,7 @@ public class Fishing_Manager : MonoBehaviour
     {
         if (_success == true)
         {
+            Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._fishCatch);
             catchaText.SetActive(true);
             yield return new WaitForSeconds(3f);
 
@@ -635,7 +636,7 @@ public class Fishing_Manager : MonoBehaviour
         }
         else
         {
-
+            Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._fishFail);
             failText.SetActive(true);
             yield return new WaitForSeconds(3f);
 

@@ -30,6 +30,8 @@ public class Const_Audio
 
     public const string _boxPick = "fx_0013";
     public const string _money = "fx_0014";
+    public const string _fishCatch = "fx_0015";
+    public const string _fishFail = "fx_0016";
 }
 
 public class Const_ETC
