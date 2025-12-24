@@ -352,6 +352,7 @@ public class UI_Main : MonoBehaviour
         SetMoney(moneyValue + _price);// 돈 이동
         Steam_StatsManager.current.StatsMoney((int)moneyValue);
         Singleton_Continue.INSTANCE.SaveContinue(); // 팔거나 사면 저장
+        Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._money);
         yield return null;
 
         float normalize = 0f;

@@ -77,9 +77,9 @@ namespace P01.Editor
             if (string.IsNullOrEmpty(_id))
                 return;
 
+            Debug.LogWarning($"oihhojop {_id}");
             Data_Event inst = InstanceScriptableObejct(_id);
             if (inst == null) return;
-
             //inst.eventStruct = 
             EditorUtility.SetDirty(inst);
             EditorGUIUtility.PingObject(inst);// 생성된 오브젝트 추적
@@ -87,20 +87,20 @@ namespace P01.Editor
 
         Data_Event InstanceScriptableObejct(string _id)
         {
-            switch (dataType)
-            {
-                case DataType.Normal:
+            //switch (dataType)
+            //{
+            //    case DataType.Normal:
 
-                    break;
+            //        break;
 
-                case DataType.Start:
+            //    case DataType.Start:
 
-                    break;
+            //        break;
 
-                case DataType.Reward:
+            //    case DataType.Reward:
 
-                    break;
-            }
+            //        break;
+            //}
             // 저장
             P01_Utility.FindFolder(path);
             string fileName = $"{_id.Trim()}_{endLabel.ToString("D2")}.asset";

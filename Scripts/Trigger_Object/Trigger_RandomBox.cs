@@ -33,6 +33,9 @@ public class Trigger_RandomBox : Trigger_Setting
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 인벤토리의 닫기 버튼 세팅
         Game_Manager.current.GetMainUI.OpenCanvas(false);// 메인 유아이 닫기
         gameObject.SetActive(false);// 트리거 오브젝트 비활성화
+        Game_Manager.current.GetPlayer.RemoveTrigger(this);// 플레이어에서 트리거 제거
+
+        Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._boxPick);
     }
 
     void CloseButton()
