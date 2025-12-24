@@ -300,6 +300,7 @@ public class Game_Manager : MonoBehaviour
         if (GetMainUI.TryMoney < _price)
         {
             GetMainUI.NoMoney();// 구매할 돈없음
+            Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._noMoney);
             return false;
         }
         return true;

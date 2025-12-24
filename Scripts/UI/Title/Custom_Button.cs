@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using Unity.VisualScripting;
+using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,6 +19,7 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     Action actionClick;
     Action<Custom_Button> actionEnter, actionExit;
+    Coroutine action;
 
     public void SetButton(Action _click, Action<Custom_Button> _enter = null, Action<Custom_Button> _exit = null)
     {
@@ -26,8 +30,24 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (action == null)
+            action = StartCoroutine(ClickAnimation());
+    }
+
+    IEnumerator ClickAnimation()
+    {
+        float prevSize = 1f;
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime * 10f;
+            float currentSize = Mathf.Lerp(prevSize, 1.2f, normalize);
+            transform.localScale = Vector3.one * currentSize;
+            yield return null;
+        }
         actionClick?.Invoke();
-        transform.localScale = Vector3.one;
+        yield return new WaitForSeconds(0.5f);
+        action = null;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

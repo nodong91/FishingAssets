@@ -36,6 +36,7 @@ public class Const_Audio
     public const string _fishDrop = "fx_0017";
     public const string _lottery = "fx_0018";
     public const string _itemDrop = "fx_0019";
+    public const string _noMoney = "fx_0020";
 }
 
 public class Const_ETC

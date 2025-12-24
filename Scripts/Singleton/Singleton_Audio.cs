@@ -126,7 +126,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         AudioSource audioSource = TryAudioSource();
         audioSource.gameObject.SetActive(true);
         audioSource.name = _id;
-        Debug.Log($"{audioSource.name}");
+        Debug.Log($"효과음 아이디 {_id}");
         audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
         audioSource.mute = masterMute == true ? true : fxMute;
         audioSource.volume = fxVolume * masterVolume;
