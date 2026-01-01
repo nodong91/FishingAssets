@@ -27,7 +27,7 @@ public class UI_Inventory_Infomation : MonoBehaviour
         float price = Mathf.Round(item.price + addPrice);// 스킬 스탯 추가
         Debug.Log($"{Singleton_Data.INSTANCE.GetLanguage(item.id)} ({item.id}) :" +
             $" {item.price} + {Game_Manager.current.currentStatus.fishPrice} = {price}");
-        weightText.text = $"{item.weight}<size={weightText.fontSize * 0.5f}>kg</size>";
+        //weightText.text = $"{item.weight}<size={weightText.fontSize * 0.5f}>kg</size>";
         priceText.text = price.ToString();
 
         string classColor = P01_Utility.ClassColor(item.itemClass);

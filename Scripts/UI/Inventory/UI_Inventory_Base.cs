@@ -38,7 +38,7 @@ public class UI_Inventory_Base : MonoBehaviour
     Dictionary<Vector2Int, ItemInInventory> dictItem = new Dictionary<Vector2Int, ItemInInventory>();
     public Dictionary<Vector2Int, ItemInInventory> GetDictItems { get { return dictItem; } }
 
-    protected virtual void SetWeight(float _weight) { }
+    //protected virtual void SetWeight(float _weight) { }
 
     public virtual void SetStart()
     {
@@ -158,7 +158,7 @@ public class UI_Inventory_Base : MonoBehaviour
     {
         dictItem.Remove(_slot.slotNum);
 
-        SetWeight(-_slot.itemInInventory.item.weight);// 무게 빼기
+        //SetWeight(-_slot.itemInInventory.item.weight);// 무게 빼기
         iconQueue.Enqueue(_slot.GetSlotImage);// 이미지 풀에 넣기
         _slot.GetSlotImage.gameObject.SetActive(false);// 이미지 비활성화
 
@@ -192,7 +192,7 @@ public class UI_Inventory_Base : MonoBehaviour
                     allSlots[slotX, slotY].SetLink(_slot);
                 }
             }
-            SetWeight(_itemClass.item.weight);// 무게 세팅
+            //SetWeight(_itemClass.item.weight);// 무게 세팅
             Image iconImage = IconPool();// SetSlot 이미지 풀에서 가져오기
             iconImage.gameObject.SetActive(true);
             iconImage.transform.position = _slot.transform.position;

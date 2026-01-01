@@ -415,8 +415,8 @@ public class UI_Inventory : MonoBehaviour
 
     void DragBuy()
     {
-        if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == true // 돈이 충분하면
-            && myBox.CheckWeight(selectItemClass.item.weight) == true)// 무게가 충분하면
+        if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == true) // 돈이 충분하면
+            //&& myBox.CheckWeight(selectItemClass.item.weight) == true)// 무게가 충분하면
         {
             BuyItem(selectItemClass.item);// 드래그 구매
             UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
@@ -484,8 +484,8 @@ public class UI_Inventory : MonoBehaviour
                     }
                     else// 구매
                     {
-                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false || myBox.AddItem(item) == false)
-                            return;
+                        //if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false || myBox.AddItem(item) == false)
+                        //    return;
 
                         Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.id)}");
                         BuyItem(item);// 클릭 구매
@@ -501,8 +501,8 @@ public class UI_Inventory : MonoBehaviour
                     }
                     else// 구매
                     {
-                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false || myBox.AddItem(item) == false)
-                            return;
+                        //if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false || myBox.AddItem(item) == false)
+                        //    return;
 
                         Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.id)}");
                         BuyItem(item);// 클릭 구매
@@ -515,8 +515,8 @@ public class UI_Inventory : MonoBehaviour
                     break;
 
                 case SlotType.Submit:
-                    if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
-                        return;
+                    //if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
+                    //    return;
 
                     if (enterSlotType == SlotType.Submit && shop.CheckMy(_slot.slotNum) == false)// 내가 넣은거 아니라면
                     {
@@ -550,8 +550,8 @@ public class UI_Inventory : MonoBehaviour
                     break;
 
                 default:
-                    if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
-                        return;
+                    //if (enterSlotType != SlotType.MyBox && myBox.CheckWeight(item.weight) == false)// 가방으로 옮길때 가방의 무게 체크
+                    //    return;
 
                     getInventory = enterSlotType == SlotType.MyBox ? shop : myBox;
                     if (getInventory.AddItem(item) == true)// 공간이 있으면 슬롯세팅

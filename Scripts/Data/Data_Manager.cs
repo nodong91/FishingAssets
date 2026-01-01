@@ -145,7 +145,7 @@ public class Data_Manager : Data_Parse
             itemClass = (ItemStruct.ItemClass)System.Enum.Parse(typeof(ItemStruct.ItemClass), _elements[4]),
             shape = tempShape,
             iconSize = TryIconSize(tempShape),
-            weight = Parse_Float(_elements[6]),
+            //weight = Parse_Float(_elements[6]),
             price = Parse_Float(_elements[7]),
             itemType = (ItemStruct.ItemType)System.Enum.Parse(typeof(ItemStruct.ItemType), _elements[8]),
         };
@@ -534,7 +534,7 @@ public class Data_Manager : Data_Parse
         public ItemClass itemClass;// 아이템 등급
         public Vector2Int[] shape;
         public Vector4 iconSize;
-        public float weight;
+        //public float weight;
         public float price;
     }
 
@@ -600,7 +600,7 @@ public class Data_Manager : Data_Parse
             {
                 id = itemStruct.id,
                 size = GetPercent(size.y / percent),
-                weight = GetPercent(itemStruct.weight / percent),
+                //weight = GetPercent(itemStruct.weight / percent),
                 price = GetPercent(itemStruct.price / percent),
             };
             return randomFish;

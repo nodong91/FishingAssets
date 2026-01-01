@@ -22,11 +22,11 @@ public class UI_MyBox : UI_Inventory_Base
         SetInventoryItem(saveData);// 마이박스
     }
 
-    public void AddMaxWeight(float _weight)
-    {
-        maxWeight = _weight;
-        SetWeight(0f);
-    }
+    //public void AddMaxWeight(float _weight)
+    //{
+    //    maxWeight = _weight;
+    //    SetWeight(0f);
+    //}
 
     public void AddInventory(Vector2Int _inventorySize)
     {
@@ -48,14 +48,14 @@ public class UI_MyBox : UI_Inventory_Base
         base.OpenCanvas(_open);
     }
 
-    protected override void SetWeight(float _weight)
-    {
-        currentWeight += _weight;
-        float sliderValue = currentWeight / maxWeight;
-        weightSlider.value = sliderValue;
-        weightText.text = $"{currentWeight.ToString("N1")}/{maxWeight}kg";
-        //Debug.LogWarning($"무게 {weightText.text}");
-    }
+    //protected override void SetWeight(float _weight)
+    //{
+    //    currentWeight += _weight;
+    //    float sliderValue = currentWeight / maxWeight;
+    //    weightSlider.value = sliderValue;
+    //    weightText.text = $"{currentWeight.ToString("N1")}/{maxWeight}kg";
+    //    //Debug.LogWarning($"무게 {weightText.text}");
+    //}
 
     public bool CheckWeight(float _weight)
     {

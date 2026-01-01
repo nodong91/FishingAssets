@@ -46,7 +46,7 @@ public class UI_FishInfo : MonoBehaviour
         string color = P01_Utility.ClassColor(_itemStruct.itemClass);
         classText.text = _unknown ? unknown : $"<color=#{color}>{_itemStruct.itemClass}</color>";
 
-        maxSizeText.text = _unknown ? unknown : _itemStruct.weight.ToString();
+        //maxSizeText.text = _unknown ? unknown : _itemStruct.weight.ToString();
         priceText.text = _unknown ? unknown : _itemStruct.price.ToString();
 
         discriptionText.alignment = _unknown ? TMPro.TextAlignmentOptions.Center : TMPro.TextAlignmentOptions.TopLeft;
