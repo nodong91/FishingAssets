@@ -15,7 +15,7 @@ public class UI_Time : MonoBehaviour
     }
     public WeatherType weatherType;
     public DayType lightMode = DayType.Any;
-    public float timeSpeed = 10f;
+    public float timeSpeed = 0.1f;
     public float minute = 0;
     public int hour = 0;
     public int day = 0;

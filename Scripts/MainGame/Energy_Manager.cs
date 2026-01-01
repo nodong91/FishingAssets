@@ -60,7 +60,7 @@ public class Energy_Manager : MonoBehaviour
         if (Game_Manager.current.CheckMoney(buyPrice) == false)
         {
             // 돈이 모자라면
-            Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._noMoney);
+            //Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._noMoney);
             StaticOpenCanvas.deleEndOpen = DeleClose;// 경고메세지 넣기
             return;
         }

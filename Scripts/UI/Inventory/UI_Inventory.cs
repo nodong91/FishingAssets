@@ -231,8 +231,9 @@ public class UI_Inventory : MonoBehaviour
     void BuyItem(ItemStruct _item)
     {
         float addPrice = _item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 싸게 구매 
-        float price = -_item.price;
+        float price = -_item.price - addPrice;
         Game_Manager.current.GetMainUI.MoveMoney(price);
+
         Debug.Log($"아이템 구매: {_item.id} for {_item.price} + {addPrice} = {price}");
     }
 
@@ -416,7 +417,7 @@ public class UI_Inventory : MonoBehaviour
     void DragBuy()
     {
         if (Game_Manager.current.CheckMoney(selectItemClass.item.price) == true) // 돈이 충분하면
-            //&& myBox.CheckWeight(selectItemClass.item.weight) == true)// 무게가 충분하면
+                                                                                 //&& myBox.CheckWeight(selectItemClass.item.weight) == true)// 무게가 충분하면
         {
             BuyItem(selectItemClass.item);// 드래그 구매
             UI_Inventory_Base tempEnter = GetInventory(enterSlotType);
@@ -484,8 +485,8 @@ public class UI_Inventory : MonoBehaviour
                     }
                     else// 구매
                     {
-                        //if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false || myBox.AddItem(item) == false)
-                        //    return;
+                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.AddItem(item) == false)
+                            return;
 
                         Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.id)}");
                         BuyItem(item);// 클릭 구매
@@ -501,8 +502,8 @@ public class UI_Inventory : MonoBehaviour
                     }
                     else// 구매
                     {
-                        //if (Game_Manager.current.CheckMoney(item.price) == false || myBox.CheckWeight(item.weight) == false || myBox.AddItem(item) == false)
-                        //    return;
+                        if (Game_Manager.current.CheckMoney(item.price) == false || myBox.AddItem(item) == false)
+                            return;
 
                         Debug.LogWarning($"우클릭으로 구매 : {Singleton_Data.INSTANCE.GetLanguage(item.id)}");
                         BuyItem(item);// 클릭 구매

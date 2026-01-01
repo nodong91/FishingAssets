@@ -201,9 +201,11 @@ public class Game_Manager : MonoBehaviour
             }
             else
             {
-                GetMainUI.OpenCanvas(false);
-                Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
-                GetDialog.DialogStart_NPC(npc, Const_Dialog._0002);// 튜토리얼 대화 시작
+                //GetMainUI.OpenCanvas(false);
+                //Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
+                //GetDialog.DialogStart_NPC(npc, Const_Dialog._0002);// 튜토리얼 대화 시작
+                // 섬입장
+                CurrentLand.SetLandingAction();
             }
         }
         else

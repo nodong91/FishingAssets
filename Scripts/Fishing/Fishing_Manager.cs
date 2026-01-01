@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.Rendering;
 using static Data_Manager;
 
 public class Fishing_Manager : MonoBehaviour

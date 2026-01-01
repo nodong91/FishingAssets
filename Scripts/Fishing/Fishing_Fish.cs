@@ -322,6 +322,7 @@ public class Fishing_Fish : MonoBehaviour
     public void FishingComplate()
     {
         FishState(StateType.None);
+        StopAllCoroutines();
         fishAgent.gameObject.SetActive(false);
     }
 
