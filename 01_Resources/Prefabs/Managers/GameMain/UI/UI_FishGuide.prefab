@@ -146,7 +146,7 @@ MonoBehaviour:
     canvasGroup: {fileID: 0}
     targetPosition: {x: 0, y: 0}
   - direction: 1
-    rect: {fileID: 6723802823488565532}
+    rect: {fileID: 2180453651225555231}
     canvasGroup: {fileID: 0}
     targetPosition: {x: 0, y: 0}
   allFishStruct: []
@@ -3950,7 +3950,7 @@ MonoBehaviour:
     fishSpellTime: 0
     fishGroggyTime: 0
     fishDefenseCount: 0
-    fishTurnDelay: {x: 0, y: 0}
+    fishLazy: 0
     addDuration: 0
     addValue: 0
     itemStruct:
@@ -4336,6 +4336,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
+--- !u!224 &2180453651225555231 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7487791622944789942, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}
+  m_PrefabInstance: {fileID: 8767239380630086825}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6723802823488565532 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2658463875418576309, guid: c35b9026bd2586b40bded628f3c36aa1, type: 3}

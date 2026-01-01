@@ -8,7 +8,7 @@ public class UI_Main : MonoBehaviour
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public CanvasGroup mainAll;
     public UI_Time timeUI;
-    public UI_Status statusUI;
+    //public UI_Status statusUI;
     public Custom_Button inventoryButton;
     public Custom_Button fishGuideButton;
     public Custom_Button mapButton;
@@ -16,6 +16,8 @@ public class UI_Main : MonoBehaviour
     public Canvas cameraCanvas;
     public TMPro.TMP_Text warnningText;
     Coroutine textActing;
+
+    public Custom_Button backButton;
 
     [Header("[ FadeScreen ]")]
     public CanvasGroup fadeScreen;
@@ -71,7 +73,7 @@ public class UI_Main : MonoBehaviour
     {
         OpenCanvas(false);
         dele_CloseButton = CloseInventory;
-        statusUI.OpenCanvas(true);
+        //statusUI.OpenCanvas(true);
         Game_Manager.current.GetInventory.OpenInventory(true);
         Game_Manager.current.OutOfControll(true);
     }
@@ -79,7 +81,7 @@ public class UI_Main : MonoBehaviour
     public void CloseInventory()
     {
         OpenCanvas(true);
-        statusUI.OpenCanvas(false);
+        //statusUI.OpenCanvas(false);
         Game_Manager.current.GetInventory.OpenInventory(false);
         Game_Manager.current.OutOfControll(false);
     }
@@ -159,6 +161,7 @@ public class UI_Main : MonoBehaviour
     // ´Ý±â
     //===========================================================================================================================
 
+
     public void CloseCanvas()
     {
         dele_CloseButton?.Invoke();
@@ -169,8 +172,7 @@ public class UI_Main : MonoBehaviour
     {
         if (StaticOpenCanvas.deleEndOpen == null)
         {
-            dele_CloseButton?.Invoke();
-            dele_CloseButton = null;
+            CloseCanvas();
         }
     }
 

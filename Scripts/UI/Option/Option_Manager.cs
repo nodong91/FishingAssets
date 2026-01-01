@@ -42,6 +42,8 @@ public class Option_Manager : MonoBehaviour
         optionControl.SetStart();// 컨트롤 쪽 세팅
         optionAudio.SetStart();// 오디오 매니저 세팅
         optionQuality.SetStart();// 퀄리티 매니저 세팅
+        optionLanguage.SetStart();
+        langageDelegate = optionLanguage.SetStart;
 
         closeButton.SetButton(CloseCanvas);
         SetToggle();
@@ -195,5 +197,13 @@ public class Option_Manager : MonoBehaviour
         optionData.DefaultOption();
 
         Static_JsonManager.SaveOptionData(Const_Save._option, optionData);
+    }
+
+    public delegate void LangageDelegate();
+    public LangageDelegate langageDelegate;
+
+    public void SetLangage()
+    {
+     
     }
 }

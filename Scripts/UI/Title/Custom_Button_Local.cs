@@ -5,12 +5,13 @@ public class Custom_Button_Local : MonoBehaviour
     public TMPro.TMP_Text buttonLocalation;
     public string buttonID;
 
-    void Start()
+    private void Start()
     {
-        Option_Manager.current.optionControl.onValueChange += ChangeLanguage;
+        Option_Manager.current.langageDelegate += ChangeLanguage;
+        ChangeLanguage();
     }
 
-    void ChangeLanguage()
+    public void ChangeLanguage()
     {
         buttonLocalation.text = Singleton_Data.INSTANCE.GetLanguage(buttonID);
     }

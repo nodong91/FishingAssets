@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -19,19 +17,33 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     Action actionClick;
     Action<Custom_Button> actionEnter, actionExit;
-    Coroutine action;
+    Custom_Button_Local buttonLocal;
+    bool clicked = false;
+
+    public delegate void GetLanguageDelegate();
+    public GetLanguageDelegate GetLanguage;
 
     public void SetButton(Action _click, Action<Custom_Button> _enter = null, Action<Custom_Button> _exit = null)
     {
         actionClick = _click;
         actionEnter = _enter;
         actionExit = _exit;
-    }
 
+        if (TryGetComponent<Custom_Button_Local>(out Custom_Button_Local _local) == true)
+        {
+            buttonLocal = _local;
+        }
+    }
+  
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (action == null)
-            action = StartCoroutine(ClickAnimation());
+        if (clicked == false)
+        {
+            clicked = true;
+            StartCoroutine(ClickAnimation());
+        }
+        if (buttonLocal != null)
+            buttonLocal.ChangeLanguage();
     }
 
     IEnumerator ClickAnimation()
@@ -40,14 +52,13 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
         float normalize = 0f;
         while (normalize < 1f)
         {
-            normalize += Time.deltaTime * 10f;
-            float currentSize = Mathf.Lerp(prevSize, 1.2f, normalize);
+            normalize += Time.deltaTime * 3f;
+            float currentSize = Mathf.Lerp(prevSize, 1.2f, normalize * 3f);
             transform.localScale = Vector3.one * currentSize;
             yield return null;
         }
         actionClick?.Invoke();
-        yield return new WaitForSeconds(0.5f);
-        action = null;
+        clicked = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

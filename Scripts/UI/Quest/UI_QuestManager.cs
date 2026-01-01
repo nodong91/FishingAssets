@@ -79,7 +79,7 @@ public class UI_QuestManager : MonoBehaviour
 
     void BackButton()
     {
-        Game_Manager.current.GetMainUI.CloseCanvas();
+        Game_Manager.current.GetMainUI?.CloseCanvas();
     }
 
     void ActionButton()

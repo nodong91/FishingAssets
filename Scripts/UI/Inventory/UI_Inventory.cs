@@ -10,8 +10,6 @@ using static UI_Inventory_Slot;
 public class UI_Inventory : MonoBehaviour
 {
     public SlotType currentType;
-    public Custom_Button backButton;
-    public Custom_Button GetBackButton { get { return backButton; } }
 
     public UI_MyBox myBox;
     public UI_Shop shop;
@@ -35,6 +33,8 @@ public class UI_Inventory : MonoBehaviour
     const int slotSize = 40;
     ResultStruct resultItem;
 
+    public Custom_Button backButton;
+    public Custom_Button GetBackButton { get { return backButton; } }
     public void CloseCanvas() => Game_Manager.current.GetMainUI?.CloseCanvas();
 
     public void SetStart()
@@ -67,8 +67,8 @@ public class UI_Inventory : MonoBehaviour
         {
             currentType = SlotType.None;
         }
-        Camera_Manager.current.CameraFocusOut(_open);
         myBox.OpenCanvas(_open);
+        Camera_Manager.current.CameraFocusOut(_open);
     }
 
     public void OpenShop(Data_ItemList _itemList)
