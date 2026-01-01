@@ -462,7 +462,10 @@ public class Unit_Player : MonoBehaviour
     public void OutOfControll(bool _isOn)
     {
         if (_isOn == true)
+        {
             StateMachine(State.None);
+            Singleton_Audio.INSTANCE.Stop_LoopFX();
+        }
         else
             StateMachine(State.Idle);// 다시 대기 상태
     }

@@ -1,6 +1,5 @@
 using System.Collections;
 using Unity.Cinemachine;
-using UnityEditor;
 using UnityEngine;
 
 public class Trigger_Landing : MonoBehaviour
