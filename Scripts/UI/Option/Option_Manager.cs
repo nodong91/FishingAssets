@@ -1,4 +1,3 @@
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -110,6 +109,7 @@ public class Option_Manager : MonoBehaviour
 
     void InputToggle(int _index)
     {
+        goTitleButton.gameObject.SetActive(LoadingManager.current.currentScene != LoadingManager.CurrentScene.Title);
         screenStruct[_index].screenObject.gameObject.SetActive(screenStruct[_index].toggle.isOn);
     }
 

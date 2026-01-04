@@ -1,9 +1,17 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static LoadingManager;
 
 public class LoadingManager : MonoBehaviour
 {
+    public enum CurrentScene
+    {
+        None,
+        Title,
+        Main
+    }
+    public CurrentScene currentScene;
     private string[] currentNames;
     private string[] sceneNames;
     public RectTransform background;
@@ -23,12 +31,14 @@ public class LoadingManager : MonoBehaviour
 
     public void GoTitle()
     {
+        currentScene = CurrentScene.Title;
         sceneNames = new string[1] { Const_Scene._title };
         OpenLoading();
     }
 
     public void GoMain()
     {
+        currentScene = CurrentScene.Main;
         sceneNames = new string[2] { Const_Scene._gameManager, Const_Scene._islandMain };
         OpenLoading();
     }
