@@ -60,16 +60,26 @@ public class Event_Manager : MonoBehaviour
         {
             activeEvent = testEvent;// 테스트 이벤트로 설정
         }
-        else if (Game_Manager.current.TryEvnet() == true)
-        {
-            Game_Manager.current.eventReset = false;
-            string setEventKey = eventKeys[Random.Range(0, eventKeys.Count)];// 랜덤 이벤트
-            activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
-        }
+        //else if (Game_Manager.current.TryEvnet() == true)
+        //{
+        //    Game_Manager.current.eventReset = false;
+        //    string setEventKey = eventKeys[Random.Range(0, eventKeys.Count)];// 랜덤 이벤트
+        //    activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
+        //}
         else
         {
-            string setEventKey = "Data_Event_0002";// 아무일도 없었다.
-            activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
+            float randomValue = Random.Range(0f, 10f);
+            if (randomValue < 1f)
+            {
+                Game_Manager.current.eventReset = false;
+                string setEventKey = eventKeys[Random.Range(0, eventKeys.Count)];// 랜덤 이벤트
+                activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
+            }
+            else
+            {
+                string setEventKey = "Data_Event_0002";// 아무일도 없었다.
+                activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
+            }
         }
         SetEvent(activeEvent);
     }
@@ -392,29 +402,29 @@ public class Event_Manager : MonoBehaviour
             // 기존 대화 보상이 있는지 확인
             if (eventData as Data_Event_Result)// 보상 이벤트라면
             {
-                Data_Event_Result tempData = eventData as Data_Event_Result;
-
-                if (tempData.npcData != null)
+                Data_Event_Result tempResult = eventData as Data_Event_Result;
+                if (tempResult.npcData != null)
                 {
                     Dialog_Manager dialogManager = Game_Manager.current.GetDialog;
-                    dialogManager.DialogStart_NPC(tempData.npcData, tempData.dialogData.name);// 대화 시작
+                    dialogManager.DialogStart_NPC(tempResult.npcData, tempResult.dialogData.name);// 대화 시작
                     Debug.LogWarning("대화 열기");
                 }
-                else if (tempData.itemList != null)
+                else if (tempResult.itemList != null)
                 {
                     // 고정 아이템
-                    string[] itemID = tempData.itemList.GetFixItems();// 고정 아이템
+                    string[] itemID = tempResult.itemList.GetFixItems();// 고정 아이템
                     Game_Manager.current.GetInventory.SetReward(itemID);// 대화 이벤트 보상
                     Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 창닫기 버튼 세팅
                     Debug.LogWarning("이벤트 보상 - 인벤토리 열기");
                 }
-                Game_Manager.current.GetMainUI.MoveMoney(tempData.addMoney);// 돈추가
+                if (tempResult.addMoney > 0)
+                    Game_Manager.current.GetMainUI.MoveMoney(tempResult.addMoney);// 돈추가
             }
             else
             {
+                Game_Manager.current.GetLanding.OpenIslandUI();// 섬 유아이 열기
                 Debug.LogWarning("보상 대화가 아님");
             }
-            Game_Manager.current.GetLanding.OpenIslandUI();// 섬 유아이 열기
             StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 이벤트 창 닫기
         }
         else
@@ -425,8 +435,9 @@ public class Event_Manager : MonoBehaviour
 
     void CloseButton()
     {
-        Game_Manager.current.OutOfControll(false);
+        Game_Manager.current.GetLanding.OpenIslandUI();// 섬 유아이 열기
+        //Game_Manager.current.OutOfControll(false);
         Game_Manager.current.GetInventory.CloseResult();//보상 닫기
-        Game_Manager.current.GetMainUI.OpenCanvas(true);
+        //Game_Manager.current.GetMainUI.OpenCanvas(true);
     }
 }

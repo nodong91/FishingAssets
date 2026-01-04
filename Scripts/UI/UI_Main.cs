@@ -153,6 +153,7 @@ public class UI_Main : MonoBehaviour
 
     public void OpenCanvas(bool _open)// 메인 유아이 캔버스
     {
+        Debug.LogWarning("// 메인 유아이 캔버스");
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
         timeUI.TimePause(!_open);
     }
