@@ -84,7 +84,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         float normalize = 0.0f;
         while (normalize < 1.0f)
         {
-            normalize += Time.fixedDeltaTime * 0.5f;
+            normalize += Time.fixedDeltaTime * 2f;
             float volume = Mathf.Lerp(0.0f, targetVolume, normalize);
             if (BGMSource != null)
                 BGMSource.volume = volume;

@@ -663,8 +663,10 @@ public class UI_Inventory_Base : MonoBehaviour
 
     string LostItem(string _id)
     {
+        string word = Singleton_Data.INSTANCE.GetLanguage("etc_2000");
         string itemName = Singleton_Data.INSTANCE.GetLanguage(_id);
-        return itemName;
+        string setLost = word.Replace("{0}", itemName);
+        return setLost;
     }
 
     //===========================================================================================================================
