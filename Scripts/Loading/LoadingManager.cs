@@ -11,7 +11,7 @@ public class LoadingManager : MonoBehaviour
         Title,
         Main
     }
-    public CurrentScene currentScene;
+    public CurrentScene currentScene = CurrentScene.None;
     private string[] currentNames;
     private string[] sceneNames;
     public RectTransform background;
@@ -31,6 +31,9 @@ public class LoadingManager : MonoBehaviour
 
     public void GoTitle()
     {
+        if (currentScene == CurrentScene.Title)
+            return;
+
         currentScene = CurrentScene.Title;
         sceneNames = new string[1] { Const_Scene._title };
         OpenLoading();
@@ -38,6 +41,9 @@ public class LoadingManager : MonoBehaviour
 
     public void GoMain()
     {
+        if (currentScene == CurrentScene.Main)
+            return;
+
         currentScene = CurrentScene.Main;
         sceneNames = new string[2] { Const_Scene._gameManager, Const_Scene._islandMain };
         OpenLoading();

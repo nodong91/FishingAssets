@@ -18,7 +18,7 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
 
     IEnumerator SetContinue()
     {
-        Debug.LogError("저장 : 컨티뉴");
+        //Debug.LogError("저장 : 컨티뉴");
         yield return null;
 
         Data_Continue continueData = new Data_Continue

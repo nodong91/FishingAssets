@@ -162,15 +162,18 @@ public class UI_Inventory_Base : MonoBehaviour
         iconQueue.Enqueue(_slot.GetSlotImage);// 이미지 풀에 넣기
         _slot.GetSlotImage.gameObject.SetActive(false);// 이미지 비활성화
 
-        // 링크 슬롯 비우기
-        Vector2Int[] shape = _slot.itemInInventory.shape;
-        if (shape != null)// 링크 슬롯 비우기
+        if(_slot.itemInInventory!= null)
         {
-            for (int i = 0; i < shape.Length; i++)
+            // 링크 슬롯 비우기
+            Vector2Int[] shape = _slot.itemInInventory.shape;
+            if (shape != null)// 링크 슬롯 비우기
             {
-                int slotX = _slot.slotNum.x + shape[i].x;
-                int slotY = _slot.slotNum.y + shape[i].y;
-                allSlots[slotX, slotY].SetEmpty();
+                for (int i = 0; i < shape.Length; i++)
+                {
+                    int slotX = _slot.slotNum.x + shape[i].x;
+                    int slotY = _slot.slotNum.y + shape[i].y;
+                    allSlots[slotX, slotY].SetEmpty();
+                }
             }
         }
         _slot.SetEmpty();// 메인 슬롯 비우기
@@ -639,6 +642,11 @@ public class UI_Inventory_Base : MonoBehaviour
                     UI_Inventory_Slot linkSlot = allSlots[x, y].GetLinkSlot;
                     if (linkSlot?.empty == false)// 아이템이 들어있으면 비우기
                     {
+                        if (linkSlot.itemInInventory != null)
+                        {
+                            string itemName = LostItem(linkSlot.itemInInventory.item.id);
+                            Game_Manager.current.GetMainUI.SetWarnningText(itemName);
+                        }
                         SlotEmpty(linkSlot);
                     }
                     allSlots[x, y].DestroySlot();// 슬롯 부수기
@@ -651,6 +659,12 @@ public class UI_Inventory_Base : MonoBehaviour
         {
             Debug.LogError("빈 슬롯 없어서 못부셔!!!!");
         }
+    }
+
+    string LostItem(string _id)
+    {
+        string itemName = Singleton_Data.INSTANCE.GetLanguage(_id);
+        return itemName;
     }
 
     //===========================================================================================================================

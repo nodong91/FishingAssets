@@ -352,12 +352,12 @@ public class UI_Main : MonoBehaviour
     IEnumerator MoneyMoving(float _price)
     {
         float prevMoney = moneyValue;
-        SetMoney(moneyValue + _price);// µ∑ ¿Ãµø
         Steam_StatsManager.current.StatsMoney((int)moneyValue);
         Singleton_Continue.INSTANCE.SaveContinue(); // ∆»∞≈≥™ ªÁ∏È ¿˙¿Â
         Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._money);
         yield return null;
 
+        SetMoney(moneyValue + _price);// µ∑ ¿Ãµø
         float normalize = 0f;
         while (normalize < 1f)
         {

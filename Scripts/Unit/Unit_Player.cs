@@ -347,6 +347,7 @@ public class Unit_Player : MonoBehaviour
         if (Game_Manager.current.TryCrashChance() == true)// È¸ÇÇ È®·ü Àû¿ë
             return false;
 
+        Singleton_Audio.INSTANCE.Stop_LoopFX();
         Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._clash);
         Game_Manager.current.GetInventory.DestroySlot();// ·£´ý ½½·Ô ºÎ¼ö±â
 

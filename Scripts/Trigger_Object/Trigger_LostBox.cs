@@ -55,6 +55,8 @@ public class Trigger_LostBox : Trigger_Setting
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;
         Game_Manager.current.GetMinimap.RemoveLostBox();
 
+        setResult = null;
+        Game_Manager.current.GetPlayer.RemoveTrigger(this);
         gameObject.SetActive(false);// 트리거 오브젝트 비활성화
     }
 
