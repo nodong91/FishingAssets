@@ -70,7 +70,10 @@ public class UI_Landing : MonoBehaviour
         shipyardButton.SetButton(ShipyardButton, EnterButton, ExitButton);
         downTownButton.SetButton(DownTownButton, EnterButton, ExitButton);
         boardButton.SetButton(BoardButton, EnterButton, ExitButton);
+    }
 
+    public void SetLanguage()
+    {
         fishshopInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._fishshop);
         shipyardInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._shipyard);
         villageInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._village);
@@ -104,6 +107,8 @@ public class UI_Landing : MonoBehaviour
         }
         SetLandingCanvas(true);// Ω√¿€
         Game_Manager.current.OutOfControll(true);
+
+        SetLanguage();
     }
 
     void RemoveUI()

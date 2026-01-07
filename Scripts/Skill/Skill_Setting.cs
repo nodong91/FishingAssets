@@ -13,7 +13,7 @@ public class Skill_Setting : MonoBehaviour
 
     const float constCatchRadius = 0.5f;//- 레벨 5
     const float constCatchSpeed = 0.5f;//- 레벨 10
-    const float constCatchPower = 1f;//- 레벨 5
+    const float constCatchPower = 0.7f;//- 레벨 10
     const float constCatchHealth = 10f; //- 레벨 7
 
     const float constShipSpeed = 0.5f;// 배의 이동 속도 - 레벨 5

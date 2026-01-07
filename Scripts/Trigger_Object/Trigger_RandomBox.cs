@@ -6,7 +6,7 @@ public class Trigger_RandomBox : Trigger_Setting
     public AreaType areaType;
     public Sprite iconImage;
     string[] itemRewards;//  보상 아이템 ID들
-    public Data_ItemList dataItemList;
+    public Data_ItemList shallowItem, coastalItem, oceanicItem, abyssalItem;
     public int randomItemCount = 3;// 랜덤으로 줄 아이템 개수
 
     public void SetAreaType(AreaType _areaType)
@@ -20,9 +20,27 @@ public class Trigger_RandomBox : Trigger_Setting
     void SetItem()
     {
         // 보상 아이템 세팅
-        randomItemCount = Random.Range(1, 3);
-        randomItemCount = 0;
-        itemRewards = dataItemList.GetRandomItems(randomItemCount);
+        Data_ItemList itemList;
+        switch (areaType)
+        {
+            default:
+                itemList = null;
+                break;
+            case AreaType.Shallow:
+                itemList = shallowItem;
+                break;
+            case AreaType.Coastal:
+                itemList = coastalItem;
+                break;
+            case AreaType.Oceanic:
+                itemList = oceanicItem;
+                break;
+            case AreaType.Abyssal:
+                itemList = abyssalItem;
+                break;
+        }
+        randomItemCount = Random.Range(itemList.randomAmount.x, itemList.randomAmount.y);
+        itemRewards = itemList.GetRandomItems(randomItemCount);
     }
 
     void SetTrigger()
