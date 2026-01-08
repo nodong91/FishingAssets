@@ -69,16 +69,19 @@ public class Event_Manager : MonoBehaviour
         else
         {
             float randomValue = Random.Range(0f, 10f);
-            if (randomValue < 1f)
+            if (randomValue < 3f)
             {
                 Game_Manager.current.eventReset = false;
                 string setEventKey = eventKeys[Random.Range(0, eventKeys.Count)];// 랜덤 이벤트
                 activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
+
+                Debug.LogWarning($"이벤트 출력 : {setEventKey}");
             }
             else
             {
                 string setEventKey = "Data_Event_0002";// 아무일도 없었다.
                 activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
+                Debug.LogWarning($"이벤트 아무일도 없었다. : {randomValue} < 3f");
             }
         }
         SetEvent(activeEvent);
@@ -122,7 +125,7 @@ public class Event_Manager : MonoBehaviour
     string SetReplace(TextStruct _textStruct)
     {
         string replace = Singleton_Data.INSTANCE.GetLanguage(_textStruct.contents);// 번역
-        Debug.LogWarning($"{_textStruct.contents} ===== {replace}");
+        //Debug.LogWarning($"{_textStruct.contents} ===== {replace}");
         dialogVector = new Vector2Int[_textStruct.dialogTypes.Length];
         for (int i = 0; i < _textStruct.dialogTypes.Length; i++)
         {
@@ -403,11 +406,15 @@ public class Event_Manager : MonoBehaviour
             if (eventData as Data_Event_Result)// 보상 이벤트라면
             {
                 Data_Event_Result tempResult = eventData as Data_Event_Result;
+                if (tempResult.addMoney > 0)
+                    Game_Manager.current.GetMainUI.MoveMoney(tempResult.addMoney);// 돈추가
                 if (tempResult.npcData != null)
                 {
                     Dialog_Manager dialogManager = Game_Manager.current.GetDialog;
                     dialogManager.DialogStart_NPC(tempResult.npcData, tempResult.dialogData.name);// 대화 시작
+                    StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 이벤트 창 닫기
                     Debug.LogWarning("대화 열기");
+                    return;
                 }
                 else if (tempResult.itemList != null)
                 {
@@ -415,16 +422,13 @@ public class Event_Manager : MonoBehaviour
                     string[] itemID = tempResult.itemList.GetFixItems();// 고정 아이템
                     Game_Manager.current.GetInventory.SetReward(itemID);// 대화 이벤트 보상
                     Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 창닫기 버튼 세팅
+                    StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 이벤트 창 닫기
                     Debug.LogWarning("이벤트 보상 - 인벤토리 열기");
+                    return;
                 }
-                if (tempResult.addMoney > 0)
-                    Game_Manager.current.GetMainUI.MoveMoney(tempResult.addMoney);// 돈추가
             }
-            else
-            {
-                Game_Manager.current.GetLanding.OpenIslandUI();// 섬 유아이 열기
-                Debug.LogWarning("보상 대화가 아님");
-            }
+            Game_Manager.current.GetLanding.OpenIslandUI();// 섬 유아이 열기
+            Debug.LogWarning("보상 대화가 아님");
             StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 이벤트 창 닫기
         }
         else
