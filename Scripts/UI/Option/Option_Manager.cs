@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
@@ -126,19 +128,31 @@ public class Option_Manager : MonoBehaviour
     {
         Steam_StatsManager.current.ResetStats();
     }
-
+    bool isChange = false;
     void GoTitle()
     {
-        LoadingManager.current.GoTitle();
-        Singleton_Continue.INSTANCE.SaveContinue();// 타이틀로 나감
+        if (isChange == true)
+            return;
         Singleton_Audio.INSTANCE.Audio_Environment(null);
+        StartCoroutine(SetExit(0.3f, LoadingManager.current.GoTitle));
         OpenCanvas(false);
     }
 
     void GoExit()
     {
+        if (isChange == true)
+            return;
+        StartCoroutine(SetExit(0.3f, LoadingManager.current.GoExit));
+    }
+
+    IEnumerator SetExit(float _delay, Action _action)
+    {
+        isChange = true;
         Singleton_Continue.INSTANCE.SaveContinue();// 게임 종료
-        LoadingManager.current.GoExit();
+        yield return new WaitForSeconds(_delay);
+
+        isChange = false;
+        _action();
     }
 
     public void SetThemeMusic(string _music)
@@ -204,6 +218,6 @@ public class Option_Manager : MonoBehaviour
 
     public void SetLangage()
     {
-     
+
     }
 }

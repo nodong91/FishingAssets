@@ -243,5 +243,7 @@ public class Camera_Manager : MonoBehaviour
     {
         float targetFOV = _on == true ? 0f : originalFOV;
         volumeSettings.FocusOffset = targetFOV;
+
+        Game_Manager.current.GetFollow?.InputFocusOut(!_on);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,6 +29,7 @@ public class Gamble_Lottery : MonoBehaviour
     private List<LineRenderer> lineList = new List<LineRenderer>();
     private Queue<LineRenderer> lineQueue = new Queue<LineRenderer>();
     public List<Gamble_Lotto_Slot> slotList = new List<Gamble_Lotto_Slot>();
+    public List<Gamble_Lotto_Slot> openSlotList = new List<Gamble_Lotto_Slot>();
     Queue<Gamble_Lotto_Slot> slotQueue = new Queue<Gamble_Lotto_Slot>();
 
     //public TMPro.TMP_Text testText;
@@ -47,11 +49,16 @@ public class Gamble_Lottery : MonoBehaviour
         answerSlot.iconImage.material = Instantiate(answerSlot.iconImage.material);
     }
 
+    private void FixedUpdate()
+    {
+        maskCamera.Render();
+    }
+
     void Update()// 복권 긁기
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Singleton_Audio.INSTANCE.Audio_LoopFX(Const_Audio._lottery);
+            //Singleton_Audio.INSTANCE.Audio_LoopFX(Const_Audio._lottery);
             positionsList.Clear();
             instLine = TryLine();
             instLine.gameObject.SetActive(true);
@@ -71,9 +78,9 @@ public class Gamble_Lottery : MonoBehaviour
                 {
                     isAnswer = true;
                 }
-                else if (slotList.Contains(setEnterSlot) == false)// 열었는지 확인
+                else if (openSlotList.Contains(setEnterSlot) == false)// 열었는지 확인
                 {
-                    slotList.Add(setEnterSlot);
+                    openSlotList.Add(setEnterSlot);
                 }
                 // 체크
                 if (isAnswer == true && isEnd == false)// 정답이 공개 되어 있고 완료되지 않았으면
@@ -85,7 +92,7 @@ public class Gamble_Lottery : MonoBehaviour
                         Game_Manager.current.GetMainUI.MoveMoney(sellPrice);
                         Steam_StatsManager.current.CountLottery(sellPrice);// 당첨 카운트
                     }
-                    else if (slotList.Count >= lotteryCards[currentIndex].lottery.slotCount)
+                    else if (slotList.Count == openSlotList.Count)
                     {
                         isEnd = true;
                         //testText.text = "노당첨!!!!!!";
@@ -93,67 +100,70 @@ public class Gamble_Lottery : MonoBehaviour
                 }
             }
         }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            Singleton_Audio.INSTANCE.Stop_LoopFX();
-        }
-    }
-
-    public void SetLottery(int _index)// 복권 세팅
-    {
-        currentIndex = _index;// 복권 종류
-        Game_Manager.current.GetInventory.GetBackButton.SetButton(delegate { OpenCanvas(false); });
-        OpenCanvas(true);
-    }
-
-    void OpenCanvas(bool _open)
-    {
-        if (_open == true)
-            ResetButton();
-        else
-            Game_Manager.current.GetInventory.SetBackButton();// 닫으면 인벤토리 닫기 버튼으로 변경
-        //StartCoroutine(OpenCanvas());
-        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStruct, _open));
+        //else if (Input.GetMouseButtonUp(0))
+        //{
+        //    Singleton_Audio.INSTANCE.Stop_LoopFX();
+        //}
     }
 
     bool CheckImage()
     {
-        for (int i = 0; i < slotList.Count; i++)
+        for (int i = 0; i < openSlotList.Count; i++)
         {
-            if (answerSlot.iconImage.sprite == slotList[i].iconImage.sprite)
+            if (answerSlot.iconImage.sprite == openSlotList[i].iconImage.sprite)
             {
                 answerSlot.iconImage.material.SetFloat("_FillAmount", 1f);
-                slotList[i].iconImage.material.SetFloat("_FillAmount", 1f);
-                answerEffect.transform.position = slotList[i].iconImage.transform.position;
+                openSlotList[i].iconImage.material.SetFloat("_FillAmount", 1f);
+                answerEffect.transform.position = openSlotList[i].iconImage.transform.position;
                 answerEffect.Play();
                 return true;
             }
         }
         return false;
     }
-
-    private void FixedUpdate()
+    //=================================================================================
+    // 복권 세팅
+    //=================================================================================
+    public void SetLottery(int _index)
     {
-        maskCamera.Render();
+        currentIndex = _index;// 복권 종류
+        Game_Manager.current.GetInventory.GetBackButton.SetButton(delegate { OpenCanvas(false); });// 닫기 버튼으로 변경
+        OpenCanvas(true);
     }
 
-    private void ResetButton()
+    void OpenCanvas(bool _open)
+    {
+        if (_open == true)
+        {
+            StartCoroutine(LotterySetting());
+        }
+        else
+        {
+            Game_Manager.current.GetInventory.SetBackButton();// 닫으면 인벤토리 닫기 버튼으로 변경
+        }
+        StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStruct, _open));
+    }
+
+    IEnumerator LotterySetting()
     {
         isEnd = false;
         isAnswer = false;
-        //testText.text = "";
-        SetLotto();
-    }
 
-    public void SetLotto()
-    {
+        for (int i = 0; i < lotteryCards.Length; i++)// 뒷배경
+        {
+            lotteryCards[i].gameObject.SetActive(i == currentIndex);
+        }
+        lotteryCards[currentIndex].maskImage.texture = maskTexture;// 마스크 랜더투텍스처 세팅
+
         // 기존 슬롯, 라인 초기화
         for (int i = 0; i < slotList.Count; i++)
         {
             slotList[i].iconImage.color = Color.white;
+            slotList[i].transform.SetParent(canvas.transform as RectTransform);
             slotQueue.Enqueue(slotList[i]);
             slotList[i].gameObject.SetActive(false);
         }
+
         for (int i = 0; i < lineList.Count; i++)
         {
             lineList[i].positionCount = 0;
@@ -163,19 +173,15 @@ public class Gamble_Lottery : MonoBehaviour
 
         slotList.Clear();
         lineList.Clear();
+        openSlotList.Clear();
         positionsList.Clear();
+        yield return null;
 
         SetRandom();
     }
 
     void SetRandom()
     {
-        for (int i = 0; i < lotteryCards.Length; i++)// 뒷배경
-        {
-            lotteryCards[i].gameObject.SetActive(i == currentIndex);
-        }
-        lotteryCards[currentIndex].maskImage.texture = maskTexture;// 마스크 랜더투텍스처 세팅
-
         Data_Lottery dataLottery = lotteryCards[currentIndex].lottery;
         List<Data_Lottery.LottoSlot> lottoSlots = dataLottery.SetRandom(out Sprite _mainSprite, out int _sellPrice);// 미리 당첨 슬롯, 가격 세팅
         sellPrice = _sellPrice;// 당첨 가격
@@ -183,14 +189,14 @@ public class Gamble_Lottery : MonoBehaviour
         answerSlot.deleEnterSlot = EnterSlot;
         answerSlot.iconImage.material.SetFloat("_FillAmount", 0f);
 
-        Transform parent = lotteryCards[currentIndex].answerSlotPosition.transform;
+        RectTransform parent = lotteryCards[currentIndex].answerSlotPosition.transform as RectTransform;
         answerSlot.transform.SetParent(parent);
         answerSlot.transform.position = parent.position;
 
-        parent = lotteryCards[currentIndex].gridParent.transform;
+        parent = lotteryCards[currentIndex].gridParent;
         for (int i = 0; i < lottoSlots.Count; i++)
         {
-            Gamble_Lotto_Slot inst = TrySlot();
+            Gamble_Lotto_Slot inst = TrySlotPool();
             inst.gameObject.SetActive(true);
             inst.transform.SetParent(parent);
             inst.transform.localScale = Vector3.one;
@@ -199,6 +205,8 @@ public class Gamble_Lottery : MonoBehaviour
             inst.deleEnterSlot = EnterSlot;
             inst.iconImage.material.SetFloat("_FillAmount", 0f);
             inst.transform.SetAsLastSibling();// 순서 변경
+
+            slotList.Add(inst);
         }
     }
 
@@ -209,13 +217,11 @@ public class Gamble_Lottery : MonoBehaviour
             setEnterSlot = _slot;
     }
 
-    Gamble_Lotto_Slot TrySlot()
+    Gamble_Lotto_Slot TrySlotPool()
     {
         if (slotQueue.Count > 0)
-        {
-            Gamble_Lotto_Slot slot = slotQueue.Dequeue();
-            return slot;
-        }
+            return slotQueue.Dequeue();
+
         Gamble_Lotto_Slot inst = Instantiate(answerSlot, canvas.transform);
         inst.iconImage.material = Instantiate(inst.iconImage.material);
         return inst;

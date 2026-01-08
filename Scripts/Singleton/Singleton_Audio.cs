@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 {
@@ -162,6 +163,7 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
         if (loopFxSource != null)
         {
             loopFxSource.Stop();
+            loopFxSource.loop = false;
             loopFxSource.gameObject.SetActive(false);
             audioQueue.Enqueue(loopFxSource);
         }

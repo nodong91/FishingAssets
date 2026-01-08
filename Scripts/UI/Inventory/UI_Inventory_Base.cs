@@ -162,7 +162,7 @@ public class UI_Inventory_Base : MonoBehaviour
         iconQueue.Enqueue(_slot.GetSlotImage);// 이미지 풀에 넣기
         _slot.GetSlotImage.gameObject.SetActive(false);// 이미지 비활성화
 
-        if(_slot.itemInInventory!= null)
+        if (_slot.itemInInventory != null)
         {
             // 링크 슬롯 비우기
             Vector2Int[] shape = _slot.itemInInventory.shape;
@@ -192,6 +192,7 @@ public class UI_Inventory_Base : MonoBehaviour
                 {
                     int slotX = _slot.slotNum.x + shape[i].x;
                     int slotY = _slot.slotNum.y + shape[i].y;
+                    Debug.LogWarning($"링크 슬롯 세팅 -----------> ({slotX}, {slotY})");
                     allSlots[slotX, slotY].SetLink(_slot);
                 }
             }
@@ -272,11 +273,11 @@ public class UI_Inventory_Base : MonoBehaviour
         _image.rectTransform.pivot = pivot;
     }
 
-    public UI_Inventory_Slot GetEmptySlot(ItemStruct _item)// 빈슬롯 찾기
+    public UI_Inventory_Slot GetEmptySlot(ItemStruct _item, Vector2Int _invenSize)// 빈슬롯 찾기
     {
-        for (int y = 0; y < inventorySize.y; y++)
+        for (int y = 0; y < _invenSize.y; y++)
         {
-            for (int x = 0; x < inventorySize.x; x++)
+            for (int x = 0; x < _invenSize.x; x++)
             {
                 bool empty = true;
                 UI_Inventory_Slot slot = allSlots[x, y];
@@ -289,15 +290,15 @@ public class UI_Inventory_Base : MonoBehaviour
                 {
                     int slotX = slot.slotNum.x + _item.shape[i].x;
                     int slotY = slot.slotNum.y + _item.shape[i].y;
-                    if (slotX < 0 || slotX >= inventorySize.x || slotY < 0 || slotY >= inventorySize.y)
+                    if (slotX < 0 || slotX >= _invenSize.x || slotY < 0 || slotY >= _invenSize.y)
                     {
                         empty = false;
                         break;
                     }
                     else
                     {
-                        bool temp = allSlots[slotX, slotY].empty;
-                        if (temp == false)
+                        UI_Inventory_Slot shapeSlot = allSlots[slotX, slotY];
+                        if (shapeSlot.empty == false || shapeSlot.destroy == true)
                         {
                             empty = false;
                             break;
@@ -313,7 +314,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public bool AddItem(ItemStruct _item)// 구매
     {
-        UI_Inventory_Slot slot = GetEmptySlot(_item);// 아이템 넣을 수 있는 칸 찾기
+        UI_Inventory_Slot slot = GetEmptySlot(_item, inventorySize);// 아이템 넣을 수 있는 칸 찾기
         if (slot == null)
         {
             Debug.LogWarning("넣을만한 빈 슬롯 없음");
@@ -460,7 +461,7 @@ public class UI_Inventory_Base : MonoBehaviour
         for (int i = 0; i < _itemID.Length; i++)
         {
             ItemStruct item = Singleton_Data.INSTANCE.GetItemStruct(_itemID[i]);
-            UI_Inventory_Slot slot = GetEmptySlot(item);// 아이템 넣을 수 있는 칸 찾기
+            UI_Inventory_Slot slot = GetEmptySlot(item, inventorySize);// 아이템 넣을 수 있는 칸 찾기
             if (slot == null)
             {
                 Debug.LogWarning("넣을만한 빈 슬롯 없음");

@@ -105,4 +105,9 @@ public class Follow_Manager : MonoBehaviour
 
         _followUI.transform.position = followPosition + _offset;
     }
+
+    public void InputFocusOut(bool _isOn)
+    {
+        canvas.gameObject.SetActive(_isOn);
+    }
 }

@@ -5,6 +5,6 @@ public class Gamble_Card : MonoBehaviour
 {
     public Data_Lottery lottery;
     public GameObject answerSlotPosition;
-    public GridLayoutGroup gridParent;
+    public RectTransform gridParent;
     public RawImage maskImage;
 }
