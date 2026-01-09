@@ -726,7 +726,7 @@ public class Fishing_Manager : MonoBehaviour
 
 
 
-    const float baitValue = 100f;
+    const float baitValue = 1f;
 
     public void SetBait(ItemStruct.ItemClass _itemClass)
     {

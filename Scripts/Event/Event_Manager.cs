@@ -406,7 +406,7 @@ public class Event_Manager : MonoBehaviour
             if (eventData as Data_Event_Result)// 보상 이벤트라면
             {
                 Data_Event_Result tempResult = eventData as Data_Event_Result;
-                if (tempResult.addMoney > 0)
+                if (tempResult.addMoney != 0)
                     Game_Manager.current.GetMainUI.MoveMoney(tempResult.addMoney);// 돈추가
                 if (tempResult.npcData != null)
                 {
