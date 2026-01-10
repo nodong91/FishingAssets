@@ -235,7 +235,7 @@ public class UI_Main : MonoBehaviour
 
     public void SetMaxEnergyPoint(float _energy)
     {
-        Debug.LogWarning($"최대 연료량 : {_energy}");
+        //Debug.LogWarning($"최대 연료량 : {_energy}");
         shipEnergyRect.gameObject.SetActive(_energy > 0f);
         shipEnergyRect.sizeDelta = new Vector2((1f + _energy) * 2f, shipEnergyRect.sizeDelta.y);
     }
@@ -477,7 +477,7 @@ public class UI_Main : MonoBehaviour
     public void SetMaxBoosterValue(float _speed, float _value)
     {
         boosterRect.gameObject.SetActive(_speed * _value > 0f);
-        boosterRect.sizeDelta = new Vector2(_value * 50f, boosterRect.sizeDelta.y);
+        boosterRect.sizeDelta = new Vector2(100f + _value * 20f, boosterRect.sizeDelta.y);
         //Debug.LogWarning($"{_speed}  {_value}");
     }
 

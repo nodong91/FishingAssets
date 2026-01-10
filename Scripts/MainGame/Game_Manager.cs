@@ -107,7 +107,7 @@ public class Game_Manager : MonoBehaviour
 
     public void SetBooster()
     {
-        GetSkill.skill_Setting.GetBooster(out float _boosterSpeed, out float _boosterValue);
+        GetSkill.skill_Setting.GetBooster(out float _boosterSpeed, out float _boosterValue);// 부스터 스탯 가져오기
         player.SetBooster(_boosterSpeed, _boosterValue);
         // 유아이 세팅
         GetMainUI.SetMaxBoosterValue(_boosterSpeed, _boosterValue);

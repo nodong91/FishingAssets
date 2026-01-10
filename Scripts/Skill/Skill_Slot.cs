@@ -175,6 +175,21 @@ public class Skill_Slot : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
     public void ActiveSlot()
     {
+        if (Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._booster) == false
+            && Skill.id.Contains(Const_Skill.booster) == true)
+        {
+            // 부스터 스킬 활성화
+            int Level_BusterValue = Game_Manager.current.GetSkill.skill_Setting.Level_BusterValue;
+            int Level_BusterSpeed = Game_Manager.current.GetSkill.skill_Setting.Level_BusterSpeed;
+
+            if (Level_BusterValue == 0 && Level_BusterSpeed == 0)
+            {
+                // 첫 부스터 스킬 활성화
+                Debug.LogError($"스킬 레벨 : {Level_BusterValue} : {Level_BusterSpeed}");
+                Tutorial_Manager.current.BoosterTutorial();
+            }
+        }
+
         Singleton_Audio.INSTANCE.Stop_LoopFX();
         // 스킬 활성화
         float price = -Game_Manager.current.GetSkill.GetSkillPrice;

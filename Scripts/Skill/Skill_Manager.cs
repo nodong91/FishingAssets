@@ -32,6 +32,8 @@ public class Skill_Manager : MonoBehaviour
     public int skillPrice = 100; // 스킬 포인트 가격
     public int GetSkillPrice { get { return skillPrice; } }
 
+    public bool boosterTutorial;
+
     public Skill_Infomation infomation;
 
     public void SetStart()
@@ -55,7 +57,7 @@ public class Skill_Manager : MonoBehaviour
 
     void SetSkillPrice()
     {
-        Debug.LogWarning($"{enableSlotLIst.Count} : {skillPrice}");
+        //Debug.LogWarning($"{enableSlotLIst.Count} : {skillPrice}");
         skillPrice = Mathf.RoundToInt((enableSlotLIst.Count + (enableSlotLIst.Count * 0.5f)) * defaultSkillPrice);
     }
 

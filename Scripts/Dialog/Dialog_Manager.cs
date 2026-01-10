@@ -406,6 +406,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
     IEnumerator StartDialog()
     {
+        typingSpeed = defaultTypingSpeed;
+
         TextStruct dialog = dataDialog.textStruct[currentDialog];
         dialogText.text = SetReplace(dialog);
         dialogText.ForceMeshUpdate(true);// 메쉬 재 생성 (리셋)

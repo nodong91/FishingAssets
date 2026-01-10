@@ -106,7 +106,7 @@ public class Static_JsonManager
     //======================================================================================
     public static void SaveTutorialData(string fileName, List<string> _data)
     {
-        string filePath = Application.dataPath + Const_Save._saveDontDestroy;
+        string filePath = Application.dataPath + Const_Save._save;
         // 弃歹 积己
         FindFolder(filePath);
 
@@ -117,7 +117,7 @@ public class Static_JsonManager
 
     public static bool TryLoadTutorialData(string fileName, out List<string> _data)
     {
-        string filePath = Application.dataPath + Const_Save._saveDontDestroy;
+        string filePath = Application.dataPath + Const_Save._save;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 
@@ -140,7 +140,7 @@ public class Static_JsonManager
 
     public static void SaveEnableSkillData(string fileName, List<Vector2Int> _data)
     {
-        string filePath = Application.dataPath + Const_Save._saveDontDestroy;
+        string filePath = Application.dataPath + Const_Save._save;
         // 弃歹 积己
         FindFolder(filePath);
 
@@ -151,7 +151,7 @@ public class Static_JsonManager
 
     public static bool TryLoadEnableSkillData(string fileName, out List<Vector2Int> _data)
     {
-        string filePath = Application.dataPath + Const_Save._saveDontDestroy;
+        string filePath = Application.dataPath + Const_Save._save;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 

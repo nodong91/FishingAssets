@@ -25,7 +25,7 @@ public class UI_ChangeShip : MonoBehaviour
             return;
 
         shipList.Add(_shipData);
-        Debug.LogWarning($"{_shipData.name} : {_shipData.shipName} : {shipList.Count} : {gameObject.name}");
+        //Debug.LogWarning($"{_shipData.name} : {_shipData.shipName} : {shipList.Count} : {gameObject.name}");
 
         UI_ChangeShip_Slot inst = Instantiate(shipButton, shipParent.transform);
         inst.SetSlot(_shipData);

@@ -27,8 +27,7 @@ public class Sprite_Animation : MonoBehaviour, IPointerClickHandler
         currentIndex++;
         if (currentIndex < tutorialStructs.Length)
         {
-            setImage.sprite = tutorialStructs[currentIndex].sprite;
-            infoText.text = tutorialStructs[currentIndex].info;
+            SetTutorial(currentIndex);
         }
         else
         {
@@ -41,24 +40,14 @@ public class Sprite_Animation : MonoBehaviour, IPointerClickHandler
         if (_open == true)
         {
             currentIndex = 0;
-            setImage.sprite = tutorialStructs[currentIndex].sprite;
-            infoText.text = tutorialStructs[currentIndex].info;
+            SetTutorial(0);
         }
-        //if (animateCoroutine != null)
-        //    StopCoroutine(animateCoroutine);
-        //if (_open == true)
-        //    animateCoroutine = StartCoroutine(AnimateSprite());
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
 
-    //IEnumerator AnimateSprite()
-    //{
-    //    int index = 0;
-    //    while (true)
-    //    {
-    //        setImage.sprite = sprites[index];
-    //        index = (index + 1) % sprites.Length;
-    //        yield return new WaitForSeconds(0.1f);
-    //    }
-    //}
+    void SetTutorial(int _index)
+    {
+        setImage.sprite = tutorialStructs[_index].sprite;
+        infoText.text = Singleton_Data.INSTANCE.GetLanguage(tutorialStructs[_index].info);
+    }
 }

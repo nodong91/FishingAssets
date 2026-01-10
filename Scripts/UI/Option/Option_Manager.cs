@@ -72,7 +72,7 @@ public class Option_Manager : MonoBehaviour
         if (_open == false)// ´ÝÈú ¶§
             StaticOpenCanvas.deleEndOpen += EndOpenCanvas;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
-        Camera_Manager.current?.CameraFocusOut(_open);
+        //Camera_Manager.current?.CameraFocusOut(_open);
         if (_open == true)
         {
             screenStruct[0].toggle.isOn = true;

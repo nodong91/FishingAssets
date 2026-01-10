@@ -27,7 +27,7 @@ public class Skill_Setting : MonoBehaviour
     const float constFishPrice = 1f;// 판매 물고기 가격 증가 - 레벨10
 
     const float constBoosterSpeed = 0.5f;//- 레벨 5
-    const float constBoosterValue = 1f;//- 레벨 7
+    const float constBoosterValue = 0.5f;//- 레벨 7
     const float constCrashChance = 5f;//- 레벨 5 최대 25%
 
     const string _001 = "_001";// 강철 낚시줄    //- 레벨 5
@@ -169,7 +169,7 @@ public class Skill_Setting : MonoBehaviour
             return;
 
         Data_Manager.SkillStruct data = Singleton_Data.INSTANCE.Dict_Skill[_id];
-        Debug.LogWarning($"{_id} ({data.skillType}): 스킬 활성화");
+        //Debug.LogWarning($"{_id} ({data.skillType}): 스킬 활성화");
         switch (data.skillType)
         {
             case Data_Manager.SkillStruct.SkillType.AddStatus:
@@ -205,7 +205,7 @@ public class Skill_Setting : MonoBehaviour
     public void GetBooster(out float _boosterSpeed, out float _boosterValue)
     {
         _boosterSpeed = constBoosterSpeed * Level_BusterSpeed;
-        _boosterValue = constBoosterValue * Level_BusterValue;
+        _boosterValue = 1f + constBoosterValue * Level_BusterValue;
     }
 
     public float GetCrashChance()

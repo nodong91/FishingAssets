@@ -192,7 +192,7 @@ public class UI_Inventory_Base : MonoBehaviour
                 {
                     int slotX = _slot.slotNum.x + shape[i].x;
                     int slotY = _slot.slotNum.y + shape[i].y;
-                    Debug.LogWarning($"링크 슬롯 세팅 -----------> ({slotX}, {slotY})");
+                    //Debug.LogWarning($"링크 슬롯 세팅 -----------> ({slotX}, {slotY})");
                     allSlots[slotX, slotY].SetLink(_slot);
                 }
             }

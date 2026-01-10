@@ -97,6 +97,7 @@ public class Const_Skill
     public const string cruise = "sk_100_03";
     public const string sailShip = "sk_100_04";
 
+    public const string booster = "sk_016";
 }
 
 public class Const_NPC
@@ -115,6 +116,7 @@ public class Const_Tutorial
     public const string _fillFuel = "FillFuel";
     public const string _firstFishing = "FirstFishing";
     public const string _fishingNews = "FishingNews";
+    public const string _booster = "Booster";
 }
 
 public class Const_Dialog

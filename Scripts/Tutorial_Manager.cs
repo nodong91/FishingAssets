@@ -10,6 +10,7 @@ public class Tutorial_Manager : MonoBehaviour
 
     public List<string> completedTutorial;
     public Sprite_Animation fishingTutorial;
+    public Sprite_Animation boosterTutorial;
 
     public static Tutorial_Manager current;
 
@@ -22,6 +23,7 @@ public class Tutorial_Manager : MonoBehaviour
     {
         LoadTutorial();
         fishingTutorial.OpenCanvas(false);
+        boosterTutorial.OpenCanvas(false);
     }
 
     public bool IsTutorialCompleted(string _id)// 완료 인지 확인
@@ -41,6 +43,11 @@ public class Tutorial_Manager : MonoBehaviour
     public void FishingTutorial()
     {
         fishingTutorial.OpenCanvas(true);
+    }
+
+    public void BoosterTutorial()
+    {
+        boosterTutorial.OpenCanvas(true);
     }
 
     void SaveTutorial()

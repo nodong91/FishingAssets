@@ -301,7 +301,7 @@ public class Unit_Player : MonoBehaviour
         {
             if (_on == true)
             {
-                boosterValue -= 1f * Time.deltaTime;
+                boosterValue -= 0.5f * Time.deltaTime;
                 if (boosterValue <= 0)
                 {
                     StateMachine(State.Damage);// ºÎ½ºÅÍ ÅÍÁü
@@ -311,7 +311,7 @@ public class Unit_Player : MonoBehaviour
             }
             else
             {
-                boosterValue += 0.3f * Time.deltaTime;
+                boosterValue += 0.1f * Time.deltaTime;
             }
             boosterValue = Mathf.Clamp(boosterValue, 0f, maxBoosterValue);
             Game_Manager.current.GetMainUI.SetBoosterGage(boosterValue / maxBoosterValue);
