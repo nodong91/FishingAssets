@@ -8,7 +8,7 @@ public class Option_Manager : MonoBehaviour
 {
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public Custom_Button closeButton;
-    public Custom_Button resetStatsButton, goTitleButton, goExitButton;
+    public Custom_Button resetCollection, goTitleButton, goExitButton;
     public Custom_Button resetButton;
     public Data_Option optionData;
 
@@ -99,7 +99,7 @@ public class Option_Manager : MonoBehaviour
             InputToggle(index);
         }
         resetButton.SetButton(SetDefaultButton, EnterButton);
-        resetStatsButton.SetButton(ResetStatsButton, EnterButton);
+        resetCollection.SetButton(ResetCollectionButton, EnterButton);
         goTitleButton.SetButton(GoTitle, EnterButton);
         goExitButton.SetButton(GoExit, EnterButton);
     }
@@ -124,9 +124,9 @@ public class Option_Manager : MonoBehaviour
         optionQuality.SetStart();// 퀄리티 매니저 세팅
     }
 
-    void ResetStatsButton()
+    void ResetCollectionButton()
     {
-        Steam_StatsManager.current.ResetStats();
+        //Steam_StatsManager.current.ResetStats();
     }
     bool isChange = false;
     void GoTitle()

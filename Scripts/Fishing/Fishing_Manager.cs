@@ -627,11 +627,11 @@ public class Fishing_Manager : MonoBehaviour
             catchaText.SetActive(false);
             SetReward();
 
-            bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._firstFishing);
-            if (isCompleted == false)
-            {
-                Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._firstFishing);// Æ©Åä¿Ï·á
-            }
+            //bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._firstFishing);
+            //if (isCompleted == false)
+            //{
+            //    Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._firstFishing);// Æ©Åä¿Ï·á
+            //}
         }
         else
         {

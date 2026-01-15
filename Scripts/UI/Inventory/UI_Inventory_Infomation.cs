@@ -20,15 +20,22 @@ public class UI_Inventory_Infomation : MonoBehaviour
         ItemStruct item = _slot.itemInInventory.item;
         nameText.text = Singleton_Data.INSTANCE.GetLanguage(item.id);
 
-        float addPrice = 0f;
-        if (Game_Manager.current.GetInventory.enterSlotType == UI_Inventory_Base.SlotType.MyBox)// 인벤토리 아이템 가격
-            addPrice = item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 
+        UI_Inventory_Base.SlotType currentType = Game_Manager.current.GetInventory.currentType;
+        bool isPrice = (currentType == UI_Inventory_Base.SlotType.Shop ||
+         currentType == UI_Inventory_Base.SlotType.Shipyard ||
+        currentType == UI_Inventory_Base.SlotType.Submit);
+        priceText.gameObject.SetActive(isPrice);
+        if (isPrice == true)
+        {
+            float addPrice = 0f;
+            if (Game_Manager.current.GetInventory.enterSlotType == UI_Inventory_Base.SlotType.MyBox)// 인벤토리 아이템 가격
+                addPrice = item.price * Game_Manager.current.currentStatus.fishPrice * 0.01f;// 퍼센트 만큼 
 
-        float price = Mathf.Round(item.price + addPrice);// 스킬 스탯 추가
-        Debug.Log($"{Singleton_Data.INSTANCE.GetLanguage(item.id)} ({item.id}) :" +
-            $" {item.price} + {Game_Manager.current.currentStatus.fishPrice} = {price}");
-        //weightText.text = $"{item.weight}<size={weightText.fontSize * 0.5f}>kg</size>";
-        priceText.text = price.ToString();
+            float price = Mathf.Round(item.price + addPrice);// 스킬 스탯 추가
+            Debug.Log($"{Singleton_Data.INSTANCE.GetLanguage(item.id)} ({item.id}) :" +
+                $" {item.price} + {Game_Manager.current.currentStatus.fishPrice} = {price}");
+            priceText.text = price.ToString();
+        }
 
         string classColor = P01_Utility.ClassColor(item.itemClass);
         classText.text = $"<color=#{classColor}>{item.itemClass}</color>";

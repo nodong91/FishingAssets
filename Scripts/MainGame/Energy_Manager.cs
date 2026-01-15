@@ -16,8 +16,6 @@ public class Energy_Manager : MonoBehaviour
 
     public void SetStart()
     {
-        titleText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._dragToFuel);
-        buttonText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._fill);
         energySlider.onValueChanged.AddListener(SetEnergy);
         buyButton.SetButton(FillUpEnergy);
         backButton.SetButton(Game_Manager.current.GetLanding.BackButton);
@@ -32,6 +30,9 @@ public class Energy_Manager : MonoBehaviour
 
     void SetStartEnergy()
     {
+        titleText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._dragToFuel);
+        buttonText.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._fill);
+
         float energy = Game_Manager.current.GetPlayer.GetEnergy;
         prevEnergy = Mathf.Clamp(energy / EnergyMaxAmount, 0f, 1f);// 0~1
         energySlider.value = prevEnergy;

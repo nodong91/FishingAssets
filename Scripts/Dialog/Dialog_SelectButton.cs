@@ -66,6 +66,7 @@ public class Dialog_SelectButton : MonoBehaviour, IPointerClickHandler, IPointer
         switch (_selectStruct.selectType)
         {
             case SelectStruct.SelectType.Out: return Const_Dialog._exit;
+            case SelectStruct.SelectType.Inn: return "di_3001_c";
             case SelectStruct.SelectType.FishPrice: return Const_Dialog._fishingNews;
             case SelectStruct.SelectType.Upgrade: return Const_Dialog._upgrade;
             case SelectStruct.SelectType.Rest: return Const_Dialog._rest;

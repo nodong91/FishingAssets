@@ -37,17 +37,37 @@ public class Reflection_Manager : MonoBehaviour
     RenderTexture reflectionTexture;
     public Vector2Int waterSize;
     public float waveSpeed = 2f;
-    public Instancer instancer;
-    public Transform instParent;
+    //public Instancer instancer;
+    //public Transform instParent;
 
     public void UpdateData()
     {
-        if (instParent != null)
-            DestroyImmediate(instParent.gameObject);
-        instParent = new GameObject($"[{TextureName}]").transform;
-        instParent.SetParent(instancer.transform);
-        InstanceWater(instParent);
+        //InstanceWater();
     }
+
+    //void InstanceWater()
+    //{
+    //    if (instParent != null)
+    //        DestroyImmediate(instParent.gameObject);
+    //    instParent = new GameObject($"[{TextureName}]").transform;
+    //    instParent.SetParent(instancer.transform);
+
+    //    Vector3 halfSize = new Vector3(waterSize.x, 0f, waterSize.y);
+    //    for (int x = 0; x < waterSize.x; x++)
+    //    {
+    //        for (int y = 0; y < waterSize.y; y++)
+    //        {
+    //            Renderer inst = Instantiate(reflectionPlane, instParent);
+    //            inst.transform.position = (new Vector3(x, 0f, y) * 10f) - (halfSize * 5f);
+
+    //            Vector3 position = (new Vector3(x, 0f, y) * 10f) - (halfSize * 5f);
+    //            Quaternion rotation = Quaternion.Euler(0f, 0f, 0f);
+    //            Vector3 scale = Vector3.one;
+    //            Matrix4x4 matrix = Matrix4x4.TRS(position, rotation, scale);
+    //        }
+    //    }
+    //    //DestroyImmediate(instParent.gameObject);
+    //}
 
     void Start()
     {
@@ -57,42 +77,32 @@ public class Reflection_Manager : MonoBehaviour
         reflectionCamera.enabled = false;
 
         mainCamera = Camera.main;
-
         reflectionTexture = new RenderTexture(Screen.width, Screen.height, 24);
         reflectionTexture.useMipMap = true;
 
         instMaterial = Instantiate(reflectionMaterial);
         instMaterial.SetFloat("_WaveSpeed", waveSpeed);
-        for (int i = 0; i < instancer.setBatch.Count; i++)
-        {
-            instancer.setBatch[i].mat[0] = instMaterial;
-        }
-    }
-
-    void InstanceWater(Transform _parent)
-    {
-        Vector3 halfSize = new Vector3(waterSize.x, 0f, waterSize.y);
-        for (int x = 0; x < waterSize.x; x++)
-        {
-            for (int y = 0; y < waterSize.y; y++)
-            {
-                Renderer inst = Instantiate(reflectionPlane, _parent);
-                inst.transform.position = (new Vector3(x, 0f, y) * 10f) - (halfSize * 5f);
-            }
-        }
+        instancedMesh.instancedMaterial = instMaterial;
+        instancedMesh.SetStart();
+        //instancer.SetBatch();
+        //for (int i = 0; i < instancer.setBatch.Count; i++)
+        //{
+        //    instancer.setBatch[i].mat[0] = instMaterial;
+        //}
+        //instParent.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        OnPostRender();
         //instancer.UpdateBatch();
+        OnPostRender();
 
         // 배 부분 물결 안생기게
         if (Game_Manager.current == null || Game_Manager.current.GetPlayer == null)
             return;
-        string shipPosition = "_ShipPosition";
+
         Transform player = Game_Manager.current.GetPlayer.transform;
-        instMaterial.SetVector(shipPosition, player.position);// 플레이어 위치 업데이트
+        instMaterial.SetVector("_ShipPosition", player.position);// 플레이어 위치 업데이트
     }
 
     private void OnPostRender()
@@ -141,8 +151,10 @@ public class Reflection_Manager : MonoBehaviour
 
     void DrawQuad()
     {
-        GL.PushMatrix();
+        if (instMaterial == null)
+            return;
 
+        GL.PushMatrix();
         instMaterial.SetPass(0);
         instMaterial.SetTexture(TextureName, reflectionTexture);
 
@@ -173,4 +185,6 @@ public class Reflection_Manager : MonoBehaviour
         if (mainCamera != null)
             Gizmos.DrawSphere(mainCamera.transform.position, 1f);
     }
+
+    public InstancedMeshRenderer instancedMesh;
 }

@@ -1,5 +1,3 @@
-using NUnit.Framework.Internal;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -69,7 +67,7 @@ public class Unit_Player : MonoBehaviour
         Debug.LogWarning($"SetStatus - Energy : {energy}/{CurrentStatus.maxEnergy}, SetStatus - Health : {health}/{CurrentStatus.shipHealth}");
         SetEnergyUI();
     }
-   
+
     public void SetShip(Data_Ship _shipData)// 배 생성 및 변경
     {
         if (playerObject != null)
@@ -380,6 +378,7 @@ public class Unit_Player : MonoBehaviour
         // 완전 파괴
         StartCoroutine(ResetPosition());
         boosterValue = maxBoosterValue;
+        Singleton_Audio.INSTANCE.Stop_LoopFX();
         Game_Manager.current.GetMainUI.SetBoosterGage(boosterValue / maxBoosterValue);
     }
 

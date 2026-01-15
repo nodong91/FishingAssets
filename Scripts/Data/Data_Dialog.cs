@@ -83,6 +83,7 @@ public class Data_Dialog : ScriptableObject
             None = 0,// 닫기
             Out = 1,// 섬으로 들어가기
             FishPrice = 2,// 마을로 들어가기
+            Inn = 3,// 마을로 들어가기
             Upgrade = 5,// 스킬 업그레이드
             Rest = 6,// 휴식 - 잠자기
             Street = 7,// 거리 열기

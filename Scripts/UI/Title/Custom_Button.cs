@@ -25,6 +25,7 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
 
     public void SetButton(Action _click, Action<Custom_Button> _enter = null, Action<Custom_Button> _exit = null)
     {
+        Debug.LogWarning("Custom_Button SetButton");
         actionClick = _click;
         actionEnter = _enter;
         actionExit = _exit;

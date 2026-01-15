@@ -20,6 +20,7 @@ public class Option_Language : MonoBehaviour
     const string _fx = "etc_1019";
     const string _enviroment = "etc_1020";
 
+    const string _resetCollection = "etc_1029";
     const string _title = "etc_1021";
     const string _saveNexit = "etc_1022";
 
@@ -47,6 +48,7 @@ public class Option_Language : MonoBehaviour
     public TMPro.TMP_Text enviromentText;
 
     [Header(" [ ¼¼ÆÃ ]")]
+    public TMPro.TMP_Text resetCollectionText;
     public TMPro.TMP_Text titleText;
     public TMPro.TMP_Text saveNexitText;
 
@@ -71,6 +73,7 @@ public class Option_Language : MonoBehaviour
         fxText.text = Singleton_Data.INSTANCE.GetLanguage(_fx);
         enviromentText.text = Singleton_Data.INSTANCE.GetLanguage(_enviroment);
 
+        resetCollectionText.text = Singleton_Data.INSTANCE.GetLanguage(_resetCollection);
         titleText.text = Singleton_Data.INSTANCE.GetLanguage(_title);
         saveNexitText.text = Singleton_Data.INSTANCE.GetLanguage(_saveNexit);
     }

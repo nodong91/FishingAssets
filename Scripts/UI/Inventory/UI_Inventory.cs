@@ -589,6 +589,12 @@ public class UI_Inventory : MonoBehaviour
                 break;
 
             case ItemStruct.ItemType.Repair:
+                if (item.id == "us_2002")
+                {
+                    AllRepair();// 전체 수리
+                    SetEmptySlot(selectSlot);// 사용한 아이템 비우기
+                    return;
+                }
                 RepairMode(true);// 수리 모드 켜기
                 break;
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,8 +29,6 @@ public class Instancer : MonoBehaviour
 {
     public LayerMask layerMask;
     public List<BATCH> setBatch = new List<BATCH>();
-    public GameObject[] setHights;
-    //public GameObject temp;
     public bool gpuInstancing;
     public List<GameObject> MissingMaterials = new List<GameObject>();
 
@@ -56,7 +53,107 @@ public class Instancer : MonoBehaviour
     {
         // 매터리얼 - Enable GPU Instancing 활성화
         MeshFilter[] tempFilter = gameObject.GetComponentsInChildren<MeshFilter>();
-        FilterListing(CombineFilterDictionary(tempFilter));
+        Dictionary<string, List<MeshFilter>> meshFilter = new Dictionary<string, List<MeshFilter>>();
+        for (int i = 0; i < tempFilter.Length; i++)
+        {
+            Renderer addRenderer = tempFilter[i].GetComponent<Renderer>();
+            Material[] addMaterials = addRenderer.sharedMaterials;
+            for (int j = 0; j < addMaterials.Length; j++)
+            {
+                string dictKey = tempFilter[i].sharedMesh.name + addMaterials[j].name;
+                if (meshFilter.ContainsKey(dictKey) == false)
+                {
+                    meshFilter[dictKey] = new List<MeshFilter>();
+                }
+                meshFilter[dictKey].Add(tempFilter[i]);
+            }
+        }
+        Debug.LogWarning(meshFilter.Count);
+        FilterListing(meshFilter);
+    }
+
+    void FilterListing(Dictionary<string, List<MeshFilter>> _meshFilter)
+    {
+        List<List<MeshFilter>> newMeshFilter = new List<List<MeshFilter>>();
+        foreach (var child in _meshFilter)
+        {
+            int dictCount = 0;
+            List<MeshFilter> temp = new List<MeshFilter>();
+            int count = 0;
+            for (int i = 0; i < child.Value.Count; i++)
+            {
+                if (count < 1023)
+                {
+                    count++;
+                    temp.Add(child.Value[i]);
+                }
+                else
+                {
+                    dictCount++;
+                    count = 0;
+                    newMeshFilter.Add(temp);
+                    temp = new List<MeshFilter>();
+                }
+            }
+            newMeshFilter.Add(temp);
+        }
+        SetMatrix(newMeshFilter);
+    }
+
+    void SetMatrix(List<List<MeshFilter>> newMeshFilter)
+    {
+        setBatch = new List<BATCH>();
+        for (int i = 0; i < newMeshFilter.Count; i++)
+        {
+            List<MeshFilter> newMesh = newMeshFilter[i];
+            int sliceValue = newMesh.Count;
+            var matrices = new Matrix4x4[sliceValue];
+            int matriceCount = 0;
+            for (int j = 0; j < sliceValue; j++)
+            {
+                matrices[matriceCount % sliceValue] = FindMatrix(newMesh[j]);
+                matriceCount++;
+
+                if (matriceCount % sliceValue == 0)
+                {
+                    Mesh addMesh = newMesh[j].sharedMesh;
+                    Renderer addRenderer = newMesh[j].GetComponent<Renderer>();
+                    Material[] addMaterials = addRenderer.sharedMaterials;
+                    for (int m = 0; m < addMaterials.Length; m++)
+                    {
+                        if (addMaterials[m] != null)
+                        {
+                            addMaterials[m].enableInstancing = gpuInstancing;
+                            Debug.LogWarning(addMaterials[m].name);
+                        }
+                        else
+                        {
+                            MissingMaterials.Add(newMesh[j].gameObject);
+                        }
+                    }
+                    BATCH addBatch = new BATCH(addMesh, addMaterials, matrices);
+                    setBatch.Add(addBatch);
+                }
+            }
+        }
+    }
+
+    Matrix4x4 FindMatrix(MeshFilter addMesh)
+    {
+        //Transform parent = addMesh.transform.parent;
+        Vector3 position = addMesh.transform.position;  // 오브젝트 위치
+        Quaternion rotate = addMesh.transform.rotation;// 오브젝트 회전
+        Vector3 scale = addMesh.transform.localScale;// 오브젝트 스케일
+        //while (parent != null)
+        //{
+        //    scale = new Vector3(
+        //        scale.x * parent.localScale.x,
+        //        scale.y * parent.localScale.y,
+        //        scale.z * parent.localScale.z
+        //        );
+        //    parent = parent.parent;
+        //}
+        return Matrix4x4.TRS(position, rotate, scale);
     }
 
     //public void SetHight()
@@ -90,15 +187,15 @@ public class Instancer : MonoBehaviour
 
     //======================================================================================================================
 
-    void Start()
-    {
-        Renderer[] hideRenderer = gameObject.GetComponentsInChildren<Renderer>();
-        for (int i = 0; i < hideRenderer.Length; i++)
-        {
-            hideRenderer[i].enabled = false;
-        }
-        //CloneMaterial();
-    }
+    //void Start()
+    //{
+    //    Renderer[] hideRenderer = gameObject.GetComponentsInChildren<Renderer>();
+    //    for (int i = 0; i < hideRenderer.Length; i++)
+    //    {
+    //        hideRenderer[i].enabled = false;
+    //    }
+    //    //CloneMaterial();
+    //}
     //public List<Material> cloneMaterial = new List<Material>();
     //public Material cloneMat;
     //void CloneMaterial()
@@ -117,120 +214,20 @@ public class Instancer : MonoBehaviour
     //    //}
     //}
 
-    private void Update()
-    {
-        UpdateBatch();
-    }
+    //private void Update()
+    //{
+    //    UpdateBatch();
+    //}
 
     public void UpdateBatch()
     {
-        foreach (var batch in setBatch)
+        for (int i = 0; i < setBatch.Count; i++)
         {
-            for (int i = 0; i < batch.mat.Length; i++)
+            BATCH batch = setBatch[i];
+            for (int j = 0; j < batch.mat.Length; j++)
             {
-                Graphics.DrawMeshInstanced(batch.mesh, i, batch.mat[i], batch.matrix, batch.matrix.Length);
-                //Graphics.DrawMeshInstanced(batch.mesh, i, cloneMat, batch.matrix, batch.matrix.Length);
+                Graphics.DrawMeshInstanced(batch.mesh, j, batch.mat[j], batch.matrix, batch.matrix.Length);
             }
         }
-    }
-
-    Dictionary<string, List<MeshFilter>> CombineFilterDictionary(MeshFilter[] _tempFilter)
-    {
-        Dictionary<string, List<MeshFilter>> meshFilter = new Dictionary<string, List<MeshFilter>>();
-        for (int i = 0; i < _tempFilter.Length; i++)
-        {
-            Renderer addRenderer = _tempFilter[i].GetComponent<Renderer>();
-            Material[] addMaterials = addRenderer.sharedMaterials;
-            string dictKey = _tempFilter[i].sharedMesh.name + addMaterials[0].name;
-            if (meshFilter.ContainsKey(dictKey) == false)
-            {
-                meshFilter[dictKey] = new List<MeshFilter>();
-            }
-            meshFilter[dictKey].Add(_tempFilter[i]);
-        }
-        return meshFilter;
-    }
-
-    void FilterListing(Dictionary<string, List<MeshFilter>> _meshFilter)
-    {
-        List<List<MeshFilter>> newMeshFilter = new List<List<MeshFilter>>();
-        foreach (var child in _meshFilter)
-        {
-            List<MeshFilter> temp = new List<MeshFilter>();
-            int count = 0;
-            for (int i = 0; i < child.Value.Count; i++)
-            {
-                if (count < 1023)
-                {
-                    count++;
-                    temp.Add(child.Value[i]);
-                }
-                else
-                {
-                    count = 0;
-                    newMeshFilter.Add(temp);
-                    temp = new List<MeshFilter>();
-                }
-            }
-            newMeshFilter.Add(temp);
-        }
-
-        setBatch = new List<BATCH>();
-        for (int i = 0; i < newMeshFilter.Count; i++)
-        {
-            SetMatrix(newMeshFilter[i]);
-        }
-        Debug.LogWarning("SetBatch : " + setBatch.Count);
-    }
- 
-    void SetMatrix(List<MeshFilter> _tempFilter)
-    {
-        int sliceValue = _tempFilter.Count;
-        var matrices = new Matrix4x4[sliceValue];
-        int matriceCount = 0;
-        for (int i = 0; i < sliceValue; i++)
-        {
-            matrices[matriceCount % sliceValue] = FindMatrix(_tempFilter[i]);
-            matriceCount++;
-
-            if (matriceCount % sliceValue == 0)
-            {
-                Mesh addMesh = _tempFilter[i].sharedMesh;
-                Renderer addRenderer = _tempFilter[i].GetComponent<Renderer>();
-                Material[] addMaterials = addRenderer.sharedMaterials;
-                for (int m = 0; m < addMaterials.Length; m++)
-                {
-                    if (addMaterials[m] != null)
-                    {
-                        addMaterials[m].enableInstancing = gpuInstancing;
-                        Debug.LogWarning(addMaterials[m].name);
-                    }
-                    else
-                    {
-                        MissingMaterials.Add(_tempFilter[i].gameObject);
-                    }
-                }
-                BATCH addBatch = new BATCH(addMesh, addMaterials, matrices);
-                setBatch.Add(addBatch);
-            }
-        }
-    }
-
-    Matrix4x4 FindMatrix(MeshFilter addMesh)
-    {
-        Transform parent = addMesh.transform.parent;
-        Vector3 pos = addMesh.transform.position;  // 오브젝트 위치
-        Quaternion rot = addMesh.transform.rotation;// 오브젝트 회전
-        Vector3 scale = addMesh.transform.localScale;// 오브젝트 스케일
-        while (parent != null)
-        {
-            scale = new Vector3(
-                scale.x * parent.localScale.x,
-                scale.y * parent.localScale.y,
-                scale.z * parent.localScale.z
-                );
-            parent = parent.parent;
-        }
-        return Matrix4x4.TRS(pos, rot, scale);
     }
 }

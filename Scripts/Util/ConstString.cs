@@ -115,6 +115,7 @@ public class Const_Tutorial
     public const string _newGame = "NewGame";
     public const string _fillFuel = "FillFuel";
     public const string _firstFishing = "FirstFishing";
+    public const string _firstShop = "FirstShop";
     public const string _fishingNews = "FishingNews";
     public const string _booster = "Booster";
 }
@@ -135,6 +136,7 @@ public class Const_Dialog
     // 생선장수
     public const string _1001 = "Data_Dialog_1001";
     public const string _1002 = "Data_Dialog_1002";
+    public const string _1003 = "Data_Dialog_1003";
     // 조선소
     public const string _2001 = "Data_Dialog_2001";
     public const string _2002 = "Data_Dialog_2002";

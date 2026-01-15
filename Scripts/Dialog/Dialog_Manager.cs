@@ -73,7 +73,6 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         {
             // 오픈
             dataNPC = _npc;
-            Option_Manager.current.SetThemeMusic(dataNPC.themeMusic);// NPC 테마 음악 설정
             dataDialog = Singleton_Data.INSTANCE.Dict_Dialog[_dialogID];
             Dialog_Npc(dataDialog);
         }
@@ -225,6 +224,12 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
 
                 break;
 
+            case SelectStruct.SelectType.Inn:
+                Data_NPC inn_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
+                Option_Manager.current.SetThemeMusic(inn_NPC.themeMusic);// NPC 테마 음악 설정
+                DialogStart_NPC(inn_NPC, Const_Dialog._3001);
+                return;
+
             case SelectStruct.SelectType.Out:
                 // 섬 나가기
                 Game_Manager.current.GetLanding.BackButton();
@@ -299,8 +304,20 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 break;
 
             case Data_ItemList.InventoryType.Shop:
-                // 상점 열기
-                Game_Manager.current.GetInventory.OpenShop(_data);
+                if (Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._firstShop) == false)
+                {
+                    Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._firstShop);// 튜토완료
+
+                    Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._shop];
+                    DialogStart_NPC(data_NPC, Const_Dialog._1003);
+                    Debug.LogWarning("상점 대화 열기");
+                    return;
+                }
+                else
+                {
+                    // 상점 열기
+                    Game_Manager.current.GetInventory.OpenShop(_data);
+                }
                 break;
 
             case Data_ItemList.InventoryType.Shipyard:
@@ -309,7 +326,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 break;
 
             case Data_ItemList.InventoryType.Inn:
-                // 밀수 열기
+                // 여관 열기
                 Game_Manager.current.GetInventory.OpenInn(_data);
                 break;
 

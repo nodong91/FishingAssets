@@ -63,7 +63,29 @@ public class UI_Inventory_Base : MonoBehaviour
 
         if (Game_Manager.current.shipData != null)// 배가 있어야
         {
-            Vector2Int invenSize = (slotType == SlotType.MyBox) ? Game_Manager.current.currentStatus.maxBoxSize : saveInventoryData.invenSize;
+            Vector2Int invenSize;
+            switch (slotType)
+            {
+                //case SlotType.None:
+                //    break;
+                //case SlotType.Shop:
+                //    break;
+                //case SlotType.Shipyard:
+                //    break;
+                //case SlotType.Result:
+                //    break;
+                //case SlotType.Submit:
+                //    break;
+                case SlotType.Storage:
+                    invenSize = Game_Manager.current.currentStatus.storageSize;
+                    break;
+                case SlotType.MyBox:
+                    invenSize = Game_Manager.current.currentStatus.maxBoxSize;
+                    break;
+                default:
+                    invenSize = saveInventoryData.invenSize;
+                    break;
+            }
             SetInventorySlot(invenSize);// 데이터 불러온 이후
             yield return null;
 
@@ -102,7 +124,7 @@ public class UI_Inventory_Base : MonoBehaviour
 
     public void SetInventorySlot(Vector2Int _size)// 인벤토리 세팅
     {
-        Debug.LogWarning($"{gameObject.name} : {_size}");
+        Debug.LogWarning($"{slotType} : {_size}");
         if (allSlots != null)// 기존 슬롯 모두 제거
         {
             foreach (var slot in allSlots)

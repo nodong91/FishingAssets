@@ -82,6 +82,7 @@ public class UI_Landing : MonoBehaviour
 
     void EnterButton(Custom_Button _button)
     {
+        SetLanguage();
         currentButton = _button;
         _button.buttonImage.gameObject.SetActive(true);
     }
@@ -108,7 +109,7 @@ public class UI_Landing : MonoBehaviour
         SetLandingCanvas(true);// 시작
         Game_Manager.current.OutOfControll(true);
 
-        SetLanguage();
+        //SetLanguage();
     }
 
     void RemoveUI()
@@ -137,8 +138,8 @@ public class UI_Landing : MonoBehaviour
             case LandingSetting.LandingType.Shipyard:
                 return shipyardUI;
 
-            //case LandingSetting.LandingType.Board:
-            //    return boardUI;
+                //case LandingSetting.LandingType.Board:
+                //    return boardUI;
         }
         return null;
     }
@@ -239,7 +240,7 @@ public class UI_Landing : MonoBehaviour
         if (CheckShip() == false || CheckEnergy() == false || CheckFix() == false)
             return;
 
-        currentType = LandingType.None;
+        //currentType = LandingType.None;
         inlanding = false;
         SetLandingCanvas(false);// 섬에서 나가기
 
@@ -251,7 +252,7 @@ public class UI_Landing : MonoBehaviour
 
     public void FuelButton()// 연료 채우기
     {
-        if (CheckShip() == false)
+        if (CheckShip() == false || currentType == LandingType.Energy)
             return;
 
         currentType = LandingType.Energy;
@@ -262,6 +263,9 @@ public class UI_Landing : MonoBehaviour
 
     public void RestButton()// 휴식
     {
+        if (currentType == LandingType.Energy)
+            return;
+
         currentType = LandingType.Rest;
         Game_Manager.current.GetRestManager.OpenCanvas(true);
         //Game_Manager.current.currentLand.CameraOutFouce(true);
@@ -269,23 +273,26 @@ public class UI_Landing : MonoBehaviour
 
     void ShopButton()
     {
-        if (CheckShip() == false)
+        if (CheckShip() == false || currentType == LandingType.Shop)
             return;
 
         currentType = LandingType.Shop;
         SetLandingCanvas(false);        // 샵 버튼 누르면 랜드 UI 제거
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._shop];
-        //Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);// 상점 음악 설정
+        Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);// NPC 테마 음악 설정
         Game_Manager.current.GetDialog.DialogStart_NPC(data_NPC, Const_Dialog._1001);
         Game_Manager.current.CurrentLand.CameraOutFouce(true);
     }
 
     public void ShipyardButton()// 조선소
     {
+        if (currentType == LandingType.Shipyard)
+            return;
+
         currentType = LandingType.Shipyard;
         SetLandingCanvas(false);        // 조선소 버튼 누르면 랜드 UI 제거
         Data_NPC data_NPC = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._shipyard];
-        //Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);// 조선소 음악 설정
+        Option_Manager.current.SetThemeMusic(data_NPC.themeMusic);// NPC 테마 음악 설정
         Game_Manager.current.CurrentLand.CameraOutFouce(true);
 
         if (Game_Manager.current.shipData == null)// 배가 없다면
@@ -301,7 +308,8 @@ public class UI_Landing : MonoBehaviour
 
     void DownTownButton()
     {
-        if (CheckShip() == false)
+        Debug.LogWarning("다운타운 버튼");
+        if (CheckShip() == false || currentType == LandingType.DownTown)
             return;
 
         currentType = LandingType.DownTown;
@@ -321,7 +329,7 @@ public class UI_Landing : MonoBehaviour
 
     void StorageButton()
     {
-        if (CheckShip() == false)
+        if (CheckShip() == false || currentType == LandingType.Storage)
             return;
 
         currentType = LandingType.Storage;
@@ -348,7 +356,7 @@ public class UI_Landing : MonoBehaviour
 
     public void BoardButton()
     {
-        if (CheckShip() == false)
+        if (CheckShip() == false || currentType == LandingType.Board)
             return;
 
         currentType = LandingType.Board;
@@ -402,6 +410,7 @@ public class UI_Landing : MonoBehaviour
 
     public void OpenIslandUI()
     {
+        currentType = LandingType.None;
         SetLandingCanvas(true);// 랜드 UI 열기
         Game_Manager.current.CurrentLand.CameraOutFouce(false);
     }

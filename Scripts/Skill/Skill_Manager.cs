@@ -45,12 +45,12 @@ public class Skill_Manager : MonoBehaviour
         closeButton.SetButton(CloseCanvas);
         resetButton.SetButton(SkillReset);
 
-        activeDescription.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._activeSkill);
         OpenCanvas(false);
     }
 
     public void OpenCanvas(bool _open)
     {
+        activeDescription.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._activeSkill);
         SetSkillPrice();
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }

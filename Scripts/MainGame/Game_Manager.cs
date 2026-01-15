@@ -168,6 +168,7 @@ public class Game_Manager : MonoBehaviour
         GetSkill.SetStart();
         GetMinimap.SetStart();
         GetFishingNews.SetStart();
+        OutOfControll(true);// 처음에 플레이어 못움직이게
 
         string shipID = continueData.shipData;// 배 세팅
         if (Singleton_Data.INSTANCE.Dict_Ship.ContainsKey(shipID) == true)
@@ -210,6 +211,8 @@ public class Game_Manager : MonoBehaviour
         }
         else
         {
+            Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._newGame);// 튜토완료
+
             GetMainUI.OpenCanvas(false);
             Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._player];
             GetDialog.DialogStart_NPC(npc, Const_Dialog._0001);// 튜토리얼 대화 시작
@@ -240,11 +243,11 @@ public class Game_Manager : MonoBehaviour
 
     public void ChangeStatus(Data_Ship _shipData)// 선박 변경
     {
-        bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._newGame);
-        if (isCompleted == false)
-        {
-            Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._newGame);// 튜토완료
-        }
+        //bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._newGame);
+        //if (isCompleted == false)
+        //{
+        //    Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._newGame);// 튜토완료
+        //}
 
         continueData = Singleton_Continue.INSTANCE.LoadContinue();
         shipData = _shipData;
