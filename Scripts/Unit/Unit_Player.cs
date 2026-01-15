@@ -260,25 +260,26 @@ public class Unit_Player : MonoBehaviour
 
     public void ActiveBooster(bool _on)
     {
-        //Debug.LogWarning($"{maxBoosterSpeed} : {boosterValue}/{maxBoosterValue}");
-        if (maxBoosterValue == 0)
-            return;
-
-        // 부스터
-        if (boosting != null)
-            StopCoroutine(boosting);
-        if (_on == true)
+        int boosterSpeedLevel = Game_Manager.current.GetSkill.skill_Setting.Level_BusterSpeed;
+        Debug.LogWarning($"부스터 레벨 {boosterSpeedLevel}={maxBoosterSpeed}");
+        if (boosterSpeedLevel > 0)
         {
-            boosterSpeed = maxBoosterSpeed;// 부스터 최고 속도 1이면 두배속
+            // 부스터
+            if (boosting != null)
+                StopCoroutine(boosting);
+            if (_on == true)
+            {
+                boosterSpeed = maxBoosterSpeed;// 부스터 최고 속도 1이면 두배속
+            }
+            else
+            {
+                boosting = StartCoroutine(BoosterAcceleration());
+            }
+            // 부스터 게이지
+            if (boosterGage != null)
+                StopCoroutine(boosterGage);
+            boosterGage = StartCoroutine(SetBoosterGage(_on));
         }
-        else
-        {
-            boosting = StartCoroutine(BoosterAcceleration());
-        }
-        // 부스터 게이지
-        if (boosterGage != null)
-            StopCoroutine(boosterGage);
-        boosterGage = StartCoroutine(SetBoosterGage(_on));
     }
 
     IEnumerator BoosterAcceleration()

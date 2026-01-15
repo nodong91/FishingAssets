@@ -18,14 +18,13 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
     Action actionClick;
     Action<Custom_Button> actionEnter, actionExit;
     Custom_Button_Local buttonLocal;
-    bool clicked = false;
+    //bool clicked = false;
 
     public delegate void GetLanguageDelegate();
     public GetLanguageDelegate GetLanguage;
 
     public void SetButton(Action _click, Action<Custom_Button> _enter = null, Action<Custom_Button> _exit = null)
     {
-        Debug.LogWarning("Custom_Button SetButton");
         actionClick = _click;
         actionEnter = _enter;
         actionExit = _exit;
@@ -35,31 +34,34 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
             buttonLocal = _local;
         }
     }
-  
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (clicked == false)
-        {
-            clicked = true;
-            StartCoroutine(ClickAnimation());
-        }
+        Debug.LogWarning("Custom_Button SetButton");
+        //if (clicked == false)
+        //{
+        if (clickCoroutine != null)
+            StopCoroutine(clickCoroutine);
+        StartCoroutine(ClickAnimation());
+        //}
         if (buttonLocal != null)
             buttonLocal.ChangeLanguage();
     }
-
+    Coroutine clickCoroutine;
     IEnumerator ClickAnimation()
     {
+        //clicked = true;
         float prevSize = 1f;
         float normalize = 0f;
         while (normalize < 1f)
         {
             normalize += Time.deltaTime * 3f;
-            float currentSize = Mathf.Lerp(prevSize, 1.2f, normalize * 3f);
+            float currentSize = Mathf.Lerp(prevSize, 1.1f, normalize * 3f);
             transform.localScale = Vector3.one * currentSize;
             yield return null;
         }
         actionClick?.Invoke();
-        clicked = false;
+        //clicked = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -73,7 +75,7 @@ public class Custom_Button : MonoBehaviour, IPointerClickHandler, IPointerEnterH
                 break;
 
             case OverStyle.Scale:
-                transform.localScale = Vector3.one * 1.2f;
+                transform.localScale = Vector3.one * 1.1f;
                 break;
         }
     }

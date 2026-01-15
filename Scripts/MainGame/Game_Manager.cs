@@ -68,32 +68,32 @@ public class Game_Manager : MonoBehaviour
         StartCoroutine(SetStart());
     }
 
-    void Update()// 아이템 추가 테스트
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            GetMainUI.MoveMoney(1000f);// 아이템 추가 테스트
-            Debug.LogError("머니 치트");
-        }
+    //void Update()// 아이템 추가 테스트
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Alpha1))
+    //    {
+    //        GetMainUI.MoveMoney(1000f);// 아이템 추가 테스트
+    //        Debug.LogError("머니 치트");
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            GetInventory.AddPickUpItem("fs_" + addItemTest);
-            Debug.LogError("아이템 치트");
-        }
+    //    if (Input.GetKeyDown(KeyCode.Alpha2))
+    //    {
+    //        GetInventory.AddPickUpItem("fs_" + addItemTest);
+    //        Debug.LogError("아이템 치트");
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            GetPlayer.TakeDamage();
-            Debug.LogError("충돌");
-        }
+    //    if (Input.GetKeyDown(KeyCode.Alpha3))
+    //    {
+    //        GetPlayer.TakeDamage();
+    //        Debug.LogError("충돌");
+    //    }
 
-        if (Input.GetKeyUp(KeyCode.Alpha4))
-        {
-            GetFishing.SetFishingTest("fs_" + addItemTest);
-            Debug.LogError("물고기 치트");
-        }
-    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha4))
+    //    {
+    //        GetFishing.SetFishingTest("fs_" + addItemTest);
+    //        Debug.LogError("물고기 치트");
+    //    }
+    //}
 
     public void InputSpacebar(bool _input)
     {
@@ -105,7 +105,7 @@ public class Game_Manager : MonoBehaviour
         SetBooster();
     }
 
-    public void SetBooster()
+    void SetBooster()
     {
         GetSkill.skill_Setting.GetBooster(out float _boosterSpeed, out float _boosterValue);// 부스터 스탯 가져오기
         player.SetBooster(_boosterSpeed, _boosterValue);
@@ -176,6 +176,7 @@ public class Game_Manager : MonoBehaviour
             shipData = Singleton_Data.INSTANCE.Dict_Ship[shipID];
             GetInventory.TryDestroySlot = continueData.destroySlot;// 부서진 슬롯
             ChangeStatus(shipData);
+            SetBooster();
         }
     }
 
@@ -329,7 +330,16 @@ public class Game_Manager : MonoBehaviour
             {
                 if (GetContinue != null)
                 {
-                    instPlayer = Instantiate(player, GetContinue.playerPosition, GetContinue.playerRotation, transform);
+                    Data_Ship ship = Singleton_Data.INSTANCE.Dict_Ship[GetContinue.shipData];
+                    if (GetContinue.destroySlot.Count >= ship.status.shipHealth)
+                    {
+                        Transform landingPoint = CurrentLand.landingPoint.transform;
+                        instPlayer = Instantiate(player, landingPoint.position, landingPoint.rotation, transform);
+                    }
+                    else
+                    {
+                        instPlayer = Instantiate(player, GetContinue.playerPosition, GetContinue.playerRotation, transform);
+                    }
                 }
                 else
                 {
@@ -817,15 +827,5 @@ public class Game_Manager : MonoBehaviour
         eventReset = true;
         Map_Generator.current.ResetArea();// 맵 리셋
         GetFishingNews.NextDay();// 낚시 뉴스 다음날
-    }
-
-    public bool TryEvnet()
-    {
-        if (eventReset == true && lightMode == DayType.Night)
-        {
-            eventReset = false;
-            return true;
-        }
-        return false;
     }
 }

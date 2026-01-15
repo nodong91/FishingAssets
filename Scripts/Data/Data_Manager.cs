@@ -435,7 +435,7 @@ public class Data_Manager : Data_Parse
             catchPower += _status.catchPower * _remove;
             catchMaxHealth += _status.catchMaxHealth * _remove;
             //catchAttakSpeed += _status.catchAttakSpeed * _remove;
-            shipSpeed += _status.shipSpeed * _remove;
+            shipSpeed += shipSpeed * _status.shipSpeed * _remove;
             maxWeight += _status.maxWeight * _remove;
             if (maxEnergy > 0)// 최대 연료가 0보다 클때
                 maxEnergy += _status.maxEnergy * _remove;

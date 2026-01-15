@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95919c93bd4d2b64c971e788a3a6b19a, type: 3}
+  m_Name: Data_Event_0001 3
+  m_EditorClassIdentifier: 
+  eventStruct:
+    contents: ev_0001_b
+    emotionType: 0
+    dialogTypes:
+    - replaceText: ev_0001_c
+      textSize: 25
+      typingSpeed: 0
+      textColor: {r: 1, g: 0.96833915, b: 0.10849059, a: 0}
+      actionType: 1
+      actionSpeed: 10
+      actionInterval: 0.5
+      actionAngle: {x: 0, y: 10}
+  eventSelect:
+  - selectDialog: ev_0001_d
+    selectEvent:
+    - {fileID: 11400000, guid: b37f75c75c78d144bb755afcce336fff, type: 2}
+    - {fileID: 11400000, guid: acce0f3e145b44f4aab3af57d7c7bec9, type: 2}
+  - selectDialog: ev_0001_e
+    selectEvent:
+    - {fileID: 11400000, guid: 61a442eb9f8d40f4899ebe8659333f51, type: 2}
+  - selectDialog: ev_0001_f
+    selectEvent:
+    - {fileID: 11400000, guid: 7097aeef4031b114696d427ff13a53bb, type: 2}
+  eventName: ev_0001_a

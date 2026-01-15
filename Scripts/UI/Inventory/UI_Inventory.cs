@@ -591,7 +591,7 @@ public class UI_Inventory : MonoBehaviour
             case ItemStruct.ItemType.Repair:
                 if (item.id == "us_2002")
                 {
-                    AllRepair();// 전체 수리
+                    AllRepair(true);// 전체 수리
                     SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                     return;
                 }
@@ -654,9 +654,16 @@ public class UI_Inventory : MonoBehaviour
         Cursor_Manager.current?.OnMouseRepair(_repair);// 커서 변경
     }
 
-    public void AllRepair()
+    public void AllRepair(bool _free)
     {
-        myBox.FixAll();
+        if (_free == true)
+        {
+            myBox.FixAllFree();
+        }
+        else
+        {
+            myBox.FixAll();
+        }
     }
 
     public void OnPointerEnter(UI_Inventory_Slot _slot, SlotType _dragSlotType)

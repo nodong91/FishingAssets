@@ -62,11 +62,11 @@ public class UI_ChangeShip : MonoBehaviour
 
     void ShipEnter(Custom_Button _button)
     {
-        _button.buttonImage.color = Color.white;
+        //_button.buttonImage.color = Color.white;
     }
 
     void ShipExit(Custom_Button _button)
     {
-        _button.buttonImage.color = Color.gray;
+        //_button.buttonImage.color = Color.gray;
     }
 }

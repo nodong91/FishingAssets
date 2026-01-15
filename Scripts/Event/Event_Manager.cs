@@ -49,9 +49,17 @@ public class Event_Manager : MonoBehaviour
             eventKeys.Add(child.Key);
         }
     }
-
+    public float eventPercent = 10f;
+    const float eventMaxPercent = 10f;
     public void StartEvent()
     {
+        if (Game_Manager.current.eventReset == true)
+        {
+            // 이벤트 확률 초기화
+            Game_Manager.current.eventReset = false;
+            eventPercent = eventMaxPercent;
+        }
+
         if (eventKeys == null || eventKeys.Count == 0)
             SetDictKey();
 
@@ -60,18 +68,12 @@ public class Event_Manager : MonoBehaviour
         {
             activeEvent = testEvent;// 테스트 이벤트로 설정
         }
-        //else if (Game_Manager.current.TryEvnet() == true)
-        //{
-        //    Game_Manager.current.eventReset = false;
-        //    string setEventKey = eventKeys[Random.Range(0, eventKeys.Count)];// 랜덤 이벤트
-        //    activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
-        //}
         else
         {
-            float randomValue = Random.Range(0f, 10f);
-            if (randomValue < 3f)
+            float randomValue = Random.Range(0f, eventMaxPercent);
+            if (randomValue < eventPercent)
             {
-                Game_Manager.current.eventReset = false;
+                eventPercent = Mathf.Max(1f, eventPercent - 2f);
                 string setEventKey = eventKeys[Random.Range(0, eventKeys.Count)];// 랜덤 이벤트
                 activeEvent = Singleton_Data.INSTANCE.Dict_Event[setEventKey];
 

@@ -43,7 +43,7 @@ public class UI_Shop : UI_Inventory_Base
 
     void FixAllButton()
     {
-        Game_Manager.current.GetInventory.AllRepair();
+        Game_Manager.current.GetInventory.AllRepair(false);
     }
 
     public override void OpenCanvas(bool _open)

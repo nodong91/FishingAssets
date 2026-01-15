@@ -727,6 +727,11 @@ public class UI_Inventory_Base : MonoBehaviour
         }
 
         Game_Manager.current.GetMainUI.MoveMoney(-fixPrice);// AllFix
+        FixAllFree();
+    }
+
+    public void FixAllFree()
+    {
         Game_Manager.current.GetPlayer.AddHealth(destroySlot.Count);// µ¥¹ÌÁö
         for (int i = 0; i < destroySlot.Count; i++)
         {

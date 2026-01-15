@@ -16,7 +16,7 @@ public class Skill_Setting : MonoBehaviour
     const float constCatchPower = 0.7f;//- 레벨 10
     const float constCatchHealth = 10f; //- 레벨 7
 
-    const float constShipSpeed = 0.5f;// 배의 이동 속도 - 레벨 5
+    const float constShipSpeed = 0.2f;// 배의 이동 속도 - 레벨 5
     const float constMaxWeight = 2f;// 인벤토리 중량 - 레벨 5
     const float constMaxEnergy = 10f;// 연료통 크기 - 레벨 5
     const float constEfficient = 0.1f;// 에너지 효율 - 레벨 5
@@ -205,7 +205,7 @@ public class Skill_Setting : MonoBehaviour
     public void GetBooster(out float _boosterSpeed, out float _boosterValue)
     {
         _boosterSpeed = constBoosterSpeed * Level_BusterSpeed;
-        _boosterValue = 1f + constBoosterValue * Level_BusterValue;
+        _boosterValue = constBoosterValue * (1f + Level_BusterValue);
     }
 
     public float GetCrashChance()

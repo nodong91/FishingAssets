@@ -91,17 +91,16 @@ public class Reflection_Manager : MonoBehaviour
         //}
         //instParent.gameObject.SetActive(false);
     }
-
+    Transform player => Game_Manager.current.GetPlayer.transform;
     void Update()
     {
         //instancer.UpdateBatch();
         OnPostRender();
 
         // 배 부분 물결 안생기게
-        if (Game_Manager.current == null || Game_Manager.current.GetPlayer == null)
+        if (Game_Manager.current == null || player == null)
             return;
 
-        Transform player = Game_Manager.current.GetPlayer.transform;
         instMaterial.SetVector("_ShipPosition", player.position);// 플레이어 위치 업데이트
     }
 
