@@ -626,12 +626,12 @@ public class Fishing_Manager : MonoBehaviour
 
             catchaText.SetActive(false);
             SetReward();
-
-            //bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._firstFishing);
-            //if (isCompleted == false)
-            //{
-            //    Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._firstFishing);// 튜토완료
-            //}
+            // 물고기를 한마리라도 잡으면 튜토리얼 더이상 안나옴
+            bool isCompleted = Tutorial_Manager.current.IsTutorialCompleted(Const_Tutorial._firstFishing);
+            if (isCompleted == false)
+            {
+                Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._firstFishing);// 튜토완료
+            }
         }
         else
         {

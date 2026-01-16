@@ -53,12 +53,11 @@ public class Gamble_Lottery : MonoBehaviour
     {
         maskCamera.Render();
     }
-
+    Vector3 prevPoint;
     void Update()// º¹±Ç ±Ü±â
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //Singleton_Audio.INSTANCE.Audio_LoopFX(Const_Audio._lottery);
             positionsList.Clear();
             instLine = TryLine();
             instLine.gameObject.SetActive(true);
@@ -98,6 +97,12 @@ public class Gamble_Lottery : MonoBehaviour
                         //testText.text = "³ë´çÃ·!!!!!!";
                     }
                 }
+            }
+             distance = (point - prevPoint).magnitude;
+            if (distance > 3f)
+            {
+                prevPoint = point;
+                Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._lottery);
             }
         }
         //else if (Input.GetMouseButtonUp(0))
