@@ -61,9 +61,9 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 
     public void Audio_BGM(string _id)
     {
-        AudioSource audioSource = (_id != null) ? TryAudioSource() : null;
         if (_id != null)
         {
+            AudioSource audioSource = TryAudioSource();
             audioSource.gameObject.SetActive(true);
             audioSource.name = _id;
             Debug.Log($"Audio_BGM : {audioSource.name}");
@@ -73,10 +73,11 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
             audioSource.loop = true;
             audioSource.pitch = 1.0f;
             audioSource.Play();
+
+            AudioSource origin = BGMSource;
+            BGMSource = audioSource;
+            StartCoroutine(PlayBGMAudio(origin));
         }
-        AudioSource origin = BGMSource;
-        BGMSource = audioSource;
-        StartCoroutine(PlayBGMAudio(origin));
     }
 
     IEnumerator PlayBGMAudio(AudioSource _origin)
@@ -218,28 +219,34 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
 
     public void Audio_Environment(string _id)
     {
-        if (envSource != null)// 기존 환경음 정지
-        {
-            envSource.Stop();
-            envSource.gameObject.SetActive(false);
-            audioQueue.Enqueue(envSource);
-        }
-
         if (_id == null)
             return;
 
-        AudioSource audioSource = TryAudioSource();
-        audioSource.gameObject.SetActive(true);
-        audioSource.name = _id;
-        //Debug.LogWarning($"배경음 : {_id}");
-        audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
-        audioSource.mute = masterMute == true ? true : envMute;
-        audioSource.volume = envVolume * masterVolume;
-        audioSource.loop = true;
-        audioSource.pitch = 1f;
-        audioSource.Play();
+        if (envSource != null)// 기존 환경음 정지
+        {
+            envSource.Stop();
+            //envSource.gameObject.SetActive(false);
+            //audioQueue.Enqueue(envSource);
+            envSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
+            envSource.name = _id;
+            envSource.Play();
+        }
+        else
+        {
+            AudioSource audioSource = TryAudioSource();
+            audioSource.gameObject.SetActive(true);
+            audioSource.name = _id;
+            //Debug.LogWarning($"배경음 : {_id}");
+            audioSource.clip = Singleton_Data.INSTANCE.Dict_Audio[_id].clip;
+            audioSource.mute = masterMute == true ? true : envMute;
+            audioSource.volume = envVolume * masterVolume;
+            audioSource.loop = true;
+            audioSource.pitch = 1f;
+            audioSource.Play();
 
-        envSource = audioSource;
+            envSource = audioSource;
+        }
+
     }
 
     public void SetEnvironmentMute(bool _isOn)

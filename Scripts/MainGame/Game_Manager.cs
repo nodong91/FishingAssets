@@ -177,6 +177,14 @@ public class Game_Manager : MonoBehaviour
             GetInventory.TryDestroySlot = continueData.destroySlot;// ºÎ¼­Áø ½½·Ô
             ChangeStatus(shipData);
             SetBooster();
+
+            Data_Ship ship = Singleton_Data.INSTANCE.Dict_Ship[GetContinue.shipData];
+            if (GetContinue.destroySlot.Count >= ship.status.shipHealth)
+            {
+                Transform landingPoint = CurrentLand.landingPoint.transform;
+                GetPlayer.transform.position = landingPoint.position;
+                GetPlayer.transform.rotation = landingPoint.rotation;
+            }
         }
     }
 
@@ -330,16 +338,7 @@ public class Game_Manager : MonoBehaviour
             {
                 if (GetContinue != null)
                 {
-                    Data_Ship ship = Singleton_Data.INSTANCE.Dict_Ship[GetContinue.shipData];
-                    if (GetContinue.destroySlot.Count >= ship.status.shipHealth)
-                    {
-                        Transform landingPoint = CurrentLand.landingPoint.transform;
-                        instPlayer = Instantiate(player, landingPoint.position, landingPoint.rotation, transform);
-                    }
-                    else
-                    {
-                        instPlayer = Instantiate(player, GetContinue.playerPosition, GetContinue.playerRotation, transform);
-                    }
+                    instPlayer = Instantiate(player, GetContinue.playerPosition, GetContinue.playerRotation, transform);
                 }
                 else
                 {
