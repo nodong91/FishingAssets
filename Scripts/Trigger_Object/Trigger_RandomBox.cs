@@ -47,6 +47,8 @@ public class Trigger_RandomBox : Trigger_Setting
     {
         Steam_StatsManager.current.CatchBox();// 박스 수집 체크
         Game_Manager.current.OutOfControll(true);
+        Map_Generator.current.RemoveBoxPoint(this);
+
         Game_Manager.current.GetInventory.SetReward(itemRewards);// 결과 아이템 세팅
         Game_Manager.current.GetMainUI.dele_CloseButton = CloseButton;// 인벤토리의 닫기 버튼 세팅
         Game_Manager.current.GetMainUI.OpenCanvas(false);// 메인 유아이 닫기

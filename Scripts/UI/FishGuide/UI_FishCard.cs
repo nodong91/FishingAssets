@@ -22,7 +22,7 @@ public class UI_FishCard : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
         fishStruct = _fishStruct;
         unknown = (_fishClass == null);
         ItemStruct itemStruct = _fishStruct.itemStruct;
-        nameText.text = unknown ? "???" : Singleton_Data.INSTANCE.GetLanguage(itemStruct.name);
+        nameText.text = unknown ? "???" : Singleton_Data.INSTANCE.GetLanguage(itemStruct.id);
         string color = P01_Utility.ClassColor(itemStruct.itemClass);
         idText.text = unknown ? "???" : $"<color=#{color}>{itemStruct.itemClass}</color>";
         iconImage.sprite = Singleton_Data.INSTANCE.Dict_Sprite[itemStruct.icon];

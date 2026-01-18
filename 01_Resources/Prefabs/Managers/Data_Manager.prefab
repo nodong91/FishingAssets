@@ -91,12 +91,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f04c2bb38ef69d3418b25e4208563b5c, type: 3}
   - {fileID: 8300000, guid: 1a5a03ae34971d74ea4ce32e661859bd, type: 3}
   - {fileID: 8300000, guid: 7263018427a85134e967251bcc618007, type: 3}
+  - {fileID: 8300000, guid: 998efd92f5090d94cabab22d8bd6c214, type: 3}
   - {fileID: 8300000, guid: 2761d7ea728cc48418318d97f66594fe, type: 3}
   - {fileID: 8300000, guid: 38aea7fcb77fc7e46a24f0c637e05e6d, type: 3}
   - {fileID: 8300000, guid: f994ceffde49f954eb1b53c4ed23d991, type: 3}
   - {fileID: 8300000, guid: 7f52f521a883dea4cb019a13d595fb9f, type: 3}
   - {fileID: 8300000, guid: 4e8e1b66c400ec844acb8b1a1ba5aea5, type: 3}
   - {fileID: 8300000, guid: c076808ab52c3e944ab88b2f120cacce, type: 3}
+  - {fileID: 8300000, guid: fef15e5094a9c6a4d8796b53104d10d4, type: 3}
   - {fileID: 8300000, guid: 30ef30bf28111964bac74ff40cd14be5, type: 3}
   - {fileID: 8300000, guid: 3c2d2a55f3927154b94935b3fb18720d, type: 3}
   - {fileID: 8300000, guid: 68ff178745cac8c44aa61eb7f9728ee6, type: 3}
@@ -383,6 +385,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 547b5c239ec766145bc62f2b5817515e, type: 2}
   - {fileID: 11400000, guid: 5e361271ef64e7046a481163d26c60a2, type: 2}
   - {fileID: 11400000, guid: 8b44588db27c2b64fa9565fc01b4f0e2, type: 2}
+  - {fileID: 11400000, guid: 02dbf013458597f4d804ffc528015abe, type: 2}
+  - {fileID: 11400000, guid: ced2c46d5c30a424b9ecf4019811a649, type: 2}
   - {fileID: 11400000, guid: cea078740f757734aa83e69f2c6cd749, type: 2}
   - {fileID: 11400000, guid: 0e1cb839b61206c46ae5be5fc5e05e1c, type: 2}
   - {fileID: 11400000, guid: 7107c347d59cfd7458f2ad79ddc77f59, type: 2}
@@ -1811,7 +1815,7 @@ MonoBehaviour:
       - {x: 1, y: 0}
       - {x: -1, y: 1}
       - {x: 0, y: 1}
-      - {x: 1, y: -1}
+      - {x: 1, y: 1}
       iconSize: {x: 3, y: 3, z: 0.5, w: 0.5}
       price: 470
     areaType: 3
@@ -2113,7 +2117,7 @@ MonoBehaviour:
     fishPower: 3
     fishSpeed: 4
     fishCoolTime: 5
-    fishSpellTime: 3.5
+    fishSpellTime: 3
     fishGroggyTime: 3
     fishDefenseCount: 5
     fishLazy: 0.7
@@ -2266,7 +2270,7 @@ MonoBehaviour:
     fishPower: 2.5
     fishSpeed: 3
     fishCoolTime: 5
-    fishSpellTime: 3.5
+    fishSpellTime: 2.5
     fishGroggyTime: 3
     fishDefenseCount: 4
     fishLazy: 0.85
@@ -6876,11 +6880,10 @@ MonoBehaviour:
     japanese: "\u5BBF\u5C4B"
     chinese: "\u5BA2\u6808"
   - id: di_3001_d
-    english: I am tired so I will rest for a bit before I leave
-    korean: "\uD53C\uACE4\uD558\uB2C8 \uC880 \uC26C\uB2E4 \uAC08\uAED8."
-    japanese: "\u75B2\u308C\u305F \u306E\u3067 \u5C11\u3057 \u4F11\u3093\u3067 \u304B\u3089
-      \u5E30\u308A\u307E\u3059"
-    chinese: "\u6709\u70B9 \u75B2\u5026 \u6240\u4EE5 \u6B47\u4F1A \u513F \u518D \u79BB\u5F00"
+    english: Please
+    korean: "\uBD80\uD0C1\uD574"
+    japanese: "\u304A\u9858\u3044\u3057\u307E\u3059"
+    chinese: "\u62DC\u6258\u4E86"
   - id: di_3002_a
     english: I can lend it but you have to return it within {0}
     korean: "\uBE4C\uB824 \uC904 \uC218\uB294 \uC788\uC9C0\uB9CC {0} \uB0B4\uB85C
@@ -7068,6 +7071,26 @@ MonoBehaviour:
       \uC0AC\uC6A9\uD574\uC694."
     japanese: "\u53F3\u30DE\u30A6\u30B9\u30DC\u30BF\u30F3\u3067{0}\u3092\u4F7F\u7528\u3057\u307E\u3059"
     chinese: "\u4F7F\u7528\u9F20\u6807\u53F3\u952E\u6765\u4F7F\u7528{0}"
+  - id: di_3009_a
+    english: Then I wish you {0}
+    korean: "\uADF8\uB7FC {0}\uC744 \uBE4C\uC5B4\uC694."
+    japanese: "\u305D\u308C\u3067\u306F{0}\u3092\u7948\u308A\u307E\u3059"
+    chinese: "\u90A3\u4E48\u795D\u4F60{0}"
+  - id: di_3009_b
+    english: Good luck
+    korean: "\uD589\uC6B4"
+    japanese: "\u5E78\u904B"
+    chinese: "\u597D\u8FD0"
+  - id: di_3010_a
+    english: I need a rest
+    korean: "\uD734\uC2DD\uC774 \uD544\uC694\uD574"
+    japanese: "\u4F11\u606F\u304C\u5FC5\u8981\u3067\u3059"
+    chinese: "\u6211\u9700\u8981\u4F11\u606F"
+  - id: di_3010_b
+    english: The cost of rest is {0}
+    korean: "\uD734\uC2DD \uBE44\uC6A9\uC740 {0}\uC785\uB2C8\uB2E4."
+    japanese: "\u4F11\u61A9\u8CBB\u7528\u306F{0}\u3067\u3059"
+    chinese: "\u4F11\u606F\u8D39\u7528\u662F{0}"
   - id: etc_0001
     english: Continue
     korean: "\uACC4\uC18D\uD558\uAE30"

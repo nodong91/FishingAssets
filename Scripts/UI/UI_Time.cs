@@ -43,7 +43,7 @@ public class UI_Time : MonoBehaviour
         SetSkyBox();
         TimePause(false);
 
-        StartLoanTimer(false);// 대출 타이머
+        //StartLoanTimer(loanActive);// 대출 타이머
         SetResetTime();// 게임 시작 시 초기화
     }
 

@@ -68,32 +68,45 @@ public class Game_Manager : MonoBehaviour
         StartCoroutine(SetStart());
     }
 
-    //void Update()// 아이템 추가 테스트
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Alpha1))
-    //    {
-    //        GetMainUI.MoveMoney(1000f);// 아이템 추가 테스트
-    //        Debug.LogError("머니 치트");
-    //    }
+    public void ESCButton()
+    {
+        if (GetInventory.currentType == UI_Inventory_Base.SlotType.None)
+        {
+            GetMainUI.OptionButton();
+            Debug.LogWarning("GetMainUI.OptionButton");
+        }
+        else
+        {
+            GetMainUI.CloseCanvas();
+        }
+    }
 
-    //    if (Input.GetKeyDown(KeyCode.Alpha2))
-    //    {
-    //        GetInventory.AddPickUpItem("fs_" + addItemTest);
-    //        Debug.LogError("아이템 치트");
-    //    }
+    void Update()// 아이템 추가 테스트
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            GetMainUI.MoveMoney(1000f);// 아이템 추가 테스트
+            Debug.LogError("머니 치트");
+        }
 
-    //    if (Input.GetKeyDown(KeyCode.Alpha3))
-    //    {
-    //        GetPlayer.TakeDamage();
-    //        Debug.LogError("충돌");
-    //    }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            GetInventory.AddPickUpItem("fs_" + addItemTest);
+            Debug.LogError("아이템 치트");
+        }
 
-    //    if (Input.GetKeyUp(KeyCode.Alpha4))
-    //    {
-    //        GetFishing.SetFishingTest("fs_" + addItemTest);
-    //        Debug.LogError("물고기 치트");
-    //    }
-    //}
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            GetPlayer.TakeDamage();
+            Debug.LogError("충돌");
+        }
+
+        if (Input.GetKeyUp(KeyCode.Alpha4))
+        {
+            GetFishing.SetFishingTest("fs_" + addItemTest);
+            Debug.LogError("물고기 치트");
+        }
+    }
 
     public void InputSpacebar(bool _input)
     {
@@ -108,7 +121,7 @@ public class Game_Manager : MonoBehaviour
     void SetBooster()
     {
         GetSkill.skill_Setting.GetBooster(out float _boosterSpeed, out float _boosterValue);// 부스터 스탯 가져오기
-        player.SetBooster(_boosterSpeed, _boosterValue);
+        GetPlayer.SetBooster(_boosterSpeed, _boosterValue);
         // 유아이 세팅
         GetMainUI.SetMaxBoosterValue(_boosterSpeed, _boosterValue);
     }
@@ -151,15 +164,19 @@ public class Game_Manager : MonoBehaviour
 
         while (CurrentLand == null)// 맵이 있는지 체크
             yield return null;
-        SetResetTime();// 하루 초기화 세팅
+        Map_Generator.current.SetStart(continueData);
+
+        //SetResetTime();// 하루 초기화 세팅
 
         GetTimeUI.SetStart(continueData);// 시간
         GetTimeUI.deleDayReset = SetResetTime;// 하루 초기화 델리게이트 등록
         GetMainUI.SetMoney(continueData.money);// 돈
+        LoanContinue();
 
         SetRendererFeature();
         yield return null;
 
+        GetPlayer.SetStart();
         GetMainUI.SetStart();
         GetDialog.SetStart();
         GetFishGuide.SetStart();
@@ -258,12 +275,12 @@ public class Game_Manager : MonoBehaviour
         //    Tutorial_Manager.current.CompletedTutorial(Const_Tutorial._newGame);// 튜토완료
         //}
 
-        continueData = Singleton_Continue.INSTANCE.LoadContinue();
+        //continueData = Singleton_Continue.INSTANCE.LoadContinue();
         shipData = _shipData;
         GetPlayer.SetShip(_shipData);
         AddStatus();// 선박 변경 스테이트 세팅
 
-        Singleton_Continue.INSTANCE.SaveContinue();
+        //Singleton_Continue.INSTANCE.SaveContinue();
     }
 
     public void AddStatus()
@@ -345,7 +362,7 @@ public class Game_Manager : MonoBehaviour
                     Transform landingPoint = CurrentLand.landingPoint.transform;
                     instPlayer = Instantiate(player, landingPoint.position, landingPoint.rotation, transform);
                 }
-                instPlayer.SetStart();
+                instPlayer.rb.useGravity = false;
             }
             return instPlayer;
         }
@@ -736,9 +753,20 @@ public class Game_Manager : MonoBehaviour
     public void LoanStart()
     {
         GetMainUI.timeUI.StartLoanTimer(true);// 대출금 상환 타이머 시작
-        loanPrice = 1000;
+        loanPrice = 1500;
         GetMainUI.SetLoanText(loanPrice);
         Debug.LogWarning(" 대출금 상환 타이머 시작.");
+        Singleton_Continue.INSTANCE.SaveContinue();
+    }
+
+    void LoanContinue()
+    {
+        if (continueData.loanPrice > 0f)
+        {
+            loanPrice = continueData.loanPrice;
+            loanInterest = continueData.loanInterest;
+            GetMainUI.SetLoanText(loanPrice);
+        }
     }
 
     public void LoanEnd()// 대출 상환

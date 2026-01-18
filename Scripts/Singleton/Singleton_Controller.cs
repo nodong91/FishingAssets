@@ -13,8 +13,7 @@ public class Singleton_Controller : MonoSingleton<Singleton_Controller>
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Game_Manager.current?.GetMainUI.OptionButton();
-            Debug.LogWarning("GetMainUI.OptionButton");
+            Game_Manager.current.ESCButton();
         }
 
         if (outOfControll == true)

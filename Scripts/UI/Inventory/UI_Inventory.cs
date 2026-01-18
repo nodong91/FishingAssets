@@ -606,6 +606,7 @@ public class UI_Inventory : MonoBehaviour
 
             case ItemStruct.ItemType.Lottery:// 복권
                 usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];
+                Game_Manager.current.GetLottery.gameObject.SetActive(true);
                 Game_Manager.current.GetLottery.SetLottery((int)usedStruct.etcValue);// 복권 열기
                 SetEmptySlot(selectSlot);// 사용한 아이템 비우기
                 break;

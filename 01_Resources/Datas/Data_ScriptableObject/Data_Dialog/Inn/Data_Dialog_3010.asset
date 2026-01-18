@@ -10,16 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f9fbee20e667ce4cb174eabf6347911, type: 3}
-  m_Name: Data_Dialog_3007
+  m_Name: Data_Dialog_3010
   m_EditorClassIdentifier: 
   npc: {fileID: 11400000, guid: f5051af63d2a58d4898565b06e66ba95, type: 2}
-  selectID: 
+  selectID: di_3010_a
   textStruct:
-  - contents: di_3007_a
-    emotionType: 5
-    dialogTypes: []
+  - contents: di_3010_b
+    emotionType: 1
+    dialogTypes:
+    - replaceText: 100G
+      textSize: 0
+      typingSpeed: 0
+      textColor: {r: 0.06657174, g: 0.8301887, b: 0.18086167, a: 0}
+      actionType: 0
+      actionSpeed: 0
+      actionInterval: 0
+      actionAngle: {x: 0, y: 0}
   addMoneyType: 0
   addMoney: 0
   selectStructs:
+  - selectType: 6
+    scriptableObject: {fileID: 0}
   - selectType: 1
     scriptableObject: {fileID: 0}

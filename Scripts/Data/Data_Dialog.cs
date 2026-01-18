@@ -99,8 +99,14 @@ public class Data_Dialog : ScriptableObject
         //public Data_Dialog dialogData;
         //[Header(" [ Á¶°Ç ]")]
         //public Data_Dialog_If dataDialogIf;
-
         public ScriptableObject scriptableObject;
     }
+    public enum AddMoneyType
+    {
+        None = 0,
+        Loan = 1,
+    }
+    public AddMoneyType addMoneyType;
+    public float addMoney;
     public SelectStruct[] selectStructs;
 }

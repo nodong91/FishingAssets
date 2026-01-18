@@ -91,6 +91,11 @@ public class Reflection_Manager : MonoBehaviour
         //}
         //instParent.gameObject.SetActive(false);
     }
+
+    public void SetStart()
+    {
+
+    }
     Transform player => Game_Manager.current.GetPlayer.transform;
     void Update()
     {

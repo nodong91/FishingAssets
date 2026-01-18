@@ -1,3 +1,4 @@
+using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -336,10 +337,7 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
                 break;
 
             case Data_ItemList.InventoryType.Fix_Loan:
-                // 대출 타이머 시작
-                Game_Manager.current.LoanStart();
-                FixItemSetting(_data);// 대출
-                Debug.LogWarning("대출 타이머 시작");
+
                 break;
         }
         OpenCanvas(false);
@@ -388,6 +386,8 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
             dataNPC = null;
             //Option_Manager.current.SetThemeMusic(null);
             Game_Manager.current.SetThemeMusic();
+            if (actionCoroutine != null)
+                StopCoroutine(actionCoroutine);
         }
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
     }
@@ -413,11 +413,23 @@ public class Dialog_Manager : MonoBehaviour, IPointerClickHandler
         }
         else if (endDialog == true)
         {
+            Debug.LogWarning($"대화 닫기 {dataDialog.addMoneyType}: {dataDialog.addMoney}");
+            if (dataDialog.addMoney != 0)
+            {
+                Game_Manager.current.GetMainUI.MoveMoney(dataDialog.addMoney);// 돈추가
+                if (dataDialog.addMoneyType == AddMoneyType.Loan)
+                {
+                    // 대출 타이머 시작
+                    Game_Manager.current.LoanStart();
+                    Debug.LogWarning("대출 타이머 시작");
+                }
+            }
+
             if (dataDialog.selectStructs.Length == 0)// 선택할 내용이 없다면 창닫기
             {
+                Game_Manager.current.GetLanding.OpenIslandUI();
                 OpenCanvas(false);
             }
-            Debug.LogWarning($"{dataDialog.name} 대화 끝인 상태에서 클릭 : {dataDialog.selectStructs.Length}");
         }
     }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static StaticOpenCanvas;
 
 public class Gamble_Lottery : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class Gamble_Lottery : MonoBehaviour
     {
         maskCamera.Render();
     }
+
     Vector3 prevPoint;
     void Update()// 복권 긁기
     {
@@ -64,6 +66,7 @@ public class Gamble_Lottery : MonoBehaviour
             lineList.Add(instLine);
 
             point = SetWorldPoint();
+            prevPoint = point;
             SetPoint(point);
         }
         else if (Input.GetMouseButton(0))
@@ -99,16 +102,16 @@ public class Gamble_Lottery : MonoBehaviour
                 }
             }
              distance = (point - prevPoint).magnitude;
-            if (distance > 3f)
+            if (distance > 5f)
             {
                 prevPoint = point;
                 Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._lottery);
             }
         }
-        //else if (Input.GetMouseButtonUp(0))
-        //{
-        //    Singleton_Audio.INSTANCE.Stop_LoopFX();
-        //}
+        else if (Input.GetMouseButtonUp(0))
+        {
+            //Singleton_Audio.INSTANCE.Stop_LoopFX();
+        }
     }
 
     bool CheckImage()
@@ -144,9 +147,16 @@ public class Gamble_Lottery : MonoBehaviour
         }
         else
         {
+            deleEndOpen = CloseGamble;
             Game_Manager.current.GetInventory.SetBackButton();// 닫으면 인벤토리 닫기 버튼으로 변경
         }
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStruct, _open));
+    }
+
+    void CloseGamble()
+    {
+        deleEndOpen = null;
+        gameObject.SetActive(false);
     }
 
     IEnumerator LotterySetting()

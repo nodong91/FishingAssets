@@ -59,7 +59,8 @@ public class Option_Manager : MonoBehaviour
         }
         else
         {
-            Game_Manager.current.GetMainUI?.CloseCanvas();
+            Game_Manager.current.GetMainUI?.CloseOption();
+            //Game_Manager.current.GetMainUI?.CloseCanvas();
         }
     }
 

@@ -55,7 +55,7 @@ public class UI_ChangeShip : MonoBehaviour
 
     void ShipClick(UI_ChangeShip_Slot _slot)// 배선택
     {
-        Singleton_Continue.INSTANCE.SaveContinue();// 배 변경 시 저장
+        //Singleton_Continue.INSTANCE.SaveContinue();// 배 변경 시 저장
         Game_Manager.current.ChangeStatus(_slot.shipData);
         Debug.LogWarning($"이게 뒤에 오나? : {shipList.Count} : {gameObject.name}");
     }

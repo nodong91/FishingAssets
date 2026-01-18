@@ -71,10 +71,13 @@ public class Rest_Manager : MonoBehaviour
 
     void RestButton()
     {
-        if (hour + minute > 0)
-            StartCoroutine(SetRest());
-        else
-            Game_Manager.current.GetLanding.BackButton();
+        if (Game_Manager.current.CheckMoney(100f))
+        {
+            if (hour + minute > 0)
+                StartCoroutine(SetRest());
+            else
+                Game_Manager.current.GetLanding.BackButton();
+        }
     }
 
     IEnumerator SetRest()

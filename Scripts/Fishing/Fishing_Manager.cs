@@ -686,7 +686,6 @@ public class Fishing_Manager : MonoBehaviour
 
     void OutFishing()// 낚시 나가기 버튼
     {
-        Singleton_Continue.INSTANCE.SaveContinue();// 낚시 종료 시 저장
         positionComposer.gameObject.SetActive(false);
 
         // 스타트 버튼 비활성화
@@ -699,8 +698,9 @@ public class Fishing_Manager : MonoBehaviour
         Game_Manager.current.GetMainUI.OpenCanvas(true);// 메인 유아이 다시 열기
 
         fishingCanvas.outButton.gameObject.SetActive(false);
-
         cinemachineBasicMultiChannelPerlin.AmplitudeGain = 0f;
+
+        Singleton_Continue.INSTANCE.SaveContinue();// 낚시 종료 시 저장
     }
 
 

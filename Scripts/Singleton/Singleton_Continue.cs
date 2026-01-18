@@ -18,7 +18,6 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
 
     IEnumerator SetContinue()
     {
-        //Debug.LogError("저장 : 컨티뉴");
         yield return null;
 
         Data_Continue continueData = new Data_Continue
@@ -40,6 +39,11 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
 
             loanActive = Game_Manager.current.GetMainUI.timeUI.loanActive,
             loanTime = Game_Manager.current.GetMainUI.timeUI.loanTime,
+            loanPrice = Game_Manager.current.loanPrice,
+            loanInterest = Game_Manager.current.loanInterest,
+
+            fishingPoint = Map_Generator.current.GetFishingPoint,
+            boxPoint = Map_Generator.current.GetBoxPoint,
         };
         Static_JsonManager.SaveCountinueData(Const_Save._continue, continueData);
     }
@@ -71,6 +75,12 @@ public class Singleton_Continue : MonoSingleton<Singleton_Continue>
 
             loanActive = false,
             loanTime = 0,
+
+            loanPrice = 0,
+            loanInterest = 0,
+
+            fishingPoint = null,
+            boxPoint = null,
         };
         // 기본 세팅
         return continueData;

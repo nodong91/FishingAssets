@@ -331,6 +331,11 @@ public class Data_Manager : Data_Parse
 
         public bool loanActive;// 대출 활성화 여부
         public int loanTime;// 대출 남은 시간
+        public float loanPrice;
+        public float loanInterest;
+
+        public Vector3[] fishingPoint;
+        public Vector3[] boxPoint;
     }
 
     [System.Serializable]

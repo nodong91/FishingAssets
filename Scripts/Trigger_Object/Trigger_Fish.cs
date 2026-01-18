@@ -34,6 +34,7 @@ public class Trigger_Fish : MonoBehaviour
     {
         if (onFishing == false)
             return;
+        Map_Generator.current.RemoveFishingPoint(this);
         Game_Manager.current.StartFishing();
         triggerSetting.gameObject.SetActive(false);// 트리거 오브젝트 비활성화
     }

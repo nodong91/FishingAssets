@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.VisualScripting;
-
+using static Data_Manager;
+using System.Linq;
 
 
 
@@ -88,7 +88,46 @@ public class Map_Generator : MonoBehaviour
     public Trigger_RandomBox triggerRandomBox;
 
     List<Trigger_Fish> fishingList = new List<Trigger_Fish>();
+    public Vector3[] GetFishingPoint
+    {
+        get
+        {
+            Vector3[] fishginPoint = new Vector3[fishingList.Count];
+            for (int i = 0; i < fishingList.Count; i++)
+            {
+                fishginPoint[i] = fishingList[i].transform.position;
+            }
+            return fishginPoint;
+        }
+    }
+
+    public void RemoveFishingPoint(Trigger_Fish _tf)
+    {
+        if (fishingList.Contains(_tf))
+        {
+            fishingList.Remove(_tf);
+        }
+    }
     List<Trigger_RandomBox> boxList = new List<Trigger_RandomBox>();
+    public Vector3[] GetBoxPoint
+    {
+        get
+        {
+            Vector3[] boxPoint = new Vector3[boxList.Count];
+            for (int i = 0; i < boxList.Count; i++)
+            {
+                boxPoint[i] = boxList[i].transform.position;
+            }
+            return boxPoint;
+        }
+    }
+    public void RemoveBoxPoint(Trigger_RandomBox _tb)
+    {
+        if (boxList.Contains(_tb))
+        {
+            boxList.Remove(_tb);
+        }
+    }
 
     Queue<Trigger_Fish> fishingQueue = new Queue<Trigger_Fish>();
     Queue<Trigger_RandomBox> boxQueue = new Queue<Trigger_RandomBox>();
@@ -111,19 +150,52 @@ public class Map_Generator : MonoBehaviour
         current = this;
     }
 
-    private void Start()
-    {
-        SetStart();
-    }
-
-    public void SetStart()
+    public void SetStart(Data_Continue _continueData)
     {
         SetNodeGrid();
-        SetAreaObject();
         hideObject.SetActive(false);
+        //Debug.LogError($"{_continueData.fishingPoint.Length} {_continueData.boxPoint.Length}");
+        if (_continueData == null || _continueData.fishingPoint == null || _continueData.boxPoint == null)
+        {
+            SetAreaObject();
+        }
+        else
+        {
+            LoadArea(_continueData);
+        }
+    }
+
+    void LoadArea(Data_Continue _continueData)
+    {
+        for (int i = 0; i < _continueData.fishingPoint.Length; i++)
+        {
+            Node node = GetNodeFromPosition(_continueData.fishingPoint[i]);
+            Trigger_Fish inst = FishingPool();
+            inst.gameObject.SetActive(true);
+            inst.SetAreaType(node.areaType);
+            inst.transform.position = _continueData.fishingPoint[i];
+            inst.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+            fishingList.Add(inst);
+        }
+        for (int i = 0; i < _continueData.boxPoint.Length; i++)
+        {
+            Node node = GetNodeFromPosition(_continueData.boxPoint[i]);
+            Trigger_RandomBox inst = BoxPool();
+            inst.gameObject.SetActive(true);
+            inst.SetAreaType(node.areaType);
+            inst.transform.position = node.worldPosition;
+            inst.transform.rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+            boxList.Add(inst);
+        }
     }
 
     public void ResetArea()
+    {
+        RemoveArea();
+        SetAreaObject();
+    }
+
+    void RemoveArea()
     {
         for (int i = 0; i < fishingList.Count; i++)// ³¬½ÃÅÍ ¼¼ÆÃ
         {
@@ -137,7 +209,6 @@ public class Map_Generator : MonoBehaviour
         }
         fishingList.Clear();
         boxList.Clear();
-        SetAreaObject();
     }
 
     void SetAreaObject()
@@ -330,7 +401,7 @@ public class Map_Generator : MonoBehaviour
         float percentX = (worldPosition.x + worldSize.x * 0.5f) / worldSize.x;
         float percentY = (worldPosition.z + worldSize.y * 0.5f) / worldSize.y;
 
-        return new Vector3(percentX,0f, percentY);
+        return new Vector3(percentX, 0f, percentY);
     }
 
 

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -153,19 +154,41 @@ public class UI_Inventory_Slot : MonoBehaviour, IPointerClickHandler, IPointerEn
     //===========================================================================================================================
     // 인풋 컨트롤
     //===========================================================================================================================
-
+    Coroutine clicking;
+    int clickAmount = 0;
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left)
+        switch (eventData.button)
         {
-            // 액션
-            dele_LeftClick?.Invoke(this);
+            case PointerEventData.InputButton.Left:
+                if (clicking != null)
+                    StopCoroutine(clicking);
+                clicking = StartCoroutine(OnDoubleClick());
+                break;
+            case PointerEventData.InputButton.Right:
+                // 확인
+                dele_RightClick?.Invoke(this);
+                break;
+            case PointerEventData.InputButton.Middle:
+                break;
         }
-        else if (eventData.button == PointerEventData.InputButton.Right)
+    }
+  
+    IEnumerator OnDoubleClick()
+    {
+        clickAmount++;
+        yield return new WaitForSeconds(0.15f);
+        if (clickAmount > 1)
         {
             // 확인
             dele_RightClick?.Invoke(this);
         }
+        else
+        {
+            // 액션
+            dele_LeftClick?.Invoke(this);
+        }
+        clickAmount = 0;
     }
 
     public void OnPointerEnter(PointerEventData eventData)

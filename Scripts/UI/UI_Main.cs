@@ -121,7 +121,7 @@ public class UI_Main : MonoBehaviour
     {
         //OpenCanvas(false);
         StartCoroutine(MainAllOpen(false));
-        dele_CloseButton = CloseOption;
+        //dele_CloseButton = CloseOption;
         Option_Manager.current.OpenCanvas(true);
         Game_Manager.current.OutOfControll(true);
         Debug.LogWarning("Option Button Clicked");
@@ -139,7 +139,7 @@ public class UI_Main : MonoBehaviour
         mainAll.alpha = (int)(_open == true ? normalize : 1f - normalize);
     }
 
-    void CloseOption()
+    public void CloseOption()
     {
         StartCoroutine(MainAllOpen(true));
         Game_Manager.current.OutOfControll(false);

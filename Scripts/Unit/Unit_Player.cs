@@ -50,7 +50,6 @@ public class Unit_Player : MonoBehaviour
             return;
 
         FocusTarget.transform.position = transform.position;
-
         CheckDeep();
     }
 
@@ -74,10 +73,10 @@ public class Unit_Player : MonoBehaviour
         {
             Destroy(playerObject);
         }
-        rb.useGravity = true;
         GameObject inst = Instantiate(_shipData.shipObject, transform);
         playerObject = inst;
         fxSound = _shipData.fxSound;
+        rb.useGravity = true;
         //Debug.LogWarning($"{_shipData.name} : {_shipData.shipObject}");
     }
 
