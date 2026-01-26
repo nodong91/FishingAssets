@@ -195,21 +195,31 @@ public class UI_Time : MonoBehaviour
         timeUpdate = StartCoroutine(TimeUpdate());
     }
 
-    public void SetRestTime(int _hour, float _minute)// 시간 이동
+    public void SetRest(int _hour, float _minute)
     {
+        Debug.LogWarning($"Rest Complete : {hour} : {minute}");
         hour += _hour;
         minute += _minute;
-        if (hour >= 24)
-        {
-            SetResetTime();// 모든 데이터 리셋
-            hour -= 24;
-            day++;
-        }
+
         string minuteStr = ((int)minute * 10).ToString("D2");
         string hourStr = hour.ToString("D2");
         hourText.text = hourStr;
         minuteText.text = minuteStr;
         WeekPosition(day % 7);
+
+        if (minute >= 6f)
+        {
+            minute = 0f;
+            hour++;
+        }
+        if (hour >= 24)
+        {
+            SetResetTime();// 날이 지나면
+            hour -= 24;
+            day++;
+        }
+        CheckLoanTime();
+        //DayChage();
         SetSkyBox();
     }
 
@@ -234,10 +244,8 @@ public class UI_Time : MonoBehaviour
             loanTime++;
             if (loanTime >= 144)// 10분 * 6 *24 = 1일 = 144
             {
-                // 게임 오버
-                Game_Manager.current.GameOver();
+                Game_Manager.current.GameOver();  // 대출 이자 증가
                 loanTime = 0;
-                //StopAllCoroutines();
             }
         }
     }

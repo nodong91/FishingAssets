@@ -50,7 +50,7 @@ public class UI_Main : MonoBehaviour
         inventoryButton.SetButton(InventoryButton);
         fishGuideButton.SetButton(FishGuideButton);
         mapButton.SetButton(MapButton);
-        optionButton.SetButton(OptionButton);
+        optionButton.SetButton(delegate { OptionButton(true); });
 
         if (energyMaterial == null)
         {
@@ -117,13 +117,13 @@ public class UI_Main : MonoBehaviour
         OpenCanvas(true);
     }
 
-    public void OptionButton()
+    public void OptionButton(bool _open)
     {
-        //OpenCanvas(false);
-        StartCoroutine(MainAllOpen(false));
+        //옵션 열기
+        StartCoroutine(MainAllOpen(!_open));
         //dele_CloseButton = CloseOption;
-        Option_Manager.current.OpenCanvas(true);
-        Game_Manager.current.OutOfControll(true);
+        Option_Manager.current.OpenCanvas(_open);
+        Game_Manager.current.OutOfControll(_open);
         Debug.LogWarning("Option Button Clicked");
     }
 

@@ -23,6 +23,7 @@ public class Fishing_Fish : MonoBehaviour
 
     public NavMeshAgent fishAgent;
     public GameObject formObject;
+    public GameObject stunEffect;
     public float addAngle;
     const float searchRadius = 1f;
     bool onCooling = false;
@@ -45,6 +46,7 @@ public class Fishing_Fish : MonoBehaviour
     {
         currentFish = _fishStruct;
         fishAgent.gameObject.SetActive(true);
+        stunEffect.SetActive(false);
         fishAgent.acceleration = _fishStruct.fishSpeed * 2f;
         FishState(StateType.Idle);
         StateCooling();
@@ -314,8 +316,10 @@ public class Fishing_Fish : MonoBehaviour
 
     IEnumerator FishGroggy()
     {
+        stunEffect.SetActive(true);
         yield return new WaitForSeconds(currentFish.fishGroggyTime);
         StateCooling();// 스킬 쿨링 시작
+        stunEffect.SetActive(false);
         FishState(StateType.Idle);
     }
 

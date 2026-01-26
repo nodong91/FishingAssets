@@ -74,8 +74,7 @@ public class UI_Shop : UI_Inventory_Base
             }
             else
             {
-                // 저장된 내용 불러오기
-                SetInventoryItem(saveData);// Shop 세팅
+                LoadShopInventory(_itemList);
             }
         }
         else
@@ -93,7 +92,6 @@ public class UI_Shop : UI_Inventory_Base
         if (_open)
         {
             OpenCanvas(true);
-
             layoutGroup.padding.bottom = 40;
 
             slotType = SlotType.Shipyard;// SetShipyard
@@ -105,8 +103,7 @@ public class UI_Shop : UI_Inventory_Base
             }
             else
             {
-                // 저장된 내용 불러오기
-                SetInventoryItem(saveData);//  Shipyard 세팅
+                LoadShopInventory(_itemList);
             }
         }
         else
@@ -124,20 +121,18 @@ public class UI_Shop : UI_Inventory_Base
         if (_open)
         {
             OpenCanvas(true);
-
-            layoutGroup.padding.bottom = 40;
+            layoutGroup.padding.bottom = 15;
 
             slotType = SlotType.Shipyard;// SetShipyard
-            fixGroup.gameObject.SetActive(true);
+            fixGroup.gameObject.SetActive(false);
             if (Game_Manager.current.innReset == true)
             {
                 Game_Manager.current.innReset = false;
-                SetItemDisplay(_itemList);// 조선소 상점 물건 리셋
+                SetItemDisplay(_itemList);// 상점 물건 리셋
             }
             else
             {
-                // 저장된 내용 불러오기
-                SetInventoryItem(saveData);//  Shipyard 세팅
+                LoadShopInventory(_itemList);
             }
         }
         else
@@ -167,9 +162,24 @@ public class UI_Shop : UI_Inventory_Base
             }
             else
             {
-                // 저장된 내용 불러오기
-                SetInventoryItem(saveData);// SetSmuggler 세팅
+                LoadShopInventory(_itemList);
             }
+        }
+    }
+
+    void LoadShopInventory(Data_ItemList _itemList)
+    {
+        LoadInventory();
+        if (GetSaveInventoryData == null || GetSaveInventoryData.saveItems == null || GetSaveInventoryData.saveItems.Count == 0)
+        {
+            Debug.LogWarning($"{GetSaveInventoryData == null}, {GetSaveInventoryData.saveItems == null}, {GetSaveInventoryData.saveItems.Count == 0}");
+            SetItemDisplay(_itemList);// 생선상점 물건 리셋
+        }
+        else
+        {
+            Debug.LogWarning($"{GetSaveInventoryData == null}");
+            // 저장된 내용 불러오기
+            SetInventoryItem(saveData);// Shop 세팅
         }
     }
 
@@ -265,7 +275,6 @@ public class UI_Shop : UI_Inventory_Base
     void SetItemDisplay(Data_ItemList _itemList)
     {
         itemList = _itemList;
-        Debug.LogWarning($"{itemList.inventoryType}");
         StartCoroutine(DisplayItem());
     }
 

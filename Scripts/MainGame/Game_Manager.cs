@@ -72,7 +72,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (GetInventory.currentType == UI_Inventory_Base.SlotType.None)
         {
-            GetMainUI.OptionButton();
+            GetMainUI.OptionButton(!Option_Manager.current.optionOpen);
             Debug.LogWarning("GetMainUI.OptionButton");
         }
         else
@@ -81,32 +81,32 @@ public class Game_Manager : MonoBehaviour
         }
     }
 
-    void Update()// 아이템 추가 테스트
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            GetMainUI.MoveMoney(1000f);// 아이템 추가 테스트
-            Debug.LogError("머니 치트");
-        }
+    //void Update()// 아이템 추가 테스트
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Alpha1))
+    //    {
+    //        GetMainUI.MoveMoney(1000f);// 아이템 추가 테스트
+    //        Debug.LogError("머니 치트");
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            GetInventory.AddPickUpItem("fs_" + addItemTest);
-            Debug.LogError("아이템 치트");
-        }
+    //    if (Input.GetKeyDown(KeyCode.Alpha2))
+    //    {
+    //        GetInventory.AddPickUpItem("fs_" + addItemTest);
+    //        Debug.LogError("아이템 치트");
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            GetPlayer.TakeDamage();
-            Debug.LogError("충돌");
-        }
+    //    if (Input.GetKeyDown(KeyCode.Alpha3))
+    //    {
+    //        GetPlayer.TakeDamage();
+    //        Debug.LogError("충돌");
+    //    }
 
-        if (Input.GetKeyUp(KeyCode.Alpha4))
-        {
-            GetFishing.SetFishingTest("fs_" + addItemTest);
-            Debug.LogError("물고기 치트");
-        }
-    }
+    //    if (Input.GetKeyUp(KeyCode.Alpha4))
+    //    {
+    //        GetFishing.SetFishingTest("fs_" + addItemTest);
+    //        Debug.LogError("물고기 치트");
+    //    }
+    //}
 
     public void InputSpacebar(bool _input)
     {
@@ -765,7 +765,7 @@ public class Game_Manager : MonoBehaviour
         {
             loanPrice = continueData.loanPrice;
             loanInterest = continueData.loanInterest;
-            GetMainUI.SetLoanText(loanPrice);
+            GetMainUI.SetLoanText(loanPrice + loanInterest);
         }
     }
 
@@ -806,7 +806,7 @@ public class Game_Manager : MonoBehaviour
     public void GameOver()
     {
         gameOver = true;
-        loanInterest += loanPrice * 0.1f;// 빌린 돈의 10%
+        loanInterest += loanPrice * 0.1f;// 빌린 돈의 10% 이자 추가
         if (loanInterest > loanPrice)
         {
             Debug.LogWarning("대출금 상환 시간이 도래했습니다!\n모든 세이브 파일이 삭제됩니다.");
@@ -814,12 +814,13 @@ public class Game_Manager : MonoBehaviour
             GetMainUI.OpenCanvas(false);
 
             Data_NPC npc = Singleton_Data.INSTANCE.Dict_NPC[Const_NPC._inn];
-            GetDialog.DialogStart_NPC(npc, Const_Dialog._3003);// 튜토리얼 대화 시작
+            GetDialog.DialogStart_NPC(npc, Const_Dialog._3003);// 대출 상환 대화 시작
         }
         else
         {
             int loanText = (int)(loanPrice + loanInterest);
             GetMainUI.SetLoanText(loanText);
+            Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._money);
         }
     }
 
@@ -833,8 +834,6 @@ public class Game_Manager : MonoBehaviour
     //====================================================================================================================
     // 하루 초기화
     //====================================================================================================================
-
-    DayType lightMode => GetMainUI.timeUI.lightMode;
 
     [Header(" [ 하루 초기화 ]")]
     public bool shopReset = false;

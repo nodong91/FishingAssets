@@ -340,7 +340,7 @@ public class Static_JsonManager
 
     public static void SaveFishGuideData(string fileName, List<FishGuide.SaveFishClass> _data)
     {
-        string filePath = Application.dataPath + Const_Save._saveDontDestroy;
+        string filePath = Application.dataPath + Const_Save._save;
         // 폴더 없으면 생성
         FindFolder(filePath);
 
@@ -351,7 +351,7 @@ public class Static_JsonManager
 
     public static bool TryLoadFishGuideData(string fileName, out List<FishGuide.SaveFishClass> _data)
     {
-        string filePath = Application.dataPath + Const_Save._saveDontDestroy;
+        string filePath = Application.dataPath + Const_Save._save;
         string path = filePath + fileName + ".json";
         FileInfo fileInfo = new FileInfo(path);
 

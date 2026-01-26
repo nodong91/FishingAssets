@@ -1,14 +1,16 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static Data_Manager;
 
 public class Option_Manager : MonoBehaviour
 {
+    public bool optionOpen;
     public StaticOpenCanvas.CanvasStruct[] canvasStructs;
     public Custom_Button closeButton;
-    public Custom_Button resetCollection, goTitleButton, goExitButton;
+    public Custom_Button saveButton, goTitleButton, goExitButton;
     public Custom_Button resetButton;
     public Data_Option optionData;
 
@@ -24,10 +26,11 @@ public class Option_Manager : MonoBehaviour
     public Option_Control optionControl;
     public Option_Audio optionAudio;
     public Option_Quality optionQuality;
+    public CanvasGroup saveOption, saveTextCanvase;
+    public TMPro.TMP_Text saveText;
 
     public delegate void DeleCloseOption();
     public DeleCloseOption deleCloseOption;
-    bool open;
 
     public static Option_Manager current;
 
@@ -45,7 +48,7 @@ public class Option_Manager : MonoBehaviour
         optionQuality.SetStart();// 퀄리티 매니저 세팅
         optionLanguage.SetStart();
         langageDelegate = optionLanguage.SetStart;
-
+        saveTextCanvase.alpha = 0f;
         closeButton.SetButton(CloseCanvas);
         SetToggle();
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, false));// 저장 안하고 닫기
@@ -60,20 +63,18 @@ public class Option_Manager : MonoBehaviour
         else
         {
             Game_Manager.current.GetMainUI?.CloseOption();
-            //Game_Manager.current.GetMainUI?.CloseCanvas();
         }
     }
 
     public void OpenCanvas(bool _open)
     {
-        if (open == _open)
+        if (optionOpen == _open || isChange == true)
             return;
 
-        open = _open;
+        optionOpen = _open;
         if (_open == false)// 닫힐 때
             StaticOpenCanvas.deleEndOpen += EndOpenCanvas;
         StartCoroutine(StaticOpenCanvas.OpenCanvas(canvasStructs, _open));
-        //Camera_Manager.current?.CameraFocusOut(_open);
         if (_open == true)
         {
             screenStruct[0].toggle.isOn = true;
@@ -100,7 +101,7 @@ public class Option_Manager : MonoBehaviour
             InputToggle(index);
         }
         resetButton.SetButton(SetDefaultButton, EnterButton);
-        resetCollection.SetButton(ResetCollectionButton, EnterButton);
+        saveButton.SetButton(SaveGame, EnterButton);
         goTitleButton.SetButton(GoTitle, EnterButton);
         goExitButton.SetButton(GoExit, EnterButton);
     }
@@ -112,7 +113,9 @@ public class Option_Manager : MonoBehaviour
 
     void InputToggle(int _index)
     {
-        goTitleButton.gameObject.SetActive(LoadingManager.current.currentScene != LoadingManager.CurrentScene.Title);
+        bool onTitle = LoadingManager.current.currentScene != LoadingManager.CurrentScene.Title;
+        saveButton.gameObject.SetActive(onTitle);
+        goTitleButton.gameObject.SetActive(onTitle);
         screenStruct[_index].screenObject.gameObject.SetActive(screenStruct[_index].toggle.isOn);
     }
 
@@ -125,17 +128,20 @@ public class Option_Manager : MonoBehaviour
         optionQuality.SetStart();// 퀄리티 매니저 세팅
     }
 
-    void ResetCollectionButton()
+    void SaveGame()
     {
-        //Steam_StatsManager.current.ResetStats();
+        if (isChange == true)
+            return;
+        StartCoroutine(SetSaving(3.0f));
     }
+
     bool isChange = false;
     void GoTitle()
     {
         if (isChange == true)
             return;
         Singleton_Audio.INSTANCE.Audio_Environment(null);
-        StartCoroutine(SetExit(0.3f, LoadingManager.current.GoTitle));
+        LoadingManager.current.GoTitle();
         OpenCanvas(false);
     }
 
@@ -143,17 +149,46 @@ public class Option_Manager : MonoBehaviour
     {
         if (isChange == true)
             return;
-        StartCoroutine(SetExit(0.3f, LoadingManager.current.GoExit));
+        StartCoroutine(SetSaving(3.0f, LoadingManager.current.GoExit));
     }
 
-    IEnumerator SetExit(float _delay, Action _action)
+    IEnumerator SetSaving(float _delay, Action _action = null)
     {
         isChange = true;
         Singleton_Continue.INSTANCE.SaveContinue();// 게임 종료
+
+        saveOption.interactable = false;
+        saveOption.blocksRaycasts = false;
+        saveText.text = "저장 중...";
+        float normalize = 0f;
+        while (normalize < 1f)
+        {
+            normalize += Time.deltaTime * 3f;
+            saveOption.alpha = 1f - normalize;
+            saveTextCanvase.alpha = normalize;
+            yield return null;
+        }
         yield return new WaitForSeconds(_delay);
 
+        saveText.text = "저장 완료";
+        yield return new WaitForSeconds(1f);
+
+        if(_action == null)
+        {
+            normalize = 0f;
+            while (normalize < 1f)
+            {
+                normalize += Time.deltaTime * 3f;
+                saveOption.alpha = normalize;
+                saveTextCanvase.alpha = 1f - normalize;
+                yield return null;
+            }
+        }
+
+        saveOption.interactable = true;
+        saveOption.blocksRaycasts = true;
         isChange = false;
-        _action();
+        _action?.Invoke();
     }
 
     public void SetThemeMusic(string _music)
@@ -173,6 +208,7 @@ public class Option_Manager : MonoBehaviour
         {
             setFPS = optionControl.GetFPS,
             shake = optionControl.GetShake,
+            cursorLock = optionControl.GetCursor,
             language = (int)Singleton_Data.INSTANCE.languageType,
             qualityLevel = optionQuality.levelIndex,
             resolutionIndex = optionQuality.resolutionIndex,

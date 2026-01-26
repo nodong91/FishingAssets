@@ -27,7 +27,7 @@ public class UI_Inventory : MonoBehaviour
     }
 
     public SlotType enterSlotType, selectSlotType;
-    private UI_Inventory_Slot enterSlot, selectSlot;
+    public UI_Inventory_Slot enterSlot, selectSlot;
     ItemInInventory selectItemClass, originItemClass;
 
     const int slotSize = 40;
@@ -241,7 +241,6 @@ public class UI_Inventory : MonoBehaviour
     {
         UI_Inventory_Base getInventory = GetInventory(enterSlotType);
         getInventory.SlotEmpty(_slot);
-        Debug.Log($"아이템 비우기: {_slot.slotNum}");
     }
 
     public void SetQuestResult()
@@ -282,11 +281,8 @@ public class UI_Inventory : MonoBehaviour
                 return;
             }
         }
-        else
+        else if (_slot.empty == false && enterSlot != null)
         {
-            if (_slot.empty == true)
-                return;
-
             Singleton_Audio.INSTANCE.Audio_FX(Const_Audio._itemDrop);
             if (enterSlotType == SlotType.Submit && shop.CheckMy(_slot.slotNum) == false)// 내가 넣은거 아니라면
             {
@@ -298,7 +294,7 @@ public class UI_Inventory : MonoBehaviour
             selectSlot = _slot.GetLinkSlot;
             selectSlotType = enterSlotType;
             selectItemClass = selectSlot.itemInInventory;
-            if (enterSlotType == SlotType.MyBox)
+            if (enterSlotType == SlotType.MyBox)// 쓰레기통 활성화
                 myBox.OnRemoveBox(true);
 
             SetOriginItemClass();// 기존 위치 저장
@@ -619,7 +615,11 @@ public class UI_Inventory : MonoBehaviour
 
             case ItemStruct.ItemType.Bait:// 미끼 아이템
                 if (Game_Manager.current.CheckLicense() == false)// 낚시 면허가 없으면 사용 불가
+                {
+                    string needLicense = Singleton_Data.INSTANCE.GetLanguage("etc_1037");
+                    Game_Manager.current.GetMainUI.SetWarnningText(needLicense);
                     return;
+                }
 
                 // 미끼 사용
                 usedStruct = Singleton_Data.INSTANCE.Dict_Used[item.id];

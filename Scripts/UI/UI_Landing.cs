@@ -27,7 +27,7 @@ public class UI_Landing : MonoBehaviour
     public GameObject shipyardUI;
     public GameObject downTownUI;
     //public GameObject boardUI;
-
+    public UI_Landing_Infomation infomation;
     LandingSetting[] landingData;
     public LandingSetting[] GetLandingData { get { return landingData; } }
 
@@ -61,36 +61,54 @@ public class UI_Landing : MonoBehaviour
         canvas.renderMode = RenderMode.ScreenSpaceCamera;
         canvas.worldCamera = Camera_Manager.current.UICamera;
 
-        outButton.SetButton(OutButton);
-        fuelButton.SetButton(FuelButton);
-        storageButton.SetButton(StorageButton);
-        changeButton.SetButton(ChangeButton);
+        outButton.SetButton(OutButton, EnterButton, ExitButton);
+        fuelButton.SetButton(FuelButton, EnterButton, ExitButton);
+        storageButton.SetButton(StorageButton, EnterButton, ExitButton);
+        changeButton.SetButton(ChangeButton, EnterButton, ExitButton);
+
+        dictButton[outButton] = "etc_1036";
+        dictButton[fuelButton] = "etc_1033";
+        dictButton[storageButton] = "etc_1034";
+        dictButton[changeButton] = "etc_1035";
+        dictButton[shopButton] = Const_ETC._fishshop;
+        dictButton[shipyardButton] = Const_ETC._shipyard;
+        dictButton[downTownButton] = Const_ETC._village;
+        dictButton[boardButton] = Const_ETC._notice;
 
         shopButton.SetButton(ShopButton, EnterButton, ExitButton);
         shipyardButton.SetButton(ShipyardButton, EnterButton, ExitButton);
         downTownButton.SetButton(DownTownButton, EnterButton, ExitButton);
         boardButton.SetButton(BoardButton, EnterButton, ExitButton);
+
+        infomation.gameObject.SetActive(false);
     }
 
-    public void SetLanguage()
-    {
-        fishshopInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._fishshop);
-        shipyardInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._shipyard);
-        villageInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._village);
-        noticeInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._notice);
-    }
+    Dictionary<Custom_Button, string> dictButton = new Dictionary<Custom_Button, string>();
+
+    //public void SetLanguage()
+    //{
+    //    fishshopInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._fishshop);
+    //    shipyardInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._shipyard);
+    //    villageInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._village);
+    //    noticeInfo.text = Singleton_Data.INSTANCE.GetLanguage(Const_ETC._notice);
+    //}
 
     void EnterButton(Custom_Button _button)
     {
-        SetLanguage();
-        currentButton = _button;
-        _button.buttonImage.gameObject.SetActive(true);
+        string infoText = Singleton_Data.INSTANCE.GetLanguage(dictButton[_button]);
+        infomation.SetStart(infoText);
+        //infomation.transform.position = _button.transform.position;
+        infomation.gameObject.SetActive(true);
+        //SetLanguage();
+        //currentButton = _button;
+        //_button.buttonImage.gameObject.SetActive(true);
     }
 
     void ExitButton(Custom_Button _button)
     {
-        currentButton = null;
-        _button.buttonImage.gameObject.SetActive(false);
+        infomation.gameObject.SetActive(false);
+        //currentButton = null;
+        //_button.buttonImage.gameObject.SetActive(false);
     }
 
     public void SetLanding(LandingSetting[] _landingData)

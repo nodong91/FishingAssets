@@ -7,6 +7,8 @@ public class Custom_Button_Local : MonoBehaviour
 
     private void Start()
     {
+        if (Option_Manager.current == null)
+            return;
         Option_Manager.current.langageDelegate += ChangeLanguage;
         ChangeLanguage();
     }

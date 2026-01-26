@@ -22,6 +22,19 @@ public class Cursor_Manager : MonoBehaviour
         OnMouseExit();
     }
 
+    public void CusorLock(bool _lock)
+    {
+        if (_lock)
+        {
+            // 게임시작시 마우스를 창안에 가둠
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+
     public void OnMouseOver()
     {
         if (type != Cursor_Type.REPAIR)

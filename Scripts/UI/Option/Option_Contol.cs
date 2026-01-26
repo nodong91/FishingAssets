@@ -8,9 +8,13 @@ public class Option_Control : MonoBehaviour
     public bool GetFPS { get { return fpsToggle.isOn; } }
     public FPSCounter fpsCanvas;
     public Toggle shakeToggle;
-
+    public Toggle cursorLockToggle;
     public TMPro.TMP_Dropdown language;
+    public bool fps = false;
+    public bool shake = false;
+    public bool cursorLock = false;
     public bool GetShake { get { return shakeToggle.isOn; } }
+    public bool GetCursor { get { return cursorLockToggle.isOn; } }
 
     public void SetStart()
     {
@@ -42,11 +46,21 @@ public class Option_Control : MonoBehaviour
 
         Data_Manager.Data_Option optionData = Option_Manager.current.optionData;
         language.value = optionData.language;
-        fpsToggle.onValueChanged.AddListener(SetFPS);
-        fpsToggle.isOn = optionData.setFPS;
 
-        shakeToggle.onValueChanged.AddListener(SetFPS);
-        shakeToggle.isOn = optionData.shake;
+        fps = optionData.setFPS;
+        fpsToggle.onValueChanged.AddListener(SetFPS);
+        fpsToggle.isOn = fps;
+        SetFPS(fps);
+
+        shake = optionData.shake;
+        shakeToggle.onValueChanged.AddListener(SetShake);
+        shakeToggle.isOn = shake;
+
+        cursorLock = optionData.cursorLock;
+        cursorLockToggle.onValueChanged.AddListener(SetCursorLock);
+        cursorLockToggle.isOn = cursorLock;
+        SetCursorLock(cursorLock);
+
         OnValueChange(optionData.language);
     }
 
@@ -61,5 +75,16 @@ public class Option_Control : MonoBehaviour
     void SetFPS(bool _open)
     {
         fpsCanvas.gameObject.SetActive(_open);
+    }
+
+    void SetShake(bool _shake)
+    {
+        shake = _shake;
+    }
+
+    void SetCursorLock(bool _lock)
+    {
+        cursorLock = _lock;
+        Cursor_Manager.current.CusorLock(cursorLock);
     }
 }

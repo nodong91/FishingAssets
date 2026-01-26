@@ -344,6 +344,7 @@ public class Data_Manager : Data_Parse
         public int language;
         public bool setFPS;
         public bool shake;
+        public bool cursorLock;
         // 그래픽 관련
         public bool fullScreen;
         public int qualityLevel;
@@ -369,6 +370,7 @@ public class Data_Manager : Data_Parse
         {
             setFPS = false;
             shake = true;
+            cursorLock = true;
             fullScreen = true;
             qualityLevel = 1;
             resolutionIndex = 6;

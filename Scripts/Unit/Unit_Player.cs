@@ -27,7 +27,7 @@ public class Unit_Player : MonoBehaviour
     public float efficient;// 에너지 효율
     private Vector2 dirction => Game_Manager.current.controllManager.dirction;
 
-    public GameObject playerObject;
+    public Unit_Ship playerObject;
     GameObject FocusTarget => Camera_Manager.current?.GetFocusTarget;
     Data_Continue ContinueData => Game_Manager.current.GetContinue;
     Coroutine stateAction;
@@ -73,7 +73,7 @@ public class Unit_Player : MonoBehaviour
         {
             Destroy(playerObject);
         }
-        GameObject inst = Instantiate(_shipData.shipObject, transform);
+        Unit_Ship inst = Instantiate(_shipData.shipObject, transform);
         playerObject = inst;
         fxSound = _shipData.fxSound;
         rb.useGravity = true;
@@ -146,7 +146,8 @@ public class Unit_Player : MonoBehaviour
             if ((efficient > 0 && energy <= 0f) || DestroyCount >= CurrentStatus.shipHealth)// 에너지가 없거나 파괴되면 못 움직임
             {
                 // 이동 불가
-                Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._dontMove);
+                //Game_Manager.current.GetMainUI.SetWarnningText(Const_ETC._dontMove);
+                StateMachine(State.Destroy);
             }
             else
             {
@@ -154,10 +155,10 @@ public class Unit_Player : MonoBehaviour
                 CheckClosestUnit();// 무브
                 energy -= CurrentStatus.efficient * Time.deltaTime;// 0에 가까울 수록 소비 안함
                 SetEnergyUI();
-                if (GetMaxEnergy > 0f && energy <= 0f)// 에너지 없으면 파괴
-                {
-                    StateMachine(State.Destroy);
-                }
+                //if (GetMaxEnergy > 0f && energy <= 0f)// 에너지 없으면 파괴
+                //{
+                //    StateMachine(State.Destroy);
+                //}
             }
             yield return null;
         }
@@ -387,28 +388,24 @@ public class Unit_Player : MonoBehaviour
         Game_Manager.current.GetMainUI.SetFadeScreen(true);
         yield return new WaitForSeconds(0.5f);
 
-        playerObject.SetActive(false);
-        Game_Manager.current.PlayerDestroy();// 플레이어 위치에 고스트 놓고 인벤토리 비우기
-        //Debug.LogError("견인 되는 연출 필요 - 보험 회사 도착");
-        CheckDeep();
-        // 견인 되는 연출 필요
-        // 위치 변경
+        playerObject.ship.SetActive(false);
+        //Game_Manager.current.PlayerDestroy();// 플레이어 위치에 고스트 놓고 인벤토리 비우기
 
         GameObject landingPoint = Game_Manager.current.CurrentLand.landingPoint.gameObject;
         Vector3 forwardDirection = landingPoint.transform.rotation * Vector3.forward;
         Vector3 backwardPosition = landingPoint.transform.position - forwardDirection * 3f;
         Vector3 targetPosition = landingPoint.transform.position;
 
-        // 마지막 위치로 이동
+        // 집으로 이동
         transform.SetPositionAndRotation(backwardPosition, landingPoint.transform.rotation);
 
         if (FocusTarget != null)
-            FocusTarget.transform.position = transform.position;
-        yield return new WaitForSeconds(1f);
+            FocusTarget.transform.position = landingPoint.transform.position;
 
-        playerObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        playerObject.ship.SetActive(true);
         Game_Manager.current.GetMainUI.SetFadeScreen(false);
-        //yield return new WaitForSeconds(0.5f);
+        Map_Generator.current.ResetArea();// 새로 새팅
 
         float noramlize = 0f;
         while (noramlize < 1f)
@@ -417,13 +414,9 @@ public class Unit_Player : MonoBehaviour
             transform.position = Vector3.Lerp(backwardPosition, targetPosition, noramlize);
             yield return null;
         }
-        //StartCoroutine(ShipTowed(backwardPosition));
-
         Singleton_Continue.INSTANCE.SaveContinue();// 견인됨 저장
-        //Debug.LogError("견인 되는 연출 필요 - 마을 도착");
         CheckClosestUnit();// 가까운 트리거 체크
-        //// 스탯 리셋
-        //SetStatus();
+        CheckDeep();
     }
 
     //================================================================================================================================================

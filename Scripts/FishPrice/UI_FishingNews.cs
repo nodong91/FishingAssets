@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static Data_Manager;
 
 public class UI_FishingNews : MonoBehaviour
@@ -10,7 +11,7 @@ public class UI_FishingNews : MonoBehaviour
     public TMPro.TMP_Text areaText;
     Dictionary<AreaType, int> sellDict = new Dictionary<AreaType, int>();
     Dictionary<AreaType, int> randomDict = new Dictionary<AreaType, int>();
-    public UI_FishingNews_Point[] lineRects;
+    //public UI_FishingNews_Point[] lineRects;
     public Custom_Button[] areaButtons;
 
     public int sellCount = 0;
@@ -116,13 +117,30 @@ public class UI_FishingNews : MonoBehaviour
 
     //    if (Input.GetKeyDown(KeyCode.Space))
     //    {
-          
+
     //        SaveData();
     //    }
     //}
-
+    public RectTransform parent;
     public void SetStart()
     {
+        for (int i = 0; i < 7; i++)
+        {
+            Image inst = Instantiate(point, parent);
+            pointList.Add(inst);
+        }
+
+        for (int i = 0; i < 7; i++)
+        {
+            TMPro.TMP_Text inst = Instantiate(valueText, parent);
+            valueTextList.Add(inst);
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            Image inst = Instantiate(lineRT, parent);
+            lineRTList.Add(inst);
+        }
         LoadData();
 
         closeButton.SetButton(CloseCanvas);
@@ -288,11 +306,11 @@ public class UI_FishingNews : MonoBehaviour
         SetPricesPercent();
         Debug.Log($"ÃÑ ½Ã¼¼ °¹¼ö : {totalCount}, ÆÈ¸° °¹¼ö : {sellCount} = {totalPercent}");
     }
-
+    Color areaColor;
     void SetPricesPercent()
     {
         areaText.text = setAreaType.ToString();
-        Color areaColor = Color.white;
+        areaColor = Color.white;
         List<float> prices = new List<float>();
         switch (setAreaType)
         {
@@ -314,25 +332,57 @@ public class UI_FishingNews : MonoBehaviour
                 break;
         }
 
-        for (int i = 0; i < lineRects.Length; i++)
-        {
-            UI_FishingNews_Point next = (i + 1 < lineRects.Length) ? lineRects[i + 1] : null;
-            lineRects[i].SetStart(next, areaColor);
-        }
+        //for (int i = 0; i < lineRects.Length; i++)
+        //{
+        //    UI_FishingNews_Point next = (i + 1 < lineRects.Length) ? lineRects[i + 1] : null;
+        //    lineRects[i].SetStart(next, areaColor);
+        //}
         SetPrice(prices);
     }
 
     void SetPrice(List<float> _price)
     {
+        //for (int i = 0; i < _price.Count; i++)
+        //{
+        //    lineRects[i].SetPoint(_price[i]);
+        //}
+
+        //for (int i = 0; i < lineRects.Length; i++)
+        //{
+        //    lineRects[i].UpdateLine();
+        //}
+        float interval = 85f;
+        float width = (interval * 6f) * 0.5f;
         for (int i = 0; i < _price.Count; i++)
         {
-            lineRects[i].SetPoint(_price[i]);
+            float x = i * interval - width;
+            float y = (_price[i] - 100f) * 1.5f;// ÆÛ¼¾Æ®
+            pointList[i].rectTransform.anchoredPosition = new Vector2(x, y);
+            pointList[i].color = areaColor;
+            valueTextList[i].text = $"{_price[i]:0.0}";
+            valueTextList[i].rectTransform.anchoredPosition = new Vector2(x, y + 20f);
         }
 
-        for (int i = 0; i < lineRects.Length; i++)
+        for (int i = 1; i < _price.Count; i++)
         {
-            lineRects[i].UpdateLine();
+            RectTransform prev = pointList[i - 1].rectTransform;
+            RectTransform point = pointList[i].rectTransform;
+            SetLineDirection(i - 1, prev.anchoredPosition, point.anchoredPosition);
         }
+    }
+    void SetLineDirection(int _index, Vector2 _pointA, Vector2 _pointB)
+    {
+        Vector2 offset = (_pointA - _pointB);
+
+        float lineWidth = offset.magnitude;
+        float xPos = (_pointB.x + _pointA.x) / 2f;
+        float yPos = (_pointB.y + _pointA.y) / 2f;
+        float angle = Mathf.Atan2(offset.normalized.y, offset.normalized.x) * Mathf.Rad2Deg;
+
+        lineRTList[_index].rectTransform.anchoredPosition = new Vector2(xPos, yPos);
+        lineRTList[_index].rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lineWidth);
+        lineRTList[_index].rectTransform.localRotation = Quaternion.Euler(0f, 0f, angle);
+        lineRTList[_index].color = areaColor;
     }
 
     private void ResetSellDictionary()
@@ -355,5 +405,46 @@ public class UI_FishingNews : MonoBehaviour
             AreaType areaType = (AreaType)i + 1;
             randomDict.Add(areaType, 0);// ±âº» ¼öÄ¡
         }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //private void Update()
+    //{
+    //    Test();
+    //}
+    public Image point;
+    public Image next;
+    public Image lineRT;
+    public TMPro.TMP_Text valueText;
+    readonly List<Image> pointList = new List<Image>();
+    readonly List<Image> lineRTList = new List<Image>();
+    readonly List<TMPro.TMP_Text> valueTextList = new List<TMPro.TMP_Text>();
+
+    void Test()
+    {
+        Vector2 offset = (next.rectTransform.anchoredPosition - point.rectTransform.anchoredPosition);
+
+        float lineWidth = offset.magnitude;
+        float xPos = (point.rectTransform.anchoredPosition.x + next.rectTransform.anchoredPosition.x) / 2;
+        float yPos = (point.rectTransform.anchoredPosition.y + next.rectTransform.anchoredPosition.y) / 2;
+        float angle = Mathf.Atan2(offset.normalized.y, offset.normalized.x) * Mathf.Rad2Deg;
+
+        lineRT.rectTransform.anchoredPosition = new Vector2(xPos, yPos);
+        lineRT.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, lineWidth);
+        lineRT.rectTransform.localRotation = Quaternion.Euler(0f, 0f, angle);
     }
 }

@@ -7,6 +7,7 @@ public class Option_Language : MonoBehaviour
     const string _audio = "etc_1008";
     const string _setting = "etc_1009";
     const string _shake = "etc_1010";
+    const string _cursorLock = "etc_1030";
     const string _language = "etc_1011";
 
     const string _fullScreen = "etc_1012";
@@ -20,7 +21,7 @@ public class Option_Language : MonoBehaviour
     const string _fx = "etc_1019";
     const string _enviroment = "etc_1020";
 
-    const string _resetCollection = "etc_1029";
+    const string _saveGame = "etc_1029";
     const string _title = "etc_1021";
     const string _saveNexit = "etc_1022";
 
@@ -32,6 +33,7 @@ public class Option_Language : MonoBehaviour
 
     [Header(" [ 컨트롤 ]")]
     public TMPro.TMP_Text shakeText;
+    public TMPro.TMP_Text cursorLockText;
     public TMPro.TMP_Text languageText;
 
     [Header(" [ 그래픽 ]")]
@@ -48,7 +50,7 @@ public class Option_Language : MonoBehaviour
     public TMPro.TMP_Text enviromentText;
 
     [Header(" [ 세팅 ]")]
-    public TMPro.TMP_Text resetCollectionText;
+    public TMPro.TMP_Text saveText;
     public TMPro.TMP_Text titleText;
     public TMPro.TMP_Text saveNexitText;
 
@@ -60,6 +62,7 @@ public class Option_Language : MonoBehaviour
         settingText.text = Singleton_Data.INSTANCE.GetLanguage(_setting);
 
         shakeText.text = Singleton_Data.INSTANCE.GetLanguage(_shake);
+        cursorLockText.text = Singleton_Data.INSTANCE.GetLanguage(_cursorLock);
         languageText.text = Singleton_Data.INSTANCE.GetLanguage(_language);
 
         fullScreenText.text = Singleton_Data.INSTANCE.GetLanguage(_fullScreen);
@@ -73,7 +76,7 @@ public class Option_Language : MonoBehaviour
         fxText.text = Singleton_Data.INSTANCE.GetLanguage(_fx);
         enviromentText.text = Singleton_Data.INSTANCE.GetLanguage(_enviroment);
 
-        resetCollectionText.text = Singleton_Data.INSTANCE.GetLanguage(_resetCollection);
+        saveText.text = Singleton_Data.INSTANCE.GetLanguage(_saveGame);
         titleText.text = Singleton_Data.INSTANCE.GetLanguage(_title);
         saveNexitText.text = Singleton_Data.INSTANCE.GetLanguage(_saveNexit);
     }

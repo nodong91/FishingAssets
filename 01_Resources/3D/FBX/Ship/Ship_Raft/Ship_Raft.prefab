@@ -63,6 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3149871882044048991}
   - component: {fileID: 8412452061174507233}
+  - component: {fileID: 8044692971829887448}
   m_Layer: 0
   m_Name: Ship_Raft
   m_TagString: Untagged
@@ -85,7 +86,6 @@ Transform:
   m_Children:
   - {fileID: 8805794069231028041}
   - {fileID: 4762676442628956785}
-  - {fileID: 9166729473527503074}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!111 &8412452061174507233
@@ -105,6 +105,19 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!114 &8044692971829887448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5872712244367025258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf881b5912a86a4399440e803a9d066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship: {fileID: 8088920690388837916}
 --- !u!1 &8088920690388837916
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +148,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5638653690790784415}
+  - {fileID: 9166729473527503074}
   m_Father: {fileID: 3149871882044048991}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5317129197028297332
@@ -209,7 +223,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3149871882044048991}
+    m_TransformParent: {fileID: 4762676442628956785}
     m_Modifications:
     - target: {fileID: 2969814458829649931, guid: b9559c44037403c42883d5084da78707, type: 3}
       propertyPath: m_Name

@@ -65,6 +65,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9121874337097842060}
   - component: {fileID: 5406991189151808078}
+  - component: {fileID: -5232697186005561969}
   m_Layer: 0
   m_Name: Ship_Sailship
   m_TagString: Untagged
@@ -87,7 +88,6 @@ Transform:
   m_Children:
   - {fileID: 6698032552251704042}
   - {fileID: 4653046952768384730}
-  - {fileID: 614874012726085823}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!111 &5406991189151808078
@@ -107,6 +107,19 @@ Animation:
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
+--- !u!114 &-5232697186005561969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3617976048407013432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf881b5912a86a4399440e803a9d066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship: {fileID: 8969530605930140569}
 --- !u!1 &8969530605930140569
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +150,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2642366780425720546}
+  - {fileID: 614874012726085823}
   m_Father: {fileID: 9121874337097842060}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2531352754936100105
@@ -211,7 +225,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 9121874337097842060}
+    m_TransformParent: {fileID: 4653046952768384730}
     m_Modifications:
     - target: {fileID: 2969814458829649931, guid: b9559c44037403c42883d5084da78707, type: 3}
       propertyPath: m_Name

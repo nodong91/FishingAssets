@@ -40,7 +40,7 @@ public class Fishing_Manager : MonoBehaviour
     private SetStatus catchStatus;
     float catchRadius = 1f;// 지름이 클수록 데미지가 약해짐 (줄을 느슨하게)
 
-    FishStruct currentFish;
+    public FishStruct currentFish;
 
     private float fishHealth = 0f;
 
@@ -74,7 +74,7 @@ public class Fishing_Manager : MonoBehaviour
         {
             FishStruct fish = child.Value;
             string dictType = fish.areaType.ToString() + fish.fishDayType.ToString();// 키 값 설정 -> 지역 타입 + 낮,밤
-            if (dictFishStruct.ContainsKey(dictType))
+            if (dictFishStruct.ContainsKey(dictType) == true)
             {
                 dictFishStruct[dictType].Add(fish);
             }
@@ -85,7 +85,6 @@ public class Fishing_Manager : MonoBehaviour
         }
         fishingSet.SetActive(false);
     }
-
     //===================================================================================================================
     // 물고기 세팅
     //===================================================================================================================
@@ -108,7 +107,7 @@ public class Fishing_Manager : MonoBehaviour
     FishStruct GetFishStruct()// 해당 타입 물고기 중 랜덤
     {
         string cordType = GetAreaType.ToString() + dayType.ToString();
-        if (dictFishStruct.ContainsKey(cordType))
+        if (dictFishStruct.ContainsKey(cordType) == true)
         {
             List<FishStruct> fishList = dictFishStruct[cordType];// 해당 타입 물고기 리스트
             FishStruct randomFish = FishingChance(fishList);// 물고기 확률로 선택
@@ -224,7 +223,7 @@ public class Fishing_Manager : MonoBehaviour
         string _id = fishQueue.Dequeue();
         currentFish = SetCurrentFish(_id);
         fishingCanvas.SetFishing();
-        //Debug.LogWarning($"물고기 이름 : {_id}");
+        Debug.LogWarning($"물고기 이름 낚시시작 : {_id}");
 
         StartCoroutine(StartCount());
     }

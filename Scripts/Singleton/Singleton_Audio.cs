@@ -220,7 +220,11 @@ public class Singleton_Audio : MonoSingleton<Singleton_Audio>
     public void Audio_Environment(string _id)
     {
         if (_id == null)
+        {
+            if (envSource != null)
+                envSource.Stop();
             return;
+        }
 
         if (envSource != null)// 기존 환경음 정지
         {

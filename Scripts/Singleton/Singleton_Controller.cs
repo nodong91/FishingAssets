@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,7 +12,15 @@ public class Singleton_Controller : MonoSingleton<Singleton_Controller>
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Game_Manager.current.ESCButton();
+
+            if (Game_Manager.current != null)
+            {
+                Game_Manager.current.ESCButton();
+            }
+            else if (Option_Manager.current.optionOpen == true)
+            {
+                Option_Manager.current.OpenCanvas(false);
+            }
         }
 
         if (outOfControll == true)
