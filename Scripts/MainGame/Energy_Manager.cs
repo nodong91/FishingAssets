@@ -8,7 +8,7 @@ public class Energy_Manager : MonoBehaviour
     public TMPro.TMP_Text energyText, energyPriceText;
     public Slider energySlider;
     float EnergyMaxAmount => Game_Manager.current.GetPlayer.GetMaxEnergy;
-    int energyPrice = 13;// 1%당 가격
+    const int energyPrice = 7;// 1%당 가격
     float prevEnergy;
     public int buyPrice;
     public float addEnergy;
